@@ -1,2 +1,13 @@
-<h5>Application</h5>
 
+<app-header></app-header>
+
+<app-loading-screen>  </app-loading-screen>
+
+
+<div class="text-center align-middle" *ngIf='loading'>
+  <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+</div>
+
+<div>
+  <router-outlet></router-outlet>
+</div>
