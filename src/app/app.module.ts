@@ -1,4 +1,6 @@
+
 import { NgModule } from '@angular/core';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -28,6 +30,7 @@ import { InterceptorServiceProvider } from './core/services/interceptor.service.
 @NgModule({
     imports: [
         BrowserModule,
+        NgbModule,        
         CommonModule,
         FormsModule,
         HttpClientModule,

@@ -12,6 +12,7 @@ const routes: Routes = [
     { path: 'loginbranch', component: LoginBranchComponent },
     { path: 'home', component: HomeComponent },
     { path: 'contact', component: ContactComponent },
+    { path: 'path', loadChildren: () => import('./clearing/clearing.module').then(m => m.ClearingModule) },
 ];
 
 @NgModule({
