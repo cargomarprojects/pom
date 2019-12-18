@@ -4,8 +4,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -13,7 +11,6 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers, metaReducers } from './reducers';
 import { environment } from '../environments/environment';
-
 
 import { GlobalService } from './core/services/global.service';
 import { LoginService } from './core/services/login.service';
@@ -26,7 +23,6 @@ import { LoadingScreenComponent } from './core/loadingscreen/loading-screen.comp
 import { InterceptorService } from './core/services/interceptor.service';
 import { LoadingScreenService } from './core/services/loadingscreen.service';
 import { InterceptorServiceProvider } from './core/services/interceptor.service.provider';
-
 
 
 @NgModule({
@@ -59,7 +55,3 @@ import { InterceptorServiceProvider } from './core/services/interceptor.service.
     ]
 })
 export class AppModule { }
-
-
-
-

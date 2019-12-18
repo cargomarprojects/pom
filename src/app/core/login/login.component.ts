@@ -30,7 +30,6 @@ export class LoginComponent {
 
   public gs: GlobalService;
 
-
   constructor(
     private router: Router,
     private gs1: GlobalService,
@@ -38,7 +37,6 @@ export class LoginComponent {
     this.gs = gs1;
     this.LoadCombo();
   }
-
 
   LoadCombo() {
     this.loading = true;
@@ -70,7 +68,6 @@ export class LoginComponent {
         this.errorMessage = error.error.error_description;
       });
   }
-
 
   Login() {
     if (!this.username) {
@@ -176,13 +173,9 @@ export class LoginComponent {
 
   }
 
-
-
   Logout() {
     this.loginservice.Logout();
     this.errorMessage = 'Pls Login';
   }
 
-
 }
-
