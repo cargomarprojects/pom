@@ -517,14 +517,6 @@
     </ngb-tab>
 
 
-
-    <ngb-tab title="Quotation" *ngIf="mode == 'EDIT'">
-      <ng-template ngbTabContent>
-        <app-qtn [partyid]="pkid" [type]="'SE-CLR'"></app-qtn>
-      </ng-template>
-    </ngb-tab>
-
-
     <ngb-tab title="Salesman" *ngIf="mode == 'EDIT' && bAdmin">
       <ng-template ngbTabContent>
         <app-custdet [parentid]="pkid"></app-custdet>
@@ -581,5 +573,5 @@
   </div>
 </ng-template>
 
-<app-crlimit [visible]="showalert"  [msg]= "ErrorMessage" [RecordList]="CrList"  (hidealert)="showalert=$event" ></app-crlimit>
+
 

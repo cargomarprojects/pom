@@ -12,7 +12,8 @@ const routes: Routes = [
     { path: 'loginbranch', component: LoginBranchComponent },
     { path: 'home', component: HomeComponent },
     { path: 'contact', component: ContactComponent },
-    { path: 'path', loadChildren: () => import('./clearing/clearing.module').then(m => m.ClearingModule) },
+    { path: 'clearing', loadChildren: () => import('./clearing/clearing.module').then(m => m.ClearingModule) },
+    { path: 'master', loadChildren: () => import('./master/master.module').then(m => m.MasterModule) },
 ];
 
 @NgModule({

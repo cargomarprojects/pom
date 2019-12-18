@@ -3,7 +3,6 @@ import { SharedModule } from '../shared/shared.module';
 import { ClearingRoutingModule } from './clearing.routing.module';
 import { ClearingComponent } from './clearing.component';
 
-import { JobComponent } from './job/job.component';
 
 import { JobOrderComponent } from './job/order/joborder.component';
 
@@ -24,7 +23,6 @@ import {EdiOrdUpdateComponent} from './job/ediordupdate/ediordupdate.component';
   ],
   declarations: [
     ClearingComponent,
-    JobComponent,
     JobOrderComponent,
     JobContainerComponent,
     OrderListComponent,
