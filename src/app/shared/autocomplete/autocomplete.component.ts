@@ -257,6 +257,18 @@ export class AutoCompleteComponent {
 
         this.showDiv = false;
     }
+
+    setMyStyles() {
+        let styles = {
+            'border': '1px solid rgba(0,0,255,0.25)',
+            'margin-left': '0px',
+            'border-radius': '0px',
+        };
+        return styles;
+      }
+
+      
+
 }
 
     
