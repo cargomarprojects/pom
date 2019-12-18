@@ -4,11 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 
-import { GlobalService } from '../../../core/services/global.service';
-import { Joborderm } from '../../models/joborder';
-import { JobOrder_VM } from '../../models/joborder';
-import { JobOrderService } from '../../services/joborder.service';
-import { SearchTable } from '../../../shared/models/searchtable';
+import { GlobalService } from '../../core/services/global.service';
+import { Joborderm } from '../models/joborder';
+import { JobOrder_VM } from '../models/joborder';
+import { JobOrderService } from '../services/joborder.service';
+import { SearchTable } from '../../shared/models/searchtable';
 
 
 

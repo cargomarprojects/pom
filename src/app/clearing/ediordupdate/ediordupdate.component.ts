@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GlobalService } from '../../../core/services/global.service';
-import { EdiOrder } from '../../models/ediorder';
+import { GlobalService } from '../../core/services/global.service';
+import { EdiOrder } from '../models/ediorder';
 
 @Component({
     selector: 'app-ediordupdate',

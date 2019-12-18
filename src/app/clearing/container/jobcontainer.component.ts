@@ -2,13 +2,13 @@ import { Component, Input, Output, OnInit, OnDestroy, EventEmitter, ViewChild, E
 
 import { ActivatedRoute } from '@angular/router';
 
-import { GlobalService } from '../../../core/services/global.service';
+import { GlobalService } from '../../core/services/global.service';
 
-import { JobContainer } from '../../models/jobcontainer';
+import { JobContainer } from '../models/jobcontainer';
 
-import { JobContainerService } from '../../services/jobcontainer.service';
+import { JobContainerService } from '../services/jobcontainer.service';
 
-import { SearchTable } from '../../../shared/models/searchtable';
+import { SearchTable } from '../../shared/models/searchtable';
 
 @Component({
     selector: 'app-jobcontainer',

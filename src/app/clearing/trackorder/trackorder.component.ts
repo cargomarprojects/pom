@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GlobalService } from '../../../core/services/global.service';
-import { Joborderm } from '../../models/joborder';
-import { TrackOrderService } from '../../services/trackorder.service';
+import { GlobalService } from '../../core/services/global.service';
+import { Joborderm } from '../models/joborder';
+import { TrackOrderService } from '../services/trackorder.service';
 
 @Component({
   selector: 'app-trackorder',

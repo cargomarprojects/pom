@@ -1,22 +1,22 @@
-import { Component, Input, OnInit, OnDestroy,ViewChild } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
-import { GlobalService } from '../../../core/services/global.service';
-import { AgentBookingm } from '../../models/agentbooking';
-import { WeekPlanningService } from '../../services/weekplanning.service';
-import { SearchTable } from '../../../shared/models/searchtable';
-import { DateComponent } from '../../../shared/date/date.component';
+import { GlobalService } from '../../core/services/global.service';
+import { AgentBookingm } from '../models/agentbooking';
+import { AgentbookingService } from '../services/agentbooking.service';
+import { SearchTable } from '../../shared/models/searchtable';
+import { DateComponent } from '../../shared/date/date.component';
 
 @Component({
-  selector: 'app-weekplanning',
-  templateUrl: './weekplanning.component.html',
-  providers: [WeekPlanningService]
+  selector: 'app-agentbook',
+  templateUrl: './agentbook.component.html',
+  providers: [AgentbookingService]
 })
-export class WeekPlanningComponent {
+export class AgentBookComponent {
   // Local Variables 
   title = 'AGENTBOOK MASTER';
 
-  @ViewChild('ab_book_date',{static:true}) private ab_book_date: DateComponent;
+  @ViewChild('ab_book_date',{static: false} ) private ab_book_date: DateComponent;
 
   @Input() menuid: string = '';
   @Input() type: string = '';
@@ -66,7 +66,7 @@ export class WeekPlanningComponent {
 
   constructor(
     private modalService: NgbModal,
-    private mainService: WeekPlanningService,
+    private mainService: AgentbookingService,
     private route: ActivatedRoute,
     private gs: GlobalService
   ) {
@@ -186,7 +186,7 @@ export class WeekPlanningComponent {
       this.pkid = id;
       this.mode = 'EDIT';
       this.ResetControls();
-      this.GetRecord(id,'');
+      this.GetRecord(id, '');
     }
   }
 
@@ -233,10 +233,10 @@ export class WeekPlanningComponent {
         this.page_current = response.page_current;
         this.page_rowcount = response.page_rowcount;
       },
-      error => {
-        this.loading = false;
-        this.ErrorMessage = this.gs.getError(error);
-      });
+        error => {
+          this.loading = false;
+          this.ErrorMessage = this.gs.getError(error);
+        });
   }
 
   NewRecord() {
@@ -259,8 +259,6 @@ export class WeekPlanningComponent {
     this.Record.ab_imp_name = '';
     this.Record.ab_remarks = '';
     this.Record.ab_approved = false;
-    this.Record.ab_week_no = 0;
-    this.Record.ab_week_status = 'IN PROGRESS';
     this.InitLov();
     this.Record.rec_mode = this.mode;
   }
@@ -268,7 +266,7 @@ export class WeekPlanningComponent {
   // Load a single Record for VIEW/EDIT
   GetRecord(Id: string, _type: string) {
     this.loading = true;
-   
+
     //if (_type != "EXCEL") {
     //  //this.book_id = '';
     //  this.book_id = Id;
@@ -280,7 +278,7 @@ export class WeekPlanningComponent {
       company_code: this.gs.globalVariables.comp_code,
       branch_code: this.gs.globalVariables.branch_code,
       Type: _type,
-      
+
     };
 
     this.ErrorMessage = '';
@@ -294,10 +292,10 @@ export class WeekPlanningComponent {
           this.LoadData(response.record);
         }
       },
-      error => {
-        this.loading = false;
-        this.ErrorMessage = this.gs.getError(error);
-      });
+        error => {
+          this.loading = false;
+          this.ErrorMessage = this.gs.getError(error);
+        });
   }
 
   LoadData(_Record: AgentBookingm) {
@@ -345,11 +343,11 @@ export class WeekPlanningComponent {
         this.RefreshList();
         alert(this.InfoMessage);
       },
-      error => {
-        this.loading = false;
-        this.ErrorMessage = this.gs.getError(error);
-        alert(this.ErrorMessage);
-      });
+        error => {
+          this.loading = false;
+          this.ErrorMessage = this.gs.getError(error);
+          alert(this.ErrorMessage);
+        });
   }
 
   allvalid() {
@@ -366,10 +364,10 @@ export class WeekPlanningComponent {
       bret = false;
       sError += "\n\r | Agent Cannot Be Blank";
     }
-    if (this.Record.ab_week_no <= 0) {
-        bret = false;
-        sError += "\n\r | Week Number Cannot Be Blank";
-    }
+    //if (this.Record.ab_exp_id.trim().length <= 0) {
+    //    bret = false;
+    //    sError += "\n\r | Exporter Cannot Be Blank";
+    //}
 
     if (bret === false)
       this.ErrorMessage = sError;
@@ -391,7 +389,6 @@ export class WeekPlanningComponent {
       REC.ab_imp_name = this.Record.ab_imp_name;
       REC.ab_book_date = this.ab_book_date.GetDisplayDate();
       REC.ab_remarks = this.Record.ab_remarks;
-      REC.ab_week_no = this.Record.ab_week_no;
     }
   }
 
@@ -432,7 +429,7 @@ export class WeekPlanningComponent {
     //}
     if (this.ErrorMessage)
       return;
-   
+
     this.loading = true;
     let SearchData = {
       rowtype: this.type,
@@ -441,7 +438,7 @@ export class WeekPlanningComponent {
       agentid: _Record.ab_agent_id,
       company_code: this.gs.globalVariables.comp_code,
       branch_code: this.gs.globalVariables.branch_code
-     
+
     };
 
     this.ErrorMessage = '';
@@ -450,21 +447,21 @@ export class WeekPlanningComponent {
       .subscribe(response => {
         this.loading = false;
         var REC = null;
-        
-          for (let Rec of response.list) {
-            REC = this.Record.OrderList.find(a => a.ord_pkid == Rec.ord_pkid);
-            if (REC == null) {
-              this.Record.OrderList.push(Rec);
-            }
+
+        for (let Rec of response.list) {
+          REC = this.Record.OrderList.find(a => a.ord_pkid == Rec.ord_pkid);
+          if (REC == null) {
+            this.Record.OrderList.push(Rec);
           }
-        
-        
+        }
+
+
         // this.Record.OrderList = response.list;
       },
-      error => {
-        this.loading = false;
-        this.ErrorMessage = this.gs.getError(error);
-      });
+        error => {
+          this.loading = false;
+          this.ErrorMessage = this.gs.getError(error);
+        });
   }
 
   Downloadfile(filename: string, filetype: string, filedisplayname: string) {

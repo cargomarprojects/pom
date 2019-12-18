@@ -1,10 +1,10 @@
 import { Component, Input, Output, OnInit, OnDestroy, EventEmitter } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
-import { GlobalService } from '../../../core/services/global.service';
-import { EdiOrder } from '../../models/ediorder';
-import { EdiOrderService } from '../../services/ediorder.service';
-import { SearchTable } from '../../../shared/models/searchtable';
+import { GlobalService } from '../../core/services/global.service';
+import { EdiOrder } from '../models/ediorder';
+import { EdiOrderService } from '../services/ediorder.service';
+import { SearchTable } from '../../shared/models/searchtable';
 // import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 //import { Settings } from '../../../master/models/settings';
 
