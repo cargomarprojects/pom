@@ -1,6 +1,7 @@
 import { GlobalVariables } from '../../core/models/globalvariables';
 
-export class Joborderm {
+
+export interface Joborderm {
   ord_pkid: string;
   ord_parent_id: string;
   ord_exp_id: string;
@@ -78,4 +79,23 @@ export class JobOrder_VM {
   ord_agent_id: string;
   ord_parent_id: string;
   ord_source: string;
+}
+
+export interface SearchQuery{
+  searchString : string ;
+}
+
+export interface PageQuery {
+  action : string;
+  page_count: number ;
+  page_current: number;
+  page_rows: number ;
+  page_rowcount: number ;
+}
+
+export interface JobOrderModel {
+  errormessage : string;
+  searchQuery : SearchQuery;
+  pageQuery : PageQuery;
+  records: Joborderm[]
 }

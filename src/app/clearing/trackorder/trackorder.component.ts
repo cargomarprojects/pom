@@ -29,7 +29,7 @@ export class TrackOrderComponent  {
   mode = 'EDIT';
   ErrorMessage = "";
   InfoMessage = "";
-  Record: Joborderm = new Joborderm;
+  Record: Joborderm = <Joborderm>{};
 
   constructor(
     private mainService: TrackOrderService,
@@ -65,7 +65,7 @@ export class TrackOrderComponent  {
   }
 
   NewRecord() {
-    this.Record = new Joborderm();
+    this.Record = <Joborderm>{};
     this.Record.ord_pkid = this.pkid;
     this.Record.ord_booking_date = '';
     this.Record.ord_rnd_insp_date = '';

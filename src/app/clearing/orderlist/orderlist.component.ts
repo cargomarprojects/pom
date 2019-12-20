@@ -93,7 +93,7 @@ export class OrderListComponent {
   // Array For Displaying List
   RecordList: Joborderm[] = [];
   // Single Record for add/edit/view details
-  Record: Joborderm = new Joborderm;
+  Record: Joborderm = <Joborderm>{};
 
   bShowList = false;
   mList: Joborderm[] = [];
@@ -432,7 +432,7 @@ export class OrderListComponent {
     this.bShowList = false;
     this.bDisabledControl = false;
     this.pkid = this.gs.getGuid();
-    this.Record = new Joborderm();
+    this.Record =  <Joborderm>{} ;
     this.Record.ord_pkid = this.pkid;
     this.Record.ord_exp_id = '';
     this.Record.ord_exp_name = '';
@@ -798,7 +798,7 @@ export class OrderListComponent {
 
     if (cbdata != null) {
 
-      let mRec: Joborderm = new Joborderm;
+      let mRec: Joborderm = <Joborderm>{};
       this.mList = [];
       var ar1 = cbdata.split("\n");
       var ar2;
@@ -932,7 +932,7 @@ export class OrderListComponent {
       for (var i = 1; i < ar1.length; i++) {
         if (ar1[i] != '') {
           ar2 = ar1[i].split("\t");
-          mRec = new Joborderm;
+          mRec = <Joborderm>{};
           mRec.ord_pkid = '';
           mRec.ord_invno = '';
           mRec.ord_desc = '';

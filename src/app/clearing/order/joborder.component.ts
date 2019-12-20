@@ -50,7 +50,7 @@ export class JobOrderComponent {
   OrdColList: any[] = [];
   RecordList: Joborderm[] = [];
   // Single Record for add/edit/view details
-  Record: Joborderm = new Joborderm;
+  Record: Joborderm = <Joborderm>{};
 
   RecordList2: Joborderm[] = [];
 
@@ -183,7 +183,7 @@ export class JobOrderComponent {
     this.bShowList = false;
 
     this.pkid = this.gs.getGuid();
-    this.Record = new Joborderm();
+    this.Record = <Joborderm>{};
     this.Record.ord_pkid = this.pkid;
     this.Record.ord_exp_id = '';
     this.Record.ord_exp_name = '';
@@ -564,7 +564,7 @@ export class JobOrderComponent {
 
     if (cbdata != null) {
 
-      let mRec: Joborderm = new Joborderm;
+      let mRec: Joborderm = <Joborderm>{};
       this.mList = [];
       var ar1 = cbdata.split("\n");
       var ar2;
@@ -698,7 +698,7 @@ export class JobOrderComponent {
 
         if (ar1[i] != '') {
           ar2 = ar1[i].split("\t");
-          mRec = new Joborderm;
+          mRec = <Joborderm>{};
           mRec.ord_pkid = '';
           mRec.ord_invno = '';
           mRec.ord_desc = '';
