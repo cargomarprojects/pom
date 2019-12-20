@@ -94,7 +94,8 @@ export interface PageQuery {
 }
 
 export interface JobOrderModel {
-  errormessage : string;
+  message : string;
+  isError : boolean;
   searchQuery : SearchQuery;
   pageQuery : PageQuery;
   records: Joborderm[]

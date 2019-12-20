@@ -9,7 +9,6 @@ import { JobOrderModel } from '../../models/joborder';
 
 @Injectable()
 export class OrderListEffects {
-
     constructor(
         private actions$ : Actions,
         private mainService :  JobOrderService  
@@ -22,14 +21,16 @@ export class OrderListEffects {
             )),
             map ( ( [action,data] ) => {
                 const mdata = <JobOrderModel>{
-                    errormessage :'',
-                    pageQuery : action.pageQuery,
-                    searchQuery : {...action.searchQuery, page_count : data.page_count, page_current : data.page_current,page_rows: data.page_rows, page_rowcount : data.page_rowcount  },
+                    isError : false,
+                    message :'',
+                    pageQuery : {...action.pageQuery, page_count : data.page_count, page_current : data.page_current,page_rows: data.page_rows, page_rowcount : data.page_rowcount},
+                    searchQuery : action.searchQuery,
                     records: data.list
                 };
                return allactions.ListLoaded({ data : mdata});
             })
         )
     );
+
 
 }
