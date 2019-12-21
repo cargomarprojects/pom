@@ -57,13 +57,13 @@ export interface Joborderm {
   ord_pod_code: string;
   ord_status: string;
   ord_uid: number;
-  ord_plan_no:number;
-  ord_agentref_id:string;
-  ord_ftp_status:string;
-  ord_window1:string;
-  ord_window2:string;
-  ord_instock1:string;
-  ord_instock2:string;
+  ord_plan_no: number;
+  ord_agentref_id: string;
+  ord_ftp_status: string;
+  ord_window1: string;
+  ord_window2: string;
+  ord_instock1: string;
+  ord_instock2: string;
 
   job_docno: string;
   rec_mode: string;
@@ -81,22 +81,48 @@ export class JobOrder_VM {
   ord_source: string;
 }
 
-export interface SearchQuery{
-  searchString : string ;
+export interface SearchQuery {
+  type: string,
+  rowtype: string,
+  searchstring: string,
+  company_code: string,
+  branch_code: string,
+  year_code: string,
+  
+  page_count: number,
+  page_current: number,
+  page_rows: number,
+  page_rowcount: number,
+  
+  job_docno: string,
+  ord_po: string,
+  ord_invoice: string,
+  from_date: string,
+  to_date: string,
+  list_exp_id: string,
+  list_imp_id: string,
+  list_agent_id: string,
+  ord_showpending: string,
+  report_folder: string,
+  file_pkid: string,
+  ord_status: string,
+  sort_colname: string
+
 }
 
 export interface PageQuery {
-  action : string;
-  page_count: number ;
+  action: string;
+  page_count: number;
   page_current: number;
-  page_rows: number ;
-  page_rowcount: number ;
+  page_rows: number;
+  page_rowcount: number;
 }
 
 export interface JobOrderModel {
-  message : string;
-  isError : boolean;
-  searchQuery : SearchQuery;
-  pageQuery : PageQuery;
+  urlid: string;
+  message: string;
+  isError: boolean;
+  searchQuery: SearchQuery;
+  pageQuery: PageQuery;
   records: Joborderm[]
 }

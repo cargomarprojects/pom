@@ -6,13 +6,22 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+
+
+
+
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers, metaReducers } from './reducers';
 import { environment } from '../environments/environment';
+
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+
 
 import { GlobalService } from './core/services/global.service';
 import { LoginService } from './core/services/login.service';
@@ -26,6 +35,8 @@ import { InterceptorService } from './core/services/interceptor.service';
 import { LoadingScreenService } from './core/services/loadingscreen.service';
 import { InterceptorServiceProvider } from './core/services/interceptor.service.provider';
 
+import { CustomSerializer } from './reducers';
+
 
 @NgModule({
     imports: [
@@ -36,6 +47,8 @@ import { InterceptorServiceProvider } from './core/services/interceptor.service.
         HttpClientModule,
         AppRoutingModule,
         StoreModule.forRoot(reducers, { metaReducers }),
+        EffectsModule.forRoot([]),
+        StoreRouterConnectingModule.forRoot({serializer: CustomSerializer}),            
         environment.production ? [] : StoreDevtoolsModule.instrument(),
     ],
     declarations: [
