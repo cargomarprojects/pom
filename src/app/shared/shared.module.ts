@@ -40,6 +40,7 @@ import { XmlomsComponent } from './xmloms/xmloms.component';
 import { AllReportComponent } from './allreport/allreport.component';
 import { FtpReportComponent } from './ftpreport/ftpreport.component';
 import { FileEditComponent } from './fileupload/fileedit.component';
+import { PageComponent } from './page/page.component';
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import { FileEditComponent } from './fileupload/fileedit.component';
     AllReportComponent,
     FtpReportComponent,
     FileEditComponent,
+    PageComponent,
   ],
   exports: [
     CommonModule,
@@ -90,6 +92,7 @@ import { FileEditComponent } from './fileupload/fileedit.component';
     AllReportComponent,
     FtpReportComponent,
     FileEditComponent,
+    PageComponent,
 
   ],
   providers: [

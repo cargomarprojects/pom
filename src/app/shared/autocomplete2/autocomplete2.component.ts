@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter, OnChanges, SimpleChange } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertService } from '../services/alert.service';
+
 import { SearchTable } from '../models/searchtable';
-import { LovService } from '../services/lov.service';
+import { LoginService } from '../../core/services/login.service';
 import { GlobalService } from '../../core/services/global.service';
+
 
 
 @Component({
@@ -17,9 +18,9 @@ import { GlobalService } from '../../core/services/global.service';
                 border-width: 1px;
                 overflow-y: scroll; 
                 position: absolute;     
-                height:200px;
+                height:300px;
                 width:auto;
-                min-width:250px;
+                min-width:300px;
                 z-index: 2000;
                 background: #fff;
                 display: block;
@@ -30,17 +31,67 @@ import { GlobalService } from '../../core/services/global.service';
 
 export class AutoComplete2Component {
 
-  @Input() inputdata: any = { controlname: '', type: '', displaycolumn: '', parentid: '', id: '', code: '', name: '', rate: 0, col1: '', col2: '', col3: '', col4: '',col5 :'',col6:'',col7:'' };
+
+  private _controlname: string;
+  @Input() set controlname(value: string) {
+    this._controlname = value;
+  }
+
+  private _displaycolumn: string;
+  @Input() set displaycolumn(value: string) {
+    this._displaycolumn = value;
+  }
+
+  private _tabletype: string;
+  @Input() set tabletype(value: string) {
+    this._tabletype = value;
+  }
+
+  private _subtype: string;
+  @Input() set subtype(value: string) {
+    this._subtype = value;
+  }
+
+  private _id: string;
+  @Input() set id(value: string) {
+    this._id = value;
+  }
+
+  public _displaydata: string;
+  @Input() set displaydata(value: string) {
+    this._displaydata = value;
+  }
+
+  private _where: string;
+  @Input() set where(value: string) {
+    this._where = value;
+  }
+
+
+
+  private _parentid: string;
+  @Input() set parentid(value: string) {
+    this._parentid = value;
+  }
+
+  private _uid: string;
+  @Input() set uid(value: string) {
+    this._uid = value;
+  }
+
+
+  private _branchcode: string;
+  @Input() set branchcode(value: string) {
+    this._branchcode = value;
+  }
+
+  private inputdata: SearchTable = new SearchTable();
+
   @Output() ValueChanged = new EventEmitter<SearchTable>();
-
   @Input() disabled: boolean = false;
-  //child_inputdata: any = { controlname: '', type: '', displaycolumn: '', parentid: '', id: '', code: '', name: '', rate: 0, col1: '', col2: '', col3: '', col4: '' };
 
-  @ViewChild('inputbox',{static:true}) private inputbox: ElementRef;
+  @ViewChild('inputbox') private inputbox: ElementRef;
 
-
-
-  public displaydata: string = '';
 
   rows_to_display: number = 0;
   rows_total: number = 0;
@@ -59,10 +110,8 @@ export class AutoComplete2Component {
 
   bShowMore = true;
 
-  TableType = "";
-  controlname = "";
-  parentid = "";
-  displaycolumn: string = "NAME";
+
+
 
   loading = false;
 
@@ -70,48 +119,17 @@ export class AutoComplete2Component {
     private elementRef: ElementRef,
     private route: ActivatedRoute,
     private router: Router,
-    private alertService: AlertService,
-    private gs: GlobalService,
-    private lovService: LovService) {
+    private loginservice: LoginService,
+    private gs: GlobalService
+  ) {
 
   }
 
   ngOnInit() {
-
-    this.controlname = this.inputdata.controlname;
-    this.TableType = this.inputdata.type;
-    this.displaycolumn = this.inputdata.displaycolumn;
-
-    if (this.displaycolumn == 'CODE')
-      this.displaydata = this.inputdata.code;
-    if (this.displaycolumn == 'NAME')
-      this.displaydata = this.inputdata.name;
-
-    if (this.inputdata.hasOwnProperty('parentid'))
-      this.parentid = this.inputdata.parentid;
-    else
-      this.parentid = '';
   }
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
-    
-    for (let propName in changes) {
 
-      let changedProp = changes[propName];
-      let from = changedProp.previousValue;
-
-      this.controlname = this.inputdata.controlname;
-      this.TableType = this.inputdata.type;
-      this.displaycolumn = this.inputdata.displaycolumn;
-
-      if (this.displaycolumn == 'CODE') {
-        this.displaydata = this.inputdata.code;
-      }
-      if (this.displaycolumn == 'NAME') {
-        this.displaydata = this.inputdata.name;
-      }
-    }
-   
   }
 
   Focus() {
@@ -119,18 +137,26 @@ export class AutoComplete2Component {
       this.inputbox.nativeElement.focus();
   }
 
-
   eventHandler(KeyCode: any) {
     this.List();
   }
 
   More() {
-    if (this.rows_ending_number < this.rows_total) {
-      this.rows_starting_number = this.rows_ending_number + 1;
-      this.rows_ending_number = this.rows_ending_number + this.rows_to_display;
+    // if (this.rows_ending_number < this.rows_total)
+    // {
+    //     this.rows_starting_number = this.rows_ending_number +1;
+    //     this.rows_ending_number = this.rows_ending_number + this.rows_to_display;
+    //     this.List('NEXT');
+    // }
 
-      this.List('NEXT');
-    }
+
+    this.rows_starting_number = this.rows_ending_number + 1;
+    this.rows_ending_number = this.rows_ending_number + this.rows_to_display;
+    this.List('NEXT');
+
+
+
+
   }
 
   List(_action: string = 'NEW') {
@@ -148,25 +174,24 @@ export class AutoComplete2Component {
       rows_to_display: this.rows_to_display,
       rows_starting_number: this.rows_starting_number,
       rows_ending_number: this.rows_ending_number,
-      type: this.inputdata.type,
-      parentid: '',
-      searchstring: this.displaydata,
-      comp_code: this.gs.globalVariables.comp_code,
-      branch_code: this.gs.globalVariables.branch_code
+      type: this._tabletype,
+      subtype: this._subtype,
+      parentid: this._parentid,
+      searchstring: this._displaydata,
+      where: this._where,
+      comp_code: this.gs.company_code,
+      branch_code: this._branchcode 
     };
 
-    if (this.inputdata.hasOwnProperty('parentid'))
-      SearchData.parentid = this.inputdata.parentid;
-    else
-      SearchData.parentid = '';
-
-
-    this.lovService.List(SearchData)
+    this.loginservice.LovList(SearchData)
       .subscribe(response => {
         //this.RecList = response.list;
-        this.rows_total = response.rows_total;
+        //this.rows_total = response.rows_total;
 
-        if (this.rows_ending_number >= this.rows_total)
+        // if (this.rows_ending_number >= this.rows_total)
+        //     this.bShowMore = false;
+
+        if (response.list == null)
           this.bShowMore = false;
 
         this.RecList.push(...response.list);
@@ -185,11 +210,11 @@ export class AutoComplete2Component {
           this.showDiv = true;
         }
       },
-      error => {
-        this.loading = false;
-        this.alertService.error(error.error);
-        
-      }
+        error => {
+          this.loading = false;
+          alert(error.error);
+
+        }
       );
   }
 
@@ -197,58 +222,57 @@ export class AutoComplete2Component {
 
   SelectedItem(_source: string, _Record: SearchTable) {
     if (_Record == null) {
+      this.inputdata.controlname = this._controlname;
+      this.inputdata.uid = this._uid;
       this.inputdata.id = "";
       this.inputdata.code = "";
       this.inputdata.name = "";
-      if (this.inputdata.hasOwnProperty('rate'))
-        this.inputdata.rate = 0;
-      if (this.inputdata.hasOwnProperty('col1'))
-        this.inputdata.col1 = '';
-      if (this.inputdata.hasOwnProperty('col2'))
-        this.inputdata.col2 = '';
-      if (this.inputdata.hasOwnProperty('col3'))
-        this.inputdata.col3 = '';
-      if (this.inputdata.hasOwnProperty('col4'))
-        this.inputdata.col4 = '';
-      if (this.inputdata.hasOwnProperty('col5'))
-        this.inputdata.col5 = '';
-      if (this.inputdata.hasOwnProperty('col6'))
-        this.inputdata.col6 = '';
-      if (this.inputdata.hasOwnProperty('col7'))
-        this.inputdata.col7 = '';
+      this.inputdata.rate = 0;
+      this.inputdata.subtype = "";
+
+      this.inputdata.col1 = '';
+      this.inputdata.col2 = '';
+      this.inputdata.col3 = '';
+      this.inputdata.col4 = '';
+      this.inputdata.col5 = '';
+      this.inputdata.col6 = '';
+
+      this.inputdata.col7 = '';
+      this.inputdata.col8 = '';
+      this.inputdata.col9 = '';
 
       this.displaydata = '';
       this.parentid = '';
 
+
+
     }
     else {
+      this.inputdata.controlname = this._controlname;
+      this.inputdata.uid = this._uid;
       this.inputdata.id = _Record.id;
       this.inputdata.code = _Record.code;
       this.inputdata.name = _Record.name;
-      if (this.inputdata.hasOwnProperty('rate'))
-        this.inputdata.rate = _Record.rate;
-      if (this.displaycolumn.toUpperCase() == "CODE")
-        this.displaydata = _Record.code;
-      if (this.displaycolumn.toUpperCase() == "NAME")
-        this.displaydata = _Record.name;
+      this.inputdata.rate = _Record.rate;
 
-      if (this.inputdata.hasOwnProperty('parentid'))
-        this.parentid = _Record.parentid;
+      if (this._displaycolumn == "CODE")
+        this._displaydata = _Record.code;
+      if (this._displaycolumn == "NAME")
+        this._displaydata = _Record.name;
 
-      if (this.inputdata.hasOwnProperty('col1'))
-        this.inputdata.col1 = _Record.col1;
-      if (this.inputdata.hasOwnProperty('col2'))
-        this.inputdata.col2 = _Record.col2;
-      if (this.inputdata.hasOwnProperty('col3'))
-        this.inputdata.col3 = _Record.col3;
-      if (this.inputdata.hasOwnProperty('col4'))
-        this.inputdata.col4 = _Record.col4;
-      if (this.inputdata.hasOwnProperty('col5'))
-        this.inputdata.col5 = _Record.col5;
-      if (this.inputdata.hasOwnProperty('col6'))
-        this.inputdata.col6 = _Record.col6;
-        if (this.inputdata.hasOwnProperty('col7'))
-        this.inputdata.col6 = _Record.col7;
+
+      this._parentid = _Record.parentid;
+      this.inputdata.subtype = _Record.subtype;
+
+      this.inputdata.col1 = _Record.col1;
+      this.inputdata.col2 = _Record.col2;
+      this.inputdata.col3 = _Record.col3;
+      this.inputdata.col4 = _Record.col4;
+      this.inputdata.col5 = _Record.col5;
+      this.inputdata.col6 = _Record.col6;
+      this.inputdata.col7 = _Record.col7;
+      this.inputdata.col8 = _Record.col8;
+      this.inputdata.col9 = _Record.col9;
     }
 
 
@@ -259,20 +283,20 @@ export class AutoComplete2Component {
 
   onfocus() {
     if (this.showDiv) {
-      if (this.old_data != this.displaydata)
-        this.displaydata = "";
+      if (this.old_data != this._displaydata)
+        this._displaydata = "";
     }
-    this.old_data = this.displaydata;
+    this.old_data = this._displaydata;
     this.RecList = [];
     this.showDiv = false;
   }
 
   onBlur() {
     let localdata: string = "";
-    if (this.displaydata === null)
+    if (this._displaydata === null)
       localdata = '';
     else
-      localdata = this.displaydata;
+      localdata = this._displaydata;
 
     if (this.old_data != localdata) {
       if (localdata == '')
@@ -284,28 +308,27 @@ export class AutoComplete2Component {
 
   Cancel() {
     let localdata: string = "";
-    if (this.displaydata === null)
+    if (this._displaydata === null)
       localdata = '';
     else
-      localdata = this.displaydata;
+      localdata = this._displaydata;
 
     if (this.old_data != localdata) {
       this.SelectedItem('', null);
     }
-
     this.showDiv = false;
   }
 
+
   setMyStyles() {
     let styles = {
-        'border': '1px solid rgba(0,0,255,0.25)',
-        'margin-left': '0px',
-        'border-radius': '0px',
+      'border': '1px solid rgba(0,0,255,0.25)',
+      'margin-left': '0px',
+      'border-radius': '0px',
     };
     return styles;
   }
 
-  
 
 }
 

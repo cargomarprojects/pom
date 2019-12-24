@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ClearingComponent } from './clearing.component';
 
-import { OrderListComponent } from './orderlist/orderlist.component';
+import { OrderListComponent } from './orderlist/list/orderlist.component';
 import { AgentBookComponent } from './agentbook/agentbook.component';
 import { WeekPlanningComponent } from './weekplanning/weekplanning.component';
 import {EdiOrderComponent } from './ediorder/ediorder.component';

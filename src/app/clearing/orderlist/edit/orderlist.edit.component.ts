@@ -1,19 +1,19 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
-import { GlobalService } from '../../core/services/global.service';
-import { Joborderm } from '../models/joborder';
-import { JobOrder_VM } from '../models/joborder';
-import { OrderListService } from '../services/orderlist.service';
-import { SearchTable } from '../../shared/models/searchtable';
+import { GlobalService } from '../../../core/services/global.service';
+import { Joborderm } from '../../models/joborder';
+import { JobOrder_VM } from '../../models/joborder';
+import { OrderListService } from '../../services/orderlist.service';
+import { SearchTable } from '../../../shared/models/searchtable';
 
 
 @Component({
-  selector: 'app-orderlist',
-  templateUrl: './orderlist.component.html',
+  selector: 'app-orderlistedit',
+  templateUrl: './orderlist.edit.component.html',
   providers: [OrderListService]
 })
-export class OrderListComponent {
+export class OrderListEditComponent {
   // Local Variables 
   title = 'Order List';
 

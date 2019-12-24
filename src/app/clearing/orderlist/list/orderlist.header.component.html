@@ -1,0 +1,116 @@
+<div class="page-search">
+    <div class="row">
+      <div class="col-8">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group row">
+              <label class="col-2 col-form-label col-form-label-sm">From.Date</label>
+              <div class="col-4">
+                <app-date [inputdate]="query.from_date" (ValueChanged)="query.from_date=$event"></app-date>
+              </div>
+              <label class="col-2 col-form-label col-form-label-sm">To.Date</label>
+              <div class="col-4">
+                <app-date [inputdate]="query.to_date" (ValueChanged)="query.to_date=$event"></app-date>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-2 col-form-label col-form-label-sm">Agent</label>
+              <div class="col-10">
+                <app-autocomplete #AgentAddLov [inputdata]="LIST_AGENTRECORD"
+                  (ValueChanged)="LovSelected($event)">
+                </app-autocomplete>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-2 col-form-label col-form-label-sm">Shipper</label>
+              <div class="col-10">
+                <app-autocomplete #ExporterLov [inputdata]="LIST_EXPRECORD" (ValueChanged)="LovSelected($event)">
+                </app-autocomplete>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-2 col-form-label col-form-label-sm">Consignee</label>
+              <div class="col-10">
+                <app-autocomplete #ImporterLov [inputdata]="LIST_IMPRECORD" (ValueChanged)="LovSelected($event)">
+                </app-autocomplete>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group row">
+              <label class="col-2 col-form-label col-form-label-sm">JOB#</label>
+              <div class="col-10">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="job_docno"
+                  (blur)="OnBlur('job_docno')" required maxlength="30" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-2 col-form-label col-form-label-sm">INVOICE#</label>
+              <div class="col-10">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="ord_invoice"
+                  (blur)="OnBlur('ord_invoice')" required maxlength="30" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-2 col-form-label col-form-label-sm">Sort By</label>
+              <div class="col-10">
+                <select class="form-control form-control-sm" [(ngModel)]="sort_colname">
+                  <option *ngFor="let rec of SortList" [value]="rec.colname">{{rec.colheadername}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="offset-2 col-5">
+                <input type="checkbox" [(ngModel)]="ord_showpending">
+                <span>Show Pending Only</span>
+              </div>
+              <label class="col-1 col-form-label col-form-label-sm">Status</label>
+              <div class="col-4">
+                <select class="form-control form-control-sm" [(ngModel)]="ord_status">
+                  <option [value]="'ALL'">ALL</option>
+                  <option [value]="'REPORTED'">REPORTED</option>
+                  <option [value]="'APPROVED'">APPROVED</option>
+                  <option [value]="'CANCELLED'">CANCELLED</option>
+                  <option [value]="'ON HOLD'">ON HOLD</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group row">
+              <label class="col-1 col-form-label col-form-label-sm">PO#</label>
+              <div class="col-11">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="ord_po"
+                  (blur)="OnBlur('ordr_po')" required maxlength="1000" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="form-group row">
+          <div class="col-12">
+            <button [disabled]="loading" (click)="List('NEW')" class="btn btn-primary btn-sm">Search</button>
+            <button [disabled]="loading" (click)="List('EXCEL')" class="btn btn-primary btn-sm">Excel</button>
+            <button [disabled]="loading" (click)="TrackOrders(trackorder)" class="btn btn-primary btn-sm">Tracking</button>
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <div class="col-6">
+            <select class="form-control form-control-sm" [(ngModel)]="ftpTransfertype">
+              <option [value]="'ORDERLIST'">ORDER LIST</option>
+              <option [value]="'TRACKING'">TRACKING</option>
+            </select>
+          </div>
+          <div class="col-6">
+            <button [disabled]="loading" (click)="MailOrders(ftpsent,'MULTIPLE','CHECK-LIST')" class="btn btn-primary btn-sm">Checklist</button>
+            <button [disabled]="loading" (click)="MailOrders(ftpsent,'MULTIPLE','')" class="btn btn-primary btn-sm">Mail/FTP</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>

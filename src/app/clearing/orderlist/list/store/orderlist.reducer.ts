@@ -1,6 +1,6 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { Action, createReducer, on, createFeatureSelector, createSelector } from '@ngrx/store';
-import { Joborderm, JobOrderModel, SearchQuery, PageQuery } from '../../models/joborder';
+import { Joborderm, JobOrderModel, SearchQuery, PageQuery } from '../../../models/joborder';
 import * as AllActions from './orderlist.actions';
 import { SelectRouterUrlId } from 'src/app/reducers';
 
