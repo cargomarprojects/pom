@@ -18,7 +18,7 @@ export const Reducer = createReducer(
     return adapter.upsertOne (action.data, state);
   }),
   on(AllActions.RequestLoadFail , (state, action) => {
-    return adapter.updateOne(action.rec ,state );
+    return adapter.updateOne( {id : action.urlid, changes:{ isError : true, message : action.message } }  ,state );
   }),
   on(AllActions.UpdateSearch , (state, action) => {
     if ( action.stype == 'SEARCH')
