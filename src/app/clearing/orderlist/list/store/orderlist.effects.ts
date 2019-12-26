@@ -41,6 +41,7 @@ export class OrderListEffects {
         )),
         tap(([action, urlid]) => {
             allactions.UpdateSearch({ urlid: urlid, stype: 'SEARCH', data: action.searchQuery });
+            allactions.Search();
         })
     ), { dispatch: false });
 
@@ -51,6 +52,7 @@ export class OrderListEffects {
         )),
         tap(([action, urlid]) => {
             allactions.UpdateSearch({ urlid: urlid, stype: 'PAGE', data: action.pageQuery });
+            allactions.Search();            
         })
     ), { dispatch: false });
 
