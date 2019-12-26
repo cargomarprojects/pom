@@ -14,10 +14,19 @@ export const initialState: OrderListState = adapter.getInitialState();
 
 export const Reducer = createReducer(
   initialState,
-  on(AllActions.RequestLoadCompleted, (state, action) => {
+  on(AllActions.RequestLoadSuccess, (state, action) => {
     adapter.removeOne(action.data.urlid, state);
     return adapter.addOne(action.data, state);
-  })
+  }),
+  on(AllActions.RequestLoadFail , (state, action) => {
+    return adapter.updateOne(action.rec ,state );
+  }),
+  on(AllActions.UpdateRecord , (state, action) => {
+    if ( action.stype == 'SEARCH')
+      return adapter.updateOne( {id : action.urlid, changes:{searchQuery : action.data } }  ,state );
+    else 
+      return adapter.updateOne( {id : action.urlid, changes:{pageQuery : action.data } }  ,state );
+  }),
 );
 
 export function OrderListReducer(state: OrderListState | undefined, action: Action) {
@@ -27,8 +36,6 @@ export function OrderListReducer(state: OrderListState | undefined, action: Acti
 export const { selectAll, selectEntities, selectIds, selectTotal } = adapter.getSelectors();
 
 export const SelectJobOrderState = createFeatureSelector<OrderListState>('orderlist');
-
-
 
 export const SelectEntity = createSelector(
   SelectJobOrderState,
