@@ -16,23 +16,25 @@
             <div class="form-group row">
               <label class="col-2 col-form-label col-form-label-sm">Agent</label>
               <div class="col-10">
-                <app-autocomplete #AgentAddLov [inputdata]="LIST_AGENTRECORD"
-                  (ValueChanged)="LovSelected($event)">
-                </app-autocomplete>
+                <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
+                [displaydata]="query.list_agent_name" (ValueChanged)="LovSelected($event)" [where]="CUST_IS_AGENT = 'Y'">
+              </app-autocomplete2>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-2 col-form-label col-form-label-sm">Shipper</label>
               <div class="col-10">
-                <app-autocomplete #ExporterLov [inputdata]="LIST_EXPRECORD" (ValueChanged)="LovSelected($event)">
-                </app-autocomplete>
+
+                <app-autocomplete2 [controlname]="'SHIPPER'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
+                [displaydata]="query.list_exp_name" (ValueChanged)="LovSelected($event)" [where]="CUST_IS_SHIPPER = 'Y'">
+
               </div>
             </div>
             <div class="form-group row">
               <label class="col-2 col-form-label col-form-label-sm">Consignee</label>
               <div class="col-10">
-                <app-autocomplete #ImporterLov [inputdata]="LIST_IMPRECORD" (ValueChanged)="LovSelected($event)">
-                </app-autocomplete>
+                <app-autocomplete2 [controlname]="'CONSIGNEE'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
+                [displaydata]="query.list_imp_name" (ValueChanged)="LovSelected($event)" [where]="CUST_IS_CONSIGNEE = 'Y'">
               </div>
             </div>
           </div>
@@ -40,33 +42,37 @@
             <div class="form-group row">
               <label class="col-2 col-form-label col-form-label-sm">JOB#</label>
               <div class="col-10">
-                <input type="text" class="form-control form-control-sm" [(ngModel)]="job_docno"
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="query.job_docno"
                   (blur)="OnBlur('job_docno')" required maxlength="30" />
               </div>
             </div>
             <div class="form-group row">
               <label class="col-2 col-form-label col-form-label-sm">INVOICE#</label>
               <div class="col-10">
-                <input type="text" class="form-control form-control-sm" [(ngModel)]="ord_invoice"
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="query.ord_invoice"
                   (blur)="OnBlur('ord_invoice')" required maxlength="30" />
               </div>
             </div>
             <div class="form-group row">
               <label class="col-2 col-form-label col-form-label-sm">Sort By</label>
               <div class="col-10">
-                <select class="form-control form-control-sm" [(ngModel)]="sort_colname">
+                <select class="form-control form-control-sm" [(ngModel)]="query.sort_colname">
                   <option *ngFor="let rec of SortList" [value]="rec.colname">{{rec.colheadername}}</option>
                 </select>
               </div>
             </div>
             <div class="form-group row">
-              <div class="offset-2 col-5">
-                <input type="checkbox" [(ngModel)]="ord_showpending">
-                <span>Show Pending Only</span>
+              <label class="col-1 col-form-label col-form-label-sm">Show Pending Only</label>              
+              <div class="col-4">
+                <select class="form-control form-control-sm" [(ngModel)]="query.ord_showpending">
+                  <option [value]="'Y'">YES</option>
+                  <option [value]="'N'">NO</option>
+                </select>
               </div>
+
               <label class="col-1 col-form-label col-form-label-sm">Status</label>
               <div class="col-4">
-                <select class="form-control form-control-sm" [(ngModel)]="ord_status">
+                <select class="form-control form-control-sm" [(ngModel)]="query.ord_status">
                   <option [value]="'ALL'">ALL</option>
                   <option [value]="'REPORTED'">REPORTED</option>
                   <option [value]="'APPROVED'">APPROVED</option>
@@ -82,7 +88,7 @@
             <div class="form-group row">
               <label class="col-1 col-form-label col-form-label-sm">PO#</label>
               <div class="col-11">
-                <input type="text" class="form-control form-control-sm" [(ngModel)]="ord_po"
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="query.ord_po"
                   (blur)="OnBlur('ordr_po')" required maxlength="1000" />
               </div>
             </div>

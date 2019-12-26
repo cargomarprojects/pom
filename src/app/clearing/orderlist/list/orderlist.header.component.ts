@@ -17,10 +17,19 @@ export class OrderListHeaderComponent implements OnInit {
     
     @Output() searchEvents = new EventEmitter<any>();
 
+    SortList : any [];
+
 
     constructor() { }
 
-    ngOnInit() { }
+    ngOnInit() { 
+
+      this.SortList = [
+        { "colheadername": "CREATED", "colname": "a.rec_created_date desc" },
+        { "colheadername": "AGENT,SHIPPER,PO", "colname": "agent.cust_name,exp.cust_name,ord_po" }
+      ];
+
+    }
 
     List(outputformat: string) {
         this.searchEvents.emit({ outputformat: outputformat, searchQuery: this.query });

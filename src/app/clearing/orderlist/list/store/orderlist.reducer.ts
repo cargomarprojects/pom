@@ -28,6 +28,8 @@ export const { selectAll, selectEntities, selectIds, selectTotal } = adapter.get
 
 export const SelectJobOrderState = createFeatureSelector<OrderListState>('orderlist');
 
+
+
 export const SelectEntity = createSelector(
   SelectJobOrderState,
   SelectRouterUrlId,
@@ -38,6 +40,18 @@ export const SelectEntity = createSelector(
       return null;
   }
 );
+
+export const SelectEntityExists = createSelector(
+  SelectJobOrderState,
+  SelectRouterUrlId,
+  (state: OrderListState, urlid) => {
+    if (state.entities[urlid])
+      return true;
+    else
+      return false;
+  }
+);
+
 
 export const SelectSearchRecord = createSelector(
   SelectEntity,
