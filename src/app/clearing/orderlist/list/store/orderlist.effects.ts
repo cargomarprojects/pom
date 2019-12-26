@@ -20,7 +20,7 @@ export class OrderListEffects {
         private mainService: JobOrderService
     ) { }
 
-    LoadList$ = createEffect(() => this.actions$.pipe(
+    RequestInit$ = createEffect(() => this.actions$.pipe(
         ofType(allactions.RequestLoad),
         map(() => this.store.select(SelectEntityExists)),
         filter(dataExists => !dataExists),
@@ -40,7 +40,7 @@ export class OrderListEffects {
             withLatestFrom(this.store.select(SelectRouterUrlId))
         )),
         tap(([action, urlid]) => {
-            allactions.UpdateRecord({ urlid: urlid, stype: 'SEARCH', data: action.searchQuery });
+            allactions.UpdateSearch({ urlid: urlid, stype: 'SEARCH', data: action.searchQuery });
         })
     ), { dispatch: false });
 
@@ -50,7 +50,20 @@ export class OrderListEffects {
             withLatestFrom(this.store.select(SelectRouterUrlId))
         )),
         tap(([action, urlid]) => {
-            allactions.UpdateRecord({ urlid: urlid, stype: 'PAGE', data: action.pageQuery });
+            allactions.UpdateSearch({ urlid: urlid, stype: 'PAGE', data: action.pageQuery });
+        })
+    ), { dispatch: false });
+
+    Search$ = createEffect(() => this.actions$.pipe(
+        ofType(allactions.Search),
+        concatMap(action => of(action).pipe(
+            withLatestFrom(this.store.select(SelectRouterUrlId))
+        )),
+        tap(([action, urlid]) => {
+            const pagequery = <PageQuery>{ action: 'NEW', page_count: 0, page_current: 0, page_rowcount: 0, page_rows: 50 };
+            const searchquery = <SearchQuery>{};
+            const data = <JobOrderModel>{ isError: false, message: '', urlid: urlid, pageQuery: pagequery, searchQuery: searchquery, records: [] };
+            allactions.RequestLoadSuccess({ data: data })            
         })
     ), { dispatch: false });
 

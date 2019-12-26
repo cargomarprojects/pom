@@ -15,13 +15,12 @@ export const initialState: OrderListState = adapter.getInitialState();
 export const Reducer = createReducer(
   initialState,
   on(AllActions.RequestLoadSuccess, (state, action) => {
-    adapter.removeOne(action.data.urlid, state);
-    return adapter.addOne(action.data, state);
+    return adapter.upsertOne (action.data, state);
   }),
   on(AllActions.RequestLoadFail , (state, action) => {
     return adapter.updateOne(action.rec ,state );
   }),
-  on(AllActions.UpdateRecord , (state, action) => {
+  on(AllActions.UpdateSearch , (state, action) => {
     if ( action.stype == 'SEARCH')
       return adapter.updateOne( {id : action.urlid, changes:{searchQuery : action.data } }  ,state );
     else 
