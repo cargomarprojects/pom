@@ -2,7 +2,8 @@ import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter, 
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { SearchTable } from '../models/searchtable';
-import { LoginService } from '../../core/services/login.service';
+import { LovService } from '../services/lov.service';
+
 import { GlobalService } from '../../core/services/global.service';
 
 
@@ -90,7 +91,7 @@ export class AutoComplete2Component {
   @Output() ValueChanged = new EventEmitter<SearchTable>();
   @Input() disabled: boolean = false;
 
-  @ViewChild('inputbox') private inputbox: ElementRef;
+  @ViewChild('inputbox', { static: false }) private inputbox: ElementRef;
 
 
   rows_to_display: number = 0;
@@ -119,7 +120,7 @@ export class AutoComplete2Component {
     private elementRef: ElementRef,
     private route: ActivatedRoute,
     private router: Router,
-    private loginservice: LoginService,
+    private loginservice: LovService,
     private gs: GlobalService
   ) {
 
@@ -179,11 +180,11 @@ export class AutoComplete2Component {
       parentid: this._parentid,
       searchstring: this._displaydata,
       where: this._where,
-      comp_code: this.gs.company_code,
-      branch_code: this._branchcode 
+      comp_code: this.gs.globalVariables.comp_code,
+      branch_code: this._branchcode
     };
 
-    this.loginservice.LovList(SearchData)
+    this.loginservice.List(SearchData)
       .subscribe(response => {
         //this.RecList = response.list;
         //this.rows_total = response.rows_total;
@@ -222,13 +223,10 @@ export class AutoComplete2Component {
 
   SelectedItem(_source: string, _Record: SearchTable) {
     if (_Record == null) {
-      this.inputdata.controlname = this._controlname;
-      this.inputdata.uid = this._uid;
       this.inputdata.id = "";
       this.inputdata.code = "";
       this.inputdata.name = "";
       this.inputdata.rate = 0;
-      this.inputdata.subtype = "";
 
       this.inputdata.col1 = '';
       this.inputdata.col2 = '';
@@ -236,33 +234,20 @@ export class AutoComplete2Component {
       this.inputdata.col4 = '';
       this.inputdata.col5 = '';
       this.inputdata.col6 = '';
-
       this.inputdata.col7 = '';
-      this.inputdata.col8 = '';
-      this.inputdata.col9 = '';
-
       this.displaydata = '';
       this.parentid = '';
-
-
-
     }
     else {
-      this.inputdata.controlname = this._controlname;
-      this.inputdata.uid = this._uid;
       this.inputdata.id = _Record.id;
       this.inputdata.code = _Record.code;
       this.inputdata.name = _Record.name;
       this.inputdata.rate = _Record.rate;
-
-      if (this._displaycolumn == "CODE")
-        this._displaydata = _Record.code;
-      if (this._displaycolumn == "NAME")
-        this._displaydata = _Record.name;
-
-
-      this._parentid = _Record.parentid;
-      this.inputdata.subtype = _Record.subtype;
+      if (this.displaycolumn == "CODE")
+        this.displaydata = _Record.code;
+      if (this.displaycolumn == "NAME")
+        this.displaydata = _Record.name;
+      this.parentid = _Record.parentid;
 
       this.inputdata.col1 = _Record.col1;
       this.inputdata.col2 = _Record.col2;
@@ -271,11 +256,7 @@ export class AutoComplete2Component {
       this.inputdata.col5 = _Record.col5;
       this.inputdata.col6 = _Record.col6;
       this.inputdata.col7 = _Record.col7;
-      this.inputdata.col8 = _Record.col8;
-      this.inputdata.col9 = _Record.col9;
     }
-
-
     this.showDiv = false;
     this.ValueChanged.emit(this.inputdata);
     this.RecList = [];

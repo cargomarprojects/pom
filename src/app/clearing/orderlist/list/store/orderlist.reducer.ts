@@ -15,16 +15,16 @@ export const initialState: OrderListState = adapter.getInitialState();
 export const Reducer = createReducer(
   initialState,
   on(AllActions.RequestLoadSuccess, (state, action) => {
-    return adapter.upsertOne (action.data, state);
+    return adapter.upsertOne(action.data, state);
   }),
-  on(AllActions.RequestLoadFail , (state, action) => {
-    return adapter.updateOne( {id : action.urlid, changes:{ isError : true, message : action.message } }  ,state );
+  on(AllActions.RequestLoadFail, (state, action) => {
+    return adapter.updateOne({ id: action.urlid, changes: { isError: true, message: action.message } }, state);
   }),
-  on(AllActions.UpdateSearch , (state, action) => {
-    if ( action.stype == 'SEARCH')
-      return adapter.updateOne( {id : action.urlid, changes:{searchQuery : action.data } }  ,state );
-    else 
-      return adapter.updateOne( {id : action.urlid, changes:{pageQuery : action.data } }  ,state );
+  on(AllActions.UpdateQuery, (state, action) => {
+    if (action.stype == 'SEARCH')
+      return adapter.updateOne({ id: action.urlid, changes: { searchQuery: action.query } }, state);
+    else
+      return adapter.updateOne({ id: action.urlid, changes: { pageQuery: action.query } }, state);
   }),
 );
 
@@ -75,7 +75,7 @@ export const SelectPageQuery = createSelector(
     if (record)
       return record.pageQuery;
     else
-      return <PageQuery>{action :'NEW',page_count :0, page_current :0, page_rowcount :0, page_rows :50};
+      return <PageQuery>{ action: 'NEW', page_count: 0, page_current: 0, page_rowcount: 0, page_rows: 50 };
   }
 );
 

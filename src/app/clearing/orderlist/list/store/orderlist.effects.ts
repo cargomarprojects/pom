@@ -33,30 +33,9 @@ export class OrderListEffects {
         ))
     ), { dispatch: true });
 
-    UpdateSearch$ = createEffect(() => this.actions$.pipe(
-        ofType(allactions.UpdateSearchQuery),
-        concatMap(action => of(action).pipe(
-            withLatestFrom(this.store.select(SelectRouterUrlId).pipe(
-                map( (urlid) =>{
-                    return allactions.Search();
-                } )
-            ))
-        ))
-    ), { dispatch: false });
 
-    UpdatePage$ = createEffect(() => this.actions$.pipe(
-        ofType(allactions.UpdatePageQuery),
-        concatMap(action => of(action).pipe(
-            withLatestFrom(this.store.select(SelectRouterUrlId))
-        )),
-        tap(([action, urlid]) => {
-            allactions.UpdateSearch({ urlid: urlid, stype: 'PAGE', data: action.pageQuery });
-            allactions.Search();
-        })
-    ), { dispatch: false });
-
-    Search$ = createEffect(() => this.actions$.pipe(
-        ofType(allactions.Search),
+/*     Search$ = createEffect(() => this.actions$.pipe(
+        ofType(allactions.UpdateQuery),
         concatMap(action => of(action).pipe(
             withLatestFrom(this.store.select(SelectRouterUrlId), this.store.select(SelectEntity)),
         )),
@@ -71,6 +50,6 @@ export class OrderListEffects {
                 })
             );
         })
-    ), { dispatch: true });
+    ), { dispatch: true }); */
 
 }
