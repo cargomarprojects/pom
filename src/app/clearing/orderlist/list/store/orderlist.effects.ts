@@ -3,14 +3,13 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as allactions from './orderlist.actions';
 import { JobOrderService } from '../../../services/joborder.service';
 import { concatMap, withLatestFrom, tap, filter, map, switchMap } from 'rxjs/operators';
-import { of, EMPTY } from 'rxjs';
+import { of, EMPTY, combineLatest } from 'rxjs';
 import { JobOrderModel, SearchQuery } from '../../../models/joborder';
 
 import { Store, ActionsSubject } from '@ngrx/store';
 import { SelectRouterUrlId, AppState } from '../../../../reducers';
 import { SelectEntityExists, SelectJobOrderState, SelectEntity } from './orderlist.reducer';
 import { PageQuery } from 'src/app/shared/models/pageQuery';
-
 
 @Injectable()
 export class OrderListEffects {
@@ -24,25 +23,25 @@ export class OrderListEffects {
         ofType(allactions.RequestLoad),
         map(() => this.store.select(SelectEntityExists)),
         filter(dataExists => !dataExists),
-        switchMap( () => this.store.select(SelectRouterUrlId) ),
-        tap((urlid) => {
-            const pagequery = <PageQuery>{ action: 'NEW', page_count: 0, page_current: 0, page_rowcount: 0, page_rows: 50 };
-            const searchquery = <SearchQuery>{};
-            const data = <JobOrderModel>{ isError: false, message: '', urlid: urlid, pageQuery: pagequery, searchQuery: searchquery, records: [] };
-            allactions.RequestLoadSuccess({ data: data })
-        })
-    ), { dispatch: false });
-
+        switchMap(() => this.store.select(SelectRouterUrlId).pipe(
+            map((urlid) => {
+                const pagequery = <PageQuery>{ action: 'NEW', page_count: 0, page_current: 0, page_rowcount: 0, page_rows: 50 };
+                const searchquery = <SearchQuery>{};
+                const data = <JobOrderModel>{ isError: false, message: '', urlid: urlid, pageQuery: pagequery, searchQuery: searchquery, records: [] };
+                return allactions.RequestLoadSuccess({ data: data })
+            })
+        ))
+    ), { dispatch: true });
 
     UpdateSearch$ = createEffect(() => this.actions$.pipe(
         ofType(allactions.UpdateSearchQuery),
         concatMap(action => of(action).pipe(
-            withLatestFrom(this.store.select(SelectRouterUrlId))
-        )),
-        tap(([action, urlid]) => {
-            allactions.UpdateSearch({ urlid: urlid, stype: 'SEARCH', data: action.searchQuery });
-            allactions.Search();
-        })
+            withLatestFrom(this.store.select(SelectRouterUrlId).pipe(
+                map( (urlid) =>{
+                    return allactions.Search();
+                } )
+            ))
+        ))
     ), { dispatch: false });
 
     UpdatePage$ = createEffect(() => this.actions$.pipe(
@@ -52,22 +51,26 @@ export class OrderListEffects {
         )),
         tap(([action, urlid]) => {
             allactions.UpdateSearch({ urlid: urlid, stype: 'PAGE', data: action.pageQuery });
-            allactions.Search();            
+            allactions.Search();
         })
     ), { dispatch: false });
 
     Search$ = createEffect(() => this.actions$.pipe(
         ofType(allactions.Search),
         concatMap(action => of(action).pipe(
-            withLatestFrom(this.store.select(SelectRouterUrlId))
+            withLatestFrom(this.store.select(SelectRouterUrlId), this.store.select(SelectEntity)),
         )),
-        tap(([action, urlid]) => {
-            const pagequery = <PageQuery>{ action: 'NEW', page_count: 0, page_current: 0, page_rowcount: 0, page_rows: 50 };
-            const searchquery = <SearchQuery>{};
-            const data = <JobOrderModel>{ isError: false, message: '', urlid: urlid, pageQuery: pagequery, searchQuery: searchquery, records: [] };
-            allactions.RequestLoadSuccess({ data: data })            
+        switchMap(([action, urlid, ent]) => {
+            const searchData = {};
+            return this.mainService.List(searchData).pipe(
+                tap(result => {
+                    const pagequery = <PageQuery>{ action: 'NEW', page_count: 0, page_current: 0, page_rowcount: 0, page_rows: 50 };
+                    const searchquery = <SearchQuery>{};
+                    const data = <JobOrderModel>{ isError: false, message: '', urlid: urlid, pageQuery: pagequery, searchQuery: searchquery, records: [] };
+                    allactions.RequestLoadSuccess({ data: data })
+                })
+            );
         })
-    ), { dispatch: false });
-
+    ), { dispatch: true });
 
 }
