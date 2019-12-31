@@ -5,13 +5,16 @@ import { SearchTable } from 'src/app/shared/models/searchtable';
 
 @Component({
   selector: 'app-orderlist-header',
-  templateUrl: 'orderlist.header.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: 'orderlist.header.component.html'
 })
 
 export class OrderListHeaderComponent implements OnInit {
 
-  @Input() query : SearchQuery;
+  query : SearchQuery;
+  @Input() set _query( value : SearchQuery){
+    this.query  = Object.assign({}, value);
+  }
+
 
   @Output() searchEvents = new EventEmitter<any>();
 

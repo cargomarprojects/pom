@@ -15,7 +15,7 @@
       
       <div class="page-list">
 
-        <app-orderlist-header [query]="searchQuery$ | async" (searchEvents)="searchEvents($event)"></app-orderlist-header>
+        <app-orderlist-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)"></app-orderlist-header>
 
 
         <App-Page [pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page>
