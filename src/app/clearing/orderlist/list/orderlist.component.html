@@ -15,7 +15,10 @@
 
       <div class="page-list">
         
-        <app-orderlist-header [query]="searchQuery$ | async" (searchEvents)="searchEvents($event)" ></app-orderlist-header>
+        <div *ngIf="searchQuery$ | async">
+          <app-orderlist-header [query]="searchQuery$ | async" (searchEvents)="searchEvents($event)" ></app-orderlist-header>
+        </div>
+        
         
         <App-Page [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page>
         

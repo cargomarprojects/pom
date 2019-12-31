@@ -13,6 +13,8 @@ import { AppState } from 'src/app/reducers';
 
 import * as FromOrderReducer from './store/orderlist.reducer';
 import * as FromOrderActions from './store/orderlist.actions';
+import { map } from 'rxjs/operators';
+import { resolve } from 'url';
 
 @Component({
   selector: 'app-orderlist',
@@ -26,6 +28,8 @@ export class OrderListComponent {
   searchQuery$: Observable<SearchQuery>;
   errorMessage$: Observable<string>;
 
+  test : SearchQuery;
+
   constructor(
     private mainService: OrderListService,
     private gs: GlobalService,
@@ -36,7 +40,7 @@ export class OrderListComponent {
 
     this.data$ = this.store.select(FromOrderReducer.SelectRecords);
     this.pageQuery$ = this.store.select(FromOrderReducer.SelectPageQuery );
-    this.searchQuery$ = this.store.select(FromOrderReducer.SelectSearchRecord );
+    this.searchQuery$ = this.store.select(FromOrderReducer.SelectSearchRecord);
     this.errorMessage$ = this.store.select(FromOrderReducer.SelectMessage);
 
     this.store.dispatch( FromOrderActions.RequestLoad());

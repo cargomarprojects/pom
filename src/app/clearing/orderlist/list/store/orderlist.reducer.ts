@@ -15,6 +15,7 @@ export const initialState: AppState = adapter.getInitialState();
 export const Reducer = createReducer(
   initialState,
   on(AllActions.RequestLoadSuccess, (state, action) => {
+    console.log('reducer', action.data);
     return adapter.upsertOne(action.data, state);
   }),
   on(AllActions.RequestLoadFail, (state, action) => {
@@ -56,7 +57,7 @@ export const SelectOrderEntityExists = createSelector(
   SelectOrderEntity,
   (entity) => {
     if (entity)
-      return true ;
+      return true;
     else
       return false;
   }
@@ -65,13 +66,12 @@ export const SelectOrderEntityExists = createSelector(
 
 export const SelectSearchRecord = createSelector(
   SelectOrderEntity,
-  (record: JobOrderModel) => {
-    if (record)
-      return record.searchQuery;
-    else
-      return <SearchQuery>{};
+  (entity : JobOrderModel) => {
+      return (entity) ? entity.searchQuery : null;
   }
 );
+
+
 
 export const SelectPageQuery = createSelector(
   SelectOrderEntity,
