@@ -13,13 +13,11 @@ import { AppState } from 'src/app/reducers';
 
 import * as FromOrderReducer from './store/orderlist.reducer';
 import * as FromOrderActions from './store/orderlist.actions';
-import { map } from 'rxjs/operators';
-import { resolve } from 'url';
+
 
 @Component({
   selector: 'app-orderlist',
-  templateUrl: './orderlist.component.html',
-  providers: [OrderListService]
+  templateUrl: './orderlist.component.html'
 })
 export class OrderListComponent {
   
@@ -28,12 +26,10 @@ export class OrderListComponent {
   searchQuery$: Observable<SearchQuery>;
   errorMessage$: Observable<string>;
 
-  test : SearchQuery;
-
   constructor(
     private mainService: OrderListService,
     private gs: GlobalService,
-    private store : Store<AppState>
+    private store : Store<FromOrderReducer.AppState>
   ) {}
     // Init Will be called After executing Constructor
   ngOnInit() {
@@ -43,6 +39,7 @@ export class OrderListComponent {
     this.searchQuery$ = this.store.select(FromOrderReducer.SelectSearchRecord);
     this.errorMessage$ = this.store.select(FromOrderReducer.SelectMessage);
 
+    console.log('before dispatch');
     this.store.dispatch( FromOrderActions.RequestLoad());
 
   }

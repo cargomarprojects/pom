@@ -5,11 +5,9 @@ import * as AllActions from './orderlist.actions';
 import { SelectRouterUrlId } from 'src/app/reducers';
 
 export interface AppState extends EntityState<JobOrderModel> {
-
 }
 
 export const adapter: EntityAdapter<JobOrderModel> = createEntityAdapter<JobOrderModel>({ selectId: orderModel => orderModel.urlid });
-
 export const initialState: AppState = adapter.getInitialState();
 
 export const Reducer = createReducer(

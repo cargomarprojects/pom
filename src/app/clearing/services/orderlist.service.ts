@@ -6,7 +6,7 @@ import { GlobalService } from '../../core/services/global.service';
 import { JobOrder_VM } from '../models/joborder';
 
 
-@Injectable()
+@Injectable({providedIn:'root'})
 export class OrderListService {
 
   constructor(
