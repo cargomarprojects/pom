@@ -14,7 +14,6 @@ export const initialState: OrderListState = adapter.getInitialState();
 export const Reducer = createReducer(
   initialState,
   on(AllActions.RequestLoadSuccess, (state, action) => {
-    console.log('reducer', action.data);
     return adapter.upsertOne(action.data, state);
   }),
   on(AllActions.RequestLoadFail, (state, action) => {

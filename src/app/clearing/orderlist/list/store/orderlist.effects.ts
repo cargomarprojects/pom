@@ -52,7 +52,6 @@ export class OrderListEffects {
                     ord_showpending : 'N' 
                 };
                 const data = <JobOrderModel>{ isError: false, message: '', urlid: urlid, pageQuery: pagequery, searchQuery: searchquery, records: [] };
-                console.log ('Effect', searchquery );
                 return allactions.RequestLoadSuccess({ data: data })
             })
         ))

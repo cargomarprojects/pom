@@ -38,7 +38,6 @@ export class OrderListComponent {
     this.pageQuery$ = this.store.select(FromOrderReducer.SelectPageQuery );
     this.errorMessage$ = this.store.select(FromOrderReducer.SelectMessage);
 
-    console.log('before dispatch');
     this.store.dispatch( FromOrderActions.RequestLoad());
 
   }
