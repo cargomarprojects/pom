@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
 import { Joborderm, SearchQuery } from '../../models/joborder';
 import { JobOrder_VM } from '../../models/joborder';
-import { OrderListService } from '../../services/orderlist.service';
 import { SearchTable } from '../../../shared/models/searchtable';
 import { Observable } from 'rxjs';
 import { PageQuery } from 'src/app/shared/models/pageQuery';
@@ -13,6 +12,7 @@ import { AppState } from 'src/app/reducers';
 
 import * as FromOrderReducer from './store/orderlist.reducer';
 import * as FromOrderActions from './store/orderlist.actions';
+
 
 
 @Component({
@@ -27,16 +27,15 @@ export class OrderListComponent {
   errorMessage$: Observable<string>;
 
   constructor(
-    private mainService: OrderListService,
     private gs: GlobalService,
-    private store : Store<FromOrderReducer.AppState>
+    private store : Store<AppState>
   ) {}
     // Init Will be called After executing Constructor
   ngOnInit() {
 
     this.data$ = this.store.select(FromOrderReducer.SelectRecords);
-    this.pageQuery$ = this.store.select(FromOrderReducer.SelectPageQuery );
     this.searchQuery$ = this.store.select(FromOrderReducer.SelectSearchRecord);
+    this.pageQuery$ = this.store.select(FromOrderReducer.SelectPageQuery );
     this.errorMessage$ = this.store.select(FromOrderReducer.SelectMessage);
 
     console.log('before dispatch');

@@ -12,16 +12,14 @@
         </div>
       </div>
 
-
+      
       <div class="page-list">
-        
-        <div *ngIf="(searchQuery$ | async)">
-          <app-orderlist-header [query]="searchQuery$ | async" (searchEvents)="searchEvents($event)" ></app-orderlist-header>
-        </div>
-        
-        
-        <App-Page [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page>
-        
+
+        <app-orderlist-header [query]="searchQuery$ | async" (searchEvents)="searchEvents($event)"></app-orderlist-header>
+
+
+        <App-Page [pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page>
+
         <div class="page-body table-responsive">
 
           <table class="table  table-hover table-sm">
@@ -108,12 +106,12 @@
           </table>
         </div>
 
-        <App-Page [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page>
+        <App-Page [pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page>
 
 
       </div>
 
-      
+
       <ng-template #trackorder let-c="close" let-d="dismiss">
         <div class="modal-header">
           <h4 class="modal-title">Tracking</h4>

@@ -36,6 +36,7 @@ export class OrderListHeaderComponent implements OnInit {
 
   LovSelected(_Record: SearchTable ) {
     // Company Settings
+    console.log(_Record);
     if (_Record.controlname == "SHIPPER") {
       this.query.list_exp_id = _Record.id;
       this.query.list_exp_name = _Record.name;
@@ -46,7 +47,8 @@ export class OrderListHeaderComponent implements OnInit {
     }
     if (_Record.controlname == "AGENT") {
       this.query.list_agent_id = _Record.id;
-      this.query.list_agent_name = _Record.code;
+      this.query.list_agent_name = _Record.name;
+      
     }
   }
 

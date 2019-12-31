@@ -6,8 +6,6 @@ import { LovService } from '../services/lov.service';
 
 import { GlobalService } from '../../core/services/global.service';
 
-
-
 @Component({
   selector: 'app-autocomplete2',
   templateUrl: './autocomplete2.component.html',
@@ -91,7 +89,7 @@ export class AutoComplete2Component {
   @Output() ValueChanged = new EventEmitter<SearchTable>();
   @Input() disabled: boolean = false;
 
-  @ViewChild('inputbox', { static: false }) private inputbox: ElementRef;
+  @ViewChild('inputbox', { static: true }) private inputbox: ElementRef;
 
 
   rows_to_display: number = 0;
@@ -223,6 +221,8 @@ export class AutoComplete2Component {
 
   SelectedItem(_source: string, _Record: SearchTable) {
     if (_Record == null) {
+      this.inputdata.controlname = this._controlname;
+      this.inputdata.uid = this._uid;
       this.inputdata.id = "";
       this.inputdata.code = "";
       this.inputdata.name = "";
@@ -234,20 +234,31 @@ export class AutoComplete2Component {
       this.inputdata.col4 = '';
       this.inputdata.col5 = '';
       this.inputdata.col6 = '';
+
       this.inputdata.col7 = '';
+
       this.displaydata = '';
       this.parentid = '';
+
+
+
     }
     else {
+      this.inputdata.controlname = this._controlname;
+      this.inputdata.uid = this._uid;
       this.inputdata.id = _Record.id;
       this.inputdata.code = _Record.code;
       this.inputdata.name = _Record.name;
       this.inputdata.rate = _Record.rate;
-      if (this.displaycolumn == "CODE")
-        this.displaydata = _Record.code;
-      if (this.displaycolumn == "NAME")
-        this.displaydata = _Record.name;
-      this.parentid = _Record.parentid;
+
+      if (this._displaycolumn == "CODE")
+        this._displaydata = _Record.code;
+      if (this._displaycolumn == "NAME")
+        this._displaydata = _Record.name;
+
+
+      this._parentid = _Record.parentid;
+      
 
       this.inputdata.col1 = _Record.col1;
       this.inputdata.col2 = _Record.col2;
@@ -256,7 +267,10 @@ export class AutoComplete2Component {
       this.inputdata.col5 = _Record.col5;
       this.inputdata.col6 = _Record.col6;
       this.inputdata.col7 = _Record.col7;
+
     }
+
+
     this.showDiv = false;
     this.ValueChanged.emit(this.inputdata);
     this.RecList = [];
@@ -312,6 +326,7 @@ export class AutoComplete2Component {
 
 
 }
+
 
 
 

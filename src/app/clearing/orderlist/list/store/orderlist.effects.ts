@@ -8,6 +8,7 @@ import { JobOrderModel, SearchQuery } from '../../../models/joborder';
 
 import { Store, ActionsSubject } from '@ngrx/store';
 import { SelectRouterUrlId, AppState } from '../../../../reducers';
+
 import { SelectOrderEntityExists,  SelectOrderEntity } from './orderlist.reducer';
 import { PageQuery } from 'src/app/shared/models/pageQuery';
 import { GlobalService } from 'src/app/core/services/global.service';
@@ -48,7 +49,7 @@ export class OrderListEffects {
                     to_date : '',
                     sort_colname :'CREATED', 
                     ord_status : 'ALL', 
-                    ord_showpending : 'NA' 
+                    ord_showpending : 'N' 
                 };
                 const data = <JobOrderModel>{ isError: false, message: '', urlid: urlid, pageQuery: pagequery, searchQuery: searchquery, records: [] };
                 console.log ('Effect', searchquery );
@@ -57,8 +58,8 @@ export class OrderListEffects {
         ))
     ), { dispatch: true });
 
-
-/*     Search$ = createEffect(() => this.actions$.pipe(
+    /* 
+    Search$ = createEffect(() => this.actions$.pipe(
         ofType(allactions.UpdateQuery),
         concatMap(action => of(action).pipe(
             withLatestFrom(this.store.select(SelectRouterUrlId), this.store.select(SelectEntity)),
@@ -74,6 +75,7 @@ export class OrderListEffects {
                 })
             );
         })
-    ), { dispatch: true }); */
+    ), { dispatch: true }); 
+    */
 
 }

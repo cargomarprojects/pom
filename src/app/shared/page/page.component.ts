@@ -11,10 +11,8 @@ import { map } from 'rxjs/operators';
 })
 export class PageComponent implements OnInit {
 
-  @Input() set _pageQuery( value : PageQuery){
-      this.pageQuery = Object.assign({}, value); 
-  } 
-  pageQuery: PageQuery;
+  @Input() pageQuery : PageQuery;
+
   @Output() pageEvents = new EventEmitter<any>();
 
   constructor() {  }

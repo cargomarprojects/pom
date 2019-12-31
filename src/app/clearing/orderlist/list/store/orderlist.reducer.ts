@@ -4,11 +4,12 @@ import { Joborderm, JobOrderModel, SearchQuery, PageQuery } from '../../../model
 import * as AllActions from './orderlist.actions';
 import { SelectRouterUrlId } from 'src/app/reducers';
 
-export interface AppState extends EntityState<JobOrderModel> {
+export interface OrderListState extends EntityState<JobOrderModel> {
 }
 
 export const adapter: EntityAdapter<JobOrderModel> = createEntityAdapter<JobOrderModel>({ selectId: orderModel => orderModel.urlid });
-export const initialState: AppState = adapter.getInitialState();
+
+export const initialState: OrderListState = adapter.getInitialState();
 
 export const Reducer = createReducer(
   initialState,
@@ -27,12 +28,12 @@ export const Reducer = createReducer(
   }),
 );
 
-export function OrderListReducer(state: AppState | undefined, action: Action) {
+export function OrderListReducer(state: OrderListState | undefined, action: Action) {
   return Reducer(state, action);
 }
 
 
-export const selectOrderListState = createFeatureSelector<AppState>('orderlist');
+export const selectOrderListState = createFeatureSelector<OrderListState>('orderlist');
 
 
 export const SelectAllOrders = createSelector(
@@ -43,12 +44,7 @@ export const SelectAllOrders = createSelector(
 export const SelectOrderEntity = createSelector(
   SelectAllOrders,
   SelectRouterUrlId,
-  (state: JobOrderModel[], urlid: string) => {
-    if (state.length > 0)
-      return state[urlid];
-    else
-      return null;
-  }
+  (state : JobOrderModel[] , urlid : string) => state.find( st => st.urlid == urlid )
 );
 
 export const SelectOrderEntityExists = createSelector(
@@ -69,15 +65,10 @@ export const SelectSearchRecord = createSelector(
   }
 );
 
-
-
 export const SelectPageQuery = createSelector(
   SelectOrderEntity,
   (record: JobOrderModel) => {
-    if (record)
-      return record.pageQuery;
-    else
-      return <PageQuery>{ action: 'NEW', page_count: 0, page_current: 0, page_rowcount: 0, page_rows: 50 };
+      return  (record) ? record.pageQuery : null;
   }
 );
 
