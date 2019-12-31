@@ -38,6 +38,7 @@ export class HeaderComponent {
             this.router.navigate([rec.menu_route1], { queryParams: { id: this.id, parameter: rec.menu_route2 }, replaceUrl: true });
         else
             this.router.navigate([rec.menu_route1], { queryParams: { parameter: rec.menu_route2 }, replaceUrl: true });
+
     }
 
     Logout() {

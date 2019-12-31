@@ -1,6 +1,6 @@
 
 import { NgModule } from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -41,15 +41,19 @@ import { CustomSerializer } from './reducers';
 @NgModule({
     imports: [
         BrowserModule,
-        NgbModule,        
+        NgbModule,
         CommonModule,
         FormsModule,
         HttpClientModule,
         AppRoutingModule,
         StoreModule.forRoot(reducers, { metaReducers }),
         EffectsModule.forRoot([]),
-        StoreRouterConnectingModule.forRoot({serializer: CustomSerializer}),            
-        environment.production ? [] : StoreDevtoolsModule.instrument(),
+        StoreRouterConnectingModule.forRoot({ serializer: CustomSerializer }),
+        StoreDevtoolsModule.instrument({
+            maxAge: 25, // Retains last 25 states
+            logOnly: environment.production, // Restrict extension to log-only mode
+        }),
+
     ],
     declarations: [
         AppComponent,
@@ -64,7 +68,7 @@ import { CustomSerializer } from './reducers';
         GlobalService,
         LoginService,
         LoadingScreenService,
-        InterceptorServiceProvider       
+        InterceptorServiceProvider
     ],
     bootstrap: [
         AppComponent

@@ -4,13 +4,13 @@ import { Joborderm, JobOrderModel, SearchQuery, PageQuery } from '../../../model
 import * as AllActions from './orderlist.actions';
 import { SelectRouterUrlId } from 'src/app/reducers';
 
-export interface OrderListState extends EntityState<JobOrderModel> {
+export interface AppState extends EntityState<JobOrderModel> {
 
 }
 
 export const adapter: EntityAdapter<JobOrderModel> = createEntityAdapter<JobOrderModel>({ selectId: orderModel => orderModel.urlid });
 
-export const initialState: OrderListState = adapter.getInitialState();
+export const initialState: AppState = adapter.getInitialState();
 
 export const Reducer = createReducer(
   initialState,
@@ -28,31 +28,35 @@ export const Reducer = createReducer(
   }),
 );
 
-export function OrderListReducer(state: OrderListState | undefined, action: Action) {
+export function OrderListReducer(state: AppState | undefined, action: Action) {
   return Reducer(state, action);
 }
 
-export const { selectAll, selectEntities, selectIds, selectTotal } = adapter.getSelectors();
 
-export const SelectJobOrderState = createFeatureSelector<OrderListState>('orderlist');
+export const selectOrderListState = createFeatureSelector<AppState>('orderlist');
 
-export const SelectEntity = createSelector(
-  SelectJobOrderState,
+
+export const SelectAllOrders = createSelector(
+  selectOrderListState,
+  adapter.getSelectors().selectAll
+);
+
+export const SelectOrderEntity = createSelector(
+  SelectAllOrders,
   SelectRouterUrlId,
-  (state: OrderListState, urlid) => {
-    if (state.entities[urlid])
-      return state.entities[urlid];
+  (state: JobOrderModel[], urlid: string) => {
+    if (state.length > 0)
+      return state[urlid];
     else
       return null;
   }
 );
 
-export const SelectEntityExists = createSelector(
-  SelectJobOrderState,
-  SelectRouterUrlId,
-  (state: OrderListState, urlid) => {
-    if (state.entities[urlid])
-      return true;
+export const SelectOrderEntityExists = createSelector(
+  SelectOrderEntity,
+  (entity) => {
+    if (entity)
+      return true ;
     else
       return false;
   }
@@ -60,7 +64,7 @@ export const SelectEntityExists = createSelector(
 
 
 export const SelectSearchRecord = createSelector(
-  SelectEntity,
+  SelectOrderEntity,
   (record: JobOrderModel) => {
     if (record)
       return record.searchQuery;
@@ -70,7 +74,7 @@ export const SelectSearchRecord = createSelector(
 );
 
 export const SelectPageQuery = createSelector(
-  SelectEntity,
+  SelectOrderEntity,
   (record: JobOrderModel) => {
     if (record)
       return record.pageQuery;
@@ -80,7 +84,7 @@ export const SelectPageQuery = createSelector(
 );
 
 export const SelectRecords = createSelector(
-  SelectEntity,
+  SelectOrderEntity,
   (record: JobOrderModel) => {
     if (record)
       return record.records;
@@ -91,7 +95,7 @@ export const SelectRecords = createSelector(
 
 
 export const SelectMessage = createSelector(
-  SelectEntity,
+  SelectOrderEntity,
   (record: JobOrderModel) => {
     if (record)
       return record.message;
@@ -101,7 +105,7 @@ export const SelectMessage = createSelector(
 );
 
 export const SelectIsError = createSelector(
-  SelectEntity,
+  SelectOrderEntity,
   (record: JobOrderModel) => {
     if (record)
       return record.isError;

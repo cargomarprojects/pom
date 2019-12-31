@@ -26,6 +26,7 @@ const {
   selectUrl,            // select the current url
 } = fromRouter.getSelectors(selectRouter);
 
+export const selectSelctedUrlId = selectQueryParam('urlid');
 
 export const SelectRouterParam = createSelector(
   selectRouter,
@@ -43,10 +44,11 @@ export const SelectRouterUrlId = createSelector(
   selectRouter,
   (router) => {
     if (router.state) {
-      return router.state.queryParams.urlid;
+     var mobj =  JSON.parse( router.state.queryParams.parameter); 
+      return mobj.urlid;
     }
     else
-      return null;
+      return '';
   }
 );
 
@@ -66,7 +68,9 @@ export const SelectRouterMenuId = createSelector(
   selectRouter,
   (router) => {
     if (router.state) {
-      return router.state.queryParams.menu_id;
+
+      var mobj =  JSON.parse( router.state.queryParams.parameter); 
+      return mobj.menu_id;
     }
     else
       return null;

@@ -1,4 +1,3 @@
-
 import { Component, Input, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
@@ -14,7 +13,6 @@ import { AppState } from 'src/app/reducers';
 
 import * as FromOrderReducer from './store/orderlist.reducer';
 import * as FromOrderActions from './store/orderlist.actions';
-
 
 @Component({
   selector: 'app-orderlist',
@@ -41,7 +39,7 @@ export class OrderListComponent {
     this.searchQuery$ = this.store.select(FromOrderReducer.SelectSearchRecord );
     this.errorMessage$ = this.store.select(FromOrderReducer.SelectMessage);
 
-    this.store.dispatch(FromOrderActions.RequestLoad);
+    this.store.dispatch( FromOrderActions.RequestLoad());
 
   }
 
