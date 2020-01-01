@@ -34,6 +34,7 @@ export class OrderListHeaderComponent implements OnInit {
   }
 
   List(outputformat: string) {
+    this.query.sort_colvalue =  this.SortList.find( rec => rec.colheadername == this.query.sort_colname).colname;
     this.searchEvents.emit({ outputformat: outputformat, searchQuery: this.query });
   }
 

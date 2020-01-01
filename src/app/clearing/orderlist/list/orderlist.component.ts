@@ -8,7 +8,7 @@ import { SearchTable } from '../../../shared/models/searchtable';
 import { Observable } from 'rxjs';
 import { PageQuery } from 'src/app/shared/models/pageQuery';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/reducers';
+import { AppState, SelectRouterUrlId } from 'src/app/reducers';
 
 import * as FromOrderReducer from './store/orderlist.reducer';
 import * as FromOrderActions from './store/orderlist.actions';
@@ -33,6 +33,7 @@ export class OrderListComponent {
     // Init Will be called After executing Constructor
   ngOnInit() {
 
+
     this.data$ = this.store.select(FromOrderReducer.SelectRecords);
     this.searchQuery$ = this.store.select(FromOrderReducer.SelectSearchRecord);
     this.pageQuery$ = this.store.select(FromOrderReducer.SelectPageQuery );
@@ -47,11 +48,11 @@ export class OrderListComponent {
   }
 
   searchEvents(actions: any) {
-      //this.store.dispatch(new FromOrderActions.RequestLoad());
+      this.store.dispatch(FromOrderActions.Search({ stype: actions.outputformat, query:actions.searchQuery}));
   }
 
   pageEvents(actions: any) {
-    //this.store.dispatch(new fromparamactions.LoadParamRequest({ type: "PAGE", Query: actions.pageQuery }))
+    this.store.dispatch(FromOrderActions.Search({ stype: 'PAGE', query:actions.pageQuery}));    
   }
 
 

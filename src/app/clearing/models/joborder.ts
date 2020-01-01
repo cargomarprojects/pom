@@ -109,8 +109,8 @@ export interface SearchQuery {
   report_folder: string,
   file_pkid: string,
   ord_status: string,
-  sort_colname: string
-
+  sort_colname: string,
+  sort_colvalue: string,
 }
 
 export interface PageQuery {
