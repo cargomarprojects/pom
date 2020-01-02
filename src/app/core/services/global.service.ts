@@ -18,12 +18,12 @@ export class GlobalService {
   public globalData: GlobalData;
   public globalVariables: GlobalVariables;
   public defaultValues: DefaultValues;
-  
+
   public baseLocalServerUrl: string = "http://localhost:8080";
   public baseUrl: string = "http://localhost:5000";
 
-  
- 
+
+
   // change this is false in production and update
   public isolderror: boolean = false;
 
@@ -32,7 +32,7 @@ export class GlobalService {
 
   constructor(
     private http2: HttpClient,
-    private location : Location,
+    private location: Location,
     private router: Router) {
     this.Company_Name = "CARGOMAR (P) LTD";
     this.globalVariables = new GlobalVariables;
@@ -53,11 +53,11 @@ export class GlobalService {
     return this.MenuList.find(f => f.menu_code == menucode);
   }
 
-  public getError(error : any) {
+  public getError(error: any) {
     if (this.isolderror)
       return JSON.parse(error.error).Message;
     else
-      return  error.error.Message;
+      return error.error.Message;
   }
 
   /*
@@ -134,11 +134,11 @@ export class GlobalService {
   }
 
 
-  public ClosePage(sPage: string,  IsCloseButton = true) {
-    if ( IsCloseButton)
+  public ClosePage(sPage: string, IsCloseButton = true) {
+    if (IsCloseButton)
       this.router.navigate([sPage], { replaceUrl: true });
-  else 
-    this.location.back();
+    else
+      this.location.back();
 
   }
 
@@ -171,7 +171,7 @@ export class GlobalService {
     this.defaultValues.monthbegindate = this.getNewdate(0);
     this.defaultValues.lastmonthdate = this.getNewdate(30);//get today -30 days
     this.defaultValues.print_cheque_only_after_ho_approved = 'N';
-    
+
     this.globalData.cost_sea_fromdate = this.defaultValues.monthbegindate;
     this.globalData.cost_sea_todate = this.defaultValues.today;
     this.globalData.cost_air_fromdate = this.defaultValues.monthbegindate;
@@ -200,7 +200,7 @@ export class GlobalService {
     return nDate.toISOString().slice(0, 10);
   }
 
-  public getGstType(_gstin: string, _gstin_state_code: string, isSez: boolean, bISGT_Exception = false ) {
+  public getGstType(_gstin: string, _gstin_state_code: string, isSez: boolean, bISGT_Exception = false) {
     let _type: string = '';
     if (_gstin.length == 15) {
       if (_gstin.substring(0, 2) == this.defaultValues.gstin_state_code)
@@ -217,9 +217,9 @@ export class GlobalService {
     if (isSez)
       _type = 'INTER-STATE';
 
-    if ( bISGT_Exception){
-      if ( _type == 'INTRA-STATE')
-        _type = 'INTER-STATE' ;
+    if (bISGT_Exception) {
+      if (_type == 'INTRA-STATE')
+        _type = 'INTER-STATE';
     }
 
     return _type;
@@ -254,7 +254,7 @@ export class GlobalService {
     var roundedTempNumber = Math.round(tempNumber);
     return roundedTempNumber / factor;
   };
- 
+
   public IsBranchWiseCodeOK(Branch_Type: string, accode: string, maincode: string): Boolean {
     let bRet: boolean = true;
     let codetype: string = '';
@@ -281,12 +281,23 @@ export class GlobalService {
   }
 
 
-  Naviagete(menu_route : string, jsonstring : string) {
+  Naviagete(menu_route: string, jsonstring: string) {
     let id = this.getGuid();
     this.router.navigate([menu_route], { queryParams: { id: id, parameter: jsonstring }, replaceUrl: false });
 
   }
 
+
+  getParameter(theParameter): string {
+    var params = window.location.search.substr(1).split('&');
+    for (var i = 0; i < params.length; i++) {
+      var p = params[i].split('=');
+      if (p[0] == theParameter) {
+        return decodeURIComponent(p[1]);
+      }
+    }
+    return '';
+  }
 
 
 }

@@ -1,4 +1,3 @@
-
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ChangeDetectionStrategy } from '@angular/core';
 import { SearchQuery } from '../../models/joborder';
 import { SearchTable } from 'src/app/shared/models/searchtable';
@@ -14,7 +13,6 @@ export class OrderListHeaderComponent implements OnInit {
   @Input() set _query( value : SearchQuery){
     this.query  = Object.assign({}, value);
   }
-
 
   @Output() searchEvents = new EventEmitter<any>();
 
@@ -34,7 +32,12 @@ export class OrderListHeaderComponent implements OnInit {
   }
 
   List(outputformat: string) {
-    this.query.sort_colvalue =  this.SortList.find( rec => rec.colheadername == this.query.sort_colname).colname;
+    
+    var sdata =  this.SortList.find( rec => rec.colheadername == this.query.sort_colname).colname;
+    if ( sdata )
+      this.query.sort_colvalue = sdata;
+
+      
     this.searchEvents.emit({ outputformat: outputformat, searchQuery: this.query });
   }
 
@@ -52,7 +55,6 @@ export class OrderListHeaderComponent implements OnInit {
       this.query.list_imp_id = _Record.id;
       this.query.list_imp_name = _Record.name;
     }
-
   }
 
 }

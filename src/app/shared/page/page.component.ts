@@ -6,18 +6,18 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'App-Page',
   templateUrl: './page.component.html',
-  changeDetection : ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 
 })
 export class PageComponent implements OnInit {
 
-  @Input() pageQuery : PageQuery;
+  @Input() pageQuery: PageQuery;
 
   @Output() pageEvents = new EventEmitter<any>();
 
-  constructor() {  }
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngOnChanges(changes: SimpleChange) {
   }
@@ -26,6 +26,33 @@ export class PageComponent implements OnInit {
   }
 
   List(outputformat: string, action: string) {
+
+    var currentPage = this.pageQuery.page_current;
+
+    if (this.pageQuery.page_current == -1)
+      return;
+
+    if (action == 'FIRST')
+      currentPage = 1;
+    if (action == 'PREV')
+      currentPage--;
+    else if (action == 'NEXT')
+      currentPage++;
+    else if (action == 'LAST')
+      currentPage = this.pageQuery.page_count;
+
+    if (currentPage <= 0)
+      return;
+    if (currentPage > this.pageQuery.page_count)
+      return;
+
+    this.pageQuery.action = action;
+
+    this.pageEvents.emit({ outputformat: outputformat, action: action, pageQuery: this.pageQuery });
+    
+  }
+
+  List_old(outputformat: string, action: string) {
 
     var oldPage = this.pageQuery.page_current;
     if (this.pageQuery.page_current == -1)
@@ -50,9 +77,12 @@ export class PageComponent implements OnInit {
     if (this.pageQuery.page_current == oldPage)
       return;
 
-
-    
     this.pageEvents.emit({ outputformat: outputformat, action: action, pageQuery: this.pageQuery });
   }
 
+
 }
+
+
+
+

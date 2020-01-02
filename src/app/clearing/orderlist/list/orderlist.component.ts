@@ -20,26 +20,26 @@ import * as FromOrderActions from './store/orderlist.actions';
   templateUrl: './orderlist.component.html'
 })
 export class OrderListComponent {
-  
-  data$: Observable<Joborderm[]>;
-  pageQuery$: Observable< PageQuery >;
+
+  recordlist$: Observable<Joborderm[]>;
+  pageQuery$: Observable<PageQuery>;
   searchQuery$: Observable<SearchQuery>;
   errorMessage$: Observable<string>;
 
   constructor(
     private gs: GlobalService,
-    private store : Store<AppState>
-  ) {}
-    // Init Will be called After executing Constructor
+    private store: Store<AppState>
+  ) { }
+  // Init Will be called After executing Constructor
   ngOnInit() {
 
 
-    this.data$ = this.store.select(FromOrderReducer.SelectRecords);
+    this.recordlist$ = this.store.select(FromOrderReducer.SelectRecords);
     this.searchQuery$ = this.store.select(FromOrderReducer.SelectSearchRecord);
-    this.pageQuery$ = this.store.select(FromOrderReducer.SelectPageQuery );
+    this.pageQuery$ = this.store.select(FromOrderReducer.SelectPageQuery);
     this.errorMessage$ = this.store.select(FromOrderReducer.SelectMessage);
 
-    this.store.dispatch( FromOrderActions.RequestLoad());
+    this.store.dispatch(FromOrderActions.RequestLoad());
 
   }
 
@@ -48,11 +48,13 @@ export class OrderListComponent {
   }
 
   searchEvents(actions: any) {
-      this.store.dispatch(FromOrderActions.Search({ stype: actions.outputformat, query:actions.searchQuery}));
+    var urlid = this.gs.getParameter('urlid');
+    this.store.dispatch(FromOrderActions.UpdateQuery({ id : urlid, stype: 'NEW', query: actions.searchQuery }));
   }
 
   pageEvents(actions: any) {
-    this.store.dispatch(FromOrderActions.Search({ stype: 'PAGE', query:actions.pageQuery}));    
+    var urlid = this.gs.getParameter('urlid');
+    this.store.dispatch(FromOrderActions.UpdateQuery({ id : urlid, stype: actions.action , query: actions.pageQuery }));
   }
 
 

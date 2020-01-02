@@ -22,29 +22,16 @@ export class HeaderComponent {
     }
 
     LoadPage(rec: Menum) {
-        let bFlag : boolean = false;
+        let bFlag: boolean = false;
         this.getUrlID();
-        /* this.router.navigate([rec.menu_route1], { queryParams: { parameter: rec.menu_route2 }, replaceUrl: true }); */
-        if (rec.menu_route1 == 'accounts/trial')
-            bFlag = true;
-        if (rec.menu_route1 == 'accounts/pandl')
-            bFlag = true;            
-        if (rec.menu_route1 == 'accounts/ledger')
-            bFlag = true;
-        if (rec.menu_route1 == 'accounts/cashbook')
-            bFlag = true;
-
-        if (bFlag)
-            this.router.navigate([rec.menu_route1], { queryParams: { id: this.id, parameter: rec.menu_route2 }, replaceUrl: true });
-        else
-            this.router.navigate([rec.menu_route1], { queryParams: { parameter: rec.menu_route2 }, replaceUrl: true });
-
+        var param = JSON.parse(rec.menu_route2);
+        this.router.navigate([rec.menu_route1], { queryParams: param, replaceUrl: false });
     }
 
     Logout() {
         this.loginservice.Logout();
         this.title = 'Pls Login';
-        this.router.navigate(['login'], { replaceUrl: true }); 
+        this.router.navigate(['login'], { replaceUrl: true });
     }
 
     getUrlID() {
