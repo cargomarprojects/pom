@@ -53,7 +53,7 @@ export const SelectOrderEntity = createSelector(
   }
 );
 
-export const SelectOrderEntityExists = createSelector(
+export const SelectOrderEntityExists = createSelector  (
   SelectOrderEntity,
   (entity) => {
     if (entity)

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as allactions from './orderlist.actions';
 import { concatMap, withLatestFrom, tap, filter, map, switchMap, catchError } from 'rxjs/operators';
-import { of, EMPTY, combineLatest, empty } from 'rxjs';
+import { of, combineLatest } from 'rxjs';
 import { JobOrderModel, SearchQuery } from '../../../models/joborder';
 
 import { Store, ActionsSubject } from '@ngrx/store';
@@ -17,19 +17,22 @@ import { OrderListService } from 'src/app/clearing/services/orderlist.service';
 @Injectable()
 export class OrderListEffects {
 
+    constructor(
+        private store: Store<AppState>,
+        private actions$: Actions,
+        private mainService: OrderListService,
+        private gs: GlobalService
+    ) { }
+
     LoadRequest$ = createEffect(() => this.actions$.pipe(
         ofType(allactions.RequestLoad),
-        map(() => this.store.select(SelectOrderEntityExists)),
-        filter((dataExists) => {
-            return (dataExists) ? true : false;
-        }),
-        switchMap(() => this.store.select(SelectRouterUrlId).pipe(
-            map((urlid) => {
-
-                if (urlid == '')
+        concatMap(action => this.store.select(SelectOrderEntityExists)),
+        switchMap(flag => this.store.select(SelectRouterUrlId).pipe(
+            map(urlid => {
+                if (flag) {
                     return allactions.EmtyReturn();
+                }
                 else {
-
                     const pagequery = <PageQuery>{ action: 'NEW', page_count: 0, page_current: 0, page_rowcount: 0, page_rows: 50 };
                     const searchquery = <SearchQuery>{
                         branch_code: this.gs.globalVariables.branch_code,
@@ -113,12 +116,7 @@ export class OrderListEffects {
     ));
 
 
-    constructor(
-        private store: Store<AppState>,
-        private actions$: Actions,
-        private mainService: OrderListService,
-        private gs: GlobalService
-    ) { }
+
 
 
 }

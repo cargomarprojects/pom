@@ -4,7 +4,8 @@ import { SearchTable } from 'src/app/shared/models/searchtable';
 
 @Component({
   selector: 'app-orderlist-header',
-  templateUrl: 'orderlist.header.component.html'
+  templateUrl: 'orderlist.header.component.html',
+  changeDetection : ChangeDetectionStrategy.OnPush
 })
 
 export class OrderListHeaderComponent implements OnInit {
