@@ -24,6 +24,7 @@ export class OrderListHeaderComponent implements OnInit {
 
   constructor() { }
 
+  
   ngOnInit() {
     this.SortList = [
       { "colheadername": "CREATED", "colname": "a.rec_created_date desc" },

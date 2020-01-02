@@ -33,6 +33,7 @@ export class OrderListComponent {
   // Init Will be called After executing Constructor
   ngOnInit() {
 
+    
 
     this.recordlist$ = this.store.select(FromOrderReducer.SelectRecords);
     this.searchQuery$ = this.store.select(FromOrderReducer.SelectSearchRecord);

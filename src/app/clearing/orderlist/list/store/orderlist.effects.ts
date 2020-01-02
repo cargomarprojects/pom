@@ -14,7 +14,7 @@ import { GlobalService } from 'src/app/core/services/global.service';
 import { OrderListService } from 'src/app/clearing/services/orderlist.service';
 
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class OrderListEffects {
     constructor(
         private store: Store<AppState>,
