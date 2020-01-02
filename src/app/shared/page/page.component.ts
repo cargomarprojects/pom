@@ -46,7 +46,7 @@ export class PageComponent implements OnInit {
     if (currentPage > this.pageQuery.page_count)
       return;
 
-    this.pageQuery.action = action;
+    
 
     this.pageEvents.emit({ outputformat: outputformat, action: action, pageQuery: this.pageQuery });
     

@@ -34,13 +34,15 @@ export class OrderListComponent {
   ngOnInit() {
 
     
+    this.store.dispatch(FromOrderActions.RequestLoad());
 
+    
     this.recordlist$ = this.store.select(FromOrderReducer.SelectRecords);
     this.searchQuery$ = this.store.select(FromOrderReducer.SelectSearchRecord);
     this.pageQuery$ = this.store.select(FromOrderReducer.SelectPageQuery);
     this.errorMessage$ = this.store.select(FromOrderReducer.SelectMessage);
 
-    this.store.dispatch(FromOrderActions.RequestLoad());
+
 
   }
 
@@ -56,6 +58,10 @@ export class OrderListComponent {
   pageEvents(actions: any) {
     var urlid = this.gs.getParameter('urlid');
     this.store.dispatch(FromOrderActions.UpdateQuery({ id : urlid, stype: actions.action , query: actions.pageQuery }));
+  }
+
+  ActionHandler(action : string , id : string ){
+
   }
 
 

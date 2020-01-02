@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as allactions from './orderlist.actions';
 import { concatMap, withLatestFrom, tap, filter, map, switchMap, catchError } from 'rxjs/operators';
-import { of, EMPTY, combineLatest } from 'rxjs';
+import { of, EMPTY, combineLatest, empty } from 'rxjs';
 import { JobOrderModel, SearchQuery } from '../../../models/joborder';
 
 import { Store, ActionsSubject } from '@ngrx/store';
@@ -16,14 +16,8 @@ import { OrderListService } from 'src/app/clearing/services/orderlist.service';
 
 @Injectable()
 export class OrderListEffects {
-    constructor(
-        private store: Store<AppState>,
-        private actions$: Actions,
-        private mainService: OrderListService,
-        private gs: GlobalService
-    ) { }
 
-    RequestInit$ = createEffect(() => this.actions$.pipe(
+    LoadRequest$ = createEffect(() => this.actions$.pipe(
         ofType(allactions.RequestLoad),
         map(() => this.store.select(SelectOrderEntityExists)),
         filter((dataExists) => {
@@ -31,6 +25,7 @@ export class OrderListEffects {
         }),
         switchMap(() => this.store.select(SelectRouterUrlId).pipe(
             map((urlid) => {
+
                 const pagequery = <PageQuery>{ action: 'NEW', page_count: 0, page_current: 0, page_rowcount: 0, page_rows: 50 };
                 const searchquery = <SearchQuery>{
                     branch_code: this.gs.globalVariables.branch_code,
@@ -57,7 +52,7 @@ export class OrderListEffects {
                 return allactions.RequestLoadSuccess({ data: data })
             })
         ))
-    ), { dispatch: true });
+    ));
 
 
     Search$ = createEffect(() => this.actions$.pipe(
@@ -91,13 +86,13 @@ export class OrderListEffects {
                 file_pkid: this.gs.getGuid(),
                 ord_status: ent.searchQuery.ord_status,
                 sort_colname: ent.searchQuery.sort_colvalue
-              };
+            };
 
             return this.mainService.List(searchData).pipe(
                 map(response => {
-                    const pageQuery = <PageQuery>{ action: ent.pageQuery.action, page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
+                    const pageQuery = <PageQuery>{ action: action.stype, page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
                     const searchquery = ent.searchQuery;
-                    const data = <JobOrderModel>{ isError: false, message: '', id: urlid, pageQuery: pageQuery, searchQuery: searchquery, records:response.list };
+                    const data = <JobOrderModel>{ isError: false, message: '', id: urlid, pageQuery: pageQuery, searchQuery: searchquery, records: response.list };
                     return allactions.RequestLoadSuccess({ data: data })
                 }),
                 catchError(err => {
@@ -109,7 +104,15 @@ export class OrderListEffects {
             );
 
         })
-    ), { dispatch: true });
+    ));
+
+
+    constructor(
+        private store: Store<AppState>,
+        private actions$: Actions,
+        private mainService: OrderListService,
+        private gs: GlobalService
+    ) { }
 
 
 }
