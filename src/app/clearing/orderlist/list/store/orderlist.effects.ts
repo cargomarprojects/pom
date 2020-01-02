@@ -26,30 +26,36 @@ export class OrderListEffects {
         switchMap(() => this.store.select(SelectRouterUrlId).pipe(
             map((urlid) => {
 
-                const pagequery = <PageQuery>{ action: 'NEW', page_count: 0, page_current: 0, page_rowcount: 0, page_rows: 50 };
-                const searchquery = <SearchQuery>{
-                    branch_code: this.gs.globalVariables.branch_code,
-                    company_code: this.gs.globalVariables.user_company_code,
-                    file_pkid: '',
-                    from_date: '',
-                    job_docno: '',
-                    list_agent_id: '',
-                    list_agent_name: '',
-                    list_exp_id: '',
-                    list_exp_name: '',
-                    list_imp_id: '',
-                    list_imp_name: '',
-                    ord_invoice: '',
-                    ord_po: '',
-                    report_folder: '',
-                    to_date: '',
-                    sort_colname: 'CREATED',
-                    sort_colvalue: 'a.rec_created_date desc',
-                    ord_status: 'ALL',
-                    ord_showpending: 'N'
-                };
-                const data = <JobOrderModel>{ isError: false, message: '', id: urlid, pageQuery: pagequery, searchQuery: searchquery, records: [] };
-                return allactions.RequestLoadSuccess({ data: data })
+                if (urlid == '')
+                    return allactions.EmtyReturn();
+                else {
+
+                    const pagequery = <PageQuery>{ action: 'NEW', page_count: 0, page_current: 0, page_rowcount: 0, page_rows: 50 };
+                    const searchquery = <SearchQuery>{
+                        branch_code: this.gs.globalVariables.branch_code,
+                        company_code: this.gs.globalVariables.user_company_code,
+                        searchstring: '',
+                        file_pkid: '',
+                        from_date: '',
+                        job_docno: '',
+                        list_agent_id: '',
+                        list_agent_name: '',
+                        list_exp_id: '',
+                        list_exp_name: '',
+                        list_imp_id: '',
+                        list_imp_name: '',
+                        ord_invoice: '',
+                        ord_po: '',
+                        report_folder: '',
+                        to_date: '',
+                        sort_colname: 'CREATED',
+                        sort_colvalue: 'a.rec_created_date desc',
+                        ord_status: 'ALL',
+                        ord_showpending: 'N'
+                    };
+                    const data = <JobOrderModel>{ isError: false, message: '', urlid: urlid, pageQuery: pagequery, searchQuery: searchquery, records: [] };
+                    return allactions.RequestLoadSuccess({ data: data })
+                }
             })
         ))
     ));
@@ -65,7 +71,7 @@ export class OrderListEffects {
             let searchData = {
                 type: action.stype,
                 rowtype: '',
-                searchstring: '',
+                searchstring: ent.searchQuery.searchstring,
                 company_code: this.gs.globalVariables.comp_code,
                 branch_code: this.gs.globalVariables.branch_code,
                 year_code: this.gs.globalVariables.year_code,
@@ -92,12 +98,12 @@ export class OrderListEffects {
                 map(response => {
                     const pageQuery = <PageQuery>{ action: action.stype, page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
                     const searchquery = ent.searchQuery;
-                    const data = <JobOrderModel>{ isError: false, message: '', id: urlid, pageQuery: pageQuery, searchQuery: searchquery, records: response.list };
+                    const data = <JobOrderModel>{ isError: false, message: '', urlid: urlid, pageQuery: pageQuery, searchQuery: searchquery, records: response.list };
                     return allactions.RequestLoadSuccess({ data: data })
                 }),
                 catchError(err => {
                     return of(allactions.RequestLoadFail({
-                        id: urlid,
+                        urlid: urlid,
                         message: err.error.Message,
                     }))
                 })

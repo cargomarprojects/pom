@@ -122,7 +122,7 @@ export interface PageQuery {
 }
 
 export interface JobOrderModel {
-  id: string;
+  urlid: string;
   message: string;
   isError: boolean;
   searchQuery: SearchQuery;

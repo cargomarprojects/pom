@@ -9,7 +9,9 @@ export interface OrderListState extends EntityState<JobOrderModel> {
 
 
 
-export const adapter: EntityAdapter<JobOrderModel> = createEntityAdapter<JobOrderModel>();
+export const adapter: EntityAdapter<JobOrderModel> = createEntityAdapter<JobOrderModel>({
+  selectId : (a : JobOrderModel) => a.urlid
+});
 
 export const initialState: OrderListState = adapter.getInitialState();
 
@@ -19,13 +21,13 @@ export const Reducer = createReducer(
     return adapter.upsertOne(action.data, state);
   }),
   on(AllActions.RequestLoadFail, (state, action) => {
-    return adapter.updateOne({ id: action.id, changes: { isError: true, message: action.message, records :[] } }, state);
+    return adapter.updateOne({ id: action.urlid, changes: { isError: true, message: action.message, records :[] } }, state);
   }),
   on(AllActions.UpdateQuery, (state, action) => {
       if (action.stype == 'NEW')
-        return adapter.updateOne({ id: action.id, changes: { isError :false, message  : '', searchQuery: action.query } }, state);
+        return adapter.updateOne({ id: action.urlid, changes: { isError :false, message  : '', searchQuery: action.query } }, state);
       else 
-        return adapter.updateOne({ id: action.id, changes: { isError :false, message  : '', pageQuery: action.query } }, state);
+        return adapter.updateOne({ id: action.urlid, changes: { isError :false, message  : '', pageQuery: action.query } }, state);
   }),
 );
 
@@ -45,7 +47,10 @@ export const SelectAllOrders = createSelector(
 export const SelectOrderEntity = createSelector(
   SelectAllOrders,
   SelectRouterUrlId,
-  (state : JobOrderModel[] , urlid : string) => state.find( st => st.id == urlid )
+  (state : JobOrderModel[] , urlid : string) => {
+    const rec =  state.find( st => st.urlid == urlid );
+    return rec;
+  }
 );
 
 export const SelectOrderEntityExists = createSelector(

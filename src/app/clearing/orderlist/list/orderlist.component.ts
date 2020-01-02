@@ -1,3 +1,4 @@
+
 import { Component, Input, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
@@ -12,6 +13,7 @@ import { AppState, SelectRouterUrlId } from 'src/app/reducers';
 
 import * as FromOrderReducer from './store/orderlist.reducer';
 import * as FromOrderActions from './store/orderlist.actions';
+import { Location } from '@angular/common';
 
 
 
@@ -28,6 +30,7 @@ export class OrderListComponent {
 
   constructor(
     private gs: GlobalService,
+    private location : Location,
     private store: Store<AppState>
   ) { }
   // Init Will be called After executing Constructor
@@ -52,17 +55,20 @@ export class OrderListComponent {
 
   searchEvents(actions: any) {
     var urlid = this.gs.getParameter('urlid');
-    this.store.dispatch(FromOrderActions.UpdateQuery({ id : urlid, stype: 'NEW', query: actions.searchQuery }));
+    this.store.dispatch(FromOrderActions.UpdateQuery({ urlid : urlid, stype: 'NEW', query: actions.searchQuery }));
   }
 
   pageEvents(actions: any) {
     var urlid = this.gs.getParameter('urlid');
-    this.store.dispatch(FromOrderActions.UpdateQuery({ id : urlid, stype: actions.action , query: actions.pageQuery }));
+    this.store.dispatch(FromOrderActions.UpdateQuery({ urlid : urlid, stype: actions.action , query: actions.pageQuery }));
   }
 
   ActionHandler(action : string , id : string ){
 
   }
 
+Close(){
+    this.location.back();
+  }
 
 }

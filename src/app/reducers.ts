@@ -44,7 +44,10 @@ export const SelectRouterUrlId = createSelector(
   selectRouter,
   (router) => {
     if (router.state) {
-      return router.state.queryParams.urlid;
+      if ( router.state.queryParams.urlid)
+        return router.state.queryParams.urlid;
+        else 
+        return '';
     }
     else
       return '';
