@@ -1,4 +1,4 @@
-import { ActionReducer, ActionReducerMap, createFeatureSelector, createSelector, MetaReducer} from '@ngrx/store';
+import { ActionReducer, ActionReducerMap, createFeatureSelector, createSelector, MetaReducer } from '@ngrx/store';
 import * as fromRouter from '@ngrx/router-store';
 import { Params, RouterStateSnapshot } from '@angular/router';
 
@@ -13,9 +13,9 @@ export const reducers: ActionReducerMap<AppState> = {
 
 export const metaReducers: MetaReducer<AppState>[] = [];
 
- 
-export const selectRouter = createFeatureSelector<AppState,fromRouter.RouterReducerState<any>>('router');
- 
+
+export const selectRouter = createFeatureSelector<AppState, fromRouter.RouterReducerState<any>>('router');
+
 
 const {
   selectQueryParams,    // select the current route query params
@@ -26,7 +26,6 @@ const {
   selectUrl,            // select the current url
 } = fromRouter.getSelectors(selectRouter);
 
-export const selectSelctedUrlId = selectQueryParam('urlid');
 
 export const SelectRouterParam = createSelector(
   selectRouter,
@@ -44,13 +43,13 @@ export const SelectRouterUrlId = createSelector(
   selectRouter,
   (router) => {
     if (router.state) {
-      if ( router.state.queryParams.urlid)
+      if (router.state.queryParams.urlid)
         return router.state.queryParams.urlid;
-        else 
-        return '';
+      else
+        return null;
     }
     else
-      return '';
+      return null;
   }
 );
 

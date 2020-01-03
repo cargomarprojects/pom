@@ -89,7 +89,7 @@ export class AutoComplete2Component {
   @Output() ValueChanged = new EventEmitter<SearchTable>();
   @Input() disabled: boolean = false;
 
-  @ViewChild('inputbox', { static: true }) private inputbox: ElementRef;
+  @ViewChild('inputbox', { static: false }) private inputbox: ElementRef;
 
 
   rows_to_display: number = 0;

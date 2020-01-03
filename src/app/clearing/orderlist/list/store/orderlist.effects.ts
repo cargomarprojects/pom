@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as allactions from './orderlist.actions';
+
 import { concatMap, withLatestFrom, tap, filter, map, switchMap, catchError } from 'rxjs/operators';
 import { of, combineLatest } from 'rxjs';
 import { JobOrderModel, SearchQuery } from '../../../models/joborder';
 
-import { Store, ActionsSubject } from '@ngrx/store';
+import { Store }  from '@ngrx/store';
+
 import { SelectRouterUrlId, AppState } from '../../../../reducers';
 
 import { SelectOrderEntityExists, SelectOrderEntity } from './orderlist.reducer';
@@ -16,20 +18,13 @@ import { OrderListService } from 'src/app/clearing/services/orderlist.service';
 
 @Injectable()
 export class OrderListEffects {
-
-    constructor(
-        private store: Store<AppState>,
-        private actions$: Actions,
-        private mainService: OrderListService,
-        private gs: GlobalService
-    ) { }
-
+  
     LoadRequest$ = createEffect(() => this.actions$.pipe(
         ofType(allactions.RequestLoad),
         concatMap(action => this.store.select(SelectOrderEntityExists)),
         switchMap(flag => this.store.select(SelectRouterUrlId).pipe(
             map(urlid => {
-                if (flag) {
+                if (flag || urlid == null) {
                     return allactions.EmtyReturn();
                 }
                 else {
@@ -61,7 +56,7 @@ export class OrderListEffects {
                 }
             })
         ))
-    ));
+    ),{resubscribeOnError: false});
 
 
     Search$ = createEffect(() => this.actions$.pipe(
@@ -116,7 +111,12 @@ export class OrderListEffects {
     ));
 
 
-
-
+    constructor(
+        private actions$: Actions,
+        private store: Store<AppState>,
+        private mainService: OrderListService,
+        private gs: GlobalService
+    ) { }
+    
 
 }

@@ -6,6 +6,7 @@ import { Update } from '@ngrx/entity';
 export const EmtyReturn = createAction('[ORDER LIST] EMPTY RETURN');
 
 export const RequestLoad = createAction('[ORDER LIST] LOAD REQUEST');
+
 export const RequestLoadSuccess  = createAction('[ORDER LIST] LOAD REQUEST SUCCESS', props<{data : JobOrderModel}>());
 export const RequestLoadFail  = createAction('[ORDER LIST] LOAD REQUEST FAIL', props<{ urlid: string , message : string }>());
 

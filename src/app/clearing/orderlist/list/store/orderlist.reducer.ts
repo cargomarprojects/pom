@@ -17,6 +17,13 @@ export const initialState: OrderListState = adapter.getInitialState();
 
 export const Reducer = createReducer(
   initialState,
+
+  on(AllActions.RequestLoad, (state, action) => {
+    return state;
+  }),
+  on(AllActions.EmtyReturn, (state, action) => {
+    return state;
+  }),
   on(AllActions.RequestLoadSuccess, (state, action) => {
     return adapter.upsertOne(action.data, state);
   }),
@@ -32,6 +39,7 @@ export const Reducer = createReducer(
 );
 
 export function OrderListReducer(state: OrderListState | undefined, action: Action) {
+  console.log(action);
   return Reducer(state, action);
 }
 

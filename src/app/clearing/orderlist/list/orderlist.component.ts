@@ -16,7 +16,6 @@ import * as FromOrderActions from './store/orderlist.actions';
 import { Location } from '@angular/common';
 
 
-
 @Component({
   selector: 'app-orderlist',
   templateUrl: './orderlist.component.html'
@@ -32,26 +31,28 @@ export class OrderListComponent {
     private gs: GlobalService,
     private location : Location,
     private store: Store<AppState>
-  ) { }
-  // Init Will be called After executing Constructor
-  ngOnInit() {
+  ) { 
 
-    
-    this.store.dispatch(FromOrderActions.RequestLoad());
-
-    
     this.recordlist$ = this.store.select(FromOrderReducer.SelectRecords);
     this.searchQuery$ = this.store.select(FromOrderReducer.SelectSearchRecord);
     this.pageQuery$ = this.store.select(FromOrderReducer.SelectPageQuery);
     this.errorMessage$ = this.store.select(FromOrderReducer.SelectMessage);
 
+    this.store.dispatch(FromOrderActions.RequestLoad());
 
+  }
+  // Init Will be called After executing Constructor
+  ngOnInit() {
 
+  
   }
 
   //// Destroy Will be called when this component is closed
   ngOnDestroy() {
+
   }
+
+
 
   searchEvents(actions: any) {
     var urlid = this.gs.getParameter('urlid');
@@ -64,11 +65,13 @@ export class OrderListComponent {
   }
 
   ActionHandler(action : string , id : string ){
-
+    
   }
 
 Close(){
+    
     this.location.back();
+
   }
 
 }
