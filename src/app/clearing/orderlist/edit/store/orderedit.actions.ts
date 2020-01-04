@@ -2,6 +2,8 @@
 import { JobOrderEditModel, Joborderm } from '../../../models/joborder';
 import { createAction , props } from '@ngrx/store'
 
+export const RESET= createAction('[ORDER EDIT] RESET');
+
 export const EmtyReturn = createAction('[ORDER EDIT] EMPTY RETURN');
 
 export const RequestLoad = createAction('[ORDER EDIT] LOAD REQUEST');

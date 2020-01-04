@@ -8,14 +8,12 @@ export interface AppState {
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-  router: fromRouter.routerReducer
-};
+  router: fromRouter.routerReducer,
+}
 
 export const metaReducers: MetaReducer<AppState>[] = [];
 
-
 export const selectRouter = createFeatureSelector<AppState, fromRouter.RouterReducerState<any>>('router');
-
 
 const {
   selectQueryParams,    // select the current route query params

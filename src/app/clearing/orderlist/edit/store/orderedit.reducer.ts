@@ -17,6 +17,9 @@ export const initialState: OrderEditState = adapter.getInitialState();
 
 export const Reducer = createReducer(
   initialState,
+  on(AllActions.RESET, (state, action) => {
+    return adapter.removeAll(state);
+  }),  
   on(AllActions.RequestLoadSuccess, (state, action) => {
     return adapter.upsertOne(action.data, state);
   }),

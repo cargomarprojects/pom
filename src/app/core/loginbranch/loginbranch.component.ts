@@ -9,6 +9,13 @@ import { Companym } from '../models/company';
 import { Yearm } from '../models/yearm';
 
 import { Settings } from '../models/settings';
+import { AppState } from 'src/app/reducers';
+import { Store } from '@ngrx/store';
+
+
+import * as fromorderlist from 'src/app/clearing/orderlist/list/store/orderlist.actions';
+import * as fromorderedit from 'src/app/clearing/orderlist/edit/store/orderedit.actions';
+
 
 @Component({
     selector: 'app-loginbranch',
@@ -35,11 +42,15 @@ export class LoginBranchComponent {
         private router: Router,
         private location: Location,
         private gs1: GlobalService,
-        private loginservice: LoginService) {
-
+        private loginservice: LoginService,
+        private store: Store<AppState>
+        ) {
         this.gs = gs1;
-
         this.branchid = this.gs.globalVariables.user_branch_id;
+
+        this.store.dispatch ( fromorderlist.RESET() );
+        this.store.dispatch ( fromorderedit.RESET() );
+
         this.LoadCombo();
     }
 
