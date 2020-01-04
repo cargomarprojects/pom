@@ -8,7 +8,7 @@ import { JobOrderModel, SearchQuery } from '../../../models/joborder';
 import { Store }  from '@ngrx/store';
 import { SelectRouterUrlId, AppState } from '../../../../reducers';
 
-import { SelectOrderEntityExists, SelectOrderEntity } from './orderlist.selctor';
+import { SelectOrderEntityExists, SelectOrderEntity } from './orderlist.selctors';
 import { PageQuery } from 'src/app/shared/models/pageQuery';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { OrderListService } from 'src/app/clearing/services/orderlist.service';

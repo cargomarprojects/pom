@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/reducers';
 
 import * as FromOrderActions from './store/orderlist.actions';
-import * as FromOrderSelectors from './store/orderlist.selctor';
+import * as FromOrderSelectors from './store/orderlist.selctors';
 
 import { Location } from '@angular/common';
 
