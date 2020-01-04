@@ -54,7 +54,7 @@ export class OrderListEffects {
                 }
             })
         ))
-    ),{resubscribeOnError: false});
+    ));
 
 
     Search$ = createEffect(() => this.actions$.pipe(

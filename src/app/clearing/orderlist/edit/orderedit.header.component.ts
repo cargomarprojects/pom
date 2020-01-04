@@ -1,22 +1,19 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
-import { Joborderm } from '../../models/joborder';
+import { Joborderm, JobOrderModel } from '../../models/joborder';
 import { JobOrder_VM } from '../../models/joborder';
 import { OrderListService } from '../../services/orderlist.service';
 import { SearchTable } from '../../../shared/models/searchtable';
 
 @Component({
-  selector: 'app-orderlistedit',
-  templateUrl: './orderlist.edit.component.html',
+  selector: 'App-OrderEditHeader',
+  templateUrl: './orderedit.header.component.html',
   providers: [OrderListService]
 })
-export class OrderListEditComponent {
+export class OrderEditHeaderComponent {
   // Local Variables 
-  title = 'Order List';
-
-
+  title = 'Order Details';
   urlid: string = '';
   menuid: string = '';
 
@@ -38,11 +35,14 @@ export class OrderListEditComponent {
   OrdColList: any[];
 
   Record: Joborderm = <Joborderm>{};
+  @Input() set _record( value :  Joborderm ){
+    this.Record  = Object.assign({}, value);
+  }
+
 
   where_agent = "CUST_IS_AGENT = 'Y'";
   where_shipper = "CUST_IS_SHIPPER = 'Y'";
   where_consignee = "CUST_IS_CONSIGNEE = 'Y'";
-
 
 
   constructor(
@@ -54,10 +54,10 @@ export class OrderListEditComponent {
     // URL Query Parameter 
 
     this.InitCompleted = true;
-
+    this.urlid = this.gs.getParameter("urlid");
     this.menuid = this.gs.getParameter("menuid");
-
     this.InitComponent();
+    
 
   }
 
@@ -460,14 +460,8 @@ export class OrderListEditComponent {
 
   }
 
-
-
-
   Close() {
     this.gs.ClosePage('home', false);
   }
-
-
-
 
 }

@@ -38,12 +38,13 @@ export class OrderListComponent {
     this.pageQuery$ = this.store.select(FromOrderSelectors.SelectPageQuery);
     this.errorMessage$ = this.store.select(FromOrderSelectors.SelectMessage);
 
-    this.store.dispatch(FromOrderActions.RequestLoad());
+    
 
   }
   // Init Will be called After executing Constructor
   ngOnInit() {
-
+    this.store.dispatch(FromOrderActions.RequestLoad());
+    
   }
 
   //// Destroy Will be called when this component is closed

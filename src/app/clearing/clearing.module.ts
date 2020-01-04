@@ -17,8 +17,16 @@ import {EdiOrdUpdateComponent} from './ediordupdate/ediordupdate.component';
 
 import { OrderListReducer } from './orderlist/list/store/orderlist.reducer';
 import { OrderListEffects } from './orderlist/list/store/orderlist.effects';
-import { OrderListEditComponent } from './orderlist/edit/orderlist.edit.component';
+
+import { OrderEditComponent } from './orderlist/edit/orderedit.component';
 import { OrderListHeaderComponent } from './orderlist/list/orderlist.header.component';
+import { OrderEditHeaderComponent } from './orderlist/edit/orderedit.header.component';
+
+
+import { OrderEditReducer } from './orderlist/edit/store/orderedit.reducer';
+import { OrderEditEffects } from './orderlist/edit/store/orderedit.effects';
+
+
 
 @NgModule({
   declarations: [
@@ -27,18 +35,21 @@ import { OrderListHeaderComponent } from './orderlist/list/orderlist.header.comp
     JobContainerComponent,
     OrderListComponent,
     OrderListHeaderComponent,
-    OrderListEditComponent,
+    OrderEditComponent,
+    OrderEditHeaderComponent,
     AgentBookComponent,
     TrackOrderComponent,
     WeekPlanningComponent,
     EdiOrderComponent,
     EdiOrdUpdateComponent
+
   ],
   imports: [
     SharedModule,
     ClearingRoutingModule,
     StoreModule.forFeature('orderlist', OrderListReducer),
-    EffectsModule.forFeature([ OrderListEffects])
+    StoreModule.forFeature('orderrecord', OrderEditReducer  ),
+    EffectsModule.forFeature([ OrderListEffects, OrderEditEffects])
   ],  
   providers: [
   ],

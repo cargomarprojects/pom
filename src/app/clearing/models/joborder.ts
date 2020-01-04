@@ -121,3 +121,12 @@ export interface JobOrderModel {
   pageQuery: PageQuery;
   records: Joborderm[]
 }
+
+export interface JobOrderEditModel {
+  urlid: string;
+  menuid: string;
+  message: string;
+  isError: boolean;
+  record: Joborderm;
+}
+
