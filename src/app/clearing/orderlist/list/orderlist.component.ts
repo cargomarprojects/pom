@@ -1,18 +1,15 @@
 
 import { Component, Input, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
 import { Joborderm, SearchQuery } from '../../models/joborder';
-import { JobOrder_VM } from '../../models/joborder';
-import { SearchTable } from '../../../shared/models/searchtable';
 import { Observable } from 'rxjs';
 import { PageQuery } from 'src/app/shared/models/pageQuery';
 import { Store } from '@ngrx/store';
-import { AppState, SelectRouterUrlId } from 'src/app/reducers';
+import { AppState } from 'src/app/reducers';
 
-import * as FromOrderReducer from './store/orderlist.reducer';
 import * as FromOrderActions from './store/orderlist.actions';
+import * as FromOrderSelectors from './store/orderlist.selctor';
+
 import { Location } from '@angular/common';
 
 
@@ -22,6 +19,9 @@ import { Location } from '@angular/common';
 })
 export class OrderListComponent {
 
+  urlid = '';
+  menuid = '';
+
   recordlist$: Observable<Joborderm[]>;
   pageQuery$: Observable<PageQuery>;
   searchQuery$: Observable<SearchQuery>;
@@ -29,14 +29,14 @@ export class OrderListComponent {
 
   constructor(
     private gs: GlobalService,
-    private location : Location,
+    private location: Location,
     private store: Store<AppState>
-  ) { 
+  ) {
 
-    this.recordlist$ = this.store.select(FromOrderReducer.SelectRecords);
-    this.searchQuery$ = this.store.select(FromOrderReducer.SelectSearchRecord);
-    this.pageQuery$ = this.store.select(FromOrderReducer.SelectPageQuery);
-    this.errorMessage$ = this.store.select(FromOrderReducer.SelectMessage);
+    this.recordlist$ = this.store.select(FromOrderSelectors.SelectRecords);
+    this.searchQuery$ = this.store.select(FromOrderSelectors.SelectSearchRecord);
+    this.pageQuery$ = this.store.select(FromOrderSelectors.SelectPageQuery);
+    this.errorMessage$ = this.store.select(FromOrderSelectors.SelectMessage);
 
     this.store.dispatch(FromOrderActions.RequestLoad());
 
@@ -44,7 +44,6 @@ export class OrderListComponent {
   // Init Will be called After executing Constructor
   ngOnInit() {
 
-  
   }
 
   //// Destroy Will be called when this component is closed
@@ -52,26 +51,35 @@ export class OrderListComponent {
 
   }
 
-
-
   searchEvents(actions: any) {
     var urlid = this.gs.getParameter('urlid');
-    this.store.dispatch(FromOrderActions.UpdateQuery({ urlid : urlid, stype: 'NEW', query: actions.searchQuery }));
+    this.store.dispatch(FromOrderActions.UpdateQuery({ urlid: urlid, stype: 'NEW', query: actions.searchQuery }));
   }
 
   pageEvents(actions: any) {
     var urlid = this.gs.getParameter('urlid');
-    this.store.dispatch(FromOrderActions.UpdateQuery({ urlid : urlid, stype: actions.action , query: actions.pageQuery }));
+    this.store.dispatch(FromOrderActions.UpdateQuery({ urlid: urlid, stype: actions.action, query: actions.pageQuery }));
   }
 
-  ActionHandler(action : string , id : string ){
-    
+  ActionHandler(action: string, id: string) {
+    /*
+    if (!this.gs.canAdd(this.menuid)) {
+      alert('Insufficient User Rights')
+      return; 
+    }
+    */
+    let parameter = {
+      urlid: this.gs.getGuid(),
+      menuid: this.gs.getParameter('menuid'),
+      pkid: id,
+      origin: 'orderlist',
+      mode: action
+    };
+    this.gs.Naviagate2('clearing/orderedit', parameter);
   }
 
-Close(){
-    
+  Close() {
     this.location.back();
-
   }
 
 }

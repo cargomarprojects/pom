@@ -287,6 +287,12 @@ export class GlobalService {
 
   }
 
+  
+  Naviagate2(menu_route: string, param : any) {
+      this.router.navigate([menu_route], { queryParams: param, replaceUrl: false });    
+  }
+
+
 
   getParameter(theParameter): string {
     var params = window.location.search.substr(1).split('&');

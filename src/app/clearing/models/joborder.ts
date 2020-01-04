@@ -1,5 +1,5 @@
 import { GlobalVariables } from '../../core/models/globalvariables';
-
+import { PageQuery } from 'src/app/shared/models/pageQuery';
 
 export interface Joborderm {
   ord_pkid: string;
@@ -111,14 +111,6 @@ export interface SearchQuery {
   ord_status: string,
   sort_colname: string,
   sort_colvalue: string,
-}
-
-export interface PageQuery {
-  action: string;
-  page_count: number;
-  page_current: number;
-  page_rows: number;
-  page_rowcount: number;
 }
 
 export interface JobOrderModel {
