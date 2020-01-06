@@ -4,10 +4,10 @@ import { JobOrderEditModel } from '../../../models/joborder';
 import { SelectRouterUrlId } from 'src/app/reducers';
 import * as reducers from './orderedit.reducer';
 
-export const selectOrderListState = createFeatureSelector<reducers.OrderEditState>('orderrecord');
+export const selectOrderEditState = createFeatureSelector<reducers.OrderEditState>('orderrecord');
 
 export const SelectAllOrders = createSelector(
-  selectOrderListState,
+  selectOrderEditState,
   reducers.adapter.getSelectors().selectAll
 );
 
@@ -29,7 +29,6 @@ export const SelectOrderEntityExists = createSelector  (
       return false;
   }
 );
-
 
 export const SelectRecord = createSelector(
   SelectOrderEntity,
