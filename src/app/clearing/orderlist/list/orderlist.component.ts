@@ -39,18 +39,15 @@ export class OrderListComponent {
     this.searchQuery$ = this.store.select(FromOrderSelectors.SelectSearchRecord);
     this.pageQuery$ = this.store.select(FromOrderSelectors.SelectPageQuery);
     this.errorMessage$ = this.store.select(FromOrderSelectors.SelectMessage);
-    
-
-    
+    this.store.dispatch(FromOrderActions.RequestLoad());    
+  
     
 
   }
   // Init Will be called After executing Constructor
   ngOnInit() {
 
-    alert('Order List Constructor');
 
-    this.store.dispatch(FromOrderActions.RequestLoad());
     
   }
 

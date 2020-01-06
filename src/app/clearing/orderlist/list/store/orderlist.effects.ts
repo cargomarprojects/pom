@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import * as allactions from './orderlist.actions';
+
 import { concatMap, withLatestFrom, map, switchMap, catchError, mergeMap, filter } from 'rxjs/operators';
 import { of, EMPTY, Observable, empty } from 'rxjs';
 import { JobOrderModel, SearchQuery } from '../../../models/joborder';
 import { Store, select } from '@ngrx/store';
-import { SelectOrderEntityExists, SelectOrderEntity } from './orderlist.selctors';
 
 import { PageQuery } from 'src/app/shared/models/pageQuery';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { OrderListService } from 'src/app/clearing/services/orderlist.service';
 import { OrderListState } from './orderlist.reducer';
+
+import * as allactions from './orderlist.actions';
+import { SelectOrderEntityExists, SelectOrderEntity } from './orderlist.selctors';
 import { SelectRouterUrlId, AppState, SelectRouterId } from 'src/app/reducers';
 
 @Injectable()
@@ -18,41 +20,44 @@ export class OrderListEffects {
 
     TestLoadRequet$ = createEffect(() => this.actions$.pipe(
         ofType(allactions.RequestLoad),
-        concatMap(action => this.store.pipe(select(SelectOrderEntityExists))),
-        switchMap(flag => this.store.pipe(select(SelectRouterUrlId)).pipe(
-            map(urlid => {
-                if (flag || urlid == null) {
-                    return allactions.EmtyReturn();
-                }
-                else {
-                    const pagequery = <PageQuery>{ action: 'NEW', page_count: 0, page_current: 0, page_rowcount: 0, page_rows: 50 };
-                    const searchquery = <SearchQuery>{
-                        branch_code: this.gs.globalVariables.branch_code,
-                        company_code: this.gs.globalVariables.user_company_code,
-                        searchstring: '',
-                        file_pkid: '',
-                        from_date: '',
-                        job_docno: '',
-                        list_agent_id: '',
-                        list_agent_name: '',
-                        list_exp_id: '',
-                        list_exp_name: '',
-                        list_imp_id: '',
-                        list_imp_name: '',
-                        ord_invoice: '',
-                        ord_po: '',
-                        report_folder: '',
-                        to_date: '',
-                        sort_colname: 'CREATED',
-                        sort_colvalue: 'a.rec_created_date desc',
-                        ord_status: 'ALL',
-                        ord_showpending: 'N'
-                    };
-                    const data = <JobOrderModel>{ isError: false, message: '', urlid: urlid, pageQuery: pagequery, searchQuery: searchquery, records: [] };
-                    return allactions.RequestLoadSuccess({ data: data })
-                }
-            })
-        ))
+        concatMap(action => of(action).pipe(
+            withLatestFrom(this.store.pipe(select(SelectRouterUrlId)), this.store.select(SelectOrderEntityExists)),
+        )),
+        switchMap(([action, urlid, flag]) => {
+
+            alert('RequestLoad Order List Effects');
+
+            if (flag || urlid == null) {
+                return of(allactions.EmtyReturn());
+            }
+            else {
+                const pagequery = <PageQuery>{ action: 'NEW', page_count: 0, page_current: 0, page_rowcount: 0, page_rows: 50 };
+                const searchquery = <SearchQuery>{
+                    branch_code: this.gs.globalVariables.branch_code,
+                    company_code: this.gs.globalVariables.user_company_code,
+                    searchstring: '',
+                    file_pkid: '',
+                    from_date: '',
+                    job_docno: '',
+                    list_agent_id: '',
+                    list_agent_name: '',
+                    list_exp_id: '',
+                    list_exp_name: '',
+                    list_imp_id: '',
+                    list_imp_name: '',
+                    ord_invoice: '',
+                    ord_po: '',
+                    report_folder: '',
+                    to_date: '',
+                    sort_colname: 'CREATED',
+                    sort_colvalue: 'a.rec_created_date desc',
+                    ord_status: 'ALL',
+                    ord_showpending: 'N'
+                };
+                const data = <JobOrderModel>{ isError: false, message: '', urlid: urlid, pageQuery: pagequery, searchQuery: searchquery, records: [] };
+                return of(allactions.RequestLoadSuccess({ data: data }));
+            }
+        })
     ));
 
 

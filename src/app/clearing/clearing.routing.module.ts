@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ClearingComponent } from './clearing.component';
 
 import { OrderListComponent } from './orderlist/list/orderlist.component';
 import { AgentBookComponent } from './agentbook/agentbook.component';
@@ -9,7 +8,6 @@ import {EdiOrderComponent } from './ediorder/ediorder.component';
 import { OrderEditComponent } from './orderlist/edit/orderedit.component';
 
 const routes: Routes = [
-  { path: 'clearing', component: ClearingComponent },
   { path: 'orderlist', component: OrderListComponent },
   { path: 'orderedit', component: OrderEditComponent },
   { path: 'orderbook', component: AgentBookComponent },

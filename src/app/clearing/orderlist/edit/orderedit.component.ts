@@ -37,14 +37,13 @@ export class OrderEditComponent {
     this.InitComponent();
     this.record$ = this.store.select( fromOrderSelectors.SelectRecord );
     this.errorMessage$ = this.store.select(fromOrderSelectors.SelectMessage);
-    
-    
-    
+    this.store.dispatch(fromOrderActions.RequestLoad());
+        
   }
 
   // Init Will be called After executing Constructor
   ngOnInit() {
-    this.store.dispatch(fromOrderActions.RequestLoad());
+    
   }
 
   InitComponent() {
