@@ -4,7 +4,7 @@ import { Params, RouterStateSnapshot } from '@angular/router';
 
 
 export interface AppState {
-  router: fromRouter.RouterReducerState<any>;
+ router: fromRouter.RouterReducerState<any>;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
@@ -13,16 +13,7 @@ export const reducers: ActionReducerMap<AppState> = {
 
 export const metaReducers: MetaReducer<AppState>[] = [];
 
-export const selectRouter = createFeatureSelector<AppState, fromRouter.RouterReducerState<any>>('router');
-
-const {
-  selectQueryParams,    // select the current route query params
-  selectQueryParam,     // factory function to select a query param
-  selectRouteParams,    // select the current route params
-  selectRouteParam,     // factory function to select a route param
-  selectRouteData,      // select the current route data
-  selectUrl,            // select the current url
-} = fromRouter.getSelectors(selectRouter);
+export const selectRouter = createFeatureSelector<fromRouter.RouterReducerState<any>>('router');
 
 
 export const SelectRouterParam = createSelector(

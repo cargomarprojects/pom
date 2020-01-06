@@ -15,7 +15,7 @@ export const adapter: EntityAdapter<JobOrderEditModel> = createEntityAdapter<Job
 
 export const initialState: OrderEditState = adapter.getInitialState();
 
-export const Reducer = createReducer(
+export const Reducer1 = createReducer(
   initialState,
   on(AllActions.RESET, (state, action) => {
     return adapter.removeAll(state);
@@ -32,5 +32,5 @@ export const Reducer = createReducer(
 );
 
 export function OrderEditReducer(state: OrderEditState | undefined, action: Action) {
-  return Reducer(state, action);
+  return Reducer1(state, action);
 }

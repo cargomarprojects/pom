@@ -289,7 +289,7 @@ export class GlobalService {
 
   
   Naviagate2(menu_route: string, param : any) {
-      this.router.navigate([menu_route], { queryParams: param, replaceUrl: false });    
+      this.router.navigate([menu_route], { queryParams: param });    
   }
 
 

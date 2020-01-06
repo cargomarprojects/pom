@@ -21,6 +21,9 @@ export class OrderEditEffects {
         concatMap(action => this.store.select(SelectOrderEntity)),
         switchMap(ent => this.store.select(SelectRouterParam).pipe(
             map(routeparam => {
+
+                alert('RequestLoad Order Edit Effects');
+
                 if (ent)
                     return allactions.EmtyReturn();
                 else if (routeparam.urlid == null || routeparam.mode == null)

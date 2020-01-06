@@ -1,26 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as allactions from './orderlist.actions';
-import { concatMap, withLatestFrom, map, switchMap, catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { concatMap, withLatestFrom, map, switchMap, catchError, mergeMap, filter } from 'rxjs/operators';
+import { of, EMPTY, Observable, empty } from 'rxjs';
 import { JobOrderModel, SearchQuery } from '../../../models/joborder';
-
-import { Store }  from '@ngrx/store';
-import { SelectRouterUrlId, AppState } from '../../../../reducers';
-
+import { Store, select } from '@ngrx/store';
 import { SelectOrderEntityExists, SelectOrderEntity } from './orderlist.selctors';
+
 import { PageQuery } from 'src/app/shared/models/pageQuery';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { OrderListService } from 'src/app/clearing/services/orderlist.service';
-
+import { OrderListState } from './orderlist.reducer';
+import { SelectRouterUrlId, AppState, SelectRouterId } from 'src/app/reducers';
 
 @Injectable()
 export class OrderListEffects {
-  
-    LoadRequest$ = createEffect(() => this.actions$.pipe(
+
+    TestLoadRequet$ = createEffect(() => this.actions$.pipe(
         ofType(allactions.RequestLoad),
-        concatMap(action => this.store.select(SelectOrderEntityExists)),
-        switchMap(flag => this.store.select(SelectRouterUrlId).pipe(
+        concatMap(action => this.store.pipe(select(SelectOrderEntityExists))),
+        switchMap(flag => this.store.pipe(select(SelectRouterUrlId)).pipe(
             map(urlid => {
                 if (flag || urlid == null) {
                     return allactions.EmtyReturn();
@@ -60,9 +59,10 @@ export class OrderListEffects {
     Search$ = createEffect(() => this.actions$.pipe(
         ofType(allactions.UpdateQuery),
         concatMap(action => of(action).pipe(
-            withLatestFrom(this.store.select(SelectRouterUrlId), this.store.select(SelectOrderEntity)),
+            withLatestFrom(this.store.pipe(select(SelectRouterUrlId)), this.store.select(SelectOrderEntity)),
         )),
         switchMap(([action, urlid, ent]) => {
+
 
             let searchData = {
                 type: action.stype,
@@ -95,7 +95,7 @@ export class OrderListEffects {
                     const pageQuery = <PageQuery>{ action: action.stype, page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
                     const searchquery = ent.searchQuery;
                     const data = <JobOrderModel>{ isError: false, message: '', urlid: urlid, pageQuery: pageQuery, searchQuery: searchquery, records: response.list };
-                    return allactions.RequestLoadSuccess({ data: data })
+                    return allactions.RequestLoadSuccess({ data: data });
                 }),
                 catchError(err => {
                     return of(allactions.RequestLoadFail({
@@ -105,8 +105,10 @@ export class OrderListEffects {
                 })
             );
 
+
         })
     ));
+
 
 
     constructor(
@@ -115,6 +117,6 @@ export class OrderListEffects {
         private mainService: OrderListService,
         private gs: GlobalService
     ) { }
-    
+
 
 }

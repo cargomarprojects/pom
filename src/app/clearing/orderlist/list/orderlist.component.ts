@@ -11,6 +11,7 @@ import * as FromOrderActions from './store/orderlist.actions';
 import * as FromOrderSelectors from './store/orderlist.selctors';
 
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -30,6 +31,7 @@ export class OrderListComponent {
   constructor(
     private gs: GlobalService,
     private location: Location,
+    private router : Router,
     private store: Store<AppState>
   ) {
 
@@ -37,13 +39,19 @@ export class OrderListComponent {
     this.searchQuery$ = this.store.select(FromOrderSelectors.SelectSearchRecord);
     this.pageQuery$ = this.store.select(FromOrderSelectors.SelectPageQuery);
     this.errorMessage$ = this.store.select(FromOrderSelectors.SelectMessage);
+    
 
+    
     
 
   }
   // Init Will be called After executing Constructor
   ngOnInit() {
+
+    alert('Order List Constructor');
+
     this.store.dispatch(FromOrderActions.RequestLoad());
+    
   }
 
   //// Destroy Will be called when this component is closed
@@ -75,7 +83,9 @@ export class OrderListComponent {
       origin: 'orderlist',
       mode: action
     };
-    this.gs.Naviagate2('clearing/orderedit', parameter);
+
+    this.router.navigate(['clearing/orderedit'], { queryParams: parameter});
+
   }
 
   Close() {

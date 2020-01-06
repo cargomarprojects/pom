@@ -15,7 +15,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers, metaReducers } from './reducers';
 import { environment } from '../environments/environment';
 
-import { StoreRouterConnectingModule, NavigationActionTiming } from '@ngrx/router-store';
+import { StoreRouterConnectingModule, NavigationActionTiming, RouterState } from '@ngrx/router-store';
 
 
 import { GlobalService } from './core/services/global.service';
@@ -50,8 +50,8 @@ import { CustomSerializer } from './reducers';
         }),
         EffectsModule.forRoot([]),
         StoreRouterConnectingModule.forRoot({ 
-            serializer: CustomSerializer,
-            navigationActionTiming: NavigationActionTiming.PostActivation
+            stateKey : 'router',
+            serializer: CustomSerializer
         }),
         StoreDevtoolsModule.instrument({
             maxAge: 25, // Retains last 25 states
