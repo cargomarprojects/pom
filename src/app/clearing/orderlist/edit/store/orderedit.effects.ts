@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, SystemJsNgModuleLoader } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatMap, withLatestFrom, map, switchMap, catchError, mergeMap } from 'rxjs/operators';
 import { of, concat } from 'rxjs';
@@ -30,8 +30,20 @@ export class OrderEditEffects {
                 return of(allactions.EmtyReturn());
             else if (routeparam.urlid == null || routeparam.mode == null)
                 return of(allactions.EmtyReturn());
-            else if (routeparam.mode == 'NEW') {
-                const record = <Joborderm>{};
+            else if (routeparam.mode == 'ADD') {
+                const record = <Joborderm>{ rec_mode : 'ADD', rec_category : 'SEA EXPORT', 
+                ord_pkid : this.gs.getGuid(),
+                ord_agent_id :'', 
+                ord_agent_code :'', 
+                ord_agent_name: '',                
+                ord_exp_id :'', 
+                ord_exp_code :'', 
+                ord_exp_name: '' ,
+                ord_imp_id :'', 
+                ord_imp_code :'', 
+                ord_imp_name: '',               
+
+                };
                 const data = <JobOrderEditModel>{ isError: false, message: '', urlid: routeparam.urlid, menuid: routeparam.menuid, record: record };
                 return of(allactions.RequestLoadSuccess({ data: data }));
             }

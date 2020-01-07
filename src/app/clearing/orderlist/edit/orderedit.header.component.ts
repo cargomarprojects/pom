@@ -47,10 +47,13 @@ export class OrderEditHeaderComponent {
     this.InitCompleted = true;
     this.urlid = this.gs.getParameter("urlid");
     this.menuid = this.gs.getParameter("menuid");
+    this.mode = this.gs.getParameter("mode");
+
     this.InitComponent();
   }
 
   ngOnInit() {
+
   }
 
   ngOnDestroy() {
@@ -118,13 +121,23 @@ export class OrderEditHeaderComponent {
   }
 
   NewRecord() {
+
     this.pkid = this.gs.getGuid();
     this.Record = <Joborderm>{};
     this.Record.ord_pkid = this.pkid;
+
     this.Record.ord_exp_id = '';
+    this.Record.ord_exp_code = '';
     this.Record.ord_exp_name = '';
+
     this.Record.ord_imp_id = '';
+    this.Record.ord_imp_code = '';
     this.Record.ord_imp_name = '';
+
+    this.Record.ord_agent_id = '';
+    this.Record.ord_agent_code = '';
+    this.Record.ord_agent_name = '';
+
     this.Record.ord_invno = '';
     this.Record.ord_uneco = '';
     this.Record.ord_po = '';
@@ -148,16 +161,14 @@ export class OrderEditHeaderComponent {
     this.Record.ord_pol_code = '';
     this.Record.ord_pod_code = '';
     this.Record.rec_category = 'SEA EXPORT';
-    this.Record.ord_exp_code = '';
-    this.Record.ord_imp_code = '';
-    this.Record.ord_agent_code = '';
+
     this.Record.rec_mode = this.mode;
   }
 
   Save() {
     if (!this.allvalid())
       return;
-    this.Record._globalvariables = this.gs.globalVariables;  
+    this.Record._globalvariables = this.gs.globalVariables;
     this.save.emit(this.Record);
   }
 
@@ -169,11 +180,11 @@ export class OrderEditHeaderComponent {
     this.ErrorMessage = '';
     this.InfoMessage = '';
 
-    if ( this.gs.isBlank(this.Record.ord_agent_id)) {
+    if (this.gs.isBlank(this.Record.ord_agent_id)) {
       bret = false;
       sError += " Agent Cannot Be Blank";
     }
-    if (this.gs.isBlank(this.Record.ord_exp_id )) {
+    if (this.gs.isBlank(this.Record.ord_exp_id)) {
       bret = false;
       sError += "\n\r | Shipper Cannot Be Blank";
     }
@@ -182,7 +193,7 @@ export class OrderEditHeaderComponent {
       sError += "\n\r | Consignee Cannot Be Blank";
     }
 
-    if ( this.gs.isBlank(this.Record.ord_po)) {
+    if (this.gs.isBlank(this.Record.ord_po)) {
       bret = false;
       sError += "\n\r | PO Cannot Be Blank";
     }
@@ -194,33 +205,6 @@ export class OrderEditHeaderComponent {
 
   }
 
-  RefreshList() {
-    /*
-    
-          REC.ord_agent_name = this.Record.ord_agent_name;
-          REC.ord_exp_name = this.Record.ord_exp_name;
-          REC.ord_imp_name = this.Record.ord_imp_name;
-          REC.ord_invno = this.Record.ord_invno;
-          REC.ord_po = this.Record.ord_po;
-          REC.ord_style = this.Record.ord_style;
-          REC.ord_contractno = this.Record.ord_contractno;
-          REC.ord_uneco = this.Record.ord_uneco;
-          REC.ord_pkg = this.Record.ord_pkg;
-          REC.ord_pcs = this.Record.ord_pcs;
-          REC.ord_grwt = this.Record.ord_grwt;
-          REC.ord_ntwt = this.Record.ord_ntwt;
-          REC.ord_cbm = this.Record.ord_cbm;
-          REC.ord_desc = this.Record.ord_desc;
-          REC.ord_color = this.Record.ord_color;
-          REC.ord_hs_code = this.Record.ord_hs_code;
-          REC.ord_cargo_status = this.Record.ord_cargo_status;
-          REC.rec_created_dte = this.Record.rec_created_dte;
-          REC.ord_pol = this.Record.ord_pol;
-          REC.ord_pod = this.Record.ord_pod;
-          REC.ord_uid = this.Record.ord_uid;
-      */
-
-  }
 
 
   OnBlur(field: string) {
@@ -356,7 +340,7 @@ export class OrderEditHeaderComponent {
       if (this.menu_record.rights_admin)
         this.bAdmin = true;
     }
-    this.LoadCombo();
+    //this.LoadCombo();
   }
   LoadCombo() {
 

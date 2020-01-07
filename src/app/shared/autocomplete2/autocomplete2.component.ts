@@ -31,57 +31,65 @@ import { GlobalService } from '../../core/services/global.service';
 export class AutoComplete2Component {
 
 
-  private _controlname: string;
+  private _controlname: string = '';
   @Input() set controlname(value: string) {
-    this._controlname = value;
+    if (value != null)
+      this._controlname = value;
   }
 
-  private _displaycolumn: string;
+  private _displaycolumn: string = '';
   @Input() set displaycolumn(value: string) {
-    this._displaycolumn = value;
+    if (value != null)
+      this._displaycolumn = value;
   }
 
-  private _tabletype: string;
+  private _tabletype: string = '';
   @Input() set tabletype(value: string) {
-    this._tabletype = value;
+    if (value != null)
+      this._tabletype = value;
   }
 
-  private _subtype: string;
+  private _subtype: string = '';
   @Input() set subtype(value: string) {
-    this._subtype = value;
+    if (value != null)
+      this._subtype = value;
   }
 
-  private _id: string;
+  private _id: string = '';
   @Input() set id(value: string) {
-    this._id = value;
+    if (value != null)
+      this._id = value;
   }
 
-  public _displaydata: string;
+  public _displaydata: string = '';
   @Input() set displaydata(value: string) {
-    this._displaydata = value;
+    if (value != null)
+      this._displaydata = value;
   }
 
-  private _where: string;
+  private _where: string = '';
   @Input() set where(value: string) {
-    this._where = value;
+    if (value != null)
+      this._where = value;
   }
 
-
-
-  private _parentid: string;
+  private _parentid: string = '';
   @Input() set parentid(value: string) {
-    this._parentid = value;
+    if (value != null)
+      this._parentid = value;
   }
 
-  private _uid: string;
+  private _uid: string = '';
   @Input() set uid(value: string) {
-    this._uid = value;
+    if (value != null)
+      this._uid = value;
   }
 
 
-  private _branchcode: string;
+  private _branchcode: string = '';
   @Input() set branchcode(value: string) {
-    this._branchcode = value;
+    if (value != null)
+      this._branchcode = value;
   }
 
   private inputdata: SearchTable = new SearchTable();
@@ -258,7 +266,7 @@ export class AutoComplete2Component {
 
 
       this._parentid = _Record.parentid;
-      
+
 
       this.inputdata.col1 = _Record.col1;
       this.inputdata.col2 = _Record.col2;

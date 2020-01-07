@@ -71,6 +71,7 @@ export class OrderListComponent {
     }
     */
     var urlid = this.gs.getParameter('urlid');
+    
 
     let parameter = {
       urlid: this.gs.getGuid(),
