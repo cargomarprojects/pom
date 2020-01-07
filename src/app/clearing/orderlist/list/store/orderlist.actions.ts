@@ -1,5 +1,5 @@
 
-import { JobOrderModel } from '../../../models/joborder';
+import { JobOrderModel, Joborderm } from '../../../models/joborder';
 import { createAction , props } from '@ngrx/store'
 
 
@@ -16,5 +16,7 @@ export const RequestLoadFail  = createAction('[ORDER LIST] LOAD REQUEST FAIL', p
 export const UpdateQuery  = createAction('[ORDER LIST] UPDATE SEARCH', props<{  urlid : string , stype : string, query : any }>());
 
 export const Search  = createAction('[ORDER LIST] SEARCH LIST', props<{stype : string, query : any }>());
+
+export const UpdateRecord  = createAction('[ORDER LIST] UPDATE RECORD', props<{  urlid : string , stype : string, record : Joborderm }>());
 
 

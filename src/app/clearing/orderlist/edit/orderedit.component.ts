@@ -57,7 +57,7 @@ export class OrderEditComponent {
   }
 
   save( record : Joborderm ){
-    alert('save');
+      this.store.dispatch( fromOrderActions.SaveRecord({record : record}) )
   }
 
 

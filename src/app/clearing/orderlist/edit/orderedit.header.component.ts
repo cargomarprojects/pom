@@ -157,27 +157,8 @@ export class OrderEditHeaderComponent {
   Save() {
     if (!this.allvalid())
       return;
+    this.Record._globalvariables = this.gs.globalVariables;  
     this.save.emit(this.Record);
-
-    return;
-
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
-
-    this.Record._globalvariables = this.gs.globalVariables;
-
-    this.mainService.Save(this.Record)
-      .subscribe(response => {
-        if (this.mode == 'ADD')
-          this.Record.ord_uid = response.uidno;
-        this.InfoMessage = "Save Complete";
-        this.mode = 'EDIT';
-        this.Record.rec_mode = this.mode;
-        this.RefreshList();
-      },
-        error => {
-          this.ErrorMessage = this.gs.getError(error);
-        });
   }
 
 
@@ -188,21 +169,20 @@ export class OrderEditHeaderComponent {
     this.ErrorMessage = '';
     this.InfoMessage = '';
 
-    if (this.Record.ord_agent_id = '') {
+    if ( this.gs.isBlank(this.Record.ord_agent_id)) {
       bret = false;
       sError += " Agent Cannot Be Blank";
     }
-    if (this.Record.ord_exp_id = '') {
+    if (this.gs.isBlank(this.Record.ord_exp_id )) {
       bret = false;
       sError += "\n\r | Shipper Cannot Be Blank";
     }
-    if (this.Record.ord_imp_id = '') {
+    if (this.gs.isBlank(this.Record.ord_imp_id)) {
       bret = false;
       sError += "\n\r | Consignee Cannot Be Blank";
     }
 
-
-    if (this.Record.ord_po.trim().length <= 0) {
+    if ( this.gs.isBlank(this.Record.ord_po)) {
       bret = false;
       sError += "\n\r | PO Cannot Be Blank";
     }

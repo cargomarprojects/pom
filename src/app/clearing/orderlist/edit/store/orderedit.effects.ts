@@ -70,19 +70,17 @@ export class OrderEditEffects {
             withLatestFrom(this.store.select(SelectRouterParam))
         )),
         switchMap(([action, routeparam]) => {
+
+            var record = {...action.record};
             
-            const record = <Joborderm> action.record;
-            record._globalvariables = this.gs.globalVariables;
-
-            return this.mainService.GetRecord({ record: record }).pipe(
+            return this.mainService.Save(record).pipe(
                 map(response => {
-
                     if (record.rec_mode == 'ADD') {
                         record.rec_mode = "EDIT";
                         record.ord_uid = response.uidno;
                     }
-                    const data = <JobOrderEditModel>{ isError: false, message: 'Save Complete', urlid: routeparam.urlid, menuid: routeparam.menuid, record: response.record };
-                    return allactions.RequestLoadSuccess({ data: data })
+                    const data = <JobOrderEditModel>{ isError: false, message: 'Save Complete', urlid: routeparam.urlid, menuid: routeparam.menuid, record: record };
+                    return allactions.RequestLoadSuccess({ data: data });
                 }),
                 catchError(err => {
                     return of(allactions.RequestLoadFail({

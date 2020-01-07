@@ -303,7 +303,32 @@ export class GlobalService {
       }
     }
     return '';
+
   }
+
+
+  public isNull(iData: any): boolean {
+    if (iData == null || iData == undefined)
+      return true;
+    else
+      return false;
+  }
+
+  public isBlank(iData: any): boolean {
+    if (iData == null || iData == undefined || iData == '')
+      return true;
+    else
+      return false;
+  }
+
+  public isZero(iData: any): boolean {
+    if (iData == null || iData == undefined || iData == 0)
+      return true;
+    else
+      return false;
+  }
+
+  
 
 
 }

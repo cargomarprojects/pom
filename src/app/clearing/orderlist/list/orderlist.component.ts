@@ -70,8 +70,11 @@ export class OrderListComponent {
       return; 
     }
     */
+    var urlid = this.gs.getParameter('urlid');
+
     let parameter = {
       urlid: this.gs.getGuid(),
+      parenturlid : urlid,
       menuid: this.gs.getParameter('menuid'),
       pkid: id,
       origin: 'orderlist',
