@@ -28,8 +28,8 @@ export class OrderEditHeaderComponent {
   OrdColList: any[];
 
   Record: Joborderm = <Joborderm>{};
-  @Input() set _record( value :  Joborderm ){
-    this.Record  = Object.assign({}, value);
+  @Input() set _record(value: Joborderm) {
+    this.Record = Object.assign({}, value);
   }
 
   @Output() save = new EventEmitter<Joborderm>();
@@ -152,15 +152,14 @@ export class OrderEditHeaderComponent {
     this.Record.ord_imp_code = '';
     this.Record.ord_agent_code = '';
     this.Record.rec_mode = this.mode;
-    this.Record.rec_mode = this.mode;
   }
 
   Save() {
     if (!this.allvalid())
       return;
-    this.save.emit(this.Record) ;
+    this.save.emit(this.Record);
 
-  return;
+    return;
 
     this.ErrorMessage = '';
     this.InfoMessage = '';
@@ -400,7 +399,5 @@ export class OrderEditHeaderComponent {
           this.ErrorMessage = this.gs.getError(error);
         });
   }
-
-
 
 }

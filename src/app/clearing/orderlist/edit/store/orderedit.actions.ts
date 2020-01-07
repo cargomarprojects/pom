@@ -18,6 +18,8 @@ export const RequestLoadFail  = createAction('[ORDER EDIT] LOAD REQUEST FAIL', p
 
 export const UpdateRecord  = createAction('[ORDER EDIT] UPDATE RECORD', props<{ urlid: string, record : Joborderm }>());
 
+export const SaveRecord  = createAction('[ORDER EDIT] SAVE RECORD', props<{ record : Joborderm }>());
+
 
 
 
