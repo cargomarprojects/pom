@@ -56,6 +56,11 @@ export class OrderEditComponent {
     }
   }
 
+  save( record : Joborderm ){
+    alert('save');
+  }
+
+
   //// Destroy Will be called when this component is closed
   ngOnDestroy() {
 

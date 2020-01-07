@@ -21,11 +21,12 @@ export class OrderListEffects {
     TestLoadRequet$ = createEffect(() => this.actions$.pipe(
         ofType(allactions.RequestLoad),
         concatMap(action => of(action).pipe(
-            withLatestFrom(this.store.pipe(select(SelectRouterUrlId)), this.store.select(SelectOrderEntityExists)),
+            withLatestFrom(
+                this.store.pipe(select(SelectRouterUrlId)),
+                this.store.select(SelectOrderEntityExists)
+            ),
         )),
         switchMap(([action, urlid, flag]) => {
-
-            alert('RequestLoad Order List Effects');
 
             if (flag || urlid == null) {
                 return of(allactions.EmtyReturn());

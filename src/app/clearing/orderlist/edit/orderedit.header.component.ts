@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, Input, Output, OnInit, OnDestroy, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
 import { Joborderm, JobOrderModel } from '../../models/joborder';
@@ -16,22 +16,15 @@ export class OrderEditHeaderComponent {
   title = 'Order Details';
   urlid: string = '';
   menuid: string = '';
-
+  disableSave = false;
+  searchstring = '';
   InitCompleted: boolean = false;
-
   menu_record: any;
-
-  modal: any;
-
   bAdmin = false;
-
   ErrorMessage = "";
-
   InfoMessage = "";
-
   mode = "";
   pkid = "";
-
   OrdColList: any[];
 
   Record: Joborderm = <Joborderm>{};
@@ -39,6 +32,7 @@ export class OrderEditHeaderComponent {
     this.Record  = Object.assign({}, value);
   }
 
+  @Output() save = new EventEmitter<Joborderm>();
 
   where_agent = "CUST_IS_AGENT = 'Y'";
   where_shipper = "CUST_IS_SHIPPER = 'Y'";
@@ -49,65 +43,35 @@ export class OrderEditHeaderComponent {
     private mainService: OrderListService,
     private route: ActivatedRoute,
     private gs: GlobalService
-
   ) {
-    // URL Query Parameter 
-
     this.InitCompleted = true;
     this.urlid = this.gs.getParameter("urlid");
     this.menuid = this.gs.getParameter("menuid");
     this.InitComponent();
-    
-
   }
 
-  // Init Will be called After executing Constructor
   ngOnInit() {
-    if (!this.InitCompleted) {
-      this.InitComponent();
-    }
   }
 
-  InitComponent() {
-    this.bAdmin = false;
-    this.menu_record = this.gs.getMenu(this.menuid);
-    if (this.menu_record) {
-      this.title = this.menu_record.menu_name;
-      if (this.menu_record.rights_admin)
-        this.bAdmin = true;
-    }
-    this.LoadCombo();
-  }
-
-  //// Destroy Will be called when this component is closed
   ngOnDestroy() {
-
   }
-
 
   LovSelected(_Record: SearchTable) {
-    // Company Settings
-
     if (_Record.controlname == "SHIPPER") {
       this.Record.ord_exp_id = _Record.id;
       this.Record.ord_exp_name = _Record.name;
       this.Record.ord_exp_code = _Record.code;
-
     }
     if (_Record.controlname == "CONSIGNEE") {
       this.Record.ord_imp_id = _Record.id;
       this.Record.ord_imp_name = _Record.name;
       this.Record.ord_imp_code = _Record.code;
-
     }
     if (_Record.controlname == "AGENT") {
       this.Record.ord_agent_id = _Record.id;
       this.Record.ord_agent_code = _Record.code;
       this.Record.ord_agent_name = _Record.name;
-
     }
-
-
     if (_Record.controlname == "POL") {
       this.Record.ord_pol_id = _Record.id;
       if (_Record.code.length >= 5)
@@ -122,33 +86,8 @@ export class OrderEditHeaderComponent {
       else
         this.Record.ord_pod = _Record.code;
     }
-
   }
 
-  LoadCombo() {
-
-    let SearchData = {
-      type: 'ORDER',
-      comp_code: this.gs.globalVariables.comp_code,
-      branch_code: this.gs.globalVariables.branch_code
-    };
-
-    SearchData.comp_code = this.gs.globalVariables.comp_code;
-    SearchData.branch_code = this.gs.globalVariables.branch_code;
-
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
-    this.mainService.LoadDefault(SearchData)
-      .subscribe(response => {
-        this.OrdColList = response.ordercolumns;
-      },
-        error => {
-          this.ErrorMessage = this.gs.getError(error);
-        });
-
-  }
-
-  ////function for handling LIST/NEW/EDIT Buttons
   ActionHandler(action: string, id: string) {
     this.ErrorMessage = '';
     this.InfoMessage = '';
@@ -157,17 +96,8 @@ export class OrderEditHeaderComponent {
       this.ResetControls();
       this.NewRecord();
     }
-    else if (action === 'EDIT') {
-      this.mode = 'EDIT';
-      this.ResetControls();
-      this.pkid = id;
-      this.GetRecord(id);
-    }
   }
 
-
-  disableSave = false;
-  searchstring = '';
 
   ResetControls() {
     this.disableSave = true;
@@ -181,8 +111,6 @@ export class OrderEditHeaderComponent {
       this.disableSave = false;
     return this.disableSave;
   }
-
-
 
 
   Downloadfile(filename: string, filetype: string, filedisplayname: string) {
@@ -227,37 +155,12 @@ export class OrderEditHeaderComponent {
     this.Record.rec_mode = this.mode;
   }
 
-
-
-
-  //// Load a single Record for VIEW/EDIT
-  GetRecord(Id: string) {
-    let SearchData = {
-      pkid: Id,
-    };
-
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
-    this.mainService.GetRecord(SearchData)
-      .subscribe(response => {
-        this.LoadData(response.record);
-      },
-        error => {
-          this.ErrorMessage = this.gs.getError(error);
-        });
-  }
-
-  LoadData(_Record: Joborderm) {
-    this.Record = _Record;
-    this.Record.rec_mode = this.mode;
-  }
-
-
-  //// Save Data
   Save() {
-
     if (!this.allvalid())
       return;
+    this.save.emit(this.Record) ;
+
+  return;
 
     this.ErrorMessage = '';
     this.InfoMessage = '';
@@ -277,6 +180,8 @@ export class OrderEditHeaderComponent {
           this.ErrorMessage = this.gs.getError(error);
         });
   }
+
+
 
   allvalid() {
     let sError: string = "";
@@ -463,5 +368,39 @@ export class OrderEditHeaderComponent {
   Close() {
     this.gs.ClosePage('home', false);
   }
+
+  InitComponent() {
+    this.bAdmin = false;
+    this.menu_record = this.gs.getMenu(this.menuid);
+    if (this.menu_record) {
+      this.title = this.menu_record.menu_name;
+      if (this.menu_record.rights_admin)
+        this.bAdmin = true;
+    }
+    this.LoadCombo();
+  }
+  LoadCombo() {
+
+    let SearchData = {
+      type: 'ORDER',
+      comp_code: this.gs.globalVariables.comp_code,
+      branch_code: this.gs.globalVariables.branch_code
+    };
+
+    SearchData.comp_code = this.gs.globalVariables.comp_code;
+    SearchData.branch_code = this.gs.globalVariables.branch_code;
+
+    this.ErrorMessage = '';
+    this.InfoMessage = '';
+    this.mainService.LoadDefault(SearchData)
+      .subscribe(response => {
+        this.OrdColList = response.ordercolumns;
+      },
+        error => {
+          this.ErrorMessage = this.gs.getError(error);
+        });
+  }
+
+
 
 }

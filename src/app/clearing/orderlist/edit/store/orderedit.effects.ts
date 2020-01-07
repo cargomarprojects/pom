@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatMap, withLatestFrom, map, switchMap, catchError, mergeMap } from 'rxjs/operators';
 import { of, concat } from 'rxjs';
-import { Store,select } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 
 
 import { SearchQuery, JobOrderEditModel, Joborderm } from '../../../models/joborder';
@@ -20,34 +20,34 @@ export class OrderEditEffects {
     LoadRequest$ = createEffect(() => this.actions$.pipe(
         ofType(allactions.RequestLoad),
         concatMap(action => of(action).pipe(
-            withLatestFrom(this.store.pipe(select(SelectRouterParam)), this.store.select(SelectOrderEntity)),
+            withLatestFrom(
+                this.store.pipe(select(SelectRouterParam)),
+                this.store.select(SelectOrderEntity)
+            ),
         )),
         switchMap(([action, routeparam, ent]) => {
-
-                alert('RequestLoad Order Edit Effects');
-
-                if (ent)
-                    return of(allactions.EmtyReturn());
-                else if (routeparam.urlid == null || routeparam.mode == null)
-                    return of(allactions.EmtyReturn());
-                else if (routeparam.mode == 'NEW') {
-                    const record = <Joborderm>{};
-                    const data = <JobOrderEditModel>{ isError: false, message: '', urlid: routeparam.urlid, menuid: routeparam.menuid, record: record };
-                    return of(allactions.RequestLoadSuccess({ data: data }));
-                }
-                else
-                    return of(allactions.RequestGetData());
-            })
+            if (ent)
+                return of(allactions.EmtyReturn());
+            else if (routeparam.urlid == null || routeparam.mode == null)
+                return of(allactions.EmtyReturn());
+            else if (routeparam.mode == 'NEW') {
+                const record = <Joborderm>{};
+                const data = <JobOrderEditModel>{ isError: false, message: '', urlid: routeparam.urlid, menuid: routeparam.menuid, record: record };
+                return of(allactions.RequestLoadSuccess({ data: data }));
+            }
+            else
+                return of(allactions.RequestGetData());
+        })
     ));
-    
+
 
 
     GetRecord$ = createEffect(() => this.actions$.pipe(
         ofType(allactions.RequestGetData),
-        concatMap( (action) =>  of (action).pipe( 
+        concatMap((action) => of(action).pipe(
             withLatestFrom(this.store.select(SelectRouterParam))
         )),
-        switchMap( ([action,routeparam]) => this.mainService.GetRecord({ pkid: routeparam.pkid }).pipe(
+        switchMap(([action, routeparam]) => this.mainService.GetRecord({ pkid: routeparam.pkid }).pipe(
             map(response => {
                 const record = <Joborderm>{};
                 const data = <JobOrderEditModel>{ isError: false, message: '', urlid: routeparam.urlid, menuid: routeparam.menuid, record: response.record };

@@ -13,4 +13,4 @@
   </div>
 </div>
 
-<App-OrderEditHeader [_record]="record$ | async" ></App-OrderEditHeader>
+<App-OrderEditHeader [_record]="record$ | async" (save)="save($event)" ></App-OrderEditHeader>
