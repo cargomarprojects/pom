@@ -9,12 +9,13 @@ import { GlobalService } from '../../core/services/global.service';
 export class InputBoxNumberComponent {
 
     @Input() inputModel: number;
-    @Output() inputModelChange = new EventEmitter<number>();
     @Input() disabled: boolean = false;
     @Input() maxlength: number = 25;
     @Input() dec: number = 2;
     @Input() field: string;
     @Input() rec: any;
+
+    @Output() inputModelChange = new EventEmitter<number>();
     @Output() blur = new EventEmitter<{field : string , rec : any}>();
 
     @ViewChild('inputbox',{static:false}) private inputbox: ElementRef;

@@ -10,16 +10,17 @@ import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter, 
 export class InputBoxComponent {
 
     @Input() inputModel: string;
-    @Output() inputModelChange = new EventEmitter<string>();
+    
     @Input() disabled: boolean = false;
     @Input() maxlength: number = 1;
 
     @Input() uppercase: boolean = false;
     @Input() lowercase: boolean = false;
 
-
     @Input() field: string;
     @Input() rec: any;
+
+    @Output() inputModelChange = new EventEmitter<string>();
     @Output() blur = new EventEmitter<{field : string , rec : any}>();
 
     @ViewChild('inputbox',{static:false}) private inputbox: ElementRef;

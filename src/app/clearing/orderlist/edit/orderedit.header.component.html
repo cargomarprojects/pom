@@ -9,7 +9,7 @@
           </app-autocomplete2>
         </div>
         <div class="col-sm-5">
-          <input type="text" disabled class="form-control form-control-sm" [(ngModel)]="Record.ord_agent_name" />
+            <InputBox [(inputModel)]="Record.ord_agent_name" [maxlength]=60 [uppercase]=true></InputBox>
         </div>
       </div>
 
@@ -21,7 +21,7 @@
           </app-autocomplete2>
         </div>
         <div class="col-sm-5">
-          <input type="text" disabled class="form-control form-control-sm" [(ngModel)]="Record.ord_exp_name" />
+          <InputBox [(inputModel)]="Record.ord_exp_name" [maxlength]=60 [uppercase]=true></InputBox>
         </div>
       </div>
 
@@ -33,20 +33,18 @@
           </app-autocomplete2>
         </div>
         <div class="col-sm-5">
-          <input type="text" disabled class="form-control form-control-sm" [(ngModel)]="Record.ord_imp_name" />
+          <InputBox [(inputModel)]="Record.ord_imp_name" [maxlength]=60 [uppercase]=true></InputBox>          
         </div>
       </div>
 
       <div class="form-group row">
         <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Invoice#</label>
         <div class="col-sm-5">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.ord_invno"
-            (blur)="OnBlur('ord_invno')" required maxlength="30" />
+            <InputBox [(inputModel)]="Record.ord_invno" [maxlength]=30 [uppercase]=true></InputBox>
         </div>
         <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">UNECO</label>
         <div class="col-sm-3">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.ord_uneco"
-            (blur)="OnBlur('ord_uneco')" required maxlength="5" />
+            <InputBox [(inputModel)]="Record.ord_uneco" [maxlength]=5 [uppercase]=true></InputBox>
         </div>
       </div>
       
@@ -54,7 +52,7 @@
         <label class="col-sm-2 col-form-label col-form-label-sm">Description</label>
         <div class="col-sm-10">
           <textarea rows="3" class="form-control form-control-sm" [(ngModel)]="Record.ord_desc"
-            (blur)="OnBlur('ord_desc')" required maxlength="100"></textarea>
+            required maxlength="100"></textarea>
         </div>
       </div>
       
@@ -68,33 +66,28 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label  col-form-label-sm">PO</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.ord_po" (blur)="OnBlur('ord_po')"
-            required maxlength="60" />
+            <InputBox [(inputModel)]="Record.ord_po" [maxlength]=60 [uppercase]=true></InputBox>
         </div>
       </div>
 
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">Style#</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.ord_style"
-            (blur)="OnBlur('ord_style')" required maxlength="60" />
+            <InputBox [(inputModel)]="Record.ord_style" [maxlength]=60 [uppercase]=true></InputBox>
         </div>
       </div>
-
 
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">Color</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.ord_color"
-            (blur)="OnBlur('ord_color')" required maxlength="60" />
+            <InputBox [(inputModel)]="Record.ord_color" [maxlength]=60 [uppercase]=true></InputBox>            
         </div>
       </div>
 
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">Contract#</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.ord_contractno"
-            (blur)="OnBlur('ord_contractno')" required maxlength="100" />
+            <InputBox [(inputModel)]="Record.ord_contractno" [maxlength]=100 [uppercase]=true></InputBox>                        
         </div>
       </div>
 
@@ -104,40 +97,34 @@
       <div class="form-group row">
         <label class="col-2 col-form-label col-form-label-sm">Pkgs</label>
         <div class="col-4">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.ord_pkg"
-            (blur)="OnBlur('ord_pkg')" required maxlength="10" />
+            <InputBoxNumber [(inputModel)]="record.ord_pkg" [maxlength]="10" [dec]="0"></InputBoxNumber>
         </div>
         <label class="col-2 col-form-label col-form-label-sm">Pcs</label>
         <div class="col-4">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.ord_pcs"
-            (blur)="OnBlur('ord_pcs')" required maxlength="14" />
+            <InputBoxNumber [(inputModel)]="record.ord_pcs" [maxlength]="14" [dec]="0"></InputBoxNumber>            
         </div>
       </div>
 
       <div class="form-group row">
         <label class="col-2 col-form-label col-form-label-sm">Nt.Wt</label>
         <div class="col-4">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.ord_ntwt"
-            (blur)="OnBlur('ord_ntwt')" required maxlength="14" />
+            <InputBoxNumber [(inputModel)]="record.ord_ntwt" [maxlength]="14" [dec]="3"></InputBoxNumber>                        
         </div>
         <label class="col-2 col-form-label col-form-label-sm">Gr.Wt</label>
         <div class="col-4">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.ord_grwt"
-            (blur)="OnBlur('ord_grwt')" required maxlength="14" />
+            <InputBoxNumber [(inputModel)]="record.ord_grwt" [maxlength]="14" [dec]="3"></InputBoxNumber>                                    
         </div>
       </div>
 
       <div class="form-group row">
         <label class="col-2 col-form-label col-form-label-sm">Cbm</label>
         <div class="col-4">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.ord_cbm"
-            (blur)="OnBlur('ord_cbm')" required maxlength="14" />
+            <InputBoxNumber [(inputModel)]="record.ord_cbm" [maxlength]="14" [dec]="3"></InputBoxNumber>                                                
         </div>
 
         <label class="col-2 col-form-label  col-form-label-sm">HS.Code</label>
         <div class="col-4">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.ord_hs_code"
-            (blur)="OnBlur('ord_hs_code')" required maxlength="15" />
+            <InputBox [(inputModel)]="Record.ord_hscode" [maxlength]=15 [uppercase]=true></InputBox>                                    
         </div>
       </div>
 
@@ -167,8 +154,7 @@
           </app-autocomplete2>
         </div>
         <div class="col-6">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.ord_pol"
-            (blur)="OnBlur('ord_pol')" required maxlength="60" />
+            <InputBox [(inputModel)]="Record.ord_pol" [maxlength]=60 [uppercase]=true></InputBox>                                    
         </div>
       </div>
 
@@ -180,8 +166,7 @@
           </app-autocomplete2>
         </div>
         <div class="col-6">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.ord_pod"
-            (blur)="OnBlur('ord_pod')" required maxlength="60" />
+            <InputBox [(inputModel)]="Record.ord_pod" [maxlength]=60 [uppercase]=true></InputBox>                                                
         </div>
       </div>
 
