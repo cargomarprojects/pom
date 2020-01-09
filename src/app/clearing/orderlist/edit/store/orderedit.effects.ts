@@ -72,6 +72,13 @@ export class OrderEditEffects {
                     ord_imp_id: '',
                     ord_imp_code: '',
                     ord_imp_name: '',
+                    ord_desc : '',
+                    ord_cargo_status :'',
+                    ord_pkg : 0,
+                    ord_pcs :0,
+                    ord_ntwt :0,
+                    ord_grwt:0,
+                    ord_cbm:0,
                 };
                 const data = <JobOrderEditModel>{ isError: false, message: '', urlid: routeparam.urlid, menuid: routeparam.menuid, record: record };
                 return allactions.RequestLoadSuccess({ data: data });

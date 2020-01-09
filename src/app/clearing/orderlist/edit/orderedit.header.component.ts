@@ -216,41 +216,14 @@ export class OrderEditHeaderComponent {
 
   OnBlur(field: string) {
     switch (field) {
-      case 'ord_exp_name':
-        {
-          this.Record.ord_exp_name = this.Record.ord_exp_name.toUpperCase();
-          break;
-        }
-      case 'ord_imp_nmae':
-        {
-          this.Record.ord_imp_name = this.Record.ord_imp_name.toUpperCase();
-          break;
-        }
-      case 'ord_invno':
-        {
-          this.Record.ord_invno = this.Record.ord_invno.toUpperCase();
-          break;
-        }
-      case 'ord_uneco':
-        {
-          this.Record.ord_uneco = this.Record.ord_uneco.toUpperCase();
-          break;
-        }
       case 'ord_po':
         {
-          this.Record.ord_po = this.Record.ord_po.toUpperCase();
           this.FindContractNo();
           break;
         }
       case 'ord_style':
         {
-          this.Record.ord_style = this.Record.ord_style.toUpperCase();
           this.FindContractNo();
-          break;
-        }
-      case 'ord_hs_code':
-        {
-          this.Record.ord_hs_code = this.Record.ord_hs_code.toUpperCase();
           break;
         }
       case 'ord_cargo_status':
@@ -263,7 +236,6 @@ export class OrderEditHeaderComponent {
           this.Record.ord_desc = this.Record.ord_desc.toUpperCase();
           break;
         }
-
       case 'ord_cbm':
         {
           this.Record.ord_cbm = this.gs.roundWeight(this.Record.ord_cbm, "CBM");
@@ -291,28 +263,7 @@ export class OrderEditHeaderComponent {
         }
       case 'ord_color':
         {
-          this.Record.ord_color = this.Record.ord_color.toUpperCase();
           this.FindContractNo();
-          break;
-        }
-      case 'ord_stylename':
-        {
-          this.Record.ord_stylename = this.Record.ord_stylename.toUpperCase();
-          break;
-        }
-      case 'ord_contractno':
-        {
-          this.Record.ord_contractno = this.Record.ord_contractno.toUpperCase();
-          break;
-        }
-      case 'ord_pol':
-        {
-          this.Record.ord_pol = this.Record.ord_pol.toUpperCase();
-          break;
-        }
-      case 'ord_pod':
-        {
-          this.Record.ord_pod = this.Record.ord_pod.toUpperCase();
           break;
         }
     }
