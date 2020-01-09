@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit, OnDestroy, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnInit, OnDestroy, EventEmitter, ViewChild, ElementRef, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
 import { Joborderm, JobOrderModel } from '../../models/joborder';
@@ -6,33 +6,23 @@ import { JobOrder_VM } from '../../models/joborder';
 import { OrderListService } from '../../services/orderlist.service';
 import { SearchTable } from '../../../shared/models/searchtable';
 
+import { AutoComplete2Component } from 'src/app/shared/autocomplete2/autocomplete2.component';
+
+
 @Component({
   selector: 'App-OrderEditHeader',
   templateUrl: './orderedit.header.component.html',
-  providers: [OrderListService]
 })
 export class OrderEditHeaderComponent {
   // Local Variables 
   title = 'Order Details';
-  urlid: string = '';
-  menuid: string = '';
-  disableSave = false;
-  searchstring = '';
-  InitCompleted: boolean = false;
-  menu_record: any;
-  bAdmin = false;
-  ErrorMessage = "";
-  InfoMessage = "";
-  mode = "";
-  pkid = "";
-  OrdColList: any[];
+
+
+  @ViewChild('agentlov', { static: false }) inputbox_agentlov: AutoComplete2Component;
 
   Record: Joborderm = <Joborderm>{};
   @Input() set _record(value: Joborderm) {
-    
-    this.Record = {...value};
-    
-    //this.Record = Object.assign({}, value);
+    this.Record = { ...value };
   }
 
   @Output() save = new EventEmitter<Joborderm>();
@@ -43,149 +33,38 @@ export class OrderEditHeaderComponent {
 
 
   constructor(
-    private mainService: OrderListService,
     private route: ActivatedRoute,
     private gs: GlobalService
-  ) {
-    this.InitCompleted = true;
-    this.urlid = this.gs.getParameter("urlid");
-    this.menuid = this.gs.getParameter("menuid");
-    this.mode = this.gs.getParameter("mode");
-
-    this.InitComponent();
-  }
+  ) { }
 
   ngOnInit() {
-
+    
   }
 
   ngOnDestroy() {
   }
 
-  LovSelected(_Record: SearchTable) {
-    if (_Record.controlname == "SHIPPER") {
-      this.Record.ord_exp_id = _Record.id;
-      this.Record.ord_exp_name = _Record.name;
-      this.Record.ord_exp_code = _Record.code;
-    }
-    if (_Record.controlname == "CONSIGNEE") {
-      this.Record.ord_imp_id = _Record.id;
-      this.Record.ord_imp_name = _Record.name;
-      this.Record.ord_imp_code = _Record.code;
-    }
-    if (_Record.controlname == "AGENT") {
-      this.Record.ord_agent_id = _Record.id;
-      this.Record.ord_agent_code = _Record.code;
-      this.Record.ord_agent_name = _Record.name;
-    }
-    if (_Record.controlname == "POL") {
-      this.Record.ord_pol_id = _Record.id;
-      if (_Record.code.length >= 5)
-        this.Record.ord_pol = _Record.code.substr(2, 3);
-      else
-        this.Record.ord_pol = _Record.code;
-    }
-    else if (_Record.controlname == "POD") {
-      this.Record.ord_pod_id = _Record.id;
-      if (_Record.code.length >= 5)
-        this.Record.ord_pod = _Record.code.substr(2, 3);
-      else
-        this.Record.ord_pod = _Record.code;
-    }
-  }
-
-  ActionHandler(action: string, id: string) {
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
-    if (action === 'ADD') {
-      this.mode = 'ADD';
-      this.ResetControls();
-      this.NewRecord();
-    }
-  }
-
-
-  ResetControls() {
-    this.disableSave = true;
-    if (!this.menu_record)
-      return;
-    if (this.menu_record.rights_admin)
-      this.disableSave = false;
-    if (this.mode == "ADD" && this.menu_record.rights_add)
-      this.disableSave = false;
-    if (this.mode == "EDIT" && this.menu_record.rights_edit)
-      this.disableSave = false;
-    return this.disableSave;
-  }
-
-
-  Downloadfile(filename: string, filetype: string, filedisplayname: string) {
-    this.gs.DownloadFile(this.gs.globalVariables.report_folder, filename, filetype, filedisplayname);
-  }
-
-  NewRecord() {
-
-    this.pkid = this.gs.getGuid();
-    this.Record = <Joborderm>{};
-    this.Record.ord_pkid = this.pkid;
-
-    this.Record.ord_exp_id = '';
-    this.Record.ord_exp_code = '';
-    this.Record.ord_exp_name = '';
-
-    this.Record.ord_imp_id = '';
-    this.Record.ord_imp_code = '';
-    this.Record.ord_imp_name = '';
-
-    this.Record.ord_agent_id = '';
-    this.Record.ord_agent_code = '';
-    this.Record.ord_agent_name = '';
-
-    this.Record.ord_invno = '';
-    this.Record.ord_uneco = '';
-    this.Record.ord_po = '';
-    this.Record.ord_style = '';
-    this.Record.ord_cbm = 0;
-    this.Record.ord_pcs = 0;
-    this.Record.ord_pkg = 0;
-    this.Record.ord_grwt = 0;
-    this.Record.ord_ntwt = 0;
-    this.Record.ord_hs_code = '';
-    this.Record.ord_cargo_status = '';
-    this.Record.ord_desc = '';
-    this.Record.ord_stylename = '';
-    this.Record.ord_color = '';
-    this.Record.ord_contractno = '';
-    this.Record.ord_source = '';
-    this.Record.ord_pol = '';
-    this.Record.ord_pod = '';
-    this.Record.ord_pol_id = '';
-    this.Record.ord_pod_id = '';
-    this.Record.ord_pol_code = '';
-    this.Record.ord_pod_code = '';
-    this.Record.rec_category = 'SEA EXPORT';
-
-    this.Record.rec_mode = this.mode;
-  }
-
   Save() {
     if (!this.allvalid())
       return;
-    
-    this.Record._globalvariables = this.gs.globalVariables;
-    const data = {...this.Record, _globalvariables : this.gs.globalVariables};
-
     this.save.emit(this.Record);
-
   }
 
+
+  ngAfterViewInit () {
+    this.setInitialFocus();
+  }
+
+  setInitialFocus() {
+    
+      this.inputbox_agentlov.setfocus();
+
+  }
 
 
   allvalid() {
     let sError: string = "";
     let bret: boolean = true;
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
 
     if (this.gs.isBlank(this.Record.ord_agent_id)) {
       bret = false;
@@ -206,12 +85,11 @@ export class OrderEditHeaderComponent {
     }
 
 
-    if (bret === false)
-      this.ErrorMessage = sError;
+    if (bret === false) {
+      alert(sError);
+    }
     return bret;
-
   }
-
 
 
   OnBlur(field: string) {
@@ -269,6 +147,43 @@ export class OrderEditHeaderComponent {
     }
   }
 
+
+  LovSelected(_Record: SearchTable) {
+    if (_Record.controlname == "SHIPPER") {
+      this.Record.ord_exp_id = _Record.id;
+      this.Record.ord_exp_name = _Record.name;
+      this.Record.ord_exp_code = _Record.code;
+    }
+    if (_Record.controlname == "CONSIGNEE") {
+      this.Record.ord_imp_id = _Record.id;
+      this.Record.ord_imp_name = _Record.name;
+      this.Record.ord_imp_code = _Record.code;
+    }
+    if (_Record.controlname == "AGENT") {
+      this.Record.ord_agent_id = _Record.id;
+      this.Record.ord_agent_code = _Record.code;
+      this.Record.ord_agent_name = _Record.name;
+    }
+    if (_Record.controlname == "POL") {
+      this.Record.ord_pol_id = _Record.id;
+      if (_Record.code.length >= 5)
+        this.Record.ord_pol = _Record.code.substr(2, 3);
+      else
+        this.Record.ord_pol = _Record.code;
+    }
+    else if (_Record.controlname == "POD") {
+      this.Record.ord_pod_id = _Record.id;
+      if (_Record.code.length >= 5)
+        this.Record.ord_pod = _Record.code.substr(2, 3);
+      else
+        this.Record.ord_pod = _Record.code;
+    }
+  }
+
+  Downloadfile(filename: string, filetype: string, filedisplayname: string) {
+    this.gs.DownloadFile(this.gs.globalVariables.report_folder, filename, filetype, filedisplayname);
+  }
+
   FindContractNo() {
     let sContract: string = "";
     sContract = this.Record.ord_po;
@@ -289,17 +204,5 @@ export class OrderEditHeaderComponent {
   Close() {
     this.gs.ClosePage('home', false);
   }
-
-  InitComponent() {
-    this.bAdmin = false;
-    this.menu_record = this.gs.getMenu(this.menuid);
-    if (this.menu_record) {
-      this.title = this.menu_record.menu_name;
-      if (this.menu_record.rights_admin)
-        this.bAdmin = true;
-    }
-    //this.LoadCombo();
-  }
-
 
 }

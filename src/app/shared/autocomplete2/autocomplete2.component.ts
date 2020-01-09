@@ -97,7 +97,7 @@ export class AutoComplete2Component {
   @Output() ValueChanged = new EventEmitter<SearchTable>();
   @Input() disabled: boolean = false;
 
-  @ViewChild('inputbox', { static: false }) private inputbox: ElementRef;
+  @ViewChild('inputbox', { static: true }) private inputbox: ElementRef;
 
 
   rows_to_display: number = 0;
@@ -139,7 +139,7 @@ export class AutoComplete2Component {
 
   }
 
-  Focus() {
+  setfocus() {
     if (!this.disabled)
       this.inputbox.nativeElement.focus();
   }

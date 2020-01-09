@@ -1,4 +1,4 @@
-import { Component,  OnInit, OnDestroy } from '@angular/core';
+import { Component,  OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { GlobalService } from '../../../core/services/global.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/reducers';
@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Joborderm } from '../../models/joborder';
 import * as fromOrderSelectors  from './store/orderedit.selctors';
 import * as fromOrderActions  from './store/orderedit.actions';
+import { OrderEditHeaderComponent } from './orderedit.header.component';
 
 @Component({
   selector: 'App-OrderEdit',
@@ -26,6 +27,7 @@ export class OrderEditComponent {
   
   record$: Observable<Joborderm>;
   errorMessage$: Observable<string>;
+
 
   constructor(
     private gs: GlobalService,
@@ -57,6 +59,7 @@ export class OrderEditComponent {
   }
 
   save( record : Joborderm ){
+
       this.store.dispatch( fromOrderActions.SaveRecord({record : record}) )
   }
 

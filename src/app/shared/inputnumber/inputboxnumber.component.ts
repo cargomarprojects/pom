@@ -18,7 +18,7 @@ export class InputBoxNumberComponent {
     @Output() inputModelChange = new EventEmitter<number>();
     @Output() blur = new EventEmitter<{field : string , rec : any}>();
 
-    @ViewChild('inputbox',{static:false}) private inputbox: ElementRef;
+    @ViewChild('inputbox',{static:true}) private inputbox: ElementRef;
 
     constructor(public gs: GlobalService,
     ) {
