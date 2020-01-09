@@ -17,6 +17,13 @@ import { SelectRouterParam, AppState } from '../../../../reducers';
 @Injectable()
 export class OrderEditEffects {
 
+    constructor(
+        private actions$: Actions,
+        private store: Store<AppState>,
+        private mainService: OrderListService,
+        private gs: GlobalService
+    ) { }
+
     loadRequest$ = createEffect(() => this.actions$.pipe(
         ofType(allactions.RequestLoad),
         concatMap(action => of(action).pipe(
@@ -31,27 +38,46 @@ export class OrderEditEffects {
             else if (routeparam.urlid == null || routeparam.mode == null)
                 return of(allactions.EmtyReturn());
             else if (routeparam.mode == 'ADD') {
-                const record = <Joborderm>{ rec_mode : 'ADD', rec_category : 'SEA EXPORT', 
-                ord_pkid : this.gs.getGuid(),
-                ord_agent_id :'', 
-                ord_agent_code :'', 
-                ord_agent_name: '',                
-                ord_exp_id :'', 
-                ord_exp_code :'', 
-                ord_exp_name: '' ,
-                ord_imp_id :'', 
-                ord_imp_code :'', 
-                ord_imp_name: '',               
-
-                };
-                const data = <JobOrderEditModel>{ isError: false, message: '', urlid: routeparam.urlid, menuid: routeparam.menuid, record: record };
-                return of(allactions.RequestLoadSuccess({ data: data }));
+                return of(allactions.NewRecord());
             }
             else
                 return of(allactions.RequestGetData());
         })
     ));
 
+    SearchData = {
+        type: 'ORDER',
+        comp_code: this.gs.globalVariables.comp_code,
+        branch_code: this.gs.globalVariables.branch_code
+    };
+
+    newRecord$ = createEffect(() => this.actions$.pipe(
+        ofType(allactions.NewRecord),
+        concatMap(action => of(action).pipe(
+            withLatestFrom(
+                this.store.pipe(select(SelectRouterParam))
+            ),
+        )),
+        switchMap(([action, routeparam]) => this.mainService.LoadDefault(this.SearchData).pipe(
+            map(resp => {
+                const record = <Joborderm>{
+                    rec_mode: 'ADD', rec_category: 'SEA EXPORT',
+                    ord_pkid: this.gs.getGuid(),
+                    ord_agent_id: '',
+                    ord_agent_code: '',
+                    ord_agent_name: '',
+                    ord_exp_id: '',
+                    ord_exp_code: '',
+                    ord_exp_name: '',
+                    ord_imp_id: '',
+                    ord_imp_code: '',
+                    ord_imp_name: '',
+                };
+                const data = <JobOrderEditModel>{ isError: false, message: '', urlid: routeparam.urlid, menuid: routeparam.menuid, record: record };
+                return allactions.RequestLoadSuccess({ data: data });
+            })
+        ))
+    ));
 
 
     getRecord$ = createEffect(() => this.actions$.pipe(
@@ -83,8 +109,8 @@ export class OrderEditEffects {
         )),
         switchMap(([action, routeparam]) => {
 
-            var record = {...action.record};
-            
+            var record = { ...action.record, _globalvariables : this.gs.globalVariables };
+
             return this.mainService.Save(record).pipe(
                 map(response => {
                     if (record.rec_mode == 'ADD') {
@@ -106,15 +132,6 @@ export class OrderEditEffects {
     ));
 
 
-
-
-
-    constructor(
-        private actions$: Actions,
-        private store: Store<AppState>,
-        private mainService: OrderListService,
-        private gs: GlobalService
-    ) { }
 
 
 }

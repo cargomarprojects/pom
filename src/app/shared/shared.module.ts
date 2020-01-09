@@ -41,6 +41,8 @@ import { AllReportComponent } from './allreport/allreport.component';
 import { FtpReportComponent } from './ftpreport/ftpreport.component';
 import { FileEditComponent } from './fileupload/fileedit.component';
 import { PageComponent } from './page/page.component';
+import { InputBoxComponent } from './input/inputbox.component';
+import { InputBoxNumberComponent } from './inputnumber/inputboxnumber.component';
 
 
 @NgModule({
@@ -69,6 +71,8 @@ import { PageComponent } from './page/page.component';
     FtpReportComponent,
     FileEditComponent,
     PageComponent,
+    InputBoxComponent,
+    InputBoxNumberComponent
   ],
   exports: [
     CommonModule,
@@ -93,7 +97,8 @@ import { PageComponent } from './page/page.component';
     FtpReportComponent,
     FileEditComponent,
     PageComponent,
-
+    InputBoxComponent,
+    InputBoxNumberComponent
   ],
   providers: [
     AlertService,

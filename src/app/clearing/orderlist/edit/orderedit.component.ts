@@ -66,6 +66,11 @@ export class OrderEditComponent {
 
   }
 
+
+  newRecord(){
+    this.store.dispatch( fromOrderActions.NewRecord());
+  }
+
   Close() {
     this.gs.ClosePage('home', false);
   }

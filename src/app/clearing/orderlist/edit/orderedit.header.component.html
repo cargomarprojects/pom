@@ -1,43 +1,36 @@
-
 <div class="page-details" *ngIf="Record">
   <div class="row">
     <div class="col-sm-5">
       <div class="form-group row">
         <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Agent</label>
         <div class="col-sm-5">
-
           <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
             [displaydata]="Record.ord_agent_code" (ValueChanged)="LovSelected($event)" [where]="where_agent">
           </app-autocomplete2>
-
         </div>
         <div class="col-sm-5">
           <input type="text" disabled class="form-control form-control-sm" [(ngModel)]="Record.ord_agent_name" />
         </div>
       </div>
+
       <div class="form-group row">
         <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Shipper</label>
         <div class="col-sm-5">
-
           <app-autocomplete2 [controlname]="'SHIPPER'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
             [displaydata]="Record.ord_exp_code" (ValueChanged)="LovSelected($event)" [where]="where_shipper">
           </app-autocomplete2>
-
-
         </div>
         <div class="col-sm-5">
           <input type="text" disabled class="form-control form-control-sm" [(ngModel)]="Record.ord_exp_name" />
         </div>
       </div>
+
       <div class="form-group row">
         <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Consignee</label>
         <div class="col-sm-5">
-
           <app-autocomplete2 [controlname]="'CONSIGNEE'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
             [displaydata]="Record.ord_imp_code" (ValueChanged)="LovSelected($event)" [where]="where_consignee">
           </app-autocomplete2>
-
-
         </div>
         <div class="col-sm-5">
           <input type="text" disabled class="form-control form-control-sm" [(ngModel)]="Record.ord_imp_name" />
@@ -56,6 +49,7 @@
             (blur)="OnBlur('ord_uneco')" required maxlength="5" />
         </div>
       </div>
+      
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">Description</label>
         <div class="col-sm-10">
@@ -63,13 +57,14 @@
             (blur)="OnBlur('ord_desc')" required maxlength="100"></textarea>
         </div>
       </div>
+      
       <!-- <div *ngIf="mode == 'EDIT'" class="form-group row">
-  <label class="col-sm-2 col-form-label  col-form-label-sm">PO ID</label>
-  <div class="col-sm-10">
-    <input type="number" class="form-control form-control-sm" [(ngModel)]="Record.ord_uid" (blur)="OnBlur('ord_uid')"
-      required maxlength="14" />
-  </div>
-</div> -->
+        <label class="col-sm-2 col-form-label  col-form-label-sm">PO ID</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control form-control-sm" [(ngModel)]="Record.ord_uid" (blur)="OnBlur('ord_uid')" required maxlength="14" />
+        </div>
+      </div> -->
+      
       <div class="form-group row">
         <label class="col-sm-2 col-form-label  col-form-label-sm">PO</label>
         <div class="col-sm-10">
@@ -77,6 +72,7 @@
             required maxlength="60" />
         </div>
       </div>
+
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">Style#</label>
         <div class="col-sm-10">
@@ -84,7 +80,6 @@
             (blur)="OnBlur('ord_style')" required maxlength="60" />
         </div>
       </div>
-
 
 
       <div class="form-group row">
@@ -103,11 +98,8 @@
         </div>
       </div>
 
-
-
     </div>
     <div class="col-sm-5">
-
 
       <div class="form-group row">
         <label class="col-2 col-form-label col-form-label-sm">Pkgs</label>
@@ -121,6 +113,7 @@
             (blur)="OnBlur('ord_pcs')" required maxlength="14" />
         </div>
       </div>
+
       <div class="form-group row">
         <label class="col-2 col-form-label col-form-label-sm">Nt.Wt</label>
         <div class="col-4">
@@ -133,6 +126,7 @@
             (blur)="OnBlur('ord_grwt')" required maxlength="14" />
         </div>
       </div>
+
       <div class="form-group row">
         <label class="col-2 col-form-label col-form-label-sm">Cbm</label>
         <div class="col-4">
@@ -154,6 +148,7 @@
             (blur)="OnBlur('ord_cargo_status')" required maxlength="250"></textarea>
         </div>
       </div>
+
       <div class="form-group row">
         <label class="col-2 col-form-label col-form-label-sm">Transport.Way</label>
         <div class="col-4">
@@ -163,7 +158,6 @@
           </select>
         </div>
       </div>
-
 
       <div class="form-group row">
         <label class="col-2 col-form-label col-form-label-sm">POL</label>
@@ -177,7 +171,6 @@
             (blur)="OnBlur('ord_pol')" required maxlength="60" />
         </div>
       </div>
-
 
       <div class="form-group row">
         <label class="col-2 col-form-label col-form-label-sm">POD</label>

@@ -29,7 +29,10 @@ export class OrderEditHeaderComponent {
 
   Record: Joborderm = <Joborderm>{};
   @Input() set _record(value: Joborderm) {
-    this.Record = Object.assign({}, value);
+    
+    this.Record = {...value};
+    
+    //this.Record = Object.assign({}, value);
   }
 
   @Output() save = new EventEmitter<Joborderm>();
@@ -168,8 +171,12 @@ export class OrderEditHeaderComponent {
   Save() {
     if (!this.allvalid())
       return;
+    
     this.Record._globalvariables = this.gs.globalVariables;
+    const data = {...this.Record, _globalvariables : this.gs.globalVariables};
+
     this.save.emit(this.Record);
+
   }
 
 
@@ -342,26 +349,6 @@ export class OrderEditHeaderComponent {
     }
     //this.LoadCombo();
   }
-  LoadCombo() {
 
-    let SearchData = {
-      type: 'ORDER',
-      comp_code: this.gs.globalVariables.comp_code,
-      branch_code: this.gs.globalVariables.branch_code
-    };
-
-    SearchData.comp_code = this.gs.globalVariables.comp_code;
-    SearchData.branch_code = this.gs.globalVariables.branch_code;
-
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
-    this.mainService.LoadDefault(SearchData)
-      .subscribe(response => {
-        this.OrdColList = response.ordercolumns;
-      },
-        error => {
-          this.ErrorMessage = this.gs.getError(error);
-        });
-  }
 
 }

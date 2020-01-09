@@ -24,7 +24,7 @@ export const Reducer1 = createReducer(
     return adapter.upsertOne(action.data, state);
   }),
   on(AllActions.RequestLoadFail, (state, action) => {
-    return adapter.updateOne({ id: action.urlid, changes: { isError: true, message: action.message, record : null } }, state);
+    return adapter.updateOne({ id: action.urlid, changes: { isError: true, message: action.message} }, state);
   }),
   on(AllActions.UpdateRecord, (state, action) => {
     return adapter.updateOne({ id: action.urlid, changes: {  record : action.record } }, state);
