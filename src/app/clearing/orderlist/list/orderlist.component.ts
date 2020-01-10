@@ -4,7 +4,7 @@ import { GlobalService } from '../../../core/services/global.service';
 import { Joborderm, SearchQuery } from '../../models/joborder';
 import { Observable } from 'rxjs';
 import { PageQuery } from 'src/app/shared/models/pageQuery';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/reducers';
 
 import * as FromOrderActions from './store/orderlist.actions';
@@ -35,11 +35,13 @@ export class OrderListComponent {
     private store: Store<AppState>
   ) {
 
-    this.recordlist$ = this.store.select(FromOrderSelectors.SelectRecords);
-    this.searchQuery$ = this.store.select(FromOrderSelectors.SelectSearchRecord);
-    this.pageQuery$ = this.store.select(FromOrderSelectors.SelectPageQuery);
-    this.errorMessage$ = this.store.select(FromOrderSelectors.SelectMessage);
+    this.recordlist$ = this.store.pipe(select(FromOrderSelectors.SelectRecords));
+    this.searchQuery$ = this.store.pipe(select(FromOrderSelectors.SelectSearchRecord));
+    this.pageQuery$ = this.store.pipe(select(FromOrderSelectors.SelectPageQuery));
+    this.errorMessage$ = this.store.pipe(select(FromOrderSelectors.SelectMessage));
+    
     this.store.dispatch(FromOrderActions.RequestLoad());    
+    
   }
   // Init Will be called After executing Constructor
   ngOnInit() {
