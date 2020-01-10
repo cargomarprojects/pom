@@ -23,6 +23,7 @@ import { OrderEditReducer } from './orderlist/edit/store/orderedit.reducer';
 import { OrderEditEffects } from './orderlist/edit/store/orderedit.effects';
 import { OrderEditComponent } from './orderlist/edit/orderedit.component';
 import { OrderEditHeaderComponent } from './orderlist/edit/orderedit.header.component';
+import { OrderListDetailComponent } from './orderlist/list/orderlist.detail.component';
 
 
 @NgModule({
@@ -37,8 +38,8 @@ import { OrderEditHeaderComponent } from './orderlist/edit/orderedit.header.comp
     TrackOrderComponent,
     WeekPlanningComponent,
     EdiOrderComponent,
-    EdiOrdUpdateComponent
-
+    EdiOrdUpdateComponent,
+    OrderListDetailComponent
   ],
   imports: [
     SharedModule,
