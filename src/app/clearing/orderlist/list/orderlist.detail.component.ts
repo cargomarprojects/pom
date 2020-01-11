@@ -1,5 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ChangeDetectionStrategy } from '@angular/core';
 import { Joborderm } from '../../models/joborder';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/reducers';
+import { SelectDeselctRecord} from './store/orderlist.actions';
+import { GlobalService } from 'src/app/core/services/global.service';
 
 @Component({
   selector: 'app-orderlist-detail',
@@ -8,17 +12,38 @@ import { Joborderm } from '../../models/joborder';
 
 export class OrderListDetailComponent implements OnInit {
 
+
+
   private records : Joborderm[];
   @Input() set _records( value : Joborderm[]){
-    
-    this.records = [...value];
-    //this.records = JSON.parse(JSON.stringify(value));
-
+    this.records = JSON.parse(JSON.stringify(value));
   }
 
-  constructor() { }
+  @Output() EditRecord = new EventEmitter<any>();
+
+  selectcheck = false;
+  
+
+  constructor(
+    private store : Store<AppState>,
+    private gs : GlobalService
+  ) { }
   
   ngOnInit() {
+  }
+
+  handleChange(rec : Joborderm){
+    var urlid = this.gs.getParameter('urlid');
+    this.store.dispatch( SelectDeselctRecord ({ urlid : urlid, pkid : rec.ord_pkid, ball :false, flag : rec.ord_selected }) );
+  }
+
+  ActionHandler(action: string, id: string) {
+    this.EditRecord.emit({action: action , id : id});
+  } 
+
+  SelectCheckbox(flag : boolean){
+    var urlid = this.gs.getParameter('urlid');
+    this.store.dispatch( SelectDeselctRecord ({ urlid : urlid, pkid : '', ball :true, flag : flag }) );
   }
 
 }

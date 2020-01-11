@@ -25,6 +25,7 @@ export class HeaderComponent {
         let bFlag: boolean = false;
         this.getUrlID();
         var param = JSON.parse(rec.menu_route2);
+        param.urlid = this.gs1.getGuid();
         this.router.navigate([rec.menu_route1], { queryParams: param});
     }
 

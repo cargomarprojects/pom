@@ -1,7 +1,5 @@
-
 import { JobOrderModel, Joborderm } from '../../../models/joborder';
 import { createAction , props } from '@ngrx/store'
-
 
 export const RESET= createAction('[ORDER LIST] RESET');
 
@@ -17,6 +15,4 @@ export const UpdateQuery  = createAction('[ORDER LIST] UPDATE SEARCH', props<{  
 
 export const Search  = createAction('[ORDER LIST] SEARCH LIST', props<{stype : string, query : any }>());
 
-export const UpdateRecord  = createAction('[ORDER LIST] UPDATE RECORD', props<{  urlid : string , stype : string, record : Joborderm }>());
-
-
+export const SelectDeselctRecord  = createAction('[ORDER LIST] UPDATE RECORD', props<{  urlid : string ,  pkid : string , ball : boolean, flag : boolean }>());

@@ -1,6 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ChangeDetectionStrategy } from '@angular/core';
 import { SearchQuery } from '../../models/joborder';
 import { SearchTable } from 'src/app/shared/models/searchtable';
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { AppState } from 'src/app/reducers';
+import { SelectSelectedRecordsCount } from './store/orderlist.selctors';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-orderlist-header',
@@ -11,10 +16,13 @@ export class OrderListHeaderComponent implements OnInit {
 
   query : SearchQuery;
   @Input() set _query( value : SearchQuery){
-    this.query  = Object.assign({}, value);
+    this.query  = JSON.parse(JSON.stringify(value));
   }
 
   @Output() searchEvents = new EventEmitter<any>();
+  
+  selectedRecordsCount$: Observable<number>;
+  total = 0;
 
   SortList: any[];
 
@@ -22,7 +30,14 @@ export class OrderListHeaderComponent implements OnInit {
   where_shipper = "CUST_IS_SHIPPER = 'Y'";
   where_consignee = "CUST_IS_CONSIGNEE = 'Y'";
 
-  constructor() { }
+  constructor(
+    private store: Store<AppState>
+  ) { 
+    this.selectedRecordsCount$ =  this.store.pipe(
+      select(SelectSelectedRecordsCount),
+      tap( total => this.total = total)
+      );
+  }
 
   
   ngOnInit() {
@@ -56,6 +71,10 @@ export class OrderListHeaderComponent implements OnInit {
       this.query.list_imp_id = _Record.id;
       this.query.list_imp_name = _Record.name;
     }
+  }
+
+  tracking(){
+    alert( this.total);
   }
 
 }

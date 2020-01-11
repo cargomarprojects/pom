@@ -20,7 +20,7 @@
 
   <App-Page [pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page>
 
-  <app-orderlist-detail [_records]="recordlist$ | async" ></app-orderlist-detail>
+  <app-orderlist-detail [_records]="recordlist$ | async" (EditRecord)="ActionHandler($event)" ></app-orderlist-detail>
 
   <App-Page [pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page>
 

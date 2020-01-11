@@ -3,7 +3,7 @@
   <table class="table  table-hover table-sm">
     <thead class="page-body-thead">
       <tr>
-        <th><input type="checkbox" [(ngModel)]="selectcheck" (click)="SelectCheckbox()"></th>
+        <th><input type="checkbox" [(ngModel)]="selectcheck" (change)="SelectCheckbox(selectcheck)"></th>
         <th>REF#</th>
         <th>AGENT</th>
         <th>SHIPPER</th>
@@ -42,7 +42,7 @@
     </thead>
     <tbody class="page-body-tbody" *ngFor="let rec of records">
       <tr>
-        <td><input type="checkbox" [(ngModel)]="rec.ord_selected"></td>
+        <td><input type="checkbox" [(ngModel)]="rec.ord_selected" (change)="handleChange(rec)" ></td>
         <td>{{rec.ord_agentref_id}}</td>
         <td (click)="ActionHandler('EDIT',rec.ord_pkid)">{{rec.ord_agent_name}}</td>
         <td (click)="ActionHandler('EDIT',rec.ord_pkid)">{{rec.ord_exp_name}}</td>

@@ -55,6 +55,28 @@ export const SelectRecords = createSelector(
   }
 );
 
+export const SelectSelectedRecords = createSelector(
+  SelectOrderEntity,
+  (record: JobOrderModel) => {
+    if (record)
+      return record.records.map( rec => rec.ord_selected)
+    else
+      return null;
+  }
+);
+
+export const SelectSelectedRecordsCount = createSelector(
+  SelectOrderEntity,
+  (record: JobOrderModel) => {
+    if (record)
+      return record.records.reduce( (x, y) => { 
+        return  (y.ord_selected) ? x + 1 : x; 
+      },0);
+    else
+      return null;
+  }
+);
+
 
 export const SelectMessage = createSelector(
   SelectOrderEntity,

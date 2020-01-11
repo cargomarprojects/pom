@@ -34,6 +34,15 @@ export const Reducer = createReducer(
     else
       return adapter.updateOne({ id: action.urlid, changes: { isError: false, message: '', pageQuery: action.query } }, state);
   }),
+  on(AllActions.SelectDeselctRecord, (state, action) => {
+    const records =  state.entities[action.urlid].records.map(r1 => {
+        if ( action.ball )
+          return { ...r1, ord_selected  : action.flag };
+        else 
+          return r1.ord_pkid == action.pkid ? { ...r1, ord_selected  : action.flag } : r1
+    })
+    return adapter.updateOne({ id: action.urlid, changes: { records: records } }, state);
+  }),
 );
 
 export function OrderListReducer(state: OrderListState | undefined, action: Action) {

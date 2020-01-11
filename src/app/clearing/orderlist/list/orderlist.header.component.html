@@ -104,7 +104,13 @@
       <div class="form-group row">
         <label class="col-5 col-form-label col-form-label-sm"></label>
         <div class="col-7">
-          <button (click)="List('NEW')" class="btn btn-primary btn-sm mr-1 mr-1">Search</button>
+          <button (click)="List('NEW')"   class="btn btn-primary btn-sm mr-1 mr-1">Search</button>
+          
+          
+          <button  (click)="tracking()" class="btn btn-primary btn-sm mr-1 mr-1" >Tracking
+            <span *ngIf ="selectedRecordsCount$ | async" class="badge badge-light">{{total}}</span>
+          </button>
+
           <button (click)="List('EXCEL')" class="btn btn-primary btn-sm mr-1 mr-1">Excel</button>
         </div>
       </div>
