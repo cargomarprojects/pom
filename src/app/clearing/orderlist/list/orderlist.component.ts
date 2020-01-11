@@ -1,5 +1,5 @@
 
-import { Component, Input, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ViewChild, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { GlobalService } from '../../../core/services/global.service';
 import { Joborderm, SearchQuery } from '../../models/joborder';
 import { Observable } from 'rxjs';
@@ -15,7 +15,8 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-orderlist',
-  templateUrl: './orderlist.component.html'
+  templateUrl: './orderlist.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OrderListComponent {
 
@@ -36,6 +37,8 @@ export class OrderListComponent {
     private router : Router,
     private store: Store<AppState>
   ) {
+
+
 
     this.recordlist$ = this.store.pipe(select(FromOrderSelectors.SelectRecords));
     this.searchQuery$ = this.store.pipe(select(FromOrderSelectors.SelectSearchRecord));

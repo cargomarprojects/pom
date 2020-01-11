@@ -31,6 +31,9 @@ import { LoadingScreenService } from './core/services/loadingscreen.service';
 import { InterceptorServiceProvider } from './core/services/interceptor.service.provider';
 
 import { CustomSerializer } from './reducers';
+import { CustomRouteReuseStrategy } from './customReuseRouteStrategy';
+import { RouteReuseStrategy } from '@angular/router';
+
 
 
 @NgModule({
@@ -71,7 +74,11 @@ import { CustomSerializer } from './reducers';
         GlobalService,
         LoginService,
         LoadingScreenService,
-        InterceptorServiceProvider
+        InterceptorServiceProvider,
+        {
+            provide: RouteReuseStrategy,
+            useClass: CustomRouteReuseStrategy
+        }
     ],
     bootstrap: [
         AppComponent

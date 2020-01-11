@@ -8,6 +8,7 @@ import { GlobalService } from 'src/app/core/services/global.service';
 @Component({
   selector: 'app-orderlist-detail',
   templateUrl: 'orderlist.detail.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class OrderListDetailComponent implements OnInit {

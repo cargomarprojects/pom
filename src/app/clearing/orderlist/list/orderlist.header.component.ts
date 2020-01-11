@@ -9,7 +9,8 @@ import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-orderlist-header',
-  templateUrl: 'orderlist.header.component.html'
+  templateUrl: 'orderlist.header.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class OrderListHeaderComponent implements OnInit {
