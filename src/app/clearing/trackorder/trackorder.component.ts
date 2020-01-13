@@ -187,6 +187,7 @@ export class TrackOrderComponent  {
   SearchRecord(controlname: string) {
     this.ErrorMessage = '';
     this.InfoMessage = '';
+
     if (controlname == 'cost_folderno') {
       if (this.Record.ord_pkid.trim().length <= 0) {
         this.ErrorMessage = " Cannot Update Invalid ID";
