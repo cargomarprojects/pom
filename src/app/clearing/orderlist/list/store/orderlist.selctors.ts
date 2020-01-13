@@ -14,13 +14,13 @@ export const SelectAllOrders = createSelector(
 export const SelectOrderEntity = createSelector(
   SelectAllOrders,
   SelectRouterUrlId,
-  (state : JobOrderModel[] , urlid : string) => {
-    const rec =  state.find( st => st.urlid == urlid );
+  (state: JobOrderModel[], urlid: string) => {
+    const rec = state.find(st => st.urlid == urlid);
     return rec;
   }
 );
 
-export const SelectOrderEntityExists = createSelector  (
+export const SelectOrderEntityExists = createSelector(
   SelectOrderEntity,
   (entity) => {
     if (entity)
@@ -33,15 +33,15 @@ export const SelectOrderEntityExists = createSelector  (
 
 export const SelectSearchRecord = createSelector(
   SelectOrderEntity,
-  (entity : JobOrderModel) => {
-      return (entity) ? entity.searchQuery : null;
+  (entity: JobOrderModel) => {
+    return (entity) ? entity.searchQuery : null;
   }
 );
 
 export const SelectPageQuery = createSelector(
   SelectOrderEntity,
   (record: JobOrderModel) => {
-      return  (record) ? record.pageQuery : null;
+    return (record) ? record.pageQuery : null;
   }
 );
 
@@ -59,7 +59,7 @@ export const SelectSelectedRecords = createSelector(
   SelectOrderEntity,
   (record: JobOrderModel) => {
     if (record)
-      return record.records.map( rec => rec.ord_selected)
+      return record.records.map(rec => rec.ord_selected)
     else
       return null;
   }
@@ -69,13 +69,47 @@ export const SelectSelectedRecordsCount = createSelector(
   SelectOrderEntity,
   (record: JobOrderModel) => {
     if (record)
-      return record.records.reduce( (x, y) => { 
-        return  (y.ord_selected) ? x + 1 : x; 
-      },0);
+      return record.records.reduce((x, y) => {
+        return (y.ord_selected) ? x + 1 : x;
+      }, 0);
     else
       return null;
   }
 );
+
+export const SelectPkids = createSelector(
+  SelectOrderEntity,
+  (record: JobOrderModel) => {
+    if (record)
+      return record.records.reduce((x, y) => {
+        if (y.ord_selected) {
+          x = (x == '') ?  '' : x + ',';
+          x = x + y.ord_pkid;
+        }
+        return x;
+      }, '');
+    else
+      return null;
+  }
+);
+
+export const SelectRefNos = createSelector(
+  SelectOrderEntity,
+  (record: JobOrderModel) => {
+    if (record)
+      return record.records.reduce((x, y) => {
+        if (y.ord_selected) {
+          x = (x == '') ?  '' : x + ',';
+          x = x + y.ord_po;
+        }
+        return x;
+      }, '');
+    else
+      return null;
+  }
+);
+
+
 
 
 export const SelectMessage = createSelector(

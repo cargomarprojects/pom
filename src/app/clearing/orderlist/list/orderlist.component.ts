@@ -1,4 +1,3 @@
-
 import { Component, Input, OnInit, OnDestroy, ViewChild, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { GlobalService } from '../../../core/services/global.service';
 import { Joborderm, SearchQuery } from '../../models/joborder';
@@ -27,9 +26,6 @@ export class OrderListComponent {
   pageQuery$: Observable<PageQuery>;
   searchQuery$: Observable<SearchQuery>;
   errorMessage$: Observable<string>;
-
-
-  
 
   constructor(
     private gs: GlobalService,

@@ -6,13 +6,16 @@ import { AgentBookComponent } from './agentbook/agentbook.component';
 import { WeekPlanningComponent } from './weekplanning/weekplanning.component';
 import {EdiOrderComponent } from './ediorder/ediorder.component';
 import { OrderEditComponent } from './orderlist/edit/orderedit.component';
+import { TrackOrderComponent } from './trackorder/trackorder.component';
 
 const routes: Routes = [
   { path: 'orderlist', component: OrderListComponent },
   { path: 'orderedit', component: OrderEditComponent },
   { path: 'orderbook', component: AgentBookComponent },
+  { path: 'tracking', component: TrackOrderComponent },  
   { path: 'weekplanning', component: WeekPlanningComponent },
-  { path: 'ediorders', component: EdiOrderComponent }
+  { path: 'ediorders', component: EdiOrderComponent },
+
 ];
 
 @NgModule({

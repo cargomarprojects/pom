@@ -6,6 +6,8 @@ import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/reducers';
 import { SelectSelectedRecordsCount } from './store/orderlist.selctors';
 import { map, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { GlobalService } from 'src/app/core/services/global.service';
 
 @Component({
   selector: 'app-orderlist-header',
@@ -32,7 +34,9 @@ export class OrderListHeaderComponent implements OnInit {
   where_consignee = "CUST_IS_CONSIGNEE = 'Y'";
 
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router : Router,
+    private gs : GlobalService,
   ) { 
     this.selectedRecordsCount$ =  this.store.pipe(
       select(SelectSelectedRecordsCount),
@@ -75,7 +79,18 @@ export class OrderListHeaderComponent implements OnInit {
   }
 
   tracking(){
-    alert( this.total);
-  }
 
+    if ( this.total <=0 ){
+      alert('No Rows Selected');
+      return;
+    }
+    var urlid = this.gs.getParameter('urlid');
+    let parameter = {
+      urlid : urlid,
+      type : '',
+      origin: 'orderlist',
+    };
+    this.router.navigate(['clearing/tracking'], { queryParams: parameter});
+
+  }
 }
