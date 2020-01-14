@@ -134,12 +134,8 @@ export class GlobalService {
   }
 
 
-  public ClosePage(sPage: string, IsCloseButton = true) {
-    if (IsCloseButton)
-      this.router.navigate([sPage], { replaceUrl: true });
-    else
+  public ClosePage(sPage: string, IsCloseButton = false) {
       this.location.back();
-
   }
 
 

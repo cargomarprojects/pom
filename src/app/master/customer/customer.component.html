@@ -237,16 +237,16 @@
               <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Salesman</label>
                 <div class="col-8">
-                  <app-autocomplete2 #sman [disabled]="!canadd" [inputdata]="SMANREC"
-                    (ValueChanged)="LovSelected($event)"></app-autocomplete2>
+                  <app-autocomplete #sman [disabled]="!canadd" [inputdata]="SMANREC"
+                    (ValueChanged)="LovSelected($event)"></app-autocomplete>
                 </div>
               </div>
 
               <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">CSD</label>
                 <div class="col-8">
-                  <app-autocomplete2 #csd [disabled]="!canadd" [inputdata]="CSDREC"
-                    (ValueChanged)="LovSelected($event)"></app-autocomplete2>
+                  <app-autocomplete #csd [disabled]="!canadd" [inputdata]="CSDREC"
+                    (ValueChanged)="LovSelected($event)"></app-autocomplete>
                 </div>
               </div>
 

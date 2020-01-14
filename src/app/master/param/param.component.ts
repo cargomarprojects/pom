@@ -1,12 +1,7 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-
 import { ActivatedRoute } from '@angular/router';
-
 import { GlobalService } from '../../core/services/global.service';
-
 import { Param } from '../models/param';
-
-
 import { ParamService } from '../services/param.service';
 
 @Component({
@@ -15,10 +10,8 @@ import { ParamService } from '../services/param.service';
   providers: [ParamService]
 })
 export class ParamComponent {
-  /*Ajith 19/06/2019 LOcked TAN Enabled
-  
-  */
-  // Local Variables 
+  /*Ajith 19/06/2019 LOcked TAN Enabled*/
+  //Local Variables 
   title = 'Param MASTER';
 
   @Input() menuid: string = '';
@@ -75,29 +68,15 @@ export class ParamComponent {
     this.page_count = 0;
     this.page_rows = 10;
     this.page_current = 0;
-
-
-    // URL Query Parameter 
-    this.sub = this.route.queryParams.subscribe(params => {
-      if (params["parameter"] != "") {
-        this.InitCompleted = true;
-        var options = JSON.parse(params["parameter"]);
-        this.menuid = options.menuid;
-        this.type = options.type;
-
-
-
-        this.InitComponent();
-      }
-    });
+    this.menuid = this.gs.getParameter('menuid');
+    this.type = this.gs.getParameter('type');
+    this.InitComponent();
+    console.log('param-constructor');
 
   }
 
   // Init Will be called After executing Constructor
   ngOnInit() {
-    if (!this.InitCompleted) {
-      this.InitComponent();
-    }
   }
 
 
@@ -171,7 +150,7 @@ export class ParamComponent {
 
   // Destroy Will be called when this component is closed
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    
   }
 
   //function for handling LIST/NEW/EDIT Buttons
