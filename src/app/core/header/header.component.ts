@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Menum } from '../models/menum';
 import { GlobalService } from '../services/global.service';
 import { LoginService } from '../services/login.service';
+import { RECOMPUTE_ACTION } from '@ngrx/store-devtools/src/reducer';
 
 @Component({
     selector: 'app-header',
@@ -30,6 +31,7 @@ export class HeaderComponent {
             param.urlid = this.gs1.getGuid();
 
         console.log('Menu Navigation', rec.menu_route1, param);
+
         this.router.navigate([rec.menu_route1], { queryParams: param});
     }
 

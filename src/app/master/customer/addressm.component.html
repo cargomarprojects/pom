@@ -1,10 +1,6 @@
-
-
-
 <div>
-  <label>{{title}}</label>
-  <button [disabled]="loading" (click)="ActionHandler('ADD',null)" class="btn btn-link">Add Record</button>
-  <i *ngIf="loading" class="fa fa-spinner"></i>
+  <label class="ml-3" >{{title}}</label>
+  <button (click)="ActionHandler('ADD',null)" class="btn btn-link mx-1">Add Record</button>
 </div>
 
 
@@ -15,8 +11,6 @@
       <thead class="page-body-thead">
         <tr>
           <th width="5%">BRANCH</th>
-          <th width="10%">GSTIN</th>
-          <th width="5%">SEZ</th>
           <th width="10%">CONTACT</th>
           <th width="10%">TEL</th>
           <th width="10%">EMAIL</th>
@@ -32,8 +26,6 @@
       <tbody class="page-body-tbody" *ngFor="let rec of RecordList">
         <tr>
           <td (click)="ActionHandler('EDIT',rec)">{{rec.add_branch_slno}}</td>
-          <td (click)="ActionHandler('EDIT',rec)">{{rec.add_gstin}}</td>
-          <td (click)="ActionHandler('EDIT',rec)">{{(rec.add_sepz_unit) ? 'Y' : 'N' }}</td>
           <td (click)="ActionHandler('EDIT',rec)">{{rec.add_contact}}</td>
           <td (click)="ActionHandler('EDIT',rec)">{{rec.add_tel}}</td>
           <td (click)="ActionHandler('EDIT',rec)">{{rec.add_email}}</td>
@@ -43,7 +35,8 @@
           <td (click)="ActionHandler('EDIT',rec)">{{rec.add_state_name}}</td>
           <td>{{rec.add_pin}}</td>
           <td>{{rec.add_country_name}}</td>
-          <td *ngIf="bDelete"><i class="fa fa-trash fa-lg pointer" aria-hidden="true" (click)="ShowlinkList(addlnklst,rec)"></i></td>
+          <td *ngIf="bDelete"><i class="fa fa-trash fa-lg pointer" aria-hidden="true"
+              (click)="ShowlinkList(addlnklst,rec)"></i></td>
         </tr>
       </tbody>
     </table>
@@ -58,151 +51,145 @@
     <div class="col-sm-6">
 
       <div class="form-group row">
-        <label class="col-2 col-form-label  col-form-label-sm">GSTIN</label>
-        <div class="col-4">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.add_gstin" required maxlength="15" 
-          [disabled]="bAdmin==false && mode =='EDIT'"
-           />
-        </div>
-        <label class="col-2 col-form-label col-form-label-sm">GST Type</label>
-        <div class="col-4">
-          <select class="form-control form-control-sm" [(ngModel)]="Record.add_gst_type" [disabled]="bAdmin==false && mode =='EDIT'">
-            <option *ngFor="let rec of GstList" [value]="rec.code">{{rec.name}}</option>
-          </select>
+        <label class="col-4 col-form-label  col-form-label-sm">Branch.SL#</label>
+        <div class="col-8">
+          <input type="number" class="form-control form-control-sm" [(ngModel)]="Record.add_branch_slno" required
+            maxlength="10" />
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-2 col-form-label  col-form-label-sm">Address</label>
-        <div class="col-10">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.add_line1" required maxlength="60" />
+        <label class="col-4 col-form-label  col-form-label-sm">Address</label>
+        <div class="col-8">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.add_line1" required
+            maxlength="60" />
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-2 col-form-label  col-form-label-sm"></label>
-        <div class="col-10">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.add_line2" required maxlength="60" />
+        <label class="col-4 col-form-label  col-form-label-sm"></label>
+        <div class="col-8">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.add_line2" required
+            maxlength="60" />
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-2 col-form-label  col-form-label-sm"></label>
-        <div class="col-10">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.add_line3" required maxlength="60" />
+        <label class="col-4 col-form-label  col-form-label-sm"></label>
+        <div class="col-8">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.add_line3" required
+            maxlength="60" />
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-2 col-form-label  col-form-label-sm"></label>
-        <div class="col-10">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.add_line4" required maxlength="60" />
+        <label class="col-4 col-form-label  col-form-label-sm"></label>
+        <div class="col-8">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.add_line4" required
+            maxlength="60" />
         </div>
       </div>
 
 
+
       <div class="form-group row">
-        <label class="col-2 col-form-label  col-form-label-sm">Branch.SL#</label>
-        <div class="col-4">
-          <input type="number" class="form-control form-control-sm" [(ngModel)]="Record.add_branch_slno" required maxlength="10" />
-        </div>
-        <label class="col-2 col-form-label  col-form-label-sm">Pin Code</label>
-        <div class="col-4">
-          <input type="number" class="form-control form-control-sm" [(ngModel)]="Record.add_pin" required maxlength="6" />
+        <label class="col-4 col-form-label  col-form-label-sm">Pin Code</label>
+        <div class="col-8">
+          <input type="number" class="form-control form-control-sm" [(ngModel)]="Record.add_pin" required
+            maxlength="6" />
         </div>
       </div>
 
     </div>
 
-    <div class="col-sm-6">
+    <div class="col-sm-3">
 
       <div class="form-group row">
-
-        <label class="col-2 col-form-label  col-form-label-sm">Contact</label>
-        <div class="col-4">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.add_contact" required maxlength="60" />
+        <label class="col-4 col-form-label  col-form-label-sm">Contact</label>
+        <div class="col-8">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.add_contact" required
+            maxlength="60" />
         </div>
-        <label class="col-2 col-form-label  col-form-label-sm">Tel</label>
-        <div class="col-4">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.add_tel" required maxlength="60" />
+      </div>
+
+      <div class="form-group row">
+        <label class="col-4 col-form-label  col-form-label-sm">Tel</label>
+        <div class="col-8">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.add_tel" required
+            maxlength="60" />
         </div>
 
       </div>
 
       <div class="form-group row">
-
-        <label class="col-2 col-form-label  col-form-label-sm">Fax</label>
-        <div class="col-4">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.add_fax" required maxlength="60" />
-        </div>
-        <label class="col-2 col-form-label  col-form-label-sm">Email</label>
-        <div class="col-4">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.add_email" required maxlength="250" />
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-2 col-form-label  col-form-label-sm">Web</label>
-        <div class="col-4">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.add_web" required maxlength="60" />
-        </div>
-        <label class="col-2 col-form-label col-form-label-sm">City</label>
-        <div class="col-4">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.add_city" required maxlength="30" />
+        <label class="col-4 col-form-label  col-form-label-sm">Fax</label>
+        <div class="col-8">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.add_fax" required
+            maxlength="60" />
         </div>
       </div>
 
-
+      <div class="form-group row">
+        <label class="col-4 col-form-label  col-form-label-sm">Email</label>
+        <div class="col-8">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.add_email" required
+            maxlength="250" />
+        </div>
+      </div>
 
       <div class="form-group row">
-
-        <label class="col-2 col-form-label col-form-label-sm">State</label>
-        <div class="col-4">
-          <select class="form-control form-control-sm" [(ngModel)]="Record.add_state_id">
-            <option *ngFor="let rec of StateList" [value]="rec.param_pkid">{{rec.param_name}}</option>
-          </select>
+        <label class="col-4 col-form-label  col-form-label-sm">Web</label>
+        <div class="col-8">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.add_web" required
+            maxlength="60" />
         </div>
-        <label class="col-2 col-form-label col-form-label-sm">Country</label>
-        <div class="col-4">
+      </div>
+
+      <div class="form-group row">
+        <label class="col-4 col-form-label col-form-label-sm">City</label>
+        <div class="col-8">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.add_city" required
+            maxlength="30" />
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-3">
+      <div class="form-group row">
+        <label class="col-4 col-form-label col-form-label-sm">Country</label>
+        <div class="col-8">
           <select class="form-control form-control-sm" [(ngModel)]="Record.add_country_id">
             <option *ngFor="let rec of CountryList" [value]="rec.param_pkid">{{rec.param_name}}</option>
           </select>
         </div>
       </div>
 
-
       <div class="form-group row">
-
-        <label class="col-2 col-form-label col-form-label-sm">Location</label>
-        <div class="col-4">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.add_location" required maxlength="60" />
+        <label class="col-4 col-form-label col-form-label-sm">State</label>
+        <div class="col-8">
+          <select class="form-control form-control-sm" [(ngModel)]="Record.add_state_id">
+            <option *ngFor="let rec of StateList" [value]="rec.param_pkid">{{rec.param_name}}</option>
+          </select>
         </div>
-
-        <label class="col-2 col-form-label col-form-label-sm"></label>
-        <div class="col-4">
-          <input type="checkbox" [(ngModel)]="Record.add_sepz_unit" />
-          <span>Sez Unit</span>
-        </div>
-
-
       </div>
 
-
-
-
+      <div class="form-group row">
+        <label class="col-4 col-form-label col-form-label-sm">Location</label>
+        <div class="col-8">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.add_location" required
+            maxlength="60" />
+        </div>
+      </div>
     </div>
-
-
-
-
 
   </div>
 
   <div class="row">
     <div class="col-sm-6">
       <div class="form-group row">
-        <div class="offset-2 col-10">
-          <button [disabled]="loading" (click)="Save()" class="btn btn-default btn-sm">OK</button>
-          <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-default btn-sm">Cancel</button>
+        <div class="col-8 offset-4">
+          <button [disabled]="loading" (click)="Save()" class="btn btn-info btn-sm mr-1">OK</button>
+          <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-info btn-sm">Cancel</button>
         </div>
       </div>
     </div>
@@ -228,4 +215,3 @@
     <button type="button" class="btn btn-outline-light" (click)="c('Close click')">Close</button>
   </div> -->
 </ng-template>
-

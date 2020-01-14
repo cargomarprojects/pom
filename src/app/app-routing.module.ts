@@ -14,6 +14,7 @@ const routes: Routes = [
     { path: 'contact', component: ContactComponent },
     { path: 'clearing', loadChildren: () => import('./clearing/clearing.module').then(m => m.ClearingModule) },
     { path: 'master', loadChildren: () => import('./master/master.module').then(m => m.MasterModule) },
+    { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
 ];
 
 @NgModule({

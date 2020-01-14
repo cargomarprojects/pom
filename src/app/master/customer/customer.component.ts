@@ -19,7 +19,7 @@ export class CustomerComponent {
   // Local Variables 
   title = 'Address MASTER';
 
-  @ViewChild('addressComponent',{static:true}) addressComponent: any;
+  @ViewChild('addressComponent', { static: true }) addressComponent: any;
 
 
   mdate: string;
@@ -32,7 +32,7 @@ export class CustomerComponent {
 
   bCreditLimit: boolean = false;
   showalert = false;
-  CrList : any[];
+  CrList: any[];
 
 
   bAdmin = false;//for detail part
@@ -90,8 +90,8 @@ export class CustomerComponent {
 
 
   SMANREC: any = {};
-  CSDREC: any = {};
-  COMPRECORD: SearchTable = new SearchTable();
+  
+  
 
 
 
@@ -103,33 +103,22 @@ export class CustomerComponent {
 
   ) {
 
-
     this.page_count = 0;
     this.page_rows = 25;
     this.page_current = 0;
 
-
     this.InitLov();
 
-    // URL Query Parameter 
-    this.sub = this.route.queryParams.subscribe(params => {
-      if (params["parameter"] != "") {
-        this.InitCompleted = true;
-        var options = JSON.parse(params["parameter"]);
-        this.menuid = options.menuid;
-        this.type = options.type;
-        this.rec_category = this.type;
-        this.InitComponent();
-      }
-    });
+    this.InitCompleted = true;
+    this.menuid = this.gs.getParameter('menuid');
+    this.type = this.gs.getParameter('type');
+    this.rec_category = this.type;
+    this.InitComponent();
 
   }
 
   // Init Will be called After executing Constructor
   ngOnInit() {
-    if (!this.InitCompleted) {
-      this.InitComponent();
-    }
   }
 
   InitComponent() {
@@ -143,9 +132,9 @@ export class CustomerComponent {
         this.bDelete = true;
     }
 
-    if ( this.gs.globalVariables.user_code == "ADMIN")
+    if (this.gs.globalVariables.user_code == "ADMIN")
       this.bAdmin2 = true;
-   
+
 
 
     this.LoadCombo();
@@ -154,18 +143,11 @@ export class CustomerComponent {
 
   // Destroy Will be called when this component is closed
   ngOnDestroy() {
-    this.sub.unsubscribe();
+
   }
 
 
   InitLov() {
-
-    this.COMPRECORD = new SearchTable();
-    this.COMPRECORD.controlname = "BRANCH";
-    this.COMPRECORD.displaycolumn = "CODE";
-    this.COMPRECORD.type = "BRANCH";
-    this.COMPRECORD.id = "";
-    this.COMPRECORD.code = "";
 
   }
 
@@ -206,16 +188,6 @@ export class CustomerComponent {
       this.Record.cust_sman_id = _Record.id;
       this.Record.cust_sman_name = _Record.name;
     }
-
-    if (_Record.controlname == "CSD") {
-      this.Record.cust_csd_id = _Record.id;
-      this.Record.cust_csd_name = _Record.name;
-    }
-
-    if (_Record.controlname == "BRANCH") {
-      this.Record.cust_branch_code = _Record.code;
-    }
-
   }
 
 
@@ -279,7 +251,7 @@ export class CustomerComponent {
       this.bDocsUpload = true;
 
 
-    if ( this.gs.globalVariables.user_code == "ADMIN")
+    if (this.gs.globalVariables.user_code == "ADMIN")
       this.bAdmin = true;
 
 
@@ -403,7 +375,7 @@ export class CustomerComponent {
 
 
     this.SMANREC = { 'controlname': 'SALESMAN', 'type': 'SALESMAN', displaycolumn: 'NAME', id: '', code: '', name: '' };
-    this.CSDREC = { 'controlname': 'CSD', 'type': 'SALESMAN', displaycolumn: 'NAME', id: '', code: '', name: '' };
+    
 
 
     this.Record.rec_mode = this.mode;
@@ -445,19 +417,12 @@ export class CustomerComponent {
     this.Record.AddressList = _Record.AddressList;
 
     this.SMANREC = { 'controlname': 'SALESMAN', 'type': 'SALESMAN', displaycolumn: 'NAME', id: this.Record.cust_sman_id, code: '', name: this.Record.cust_sman_name };
-    this.CSDREC = { 'controlname': 'CSD', 'type': 'SALESMAN', displaycolumn: 'NAME', id: this.Record.cust_csd_id, code: '', name: this.Record.cust_csd_name };
 
     this.Record.rec_mode = this.mode;
 
     this.InitLov();
 
-    this.COMPRECORD.code = this.Record.cust_branch_code;
-
-
   }
-
-
-
 
   // Save Data
   Save() {
@@ -506,126 +471,10 @@ export class CustomerComponent {
       sError += "\n\r | Name Cannot Be Blank";
     }
 
-    if (this.Record.cust_is_foreigner) {
-      if (this.Record.cust_is_shipper == false) {
-        bret = false;
-        sError += "\n\r | Shipper Need To Be Selected";
-      }
-    }
-
-    if (this.Record.cust_linked) {
-
-      if (!this.Record.acc_group_id || !this.Record.acc_type_id || !this.Record.acc_against_invoice) {
-        bret = false;
-        sError += "\n\r | A/c Details Not Complete";
-      }
-      else if (this.Record.acc_group_id.toString().length <= 0 || this.Record.acc_type_id.toString().length <= 0 || this.Record.acc_against_invoice.toString().length <= 0) {
-        bret = false;
-        sError += "\n\r | A/c Details Not Complete";
-      }
-
-    }
-
-
-    if (this.Record.cust_is_consignee) {
-      if (this.Record.cust_nomination == 'NA') {
-        bret = false;
-        sError += "| Nomination Need To Be Selected";
-      }
-    }
-
-    if (!this.Record.cust_is_consignee) {
-      if (this.Record.cust_nomination != 'NA') {
-        bret = false;
-        sError += "| Invalid Nomination Status";
-      }
-    }
-
     if (this.addressComponent) {
       if (this.addressComponent.currentTab != 'LIST') {
         bret = false;
         sError += "\n\r | Save/Cancel Address Record";
-      }
-    }
-
-    this.Record.cust_panno = this.Record.cust_panno.toUpperCase().trim();
-
-    if (this.gs.globalVariables.user_code != 'ADMIN') {
-      if (this.Record.cust_is_foreigner == false && this.Record.cust_is_shipper && this.Record.cust_panno == "" && this.gs.globalVariables.comp_code == 'CPL') {
-        bret = false;
-        sError += "\n\r | Pan No Cannot be Blank  ";
-      }
-    }
-
-    if (this.Record.cust_panno != "" && this.Record.cust_panno != "NA") {
-
-      if (this.Record.cust_panno.length != 10) {
-        bret = false;
-        sError += "\n\r | Pan# Need To Be 10 Characters  ";
-      }
-      else {
-
-        for (var i = 0; i <= 9; i++) {
-
-          if (i <= 4) {
-            if (this.Isnumeric(this.Record.cust_panno[i]) == true) {
-              bret = false;
-              sError += "\n\r | Invalid Pan#, Format XXXXX9999X ";
-              break;
-            }
-          }
-          else if (i <= 8) {
-            if (this.Isnumeric(this.Record.cust_panno[i]) == false) {
-              bret = false;
-              sError += "\n\r | Invalid Pan#, Format XXXXX9999X ";
-              break;
-            }
-          }
-          else if (i == 9) {
-            if (this.Isnumeric(this.Record.cust_panno[i]) == true) {
-              bret = false;
-              sError += "\n\r | Invalid Pan#, Format XXXXX9999X ";
-
-            }
-          }
-        }
-
-      }
-    }
-
-    this.Record.cust_tanno = this.Record.cust_tanno.toUpperCase().trim();
-
-    if (this.Record.cust_tanno != "" && this.Record.cust_tanno != "NA") {
-
-      if (this.Record.cust_tanno.length != 10) {
-        bret = false;
-        sError += "\n\r | Tan# Need To Be 10 Characters ";
-      }
-      else {
-
-        for (var i = 0; i <= 9; i++) {
-
-          if (i <= 3) {
-            if (this.Isnumeric(this.Record.cust_tanno[i]) == true) {
-              bret = false;
-              sError += "\n\r | Invalid Tan#, Format XXXX99999X ";
-              break;
-            }
-          }
-          else if (i <= 8) {
-            if (this.Isnumeric(this.Record.cust_tanno[i]) == false) {
-              bret = false;
-              sError += "\n\r | Invalid Tan#, Format XXXX99999X ";
-              break;
-            }
-          }
-          else if (i == 9) {
-            if (this.Isnumeric(this.Record.cust_tanno[i]) == true) {
-              bret = false;
-              sError += "\n\r | Invalid Tan#, Format XXXX99999X ";
-            }
-          }
-        }
       }
     }
 
@@ -634,7 +483,6 @@ export class CustomerComponent {
       this.Record.cust_code = this.Record.cust_code.toUpperCase().replace(' ', '');
       this.Record.cust_name = this.Record.cust_name.toUpperCase().trim();
       this.Record.cust_iecode = this.Record.cust_iecode.toUpperCase().trim();
-
     }
 
     if (bret === false)
@@ -669,14 +517,6 @@ export class CustomerComponent {
 
 
   OnBlur(field: string) {
-    if (field == 'cust_crdays') {
-      this.Record.cust_crdays = this.Record.cust_crdays;
-    }
-    if (field == 'cust_crlimit') {
-      this.Record.cust_crlimit = this.Record.cust_crlimit;
-    }
-
-
   }
 
   Close() {
@@ -690,75 +530,5 @@ export class CustomerComponent {
     this.ErrorMessage = '';
     this.open(history);
   }
-
-  Unlink(Id: string) {
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
-
-    if (this.gs.globalVariables.user_code != "ADMIN")
-      return;
-
-    this.loading = true;
-    let SearchData = {
-      pkid: Id,
-      company_code: this.gs.globalVariables.comp_code,
-      branch_code: this.gs.globalVariables.branch_code,
-      year_code: this.gs.globalVariables.year_code
-    };
-
-    SearchData.pkid = Id;
-    this.mainService.UnlinkAccounts(SearchData)
-      .subscribe(response => {
-        this.loading = false;
-        if (response.error.length > 0) {
-          this.ErrorMessage = response.error;
-          alert(this.ErrorMessage);
-        }
-        else {
-          this.InfoMessage = "Successfully Unlinked";
-          alert(this.InfoMessage);
-        }
-      },
-        error => {
-          this.loading = false;
-          this.ErrorMessage = this.gs.getError(error);
-          alert(this.ErrorMessage);
-        });
-  }
-
-  CheckCrLimit(bCallSave: boolean = false) {
-
-
-    let SearchData = {
-      searchfrom: 'SI-IMPORT',
-      comp_code: this.gs.globalVariables.comp_code,
-      branch_code: this.gs.globalVariables.branch_code,
-      customerid: this.pkid,
-      billtoid: ''
-    };
-
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
-    this.mainService.GetCreditLimit(SearchData)
-      .subscribe(response => {
-        this.loading = false;
-        this.CrList = response.list;
-        this.bCreditLimit = response.retvalue;
-        
-        if (!this.bCreditLimit) {
-          this.ErrorMessage = response.message;
-          
-          this.showalert = true;
-          //alert(response.message);
-
-        }
-      },
-        error => {
-          this.loading = false;
-          this.ErrorMessage = this.gs.getError(error);
-        });
-  }
-
-
 
 }

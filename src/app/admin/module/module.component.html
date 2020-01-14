@@ -1,10 +1,10 @@
-
+﻿
 <div class="page-header">
   <div class="col">
     <label>{{title}}</label>
     <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-primary btn-sm">List</button>
     <button [disabled]="loading" (click)="ActionHandler('ADD','')" class="btn btn-primary btn-sm">New</button>
-    <button class="btn btn-primary btn-sm" (click)="Close()">Close</button>
+    <button class="btn btn-primary btn-sm" (click)="Close()" >Close</button>
     <i *ngIf="loading" class="fa fa-spinner"></i>
   </div>
 </div>
@@ -39,14 +39,14 @@
     <table class="table  table-hover table-sm">
       <thead class="page-body-thead">
         <tr>
-          <th>CODE</th>
           <th>NAME</th>
+          <th>ORDER</th>
         </tr>
       </thead>
       <tbody class="page-body-tbody" *ngFor="let rec of RecordList">
-        <tr (click)="ActionHandler('EDIT',rec.ritc_pkid)">
-          <td>{{rec.ritc_code}}</td>
-          <td>{{rec.ritc_name}}</td>
+        <tr (click)="ActionHandler('EDIT',rec.module_pkid)">
+          <td>{{rec.module_name}}</td>
+          <td>{{rec.module_order}}</td>
         </tr>
       </tbody>
     </table>
@@ -63,55 +63,51 @@
       </ul>
     </div>
   </div>
-
 </div>
 
 
 <div *ngIf="currentTab=='DETAILS'" class="page-details">
 
-  <div class="page-box">
-
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="form-group row">
-          <label class="col-3 col-form-label col-form-label-sm" (click)="focus()">Code</label>
-          <div class="col-4">
-            <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.ritc_code" (blur)="OnBlur('ritc_code')" required maxlength="8" />
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-3 col-form-label  col-form-label-sm">Name</label>
-          <div class="col-9">
-            <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.ritc_name"  (blur)="OnBlur('ritc_name')" required maxlength="250" />
-          </div>
-        </div>
-
+  <div class="row">
+    <div class="col-sm-6">
       
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label  col-form-label-sm">Name</label>
+        <div class="col-10">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.module_name" required maxlength="60" />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label  col-form-label-sm">Order</label>
+        <div class="col-10">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.module_order" required maxlength="10" />
+        </div>
       </div>
 
 
     </div>
   </div>
-  <div class="page-box">
+
+  <div class="row">
     <div class="col-sm-6">
-
-      <button [disabled]="loading" (click)="Save()" class="btn btn-success btn-sm">Save</button>
-      <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-success btn-sm">Return</button>
-
-      <i *ngIf="loading" class="fa fa-spinner"></i>
+      <div class="form-group row">
+        <div class="offset-2 col-10">
+          <button [disabled]="loading" (click)="Save()" class="btn btn-primary btn-sm">Save</button>
+          <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-primary btn-sm">Return</button>
+          <i *ngIf="loading" class="fa fa-spinner"></i>
+        </div>
+      </div>
     </div>
   </div>
-
 </div>
+
 <br />
-
-<App-Wait [visible]="loading" [msg]="'Please Wait'"></App-Wait>
-
-<div *ngIf="InfoMessage" class="alert alert-success">
-  {{InfoMessage}}
-</div>
-<div *ngIf="ErrorMessage" class="alert alert-danger">
+<div *ngIf="ErrorMessage" class="alert alert-info">
   {{ErrorMessage}}
 </div>
+
+
+
 

@@ -15,7 +15,7 @@ import { AddbookComponent } from './customer/addbook.component';
 import { AddressmComponent } from './customer/addressm.component';
 
 
-import { RitcmComponent } from './ritcm/ritcm.component';
+
 import { XmlComponent } from './xml/xml.component';
 import { LinkmComponent } from './linkm/linkm.component';
 import { Linkm2Component } from './linkm2/linkm2.component';
@@ -47,21 +47,13 @@ import { BenfComponent   } from './customer/benf.component';
     CustomerComponent,
     AddbookComponent,
     AddressmComponent,
-    RitcmComponent,
     XmlComponent,
     LinkmComponent,
     Linkm2Component,
     LinkupdateComponent,
     AllnumComponent,
-    
-    
     CustdetComponent,
-    
-    
     BankInfoComponent,
-    
-    
-    
     AddbookdelComponent,
     BenfComponent
   ],

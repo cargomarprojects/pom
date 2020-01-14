@@ -1,9 +1,8 @@
 <div class="page-header">
   <div class="col">
     <label>{{title}}</label>
-    <button [disabled]="loading" (click)="List('LIST')" class="btn btn-primary btn-sm">Refresh</button>
-    <button [disabled]="loading" (click)="List('LIST','DELETED')" class="btn btn-primary btn-sm">Show Deleted</button>
-    <i *ngIf="loading" class="fa fa-spinner"></i>
+    <button [disabled]="loading" (click)="List('LIST')" class="btn btn-primary btn-sm mx-1">Refresh</button>
+    <button [disabled]="loading" (click)="List('LIST','DELETED')" class="btn btn-primary btn-sm mr-1">Show Deleted</button>
   </div>
 </div>
 

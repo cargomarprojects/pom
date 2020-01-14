@@ -1,10 +1,9 @@
 <div class="page-header">
   <div class="col">
     <label>{{title}}</label>
-    <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-primary btn-sm">List</button>
-    <button [disabled]="loading" (click)="ActionHandler('ADD','')" class="btn btn-primary btn-sm">New</button>
-    <button class="btn btn-primary btn-sm" (click)="Close()">Close</button>
-    <i *ngIf="loading" class="fa fa-spinner"></i>
+    <button (click)="ActionHandler('LIST','')" class="btn btn-primary btn-sm mr-1">List</button>
+    <button (click)="ActionHandler('ADD','')" class="btn btn-primary btn-sm mr-1">New</button>
+    <button class="btn btn-primary btn-sm" (click)="Close()">Return</button>
   </div>
 </div>
 
@@ -34,20 +33,9 @@
       </div>
 
       <div class="col-1">
-        <input type="checkbox" [(ngModel)]="Is_Creditor" />
-        <span>Creditor</span>
-      </div>
-
-      <div class="col-1">
         <input type="checkbox" [(ngModel)]="Is_Others" />
         <span>Others</span>
       </div>
-
-      <div *ngIf="bAdmin2" class="col-2">
-        <input type="checkbox" [(ngModel)]="Last_Bill_date" />
-        <span>Last Billed Date</span>
-      </div>
-
     </div>
   </div>
   <div class="page-search">
@@ -57,9 +45,8 @@
         <input type="text" class="col form-control form-control-sm" name="Search" [(ngModel)]="searchstring" />
       </div>
       <div class="col">
-        <button [disabled]="loading" (click)="List('NEW')" class="btn btn-primary btn-sm">Search</button>
-        <button *ngIf="bAdmin2" [disabled]="loading" (click)="List('EXCEL')"
-          class="btn btn-primary btn-sm">EXCEL</button>
+        <button (click)="List('NEW')" class="btn btn-primary btn-sm mr-1">Search</button>
+        <button *ngIf="bAdmin2" (click)="List('EXCEL')" class="btn btn-primary btn-sm">EXCEL</button>
       </div>
     </div>
   </div>
@@ -132,120 +119,34 @@
       <ng-template ngbTabContent>
         <div class="page-box">
           <div class="row">
+
             <div class="col-sm-6">
               <div class="form-group row">
-                <label class="col-2 col-form-label col-form-label-sm" (click)="focus()">Code</label>
-                <div class="col-4">
+                <label class="col-4 col-form-label col-form-label-sm" (click)="focus()">Code</label>
+                <div class="col-8">
                   <input [disabled]="!canadd" type="text" class="form-control form-control-sm"
                     [(ngModel)]="Record.cust_code" required maxlength="15" />
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-2 col-form-label  col-form-label-sm">Name</label>
-                <div class="col-10">
+                <label class="col-4 col-form-label  col-form-label-sm">Name</label>
+                <div class="col-8">
                   <input type="text" [disabled]="!canadd" class="form-control form-control-sm"
                     [(ngModel)]="Record.cust_name" required maxlength="60" />
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-2 col-form-label  col-form-label-sm">IE-Code</label>
-                <div class="col-4">
+                <label class="col-4 col-form-label  col-form-label-sm">IE-Code</label>
+                <div class="col-8">
                   <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.cust_iecode" required
                     maxlength="10" />
                 </div>
               </div>
-              <div class="form-group row">
-                <label class="col-2 col-form-label  col-form-label-sm">Pan No</label>
-                <div class="col-4">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.cust_panno" required
-                    maxlength="15" [disabled]="!bAdmin" />
-                </div>
-              </div>
 
-
-
-              <div class="form-group row">
-                <label class="col-2 col-form-label  col-form-label-sm">Tan No</label>
-                <div class="col-4">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.cust_tanno" required
-                    maxlength="15" [disabled]="!bAdmin" />
-                </div>
-
-                <label class="col-2 col-form-label col-form-label-sm">Type</label>
-                <div class="col-4">
-                  <select class="form-control form-control-sm" [(ngModel)]="Record.cust_type">
-                    <option [value]="'N'">NA</option>
-                    <option [value]="'R'">Merchant</option>
-                    <option [value]="'F'">Manufacturer</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class=" form-group row">
-                <label class="col-2 col-form-label col-form-label-sm">Class</label>
-                <div class="col-4">
-                  <select class="form-control form-control-sm" [(ngModel)]="Record.cust_class">
-                    <option [value]="'N'">NA</option>
-                    <option [value]="'P'">Private</option>
-                    <option [value]="'G'">Government</option>
-                  </select>
-                </div>
-
-
-
-                <label class="col-2 col-form-label col-form-label-sm"></label>
-                <div class="col-4">
-                  <input type="checkbox" [(ngModel)]="Record.cust_sepz_unit" />
-                  <span>Sez Unit</span>
-                </div>
-
-
-              </div>
-
-              <div class="form-group row">
-                <label class="col-sm-2 col-form-label col-form-label-sm">This Branch Only</label>
-                <div class="col-sm-4">
-                  <app-autocomplete [disabled]="!canadd" #LinerLov [inputdata]="COMPRECORD"
-                    (ValueChanged)="LovSelected($event)"></app-autocomplete>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group row">
-                <label class="col-4 col-form-label col-form-label-sm">Credit Days</label>
-                <div class="col-8">
-                  <input [disabled]="!canadd" type="text" class="form-control form-control-sm"
-                    [(ngModel)]="Record.cust_crdays" (blur)="OnBlur('cust_crdays')" required maxlength="10" />
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-4 col-form-label col-form-label-sm">Credit Limit</label>
-                <div class="col-8">
-                  <input [disabled]="!canadd" type="text" class="form-control form-control-sm"
-                    [(ngModel)]="Record.cust_crlimit" (blur)="OnBlur('cust_crlimit')" required maxlength="15" />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label class="col-4 col-form-label col-form-label-sm">Credit-Date</label>
-
-                <div class="col-8">
-                  <app-date [disabled]="!canadd" [inputdate]="Record.cust_crdate"
-                    (ValueChanged)="Record.cust_crdate=$event"></app-date>
-                </div>
-              </div>
               <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Salesman</label>
                 <div class="col-8">
                   <app-autocomplete #sman [disabled]="!canadd" [inputdata]="SMANREC"
-                    (ValueChanged)="LovSelected($event)"></app-autocomplete>
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label class="col-4 col-form-label col-form-label-sm">CSD</label>
-                <div class="col-8">
-                  <app-autocomplete #csd [disabled]="!canadd" [inputdata]="CSDREC"
                     (ValueChanged)="LovSelected($event)"></app-autocomplete>
                 </div>
               </div>
@@ -266,138 +167,44 @@
                 </div>
               </div>
 
+              <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Lock</label>
+                <div class="col-8">
+                  <input [disabled]="!canadd" type="checkbox" [(ngModel)]="Record.rec_locked" />
+                  <span>Lock This Customer</span>
+                </div>
+              </div>
+
+
             </div>
 
 
-            <div class="col-sm-3">
-              <div class="col-sm-12">
-                <!-- <input [disabled]="!canadd" type="checkbox" [(ngModel)]="Record.cust_is_shipper" />
-                <span>Shipper</span> -->
-                <div class="form-check form-check-inline">
-                  <input [disabled]="!canadd" type="checkbox" [(ngModel)]="Record.cust_is_shipper" />
-                  <span>Shipper</span>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input [disabled]="!canadd" type="checkbox" [(ngModel)]="Record.cust_is_ungst" />
-                  <span>Unregistered</span>
-                </div>
+            <div class="col-sm-6">
+              <div class="col-8 offset-4">
+                <input [disabled]="!canadd" type="checkbox" [(ngModel)]="Record.cust_is_shipper" />
+                <span>Shipper</span>
               </div>
-
-              <div class="col-12">
-                <input [disabled]="!canadd" type="checkbox" [(ngModel)]="Record.cust_is_foreigner" />
-                <span>Foreign Shipper</span>
-              </div>
-
-              <div class="col-12">
+              <div class="col-8 offset-4">
                 <input [disabled]="!canadd" type="checkbox" [(ngModel)]="Record.cust_is_consignee" />
                 <span>Consignee</span>
               </div>
-
-              <div class="col-12">
+              <div class="col-8 offset-4">
                 <input [disabled]="!canadd" type="checkbox" [(ngModel)]="Record.cust_is_agent" />
                 <span>Agent</span>
               </div>
-
-              <div class="col-12">
+              <div class="col-8 offset-4">
                 <input [disabled]="!canadd" type="checkbox" [(ngModel)]="Record.cust_is_cha" />
                 <span>Cha/Forwarder</span>
               </div>
-
-              <div class="col-12">
-                <input [disabled]="!canadd" type="checkbox" [(ngModel)]="Record.cust_is_creditor" />
-                <span>Creditor</span>
-              </div>
-
-              <div class="col-12">
+              <div class="col-8 offset-4">
                 <input [disabled]="!canadd" type="checkbox" [(ngModel)]="Record.cust_is_others" />
                 <span>Others</span>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div class="page-box">
-          <div class="row">
-            <div class="col-sm-6">
-
-              <div class="form-group row">
-                <!-- <label class="col-2 col-form-label col-form-label-sm"></label> -->
-                <div class="col-2">
-                  <button *ngIf="gs.globalVariables.user_code == 'ADMIN'" [disabled]="loading" (click)="Unlink(Record.cust_pkid)"
-                    class="btn btn-success btn-sm">Unlink</button>
-                </div>
-                <div class="col-4">
-                  <input [disabled]="cust_linked || !canadd" type="checkbox" [(ngModel)]="Record.cust_linked" />
-                  <span>Link To Accounts</span>
-                </div>
-
-                <label class="col-2 col-form-label col-form-label-sm"></label>
-                <div class="col-4">
-                  <input [disabled]="!canadd" type="checkbox" [(ngModel)]="Record.rec_locked" />
-                  <span>Lock This Customer</span>
-                </div>
-
-              </div>
-
-              <div *ngIf="Record.cust_linked">
-
-                <div class="form-group row">
-                  <label class="col-2 col-form-label col-form-label-sm">A/c Group</label>
-                  <div class="col-10">
-                    <select [disabled]="!Record.cust_linked || !canadd" class="form-control form-control-sm"
-                      [(ngModel)]="Record.acc_group_id">
-                      <option *ngFor="let rec of AcGrpList" [value]="rec.acgrp_pkid">{{rec.acgrp_name}}</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <label class="col-2 col-form-label col-form-label-sm">A/c Type</label>
-                  <div class="col-10">
-                    <select [disabled]="!Record.cust_linked || !canadd" class="form-control form-control-sm"
-                      [(ngModel)]="Record.acc_type_id">
-                      <option *ngFor="let rec of AcTypeList" [value]="rec.actype_pkid">{{rec.actype_name}}</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <label class="col-2 col-form-label col-form-label-sm">Alloc.Against</label>
-                  <div class="col-10">
-                    <select [disabled]="!Record.cust_linked || !canadd" class="form-control form-control-sm"
-                      [(ngModel)]="Record.acc_against_invoice">
-                      <option [value]="'N'">NA</option>
-                      <option [value]="'D'">DEBIT</option>
-                      <option [value]="'C'">CREDIT</option>
-                    </select>
-                  </div>
-                </div>
-
-              </div>
-
-
-            </div>
-
-            <div class="col-sm-6">
-
-              <div class="form-group row">
-                <label class="col-2 col-form-label col-form-label-sm">Nomination</label>
-                <div class="col-4">
-                  <select [disabled]="!canadd" class="form-control form-control-sm"
-                    [(ngModel)]="Record.cust_nomination">
-                    <option [value]="'NA'">NA</option>
-                    <option [value]="'NOMINATION'">NOMINATION</option>
-                    <option [value]="'MUTUAL'">MUTUAL</option>
-                    <option [value]="'FREEHAND'">FREEHAND</option>
-                  </select>
-                </div>
-              </div>
-
-            </div>
-
 
           </div>
         </div>
+
 
         <div class="page-box">
           <app-addressm #addressComponent [RecordList]="Record.AddressList" [StateList]="StateList"
@@ -408,139 +215,18 @@
 
         <div class="page-box">
           <div class="col">
-            <button [hidden]="disableSave" [disabled]="loading" (click)="Save()"
-              class="btn btn-success btn-sm">Save</button>
-            <button [disabled]="loading" (click)="ActionHandler('LIST','')"
-              class="btn btn-success btn-sm">Return</button>
-            <button *ngIf="mode == 'EDIT'" [disabled]="loading" (click)="ShowHistory(history)"
-              class="btn btn-success btn-sm">History</button>
-
-              <button [disabled]="loading" *ngIf="mode == 'EDIT'"  class="btn btn-primary btn-sm" (click)="CheckCrLimit()">Check
-                CR-Limit</button>
-
-            <i *ngIf="loading" class="fa fa-spinner"></i>
+            <button [hidden]="disableSave" (click)="Save()" class="btn btn-success btn-sm mr-1">Save</button>
+            <button (click)="ActionHandler('LIST','')" class="btn btn-success btn-sm mr-1">Return</button>
+            <button *ngIf="mode == 'EDIT'" (click)="ShowHistory(history)" class="btn btn-success btn-sm mr-1">History</button>
           </div>
         </div>
 
-      </ng-template>
-    </ngb-tab>
-    <ngb-tab title="Others">
-      <ng-template ngbTabContent>
-
-        <div class="page-box">
-          <div class="form-group row">
-            <label class="col-2 col-form-label  col-form-label-sm">DBK A/c#</label>
-            <div class="col-4">
-              <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.cust_dbkacno" required
-                maxlength="50" />
-            </div>
-          </div>
-
-
-          <div class="form-group row">
-            <label class="col-2 col-form-label  col-form-label-sm">Ad Code</label>
-            <div class="col-4">
-              <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.cust_adcode" required
-                maxlength="50" />
-            </div>
-          </div>
-
-
-          <div class="form-group row">
-            <label class="col-2 col-form-label  col-form-label-sm">Bank A/c#</label>
-            <div class="col-4">
-              <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.cust_acno" required
-                maxlength="60" />
-
-            </div>
-          </div>
-
-
-          <div class="form-group row">
-            <label class="col-2 col-form-label  col-form-label-sm">Forex A/c#</label>
-            <div class="col-4">
-              <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.cust_forexacno" required
-                maxlength="60" />
-
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-2 col-form-label  col-form-label-sm">Bank</label>
-            <div class="col-4">
-              <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.cust_bank" required
-                maxlength="60" />
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-2 col-form-label  col-form-label-sm">Branch</label>
-            <div class="col-4">
-              <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.cust_bank_branch" required
-                maxlength="60" />
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-2 col-form-label  col-form-label-sm">Address</label>
-            <div class="col-4">
-              <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.cust_bank_address1" required
-                maxlength="60" />
-
-            </div>
-          </div>
-
-
-          <div class="form-group row">
-            <label class="col-2 col-form-label  col-form-label-sm"></label>
-            <div class="col-4">
-              <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.cust_bank_address2" required
-                maxlength="60" />
-
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label class="col-2 col-form-label  col-form-label-sm"></label>
-            <div class="col-4">
-              <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.cust_bank_address3" required
-                maxlength="60" />
-
-            </div>
-          </div>
-
-        </div>
       </ng-template>
     </ngb-tab>
 
     <ngb-tab title="Documents" *ngIf="mode == 'EDIT' && bDocs">
       <ng-template ngbTabContent>
         <app-upload [pkid]="pkid" [type]="'CUSTOMER'" [canupload]="bDocsUpload"></app-upload>
-      </ng-template>
-    </ngb-tab>
-
-
-    <ngb-tab title="Salesman" *ngIf="mode == 'EDIT' && bAdmin">
-      <ng-template ngbTabContent>
-        <app-custdet [parentid]="pkid"></app-custdet>
-      </ng-template>
-    </ngb-tab>
-
-    <ngb-tab *ngIf="mode == 'EDIT'" title="EDI">
-      <ng-template ngbTabContent>
-        <div class="page-box">
-          <div class="col">
-            <app-xmloms [pkid]="pkid" [filename]="Record.cust_name" [type]="'CUSTOMER'"></app-xmloms>
-          </div>
-        </div>
-      </ng-template>
-    </ngb-tab>
-
-    <ngb-tab *ngIf="mode == 'EDIT'" title="Beneficiary">
-      <ng-template ngbTabContent>
-        <div class="page-box">
-          <div class="col">
-            <app-benf [parentid]="pkid" [cust_code]="Record.cust_code" [cust_name]="Record.cust_name" [type]="type">
-            </app-benf>
-          </div>
-        </div>
       </ng-template>
     </ngb-tab>
 
@@ -551,7 +237,7 @@
 
 
 
-<App-Wait [visible]="loading" [msg]="'Please Wait'"></App-Wait>
+
 
 
 
@@ -572,6 +258,3 @@
     <app-history [pkid]="pkid" [type]="'CUSTOMER'"></app-history>
   </div>
 </ng-template>
-
-
-
