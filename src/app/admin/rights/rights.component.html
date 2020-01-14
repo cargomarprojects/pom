@@ -44,7 +44,6 @@
           <th>Login ID</th>
           <th>User Name</th>
           <th>Email</th>
-          <th>Rights</th>
         </tr>
       </thead>
       <tbody class="page-body-tbody" *ngFor="let rec of RecordMast">
@@ -52,7 +51,6 @@
           <td>{{rec.user_code}}</td>
           <td>{{rec.user_name}}</td>
           <td>{{rec.user_email}}</td>
-          <td>{{rec.user_rights_total}}</td>
         </tr>
       </tbody>
     </table>
@@ -78,7 +76,7 @@
 
   <div class="row">
     <div class="col-6">
-      User : {{user_name}} - Branch : {{branch_name}}
+      User : {{user_name}} - Company : {{branch_name}}
     </div>
 
     <!--     
