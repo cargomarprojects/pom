@@ -115,6 +115,10 @@ export class LoginComponent {
           this.gs.globalVariables.ipaddress = user.useripaddress;
           this.gs.globalVariables.tokenid = user.usertokenid;
           this.gs.globalVariables.user_branch_user = user.user_branch_user;
+
+          this.gs.globalVariables.branch_code = '';
+          this.gs.globalVariables.year_code = '';
+
           // If a branch user hide ho entries
           if (user.user_branch_user == "Y")
             this.gs.globalVariables.hide_ho_entries = "Y";
@@ -129,7 +133,7 @@ export class LoginComponent {
           }
           else {
             this.errorMessage = "Login Success";
-            this.router.navigate(['loginbranch'], { replaceUrl: true });
+            this.LoadMenu();
           }
         }
         else {
@@ -177,5 +181,64 @@ export class LoginComponent {
     this.loginservice.Logout();
     this.errorMessage = 'Pls Login';
   }
+
+
+  LoadMenu() {
+    let SearchData = {
+        userid: this.gs.globalVariables.user_pkid,
+        usercode: this.gs.globalVariables.user_code,
+        compid: this.gs.globalVariables.user_company_id,
+        compcode: this.gs.globalVariables.user_company_code,
+        branchid: '',
+        yearid: '',
+        ipaddress : this.gs.globalVariables.ipaddress,
+        tokenid  : this.gs.globalVariables.tokenid           
+    };
+
+    if (this.gs.globalVariables.user_company_id == '') {
+        alert('Branch Not Selected');
+        return;
+    }
+
+
+    this.loading = true;
+
+    this.loginservice.LoadMenu(SearchData)
+        .subscribe(response => {
+            this.gs.IsAuthenticated = true;
+            this.loading = false;
+            this.gs.MenuList = response.list;
+            this.gs.Modules = response.modules;
+            let data = response.data;
+
+            this.gs.globalVariables.comp_pkid = data.comp_pkid;
+            this.gs.globalVariables.comp_code = data.comp_code;
+            this.gs.globalVariables.comp_name = data.comp_name;
+
+            this.gs.Company_Name = data.comp_name;
+
+            this.gs.globalVariables.report_folder = data.report_folder;
+
+            this.gs.InitdefaultValues();
+
+            //this.initDefaults(response.settings);
+
+            //Air Export Job Default Loading 
+
+            if (this.gs.globalVariables.comp_pkid == '') {
+                alert("Invalid Company");
+                return;
+            }
+
+            this.router.navigate(['home'],{ replaceUrl: true });
+        },
+        error => {
+            this.loading = false;
+            alert(this.gs.getError(error));
+        });
+}
+
+
+
 
 }

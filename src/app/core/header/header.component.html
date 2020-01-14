@@ -1,5 +1,5 @@
 <div *ngIf="gs.IsAuthenticated">
-  <h5>{{gs.Company_Name}}[{{gs.globalVariables.year_name}}]</h5>
+  <h5>{{gs.Company_Name}}</h5>
 </div>
 
 <div *ngIf="gs.IsAuthenticated">
@@ -28,10 +28,6 @@
       <form class="form-inline my-2 my-lg-0">
         <label>{{gs.globalVariables.user_name}}</label>
         <label>|</label>
-        <label>{{gs.globalVariables.branch_name}}</label>
-        <label>|</label>
-        <!-- <label>{{gs.globalVariables.year_name}}</label>
-          <label>|</label> -->
         <a (click)="Logout()">Logout</a>
       </form>
     </div>

@@ -166,25 +166,6 @@ export class GlobalService {
     this.defaultValues.today = new Date().toISOString().slice(0, 10);
     this.defaultValues.monthbegindate = this.getNewdate(0);
     this.defaultValues.lastmonthdate = this.getNewdate(30);//get today -30 days
-    this.defaultValues.print_cheque_only_after_ho_approved = 'N';
-
-    this.globalData.cost_sea_fromdate = this.defaultValues.monthbegindate;
-    this.globalData.cost_sea_todate = this.defaultValues.today;
-    this.globalData.cost_air_fromdate = this.defaultValues.monthbegindate;
-    this.globalData.cost_air_todate = this.defaultValues.today;
-    this.globalData.cost_drcr_fromdate = this.defaultValues.monthbegindate;
-    this.globalData.cost_drcr_todate = this.defaultValues.today;
-    this.globalData.cost_agentinvoice_fromdate = this.defaultValues.monthbegindate;
-    this.globalData.cost_agentinvoice_todate = this.defaultValues.today;
-
-    this.globalData.job_fromdate = this.defaultValues.lastmonthdate;
-    this.globalData.job_todate = this.defaultValues.today;
-    this.globalData.hbl_fromdate = this.defaultValues.lastmonthdate;
-    this.globalData.hbl_todate = this.defaultValues.today;
-    this.globalData.mbl_fromdate = this.defaultValues.lastmonthdate;
-    this.globalData.mbl_todate = this.defaultValues.today;
-    this.globalData.ledger_fromdate = this.defaultValues.lastmonthdate;
-    this.globalData.ledger_todate = this.defaultValues.today;
 
   }
   public getNewdate(_days: number) {

@@ -42,7 +42,6 @@
         <tr>
           <th>CODE</th>
           <th>NAME</th>
-          <th *ngIf="type == 'B'">PARENT COMPANY</th>
           <th>PTC</th>
           <th>EMAIL</th>
           <th>TEL</th>
@@ -55,7 +54,6 @@
         <tr (click)="ActionHandler('EDIT',rec.comp_pkid)">
           <td>{{rec.comp_code}}</td>
           <td>{{rec.comp_name}}</td>
-          <td *ngIf="type == 'B'">{{rec.comp_parent_name}}</td>
           <td>{{rec.comp_ptc}}</td>
           <td>{{rec.comp_email}}</td>
           <td>{{rec.comp_tel}}</td>
