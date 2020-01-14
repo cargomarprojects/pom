@@ -58,24 +58,15 @@ export class CompanyComponent {
     this.page_current = 0;
 
 
-    this.sub = this.route.queryParams.subscribe(params => {
-      if (params["parameter"] != "") {
-        this.InitCompleted = true;
-        var options = JSON.parse(params["parameter"]);
-        this.menuid = options.menuid;
-        this.type = options.type;
-        this.InitComponent();
-      }
-    });
+    this.menuid = this.gs.getParameter('menuid');
+    this.type =this.gs.getParameter('type');
+    this.InitComponent();
 
     // URL Query Parameter 
   }
 
   // Init Will be called After executing Constructor
   ngOnInit() {
-    if (!this.InitCompleted) {
-      this.InitComponent();
-    }
   }
 
   InitComponent() {
@@ -92,7 +83,7 @@ export class CompanyComponent {
 
   // Destroy Will be called when this component is closed
   ngOnDestroy() {
-    this.sub.unsubscribe();
+
   }
 
   //function for handling LIST/NEW/EDIT Buttons

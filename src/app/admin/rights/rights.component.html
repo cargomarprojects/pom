@@ -1,9 +1,9 @@
 <div class="page-header">
   <div class="col">
     <label class="col-form-label">{{title}}</label>
-    <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-primary btn-sm">List</button>
+    <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-primary btn-sm mx-1">List</button>
     <button class="btn btn-primary btn-sm" (click)="Close()">Close</button>
-    <i *ngIf="loading" class="fa fa-spinner"></i>
+
   </div>
 </div>
 
@@ -151,7 +151,7 @@
   <br />
 
   <div>
-    <button [disabled]="loading" (click)="Save()" class="btn btn-primary btn-sm">Save</button>
+    <button [disabled]="loading" (click)="Save()" class="btn btn-primary btn-sm mr-1">Save</button>
     <button [disabled]="loading" (click)="Return2Parent()" class="btn btn-primary btn-sm">Return</button>
     <i *ngIf="loading" class="fa fa-spinner"></i>
   </div>
