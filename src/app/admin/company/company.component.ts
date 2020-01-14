@@ -74,10 +74,7 @@ export class CompanyComponent {
     if (this.menu_record)
       this.title = this.menu_record.menu_name;
 
-    if (this.type == 'B')
-      this.LoadCombo();
-    else
-      this.List("NEW");
+    this.List("NEW");
     this.currentTab = 'LIST';
   }
 
@@ -168,6 +165,7 @@ export class CompanyComponent {
 
     this.Record = new Companym();
     this.Record.comp_pkid = this.pkid;
+    
     this.Record.comp_code = '';
     this.Record.comp_name = '';
     this.Record.comp_type = this.type;
@@ -229,6 +227,10 @@ export class CompanyComponent {
   Save() {
     if (!this.allvalid())
       return;
+
+    if ( this.mode == 'NEW' && this.type == 'B')
+      this.Record.comp_parent_id = this.gs.globalVariables.comp_pkid;
+
     this.loading = true;
     this.ErrorMessage = '';
     this.Record._globalvariables = this.gs.globalVariables;
@@ -297,17 +299,12 @@ export class CompanyComponent {
 
     var REC = this.RecordList.find(rec => rec.comp_pkid == this.Record.comp_pkid);
     if (REC == null) {
-      if (this.type == 'B')
-        this.Record.comp_parent_name = this.CompanyList.find(row => row.comp_pkid == this.Record.comp_parent_id).comp_name;
       this.RecordList.push(this.Record);
     }
     else {
       REC.comp_code = this.Record.comp_code;
       REC.comp_name = this.Record.comp_name;
       REC.comp_branch_type = this.Record.comp_branch_type;
-
-      if (this.type == 'B')
-        REC.comp_parent_name = this.CompanyList.find(row => row.comp_pkid == this.Record.comp_parent_id).comp_name;
     }
   }
 
