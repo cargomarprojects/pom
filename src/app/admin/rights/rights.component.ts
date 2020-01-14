@@ -171,7 +171,7 @@ Ajith 31/05/2019 copy user rights from one user to another implemented
             type: _type,
             searchstring: this.searchstring,
             comp_code: this.gs.globalVariables.comp_code,
-            branchid: _Rec.user_branch_id,
+            compid: _Rec.user_company_id,
             userid: _Rec.user_pkid,
         };
 

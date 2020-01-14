@@ -8,6 +8,7 @@ export class User {
     user_name: string;
     user_email: string;
     user_password: string;
+    user_company_id: string;
     user_branch_id: string;
     user_branch_name: string;
     user_rights_total: number;

@@ -3,6 +3,7 @@ import { GlobalVariables } from '../../core/models/globalvariables';
 
 export class UserRights {
     rights_id: string;
+    rights_company_id: string;
     rights_branch_id: string;
 
     rights_user_id: string;

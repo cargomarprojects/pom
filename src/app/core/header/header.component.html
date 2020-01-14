@@ -17,10 +17,9 @@
             aria-haspopup="true" aria-expanded="false">
             {{rech.module_name}}
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <div class="dropdown-menu pb-0" aria-labelledby="navbarDropdown">
             <div *ngFor="let rec of gs.MenuList" class="menulist">
-              <a *ngIf="rech.module_name == rec.menu_module_name && rec.menu_displayed" class="dropdown-item"
-                (click)="LoadPage(rec)">{{rec.menu_name}}</a>
+              <a *ngIf="rech.module_name == rec.menu_module_name && rec.menu_displayed" class="dropdown-item border-bottom" (click)="LoadPage(rec)">{{rec.menu_name}}</a>
             </div>
           </div>
         </li>
