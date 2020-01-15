@@ -11,7 +11,6 @@ import { LoginService } from '../services/login.service';
 export class LoginComponent {
   errorMessage: string;
   ErrorExternalLogin: string = '';
-
   errorMessageVersion: string = '1.342';
   software_version_string: string = '1.342';
 
