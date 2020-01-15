@@ -9,6 +9,9 @@ import { LoginService } from '../services/login.service';
   templateUrl: './login.component.html'
 })
 export class LoginComponent {
+
+  // login screen
+
   errorMessage: string;
   ErrorExternalLogin: string = '';
   errorMessageVersion: string = '1.342';
