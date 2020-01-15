@@ -34,8 +34,16 @@ export class HeaderComponent {
     }
 
     Logout() {
+
         this.loginservice.Logout();
         this.title = 'Pls Login';
+
+        localStorage.removeItem ('menu');
+        localStorage.removeItem('modules');
+        localStorage.removeItem('gv');
+        localStorage.removeItem('dv');
+        localStorage.removeItem('access_token');
+
         this.router.navigate(['login'], { replaceUrl: true });
     }
 

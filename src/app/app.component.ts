@@ -1,5 +1,6 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit} from '@angular/core';
 import { Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
+import { GlobalService } from './core/services/global.service';
 
 @Component({
     selector: 'app-root',
@@ -11,7 +12,10 @@ export class AppComponent implements OnDestroy {
 
     sub : any;
 
-    constructor(private router: Router) {
+    constructor(
+        private gs : GlobalService,
+        private router: Router
+    ) {
         this.sub =  this.router.events.subscribe((event: Event) => {
             switch (true) {
                 case event instanceof NavigationStart: {
@@ -29,6 +33,21 @@ export class AppComponent implements OnDestroy {
                 }
             }
         });
+    }
+
+
+    ngOnInit(){
+        if (localStorage.length > 0) {
+            this.gs.MenuList = JSON.parse(localStorage.getItem('menu'));
+            this.gs.Modules = JSON.parse(localStorage.getItem('modules'));
+            this.gs.globalVariables = JSON.parse(localStorage.getItem('gv'));
+            this.gs.defaultValues = JSON.parse(localStorage.getItem('dv'));
+            this.gs.Access_Token = localStorage.getItem('access_token');
+            if ( this.gs.Access_Token) {
+                this.gs.IsAuthenticated= true ;
+                this.gs.IsLoginSuccess =true;
+            }
+        }
     }
 
     ngOnDestroy(){

@@ -14,15 +14,15 @@ export class LoginComponent {
 
   errorMessageVersion: string = '1.342';
   software_version_string: string = '1.342';
-  
+
   username: string = 'ADMIN';
   password: string = 'ADMIN';
-  
+
   server_software_version_string: string = '';
   showloginbutton: boolean = true;
 
   company_code: string = '';
-  
+
   loading = false;
   showlogin = false;
 
@@ -62,11 +62,11 @@ export class LoginComponent {
         this.loading = false;
         this.showlogin = true;
       },
-      error => {
-        this.loading = false;
-        this.showlogin = false;
-        this.errorMessage = error.error.error_description;
-      });
+        error => {
+          this.loading = false;
+          this.showlogin = false;
+          this.errorMessage = error.error.error_description;
+        });
   }
 
   Login() {
@@ -99,6 +99,7 @@ export class LoginComponent {
       .subscribe(response => {
         this.loading = false;
         let user = response;
+
         if (user && user.access_token) {
           this.gs.IsLoginSuccess = true;
           this.gs.Access_Token = user.access_token;
@@ -115,39 +116,66 @@ export class LoginComponent {
           this.gs.globalVariables.ipaddress = user.useripaddress;
           this.gs.globalVariables.tokenid = user.usertokenid;
           this.gs.globalVariables.user_branch_user = user.user_branch_user;
-
           this.gs.globalVariables.branch_code = '';
           this.gs.globalVariables.year_code = '';
-
-          // If a branch user hide ho entries
-          if (user.user_branch_user == "Y")
-            this.gs.globalVariables.hide_ho_entries = "Y";
-          else
-            this.gs.globalVariables.hide_ho_entries = "N";
         }
 
         if (this.gs.IsLoginSuccess) {
-          
-          if (this.gs.baseLocalServerUrl != "") {
-            this.checkLocalServer();
-          }
-          else {
-            this.errorMessage = "Login Success";
-            this.LoadMenu();
-          }
+          this.errorMessage = "Login Success";
+          this.LoadMenu();
         }
         else {
           this.errorMessage = "Login Failed";
         }
       },
-      error => {
-        this.loading = false;
-        this.errorMessage = error.error.error_description;
-      });
-
+        error => {
+          this.loading = false;
+          this.errorMessage = error.error.error_description;
+        });
   }
 
+  LoadMenu() {
+    let SearchData = {
+      userid: this.gs.globalVariables.user_pkid,
+      usercode: this.gs.globalVariables.user_code,
+      compid: this.gs.globalVariables.user_company_id,
+      compcode: this.gs.globalVariables.user_company_code,
+      branchid: '',
+      yearid: '',
+      ipaddress: this.gs.globalVariables.ipaddress,
+      tokenid: this.gs.globalVariables.tokenid
+    };
 
+    this.loading = true;
+    this.loginservice.LoadMenu(SearchData)
+      .subscribe(response => {
+        this.gs.IsAuthenticated = true;
+        this.loading = false;
+        this.gs.MenuList = response.list;
+        this.gs.Modules = response.modules;
+        
+        let data = response.data;
+        this.gs.globalVariables.comp_pkid = data.comp_pkid;
+        this.gs.globalVariables.comp_code = data.comp_code;
+        this.gs.globalVariables.comp_name = data.comp_name;
+        this.gs.Company_Name = data.comp_name;
+        this.gs.globalVariables.report_folder = data.report_folder;
+
+        this.gs.InitdefaultValues();
+        
+        localStorage.setItem('access_token', this.gs.Access_Token);
+        localStorage.setItem('menu', JSON.stringify(this.gs.MenuList));
+        localStorage.setItem('modules', JSON.stringify(this.gs.Modules));
+        localStorage.setItem('gv', JSON.stringify(this.gs.globalVariables));
+        localStorage.setItem('dv', JSON.stringify(this.gs.defaultValues));
+
+        this.router.navigate(['home'], { replaceUrl: true });
+      },
+        error => {
+          this.loading = false;
+          alert(this.gs.getError(error));
+        });
+  }
   checkLocalServer() {
 
     this.loading = true;
@@ -182,61 +210,6 @@ export class LoginComponent {
     this.errorMessage = 'Pls Login';
   }
 
-
-  LoadMenu() {
-    let SearchData = {
-        userid: this.gs.globalVariables.user_pkid,
-        usercode: this.gs.globalVariables.user_code,
-        compid: this.gs.globalVariables.user_company_id,
-        compcode: this.gs.globalVariables.user_company_code,
-        branchid: '',
-        yearid: '',
-        ipaddress : this.gs.globalVariables.ipaddress,
-        tokenid  : this.gs.globalVariables.tokenid           
-    };
-
-    if (this.gs.globalVariables.user_company_id == '') {
-        alert('Branch Not Selected');
-        return;
-    }
-
-
-    this.loading = true;
-
-    this.loginservice.LoadMenu(SearchData)
-        .subscribe(response => {
-            this.gs.IsAuthenticated = true;
-            this.loading = false;
-            this.gs.MenuList = response.list;
-            this.gs.Modules = response.modules;
-            let data = response.data;
-
-            this.gs.globalVariables.comp_pkid = data.comp_pkid;
-            this.gs.globalVariables.comp_code = data.comp_code;
-            this.gs.globalVariables.comp_name = data.comp_name;
-
-            this.gs.Company_Name = data.comp_name;
-
-            this.gs.globalVariables.report_folder = data.report_folder;
-
-            this.gs.InitdefaultValues();
-
-            //this.initDefaults(response.settings);
-
-            //Air Export Job Default Loading 
-
-            if (this.gs.globalVariables.comp_pkid == '') {
-                alert("Invalid Company");
-                return;
-            }
-
-            this.router.navigate(['home'],{ replaceUrl: true });
-        },
-        error => {
-            this.loading = false;
-            alert(this.gs.getError(error));
-        });
-}
 
 
 
