@@ -10,7 +10,7 @@ import { LoginService } from '../services/login.service';
 })
 export class LoginComponent {
 
-  // login screen
+  // login screen 2
 
   errorMessage: string;
   ErrorExternalLogin: string = '';
