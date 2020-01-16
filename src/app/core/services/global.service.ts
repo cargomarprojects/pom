@@ -34,7 +34,7 @@ export class GlobalService {
     private http2: HttpClient,
     private location: Location,
     private router: Router) {
-    this.Company_Name = "CARGOMAR (P) LTD";
+    this.Company_Name = "";
     this.globalVariables = new GlobalVariables;
     this.globalData = new GlobalData;
     this.InitdefaultValues();
