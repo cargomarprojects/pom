@@ -166,6 +166,7 @@ export class LoginComponent {
         this.gs.InitdefaultValues();
         
         localStorage.setItem('access_token', this.gs.Access_Token);
+        localStorage.setItem('company_name', this.gs.Company_Name);
         localStorage.setItem('menu', JSON.stringify(this.gs.MenuList));
         localStorage.setItem('modules', JSON.stringify(this.gs.Modules));
         localStorage.setItem('gv', JSON.stringify(this.gs.globalVariables));
