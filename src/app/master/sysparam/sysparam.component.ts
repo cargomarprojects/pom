@@ -73,25 +73,29 @@ export class SysParamComponent {
     this.page_rows = 10;
     this.page_current = 0;
 
+    this.menuid = this.gs.getParameter('menuid');
+    this.type = this.gs.getParameter('type');
+    this.InitComponent();
+    console.log('sysparam-constructor');
 
-    // URL Query Parameter 
-    this.sub = this.route.queryParams.subscribe(params => {
-      if (params["parameter"] != "") {
-        this.InitCompleted = true;
-        var options = JSON.parse(params["parameter"]);
-        this.menuid = options.menuid;
-        this.type = options.type;
-        this.InitComponent();
-      }
-    });
+    // // URL Query Parameter 
+    // this.sub = this.route.queryParams.subscribe(params => {
+    //   if (params["parameter"] != "") {
+    //     this.InitCompleted = true;
+    //     var options = JSON.parse(params["parameter"]);
+    //     this.menuid = options.menuid;
+    //     this.type = options.type;
+    //     this.InitComponent();
+    //   }
+    // });
 
   }
 
   // Init Will be called After executing Constructor
   ngOnInit() {
-    if (!this.InitCompleted) {
-      this.InitComponent();
-    }
+    // if (!this.InitCompleted) {
+    //   this.InitComponent();
+    // }
   }
 
 
@@ -111,7 +115,7 @@ export class SysParamComponent {
 
   // Destroy Will be called when this component is closed
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    // this.sub.unsubscribe();
   }
 
   //function for handling LIST/NEW/EDIT Buttons
