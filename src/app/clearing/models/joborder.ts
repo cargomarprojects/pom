@@ -111,6 +111,7 @@ export interface SearchQuery {
   ord_status: string,
   sort_colname: string,
   sort_colvalue: string,
+  ftp_transfertype: string
 }
 
 export interface JobOrderModel {

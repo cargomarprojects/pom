@@ -30,7 +30,7 @@ export class OrderListComponent {
   constructor(
     private gs: GlobalService,
     private location: Location,
-    private router : Router,
+    private router: Router,
     private store: Store<AppState>
   ) {
 
@@ -41,15 +41,15 @@ export class OrderListComponent {
     this.pageQuery$ = this.store.pipe(select(FromOrderSelectors.SelectPageQuery));
     this.errorMessage$ = this.store.pipe(select(FromOrderSelectors.SelectMessage));
 
-    
-    
-    
+
+
+
   }
   // Init Will be called After executing Constructor
   ngOnInit() {
 
-    this.store.dispatch(FromOrderActions.RequestLoad());    
-    
+    this.store.dispatch(FromOrderActions.RequestLoad());
+
   }
 
   //// Destroy Will be called when this component is closed
@@ -59,7 +59,11 @@ export class OrderListComponent {
 
   searchEvents(actions: any) {
     var urlid = this.gs.getParameter('urlid');
-    this.store.dispatch(FromOrderActions.UpdateQuery({ urlid: urlid, stype: 'NEW', query: actions.searchQuery }));
+
+    if (actions.outputformat == 'CHECK-LIST') {
+
+    } else
+      this.store.dispatch(FromOrderActions.UpdateQuery({ urlid: urlid, stype: 'NEW', query: actions.searchQuery }));
   }
 
   pageEvents(actions: any) {
@@ -67,7 +71,7 @@ export class OrderListComponent {
     this.store.dispatch(FromOrderActions.UpdateQuery({ urlid: urlid, stype: actions.action, query: actions.pageQuery }));
   }
 
-  ActionHandler(actions : any) {
+  ActionHandler(actions: any) {
     /*
     if (!this.gs.canAdd(this.menuid)) {
       alert('Insufficient User Rights')
@@ -75,18 +79,18 @@ export class OrderListComponent {
     }
     */
     var urlid = this.gs.getParameter('urlid');
-    
+
 
     let parameter = {
       urlid: this.gs.getGuid(),
-      parenturlid : urlid,
+      parenturlid: urlid,
       menuid: this.gs.getParameter('menuid'),
       pkid: actions.id,
       origin: 'orderlist',
       mode: actions.action
     };
 
-    this.router.navigate(['clearing/orderedit'], { queryParams: parameter});
+    this.router.navigate(['clearing/orderedit'], { queryParams: parameter });
 
   }
 

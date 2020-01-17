@@ -104,16 +104,33 @@
       <div class="form-group row">
         <label class="col-5 col-form-label col-form-label-sm"></label>
         <div class="col-7">
-          <button (click)="List('NEW')"   class="btn btn-primary btn-sm mr-1 mr-1">Search</button>
+          <button (click)="List('NEW')"   class="btn btn-primary btn-sm mr-1">Search</button>
           
           
-          <button  (click)="tracking()" class="btn btn-primary btn-sm mr-1 mr-1" >Tracking
+          <button  (click)="tracking()" class="btn btn-primary btn-sm mr-1" >Tracking
             <span *ngIf ="selectedRecordsCount$ | async" class="badge badge-light">{{total}}</span>
           </button>
 
-          <button (click)="List('EXCEL')" class="btn btn-primary btn-sm mr-1 mr-1">Excel</button>
+          <button (click)="List('EXCEL')" class="btn btn-primary btn-sm mr-1">Excel</button>
         </div>
       </div>
+      <div class="form-group row">
+        <div class="col-5">
+          <select class="form-control form-control-sm" [(ngModel)]="query.ftp_transfertype">
+            <option [value]="'ORDERLIST'">ORDER LIST</option>
+            <option [value]="'TRACKING'">TRACKING</option>
+          </select>
+        </div>
+        <div class="col-7">
+          <button [disabled]="loading" (click)="MailOrders('CHECK-LIST')"
+            class="btn btn-primary btn-sm mr-1">Checklist</button>
+          <button [disabled]="loading" (click)="MailOrders('FTP')"
+            class="btn btn-primary btn-sm">Mail/FTP</button>
+        </div>
+      </div>
+
+
+
     </div>
 
   </div>

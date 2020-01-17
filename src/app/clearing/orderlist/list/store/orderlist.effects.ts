@@ -53,7 +53,8 @@ export class OrderListEffects {
                     sort_colname: 'CREATED',
                     sort_colvalue: 'a.rec_created_date desc',
                     ord_status: 'ALL',
-                    ord_showpending: 'N'
+                    ord_showpending: 'N',
+                    ftp_transfertype:'ORDERLIST'
                 };
                 const data = <JobOrderModel>{ isError: false, message: '', urlid: urlid, pageQuery: pagequery, searchQuery: searchquery, records: [] };
                 return of(allactions.RequestLoadSuccess({ data: data }));
@@ -93,7 +94,8 @@ export class OrderListEffects {
                 report_folder: this.gs.globalVariables.report_folder,
                 file_pkid: this.gs.getGuid(),
                 ord_status: ent.searchQuery.ord_status,
-                sort_colname: ent.searchQuery.sort_colvalue
+                sort_colname: ent.searchQuery.sort_colvalue,
+                ftp_transfertype:ent.searchQuery.ftp_transfertype
             };
 
             return this.mainService.List(searchData).pipe(
