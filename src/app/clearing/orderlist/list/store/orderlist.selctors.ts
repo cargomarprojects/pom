@@ -83,7 +83,7 @@ export const SelectPkids = createSelector(
     if (record)
       return record.records.reduce((x, y) => {
         if (y.ord_selected) {
-          x = (x == '') ?  '' : x + ',';
+          x = (x == '') ? '' : x + ',';
           x = x + y.ord_pkid;
         }
         return x;
@@ -99,7 +99,7 @@ export const SelectRefNos = createSelector(
     if (record)
       return record.records.reduce((x, y) => {
         if (y.ord_selected) {
-          x = (x == '') ?  '' : x + ',';
+          x = (x == '') ? '' : x + ',';
           x = x + y.ord_po;
         }
         return x;
@@ -127,6 +127,23 @@ export const SelectIsError = createSelector(
   (record: JobOrderModel) => {
     if (record)
       return record.isError;
+    else
+      return null;
+  }
+);
+
+
+export const SelectPkidsPos = createSelector(
+  SelectOrderEntity,
+  (record: JobOrderModel) => {
+    if (record)
+      return record.records.reduce((x, y) => {
+        if (y.ord_selected) {
+          x = (x == '') ? '' : x + ',';
+          x = x + y.ord_pkid + '~PO-' + y.ord_po;
+        }
+        return x;
+      }, '');
     else
       return null;
   }

@@ -60,7 +60,7 @@ export class OrderListComponent {
   searchEvents(actions: any) {
     var urlid = this.gs.getParameter('urlid');
 
-    if (actions.outputformat == 'CHECK-LIST') {
+    if (actions.outputformat == 'MAIL-FTP') {
 
     } else
       this.store.dispatch(FromOrderActions.UpdateQuery({ urlid: urlid, stype: 'NEW', query: actions.searchQuery }));

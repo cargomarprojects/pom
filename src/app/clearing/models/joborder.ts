@@ -111,7 +111,10 @@ export interface SearchQuery {
   ord_status: string,
   sort_colname: string,
   sort_colvalue: string,
-  ftp_transfertype: string
+  ftp_transfertype: string,
+  ftp_is_multipleorder: string,
+  ftp_is_checklist: string,
+  ftp_ordpoids: string
 }
 
 export interface JobOrderModel {

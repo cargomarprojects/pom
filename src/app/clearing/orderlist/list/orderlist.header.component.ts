@@ -4,7 +4,7 @@ import { SearchTable } from 'src/app/shared/models/searchtable';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/reducers';
-import { SelectSelectedRecordsCount } from './store/orderlist.selctors';
+import { SelectSelectedRecordsCount,SelectPkidsPos } from './store/orderlist.selctors';
 import { map, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { GlobalService } from 'src/app/core/services/global.service';
@@ -17,15 +17,18 @@ import { GlobalService } from 'src/app/core/services/global.service';
 
 export class OrderListHeaderComponent implements OnInit {
 
-  query : SearchQuery;
-  @Input() set _query( value : SearchQuery){
-    this.query  = JSON.parse(JSON.stringify(value));
+  query: SearchQuery;
+  @Input() set _query(value: SearchQuery) {
+    this.query = JSON.parse(JSON.stringify(value));
   }
 
   @Output() searchEvents = new EventEmitter<any>();
-  
+
   selectedRecordsCount$: Observable<number>;
   total = 0;
+
+  SelectPkidsPos$: Observable<string>;
+  ord_id_POs = "";
 
   SortList: any[];
 
@@ -35,16 +38,20 @@ export class OrderListHeaderComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
-    private router : Router,
-    private gs : GlobalService,
-  ) { 
-    this.selectedRecordsCount$ =  this.store.pipe(
+    private router: Router,
+    private gs: GlobalService,
+  ) {
+    this.selectedRecordsCount$ = this.store.pipe(
       select(SelectSelectedRecordsCount),
-      tap( total => this.total = total)
-      );
+      tap(total => this.total = total)
+    );
+    this.SelectPkidsPos$ = this.store.pipe(
+      select(SelectPkidsPos),
+      tap(ord_id_POs => this.ord_id_POs = this.ord_id_POs)
+    );
   }
 
-  
+
   ngOnInit() {
     this.SortList = [
       { "colheadername": "CREATED", "colname": "a.rec_created_date desc" },
@@ -53,16 +60,16 @@ export class OrderListHeaderComponent implements OnInit {
   }
 
   List(outputformat: string) {
-    
-    var sdata =  this.SortList.find( rec => rec.colheadername == this.query.sort_colname).colname;
-    if ( sdata )
+
+    var sdata = this.SortList.find(rec => rec.colheadername == this.query.sort_colname).colname;
+    if (sdata)
       this.query.sort_colvalue = sdata;
 
-      
+
     this.searchEvents.emit({ outputformat: outputformat, searchQuery: this.query });
   }
 
-  LovSelected(_Record: SearchTable ) {
+  LovSelected(_Record: SearchTable) {
     // Company Settings
     if (_Record.controlname == "AGENT") {
       this.query.list_agent_id = _Record.id;
@@ -78,29 +85,40 @@ export class OrderListHeaderComponent implements OnInit {
     }
   }
 
-  tracking(){
+  tracking() {
 
-    if ( this.total <=0 ){
+    if (this.total <= 0) {
       alert('No Rows Selected');
       return;
     }
     var urlid = this.gs.getParameter('urlid');
     let parameter = {
-      urlid : urlid,
-      type : '',
+      urlid: urlid,
+      type: '',
       origin: 'orderlist',
     };
-    this.router.navigate(['clearing/tracking'], { queryParams: parameter});
+    this.router.navigate(['clearing/tracking'], { queryParams: parameter });
 
   }
 
 
   MailOrders(_filetype: string = "") {
-    
-    this.List(_filetype)
-    
-    
-    
+   
+    if (this.ord_id_POs =='') {
+      alert('Please select PO and continue.....');
+      return;
+    }
+   
+    this.query.ftp_ordpoids = this.ord_id_POs;
+    this.query.ftp_is_checklist = 'N';
+    this.query.ftp_is_multipleorder = 'Y';
+    if (_filetype === "CHECK-LIST") {
+      this.query.ftp_is_checklist = 'Y';
+    } else if (_filetype === "FTP") {
+      this.query.ftp_is_checklist = 'N';
+    }
+    this.List('MAIL-FTP')
+
     // this.InfoMessage = '';
     // this.ErrorMessage = '';
     // this.ftp_agent_code = '';

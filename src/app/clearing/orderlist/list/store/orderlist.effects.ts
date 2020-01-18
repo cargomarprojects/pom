@@ -54,7 +54,10 @@ export class OrderListEffects {
                     sort_colvalue: 'a.rec_created_date desc',
                     ord_status: 'ALL',
                     ord_showpending: 'N',
-                    ftp_transfertype:'ORDERLIST'
+                    ftp_transfertype:'ORDERLIST',
+                    ftp_is_multipleorder:'N',
+                    ftp_is_checklist:'N',
+                    ftp_ordpoids:''
                 };
                 const data = <JobOrderModel>{ isError: false, message: '', urlid: urlid, pageQuery: pagequery, searchQuery: searchquery, records: [] };
                 return of(allactions.RequestLoadSuccess({ data: data }));
