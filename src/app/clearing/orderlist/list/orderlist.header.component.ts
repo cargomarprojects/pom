@@ -117,9 +117,4 @@ export class OrderListHeaderComponent implements OnInit {
     this.modalRef.close();
   }
 
-  
-
-
-
-
 }
