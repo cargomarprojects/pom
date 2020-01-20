@@ -109,9 +109,6 @@ export const SelectRefNos = createSelector(
   }
 );
 
-
-
-
 export const SelectMessage = createSelector(
   SelectOrderEntity,
   (record: JobOrderModel) => {
@@ -133,7 +130,7 @@ export const SelectIsError = createSelector(
 );
 
 
-export const SelectPkidsPos = createSelector(
+export const SelectSelectedPkidsPos = createSelector(
   SelectOrderEntity,
   (record: JobOrderModel) => {
     if (record)

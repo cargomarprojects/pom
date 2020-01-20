@@ -4,7 +4,7 @@ import { SearchTable } from 'src/app/shared/models/searchtable';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/reducers';
-import { SelectSelectedRecordsCount,SelectPkidsPos } from './store/orderlist.selctors';
+import { SelectSelectedRecordsCount, SelectSelectedPkidsPos } from './store/orderlist.selctors';
 import { map, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { GlobalService } from 'src/app/core/services/global.service';
@@ -44,10 +44,6 @@ export class OrderListHeaderComponent implements OnInit {
     this.selectedRecordsCount$ = this.store.pipe(
       select(SelectSelectedRecordsCount),
       tap(total => this.total = total)
-    );
-    this.SelectPkidsPos$ = this.store.pipe(
-      select(SelectPkidsPos),
-      tap(ord_id_POs => this.ord_id_POs = this.ord_id_POs)
     );
   }
 
@@ -103,12 +99,17 @@ export class OrderListHeaderComponent implements OnInit {
 
 
   MailOrders(_filetype: string = "") {
-   
-    if (this.ord_id_POs =='') {
+
+    this.SelectPkidsPos$ = this.store.pipe(
+      select(SelectSelectedPkidsPos),
+      tap(ord_id_POs => this.ord_id_POs = ord_id_POs)
+    );
+
+    if (this.ord_id_POs == '') {
       alert('Please select PO and continue.....');
       return;
     }
-   
+
     this.query.ftp_ordpoids = this.ord_id_POs;
     this.query.ftp_is_checklist = 'N';
     this.query.ftp_is_multipleorder = 'Y';
