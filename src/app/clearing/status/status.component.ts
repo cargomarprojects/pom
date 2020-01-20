@@ -18,6 +18,8 @@ export class StatusComponent {
   title = 'Track Details';
 
   @Output() ModifiedRecords = new EventEmitter<any>();
+  
+  @Output() closeModal= new EventEmitter<any>();
 
   private menuid: string = '';
   private type: string = '';
@@ -75,19 +77,17 @@ export class StatusComponent {
     if (this.menu_record)
       this.title = this.menu_record.menu_name;
   }
-  
 
   save(){
-
+      this.Close();
   }
-
 
   // Destroy Will be called when this component is closed
   ngOnDestroy() {
   }
 
   Close() {
-    this.location.back();
+    this.closeModal.emit();
   }
 
 
