@@ -32,7 +32,7 @@ export class OrderListEffects {
                 return of(allactions.EmtyReturn());
             }
             else {
-                const pagequery = <PageQuery>{ action: 'NEW', page_count: 0, page_current: 0, page_rowcount: 0, page_rows: 50 };
+                const pagequery = <PageQuery>{ action: 'NEW', page_count: 0, page_current: 0, page_rowcount: 0, page_rows: 20 };
                 const searchquery = <SearchQuery>{
                     branch_code: this.gs.globalVariables.branch_code,
                     company_code: this.gs.globalVariables.user_company_code,

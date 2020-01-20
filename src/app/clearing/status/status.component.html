@@ -1,0 +1,66 @@
+
+<div *ngIf="pkid$ | async">
+</div>
+
+<div class="page-box">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group row">
+        <label class="col-2 col-form-label col-form-label-sm">PO#</label>
+        <div class="col-10" *ngIf="refno$ | async as item">
+          <textarea disabled rows="2" style="font-weight:bold" class="form-control form-control-sm"
+            [(ngModel)]="item"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-box">
+  <div class="row">
+    <div class="col-sm-12">
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label col-form-label-sm">PO Status</label>
+        <div class="col-10">
+          <select class="form-control form-control-sm" [(ngModel)]="ord_status">
+            <option [value]="'APPROVED'">APPROVED</option>
+            <option [value]="'CANCELLED'">CANCELLED</option>
+            <option [value]="'ON HOLD'">ON HOLD</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="page-box">
+  <div class="row">
+    <div class="col-sm-12">
+      
+      <div class="form-group row">
+        <div class="col-10 offset-2">
+          <button  (click)="save()" class="btn btn-primary btn-sm">Update</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<br />
+
+
+<div *ngIf="InfoMessage" class="alert alert-success">
+  {{InfoMessage}}
+</div>
+
+<div *ngIf="ErrorMessage" class="alert alert-danger">
+  {{ErrorMessage}}
+</div>

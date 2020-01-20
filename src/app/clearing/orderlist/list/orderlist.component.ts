@@ -11,6 +11,7 @@ import * as FromOrderSelectors from './store/orderlist.selctors';
 
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-orderlist',
@@ -27,6 +28,7 @@ export class OrderListComponent {
   searchQuery$: Observable<SearchQuery>;
   errorMessage$: Observable<string>;
 
+
   constructor(
     private gs: GlobalService,
     private location: Location,
@@ -34,15 +36,10 @@ export class OrderListComponent {
     private store: Store<AppState>
   ) {
 
-
-
     this.recordlist$ = this.store.pipe(select(FromOrderSelectors.SelectRecords));
     this.searchQuery$ = this.store.pipe(select(FromOrderSelectors.SelectSearchRecord));
     this.pageQuery$ = this.store.pipe(select(FromOrderSelectors.SelectPageQuery));
     this.errorMessage$ = this.store.pipe(select(FromOrderSelectors.SelectMessage));
-
-
-
 
   }
   // Init Will be called After executing Constructor
