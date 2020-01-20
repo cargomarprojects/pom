@@ -20,6 +20,7 @@ export class TrackOrderComponent {
   title = 'Track Details';
 
   @Output() ModifiedRecords = new EventEmitter<any>();
+  @Output() closeModal= new EventEmitter<any>();
   
   /*
   @Input() menuid: string = '';
@@ -235,9 +236,11 @@ export class TrackOrderComponent {
 
   }
 
+
   Close() {
-    this.location.back();
+    this.closeModal.emit();
   }
+
 
 
 }

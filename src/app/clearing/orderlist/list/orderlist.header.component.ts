@@ -37,7 +37,7 @@ export class OrderListHeaderComponent implements OnInit {
   where_shipper = "CUST_IS_SHIPPER = 'Y'";
   where_consignee = "CUST_IS_CONSIGNEE = 'Y'";
 
-  modalRef : any;
+  modalRef: any;
 
   constructor(
     private store: Store<AppState>,
@@ -85,18 +85,22 @@ export class OrderListHeaderComponent implements OnInit {
     }
   }
 
-  tracking() {
+  tracking(modalname: any) {
     if (this.total <= 0) {
       alert('No Rows Selected');
       return;
     }
-    var urlid = this.gs.getParameter('urlid');
-    let parameter = {
-      urlid: urlid,
-      type: '',
-      origin: 'orderlist',
-    };
-    this.router.navigate(['clearing/tracking'], { queryParams: parameter });
+    this.modalRef = this.modalService.open(modalname);
+    /*
+        var urlid = this.gs.getParameter('urlid');
+        let parameter = {
+          urlid: urlid,
+          type: '',
+          origin: 'orderlist',
+        };
+        this.router.navigate(['clearing/tracking'], { queryParams: parameter });
+    */
+
   }
 
 
@@ -110,7 +114,7 @@ export class OrderListHeaderComponent implements OnInit {
       alert('No Rows Selected');
       return;
     }
-    this.modalRef = this.modalService.open(modalname);    
+    this.modalRef = this.modalService.open(modalname);
   }
 
   closeModal() {
