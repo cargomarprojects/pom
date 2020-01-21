@@ -10,6 +10,8 @@ import { map, tap } from 'rxjs/operators';
 import { Location } from '@angular/common';
 import { TrackOrderService } from '../services/trackorder.service';
 
+import * as FromOrderActions from '../orderlist/list/store/orderlist.actions';
+
 @Component({
   selector: 'app-status',
   templateUrl: './status.component.html',
@@ -19,9 +21,9 @@ export class StatusComponent {
   // Local Variables 
   title = 'Track Details';
 
-  @Output() ModifiedRecords = new EventEmitter<any>();
-
+  @Output() ChangeStatus = new EventEmitter<any>();
   @Output() closeModal = new EventEmitter<any>();
+
 
   private menuid: string = '';
   private type: string = '';
@@ -30,6 +32,9 @@ export class StatusComponent {
 
   pkid$: Observable<string>;
   refno$: Observable<string>;
+
+
+  ids : any [];
 
   InitCompleted: boolean = false;
   menu_record: any;
@@ -105,7 +110,9 @@ export class StatusComponent {
     this.mainService.ChangeStatus(SearchData)
       .subscribe(response => {
         this.InfoMessage = "Save Complete";
-        alert(this.InfoMessage);
+        this.ids = response.list;
+        var urlid = this.gs.getParameter('urlid');
+        this.store.dispatch( FromOrderActions.ChangeStatus({urlid: urlid, pkids: this.ids})  )
         this.Close();
       }, error => {
         this.ErrorMessage = this.gs.getError(error);

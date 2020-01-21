@@ -16,3 +16,5 @@ export const UpdateQuery  = createAction('[ORDER LIST] UPDATE SEARCH', props<{  
 export const Search  = createAction('[ORDER LIST] SEARCH LIST', props<{stype : string, query : any }>());
 
 export const SelectDeselctRecord  = createAction('[ORDER LIST] UPDATE RECORD', props<{  urlid : string ,  pkid : string , ball : boolean, flag : boolean }>());
+
+export const ChangeStatus  = createAction('[ORDER LIST] CHANGE STATUS', props<{  urlid : string ,  pkids: any[] }>());

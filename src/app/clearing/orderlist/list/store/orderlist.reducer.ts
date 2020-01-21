@@ -43,6 +43,16 @@ export const Reducer = createReducer(
     })
     return adapter.updateOne({ id: action.urlid, changes: { records: records } }, state);
   }),
+  on(AllActions.ChangeStatus, (state, action) => {
+    const records =  state.entities[action.urlid].records.map(r1 => {
+          var rec = action.pkids.find( r2 => r2.id ==r1.ord_pkid);
+          if ( rec)
+            return  { ...r1, ord_status : rec.status, ord_color : rec.color };
+          else 
+             return r1;
+    })
+    return adapter.updateOne({ id: action.urlid, changes: { records: records } }, state);
+  }),  
 );
 
 export function OrderListReducer(state: OrderListState | undefined, action: Action) {
