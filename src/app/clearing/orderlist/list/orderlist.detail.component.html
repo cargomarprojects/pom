@@ -26,7 +26,7 @@
       </tr>
     </thead>
     <tbody class="page-body-tbody" *ngFor="let rec of records">
-      <tr>
+      <tr [style.color]="rec.ord_status_color">
         <td><input type="checkbox" [(ngModel)]="rec.ord_selected" (change)="handleChange(rec)" ></td>
         <td>{{rec.ord_status}}</td>        
         <td>{{rec.ord_agent_name}}</td>

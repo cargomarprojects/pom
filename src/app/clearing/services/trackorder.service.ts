@@ -23,5 +23,10 @@ export class TrackOrderService {
   Update(Record: Joborderm) {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/TrackOrder/Update', Record, this.gs.headerparam2('authorized'));
   }
+
+  ChangeStatus(SearchData :any ) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/TrackOrder/ChangeStatus', SearchData, this.gs.headerparam2('authorized'));
+  }
+
 }
 

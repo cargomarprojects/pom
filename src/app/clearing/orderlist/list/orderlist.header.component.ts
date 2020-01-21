@@ -90,7 +90,7 @@ export class OrderListHeaderComponent implements OnInit {
       alert('No Rows Selected');
       return;
     }
-    this.modalRef = this.modalService.open(modalname);
+    this.modalRef = this.modalService.open(modalname, { centered: true });
     /*
         var urlid = this.gs.getParameter('urlid');
         let parameter = {
@@ -114,7 +114,7 @@ export class OrderListHeaderComponent implements OnInit {
       alert('No Rows Selected');
       return;
     }
-    this.modalRef = this.modalService.open(modalname);
+    this.modalRef = this.modalService.open(modalname, { centered: true });
   }
 
   closeModal() {

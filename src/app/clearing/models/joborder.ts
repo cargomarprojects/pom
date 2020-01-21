@@ -56,6 +56,7 @@ export interface Joborderm {
   ord_pol_code: string;
   ord_pod_code: string;
   ord_status: string;
+  ord_status_color: string;
   ord_uid: number;
   ord_plan_no: number;
   ord_agentref_id: string;
