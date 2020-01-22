@@ -105,7 +105,7 @@
               <button (click)="List('NEW')" class="btn btn-primary btn-sm btn-block">Search</button>
             </div>
           </div>
-          
+
           <div class="form-group row">
             <div class="col-9 offset-3">
               <button (click)="tracking(trackorder)" class="btn btn-primary btn-sm btn-block">Tracking
@@ -113,6 +113,8 @@
               </button>
             </div>
           </div>
+
+
 
           <div class="form-group row">
             <div class="col-9 offset-3">
@@ -122,12 +124,19 @@
             </div>
           </div>
 
-          
+
           <div class="form-group row">
             <div class="col-9 offset-3">
               <button (click)="List('EXCEL')" class="btn btn-primary btn-sm btn-block">Excel</button>
             </div>
           </div>
+
+          <div class="form-group row">
+            <div class="col-9 offset-3">
+              <button (click)="ShowHistory(history)" class="btn btn-primary btn-sm btn-block">History</button>
+            </div>
+          </div>
+
 
           <!-- <div class="form-group row">
             <div class="col-5">
@@ -156,12 +165,24 @@
 
 <ng-template #changestatus let-c="close" let-d="dismiss">
   <div class="modal-body">
-    <app-status (closeModal)="closeModal()"  ></app-status>
+    <app-status (closeModal)="closeModal()"></app-status>
   </div>
 </ng-template>
 
 <ng-template #trackorder let-c="close" let-d="dismiss">
   <div class="modal-body">
-    <app-trackorder (closeModal)="closeModal()"  ></app-trackorder>
+    <app-trackorder (closeModal)="closeModal()"></app-trackorder>
+  </div>
+</ng-template>
+
+<ng-template #history let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">History</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-history [pkid]="orderid" ></app-history>
   </div>
 </ng-template>

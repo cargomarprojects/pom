@@ -100,7 +100,8 @@ export class StatusComponent {
       branch_code: this.gs.globalVariables.branch_code,
       year_code: this.gs.globalVariables.year_code,
       pkids: this.pkid,
-      status : this.ord_status
+      status : this.ord_status,
+      user_code : this.gs.globalVariables.user_code
     };
 
     this.loading = true;

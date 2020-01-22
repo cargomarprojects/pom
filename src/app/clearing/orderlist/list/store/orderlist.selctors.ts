@@ -59,7 +59,7 @@ export const SelectSelectedRecords = createSelector(
   SelectOrderEntity,
   (record: JobOrderModel) => {
     if (record)
-      return record.records.map(rec => rec.ord_selected)
+      return record.records.filter(rec => rec.ord_selected)
     else
       return null;
   }

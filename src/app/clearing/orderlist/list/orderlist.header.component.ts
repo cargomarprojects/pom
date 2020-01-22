@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ChangeDetectionStrategy } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { SearchQuery } from '../../models/joborder';
+import { SearchQuery, Joborderm } from '../../models/joborder';
 import { SearchTable } from 'src/app/shared/models/searchtable';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/reducers';
-import { SelectSelectedRecordsCount, SelectSelectedPkidsPos } from './store/orderlist.selctors';
-import { map, tap } from 'rxjs/operators';
+import { SelectSelectedRecordsCount, SelectSelectedPkidsPos, SelectSelectedRecords } from './store/orderlist.selctors';
+import { map, tap, take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { GlobalService } from 'src/app/core/services/global.service';
 
@@ -31,6 +31,9 @@ export class OrderListHeaderComponent implements OnInit {
   SelectPkidsPos$: Observable<string>;
   ord_id_POs = "";
 
+  orderID$ : Observable<string>;
+  orderid : string ;
+
   SortList: any[];
 
   where_agent = "CUST_IS_AGENT = 'Y'";
@@ -39,16 +42,28 @@ export class OrderListHeaderComponent implements OnInit {
 
   modalRef: any;
 
+
+  
+
   constructor(
     private store: Store<AppState>,
     private router: Router,
     private gs: GlobalService,
     private modalService: NgbModal,
   ) {
+    
     this.selectedRecordsCount$ = this.store.pipe(
       select(SelectSelectedRecordsCount),
       tap(total => this.total = total)
     );
+
+
+    this.orderID$ = this.store.pipe(
+      select(SelectSelectedRecords),
+      map( rec => rec[0].ord_pkid),
+      take(1)
+    );
+
   }
 
 
@@ -119,6 +134,21 @@ export class OrderListHeaderComponent implements OnInit {
 
   closeModal() {
     this.modalRef.close();
+  }
+
+  ShowHistory(modalname :any) {
+    if (this.total <= 0) {
+      alert('No Rows Selected');
+      return;
+    }
+
+    this.orderID$.subscribe ( id =>{
+      console.log(id);
+      this.orderid = id;
+      this.modalRef = this.modalService.open(modalname, { centered: true });
+    });
+
+    
   }
 
 }
