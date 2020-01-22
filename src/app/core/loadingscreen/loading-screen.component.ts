@@ -2,32 +2,30 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { LoadingScreenService } from '../services/loadingscreen.service';
 
-import { Subscription } from "rxjs";
-import { debounceTime } from 'rxjs/operators';
+import { Subscription, Observable } from "rxjs";
+import { debounceTime, startWith, delay } from 'rxjs/operators';
 
 
 @Component({
   selector: 'app-loading-screen',
   templateUrl: './loading-screen.component.html',
-  changeDetection : ChangeDetectionStrategy.OnPush
+  changeDetection : ChangeDetectionStrategy.Default
 })
 export class LoadingScreenComponent implements OnInit {
 
-  loading: boolean = false;
-  loadingSubscription: Subscription;
-
+  msub : Observable<boolean>;
   constructor(
     private loadingScreenService: LoadingScreenService
     ) {}
 
   ngOnInit() {
-    this.loadingSubscription = this.loadingScreenService.loadingStatus.subscribe((value) => {
-      this.loading = value;
-    });
+    this.msub =  this.loadingScreenService.loadingStatus.pipe(
+      startWith(false),
+      delay(0)
+    );
   }
 
   ngOnDestroy() {
-    this.loadingSubscription.unsubscribe();
   }
 
 }
