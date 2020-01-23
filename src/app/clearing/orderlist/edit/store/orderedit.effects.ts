@@ -63,6 +63,7 @@ export class OrderEditEffects {
                 const record = <Joborderm>{
                     rec_mode: 'ADD', rec_category: 'SEA EXPORT',
                     ord_pkid: this.gs.getGuid(),
+                    ord_status : 'REPORTED',
                     ord_agent_id: '',
                     ord_agent_code: '',
                     ord_agent_name: '',
@@ -82,6 +83,11 @@ export class OrderEditEffects {
                     ord_ntwt :0,
                     ord_grwt:0,
                     ord_cbm:0,
+                    ord_boarding1 :'',
+                    ord_boarding2 :'',
+                    ord_instock1 :'',                    
+                    ord_instock2 :''                    
+
                 };
                 const data = <JobOrderEditModel>{ isError: false, message: '', urlid: routeparam.urlid, menuid: routeparam.menuid, record: record };
                 return allactions.RequestLoadSuccess({ data: data });

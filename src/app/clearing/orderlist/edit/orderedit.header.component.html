@@ -1,11 +1,11 @@
 <div class="page-details" *ngIf="Record">
   <div class="row">
-    <div class="col-sm-5">
+    <div class="col-sm-6">
       <div class="form-group row">
-        <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Agent</label>
+        <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Pol.Agent</label>
         <div class="col-sm-5">
           <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
-            [displaydata]="Record.ord_agent_code" (ValueChanged)="LovSelected($event)" [where]="where_agent" #agentlov> 
+            [displaydata]="Record.ord_agent_code" (ValueChanged)="LovSelected($event)" [where]="where_agent" #agentlov>
           </app-autocomplete2>
         </div>
         <div class="col-sm-5">
@@ -66,21 +66,24 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label  col-form-label-sm">PO</label>
         <div class="col-sm-10">
-          <InputBox [(inputModel)]="Record.ord_po" [maxlength]="60" [uppercase]=true (blur)="OnBlur('ord_po')"></InputBox>
+          <InputBox [(inputModel)]="Record.ord_po" [maxlength]="60" [uppercase]=true (blur)="OnBlur('ord_po')">
+          </InputBox>
         </div>
       </div>
 
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">Style#</label>
         <div class="col-sm-10">
-          <InputBox [(inputModel)]="Record.ord_style" [maxlength]="60" [uppercase]=true  (blur)="OnBlur('ord_style')" ></InputBox>
+          <InputBox [(inputModel)]="Record.ord_style" [maxlength]="60" [uppercase]=true (blur)="OnBlur('ord_style')">
+          </InputBox>
         </div>
       </div>
 
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">Color</label>
         <div class="col-sm-10">
-          <InputBox [(inputModel)]="Record.ord_color" [maxlength]="60" [uppercase]=true  (blur)="OnBlur('ord_color')"></InputBox>
+          <InputBox [(inputModel)]="Record.ord_color" [maxlength]="60" [uppercase]=true (blur)="OnBlur('ord_color')">
+          </InputBox>
         </div>
       </div>
 
@@ -90,9 +93,33 @@
           <InputBox [(inputModel)]="Record.ord_contractno" [maxlength]="100" [uppercase]=true></InputBox>
         </div>
       </div>
+      
 
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-6">
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label col-form-label-sm">Borading1</label>
+        <div class="col-4">
+          <app-date [inputdate]="Record.ord_boarding1" (ValueChanged)="Record.ord_boarding1=$event"></app-date>
+        </div>
+        <label class="col-2 col-form-label col-form-label-sm">Borading2</label>
+        <div class="col-4">
+          <app-date [inputdate]="Record.ord_boarding2" (ValueChanged)="Record.ord_boarding2=$event"></app-date>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label col-form-label-sm">Instock1</label>
+        <div class="col-4">
+          <app-date [inputdate]="Record.ord_instock1" (ValueChanged)="Record.ord_instock1=$event"></app-date>
+        </div>
+        <label class="col-2 col-form-label col-form-label-sm">Instock2</label>
+        <div class="col-4">
+          <app-date [inputdate]="Record.ord_instock2" (ValueChanged)="Record.ord_instock2=$event"></app-date>
+        </div>
+      </div>
 
       <div class="form-group row">
         <label class="col-2 col-form-label col-form-label-sm">Pkgs</label>
@@ -171,16 +198,77 @@
       </div>
 
     </div>
-
   </div>
 </div>
 
 <div class="page-box">
   <div class="col-sm-12">
     <div class="row">
-      <div class="col-sm-5">
-        <button [disabled]="loading" (click)="Save()" class="btn btn-success btn-sm">Save</button>
+      <div class="col-6">
+        <label class="col-form-label col-form-label-sm">Status : {{Record.ord_status}}</label>
       </div>
+      <div class="col-6" *ngIf="Record.ord_status == 'REPORTED'">
+          <button  (click)="Save()" class="btn btn-success btn-sm">Save</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="Record">
+  <div class="page-details" *ngIf="Record.rec_mode == 'EDIT'">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group row">
+          <label class="col-6 col-form-label col-form-label-sm">Booking Request Date</label>
+          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_booking_date}}</label>
+        </div>
+        <div class="form-group row">
+          <label class="col-6 col-form-label col-form-label-sm">Random Inspection Date</label>
+          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_rnd_insp_date}}</label>
+        </div>
+        <div class="form-group row">
+          <label class="col-6 col-form-label col-form-label-sm">PO Release Date</label>
+          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_po_rel_date}}</label>
+        </div>
+        <div class="form-group row">
+          <label class="col-6 col-form-label col-form-label-sm">Cargo Ready Date</label>
+          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_cargo_ready_date}}</label>
+        </div>
+
+      </div>
+
+      <div class="col-sm-4">
+        <div class="form-group row">
+          <label class="col-6 col-form-label col-form-label-sm">Fcr Date</label>
+          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_fcr_date}}</label>
+        </div>
+        <div class="form-group row">
+          <label class="col-6 col-form-label col-form-label-sm">Inspection Date</label>
+          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_insp_date}}</label>
+        </div>
+        <div class="form-group row">
+          <label class="col-6 col-form-label col-form-label-sm">Stuffing Date</label>
+          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_stuf_date}}</label>
+        </div>
+        <div class="form-group row">
+          <label class="col-6 col-form-label col-form-label-sm">WH Departure Date</label>
+          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_whd_date}}</label>
+        </div>
+
+      </div>
+
+      <div class="col-sm-4">
+        <div class="form-group row">
+          <label class="col-6 col-form-label col-form-label-sm">POL Delivery Date</label>
+          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_dlv_pol_date}}</label>
+        </div>
+        <div class="form-group row">
+          <label class="col-6 col-form-label col-form-label-sm">POD Delivery Date</label>
+          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_dlv_pod_date}}</label>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

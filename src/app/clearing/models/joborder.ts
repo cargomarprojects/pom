@@ -35,6 +35,11 @@ export interface Joborderm {
   ord_booking_id: string;
   ord_approved: boolean;
   ord_booking_no: string;
+  
+  ord_boarding1: string;
+  ord_boarding2: string;
+  ord_instock1: string;
+  ord_instock2: string;
   ord_booking_date: string;
   ord_rnd_insp_date: string;
   ord_po_rel_date: string;
@@ -61,10 +66,6 @@ export interface Joborderm {
   ord_plan_no: number;
   ord_agentref_id: string;
   ord_ftp_status: string;
-  ord_window1: string;
-  ord_window2: string;
-  ord_instock1: string;
-  ord_instock2: string;
 
   job_docno: string;
   rec_mode: string;

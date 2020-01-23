@@ -166,17 +166,11 @@ export class OrderEditHeaderComponent {
     }
     if (_Record.controlname == "POL") {
       this.Record.ord_pol_id = _Record.id;
-      if (_Record.code.length >= 5)
-        this.Record.ord_pol = _Record.code.substr(2, 3);
-      else
-        this.Record.ord_pol = _Record.code;
+      this.Record.ord_pol = _Record.code;
     }
     else if (_Record.controlname == "POD") {
       this.Record.ord_pod_id = _Record.id;
-      if (_Record.code.length >= 5)
-        this.Record.ord_pod = _Record.code.substr(2, 3);
-      else
-        this.Record.ord_pod = _Record.code;
+      this.Record.ord_pod = _Record.code;
     }
   }
 
