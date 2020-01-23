@@ -84,7 +84,7 @@ export class OrderListComponent {
       menuid: this.gs.getParameter('menuid'),
       pkid: actions.id,
       origin: 'orderlist',
-      mode: actions.action
+      mode: actions
     };
 
     this.router.navigate(['clearing/orderedit'], { queryParams: parameter });

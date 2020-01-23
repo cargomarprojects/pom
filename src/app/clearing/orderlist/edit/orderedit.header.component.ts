@@ -187,12 +187,12 @@ export class OrderEditHeaderComponent {
   FindContractNo() {
     let sContract: string = "";
     sContract = this.Record.ord_po;
-    if (this.Record.ord_style.trim() != "") {
+    if ( !this.gs.isBlank(this.Record.ord_style)) {
       if (sContract.trim() != "")
         sContract += "/";
       sContract += this.Record.ord_style;
     }
-    if (this.Record.ord_color.trim() != "") {
+    if ( !this.gs.isBlank(this.Record.ord_color)) {
       if (sContract.trim() != "")
         sContract += "-";
       sContract += this.Record.ord_color;

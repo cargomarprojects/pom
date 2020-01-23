@@ -1,12 +1,13 @@
 import { Component,  OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { GlobalService } from '../../../core/services/global.service';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/reducers';
 import { Observable } from 'rxjs';
 import { Joborderm } from '../../models/joborder';
 import * as fromOrderSelectors  from './store/orderedit.selctors';
 import * as fromOrderActions  from './store/orderedit.actions';
 import { OrderEditHeaderComponent } from './orderedit.header.component';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'App-OrderEdit',
@@ -37,8 +38,13 @@ export class OrderEditComponent {
 
     this.InitCompleted = true;
     this.InitComponent();
-    this.record$ = this.store.select( fromOrderSelectors.SelectRecord );
-    this.errorMessage$ = this.store.select(fromOrderSelectors.SelectMessage);
+    this.record$ = this.store.pipe(select( fromOrderSelectors.SelectRecord ));
+    this.errorMessage$ = this.store.pipe(select(fromOrderSelectors.SelectMessage), 
+    tap(msg =>{
+      console.log(msg);
+    })
+    );
+    
     this.store.dispatch(fromOrderActions.RequestLoad());
         
   }
