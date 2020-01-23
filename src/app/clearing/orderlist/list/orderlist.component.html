@@ -8,9 +8,12 @@
 </div>
 
 
-<div class="page-list">
-  <div *ngIf="errorMessage$ | async" class="alert alert-danger">
-    {{errorMessage$ | async}}
+
+<div *ngIf="errorMessage$ | async as msg">
+  <div class="page-list">
+    <div class="alert alert-info">
+      <p class="mb-0">{{msg}}</p>
+    </div>
   </div>
 </div>
 
@@ -21,7 +24,7 @@
 
   <App-Page [pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page>
 
-  <app-orderlist-detail [_records]="recordlist$ | async" (EditRecord)="ActionHandler($event)" ></app-orderlist-detail>
+  <app-orderlist-detail [_records]="recordlist$ | async" (EditRecord)="ActionHandler($event)"></app-orderlist-detail>
 
   <App-Page [pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page>
 
