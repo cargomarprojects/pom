@@ -8,7 +8,7 @@ import { CustomerComponent } from './customer/customer.component';
 import { AddbookComponent } from './customer/addbook.component';
 
 import { XmlComponent } from './xml/xml.component';
-import { LinkmComponent } from './linkm/linkm.component';
+
 import { Linkm2Component } from './linkm2/linkm2.component';
 import { AllnumComponent } from './allnum/allnum.component';
 
@@ -22,7 +22,6 @@ const routes: Routes = [
     { path: 'customer', component: CustomerComponent },
     { path: 'addbook', component: AddbookComponent },
     { path: 'xml', component: XmlComponent },
-    { path: 'linkm', component: LinkmComponent },
     { path: 'linkm2', component: Linkm2Component },
     { path: 'allnum', component: AllnumComponent },
     { path: 'custdet', component: CustdetComponent },
