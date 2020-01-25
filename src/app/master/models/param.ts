@@ -29,6 +29,10 @@ export class Paramvalues {
     param_key: string;
     param_value: string;
     param_defvalue: string;
+
+    param_filetype: string;
+    param_impexp: string;
+    param_edifile: string;
 }
 
 export class Paramvalues_vm{

@@ -81,17 +81,20 @@
           <tr>
             <th>KEY</th>
             <th>REMARKS</th>
+            <th>TYPE</th>
+            <th>IMPEXP</th>
+            <th>EDIFILE</th>
+
             <th>VALUE</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let rec of RecordDet;  let i = index" >
-            <td>
-              {{rec.param_key}}
-            </td>
-            <td>
-              {{rec.param_defvalue}}
-            </td>            
+            <td>{{rec.param_key}}</td>
+            <td>{{rec.param_defvalue}}</td>            
+            <td>{{rec.param_filetype}}</td>                        
+            <td>{{rec.param_impexp}}</td>                        
+            <td>{{rec.param_edifile}}</td>                                    
             <td>
               <input type="text" class="form-control form-control-sm" [(ngModel)]="rec.param_value" required maxlength="100" />
             </td>

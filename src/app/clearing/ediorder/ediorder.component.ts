@@ -16,7 +16,7 @@ import { SearchTable } from '../../shared/models/searchtable';
 })
 export class EdiOrderComponent {
   // Local Variables 
-  title = 'Order List';
+  title = 'EDI - Orders';
 
   @Input() menuid: string = '';
   @Input() type: string = '';
@@ -209,6 +209,7 @@ export class EdiOrderComponent {
       report_folder: this.gs.globalVariables.report_folder,
       user_code: this.gs.globalVariables.user_code,
       ftptypeid: this.agent_id
+      
     };
 
     this.ErrorMessage = '';
