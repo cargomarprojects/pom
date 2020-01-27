@@ -209,7 +209,7 @@ export class EdiOrderComponent {
       report_folder: this.gs.globalVariables.report_folder,
       user_code: this.gs.globalVariables.user_code,
       ftptypeid: this.agent_id
-      
+
     };
 
     this.ErrorMessage = '';
@@ -217,20 +217,10 @@ export class EdiOrderComponent {
     this.mainService.Process(SearchData)
       .subscribe(response => {
         this.loading = false;
-        if (_type == "DOWNLOAD") {
-          if (response.serror == "Complete") {
-            this.InfoMessage = response.dfilecount + " Files Downloaded";
-            alert(this.InfoMessage);
-          }
-          else {
-            if (response.serror) {
-              this.ErrorMessage = response.serror;
-              alert(this.ErrorMessage);
-            }
-          }
-        } else {
-          this.List('NEW');
-        }
+        if (response.error == "")
+          this.InfoMessage = "Process Complete";
+        else
+          this.ErrorMessage = response.error;
       },
         error => {
           this.loading = false;
