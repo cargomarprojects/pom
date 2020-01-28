@@ -10,6 +10,10 @@ export class Customerm {
 
     cust_group: string;
 
+
+    cust_edi_code: string;
+    cust_trading_partner: string;
+
     cust_iecode: string;
     cust_panno: string;
     cust_tanno: string;

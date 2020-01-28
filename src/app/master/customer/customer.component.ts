@@ -89,10 +89,6 @@ export class CustomerComponent {
   AcTypeList: any[] = [];
 
 
-  SMANREC: any = {};
-  
-  
-
 
 
   constructor(
@@ -188,6 +184,7 @@ export class CustomerComponent {
       this.Record.cust_sman_id = _Record.id;
       this.Record.cust_sman_name = _Record.name;
     }
+    
   }
 
 
@@ -374,9 +371,8 @@ export class CustomerComponent {
     this.Record.cust_nomination = 'NA';
 
 
-    this.SMANREC = { 'controlname': 'SALESMAN', 'type': 'SALESMAN', displaycolumn: 'NAME', id: '', code: '', name: '' };
     
-
+    
 
     this.Record.rec_mode = this.mode;
 
@@ -416,7 +412,7 @@ export class CustomerComponent {
     this.cust_linked = this.Record.cust_linked;
     this.Record.AddressList = _Record.AddressList;
 
-    this.SMANREC = { 'controlname': 'SALESMAN', 'type': 'SALESMAN', displaycolumn: 'NAME', id: this.Record.cust_sman_id, code: '', name: this.Record.cust_sman_name };
+    
 
     this.Record.rec_mode = this.mode;
 

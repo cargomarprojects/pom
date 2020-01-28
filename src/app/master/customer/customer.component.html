@@ -75,7 +75,12 @@
           <th>TYPE</th>
           <th>KYC</th>
           <th>SALESMAN</th>
+
+          <th>EDI-CODE</th>
+          <th>TRADING-PARTNER</th>
+
           <th>DOCS</th>
+
           <th>CREATED.BY</th>
           <th>CREATED.DATE</th>
         </tr>
@@ -87,6 +92,10 @@
           <td (click)="ActionHandler('EDIT',rec.cust_pkid)">{{rec.cust_group}}</td>
           <td (click)="ActionHandler('EDIT',rec.cust_pkid)">{{rec.cust_kyc_status}}</td>
           <td (click)="ActionHandler('EDIT',rec.cust_pkid)">{{rec.cust_sman_name}}</td>
+
+          <td (click)="ActionHandler('EDIT',rec.cust_pkid)">{{rec.cust_edi_code}}</td>
+          <td (click)="ActionHandler('EDIT',rec.cust_pkid)">{{rec.cust_trading_partner}}</td>
+
           <td>{{rec.cust_docs}}</td>
           <td>{{rec.rec_created_by}}</td>
           <td>{{rec.rec_created_date}}</td>
@@ -135,6 +144,7 @@
                     [(ngModel)]="Record.cust_name" required maxlength="60" />
                 </div>
               </div>
+
               <div class="form-group row">
                 <label class="col-4 col-form-label  col-form-label-sm">IE-Code</label>
                 <div class="col-8">
@@ -144,10 +154,32 @@
               </div>
 
               <div class="form-group row">
+                <label class="col-4 col-form-label  col-form-label-sm">EDI Code</label>
+                <div class="col-8">
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.cust_edi_code" required
+                    maxlength="20" />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-4 col-form-label  col-form-label-sm">Trading Partner</label>
+                <div class="col-8">
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.cust_trading_partner" required
+                    maxlength="20" />
+                </div>
+              </div>
+
+
+              <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Salesman</label>
                 <div class="col-8">
-                  <app-autocomplete #sman [disabled]="!canadd" [inputdata]="SMANREC"
-                    (ValueChanged)="LovSelected($event)"></app-autocomplete>
+                  
+
+                    <app-autocomplete2 [controlname]="'SALESMAN'" [tabletype]="'SALESMAN'" [displaycolumn]="'NAME'"
+                    [displaydata]="Record.cust_sman_name" (ValueChanged)="LovSelected($event)" >
+                  </app-autocomplete2>
+
+
                 </div>
               </div>
 
