@@ -30,6 +30,9 @@ export class GlobalService {
   public Modules: Modulem[] = [];
   public MenuList: Menum[] = [];
 
+
+  public TradingPartners: any[];
+
   constructor(
     private http2: HttpClient,
     private location: Location,
@@ -135,9 +138,31 @@ export class GlobalService {
 
 
   public ClosePage(sPage: string, IsCloseButton = false) {
-      this.location.back();
+    this.location.back();
   }
 
+  public LoadCombo() {
+    
+    this.LoadTradingPartners();
+
+  }
+
+  public LoadTradingPartners() {
+
+    let SearchRecord = {
+      table: 'PARAM',
+      comp_code: this.globalVariables.comp_code,
+      param_type: 'PARAM'
+    }
+    this.SearchRecord(SearchRecord).subscribe(
+      response => {
+        this.TradingPartners = response.param;
+        localStorage.setItem('tp', JSON.stringify(this.TradingPartners));
+      },
+      error => {
+        alert(this.getError(error));
+      });
+  }
 
   public SendEmail(SearchData: any) {
     return this.http2.post<any>(this.baseUrl + "/api/Email/Common", SearchData, this.headerparam2('authorized'));
@@ -161,7 +186,7 @@ export class GlobalService {
   };
 
   public InitdefaultValues() {
-    
+
     this.defaultValues = new DefaultValues;
     this.defaultValues.today = new Date().toISOString().slice(0, 10);
     this.defaultValues.monthbegindate = this.getNewdate(0);
@@ -264,9 +289,9 @@ export class GlobalService {
 
   }
 
-  
-  Naviagate2(menu_route: string, param : any) {
-      this.router.navigate([menu_route], { queryParams: param });    
+
+  Naviagate2(menu_route: string, param: any) {
+    this.router.navigate([menu_route], { queryParams: param });
   }
 
 
@@ -305,7 +330,7 @@ export class GlobalService {
       return false;
   }
 
-  
+
 
 
 }

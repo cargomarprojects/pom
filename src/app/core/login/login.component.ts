@@ -164,6 +164,7 @@ export class LoginComponent {
         this.gs.globalVariables.report_folder = data.report_folder;
 
         this.gs.InitdefaultValues();
+
         
         localStorage.setItem('access_token', this.gs.Access_Token);
         localStorage.setItem('company_name', this.gs.Company_Name);
@@ -171,6 +172,10 @@ export class LoginComponent {
         localStorage.setItem('modules', JSON.stringify(this.gs.Modules));
         localStorage.setItem('gv', JSON.stringify(this.gs.globalVariables));
         localStorage.setItem('dv', JSON.stringify(this.gs.defaultValues));
+        localStorage.setItem('dv', JSON.stringify(this.gs.defaultValues));
+
+        this.gs.LoadCombo();
+        
 
         this.router.navigate(['home'], { replaceUrl: true });
       },

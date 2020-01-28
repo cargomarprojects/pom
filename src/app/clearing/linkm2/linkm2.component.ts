@@ -83,6 +83,12 @@ export class Linkm2Component {
  
 
   loadCombo(){
+
+    this.TradingPartners = this.gs.TradingPartners;
+    if ( this.TradingPartners.length >0)
+      this.link_sender = this.TradingPartners[0].param_code;
+
+/*
     let SearchRecord = {
       table : 'PARAM',
       comp_code : this.gs.globalVariables.comp_code,
@@ -98,6 +104,7 @@ export class Linkm2Component {
       error =>{
         this.ErrorMessage = this.gs.getError(error);
       });
+*/
   }
 
   InitComponent() {
