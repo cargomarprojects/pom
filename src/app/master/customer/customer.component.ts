@@ -103,7 +103,7 @@ export class CustomerComponent {
     this.page_rows = 25;
     this.page_current = 0;
 
-    this.InitLov();
+    
 
     this.InitCompleted = true;
     this.menuid = this.gs.getParameter('menuid');
@@ -143,9 +143,7 @@ export class CustomerComponent {
   }
 
 
-  InitLov() {
 
-  }
 
 
 
@@ -184,7 +182,7 @@ export class CustomerComponent {
       this.Record.cust_sman_id = _Record.id;
       this.Record.cust_sman_name = _Record.name;
     }
-    
+
   }
 
 
@@ -318,6 +316,10 @@ export class CustomerComponent {
     this.Record.cust_pkid = this.pkid;
     this.Record.cust_code = '';
     this.Record.cust_name = '';
+
+    this.Record.cust_edi_code = '';
+    this.Record.cust_trading_partner = '';
+
     this.Record.cust_iecode = '';
     this.Record.cust_panno = '';
     this.Record.cust_tanno = '';
@@ -365,20 +367,9 @@ export class CustomerComponent {
     this.Record.cust_branch_code = '';
 
     this.Record.cust_linked = false;
-
     this.cust_linked = false;
-
     this.Record.cust_nomination = 'NA';
-
-
-    
-    
-
     this.Record.rec_mode = this.mode;
-
-    this.InitLov();
-
-
 
   }
 
@@ -411,12 +402,7 @@ export class CustomerComponent {
 
     this.cust_linked = this.Record.cust_linked;
     this.Record.AddressList = _Record.AddressList;
-
-    
-
     this.Record.rec_mode = this.mode;
-
-    this.InitLov();
 
   }
 
@@ -467,6 +453,13 @@ export class CustomerComponent {
       sError += "\n\r | Name Cannot Be Blank";
     }
 
+    if (this.Record.cust_is_consignee) {
+      if (this.gs.isBlank(this.Record.cust_edi_code)) {
+        bret = false;
+        sError += "\n\r | Edi Code Cannot be Blank";
+      }
+    }
+    
     if (this.addressComponent) {
       if (this.addressComponent.currentTab != 'LIST') {
         bret = false;
