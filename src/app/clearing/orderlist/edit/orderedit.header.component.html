@@ -5,7 +5,8 @@
         <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Pol.Agent</label>
         <div class="col-sm-5">
           <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
-            [displaydata]="Record.ord_agent_code" (ValueChanged)="LovSelected($event)" [where]="where_agent" #agentlov>
+           [disabled]="(Record.ord_status == 'REPORTED') ? false : true "  
+           [displaydata]="Record.ord_agent_code" (ValueChanged)="LovSelected($event)" [where]="where_agent" #agentlov>
           </app-autocomplete2>
         </div>
         <div class="col-sm-5">
@@ -17,6 +18,7 @@
         <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Shipper</label>
         <div class="col-sm-5">
           <app-autocomplete2 [controlname]="'SHIPPER'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
+            [disabled]="(Record.ord_status == 'REPORTED') ? false : true "  
             [displaydata]="Record.ord_exp_code" (ValueChanged)="LovSelected($event)" [where]="where_shipper">
           </app-autocomplete2>
         </div>
@@ -29,6 +31,7 @@
         <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Consignee</label>
         <div class="col-sm-5">
           <app-autocomplete2 [controlname]="'CONSIGNEE'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
+            [disabled]="(Record.ord_status == 'REPORTED') ? false : true "  
             [displaydata]="Record.ord_imp_code" (ValueChanged)="LovSelected($event)" [where]="where_consignee">
           </app-autocomplete2>
         </div>
