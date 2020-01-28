@@ -1,0 +1,35 @@
+<div class="page-header">
+  <div class="col">
+    <label >{{title}}</label>
+    <button class="btn btn-primary btn-sm mx-1" (click)="Close()">Return</button>
+  </div>
+</div>
+<div class="page-list">
+  <div class="page-search">
+    <div class="row">
+      <div class="col-12">
+        <button (click)="Process('DOWNLOAD')" class="btn btn-primary btn-sm">FTP Download</button>
+        <button (click)="Process('PROCESS')" class="btn btn-primary btn-sm">Local Download</button>
+      </div>
+    </div>
+  </div>
+  
+  <ngb-tabset>
+    <ngb-tab title="Order List">
+      <ng-template ngbTabContent>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Error List">
+      <ng-template ngbTabContent>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>
+<br />
+
+<div *ngIf="InfoMessage" class="alert alert-success">
+  {{InfoMessage}}
+</div>
+<div *ngIf="ErrorMessage" class="alert alert-danger">
+  {{ErrorMessage}}
+</div>
