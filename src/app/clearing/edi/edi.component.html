@@ -1,30 +1,45 @@
 <div class="page-header">
   <div class="col">
-    <label >{{title}}</label>
-    <button class="btn btn-primary btn-sm mx-1" (click)="Close()">Return</button>
+    <label>{{title}}</label>
+    <button class="btn btn-primary btn-sm mx-2" (click)="Close()">Return</button>
   </div>
 </div>
 <div class="page-list">
   <div class="page-search">
     <div class="row">
       <div class="col-12">
-        <button (click)="Process('DOWNLOAD')" class="btn btn-primary btn-sm">FTP Download</button>
-        <button (click)="Process('PROCESS')" class="btn btn-primary btn-sm">Local Download</button>
+        <label>STEP 1</label>
+        <button (click)="Process('DOWNLOAD')" class="btn btn-info btn-sm mx-2">FTP Download</button>
+        <label>STEP 2</label>
+        <button (click)="Process('PROCESS')" class="btn btn-info btn-sm mx-2">Local Download</button>
       </div>
     </div>
   </div>
-  
+</div>
+
+<div class="page-list mt-2">
   <ngb-tabset>
-    <ngb-tab title="Order List">
+    <ngb-tab title="Order">
       <ng-template ngbTabContent>
+
       </ng-template>
     </ngb-tab>
     <ngb-tab title="Error List">
       <ng-template ngbTabContent>
       </ng-template>
     </ngb-tab>
+
+    <ngb-tab title="Code Mapping">
+      <ng-template ngbTabContent>
+        <app-mapping [showheader]=false> </app-mapping>
+      </ng-template>
+    </ngb-tab>
+
+
   </ngb-tabset>
+
 </div>
+
 <br />
 
 <div *ngIf="InfoMessage" class="alert alert-success">

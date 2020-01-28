@@ -1,4 +1,4 @@
-<div class="page-header">
+<div class="page-header" *ngIf="showheader">
   <div class="col">
     <label>{{title}}</label>
     <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-primary btn-sm mx-1">List</button>

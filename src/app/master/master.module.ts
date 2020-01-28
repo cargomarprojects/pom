@@ -17,7 +17,7 @@ import { AddressmComponent } from './customer/addressm.component';
 
 
 import { XmlComponent } from './xml/xml.component';
-import { Linkm2Component } from './linkm2/linkm2.component';
+
 import { AllnumComponent } from './allnum/allnum.component';
 
 import { CustdetComponent } from './customer/custdet.component';
@@ -39,7 +39,7 @@ import { BenfComponent   } from './customer/benf.component';
     AddbookComponent,
     AddressmComponent,
     XmlComponent,
-    Linkm2Component,
+
     AllnumComponent,
     CustdetComponent,
     BankInfoComponent,

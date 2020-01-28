@@ -3,10 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../core/services/global.service';
 import { Linkm2Service } from '../services/linkm2.service';
 import { SearchTable } from '../../shared/models/searchtable';
-import { targetlistm } from '../models/targetlistm';
+import { targetlistm } from '../../master/models/targetlistm';
 import { edi_link } from '../models/edi_link';
 @Component({
-  selector: 'app-linkm2',
+  selector: 'app-mapping',
   templateUrl: './linkm2.component.html',
   providers: [Linkm2Service]
 })
@@ -15,6 +15,7 @@ export class Linkm2Component {
   title = 'Master Linking';
 
   mdate: string;
+  @Input() showheader: boolean = true;
 
   @Input() menuid: string = '';
   @Input() type: string = '';

@@ -25,6 +25,8 @@ import { OrderEditComponent } from './orderlist/edit/orderedit.component';
 import { OrderEditHeaderComponent } from './orderlist/edit/orderedit.header.component';
 import { OrderListDetailComponent } from './orderlist/list/orderlist.detail.component';
 import { StatusComponent } from './status/status.component';
+import { EdiComponent } from './edi/edi.component';
+import { Linkm2Component } from './linkm2/linkm2.component';
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import { StatusComponent } from './status/status.component';
     EdiOrderComponent,
     EdiOrdUpdateComponent,
     OrderListDetailComponent,
-    StatusComponent
+    StatusComponent,
+    EdiComponent,
+    Linkm2Component
   ],
   imports: [
     SharedModule,

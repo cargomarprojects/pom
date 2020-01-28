@@ -13,7 +13,7 @@ import { SearchTable } from '../../shared/models/searchtable';
 })
 export class EdiComponent {
   // Local Variables 
-  title = 'EDI';
+  title = 'EDI Process';
 
   @Input() menuid: string = '';
   @Input() type: string = '';
