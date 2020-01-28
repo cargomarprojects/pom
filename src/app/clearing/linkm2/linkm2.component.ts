@@ -46,7 +46,7 @@ export class Linkm2Component {
 
   link_type = 'IN';
   link_status = '';
-  link_sender = 'MEXICO-TMM';
+  link_sender = '';
   link_subcategory = '';
 
   PARTYRECORD: SearchTable = new SearchTable();
@@ -57,6 +57,8 @@ export class Linkm2Component {
   RecordList: edi_link[] = [];
   // Single Record for add/edit/view details
   Record: edi_link = new edi_link;
+
+  TradingPartners : any [];
 
   constructor(
     private mainService: Linkm2Service,
@@ -71,12 +73,31 @@ export class Linkm2Component {
     this.menuid = this.gs.getParameter('menuid');
     this.type = '';
 
-
   }
 
   // Init Will be called After executing Constructor
   ngOnInit() {
     this.InitComponent();
+    this.loadCombo();
+  }
+ 
+
+  loadCombo(){
+    let SearchRecord = {
+      table : 'PARAM',
+      comp_code : this.gs.globalVariables.comp_code,
+      param_type : 'PARAM'
+    }
+    this.gs.SearchRecord(SearchRecord).subscribe(
+      response =>{
+        this.TradingPartners = response.param;
+        if ( response.param.length > 0){
+          this.link_sender =   response.param[0].param_code;
+        }
+      },
+      error =>{
+        this.ErrorMessage = this.gs.getError(error);
+      });
   }
 
   InitComponent() {

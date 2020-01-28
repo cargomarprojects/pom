@@ -17,7 +17,7 @@
           <label class="col-3 col-form-label col-form-label-sm">Partner</label>
           <div class="col-9">
             <select class="form-control form-control-sm" [(ngModel)]="link_sender">
-              <option value="MEXICO-TMM">MEXICO-TMM</option>
+              <option  *ngFor="let rec of TradingPartners" value="{{rec.param_code}}">{{rec.param_code}}</option>
             </select>
           </div>
         </div>
