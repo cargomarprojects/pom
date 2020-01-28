@@ -6,7 +6,6 @@ import { EdiOrder } from '../models/ediorder';
 import { EdiOrderService } from '../services/ediorder.service';
 import { SearchTable } from '../../shared/models/searchtable';
 
-
 @Component({
   selector: 'app-edi',
   templateUrl: './edi.component.html',
