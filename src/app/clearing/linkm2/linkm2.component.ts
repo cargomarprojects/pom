@@ -45,8 +45,9 @@ export class Linkm2Component {
   targetname: string = "";
 
   link_type = 'INWARD';
-  link_status = '';
+  link_status = 'N';
   link_sender = '';
+  link_category = '';
   link_subcategory = '';
 
 
@@ -92,6 +93,10 @@ export class Linkm2Component {
     this.TradingPartners = this.gs.TradingPartners;
     if ( this.TradingPartners.length >0)
       this.link_sender = this.TradingPartners[0].param_code;
+
+    this.link_sender = "ALL";
+
+
 
 /*
     let SearchRecord = {
@@ -161,9 +166,12 @@ export class Linkm2Component {
         this.Record = response.record;
         this.Record.rec_mode = this.mode;
       
-        this.controlname = this.Record.link_category;
-        this.tabletype =  this.Record.link_subcategory;
-        this.displaydata = '';
+        this.controlname = this.Record.link_category + "-" +  this.Record.link_subcategory;
+        this.tabletype =  this.Record.link_category;
+        this.subtype =  this.Record.link_subcategory;
+        this.displaydata = this.Record.link_target_name;
+        if ( this.gs.isBlank( this.displaydata))  
+          this.displaydata = this.Record.link_source_name;
         
       },
         error => {
@@ -191,6 +199,7 @@ export class Linkm2Component {
       link_sender: this.link_sender,
       link_type: this.link_type,
       link_status: this.link_status,
+      link_category: this.link_category,
       link_subcategory: this.link_subcategory,
       searchstring: this.searchstring,
     };

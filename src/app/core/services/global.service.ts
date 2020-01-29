@@ -156,7 +156,11 @@ export class GlobalService {
     }
     this.SearchRecord(SearchRecord).subscribe(
       response => {
-        this.TradingPartners = response.param;
+        this.TradingPartners =  response.param;
+        this.TradingPartners.push( {param_pkid :'', param_code : 'ALL', param_name : 'ALL', param_id1 : ''})
+         
+        response.param;
+
         localStorage.setItem('tp', JSON.stringify(this.TradingPartners));
       },
       error => {
