@@ -3,13 +3,12 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../core/services/global.service';
 import { EdiOrder } from '../models/ediorder';
-import { EdiOrderService } from '../services/ediorder.service';
+import { EdiService } from '../services/edi.service';
 import { SearchTable } from '../../shared/models/searchtable';
 
 @Component({
   selector: 'app-edi',
-  templateUrl: './edi.component.html',
-  providers: [EdiOrderService]
+  templateUrl: './edi.component.html'
 })
 export class EdiComponent {
   // Local Variables 
@@ -27,7 +26,7 @@ export class EdiComponent {
 
   constructor(
     private modalService: NgbModal,
-    private mainService: EdiOrderService,
+    private mainService: EdiService,
     private route: ActivatedRoute,
     private gs: GlobalService
   ) {
@@ -71,7 +70,7 @@ export class EdiComponent {
 
     this.ErrorMessage = '';
     this.InfoMessage = '';
-    this.mainService.Process(SearchData)
+    this.mainService.TrasnferEdiFiles(SearchData)
       .subscribe(response => {
         if (response.error == "")
           this.InfoMessage = "Process Complete";
