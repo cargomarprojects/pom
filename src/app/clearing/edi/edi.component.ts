@@ -63,14 +63,12 @@ export class EdiComponent {
       type: _type,
       company_code: this.gs.globalVariables.comp_code,
       branch_code: this.gs.globalVariables.branch_code,
-      year_code: this.gs.globalVariables.year_code,
-      report_folder: this.gs.globalVariables.report_folder,
-      user_code: this.gs.globalVariables.user_code,
+      user_code: this.gs.globalVariables.user_code
     };
 
     this.ErrorMessage = '';
     this.InfoMessage = '';
-    this.mainService.TrasnferEdiFiles(SearchData)
+    this.mainService.TransferEdiFiles(SearchData)
       .subscribe(response => {
         if (response.error == "")
           this.InfoMessage = "Process Complete";
@@ -82,6 +80,32 @@ export class EdiComponent {
           alert(this.ErrorMessage);
         });
   }
+
+  ImportEdiFiles(_type: string) {
+    let SearchData = {
+      type: _type,
+      company_code: this.gs.globalVariables.comp_code,
+      branch_code: this.gs.globalVariables.branch_code,
+      user_code: this.gs.globalVariables.user_code,
+      messagedoc_type : 'ALL'
+    };
+
+    this.ErrorMessage = '';
+    this.InfoMessage = '';
+    this.mainService.ImportEdiFiles(SearchData)
+      .subscribe(response => {
+        if (response.error == "")
+          this.InfoMessage = "Process Complete";
+        else
+          this.ErrorMessage = response.error;
+      },
+        error => {
+          this.ErrorMessage = this.gs.getError(error);
+          alert(this.ErrorMessage);
+        });
+  }
+
+
 
   Close() {
     this.gs.ClosePage('home');
