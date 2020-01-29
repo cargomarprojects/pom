@@ -81,7 +81,7 @@ export class EdiComponent {
         });
   }
 
-  ImportEdiFiles(_type: string) {
+  ImportFiles(_type: string) {
     let SearchData = {
       type: _type,
       company_code: this.gs.globalVariables.comp_code,

@@ -26,8 +26,8 @@
           <label class="col-3 col-form-label col-form-label-sm">Type</label>
           <div class="col-9">
             <select class="form-control form-control-sm" [(ngModel)]="link_type">
-              <option value="IN">INWARD</option>
-              <option value="OUT">OUTWARD</option>
+              <option value="INWARD">INWARD</option>
+              <option value="OUTWARD">OUTWARD</option>
             </select>
           </div>
         </div>
@@ -108,7 +108,7 @@
           <td>{{rec.link_type}}</td>
           <td>{{rec.link_category}}</td>
           <td>{{rec.link_subcategory}}</td>
-          <td>{{rec.link_source_name}}</td>
+          <td (click)="ActionHandler('EDIT',rec.link_pkid)" class="undline" >{{rec.link_source_name}}</td>
           <td>{{rec.link_mode}}</td>
           <td>{{rec.link_target_id}}</td>
           <td>{{rec.link_target_name}}</td>
@@ -140,23 +140,21 @@
         <div class="form-group row">
           <label class="col-2 col-form-label col-form-label-sm" (click)="focus()">Group</label>
           <div class="col-10">
-            <select disabled class="form-control form-control-sm" [(ngModel)]="Record.link_messagesender">
-              <option value="MEXICO-TMM">MEXICO-TMM</option>
-            </select>
+            <input type="text" disabled class="form-control form-control-sm" [(ngModel)]="Record.link_messagesender" />
           </div>
         </div>
 
         <div class="form-group row">
           <label class="col-2 col-form-label  col-form-label-sm">Type</label>
           <div class="col-10">
-            <select disabled class="form-control form-control-sm" [(ngModel)]="Record.link_subcategory"
-              (change)="OnChange('link_subcategory')">
-              <option value="SHIPPER">SHIPPER</option>
-              <option value="CONSIGNEE">CONSIGNEE</option>
-              <option value="SHIPPER-GROUP">SHIPPER-GROUP</option>
-              <option value="CONTAINER">CONTAINER</option>
-              <option value="SEA CARRIER">SEA CARRIER</option>
-            </select>
+            <input type="text" disabled class="form-control form-control-sm" [(ngModel)]="Record.link_category" />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-2 col-form-label  col-form-label-sm">Sub Type</label>
+          <div class="col-10">
+            <input type="text" disabled class="form-control form-control-sm" [(ngModel)]="Record.link_subcategory" />
           </div>
         </div>
 
@@ -173,8 +171,12 @@
 
             <label class="col-2 col-form-label col-form-label-sm">Target</label>
             <div class="col-10">
-              <app-autocomplete #Party [inputdata]="PARTYRECORD" (ValueChanged)="LovSelected($event)">
-              </app-autocomplete>
+             <app-autocomplete2 [controlname]="controlname" [tabletype]="tabletype" [tabletype]="subtype" [displaycolumn]="'NAME'"
+              [displaydata]="displaydata" (ValueChanged)="LovSelected($event)" >
+            </app-autocomplete2>
+
+
+
             </div>
           </div>
         </div>

@@ -44,12 +44,17 @@ export class Linkm2Component {
   targetcode: string = "";
   targetname: string = "";
 
-  link_type = 'IN';
+  link_type = 'INWARD';
   link_status = '';
   link_sender = '';
   link_subcategory = '';
 
-  PARTYRECORD: SearchTable = new SearchTable();
+
+  controlname ='';
+  tabletype='';
+  subtype='';
+  displaydata='';
+  
 
   RecordList2: targetlistm[] = [];
 
@@ -137,7 +142,6 @@ export class Linkm2Component {
       this.ResetControls();
       this.pkid = id;
       this.GetRecord(id);
-      //this.initlov('CUSTOMER');
     }
   }
 
@@ -156,17 +160,22 @@ export class Linkm2Component {
         this.loading = false;
         this.Record = response.record;
         this.Record.rec_mode = this.mode;
-        this.initlov(this.Record.link_category);
-
-        this.PARTYRECORD.id = this.Record.link_target_id;
-        this.PARTYRECORD.name = this.Record.link_target_name;
-
-
+      
+        this.controlname = this.Record.link_category;
+        this.tabletype =  this.Record.link_subcategory;
+        this.displaydata = '';
+        
       },
         error => {
           this.loading = false;
           this.ErrorMessage = this.gs.getError(error);
         });
+  }
+
+
+  LovSelected(_Record: any) {
+      this.Record.link_target_id = _Record.id;
+      this.Record.link_target_name = _Record.name;
   }
 
 
@@ -219,49 +228,7 @@ export class Linkm2Component {
   }
 
 
-  initlov(_type: string) {
-    if (_type == 'CUSTOMER') {
-      this.PARTYRECORD = new SearchTable();
-      this.PARTYRECORD.controlname = "CUSTOMER";
-      this.PARTYRECORD.displaycolumn = "NAME";
-      this.PARTYRECORD.type = "CUSTOMER";
-      this.PARTYRECORD.where = "";
-      this.PARTYRECORD.id = "";
-      this.PARTYRECORD.code = "";
-      this.PARTYRECORD.name = "";
-      this.PARTYRECORD.parentid = "";
-    }
-    if (_type == 'CONTAINER') {
-      this.PARTYRECORD = new SearchTable();
-      this.PARTYRECORD.controlname = "CONTAINER";
-      this.PARTYRECORD.displaycolumn = "NAME";
-      this.PARTYRECORD.type = "CONTAINER TYPE";
-      this.PARTYRECORD.where = "";
-      this.PARTYRECORD.id = "";
-      this.PARTYRECORD.code = "";
-      this.PARTYRECORD.name = "";
-      this.PARTYRECORD.parentid = "";
-    }
-    if (_type == 'SEA CARRIER') {
-      this.PARTYRECORD = new SearchTable();
-      this.PARTYRECORD.controlname = "SEA CARRIER";
-      this.PARTYRECORD.displaycolumn = "NAME";
-      this.PARTYRECORD.type = "SEA CARRIER";
-      this.PARTYRECORD.where = "";
-      this.PARTYRECORD.id = "";
-      this.PARTYRECORD.code = "";
-      this.PARTYRECORD.name = "";
-      this.PARTYRECORD.parentid = "";
-    }
-  }
 
-
-  LovSelected(_Record: any) {
-    if (_Record.controlname == "CUSTOMER" || _Record.controlname == "CONTAINER" || _Record.controlname == "SEA CARRIER") {
-      this.Record.link_target_id = _Record.id;
-      this.Record.link_target_name = _Record.name;
-    }
-  }
 
 
   // Save Data
