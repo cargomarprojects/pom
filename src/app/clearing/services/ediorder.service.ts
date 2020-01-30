@@ -7,6 +7,7 @@ import { EdiOrder } from '../models/ediorder';
 export class EdiOrderService {
 
   selectcheckbox: boolean = false;
+  showdeleted : boolean =false;
   page_count = 0;
   page_current = 0;
   page_rows = 0;
@@ -16,6 +17,7 @@ export class EdiOrderService {
   InfoMessage = "";
   partnerid = 'ALL';
   rowstatus = "ALL";
+  fileno = "";
   pono = "";
   RecordList: EdiOrder[] = [];
   TradingPartners : any [];
@@ -62,7 +64,9 @@ export class EdiOrderService {
       user_code: this.gs.globalVariables.user_code,
       partnerid: this.partnerid,
       rowstatus: this.rowstatus,
+      fileno: this.fileno,
       po: this.pono,
+      showdeleted : this.showdeleted
     };
 
     this.ErrorMessage = '';

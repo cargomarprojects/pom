@@ -11,7 +11,7 @@
 
     <div class="row">
 
-      <div class="col-md-4">
+      <div class="col-sm-3">
         <div class="form-group row">
           <label class="col-2 col-form-label col-form-label-sm">Partner</label>
           <div class="col-10">
@@ -26,29 +26,51 @@
           <div class="col-10">
             <select class="form-control form-control-sm" [(ngModel)]="ms.rowstatus">
               <option [value]="'ALL'">ALL</option>
-              <option [value]="'PENDING'">PENDING</option>
-              <option [value]="'UPDATED'">UPDATED</option>
+              <option [value]="'N'">PENDING</option>
+              <option [value]="'Y'">UPDATED</option>
             </select>
           </div>
         </div>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-sm-3">
+        <div class="form-group row">
+          <label class="col-2">File#</label>
+          <div class="col-10">
+            <input type="text" class="col form-control form-control-sm"  [(ngModel)]="ms.fileno" />
+          </div>
+        </div>
+
         <div class="form-group row">
           <label class="col-2">PO</label>
           <div class="col-10">
             <input type="text" class="col form-control form-control-sm"  [(ngModel)]="ms.pono" />
           </div>
         </div>
-      </div>
 
-      <div class="col-md-4">
+      </div>
+      
+
+      <div class="col-sm-6">
+
         <div class="form-group row">
-          <div class="col-12">
-            <button [disabled]="loading" (click)="ms.List('NEW')" class="btn btn-info btn-sm">Search</button>
+          <label class="col-2"></label>
+          <div class="col-10">
+            <label class ="mr-1" >Show Deleted</label>
+            <input type="checkbox" [(ngModel)]="ms.showdeleted"/>
+          </div>
+        </div>        
+
+        <div class="form-group row">
+          <label class="col-2"></label>
+          <div class="col-10">
+            <button [disabled]="loading" (click)="ms.List('NEW')" class="btn btn-info btn-sm mr-1">Search</button>
+            <button [disabled]="loading" (click)="ms.List('NEW')" class="btn btn-info btn-sm mr-1">Validate</button>
+            <button [disabled]="loading" (click)="ms.List('NEW')" class="btn btn-info btn-sm">Transfer</button>
           </div>
         </div>
       </div>
+      
 
     </div>
   </div>
@@ -79,9 +101,13 @@
     <thead class="page-body-thead">
       <tr>
         <th><input type="checkbox" [(ngModel)]="ms.selectcheckbox" (change)="SelectCheckbox()"></th>
+        <th>SENDER</th>
+        <th>MESSAGE-DATE</th>
+        <th>FILE-NAME</th>
+        <th>FILE#</th>
         <th>TRANSFERED</th>
-        <th>STATUS</th>
-
+        <th>DELETED</th>
+        <th>REMARKS</th>
         <th>PO#</th>
         <th>STYLE</th>
         <th>COLOR</th>
@@ -99,9 +125,15 @@
     <tbody class="page-body-tbody">
       <tr [style.color]="rec.row_colour" *ngFor="let rec of ms.RecordList; let i = index"
         [class.active]="i == selectedRowIndex">
+        
         <td><input type="checkbox" [(ngModel)]="rec.ord_selected"></td>
+        <td>{{rec.ord_sender}}</td>
+        <td>{{rec.ord_message_date}}</td>
+        <td>{{rec.ord_message_file_name}}</td>
+        <td>{{rec.ord_message_number}}</td>
         <td>{{rec.ord_updated}}</td>
-        <td>{{rec.ord_status}}</td>
+        <td>{{rec.rec_deleted ? 'Y' : 'N'}}</td>
+        <td>{{rec.transfer_remarks}}</td>
         <td>{{rec.ord_po}}</td>        
         <td>{{rec.ord_style}}</td>        
         <td>{{rec.ord_color}}</td>        

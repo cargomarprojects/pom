@@ -76,8 +76,13 @@ export class EdiOrder {
   ord_instock1 : string;
   ord_instock2 : string;
 
+  transfer_remarks : string;
+
   rec_mode: string;
   rec_category: string;
+
+  rec_deleted: boolean;
+
   _globalvariables: GlobalVariables;
 }
 
