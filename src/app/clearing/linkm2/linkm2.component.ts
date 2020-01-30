@@ -95,26 +95,7 @@ export class Linkm2Component {
       this.link_sender = this.TradingPartners[0].param_code;
 
     this.link_sender = "ALL";
-
-
-
-/*
-    let SearchRecord = {
-      table : 'PARAM',
-      comp_code : this.gs.globalVariables.comp_code,
-      param_type : 'PARAM'
-    }
-    this.gs.SearchRecord(SearchRecord).subscribe(
-      response =>{
-        this.TradingPartners = response.param;
-        if ( response.param.length > 0){
-          this.link_sender =   response.param[0].param_code;
-        }
-      },
-      error =>{
-        this.ErrorMessage = this.gs.getError(error);
-      });
-*/
+    
   }
 
   InitComponent() {
