@@ -15,8 +15,9 @@ export class EdiOrderService {
   searchstring = "";
   ErrorMessage = "";
   InfoMessage = "";
-  partnerid = 'ALL';
-  rowstatus = "ALL";
+  ordstatus = '';
+  partnerid = '';
+  rowstatus = "";
   fileno = "";
   pono = "";
   RecordList: EdiOrder[] = [];
@@ -38,6 +39,7 @@ export class EdiOrderService {
     this.searchstring = "";
     this.ErrorMessage = "";
     this.InfoMessage = "";
+    this.ordstatus = 'ALL';
     this.partnerid = 'ALL';
     this.rowstatus = "ALL";
     this.pono = "";
@@ -62,6 +64,7 @@ export class EdiOrderService {
       page_rows: this.page_rows,
       page_rowcount: this.page_rowcount,
       user_code: this.gs.globalVariables.user_code,
+      ordstatus: this.ordstatus,
       partnerid: this.partnerid,
       rowstatus: this.rowstatus,
       fileno: this.fileno,
