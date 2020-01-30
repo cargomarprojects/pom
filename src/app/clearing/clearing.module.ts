@@ -27,6 +27,7 @@ import { OrderListDetailComponent } from './orderlist/list/orderlist.detail.comp
 import { StatusComponent } from './status/status.component';
 import { EdiComponent } from './edi/edi.component';
 import { Linkm2Component } from './linkm2/linkm2.component';
+import { EdiErrorComponent } from './edi-error/edi-error.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { Linkm2Component } from './linkm2/linkm2.component';
     OrderListDetailComponent,
     StatusComponent,
     EdiComponent,
-    Linkm2Component
+    Linkm2Component,
+    EdiErrorComponent
   ],
   imports: [
     SharedModule,
