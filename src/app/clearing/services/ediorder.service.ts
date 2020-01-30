@@ -6,19 +6,15 @@ import { EdiOrder } from '../models/ediorder';
 @Injectable({providedIn : 'root'})
 export class EdiOrderService {
 
-
   selectcheckbox: boolean = false;
-  
   page_count = 0;
   page_current = 0;
   page_rows = 0;
   page_rowcount = 0;
-
   searchstring = "";
   ErrorMessage = "";
   InfoMessage = "";
- 
-  partnerid = '';
+  partnerid = 'ALL';
   rowstatus = "ALL";
   pono = "";
   RecordList: EdiOrder[] = [];
@@ -27,18 +23,29 @@ export class EdiOrderService {
   constructor(
     private http2: HttpClient,
     private gs: GlobalService) {
-      this.page_rows = 30;
-
+      this.init();
       this.loadCombo();
   }
 
-  loadCombo(){
-
-    this.TradingPartners = this.gs.TradingPartners;
-    this.partnerid = "ALL";
-    
+  init(){
+    this.selectcheckbox = false;
+    this.page_count = 0;
+    this.page_current = 0;
+    this.page_rows = 30;
+    this.page_rowcount = 0;
+    this.searchstring = "";
+    this.ErrorMessage = "";
+    this.InfoMessage = "";
+    this.partnerid = 'ALL';
+    this.rowstatus = "ALL";
+    this.pono = "";
+    this.RecordList = []
+    this.TradingPartners= [];
   }
 
+  loadCombo(){
+    this.TradingPartners = this.gs.TradingPartners;
+  }
 
   List(_type: string) {
 

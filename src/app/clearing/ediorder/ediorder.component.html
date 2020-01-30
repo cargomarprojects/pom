@@ -45,7 +45,7 @@
       <div class="col-md-4">
         <div class="form-group row">
           <div class="col-12">
-            <button [disabled]="loading" (click)="ms.List('NEW')" class="btn btn-primary btn-sm">Search</button>
+            <button [disabled]="loading" (click)="ms.List('NEW')" class="btn btn-info btn-sm">Search</button>
           </div>
         </div>
       </div>
@@ -79,30 +79,37 @@
     <thead class="page-body-thead">
       <tr>
         <th><input type="checkbox" [(ngModel)]="ms.selectcheckbox" (change)="SelectCheckbox()"></th>
+        <th>TRANSFERED</th>
         <th>STATUS</th>
-        <th>PO</th>
+
+        <th>PO#</th>
+        <th>STYLE</th>
+        <th>COLOR</th>
+        <th>MODE</th>
         <th>SHIPPER</th>
         <th>CONSIGNEE</th>
         <th>POL</th>
         <th>POD</th>
-        <th>TRANS.WAY</th>
         <th>BOARDING1</th>
         <th>BOARDING2</th>
         <th>INSTOCK1</th>
-        <th>InSTOCK2</th>
+        <th>INSTOCK2</th>
       </tr>
     </thead>
     <tbody class="page-body-tbody">
       <tr [style.color]="rec.row_colour" *ngFor="let rec of ms.RecordList; let i = index"
         [class.active]="i == selectedRowIndex">
         <td><input type="checkbox" [(ngModel)]="rec.ord_selected"></td>
+        <td>{{rec.ord_updated}}</td>
         <td>{{rec.ord_status}}</td>
-        <td>{{rec.ord_po}}</td>
+        <td>{{rec.ord_po}}</td>        
+        <td>{{rec.ord_style}}</td>        
+        <td>{{rec.ord_color}}</td>        
+        <td>{{rec.rec_category}}</td>
         <td>{{rec.ord_exp_name}}</td>
         <td>{{rec.ord_imp_name}}</td>
         <td>{{rec.ord_pol}}</td>
         <td>{{rec.ord_pod}}</td>
-        <td>{{rec.rec_category}}</td>
         <td>{{rec.ord_boarding1}}</td>
         <td>{{rec.ord_boarding2}}</td>
         <td>{{rec.ord_instock1}}</td>

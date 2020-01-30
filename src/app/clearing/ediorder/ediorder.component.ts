@@ -2,7 +2,6 @@ import { Component, Input, Output, OnInit, OnDestroy, EventEmitter } from '@angu
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../core/services/global.service';
-import { EdiOrder } from '../models/ediorder';
 import { EdiOrderService } from '../services/ediorder.service';
 import { SearchTable } from '../../shared/models/searchtable';
 
@@ -17,22 +16,16 @@ export class EdiOrderComponent {
   @Input() menuid: string = '';
   @Input() type: string = '';
   @Input() parentid: string = '';
-
   @Input() showHeading : boolean =true;
 
   selectedRowIndex: number = -1;
   InitCompleted: boolean = false;
   menu_record: any;
   sub: any;
-  
     
   bAdmin = false;
   bChanged: boolean;
   user_admin = false;
-
-  // Single Record for add/edit/view details
-  Record: EdiOrder = new EdiOrder;
-  RecordMissingList: EdiOrder[] = [];
 
   constructor(
     private modalService: NgbModal,
@@ -56,7 +49,6 @@ export class EdiOrderComponent {
       if (this.menu_record.rights_admin)
         this.bAdmin = true;
     }
-    
   }
 
 
@@ -70,8 +62,6 @@ export class EdiOrderComponent {
 
   ActionHandler(action: string, id: string, _selectedRowIndex: number = -1) {
   }
-
- 
 
   Close() {
     this.gs.ClosePage('home');

@@ -9,6 +9,7 @@ export class EdiOrder {
   ord_message_number : string;
 
   ord_status : string;
+  ord_updated : string;
   ord_pol_agent : string;
   ord_parent_id : string;
   ord_exp_id : string;
