@@ -113,7 +113,7 @@ export class EdiOrderService {
         });
   }
 
-  Transfer(_type: string) {
+  TransferPO(_type: string) {
 
     let SearchData = {
       type : _type,
@@ -124,7 +124,28 @@ export class EdiOrderService {
 
     this.ErrorMessage = '';
     this.InfoMessage = '';
-    this.ProcessTransfer(SearchData)
+    this.ProcessTransferPO(SearchData)
+      .subscribe(response => {
+        alert( response.status );
+      },
+        error => {
+          this.ErrorMessage = this.gs.getError(error);
+        });
+  }
+
+
+  TransferPOTracking(_type: string) {
+
+    let SearchData = {
+      type : _type,
+      company_code: this.gs.globalVariables.comp_code,
+      user_code: this.gs.globalVariables.user_code,      
+      partnerid: this.partnerid,
+    };
+
+    this.ErrorMessage = '';
+    this.InfoMessage = '';
+    this.ProcessTransferPOTracking(SearchData)
       .subscribe(response => {
         alert( response.status );
       },
@@ -146,8 +167,12 @@ export class EdiOrderService {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Edi/Order/Validate', SearchData, this.gs.headerparam2('authorized'));
   }
 
-  ProcessTransfer(SearchData: any) {
-    return this.http2.post<any>(this.gs.baseUrl + '/api/Edi/Order/Transfer', SearchData, this.gs.headerparam2('authorized'));
+  ProcessTransferPO(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Edi/Order/TransferPO', SearchData, this.gs.headerparam2('authorized'));
+  }
+
+  ProcessTransferPOTracking(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Edi/Order/TransferPOTracking', SearchData, this.gs.headerparam2('authorized'));
   }
 
   Process(SearchData: any) {
