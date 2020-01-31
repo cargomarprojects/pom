@@ -112,6 +112,27 @@ export class EdiOrderService {
         });
   }
 
+  Transfer(_type: string) {
+
+    let SearchData = {
+      type : _type,
+      company_code: this.gs.globalVariables.comp_code,
+      partnerid: this.partnerid,
+    };
+
+    this.ErrorMessage = '';
+    this.InfoMessage = '';
+    this.ProcessTransfer(SearchData)
+      .subscribe(response => {
+        alert('Process Complete');
+      },
+        error => {
+          this.ErrorMessage = this.gs.getError(error);
+        });
+  }
+
+
+
 
 
 
@@ -123,12 +144,14 @@ export class EdiOrderService {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Edi/Order/Validate', SearchData, this.gs.headerparam2('authorized'));
   }
 
+  ProcessTransfer(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Edi/Order/Transfer', SearchData, this.gs.headerparam2('authorized'));
+  }
+
   Process(SearchData: any) {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/JobOrderEdi/Process', SearchData, this.gs.headerparam2('authorized'));
   }
 
-  UpdateOrdersList(SearchData: any) {
-    return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/JobOrderEdi/UpdateOrdersList', SearchData, this.gs.headerparam2('authorized'));
-  }
+
 }
 
