@@ -94,6 +94,7 @@ export class EdiOrderService {
 
     let SearchData = {
       company_code: this.gs.globalVariables.comp_code,
+      user_code: this.gs.globalVariables.user_code,      
       partnerid: this.partnerid,
     };
 
@@ -117,6 +118,7 @@ export class EdiOrderService {
     let SearchData = {
       type : _type,
       company_code: this.gs.globalVariables.comp_code,
+      user_code: this.gs.globalVariables.user_code,      
       partnerid: this.partnerid,
     };
 
@@ -124,7 +126,7 @@ export class EdiOrderService {
     this.InfoMessage = '';
     this.ProcessTransfer(SearchData)
       .subscribe(response => {
-        alert('Process Complete');
+        alert( response.status );
       },
         error => {
           this.ErrorMessage = this.gs.getError(error);
