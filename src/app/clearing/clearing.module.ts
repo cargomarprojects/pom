@@ -28,7 +28,7 @@ import { StatusComponent } from './status/status.component';
 import { EdiComponent } from './edi/edi.component';
 import { Linkm2Component } from './linkm2/linkm2.component';
 import { EdiErrorComponent } from './edi/edi-error/edi-error.component';
-import { EdiHblComponent } from './edihbl/edihbl.component';
+import { EdiHblComponent } from './edi/edihbl/edihbl.component';
 
 @NgModule({
   declarations: [

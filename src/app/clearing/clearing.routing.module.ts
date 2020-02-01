@@ -9,7 +9,7 @@ import { OrderEditComponent } from './orderlist/edit/orderedit.component';
 import { TrackOrderComponent } from './trackorder/trackorder.component';
 import { EdiComponent } from './edi/edi.component';
 import { Linkm2Component } from './linkm2/linkm2.component';
-import {EdiHblComponent } from './edihbl/edihbl.component';
+import {EdiHblComponent } from './edi/edihbl/edihbl.component';
 
 const routes: Routes = [
   { path: 'orderlist', component: OrderListComponent },

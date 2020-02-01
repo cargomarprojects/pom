@@ -1,9 +1,9 @@
 import { Component, Input, Output, OnInit, OnDestroy, EventEmitter } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
-import { GlobalService } from '../../core/services/global.service';
-import { EdiHblService } from '../services/edihbl.service';
-import { SearchTable } from '../../shared/models/searchtable';
+import { GlobalService } from '../../../core/services/global.service';
+import { EdiHblService } from '../../services/edihbl.service';
+import { SearchTable } from '../../../shared/models/searchtable';
 
 @Component({
   selector: 'app-edihbl',
