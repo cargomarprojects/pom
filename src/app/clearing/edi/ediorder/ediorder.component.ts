@@ -1,28 +1,31 @@
 import { Component, Input, Output, OnInit, OnDestroy, EventEmitter } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
-import { GlobalService } from '../../core/services/global.service';
-import { SearchTable } from '../../shared/models/searchtable';
-import { EdiOrderService } from '../services/ediorder.service';
+import { GlobalService } from '../../../core/services/global.service';
+import { EdiOrderService } from '../../services/ediorder.service';
+import { SearchTable } from '../../../shared/models/searchtable';
 
 @Component({
-  selector: 'app-edierror',
-  templateUrl: './edi-error.component.html'
+  selector: 'app-ediorder',
+  templateUrl: './ediorder.component.html'
 })
-export class EdiErrorComponent {
+export class EdiOrderComponent {
   // Local Variables 
-  title = 'EDI Process';
+  title = 'EDI - Orders';
 
   @Input() menuid: string = '';
   @Input() type: string = '';
-  @Input() showHeading : boolean = true;
+  @Input() parentid: string = '';
+  @Input() showHeading : boolean =true;
 
+  selectedRowIndex: number = -1;
+  InitCompleted: boolean = false;
   menu_record: any;
   sub: any;
-  currentTab = 'LIST';
+    
   bAdmin = false;
-  ErrorMessage = "";
-  InfoMessage = "";
+  bChanged: boolean;
+  user_admin = false;
 
   constructor(
     private modalService: NgbModal,
@@ -30,16 +33,16 @@ export class EdiErrorComponent {
     private route: ActivatedRoute,
     private gs: GlobalService
   ) {
-
     this.menuid = this.gs.getParameter("menuid");
+    this.InitComponent();
   }
 
-  // Init Will be called After executing Constructor
   ngOnInit() {
   }
 
   InitComponent() {
     this.bAdmin = false;
+    this.user_admin = false;
     this.menu_record = this.gs.getMenu(this.menuid);
     if (this.menu_record) {
       this.title = this.menu_record.menu_name;
@@ -48,20 +51,28 @@ export class EdiErrorComponent {
     }
   }
 
+
   // Destroy Will be called when this component is closed
   ngOnDestroy() {
   }
 
-  InitLov() {
-  }
-
   LovSelected(_Record: SearchTable) {
+
   }
 
-
+  ActionHandler(action: string, id: string, _selectedRowIndex: number = -1) {
+  }
 
   Close() {
     this.gs.ClosePage('home');
   }
 
+  SelectCheckbox() {
+    for (var i = 0; i < this.ms.RecordList.length; i++) {
+      this.ms.RecordList[i].ord_selected = this.ms.selectcheckbox;
+    }
+  }
+
 }
+
+  

@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { OrderListComponent } from './orderlist/list/orderlist.component';
 import { AgentBookComponent } from './agentbook/agentbook.component';
 import { WeekPlanningComponent } from './weekplanning/weekplanning.component';
-import {EdiOrderComponent } from './ediorder/ediorder.component';
+import {EdiOrderComponent } from './edi/ediorder/ediorder.component';
 import { OrderEditComponent } from './orderlist/edit/orderedit.component';
 import { TrackOrderComponent } from './trackorder/trackorder.component';
 import { EdiComponent } from './edi/edi.component';
