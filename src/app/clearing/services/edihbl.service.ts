@@ -15,7 +15,7 @@ export class EdiHblService {
   searchstring = "";
   ErrorMessage = "";
   InfoMessage = "";
-  ordstatus = '';
+  hblstatus = '';
   partnerid = '';
   rowstatus = "";
   fileno = "";
@@ -41,7 +41,7 @@ export class EdiHblService {
     this.searchstring = "";
     this.ErrorMessage = "";
     this.InfoMessage = "";
-    this.ordstatus = 'ALL';
+    this.hblstatus = 'ALL';
     this.partnerid = 'ALL';
     this.rowstatus = "ALL";
     this.houseno = "";
@@ -67,7 +67,7 @@ export class EdiHblService {
       page_rows: this.page_rows,
       page_rowcount: this.page_rowcount,
       user_code: this.gs.globalVariables.user_code,
-      ordstatus: this.ordstatus,
+      hblstatus: this.hblstatus,
       partnerid: this.partnerid,
       rowstatus: this.rowstatus,
       fileno: this.fileno,
