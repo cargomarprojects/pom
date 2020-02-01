@@ -28,7 +28,7 @@ import { StatusComponent } from './status/status.component';
 import { EdiComponent } from './edi/edi.component';
 import { Linkm2Component } from './linkm2/linkm2.component';
 import { EdiErrorComponent } from './edi-error/edi-error.component';
-
+import { EdiHblComponent } from './edihbl/edihbl.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,8 @@ import { EdiErrorComponent } from './edi-error/edi-error.component';
     StatusComponent,
     EdiComponent,
     Linkm2Component,
-    EdiErrorComponent
+    EdiErrorComponent,
+    EdiHblComponent
   ],
   imports: [
     SharedModule,
