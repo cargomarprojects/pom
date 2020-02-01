@@ -26,8 +26,7 @@
             <div class="col-10">
               <select class="form-control form-control-sm" [(ngModel)]="ms.hblstatus">
                 <option [value]="'ALL'">ALL</option>
-                <option [value]="'PO'">PO</option>
-                <option [value]="'TRACKING'">TRACKING</option>
+                <option [value]="'HBL'">HBL</option>
               </select>
             </div>
           </div>
@@ -141,16 +140,16 @@
       <tbody class="page-body-tbody">
         <tr [style.color]="rec.row_colour" *ngFor="let rec of ms.RecordList; let i = index"
           [class.active]="i == selectedRowIndex">
-          <td><input type="checkbox" [(ngModel)]="rec.ord_selected"></td>
-          <td>{{rec.ord_status}}</td>        
-          <td>{{rec.ord_sender}}</td>
-          <td>{{rec.ord_message_date}}</td>
-          <td>{{rec.ord_message_file_name}}</td>
-          <td>{{rec.ord_message_number}}</td>
-          <td>{{rec.ord_updated}}</td>
+          <td><input type="checkbox" [(ngModel)]="rec.hbl_selected"></td>
+          <td>{{rec.hbl_status}}</td>        
+          <td>{{rec.hbl_sender}}</td>
+          <td>{{rec.hbl_message_date}}</td>
+          <td>{{rec.hbl_message_file_name}}</td>
+          <td>{{rec.hbl_message_number}}</td>
+          <td>{{rec.hbl_updated}}</td>
           <td>{{rec.rec_deleted ? 'Y' : 'N'}}</td>
           <td>{{rec.transfer_remarks}}</td>
-          <td>{{rec.ord_po}}</td>       
+          <td>{{rec.hbl_house_no}}</td>       
           
           <!-- <td>{{rec.ord_style}}</td>        
           <td>{{rec.ord_color}}</td>        
