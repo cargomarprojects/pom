@@ -9,6 +9,7 @@ import { OrderEditComponent } from './orderlist/edit/orderedit.component';
 import { TrackOrderComponent } from './trackorder/trackorder.component';
 import { EdiComponent } from './edi/edi.component';
 import { Linkm2Component } from './linkm2/linkm2.component';
+import {EdiHblComponent } from './edihbl/edihbl.component';
 
 const routes: Routes = [
   { path: 'orderlist', component: OrderListComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'linkm2', component: Linkm2Component },  
   { path: 'edi', component: EdiComponent },
   { path: 'ediorders', component: EdiOrderComponent },
+  { path: 'edihbls', component: EdiHblComponent },
 
 ];
 

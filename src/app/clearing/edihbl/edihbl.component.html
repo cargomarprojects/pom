@@ -1,0 +1,196 @@
+<div class="page-header" *ngIf="showHeading">
+    <div class="col">
+      <label>{{title}}</label>
+      <button class="btn btn-primary btn-sm mx-1" (click)="Close()">Close</button>
+      <i *ngIf="loading" class="fa fa-spinner"></i>
+    </div>
+  </div>
+  
+  <div class="page-list">
+    <div class="page-search">
+  
+      <div class="row">
+  
+        <div class="col-sm-3">
+          <div class="form-group row">
+            <label class="col-2 col-form-label col-form-label-sm">Partner</label>
+            <div class="col-10">
+              <select class="form-control form-control-sm" [(ngModel)]="ms.partnerid">
+                <option *ngFor="let rec of ms.TradingPartners" value="{{rec.param_code}}">{{rec.param_code}}</option>
+              </select>
+            </div>
+          </div>
+  
+          <div class="form-group row">
+            <label class="col-2 col-form-label col-form-label-sm">Type</label>
+            <div class="col-10">
+              <select class="form-control form-control-sm" [(ngModel)]="ms.hblstatus">
+                <option [value]="'ALL'">ALL</option>
+                <option [value]="'HBL'">HBL</option>
+              </select>
+            </div>
+          </div>
+  
+  
+          <div class="form-group row">
+            <label class="col-2 col-form-label col-form-label-sm">Show</label>
+            <div class="col-10">
+              <select class="form-control form-control-sm" [(ngModel)]="ms.rowstatus">
+                <option [value]="'ALL'">ALL</option>
+                <option [value]="'N'">PENDING</option>
+                <option [value]="'Y'">UPDATED</option>
+              </select>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-sm-3">
+          <div class="form-group row">
+            <label class="col-2">File#</label>
+            <div class="col-10">
+              <input type="text" class="col form-control form-control-sm"  [(ngModel)]="ms.fileno" />
+            </div>
+          </div>
+  
+          <div class="form-group row">
+            <label class="col-2">House#</label>
+            <div class="col-10">
+              <input type="text" class="col form-control form-control-sm"  [(ngModel)]="ms.houseno" />
+            </div>
+          </div>
+  
+        </div>
+        
+  
+        <div class="col-sm-6">
+  
+          <div class="form-group row">
+            <label class="col-2"></label>
+            <div class="col-10">
+              <label class ="mr-1" >Show Deleted</label>
+              <input type="checkbox" [(ngModel)]="ms.showdeleted"/>
+            </div>
+          </div>        
+  
+          <div class="form-group row">
+            <label class="col-2"></label>
+            <div class="col-10">
+              <button [disabled]="loading" (click)="ms.List('NEW')" class="btn btn-info btn-sm mr-1">Search</button>
+              <button [disabled]="loading" (click)="ms.Validate('NEW')" class="btn btn-info btn-sm mr-1">Validate</button>
+              
+              <button [disabled]="loading" (click)="ms.TransferBL('BL')" class="btn btn-info btn-sm mr-1">Transfer House </button>
+              <!-- <button [disabled]="loading" (click)="ms.TransferPOTracking('TRACKING')" class="btn btn-info btn-sm">Transfer PO Tracking </button> -->
+            </div>
+          </div>
+        </div>
+        
+  
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="page-pager">
+    <div *ngIf="ms.page_count">
+      <ul class="pagination pagination-sm">
+        <li class="page-item"><a class="page-link">Page {{ms.page_current}}/{{ms.page_count}}
+            (Records-{{ms.page_rowcount}})</a>
+        </li>
+        <li class="page-item"><a class="page-link" (click)="List('FIRST')"><span class="fa fa-backward"></span></a></li>
+        <li class="page-item"><a class="page-link" (click)="List('PREV')"><span class="fa fa-arrow-left"></span></a>
+        </li>
+        <li class="page-item"><a class="page-link" (click)="List('NEXT')"><span class="fa fa-arrow-right"></span></a>
+        </li>
+        <li class="page-item"><a class="page-link" (click)="List('LAST')"><span class="fa fa-forward"></span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  
+  
+  <div class="page-body table-responsive">
+    <table class="table  table-hover table-sm">
+      <thead class="page-body-thead">
+        <tr>
+          <th><input type="checkbox" [(ngModel)]="ms.selectcheckbox" (change)="SelectCheckbox()"></th>
+          <th>EDI-TYPE</th>        
+          <th>SENDER</th>
+          <th>MESSAGE-DATE</th>
+          <th>FILE-NAME</th>
+          <th>FILE#</th>
+          <th>TRANSFERED</th>
+          <th>DELETED</th>
+          <th>REMARKS</th>
+          <th>HBL#</th>
+
+          <!-- <th>STYLE</th>
+          <th>COLOR</th>
+          <th>MODE</th>
+          <th>SHIPPER</th>
+          <th>CONSIGNEE</th>
+          <th>POL</th>
+          <th>POD</th>
+          <th>BOARDING1</th>
+          <th>BOARDING2</th>
+          <th>INSTOCK1</th>
+          <th>INSTOCK2</th> -->
+        </tr>
+      </thead>
+      <tbody class="page-body-tbody">
+        <tr [style.color]="rec.row_colour" *ngFor="let rec of ms.RecordList; let i = index"
+          [class.active]="i == selectedRowIndex">
+          <td><input type="checkbox" [(ngModel)]="rec.hbl_selected"></td>
+          <td>{{rec.hbl_status}}</td>        
+          <td>{{rec.hbl_sender}}</td>
+          <td>{{rec.hbl_message_date}}</td>
+          <td>{{rec.hbl_message_file_name}}</td>
+          <td>{{rec.hbl_message_number}}</td>
+          <td>{{rec.hbl_updated}}</td>
+          <td>{{rec.rec_deleted ? 'Y' : 'N'}}</td>
+          <td>{{rec.transfer_remarks}}</td>
+          <td>{{rec.hbl_house_no}}</td>       
+          
+          <!-- <td>{{rec.ord_style}}</td>        
+          <td>{{rec.ord_color}}</td>        
+          <td>{{rec.rec_category}}</td>
+          <td>{{rec.ord_exp_name}}</td>
+          <td>{{rec.ord_imp_name}}</td>
+          <td>{{rec.ord_pol}}</td>
+          <td>{{rec.ord_pod}}</td>
+          <td>{{rec.ord_boarding1}}</td>
+          <td>{{rec.ord_boarding2}}</td>
+          <td>{{rec.ord_instock1}}</td>
+          <td>{{rec.ord_instock2}}</td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+  <div class="page-pager">
+    <div *ngIf="ms.page_count">
+      <ul class="pagination pagination-sm">
+        <li class="page-item"><a class="page-link">Page {{ms.page_current}}/{{ms.page_count}}
+            (Records-{{ms.page_rowcount}})</a>
+        </li>
+        <li class="page-item"><a class="page-link" (click)="List('FIRST')"><span class="fa fa-backward"></span></a></li>
+        <li class="page-item"><a class="page-link" (click)="List('PREV')"><span class="fa fa-arrow-left"></span></a>
+        </li>
+        <li class="page-item"><a class="page-link" (click)="List('NEXT')"><span class="fa fa-arrow-right"></span></a>
+        </li>
+        <li class="page-item"><a class="page-link" (click)="List('LAST')"><span class="fa fa-forward"></span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <br />
+  
+  <div *ngIf="ms.InfoMessage" class="alert alert-success">
+    {{ms.InfoMessage}}
+  </div>
+  <div *ngIf="ms.ErrorMessage" class="alert alert-danger">
+    {{ms.ErrorMessage}}
+  </div>
