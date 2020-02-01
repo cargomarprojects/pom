@@ -1,17 +1,17 @@
 import { Component, Input, Output, OnInit, OnDestroy, EventEmitter } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
-import { GlobalService } from '../../core/services/global.service';
-import { EdiOrderService } from '../services/ediorder.service';
-import { SearchTable } from '../../shared/models/searchtable';
+import { GlobalService } from '../../../core/services/global.service';
+import { EdiHblService } from '../../services/edihbl.service';
+import { SearchTable } from '../../../shared/models/searchtable';
 
 @Component({
-  selector: 'app-ediorder',
-  templateUrl: './ediorder.component.html'
+  selector: 'app-edihbl',
+  templateUrl: './edihbl.component.html'
 })
-export class EdiOrderComponent {
+export class EdiHblComponent {
   // Local Variables 
-  title = 'EDI - Orders';
+  title = 'EDI - House';
 
   @Input() menuid: string = '';
   @Input() type: string = '';
@@ -29,7 +29,7 @@ export class EdiOrderComponent {
 
   constructor(
     private modalService: NgbModal,
-    private ms: EdiOrderService,
+    private ms: EdiHblService,
     private route: ActivatedRoute,
     private gs: GlobalService
   ) {
@@ -51,7 +51,6 @@ export class EdiOrderComponent {
     }
   }
 
-
   // Destroy Will be called when this component is closed
   ngOnDestroy() {
   }
@@ -69,7 +68,7 @@ export class EdiOrderComponent {
 
   SelectCheckbox() {
     for (var i = 0; i < this.ms.RecordList.length; i++) {
-      this.ms.RecordList[i].ord_selected = this.ms.selectcheckbox;
+      this.ms.RecordList[i].hbl_selected = this.ms.selectcheckbox;
     }
   }
 

@@ -1,48 +1,45 @@
 import { Component, Input, Output, OnInit, OnDestroy, EventEmitter } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
-import { GlobalService } from '../../core/services/global.service';
-import { EdiHblService } from '../services/edihbl.service';
-import { SearchTable } from '../../shared/models/searchtable';
+import { GlobalService } from '../../../core/services/global.service';
+import { SearchTable } from '../../../shared/models/searchtable';
+import { EdiOrderService } from '../../services/ediorder.service';
 
 @Component({
-  selector: 'app-edihbl',
-  templateUrl: './edihbl.component.html'
+  selector: 'app-edierror',
+  templateUrl: './edi-error.component.html'
 })
-export class EdiHblComponent {
+export class EdiErrorComponent {
   // Local Variables 
-  title = 'EDI - House';
+  title = 'EDI Process';
 
   @Input() menuid: string = '';
   @Input() type: string = '';
-  @Input() parentid: string = '';
-  @Input() showHeading : boolean =true;
+  @Input() showHeading : boolean = true;
 
-  selectedRowIndex: number = -1;
-  InitCompleted: boolean = false;
   menu_record: any;
   sub: any;
-    
+  currentTab = 'LIST';
   bAdmin = false;
-  bChanged: boolean;
-  user_admin = false;
+  ErrorMessage = "";
+  InfoMessage = "";
 
   constructor(
     private modalService: NgbModal,
-    private ms: EdiHblService,
+    private ms: EdiOrderService,
     private route: ActivatedRoute,
     private gs: GlobalService
   ) {
+
     this.menuid = this.gs.getParameter("menuid");
-    this.InitComponent();
   }
 
+  // Init Will be called After executing Constructor
   ngOnInit() {
   }
 
   InitComponent() {
     this.bAdmin = false;
-    this.user_admin = false;
     this.menu_record = this.gs.getMenu(this.menuid);
     if (this.menu_record) {
       this.title = this.menu_record.menu_name;
@@ -55,23 +52,16 @@ export class EdiHblComponent {
   ngOnDestroy() {
   }
 
+  InitLov() {
+  }
+
   LovSelected(_Record: SearchTable) {
-
   }
 
-  ActionHandler(action: string, id: string, _selectedRowIndex: number = -1) {
-  }
+
 
   Close() {
     this.gs.ClosePage('home');
   }
 
-  SelectCheckbox() {
-    for (var i = 0; i < this.ms.RecordList.length; i++) {
-      this.ms.RecordList[i].hbl_selected = this.ms.selectcheckbox;
-    }
-  }
-
 }
-
-  

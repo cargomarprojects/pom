@@ -11,7 +11,7 @@ import { JobContainerComponent } from './container/jobcontainer.component';
 import { AgentBookComponent } from './agentbook/agentbook.component';
 import { TrackOrderComponent } from './trackorder/trackorder.component';
 import { WeekPlanningComponent } from './weekplanning/weekplanning.component';
-import { EdiOrderComponent } from './ediorder/ediorder.component';
+import { EdiOrderComponent } from './edi/ediorder/ediorder.component';
 import { EdiOrdUpdateComponent} from './ediordupdate/ediordupdate.component';
 
 import { OrderListReducer } from './orderlist/list/store/orderlist.reducer';
@@ -27,8 +27,8 @@ import { OrderListDetailComponent } from './orderlist/list/orderlist.detail.comp
 import { StatusComponent } from './status/status.component';
 import { EdiComponent } from './edi/edi.component';
 import { Linkm2Component } from './linkm2/linkm2.component';
-import { EdiErrorComponent } from './edi-error/edi-error.component';
-import { EdiHblComponent } from './edihbl/edihbl.component';
+import { EdiErrorComponent } from './edi/edi-error/edi-error.component';
+import { EdiHblComponent } from './edi/edihbl/edihbl.component';
 
 @NgModule({
   declarations: [
