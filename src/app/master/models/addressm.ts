@@ -40,6 +40,8 @@ export class Addressm {
 
     add_is_export : boolean ;
 
+    add_default : string ;
+
     rec_mode: string;
 
 }

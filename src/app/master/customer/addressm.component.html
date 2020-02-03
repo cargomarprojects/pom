@@ -20,6 +20,7 @@
           <th width="10%">STATE</th>
           <th width="5%">PIN</th>
           <th width="6%">COUNTRY</th>
+          <th width="6%">DEFAULT</th>
           <th *ngIf="bDelete" width="4%">DELETE</th>
         </tr>
       </thead>
@@ -35,6 +36,7 @@
           <td (click)="ActionHandler('EDIT',rec)">{{rec.add_state_name}}</td>
           <td>{{rec.add_pin}}</td>
           <td>{{rec.add_country_name}}</td>
+          <td>{{rec.add_default}}</td>
           <td *ngIf="bDelete"><i class="fa fa-trash fa-lg pointer" aria-hidden="true"
               (click)="ShowlinkList(addlnklst,rec)"></i></td>
         </tr>

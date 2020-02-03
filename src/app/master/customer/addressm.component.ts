@@ -349,7 +349,7 @@ export class AddressmComponent {
         this.ErrorMessage = '';
         this.addid = _rec.add_pkid;
 
-        if ( this.Record.add_pkid == this.Record.add_parent_id){
+        if ( _rec.add_pkid == _rec.add_parent_id){
             alert('Cannot Remove Default Address');
             return;
         }
