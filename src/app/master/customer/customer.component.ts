@@ -5,6 +5,7 @@ import { GlobalService } from '../../core/services/global.service';
 import { Customerm } from '../models/customer';
 import { CustomerService } from '../services/customer.service';
 import { SearchTable } from '../../shared/models/searchtable';
+import { Addressm } from '../models/addressm';
 
 @Component({
   selector: 'app-customerm',
@@ -78,6 +79,7 @@ export class CustomerComponent {
   // Single Record for add/edit/view details
   Record: Customerm = new Customerm;
 
+  Record1: Addressm = new Addressm;
 
   TypeList: any[] = [];
   ClassList: any[] = [];
@@ -103,7 +105,7 @@ export class CustomerComponent {
     this.page_rows = 25;
     this.page_current = 0;
 
-    
+
 
     this.InitCompleted = true;
     this.menuid = this.gs.getParameter('menuid');
@@ -371,6 +373,10 @@ export class CustomerComponent {
     this.Record.cust_nomination = 'NA';
     this.Record.rec_mode = this.mode;
 
+    this.Record1 = new Addressm;
+
+    this.Record.AddressList.push(this.Record1);
+
   }
 
 
@@ -402,7 +408,15 @@ export class CustomerComponent {
 
     this.cust_linked = this.Record.cust_linked;
     this.Record.AddressList = _Record.AddressList;
+
+    this.Record1 = new Addressm;
+    if (_Record.AddressList.length > 0)
+      this.Record1 = _Record.AddressList[0];
+
     this.Record.rec_mode = this.mode;
+
+
+
 
   }
 
@@ -459,14 +473,31 @@ export class CustomerComponent {
         sError += "\n\r | Edi Code Cannot be Blank";
       }
     }
-    
-    if (this.addressComponent) {
-      if (this.addressComponent.currentTab != 'LIST') {
-        bret = false;
-        sError += "\n\r | Save/Cancel Address Record";
-      }
+
+    if (this.Record1.add_contact.trim().length <= 0) {
+      bret = false;
+      sError += "| Contact Name Cannot Be Blank";
     }
 
+    if (this.Record1.add_line1.trim().length <= 0) {
+      bret = false;
+      sError += "| Address Line1  Cannot Be Blank";
+    }
+
+    if (this.Record1.add_city.trim().length <= 0) {
+      bret = false;
+      sError += "| City  Cannot Be Blank";
+    }
+
+    if (this.Record1.add_state_id.trim().length <= 0) {
+      bret = false;
+      sError += "| State  Cannot Be Blank";
+    }
+
+    if (this.Record1.add_country_id.trim().length <= 0) {
+      bret = false;
+      sError += "| Country  Cannot Be Blank";
+    }
 
     if (bret) {
       this.Record.cust_code = this.Record.cust_code.toUpperCase().replace(' ', '');
