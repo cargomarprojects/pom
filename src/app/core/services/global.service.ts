@@ -147,7 +147,7 @@ export class GlobalService {
 
   }
 
-  public LoadTradingPartners() {
+  public  LoadTradingPartners() {
 
     let SearchRecord = {
       table: 'PARAM',
@@ -195,6 +195,9 @@ export class GlobalService {
     this.defaultValues.today = new Date().toISOString().slice(0, 10);
     this.defaultValues.monthbegindate = this.getNewdate(0);
     this.defaultValues.lastmonthdate = this.getNewdate(30);//get today -30 days
+
+    this.defaultValues.root_folder = '';
+    this.defaultValues.sub_folder = '';
 
   }
   public getNewdate(_days: number) {
