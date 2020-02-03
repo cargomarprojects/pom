@@ -375,6 +375,8 @@ export class CustomerComponent {
 
     this.Record1 = new Addressm;
 
+    this.Record1.add_pkid =  this.pkid;
+    this.Record1.add_parent_id =  this.pkid;
     this.Record.AddressList.push(this.Record1);
 
   }
@@ -414,8 +416,6 @@ export class CustomerComponent {
       this.Record1 = _Record.AddressList[0];
 
     this.Record.rec_mode = this.mode;
-
-
 
 
   }
@@ -458,11 +458,11 @@ export class CustomerComponent {
     this.ErrorMessage = '';
     this.InfoMessage = '';
 
-    if (this.Record.cust_code.trim().length <= 0) {
+    if ( this.gs.isBlank(this.Record.cust_code)) {
       bret = false;
       sError = " | Code Cannot Be Blank";
     }
-    if (this.Record.cust_name.trim().length <= 0) {
+    if (this.gs.isBlank(this.Record.cust_name)) {
       bret = false;
       sError += "\n\r | Name Cannot Be Blank";
     }
@@ -474,27 +474,27 @@ export class CustomerComponent {
       }
     }
 
-    if (this.Record1.add_contact.trim().length <= 0) {
+    if (this.gs.isBlank(this.Record1.add_contact)) {
       bret = false;
       sError += "| Contact Name Cannot Be Blank";
     }
 
-    if (this.Record1.add_line1.trim().length <= 0) {
+    if (this.gs.isBlank(this.Record1.add_line1)) {
       bret = false;
       sError += "| Address Line1  Cannot Be Blank";
     }
 
-    if (this.Record1.add_city.trim().length <= 0) {
+    if (this.gs.isBlank(this.Record1.add_city)) {
       bret = false;
       sError += "| City  Cannot Be Blank";
     }
 
-    if (this.Record1.add_state_id.trim().length <= 0) {
+    if (this.gs.isBlank(this.Record1.add_state_id)) {
       bret = false;
       sError += "| State  Cannot Be Blank";
     }
 
-    if (this.Record1.add_country_id.trim().length <= 0) {
+    if (this.gs.isBlank(this.Record1.add_country_id)) {
       bret = false;
       sError += "| Country  Cannot Be Blank";
     }

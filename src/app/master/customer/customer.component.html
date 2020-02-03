@@ -391,21 +391,21 @@
 
 
 
-<!--           <div class="page-box">
+        <!--           <div class="page-box">
             <app-addressm #addressComponent [RecordList]="Record.AddressList" [StateList]="StateList"
               [CountryList]="CountryList" [customer_id]="pkid" [bAdmin]="bAdmin2" [bDelete]="bDelete"
               [pan_no]="Record.cust_panno" [bShipper]="Record.cust_is_shipper" [bForeigner]="Record.cust_is_foreigner"
               [bUnregistered]="Record.cust_is_ungst"></app-addressm>
           </div>
  -->
-          <div class="page-box">
-            <div class="col">
-              <button [hidden]="disableSave" (click)="Save()" class="btn btn-success btn-sm mr-1">Save</button>
-              <button (click)="ActionHandler('LIST','')" class="btn btn-success btn-sm mr-1">Return</button>
-              <button *ngIf="mode == 'EDIT'" (click)="ShowHistory(history)"
-                class="btn btn-success btn-sm mr-1">History</button>
-            </div>
+        <div class="page-box">
+          <div class="col">
+            <button [hidden]="disableSave" (click)="Save()" class="btn btn-success btn-sm mr-1">Save</button>
+            <button (click)="ActionHandler('LIST','')" class="btn btn-success btn-sm mr-1">Return</button>
+            <button *ngIf="mode == 'EDIT'" (click)="ShowHistory(history)"
+              class="btn btn-success btn-sm mr-1">History</button>
           </div>
+        </div>
 
       </ng-template>
     </ngb-tab>
