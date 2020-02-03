@@ -345,6 +345,8 @@ export class AddressmComponent {
     ShowlinkList(addlnklst: any, _rec: Addressm) {
         this.ErrorMessage = '';
         this.addid = _rec.add_pkid;
+
+        
         this.open(addlnklst);
     }
 
