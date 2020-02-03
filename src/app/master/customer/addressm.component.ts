@@ -8,6 +8,7 @@ import { Addressm } from '../models/addressm';
 
 import { CustomerService } from '../services/customer.service';
 import { Addressdel } from '../models/addressdel';
+import { LiteralMapEntry } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -121,8 +122,10 @@ export class AddressmComponent {
         this.Record = new Addressm();
         this.Record.add_pkid = this.pkid;
 
-        if (this.RecordList.length <= 0)
+        if (this.RecordList.length <= 0) {
             this.Record.add_pkid = this.customer_id;
+            this.Record.add_parent_id = this.customer_id;
+        }
 
         this.Record.add_line1 = '';
         this.Record.add_line2 = '';
@@ -346,6 +349,11 @@ export class AddressmComponent {
         this.ErrorMessage = '';
         this.addid = _rec.add_pkid;
 
+        if ( this.Record.add_pkid == this.Record.add_parent_id){
+            alert('Cannot Remove Default Address');
+            return;
+        }
+        
         
         this.open(addlnklst);
     }
