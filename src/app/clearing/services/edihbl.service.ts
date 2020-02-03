@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GlobalService } from '../../core/services/global.service';
 import { EdiHbl} from '../models/edihbl';
+import { EdiService } from '../services/edi.service';
 
 @Injectable({ providedIn: 'root' })
 export class EdiHblService {
@@ -27,6 +28,7 @@ export class EdiHblService {
 
   constructor(
     private http2: HttpClient,
+    private mainService: EdiService,
     private gs: GlobalService) {
     this.init();
     this.loadCombo();
@@ -102,7 +104,7 @@ export class EdiHblService {
     this.InfoMessage = '';
     this.getValidate(SearchData)
       .subscribe(response => {
-        this.EdiErrorList = response.list;
+        this.mainService.EdiErrorList = response.list;
         if ( response.list.length >0 )
           alert('pls check the Error List tab to see the Missing Data');
         else

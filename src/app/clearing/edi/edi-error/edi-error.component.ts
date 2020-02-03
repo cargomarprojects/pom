@@ -3,7 +3,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
 import { SearchTable } from '../../../shared/models/searchtable';
-import { EdiOrderService } from '../../services/ediorder.service';
+import { EdiService } from '../../services/edi.service';
 
 @Component({
   selector: 'app-edierror',
@@ -26,7 +26,7 @@ export class EdiErrorComponent {
 
   constructor(
     private modalService: NgbModal,
-    private ms: EdiOrderService,
+    private ms: EdiService,
     private route: ActivatedRoute,
     private gs: GlobalService
   ) {
