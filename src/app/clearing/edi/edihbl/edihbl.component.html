@@ -122,18 +122,17 @@
           <th>DELETED</th>
           <th>REMARKS</th>
           <th>HBL#</th>
-
-          <!-- <th>STYLE</th>
-          <th>COLOR</th>
-          <th>MODE</th>
+          <th>MBL#</th>
+          <th>CARRIER</th>
           <th>SHIPPER</th>
           <th>CONSIGNEE</th>
           <th>POL</th>
           <th>POD</th>
-          <th>BOARDING1</th>
-          <th>BOARDING2</th>
-          <th>INSTOCK1</th>
-          <th>INSTOCK2</th> -->
+          <th>ETD</th>
+          <th>ETA</th>
+          <th>FREIGHT</th>
+          <th>VESSEL</th>
+          <th>VOYAGE</th>
         </tr>
       </thead>
       <tbody class="page-body-tbody">
@@ -149,24 +148,21 @@
           <td>{{rec.rec_deleted ? 'Y' : 'N'}}</td>
           <td>{{rec.transfer_remarks}}</td>
           <td>{{rec.hbl_house_no}}</td>       
-          
-          <!-- <td>{{rec.ord_style}}</td>        
-          <td>{{rec.ord_color}}</td>        
-          <td>{{rec.rec_category}}</td>
-          <td>{{rec.ord_exp_name}}</td>
-          <td>{{rec.ord_imp_name}}</td>
-          <td>{{rec.ord_pol}}</td>
-          <td>{{rec.ord_pod}}</td>
-          <td>{{rec.ord_boarding1}}</td>
-          <td>{{rec.ord_boarding2}}</td>
-          <td>{{rec.ord_instock1}}</td>
-          <td>{{rec.ord_instock2}}</td> -->
+          <td>{{rec.hbl_master_no}}</td>        
+          <td>{{rec.hbl_carrier_name}}</td>        
+          <td>{{rec.hbl_shipper_name}}</td>
+          <td>{{rec.hbl_consignee_name}}</td>
+          <td>{{rec.hbl_pol_name}}</td>
+          <td>{{rec.hbl_pod_name}}</td>
+          <td>{{rec.hbl_etd}}</td>
+          <td>{{rec.hbl_eta}}</td>
+          <td>{{rec.hbl_freight}}</td>
+          <td>{{rec.hbl_vessel}}</td>
+          <td>{{rec.hbl_voyage}}</td>
         </tr>
       </tbody>
     </table>
   </div>
-  
-  
   
   <div class="page-pager">
     <div *ngIf="ms.page_count">
