@@ -239,165 +239,17 @@
           </div>
 
 
-
-
-
         </div>
 
 
 
-        <div class="page-box">
-
-          <div class="row">
-            <div class="col-sm-6">
-
-              <div class="form-group row">
-                <label class="col-4 col-form-label  col-form-label-sm">Branch.SL#</label>
-                <div class="col-8">
-                  <input type="number" class="form-control form-control-sm" [(ngModel)]="Record1.add_branch_slno"
-                    required maxlength="10" />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label class="col-4 col-form-label  col-form-label-sm">Address</label>
-                <div class="col-8">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]="Record1.add_line1" required
-                    maxlength="60" />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label class="col-4 col-form-label  col-form-label-sm"></label>
-                <div class="col-8">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]="Record1.add_line2" required
-                    maxlength="60" />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label class="col-4 col-form-label  col-form-label-sm"></label>
-                <div class="col-8">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]="Record1.add_line3" required
-                    maxlength="60" />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label class="col-4 col-form-label  col-form-label-sm"></label>
-                <div class="col-8">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]="Record1.add_line4" required
-                    maxlength="60" />
-                </div>
-              </div>
-
-
-
-              <div class="form-group row">
-                <label class="col-4 col-form-label  col-form-label-sm">Pin Code</label>
-                <div class="col-8">
-                  <input type="number" class="form-control form-control-sm" [(ngModel)]="Record1.add_pin" required
-                    maxlength="6" />
-                </div>
-              </div>
-
-            </div>
-
-            <div class="col-sm-3">
-
-              <div class="form-group row">
-                <label class="col-4 col-form-label  col-form-label-sm">Contact</label>
-                <div class="col-8">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]="Record1.add_contact" required
-                    maxlength="60" />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label class="col-4 col-form-label  col-form-label-sm">Tel</label>
-                <div class="col-8">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]="Record1.add_tel" required
-                    maxlength="60" />
-                </div>
-
-              </div>
-
-              <div class="form-group row">
-                <label class="col-4 col-form-label  col-form-label-sm">Fax</label>
-                <div class="col-8">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]="Record1.add_fax" required
-                    maxlength="60" />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label class="col-4 col-form-label  col-form-label-sm">Email</label>
-                <div class="col-8">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]="Record1.add_email" required
-                    maxlength="250" />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label class="col-4 col-form-label  col-form-label-sm">Web</label>
-                <div class="col-8">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]="Record1.add_web" required
-                    maxlength="60" />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label class="col-4 col-form-label col-form-label-sm">City</label>
-                <div class="col-8">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]="Record1.add_city" required
-                    maxlength="30" />
-                </div>
-              </div>
-            </div>
-
-            <div class="col-sm-3">
-              <div class="form-group row">
-                <label class="col-4 col-form-label col-form-label-sm">Country</label>
-                <div class="col-8">
-                  <select class="form-control form-control-sm" [(ngModel)]="Record1.add_country_id">
-                    <option *ngFor="let rec of CountryList" [value]="rec.param_pkid">{{rec.param_name}}</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label class="col-4 col-form-label col-form-label-sm">State</label>
-                <div class="col-8">
-                  <select class="form-control form-control-sm" [(ngModel)]="Record1.add_state_id">
-                    <option *ngFor="let rec of StateList" [value]="rec.param_pkid">{{rec.param_name}}</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label class="col-4 col-form-label col-form-label-sm">Location</label>
-                <div class="col-8">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]="Record1.add_location" required
-                    maxlength="60" />
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-
-
-
-
-
-        <!--           <div class="page-box">
+                  <div class="page-box">
             <app-addressm #addressComponent [RecordList]="Record.AddressList" [StateList]="StateList"
               [CountryList]="CountryList" [customer_id]="pkid" [bAdmin]="bAdmin2" [bDelete]="bDelete"
               [pan_no]="Record.cust_panno" [bShipper]="Record.cust_is_shipper" [bForeigner]="Record.cust_is_foreigner"
               [bUnregistered]="Record.cust_is_ungst"></app-addressm>
           </div>
- -->
+ 
         <div class="page-box">
           <div class="col">
             <button [hidden]="disableSave" (click)="Save()" class="btn btn-success btn-sm mr-1">Save</button>

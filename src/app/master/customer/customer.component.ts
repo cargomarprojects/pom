@@ -79,7 +79,7 @@ export class CustomerComponent {
   // Single Record for add/edit/view details
   Record: Customerm = new Customerm;
 
-  Record1: Addressm = new Addressm;
+  
 
   TypeList: any[] = [];
   ClassList: any[] = [];
@@ -373,11 +373,6 @@ export class CustomerComponent {
     this.Record.cust_nomination = 'NA';
     this.Record.rec_mode = this.mode;
 
-    this.Record1 = new Addressm;
-
-    this.Record1.add_pkid =  this.pkid;
-    this.Record1.add_parent_id =  this.pkid;
-    this.Record.AddressList.push(this.Record1);
 
   }
 
@@ -410,10 +405,6 @@ export class CustomerComponent {
 
     this.cust_linked = this.Record.cust_linked;
     this.Record.AddressList = _Record.AddressList;
-
-    this.Record1 = new Addressm;
-    if (_Record.AddressList.length > 0)
-      this.Record1 = _Record.AddressList[0];
 
     this.Record.rec_mode = this.mode;
 
@@ -474,30 +465,7 @@ export class CustomerComponent {
       }
     }
 
-    if (this.gs.isBlank(this.Record1.add_contact)) {
-      bret = false;
-      sError += "| Contact Name Cannot Be Blank";
-    }
 
-    if (this.gs.isBlank(this.Record1.add_line1)) {
-      bret = false;
-      sError += "| Address Line1  Cannot Be Blank";
-    }
-
-    if (this.gs.isBlank(this.Record1.add_city)) {
-      bret = false;
-      sError += "| City  Cannot Be Blank";
-    }
-
-    if (this.gs.isBlank(this.Record1.add_state_id)) {
-      bret = false;
-      sError += "| State  Cannot Be Blank";
-    }
-
-    if (this.gs.isBlank(this.Record1.add_country_id)) {
-      bret = false;
-      sError += "| Country  Cannot Be Blank";
-    }
 
     if (bret) {
       this.Record.cust_code = this.Record.cust_code.toUpperCase().replace(' ', '');
