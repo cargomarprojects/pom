@@ -42,18 +42,14 @@ export class HouseListService {
     this.searchstring = "";
     this.ErrorMessage = "";
     this.InfoMessage = "";
-    this.hblstatus = 'ALL';
-    this.partnerid = 'ALL';
-    this.rowstatus = "ALL";
     this.houseno = "";
     this.masterno = "";
     this.RecordList = []
-    this.TradingPartners = [];
-    this.EdiErrorList = [];
+   
   }
 
   loadCombo() {
-    this.TradingPartners = this.gs.TradingPartners;
+    // this.TradingPartners = this.gs.TradingPartners;
   }
 
   List(_type: string) {
@@ -69,13 +65,8 @@ export class HouseListService {
       page_rows: this.page_rows,
       page_rowcount: this.page_rowcount,
       user_code: this.gs.globalVariables.user_code,
-      hblstatus: this.hblstatus,
-      partnerid: this.partnerid,
-      rowstatus: this.rowstatus,
-      fileno: this.fileno,
       houseno: this.houseno,
-      masterno:this.masterno,
-      showdeleted: this.showdeleted
+      masterno:this.masterno
     };
 
     this.ErrorMessage = '';
@@ -93,7 +84,7 @@ export class HouseListService {
   }
 
   getList(SearchData: any) {
-    return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/HouseList', SearchData, this.gs.headerparam2('authorized'));
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/House/List', SearchData, this.gs.headerparam2('authorized'));
   }
 
 }
