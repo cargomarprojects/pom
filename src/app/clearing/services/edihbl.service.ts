@@ -21,6 +21,7 @@ export class EdiHblService {
   rowstatus = "";
   fileno = "";
   houseno = "";
+  masterno = "";
   RecordList: EdiHbl[] = [];
   TradingPartners: any[];
 
@@ -47,6 +48,7 @@ export class EdiHblService {
     this.partnerid = 'ALL';
     this.rowstatus = "ALL";
     this.houseno = "";
+    this.masterno = "";
     this.RecordList = []
     this.TradingPartners = [];
     this.EdiErrorList = [];
@@ -74,6 +76,7 @@ export class EdiHblService {
       rowstatus: this.rowstatus,
       fileno: this.fileno,
       houseno: this.houseno,
+      masterno:this.masterno,
       showdeleted: this.showdeleted
     };
 

@@ -21,7 +21,7 @@
             </div>
           </div>
   
-          <div class="form-group row">
+          <!-- <div class="form-group row">
             <label class="col-2 col-form-label col-form-label-sm">Type</label>
             <div class="col-10">
               <select class="form-control form-control-sm" [(ngModel)]="ms.hblstatus">
@@ -29,8 +29,7 @@
                 <option [value]="'HBL'">HBL</option>
               </select>
             </div>
-          </div>
-  
+          </div> -->
   
           <div class="form-group row">
             <label class="col-2 col-form-label col-form-label-sm">Show</label>
@@ -42,16 +41,25 @@
               </select>
             </div>
           </div>
-        </div>
-  
-        <div class="col-sm-3">
+
           <div class="form-group row">
             <label class="col-2">File#</label>
             <div class="col-10">
               <input type="text" class="col form-control form-control-sm"  [(ngModel)]="ms.fileno" />
             </div>
           </div>
+        </div>
   
+        <div class="col-sm-3">
+          
+  
+          <div class="form-group row">
+            <label class="col-2">Master#</label>
+            <div class="col-10">
+              <input type="text" class="col form-control form-control-sm"  [(ngModel)]="ms.masterno" />
+            </div>
+          </div>
+
           <div class="form-group row">
             <label class="col-2">House#</label>
             <div class="col-10">
@@ -121,8 +129,8 @@
           <th>TRANSFERED</th>
           <th>DELETED</th>
           <th>REMARKS</th>
-          <th>HBL#</th>
           <th>MBL#</th>
+          <th>HBL#</th>
           <th>CARRIER</th>
           <th>SHIPPER</th>
           <th>CONSIGNEE</th>
@@ -130,7 +138,7 @@
           <th>POD</th>
           <th>ETD</th>
           <th>ETA</th>
-          <th>FREIGHT</th>
+          <!-- <th>FREIGHT</th> -->
           <th>VESSEL</th>
           <th>VOYAGE</th>
         </tr>
@@ -147,8 +155,8 @@
           <td>{{rec.hbl_updated}}</td>
           <td>{{rec.rec_deleted ? 'Y' : 'N'}}</td>
           <td>{{rec.transfer_remarks}}</td>
+          <td>{{rec.hbl_master_no}}</td>       
           <td>{{rec.hbl_house_no}}</td>       
-          <td>{{rec.hbl_master_no}}</td>        
           <td>{{rec.hbl_carrier_name}}</td>        
           <td>{{rec.hbl_shipper_name}}</td>
           <td>{{rec.hbl_consignee_name}}</td>
@@ -156,7 +164,7 @@
           <td>{{rec.hbl_pod_name}}</td>
           <td>{{rec.hbl_etd}}</td>
           <td>{{rec.hbl_eta}}</td>
-          <td>{{rec.hbl_freight}}</td>
+          <!-- <td>{{rec.hbl_freight}}</td> -->
           <td>{{rec.hbl_vessel}}</td>
           <td>{{rec.hbl_voyage}}</td>
         </tr>
