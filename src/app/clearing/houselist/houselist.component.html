@@ -128,6 +128,7 @@
           <th>DELETED</th>
           <th>REMARKS</th> -->
         <th>MBL#</th>
+        <th>ETA</th>
         <th>HBL#</th>
         <th>CARRIER</th>
         <th>SHIPPER</th>
@@ -135,7 +136,6 @@
         <th>POL</th>
         <th>POD</th>
         <th>ETD</th>
-        <th>ETA</th>
         <!-- <th>FREIGHT</th> -->
         <th>VESSEL</th>
         <th>VOYAGE</th>
@@ -154,6 +154,7 @@
           <td>{{rec.rec_deleted ? 'Y' : 'N'}}</td>
           <td>{{rec.transfer_remarks}}</td> -->
         <td>{{rec.bl_mbl_no}}</td>
+        <td>{{rec.bl_pod_eta}}</td>
         <td>{{rec.bl_bl_no}}</td>
         <td>{{rec.bl_carrier_name}}</td>
         <td>{{rec.bl_shipper_name}}</td>
@@ -161,7 +162,7 @@
         <td>{{rec.bl_pol}}</td>
         <td>{{rec.bl_pod}}</td>
         <td>{{rec.bl_pol_etd}}</td>
-        <td>{{rec.bl_pod_eta}}</td>
+        
         <!-- <td>{{rec.hbl_freight}}</td> -->
         <td>{{rec.bl_vsl_name}}</td>
         <td>{{rec.bl_vsl_voy_no}}</td>
