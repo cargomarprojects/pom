@@ -917,7 +917,7 @@
   
                 <div class="form-group row">
                   <div class="offset-4 col-8">
-                    <button [disabled]="loading || Record.bl_original_print == 'Y'" (click)="Save()" class="btn btn-success btn-sm">Save</button>
+                    <!-- <button [disabled]="loading || Record.bl_original_print == 'Y'" (click)="Save()" class="btn btn-success btn-sm">Save</button> -->
                     <button [disabled]="loading" (click)="HideBlPage()" class="btn btn-success btn-sm">Return</button>
                     <!-- <button [disabled]="loading" *ngIf="mode=='EDIT' && invokefrom=='HBL'" (click)="GetRecord('PDF','SEABL')" class="btn btn-success btn-sm">BL Print</button>
                     <button [disabled]="loading" *ngIf="mode=='EDIT' && invokefrom=='HBL'" (click)="GetRecord('PDF','FCR')" class="btn btn-success btn-sm">FCR</button>
@@ -928,9 +928,9 @@
                 </div>
   
               </div>
-              <div *ngIf="invokefrom=='HBL'" class="col-sm-6">
+              <!-- <div *ngIf="invokefrom=='HBL'" class="col-sm-6">
                 <label style="color:red" class="col-form-label col-form-label-sm">No changes will be allowed after printing ORIGINAL. Also Printing ORIGINAL will only be allowed once.</label>
-              </div>
+              </div> -->
   
             </div>
           </div>
