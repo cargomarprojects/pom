@@ -30,6 +30,7 @@ import { Linkm2Component } from './linkm2/linkm2.component';
 import { EdiErrorComponent } from './edi/edi-error/edi-error.component';
 import { EdiHblComponent } from './edi/edihbl/edihbl.component';
 import { HouseListComponent } from './houselist/houselist.component';
+import { HouseEditComponent } from './houselist/edit/houseedit.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { HouseListComponent } from './houselist/houselist.component';
     Linkm2Component,
     EdiErrorComponent,
     EdiHblComponent,
-    HouseListComponent
+    HouseListComponent,
+    HouseEditComponent
   ],
   imports: [
     SharedModule,

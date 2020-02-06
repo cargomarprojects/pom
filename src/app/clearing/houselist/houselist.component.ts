@@ -60,7 +60,10 @@ export class HouseListComponent {
   }
 
   ActionHandler(action: string, id: string, _selectedRowIndex: number = -1) {
+
+    
   }
+  
 
   Close() {
     this.gs.ClosePage('home');

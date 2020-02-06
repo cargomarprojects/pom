@@ -11,6 +11,7 @@ import { EdiComponent } from './edi/edi.component';
 import { Linkm2Component } from './linkm2/linkm2.component';
 import {EdiHblComponent } from './edi/edihbl/edihbl.component';
 import { HouseListComponent } from './houselist/houselist.component';
+import { HouseEditComponent } from './houselist/edit/houseedit.component';
 
 const routes: Routes = [
   { path: 'orderlist', component: OrderListComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'ediorders', component: EdiOrderComponent },
   { path: 'edihbls', component: EdiHblComponent },
   { path: 'houselist', component: HouseListComponent },
+  { path: 'houseedit', component: HouseEditComponent },
 ];
 
 @NgModule({
