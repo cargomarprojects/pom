@@ -7,13 +7,16 @@
 
 html, body {
 margin: 0px;
-padding-top :2px;
+padding-top :1.7rem;
 padding-left: 1px;
 padding-right: 1px;
 font-family: 'roboto' ;
 font-size : 14px;
 height:100%;
 }
+
+
+
 
 .page-body-thead {
 font-size: 10px; 
