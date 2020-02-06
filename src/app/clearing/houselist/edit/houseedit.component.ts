@@ -1340,91 +1340,91 @@ export class HouseEditComponent {
 
   PasteDataClosed(cbdata: string) {
 
-    // let col_desc = -1;
-    // let col_mark = -1;
+    let col_desc = -1;
+    let col_mark = -1;
 
-    // if (cbdata != null) {
-    //   if (this.AttchRecordList == null)
-    //     this.AttchRecordList = new Array<Bldesc>();
+    if (cbdata != null) {
+      if (this.AttchRecordList == null)
+        this.AttchRecordList = new Array<Bldesc>();
 
-    //   var ar1 = cbdata.split("\n");
-    //   var ar2;
+      var ar1 = cbdata.split("\n");
+      var ar2;
 
-    //   if (ar1.length > 0) {
-    //     ar2 = ar1[0].split("\t");
-    //     for (var i = 0; i < ar2.length; i++) {
-    //       if (ar2[i].toUpperCase().indexOf("DESCRIPTION") >= 0 || ar2[i].toUpperCase().indexOf("DESC") >= 0) {
-    //         col_desc = i;
-    //       }
-    //       if (ar2[i].toUpperCase().indexOf("MARKS") >= 0) {
-    //         col_mark = i;
-    //       }
-    //     }
-    //   }
+      if (ar1.length > 0) {
+        ar2 = ar1[0].split("\t");
+        for (var i = 0; i < ar2.length; i++) {
+          if (ar2[i].toUpperCase().indexOf("DESCRIPTION") >= 0 || ar2[i].toUpperCase().indexOf("DESC") >= 0) {
+            col_desc = i;
+          }
+          if (ar2[i].toUpperCase().indexOf("MARKS") >= 0) {
+            col_mark = i;
+          }
+        }
+      }
 
-    //   for (var i = 0; i < ar1.length; i++) {
-    //     if (ar1[i] != '') {
-    //       ar2 = ar1[i].split("\t");
+      for (var i = 0; i < ar1.length; i++) {
+        if (ar1[i] != '') {
+          ar2 = ar1[i].split("\t");
 
-    //       if (col_mark == -1) {
-    //         if (ar2.length > 0)
-    //           if (ar2[0].length > 125) {
-    //             this.ErrorMessage = "Marks and Number, One or more line exceed the Character length. (max allow 125 Characters)";
-    //             alert(this.ErrorMessage);
-    //             break;
-    //           }
-    //       } else {
-    //         if (col_mark > -1 && ar2.length > col_mark)
-    //           if (ar2[col_mark].length > 125) {
-    //             this.ErrorMessage = "Marks and Number, One or more line exceed the Character length. (max allow 125 Characters)";
-    //             alert(this.ErrorMessage);
-    //             break;
-    //           }
-    //       }
+          if (col_mark == -1) {
+            if (ar2.length > 0)
+              if (ar2[0].length > 125) {
+                this.ErrorMessage = "Marks and Number, One or more line exceed the Character length. (max allow 125 Characters)";
+                alert(this.ErrorMessage);
+                break;
+              }
+          } else {
+            if (col_mark > -1 && ar2.length > col_mark)
+              if (ar2[col_mark].length > 125) {
+                this.ErrorMessage = "Marks and Number, One or more line exceed the Character length. (max allow 125 Characters)";
+                alert(this.ErrorMessage);
+                break;
+              }
+          }
 
-    //       if (col_desc == -1) {
-    //         if (ar2.length > 1)
-    //           if (ar2[1].length > 125) {
-    //             this.ErrorMessage = "Description, One or more line exceed the Character length. (max allow 125 Characters)";
-    //             alert(this.ErrorMessage);
-    //             break;
-    //           }
-    //       } else {
-    //         if (col_desc > -1 && ar2.length > col_desc)
-    //           if (ar2[col_desc].length > 125) {
-    //             this.ErrorMessage = "Description, One or more line exceed the Character length. (max allow 125 Characters)";
-    //             alert(this.ErrorMessage);
-    //             break;
-    //           }
-    //       }
-    //     }
-    //   }
-    //   for (var i = 0; i < ar1.length; i++) {
-    //     if (i == 0) {
-    //       if (col_desc > 0 || col_mark > 0)
-    //         continue;
-    //       else {
-    //         col_mark = 0;
-    //         col_desc = 1;
-    //       }
-    //     }
+          if (col_desc == -1) {
+            if (ar2.length > 1)
+              if (ar2[1].length > 125) {
+                this.ErrorMessage = "Description, One or more line exceed the Character length. (max allow 125 Characters)";
+                alert(this.ErrorMessage);
+                break;
+              }
+          } else {
+            if (col_desc > -1 && ar2.length > col_desc)
+              if (ar2[col_desc].length > 125) {
+                this.ErrorMessage = "Description, One or more line exceed the Character length. (max allow 125 Characters)";
+                alert(this.ErrorMessage);
+                break;
+              }
+          }
+        }
+      }
+      for (var i = 0; i < ar1.length; i++) {
+        if (i == 0) {
+          if (col_desc > 0 || col_mark > 0)
+            continue;
+          else {
+            col_mark = 0;
+            col_desc = 1;
+          }
+        }
 
-    //     if (ar1[i] != '') {
-    //       ar2 = ar1[i].split("\t");
-    //       this.AttchRecord = new Bldesc();
-    //       this.AttchRecord.bl_pkid = this.gs.getGuid();
-    //       this.AttchRecord.bl_desc = '';
-    //       this.AttchRecord.bl_marks = '';
-    //       if (col_desc > -1 && ar2.length > col_desc)
-    //         this.AttchRecord.bl_desc = ar2[col_desc].toUpperCase();
-    //       if (col_mark > -1 && ar2.length > col_mark)
-    //         this.AttchRecord.bl_marks = ar2[col_mark].toUpperCase();
-    //       this.AttchRecordList.push(this.AttchRecord);
-    //     }
-    //   }
-    // }
-    // this.bShowPasteData = false;
-    // this.closeModal();
+        if (ar1[i] != '') {
+          ar2 = ar1[i].split("\t");
+          this.AttchRecord = new Bldesc();
+          this.AttchRecord.bl_pkid = this.gs.getGuid();
+          this.AttchRecord.bl_desc = '';
+          this.AttchRecord.bl_marks = '';
+          if (col_desc > -1 && ar2.length > col_desc)
+            this.AttchRecord.bl_desc = ar2[col_desc].toUpperCase();
+          if (col_mark > -1 && ar2.length > col_mark)
+            this.AttchRecord.bl_marks = ar2[col_mark].toUpperCase();
+          this.AttchRecordList.push(this.AttchRecord);
+        }
+      }
+    }
+    this.bShowPasteData = false;
+    this.closeModal();
   }
 
   closeModal() {
