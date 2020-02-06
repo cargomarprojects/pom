@@ -219,7 +219,7 @@
               <app-date [inputdate]="Record.hbl_date" (ValueChanged)="Record.hbl_date=$event"></app-date>
             </div>
           </div>
-          <div class="form-group row">
+          <!-- <div class="form-group row">
             <label class="col-4 col-form-label col-form-label-sm">HBL Sequence Format</label>
             <div class="col-sm-8">
               <select class="form-control form-control-sm" [(ngModel)]="Record.hbl_seq_format_id" [disabled]="(Record.hbl_blno_generated == 'G' || Record.hbl_fcr_no != '') && (Record.hbl_blno_generated != 'B')">
@@ -233,7 +233,7 @@
               <button [disabled]="(loading || Record.hbl_blno_generated == 'G'|| Record.hbl_bl_no != '' || Record.hbl_fcr_no != '' || mode=='ADD')  && (Record.hbl_blno_generated != 'B')" (click)="GenerateBLNo('SEABL',Record.hbl_seq_format_id)" class="btn btn-success btn-sm">Generate BL No And Save</button>
               <i *ngIf="loading" class="fa fa-spinner"></i>
             </div>
-          </div>
+          </div> -->
   
         </div>
   
@@ -268,12 +268,12 @@
             </div>
           </div>
   
-          <div class="form-group row">
+          <!-- <div class="form-group row">
             <div class="offset-4 col-8">
               <button [disabled]="(loading || Record.hbl_blno_generated == 'G'|| Record.hbl_bl_no != '' || Record.hbl_fcr_no != '' || mode=='ADD' ) && (Record.hbl_blno_generated != 'B')" (click)="GenerateBLNo('FCR','')" class="btn btn-success btn-sm">Generate FCR No And Save</button>
               <i *ngIf="loading" class="fa fa-spinner"></i>
             </div>
-          </div>
+          </div> -->
   
         </div>
   
@@ -394,7 +394,7 @@
   
           <div class="form-group row">
             <div class="col-2">
-              <label style="color:red" class="col-form-label col-form-label-sm">Please tick, If Marks & Nos</label>
+              <!-- <label style="color:red" class="col-form-label col-form-label-sm">Please tick, If Marks & Nos</label> -->
             </div>
             <label style="padding-right:0" class="col-3 col-form-label col-form-label-sm">Container(Nos) &nbsp;&nbsp;&nbsp; Marks and Numbers</label>
             <label style="padding-right:0;padding-left:1px" class="col-4 col-form-label col-form-label-sm">General description of goods (said to contain)</label>
@@ -416,9 +416,9 @@
             </div>-->
             <div class="col-2">
               <div class="row">
-                <div style="padding-right:0;" class="col-8">
+                <!-- <div style="padding-right:0;" class="col-8">
                   <button (click)="LoadDescription('FORMAT-1')" class="btn btn-default btn-sm">Format-1 (V)</button>
-                </div>
+                </div> -->
                 <div style="padding-right:0;padding-left:0" class="col-4 text-right">
                   <input type="checkbox" [(ngModel)]="Record.bl_is_mark1">
                 </div> 
@@ -439,9 +439,9 @@
             </div>-->
             <div class="col-2">
               <div class="row">
-                <div style="padding-right:0;" class="col-8">
+                <!-- <div style="padding-right:0;" class="col-8">
                   <button (click)="LoadDescription('FORMAT-2')" class="btn btn-default btn-sm">Format-2 (H)</button>
-                </div>
+                </div> -->
                 <div style="padding-right:0;padding-left:0" class="col-4 text-right">
                   <input type="checkbox" [(ngModel)]="Record.bl_is_mark2">
                 </div>
@@ -735,7 +735,7 @@
           </div>
   
         </div>
-        <div *ngIf="invokefrom=='HBL'" class="page-box">
+        <!-- <div *ngIf="invokefrom=='HBL'" class="page-box">
             <div class="form-group row">
               <label class="col-2 col-form-label col-form-label-sm">
                 PO Numbers
@@ -757,7 +757,7 @@
                 <textarea rows="3" class="form-control form-control-sm" [(ngModel)]="Record.bl_itm_desc" (blur)="OnBlur('bl_itm_desc')" required maxlength="1000"></textarea>
               </div>
             </div>
-          </div>
+          </div> -->
   
           <div *ngIf="invokefrom=='HBL'" class="form-group row">
             <label style="padding-right:0" class="offset-2 col-2 col-form-label col-form-label-sm">Freight Amount</label>
@@ -887,7 +887,7 @@
           <div class="page-box">
             <div class="form-group row">
               <div class="col-sm-6">
-                <div *ngIf="invokefrom=='HBL'"  class="form-group row">
+                <!-- <div *ngIf="invokefrom=='HBL'"  class="form-group row">
                   <div class="offset-4 col-8">
                     <div class="form-check form-check-inline">
                       <label class="form-check-label">
@@ -904,16 +904,16 @@
                       </label>
                     </div>
                   </div>
-                </div>
+                </div> -->
   
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                   <label class="col-4 col-form-label col-form-label-sm">BL Print Format</label>
                   <div class="col-8">
                     <select class="form-control form-control-sm" [(ngModel)]="Record.bl_print_format_id">
                       <option *ngFor="let rec of BLPrintFormatList" [value]="rec.blf_pkid">{{rec.blf_name}}</option>
                     </select>
                   </div>
-                </div>
+                </div> -->
   
                 <div class="form-group row">
                   <div class="offset-4 col-8">
