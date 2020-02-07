@@ -895,134 +895,154 @@
   </div>
 
   <div class="page-box">
-    <div class="page-body table-responsive">
-      <table class="table  table-hover table-sm">
-        <thead class="page-body-thead">
-          <tr>
-            <th>CNTR.NO</th>
-            <th>SIZE</th>
-            <th>TYPE</th>
-            <th>ASEAL NO</th>
-            <th>CSEAL NO</th>
-            <th>PCS</th>
-            <th>NTWT</th>
-            <th>GRWT</th>
-            <th>CBM</th>
-            <!-- <th class='text-center'>REMOVE</th> -->
-          </tr>
-        </thead>
-        <tbody class="page-body-tbody">
-          <tr *ngFor="let rec of Record.CntrList; let i = index" [class.active]="i == selectedRowIndex">
+    <div class="row">
+      <div class="offset-2 col-sm-10">
+        <div class="page-body table-responsive">
+          <table class="table  table-hover table-sm">
+            <thead class="page-body-thead">
+              <tr>
+                <th>CNTR.NO</th>
+                <th>SIZE</th>
+                <th>TYPE</th>
+                <th>ASEAL NO</th>
+                <th>CSEAL NO</th>
+                <th>PCS</th>
+                <th>NTWT</th>
+                <th>GRWT</th>
+                <th>CBM</th>
+                <!-- <th class='text-center'>REMOVE</th> -->
+              </tr>
+            </thead>
+            <tbody class="page-body-tbody">
+              <tr *ngFor="let rec of Record.CntrList; let i = index" [class.active]="i == selectedRowIndex">
 
-            <td class="p-0">
-              <InputBox [(inputModel)]="rec.cntr_no" [field]="'cntr_no'" [maxlength]="11" [uppercase]="true"
-                (blur)="onBlur($event)"></InputBox>
-            </td>
-            <td class="p-0">
-              <app-autocomplete2 [controlname]="'CONTAINER TYPE'" [displaycolumn]="'CODE'"
-                [tabletype]="'CONTAINER TYPE'" [subtype]="'CONTAINER TYPE'" [uid]="rec.cntr_pkid"
-                [displaydata]="rec.cntr_type_code" (ValueChanged)="LovSelected($event)">
-              </app-autocomplete2>
-            </td>
-            <td class="p-0">
-              <InputBox [(inputModel)]="rec.cntr_shipment_type" [field]="'cntr_shipment_type'" [maxlength]="20"
-                [uppercase]="true" (blur)="onBlur($event)"></InputBox>
-            </td>
-            <td class="p-0">
-              <InputBox [(inputModel)]="rec.cntr_asealno" [field]="'cntr_asealno'" [maxlength]="25" [uppercase]="true"
-                (blur)="onBlur($event)"></InputBox>
-            </td>
-            <td class="p-0">
-              <InputBox [(inputModel)]="rec.cntr_csealno" [field]="'cntr_csealno'" [maxlength]="25" [uppercase]="true"
-                (blur)="onBlur($event)"></InputBox>
-            </td>
-            <td class="p-0">
-              <InputBoxNumber [(inputModel)]="rec.cntr_pkg" [field]="'cntr_pkg'" [dec]="0" [maxlength]="15"
-                (blur)="onBlur($event)"></InputBoxNumber>
-            </td>
-            <td class="p-0">
-              <InputBox [(inputModel)]="rec.cntr_ntwt" [field]="'cntr_ntwt'" [maxlength]="15" [uppercase]="true"
-                (blur)="onBlur($event)"></InputBox>
-            </td>
-            <td class="p-0">
-              <InputBoxNumber [(inputModel)]="rec.cntr_grwt" [field]="'cntr_grwt'" [dec]="3" [maxlength]="15"
-                (blur)="onBlur($event)"></InputBoxNumber>
-            </td>
-            <td class="p-0">
-              <InputBoxNumber [(inputModel)]="rec.cntr_cbm" [field]="'cntr_cbm'" [dec]="3" [maxlength]="15"
-                (blur)="onBlur($event)"></InputBoxNumber>
-            </td>
-            <!-- <td class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                <td class="p-0">
+                  <InputBox [(inputModel)]="rec.cntr_no" [field]="'cntr_no'" [maxlength]="11" [uppercase]="true"
+                    (blur)="onBlur($event)"></InputBox>
+                </td>
+                <td class="p-0">
+                  <app-autocomplete2 [controlname]="'CONTAINER TYPE'" [displaycolumn]="'CODE'"
+                    [tabletype]="'CONTAINER TYPE'" [subtype]="'CONTAINER TYPE'" [uid]="rec.cntr_pkid"
+                    [displaydata]="rec.cntr_type_code" (ValueChanged)="LovSelected($event)">
+                  </app-autocomplete2>
+                </td>
+                <td class="p-0">
+                  <InputBox [(inputModel)]="rec.cntr_shipment_type" [field]="'cntr_shipment_type'" [maxlength]="20"
+                    [uppercase]="true" (blur)="onBlur($event)"></InputBox>
+                </td>
+                <td class="p-0">
+                  <InputBox [(inputModel)]="rec.cntr_asealno" [field]="'cntr_asealno'" [maxlength]="25"
+                    [uppercase]="true" (blur)="onBlur($event)"></InputBox>
+                </td>
+                <td class="p-0">
+                  <InputBox [(inputModel)]="rec.cntr_csealno" [field]="'cntr_csealno'" [maxlength]="25"
+                    [uppercase]="true" (blur)="onBlur($event)"></InputBox>
+                </td>
+                <td class="p-0">
+                  <InputBoxNumber [(inputModel)]="rec.cntr_pkg" [field]="'cntr_pkg'" [dec]="0" [maxlength]="15"
+                    (blur)="onBlur($event)"></InputBoxNumber>
+                </td>
+                <td class="p-0">
+                  <InputBox [(inputModel)]="rec.cntr_ntwt" [field]="'cntr_ntwt'" [maxlength]="15" [uppercase]="true"
+                    (blur)="onBlur($event)"></InputBox>
+                </td>
+                <td class="p-0">
+                  <InputBoxNumber [(inputModel)]="rec.cntr_grwt" [field]="'cntr_grwt'" [dec]="3" [maxlength]="15"
+                    (blur)="onBlur($event)"></InputBoxNumber>
+                </td>
+                <td class="p-0">
+                  <InputBoxNumber [(inputModel)]="rec.cntr_cbm" [field]="'cntr_cbm'" [dec]="3" [maxlength]="15"
+                    (blur)="onBlur($event)"></InputBoxNumber>
+                </td>
+                <!-- <td class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
               (click)="RemoveRow(rec)"></i></td> -->
 
-          </tr>
-        </tbody>
-      </table>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
+
+
   </div>
 
   <div class="page-box">
-    <div class="page-body table-responsive">
-      <table class="table  table-hover table-sm">
-        <thead class="page-body-thead">
-          <tr>
-            <th>ORDER#</th>
-            <th>STYLE</th>
-            <th>COLOR</th>
-            <th>INVOICE#</th>
-            <th>PKG</th>
-            <th>PCS</th>
-            <th>NTWT</th>
-            <th>GRWT</th>
-            <th>CBM</th>
-            <!-- <th class='text-center'>REMOVE</th> -->
-          </tr>
-        </thead>
-        <tbody class="page-body-tbody">
-          <tr *ngFor="let rec of Record.OrdList; let i = index" [class.active]="i == selectedRowIndex">
+    <div class="row">
+      <div class="offset-2 col-sm-10">
+        <div class="page-body table-responsive">
+          <table class="table  table-hover table-sm">
+            <thead class="page-body-thead">
+              <tr>
+                <th>CNTR.NO</th>
+                <th>ORDER#</th>
+                <th>STYLE</th>
+                <th>COLOR</th>
+                <th>INVOICE#</th>
+                <th>PKG</th>
+                <th>PCS</th>
+                <th>NTWT</th>
+                <th>GRWT</th>
+                <th>CBM</th>
+                <th>REMARKS</th>
+                <!-- <th class='text-center'>REMOVE</th> -->
+              </tr>
+            </thead>
+            <tbody class="page-body-tbody">
+              <tr *ngFor="let rec of Record.OrdList; let i = index" [class.active]="i == selectedRowIndex">
 
-            <td class="p-0">
-              <InputBox [(inputModel)]="rec.hord_no" [field]="'hord_no'" [maxlength]="50" [uppercase]="true"
-                (blur)="onBlur($event)"></InputBox>
-            </td>
-            <td class="p-0">
-              <InputBox [(inputModel)]="rec.hord_style" [field]="'hord_style'" [maxlength]="50" [uppercase]="true"
-                (blur)="onBlur($event)"></InputBox>
-            </td>
-            <td class="p-0">
-              <InputBox [(inputModel)]="rec.hord_color" [field]="'hord_color'" [maxlength]="50" [uppercase]="true"
-                (blur)="onBlur($event)"></InputBox>
-            </td>
-            <td class="p-0">
-              <InputBox [(inputModel)]="rec.hord_invno" [field]="'hord_invno'" [maxlength]="25" [uppercase]="true"
-                (blur)="onBlur($event)"></InputBox>
-            </td>
-            <td class="p-0">
-              <InputBoxNumber [(inputModel)]="rec.hord_pkgs" [field]="'hord_pkgs'" [dec]="0" [maxlength]="15"
-                (blur)="onBlur($event)"></InputBoxNumber>
-            </td>
-            <td class="p-0">
-              <InputBoxNumber [(inputModel)]="rec.hord_pcs" [field]="'hord_pcs'" [dec]="3" [maxlength]="15"
-                (blur)="onBlur($event)"></InputBoxNumber>
-            </td>
-            <td class="p-0">
-              <InputBoxNumber [(inputModel)]="rec.hord_ntwt" [field]="'hord_ntwt'" [dec]="3" [maxlength]="15"
-                (blur)="onBlur($event)"></InputBoxNumber>
-            </td>
-            <td class="p-0">
-              <InputBoxNumber [(inputModel)]="rec.hord_grwt" [field]="'hord_grwt'" [dec]="3" [maxlength]="15"
-                (blur)="onBlur($event)"></InputBoxNumber>
-            </td>
-            <td class="p-0">
-              <InputBoxNumber [(inputModel)]="rec.hord_cbm" [field]="'hord_cbm'" [dec]="3" [maxlength]="15"
-                (blur)="onBlur($event)"></InputBoxNumber>
-            </td>
-            <!-- <td class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                <td class="p-0">
+                  <InputBox [(inputModel)]="rec.hord_cntrno" [field]="'hord_cntrno'" [maxlength]="11" [uppercase]="true"
+                    (blur)="onBlur($event)"></InputBox>
+                </td>
+                <td class="p-0">
+                  <InputBox [(inputModel)]="rec.hord_no" [field]="'hord_no'" [maxlength]="50" [uppercase]="true"
+                    (blur)="onBlur($event)"></InputBox>
+                </td>
+                <td class="p-0">
+                  <InputBox [(inputModel)]="rec.hord_style" [field]="'hord_style'" [maxlength]="50" [uppercase]="true"
+                    (blur)="onBlur($event)"></InputBox>
+                </td>
+                <td class="p-0">
+                  <InputBox [(inputModel)]="rec.hord_color" [field]="'hord_color'" [maxlength]="50" [uppercase]="true"
+                    (blur)="onBlur($event)"></InputBox>
+                </td>
+                <td class="p-0">
+                  <InputBox [(inputModel)]="rec.hord_invno" [field]="'hord_invno'" [maxlength]="25" [uppercase]="true"
+                    (blur)="onBlur($event)"></InputBox>
+                </td>
+                <td class="p-0">
+                  <InputBoxNumber [(inputModel)]="rec.hord_pkgs" [field]="'hord_pkgs'" [dec]="0" [maxlength]="15"
+                    (blur)="onBlur($event)"></InputBoxNumber>
+                </td>
+                <td class="p-0">
+                  <InputBoxNumber [(inputModel)]="rec.hord_pcs" [field]="'hord_pcs'" [dec]="3" [maxlength]="15"
+                    (blur)="onBlur($event)"></InputBoxNumber>
+                </td>
+                <td class="p-0">
+                  <InputBoxNumber [(inputModel)]="rec.hord_ntwt" [field]="'hord_ntwt'" [dec]="3" [maxlength]="15"
+                    (blur)="onBlur($event)"></InputBoxNumber>
+                </td>
+                <td class="p-0">
+                  <InputBoxNumber [(inputModel)]="rec.hord_grwt" [field]="'hord_grwt'" [dec]="3" [maxlength]="15"
+                    (blur)="onBlur($event)"></InputBoxNumber>
+                </td>
+                <td class="p-0">
+                  <InputBoxNumber [(inputModel)]="rec.hord_cbm" [field]="'hord_cbm'" [dec]="3" [maxlength]="15"
+                    (blur)="onBlur($event)"></InputBoxNumber>
+                </td>
+                <td class="p-0">
+                  <InputBox [(inputModel)]="rec.hord_remarks" [field]="'hord_remarks'" [maxlength]="50" [uppercase]="true"
+                    (blur)="onBlur($event)"></InputBox>
+                </td>
+                <!-- <td class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
               (click)="RemoveRow(rec)"></i></td> -->
 
-          </tr>
-        </tbody>
-      </table>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
   <div class="page-box">

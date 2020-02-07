@@ -12,5 +12,7 @@ export class HouseOrder {
     hord_ntwt: number;
     hord_pcs: number;
     hord_cbm: number;
+    hord_cntrno: string;
+    hord_remarks: string;
 }
 
