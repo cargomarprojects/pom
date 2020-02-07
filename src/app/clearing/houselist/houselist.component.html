@@ -132,8 +132,8 @@
     <tbody class="page-body-tbody">
       <tr [style.color]="rec.row_colour" *ngFor="let rec of ms.RecordList; let i = index"
         [class.active]="i == selectedRowIndex">
-        <td (click)="editPage(rec)" class="hlink">{{rec.bl_mbl_no}}</td>
-        <td>{{rec.bl_bl_no}}</td>
+        <td >{{rec.bl_mbl_no}}</td>
+        <td (click)="editPage(rec)" class="hlink" >{{rec.bl_bl_no}}</td>
         <td>{{rec.bl_vsl_name}}</td>
         <td>{{rec.bl_vsl_voy_no}}</td>
         <td>{{rec.bl_pol_etd}}</td>

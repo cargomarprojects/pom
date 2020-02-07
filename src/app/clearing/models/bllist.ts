@@ -1,4 +1,6 @@
 import { GlobalVariables } from '../../core/models/globalvariables';
+import { Containerm  } from '../models/Container';
+import { HouseOrder } from '../models/houseorder';
 
 export class BlList {
     bl_pkid: string;
@@ -41,8 +43,10 @@ export class BlList {
   
     bl_place_receipt: string;
     bl_date_receipt: string;
+    bl_pol_id: string;
     bl_pol: string;
     bl_pol_code: string;
+    bl_pod_id: string;
     bl_pod: string;
     bl_pod_code: string;
     bl_place_delivery: string;
@@ -245,7 +249,9 @@ export class BlList {
     bl_itm_desc: string;
     bl_itm_po: string;
 
-
     bl_selected:Boolean;
+
+    CntrList: Containerm[] = [];
+    OrdList: HouseOrder[] = [];
 }
 
