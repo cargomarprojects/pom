@@ -273,11 +273,12 @@ export class HouseEditComponent {
       pkid: this.pkid,
       rowtype: 'SEA EXPORT',
       report_folder: this.gs.globalVariables.report_folder,
-      folderid: '',
+      folderid: this.gs.getGuid(),
       colorprint: 'N',
       issuedplace: this.gs.defaultValues.bl_issued_place,
       branch_code: this.gs.globalVariables.branch_code,
-      invokefrm: ''
+      invokefrm: 'HBL',
+      comp_code:this.gs.globalVariables.comp_code
     };
 
     this.mainService.GetRecord(SearchData)
