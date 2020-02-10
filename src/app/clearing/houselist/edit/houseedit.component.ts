@@ -1433,4 +1433,7 @@ export class HouseEditComponent {
  
   }
    
+  onBlur(field: string) {
+    
+  }
 }
