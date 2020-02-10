@@ -31,7 +31,7 @@ export class HouseListComponent {
 
   constructor(
     private modalService: NgbModal,
-    private ms: HouseListService,
+    public ms: HouseListService,
     private router: Router,
     private gs: GlobalService
   ) {

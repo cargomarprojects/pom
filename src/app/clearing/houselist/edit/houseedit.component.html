@@ -914,7 +914,7 @@
               </tr>
             </thead>
             <tbody class="page-body-tbody">
-              <tr *ngFor="let rec of Record.CntrList; let i = index" [class.active]="i == selectedRowIndex">
+              <tr *ngFor="let rec of Record.CntrList; let i = index" >
 
                 <td class="p-0">
                   <InputBox [(inputModel)]="rec.cntr_no" [field]="'cntr_no'" [maxlength]="11" [uppercase]="true"
@@ -989,7 +989,7 @@
               </tr>
             </thead>
             <tbody class="page-body-tbody">
-              <tr *ngFor="let rec of Record.OrdList; let i = index" [class.active]="i == selectedRowIndex">
+              <tr *ngFor="let rec of Record.OrdList; let i = index" >
 
                 <td class="p-0">
                   <InputBox [(inputModel)]="rec.hord_cntrno" [field]="'hord_cntrno'" [maxlength]="11" [uppercase]="true"
