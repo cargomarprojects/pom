@@ -133,7 +133,7 @@
 
             <div class="col-sm-6">
               <div class="form-group row">
-                <label class="col-4 col-form-label col-form-label-sm" (click)="focus()">Code</label>
+                <label class="col-4 col-form-label col-form-label-sm" >Code</label>
                 <div class="col-8">
                   <input [disabled]="!canadd" type="text" class="form-control form-control-sm"
                     [(ngModel)]="Record.cust_code" required maxlength="15" />
@@ -243,13 +243,13 @@
 
 
 
-                  <div class="page-box">
-            <app-addressm #addressComponent [RecordList]="Record.AddressList" [StateList]="StateList"
-              [CountryList]="CountryList" [customer_id]="pkid" [bAdmin]="bAdmin2" [bDelete]="bDelete"
-              [pan_no]="Record.cust_panno" [bShipper]="Record.cust_is_shipper" [bForeigner]="Record.cust_is_foreigner"
-              [bUnregistered]="Record.cust_is_ungst"></app-addressm>
-          </div>
- 
+        <div class="page-box">
+          <app-addressm #addressComponent [RecordList]="Record.AddressList" [StateList]="StateList"
+            [CountryList]="CountryList" [customer_id]="pkid" [bAdmin]="bAdmin2" [bDelete]="bDelete"
+            [pan_no]="Record.cust_panno" [bShipper]="Record.cust_is_shipper" [bForeigner]="Record.cust_is_foreigner"
+            [bUnregistered]="Record.cust_is_ungst"></app-addressm>
+        </div>
+
         <div class="page-box">
           <div class="col">
             <button [hidden]="disableSave" (click)="Save()" class="btn btn-success btn-sm mr-1">Save</button>

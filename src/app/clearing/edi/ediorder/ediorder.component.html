@@ -75,11 +75,11 @@
         <div class="form-group row">
           <label class="col-2"></label>
           <div class="col-10">
-            <button [disabled]="loading" (click)="ms.List('NEW')" class="btn btn-info btn-sm mr-1">Search</button>
-            <button [disabled]="loading" (click)="ms.Validate('NEW')" class="btn btn-info btn-sm mr-1">Validate</button>
+            <button  (click)="ms.List('NEW')" class="btn btn-info btn-sm mr-1">Search</button>
+            <button  (click)="ms.Validate('NEW')" class="btn btn-info btn-sm mr-1">Validate</button>
             
-            <button [disabled]="loading" (click)="ms.TransferPO('PO')" class="btn btn-info btn-sm mr-1">Transfer PO </button>
-            <button [disabled]="loading" (click)="ms.TransferPOTracking('TRACKING')" class="btn btn-info btn-sm">Transfer Tracking</button>
+            <button  (click)="ms.TransferPO('PO')" class="btn btn-info btn-sm mr-1">Transfer PO </button>
+            <button  (click)="ms.TransferPOTracking('TRACKING')" class="btn btn-info btn-sm">Transfer Tracking</button>
           </div>
         </div>
       </div>

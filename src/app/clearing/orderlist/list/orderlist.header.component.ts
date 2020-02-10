@@ -100,7 +100,7 @@ export class OrderListHeaderComponent implements OnInit {
     }
   }
 
-  tracking(modalname: any) {
+ ShowTracking(modalname: any) {
     if (this.total <= 0) {
       alert('No Rows Selected');
       return;
@@ -124,7 +124,7 @@ export class OrderListHeaderComponent implements OnInit {
   }
 
 
-  changeStatus(modalname: any) {
+  ShowStatus(modalname: any) {
     if (this.total <= 0) {
       alert('No Rows Selected');
       return;
@@ -132,7 +132,7 @@ export class OrderListHeaderComponent implements OnInit {
     this.modalRef = this.modalService.open(modalname, { centered: true });
   }
 
-  closeModal() {
+  CloseModal1() {
     this.modalRef.close();
   }
 

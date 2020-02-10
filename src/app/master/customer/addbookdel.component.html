@@ -16,7 +16,7 @@
                 </tr>
               </thead>
               <tbody class="page-body-tbody">
-                <tr *ngFor="let rec of RecordList; let i = index" [class.active]="i == selectedRowIndex">
+                <tr *ngFor="let rec of RecordList; let i = index" >
                   <td>{{rec.addopr_branch}}</td>
                   <td>{{rec.addopr_year}}</td>
                   <td>{{rec.addopr_type}}</td>

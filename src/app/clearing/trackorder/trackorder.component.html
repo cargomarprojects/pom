@@ -16,9 +16,9 @@
     <div class="col-sm-12">
       <div class="form-group row">
         <label class="col-1 col-form-label col-form-label-sm"><strong>PO#</strong></label>
-        <div class="col-sm-11" *ngIf="refno$ | async as item">
+        <div class="col-sm-11" *ngIf="refno$ | async">
           <textarea disabled rows="2" style="color:red; font-weight:bold" class="form-control form-control-sm"
-            [(ngModel)]="item"></textarea>
+            [(ngModel)]="refno"></textarea>
         </div>
       </div>
     </div>

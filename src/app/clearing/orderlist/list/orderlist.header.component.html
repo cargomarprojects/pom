@@ -110,17 +110,15 @@
 
           <div class="form-group row">
             <div class="col-9 offset-3">
-              <button (click)="tracking(trackorder)" class="btn btn-primary btn-sm btn-block">Tracking
+              <button (click)="ShowTracking(trackorder)" class="btn btn-primary btn-sm btn-block">Tracking
                 <span *ngIf="selectedRecordsCount$ | async" class="badge badge-light">{{total}}</span>
               </button>
             </div>
           </div>
 
-
-
           <div class="form-group row">
             <div class="col-9 offset-3">
-              <button (click)="changeStatus(changestatus)" class="btn btn-primary btn-sm btn-block">Change PO Status
+              <button (click)="ShowStatus(changestatus)" class="btn btn-primary btn-sm btn-block">Change PO Status
                 <span *ngIf="selectedRecordsCount$ | async" class="badge badge-light">{{total}}</span>
               </button>
             </div>
@@ -167,13 +165,13 @@
 
 <ng-template #changestatus let-c="close" let-d="dismiss">
   <div class="modal-body">
-    <app-status (closeModal)="closeModal()"></app-status>
+    <app-status (closeModalWindow)="CloseModal1()"></app-status>
   </div>
 </ng-template>
 
 <ng-template #trackorder let-c="close" let-d="dismiss">
   <div class="modal-body">
-    <app-trackorder (closeModal)="closeModal()"></app-trackorder>
+    <app-trackorder (closeModalWindow)="CloseModal1()"></app-trackorder>
   </div>
 </ng-template>
 

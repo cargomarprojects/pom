@@ -15,7 +15,7 @@ export class OrderListDetailComponent implements OnInit {
 
 
 
-  private records : Joborderm[];
+  records : Joborderm[];
   @Input() set _records( value : Joborderm[]){
     this.records = JSON.parse(JSON.stringify(value));
   }

@@ -22,13 +22,13 @@ export class StatusComponent {
   title = 'Track Details';
 
   @Output() ChangeStatus = new EventEmitter<any>();
-  @Output() closeModal = new EventEmitter<any>();
+  @Output() closeModalWindow = new EventEmitter<any>();
 
 
   private menuid: string = '';
   private type: string = '';
-  private pkid: string;
-  private refno: string = '';
+  pkid: string;
+  refno: string = '';
 
   pkid$: Observable<string>;
   refno$: Observable<string>;
@@ -127,7 +127,7 @@ export class StatusComponent {
   }
 
   Close() {
-    this.closeModal.emit();
+    this.closeModalWindow.emit();
   }
 
 

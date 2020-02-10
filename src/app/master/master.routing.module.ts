@@ -9,7 +9,6 @@ import { AddbookComponent } from './customer/addbook.component';
 
 import { XmlComponent } from './xml/xml.component';
 
-import { Linkm2Component } from '../clearing/linkm2/linkm2.component';
 import { AllnumComponent } from './allnum/allnum.component';
 
 

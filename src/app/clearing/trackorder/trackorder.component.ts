@@ -20,7 +20,7 @@ export class TrackOrderComponent {
   title = 'Track Details';
 
   @Output() ModifiedRecords = new EventEmitter<any>();
-  @Output() closeModal= new EventEmitter<any>();
+  @Output() closeModalWindow= new EventEmitter<any>();
   
   /*
   @Input() menuid: string = '';
@@ -30,8 +30,8 @@ export class TrackOrderComponent {
   */
   private menuid: string = '';
   private type: string = '';
-  private pkid: string;
-  private refno: string = '';
+  pkid: string;
+  refno: string = '';
 
   pkid$: Observable<string>;
   refno$: Observable<string>;
@@ -238,7 +238,7 @@ export class TrackOrderComponent {
 
 
   Close() {
-    this.closeModal.emit();
+    this.closeModalWindow.emit();
   }
 
 
