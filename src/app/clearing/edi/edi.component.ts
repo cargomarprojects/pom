@@ -26,7 +26,7 @@ export class EdiComponent {
 
   constructor(
     private modalService: NgbModal,
-    private mainService: EdiService,
+    public mainService: EdiService,
     private route: ActivatedRoute,
     private gs: GlobalService
   ) {
