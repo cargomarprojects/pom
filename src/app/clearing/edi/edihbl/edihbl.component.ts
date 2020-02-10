@@ -29,7 +29,7 @@ export class EdiHblComponent {
 
   constructor(
     private modalService: NgbModal,
-    private ms: EdiHblService,
+    public ms: EdiHblService,
     private route: ActivatedRoute,
     private gs: GlobalService
   ) {

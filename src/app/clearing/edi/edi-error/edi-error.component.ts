@@ -26,7 +26,7 @@ export class EdiErrorComponent {
 
   constructor(
     private modalService: NgbModal,
-    private ms: EdiService,
+    public ms: EdiService,
     private route: ActivatedRoute,
     private gs: GlobalService
   ) {
