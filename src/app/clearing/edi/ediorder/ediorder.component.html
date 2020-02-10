@@ -2,7 +2,6 @@
   <div class="col">
     <label>{{title}}</label>
     <button class="btn btn-primary btn-sm mx-1" (click)="Close()">Close</button>
-    <i *ngIf="loading" class="fa fa-spinner"></i>
   </div>
 </div>
 
@@ -97,12 +96,12 @@
       <li class="page-item"><a class="page-link">Page {{ms.page_current}}/{{ms.page_count}}
           (Records-{{ms.page_rowcount}})</a>
       </li>
-      <li class="page-item"><a class="page-link" (click)="List('FIRST')"><span class="fa fa-backward"></span></a></li>
-      <li class="page-item"><a class="page-link" (click)="List('PREV')"><span class="fa fa-arrow-left"></span></a>
+      <li class="page-item"><a class="page-link" (click)="ms.List('FIRST')"><span class="fa fa-backward"></span></a></li>
+      <li class="page-item"><a class="page-link" (click)="ms.List('PREV')"><span class="fa fa-arrow-left"></span></a>
       </li>
-      <li class="page-item"><a class="page-link" (click)="List('NEXT')"><span class="fa fa-arrow-right"></span></a>
+      <li class="page-item"><a class="page-link" (click)="ms.List('NEXT')"><span class="fa fa-arrow-right"></span></a>
       </li>
-      <li class="page-item"><a class="page-link" (click)="List('LAST')"><span class="fa fa-forward"></span></a>
+      <li class="page-item"><a class="page-link" (click)="ms.List('LAST')"><span class="fa fa-forward"></span></a>
       </li>
     </ul>
   </div>
@@ -175,12 +174,12 @@
       <li class="page-item"><a class="page-link">Page {{ms.page_current}}/{{ms.page_count}}
           (Records-{{ms.page_rowcount}})</a>
       </li>
-      <li class="page-item"><a class="page-link" (click)="List('FIRST')"><span class="fa fa-backward"></span></a></li>
-      <li class="page-item"><a class="page-link" (click)="List('PREV')"><span class="fa fa-arrow-left"></span></a>
+      <li class="page-item"><a class="page-link" (click)="ms.List('FIRST')"><span class="fa fa-backward"></span></a></li>
+      <li class="page-item"><a class="page-link" (click)="ms.List('PREV')"><span class="fa fa-arrow-left"></span></a>
       </li>
-      <li class="page-item"><a class="page-link" (click)="List('NEXT')"><span class="fa fa-arrow-right"></span></a>
+      <li class="page-item"><a class="page-link" (click)="ms.List('NEXT')"><span class="fa fa-arrow-right"></span></a>
       </li>
-      <li class="page-item"><a class="page-link" (click)="List('LAST')"><span class="fa fa-forward"></span></a>
+      <li class="page-item"><a class="page-link" (click)="ms.List('LAST')"><span class="fa fa-forward"></span></a>
       </li>
     </ul>
   </div>

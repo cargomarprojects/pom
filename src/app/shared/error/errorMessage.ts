@@ -4,7 +4,7 @@
     templateUrl: './errorMessage.html',
 })
 export class ErrorMessageComponent {
-    private ErrorMsg: string;
+    ErrorMsg: string;
     public ErrorMessageIsVisible: boolean;
 
     public showErrorMessage(msg: string) {

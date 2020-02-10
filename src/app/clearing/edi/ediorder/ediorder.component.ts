@@ -29,7 +29,7 @@ export class EdiOrderComponent {
 
   constructor(
     private modalService: NgbModal,
-    private ms: EdiOrderService,
+    public ms: EdiOrderService,
     private route: ActivatedRoute,
     private gs: GlobalService
   ) {

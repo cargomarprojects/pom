@@ -31,7 +31,7 @@ import { ClipBoardComponent } from './clipboarddata/clipboard.component';
 
 import { MailComponent } from './mail/mail.component';
 import { HistoryComponent } from './history/history.component';
-import { ApprovalComponent } from './approval/approval.component';
+
 
 import { PasteDataComponent } from './pastedata/pastedata.component';
 
@@ -64,7 +64,6 @@ import { InputBoxNumberComponent } from './inputnumber/inputboxnumber.component'
     ClipBoardComponent,
     MailComponent,
     HistoryComponent,
-    ApprovalComponent,
     PasteDataComponent,
     XmlomsComponent,
     AllReportComponent,
@@ -90,7 +89,6 @@ import { InputBoxNumberComponent } from './inputnumber/inputboxnumber.component'
     ClipBoardComponent,
     MailComponent,
     HistoryComponent,
-    ApprovalComponent,
     PasteDataComponent,
     XmlomsComponent,
     AllReportComponent,
