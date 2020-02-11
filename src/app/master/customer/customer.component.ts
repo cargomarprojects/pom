@@ -167,8 +167,8 @@ export class CustomerComponent {
         this.loading = false;
         this.StateList = response.statelist;
         this.CountryList = response.countrylist;
-        this.AcGrpList = response.acgroupm;
-        this.AcTypeList = response.actypem;
+        // this.AcGrpList = response.acgroupm;
+        // this.AcTypeList = response.actypem;
         this.List("NEW");
       },
         error => {
