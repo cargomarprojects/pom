@@ -10,7 +10,8 @@ import { Store } from '@ngrx/store';
 import * as fromorderlist from 'src/app/clearing/orderlist/list/store/orderlist.actions';
 import * as fromorderedit from 'src/app/clearing/orderlist/edit/store/orderedit.actions';
 import { HouseListService } from 'src/app/clearing/services/houselist.service';
-
+import { EdiHblService } from 'src/app/clearing/services/edihbl.service';
+import { EdiOrderService } from 'src/app/clearing/services/ediorder.service';
 
 @Component({
   selector: 'app-login',
@@ -45,7 +46,9 @@ export class LoginComponent {
     private gs1: GlobalService,
     private store: Store<AppState>,
     private loginservice: LoginService,
-    private hs: HouseListService
+    private hs: HouseListService,
+    private edihs: EdiHblService,
+    private ediord: EdiOrderService 
 
   ) {
 
@@ -53,7 +56,14 @@ export class LoginComponent {
     this.store.dispatch(fromorderedit.RESET());
     this.gs = gs1;
     this.LoadCombo();
+    this.InitAllService();
+  }
+
+  InitAllService()
+  {
     this.hs.init();
+    this.edihs.init();
+    this.ediord.init();
   }
 
   LoadCombo() {
