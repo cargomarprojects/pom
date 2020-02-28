@@ -4,6 +4,14 @@ import { Companym } from '../models/company';
 import { GlobalService } from '../services/global.service';
 import { LoginService } from '../services/login.service';
 
+import { AppState } from 'src/app/reducers';
+import { Store } from '@ngrx/store';
+
+
+import * as fromorderlist from 'src/app/clearing/orderlist/list/store/orderlist.actions';
+import * as fromorderedit from 'src/app/clearing/orderlist/edit/store/orderedit.actions';
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html'
@@ -35,9 +43,15 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private gs1: GlobalService,
+    private store: Store<AppState>,
     private loginservice: LoginService) {
+
+    this.store.dispatch(fromorderlist.RESET());
+    this.store.dispatch(fromorderedit.RESET());
+    
     this.gs = gs1;
     this.LoadCombo();
+
   }
 
   LoadCombo() {
@@ -155,7 +169,7 @@ export class LoginComponent {
         this.loading = false;
         this.gs.MenuList = response.list;
         this.gs.Modules = response.modules;
-        
+
         let data = response.data;
         this.gs.globalVariables.comp_pkid = data.comp_pkid;
         this.gs.globalVariables.comp_code = data.comp_code;
@@ -165,7 +179,7 @@ export class LoginComponent {
 
         this.gs.InitdefaultValues();
 
-        
+
         localStorage.setItem('access_token', this.gs.Access_Token);
         localStorage.setItem('company_name', this.gs.Company_Name);
         localStorage.setItem('menu', JSON.stringify(this.gs.MenuList));
@@ -175,7 +189,7 @@ export class LoginComponent {
         localStorage.setItem('dv', JSON.stringify(this.gs.defaultValues));
 
         this.gs.LoadCombo();
-        
+
 
         this.router.navigate(['home'], { replaceUrl: true });
       },
@@ -206,10 +220,10 @@ export class LoginComponent {
           this.ErrorExternalLogin = 'External Login Not Allowed';
         }
       },
-      error => {
-        this.loading = false;
-        this.ErrorExternalLogin = 'External Login Not Allowed';
-      });
+        error => {
+          this.loading = false;
+          this.ErrorExternalLogin = 'External Login Not Allowed';
+        });
 
   }
 
