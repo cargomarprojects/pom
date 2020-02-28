@@ -45,7 +45,8 @@ export class HouseListService {
     this.InfoMessage = "";
     this.houseno = "";
     this.masterno = "";
-    this.RecordList = []
+    //this.RecordList = []
+    this.RecordList = new Array<BlList>();
    
   }
 
@@ -83,10 +84,6 @@ export class HouseListService {
           this.ErrorMessage = this.gs.getError(error);
         });
   }
-
-
-
-  
 
   getList(SearchData: any) {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/House/List', SearchData, this.gs.headerparam2('authorized'));

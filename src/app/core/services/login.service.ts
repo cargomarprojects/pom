@@ -5,28 +5,19 @@ import { HttpClient } from '@angular/common/http';
 //import 'rxjs/add/operator/map';
 
 import { GlobalService } from './global.service';
-import { HouseListService } from '../../Clearing/services/houselist.service';
 
 @Injectable()
 export class LoginService {
   constructor(
     private http2: HttpClient,
-    private gs: GlobalService,
-    private hs: HouseListService
+    private gs: GlobalService
   ) {
-  }
 
+  }
 
   Login(username: string, password: string, company_code: string) {
-
-    this.initAllService();
-
     var body = 'grant_type=' + 'password' + '&username=' + username + '&password=' + password;
     return this.http2.post<any>(this.gs.baseUrl + "/Token", body, this.gs.headerparam2('login', company_code));
-  }
-
-  initAllService() {
-    this.hs.init();
   }
 
   Logout() {

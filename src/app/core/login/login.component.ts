@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Companym } from '../models/company';
 import { GlobalService } from '../services/global.service';
 import { LoginService } from '../services/login.service';
+import { InitialiseService } from '../services/initialise.service';
 
 import { AppState } from 'src/app/reducers';
 import { Store } from '@ngrx/store';
@@ -44,14 +45,15 @@ export class LoginComponent {
     private router: Router,
     private gs1: GlobalService,
     private store: Store<AppState>,
-    private loginservice: LoginService) {
+    private loginservice: LoginService,
+    private Initservice: InitialiseService
+    ) {
 
     this.store.dispatch(fromorderlist.RESET());
     this.store.dispatch(fromorderedit.RESET());
-    
     this.gs = gs1;
     this.LoadCombo();
-
+    this.Initservice.InitAllService();
   }
 
   LoadCombo() {
@@ -86,6 +88,7 @@ export class LoginComponent {
   }
 
   Login() {
+
     if (!this.username) {
       this.errorMessage = 'Login ID Cannot Be Blank';
       return;

@@ -90,8 +90,22 @@ export class HouseListComponent {
       mode: "EDIT"
     };
 
-     this.router.navigate(['clearing/houseedit'], { queryParams: parameter });
+    this.router.navigate(['clearing/houseedit'], { queryParams: parameter });
 
+  }
+  OnBlur(field: string) {
+    switch (field) {
+      case 'masterno':
+        {
+          this.ms.masterno = this.ms.masterno.toUpperCase();
+          break;
+        }
+      case 'houseno':
+        {
+          this.ms.houseno = this.ms.houseno.toUpperCase();
+          break;
+        }
+    }
   }
 
 }
