@@ -3,14 +3,13 @@ import { Router } from '@angular/router';
 import { Companym } from '../models/company';
 import { GlobalService } from '../services/global.service';
 import { LoginService } from '../services/login.service';
-import { InitialiseService } from '../services/initialise.service';
 
 import { AppState } from 'src/app/reducers';
 import { Store } from '@ngrx/store';
 
-
 import * as fromorderlist from 'src/app/clearing/orderlist/list/store/orderlist.actions';
 import * as fromorderedit from 'src/app/clearing/orderlist/edit/store/orderedit.actions';
+import { HouseListService } from 'src/app/clearing/services/houselist.service';
 
 
 @Component({
@@ -46,14 +45,15 @@ export class LoginComponent {
     private gs1: GlobalService,
     private store: Store<AppState>,
     private loginservice: LoginService,
-    private Initservice: InitialiseService
-    ) {
+    private hs: HouseListService
+
+  ) {
 
     this.store.dispatch(fromorderlist.RESET());
     this.store.dispatch(fromorderedit.RESET());
     this.gs = gs1;
     this.LoadCombo();
-    this.Initservice.InitAllService();
+    this.hs.init();
   }
 
   LoadCombo() {
