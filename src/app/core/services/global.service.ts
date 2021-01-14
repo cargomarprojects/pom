@@ -20,9 +20,9 @@ export class GlobalService {
   public defaultValues: DefaultValues;
 
   public baseLocalServerUrl: string = "http://localhost:8080";
-  //public baseUrl: string = "http://localhost:5000";
+  public baseUrl: string = "http://localhost:5000";
   //public baseUrl: string = "https://localhost:44340";
-  public baseUrl: string = "";
+  //public baseUrl: string = "";
 
 
 
@@ -199,7 +199,8 @@ export class GlobalService {
     this.defaultValues.lastmonthdate = this.getNewdate(30);//get today -30 days
 
     this.defaultValues.root_folder = '';
-    this.defaultValues.sub_folder = '';
+    this.defaultValues.root_folder = 'c://documents/alldocs/';    
+    this.defaultValues.sub_folder = '2021';
 
   }
   public getNewdate(_days: number) {

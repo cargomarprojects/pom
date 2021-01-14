@@ -136,7 +136,7 @@ export class FileUploadComponent {
 
 
     if (this.gs.defaultValues.sub_folder == '') {
-      alert('Root Folder is blank');
+      alert('Sub Folder is blank');
       return;
     }
 
