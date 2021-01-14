@@ -20,7 +20,8 @@ export class GlobalService {
   public defaultValues: DefaultValues;
 
   public baseLocalServerUrl: string = "http://localhost:8080";
-  public baseUrl: string = "http://localhost:5000";
+  //public baseUrl: string = "http://localhost:5000";
+  public baseUrl: string = "https://localhost:44340";
 
 
 
