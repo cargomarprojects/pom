@@ -26,8 +26,8 @@ export class LoginComponent {
   errorMessageVersion: string = '1.345';
   software_version_string: string = '1.345';
 
-  username: string = 'ADMIN';
-  password: string = 'ADMIN';
+  username: string = '';
+  password: string = '';
 
   server_software_version_string: string = '';
   showloginbutton: boolean = true;
