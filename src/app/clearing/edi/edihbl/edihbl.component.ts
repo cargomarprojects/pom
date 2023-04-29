@@ -31,7 +31,7 @@ export class EdiHblComponent {
     private modalService: NgbModal,
     public ms: EdiHblService,
     private route: ActivatedRoute,
-    private gs: GlobalService
+    public gs: GlobalService
   ) {
     this.menuid = this.gs.getParameter("menuid");
     this.InitComponent();

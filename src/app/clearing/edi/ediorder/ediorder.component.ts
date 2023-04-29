@@ -31,7 +31,7 @@ export class EdiOrderComponent {
     private modalService: NgbModal,
     public ms: EdiOrderService,
     private route: ActivatedRoute,
-    private gs: GlobalService
+    public gs: GlobalService
   ) {
     this.menuid = this.gs.getParameter("menuid");
     this.InitComponent();

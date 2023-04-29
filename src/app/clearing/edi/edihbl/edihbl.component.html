@@ -15,7 +15,7 @@
             <label class="col-2 col-form-label col-form-label-sm">Partner</label>
             <div class="col-10">
               <select class="form-control form-control-sm" [(ngModel)]="ms.partnerid">
-                <option *ngFor="let rec of ms.TradingPartners" value="{{rec.param_code}}">{{rec.param_code}}</option>
+                <option *ngFor="let rec of gs.TradingPartners" value="{{rec.param_code}}">{{rec.param_code}}</option>
               </select>
             </div>
           </div>
