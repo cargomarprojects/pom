@@ -90,6 +90,7 @@ export class OrderEditEffects {
 
                 };
                 const data = <JobOrderEditModel>{ isError: false, message: '', urlid: routeparam.urlid, menuid: routeparam.menuid, record: record };
+                console.log(data);
                 return allactions.RequestLoadSuccess({ data: data });
             })
         ))
