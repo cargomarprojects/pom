@@ -185,7 +185,12 @@ export class GlobalService {
     let body = 'report_folder=' + report_folder + '&filename=' + filename + '&filetype=' + filetype + '&filedisplayname=' + filedisplayname;
     window.open(this.baseUrl + '/api/Admin/User/DownloadFile?' + body, "_blank");
   }
-
+  
+  /*
+  Downloadfile(filename: string, filetype: string, filedisplayname: string) {
+    this.DownloadFile(this.globalVariables.report_folder, filename, filetype, filedisplayname);
+  }
+  */
 
   public roundNumber(_number: number, _precision: number) {
     var factor = Math.pow(10, _precision);

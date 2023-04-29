@@ -21,6 +21,7 @@ export class OrderListHeaderComponent implements OnInit {
   query: SearchQuery;
   @Input() set _query(value: SearchQuery) {
     this.query = JSON.parse(JSON.stringify(value));
+    console.log(this.query);
   }
 
   @Output() searchEvents = new EventEmitter<any>();

@@ -57,9 +57,11 @@ export class OrderListComponent {
   searchEvents(actions: any) {
     var urlid = this.gs.getParameter('urlid');
 
-    if (actions.outputformat == 'MAIL-FTP') {
-
-    } else
+    // if (actions.outputformat == 'MAIL-FTP') {
+    if (actions.outputformat == 'EXCEL') {
+      this.store.dispatch(FromOrderActions.UpdateQuery({ urlid: urlid, stype: 'EXCEL', query: actions.searchQuery }));
+    } 
+    else
       this.store.dispatch(FromOrderActions.UpdateQuery({ urlid: urlid, stype: 'NEW', query: actions.searchQuery }));
   }
 

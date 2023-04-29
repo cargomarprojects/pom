@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { concatMap, withLatestFrom, map, switchMap, catchError, mergeMap, filter } from 'rxjs/operators';
+import { concatMap, withLatestFrom, map, switchMap, catchError, mergeMap, filter, tap } from 'rxjs/operators';
 import { of, EMPTY, Observable, empty } from 'rxjs';
 import { JobOrderModel, SearchQuery } from '../../../models/joborder';
 import { Store, select } from '@ngrx/store';
@@ -69,10 +69,12 @@ export class OrderListEffects {
     Search$ = createEffect(() => this.actions$.pipe(
         ofType(allactions.UpdateQuery),
         concatMap(action => of(action).pipe(
-            withLatestFrom(this.store.pipe(select(SelectRouterUrlId)), this.store.select(SelectOrderEntity)),
+            withLatestFrom(
+                this.store.pipe(select(SelectRouterUrlId)), 
+                this.store.select(SelectOrderEntity)
+            ),
         )),
         switchMap(([action, urlid, ent]) => {
-
 
             let searchData = {
                 type: action.stype,
@@ -103,10 +105,17 @@ export class OrderListEffects {
 
             return this.mainService.List(searchData).pipe(
                 map(response => {
-                    const pageQuery = <PageQuery>{ action: action.stype, page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
-                    const searchquery = ent.searchQuery;
-                    const data = <JobOrderModel>{ isError: false, message: '', urlid: urlid, pageQuery: pageQuery, searchQuery: searchquery, records: response.list };
-                    return allactions.RequestLoadSuccess({ data: data });
+                    if ( response.filename !="" )
+                    {
+                        this.gs.DownloadFile("", response.filename, response.filetype, response.filedisplayname)
+                        return allactions.Download_Excel_Complete();
+                    }
+                    else {
+                        const pageQuery = <PageQuery>{ action: action.stype, page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
+                        const searchquery = ent.searchQuery;
+                        const data = <JobOrderModel>{ isError: false, message: '', urlid: urlid, pageQuery: pageQuery, searchQuery: searchquery, records: response.list };
+                        return allactions.RequestLoadSuccess({ data: data });
+                    }
                 }),
                 catchError(err => {
                     return of(allactions.RequestLoadFail({
@@ -119,6 +128,7 @@ export class OrderListEffects {
 
         })
     ));
+
 
 
 

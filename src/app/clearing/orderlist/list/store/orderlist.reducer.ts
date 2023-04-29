@@ -22,6 +22,10 @@ export const Reducer = createReducer(
     return adapter.removeAll(state);
   }),
 
+  on(AllActions.Download_Excel_Complete, (state, action) => {
+    return state;
+  }),
+
   on(AllActions.RequestLoadSuccess, (state, action) => {
     return adapter.upsertOne(action.data, state);
   }),
@@ -29,7 +33,7 @@ export const Reducer = createReducer(
     return adapter.updateOne({ id: action.urlid, changes: { isError: true, message: action.message, records: [] } }, state);
   }),
   on(AllActions.UpdateQuery, (state, action) => {
-    if (action.stype == 'NEW')
+    if (action.stype == 'NEW' || action.stype == 'EXCEL')
       return adapter.updateOne({ id: action.urlid, changes: { isError: false, message: '', searchQuery: action.query } }, state);
     else
       return adapter.updateOne({ id: action.urlid, changes: { isError: false, message: '', pageQuery: action.query } }, state);
