@@ -15,7 +15,9 @@ font-size : 14px;
 height:100%;
 }
 
-
+.router {
+  margin-top: 13px;
+}
 
 
 .page-body-thead {
@@ -251,8 +253,6 @@ hr {
     padding: 0px;
 }
 
-.leftsidebar ul li {
-}
 
 .leftsidebar ul li:hover {
         background-color: cornflowerblue;
