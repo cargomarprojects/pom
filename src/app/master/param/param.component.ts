@@ -141,7 +141,7 @@ export class ParamComponent {
       this.id1 = "Region";
     }
     if (this.type == 'PARAM') {
-      this.id1 = "Customer Code";
+      this.id1 = "Cust.Code";
     }
     if (this.type == 'SERVICE CONTRACT') {
       this.id3 = "Group";

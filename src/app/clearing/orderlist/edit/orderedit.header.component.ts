@@ -70,7 +70,7 @@ export class OrderEditHeaderComponent {
 
     if (this.gs.isBlank(this.Record.ord_agent_id)) {
       bret = false;
-      sError += " Agent Cannot Be Blank";
+      sError += " Agent(Origin) Cannot Be Blank";
     }
     if (this.gs.isBlank(this.Record.ord_exp_id)) {
       bret = false;
@@ -80,6 +80,10 @@ export class OrderEditHeaderComponent {
       bret = false;
       sError += "\n\r | Consignee Cannot Be Blank";
     }
+    if (this.gs.isBlank(this.Record.ord_pod_agent_id)) {
+      bret = false;
+      sError += " Agent(Destination) Cannot Be Blank";
+    }    
 
     if (this.gs.isBlank(this.Record.ord_po)) {
       bret = false;
