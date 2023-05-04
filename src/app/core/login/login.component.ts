@@ -28,6 +28,7 @@ export class LoginComponent {
 
   username: string = '';
   password: string = '';
+ 
 
   server_software_version_string: string = '';
   showloginbutton: boolean = true;
@@ -51,6 +52,9 @@ export class LoginComponent {
     private ediord: EdiOrderService 
 
   ) {
+
+    this.username = 'admin';
+    this.password = 'admin';
 
     this.store.dispatch(fromorderlist.RESET());
     this.store.dispatch(fromorderedit.RESET());

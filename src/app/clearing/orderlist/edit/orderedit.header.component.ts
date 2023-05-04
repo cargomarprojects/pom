@@ -27,9 +27,11 @@ export class OrderEditHeaderComponent {
 
   @Output() save = new EventEmitter<Joborderm>();
 
+  
   where_agent = "CUST_IS_AGENT = 'Y'";
   where_shipper = "CUST_IS_SHIPPER = 'Y'";
   where_consignee = "CUST_IS_CONSIGNEE = 'Y'";
+  where_buy_agent = "CUST_IS_BUY_AGENT = 'Y'";
 
 
   constructor(
@@ -96,12 +98,12 @@ export class OrderEditHeaderComponent {
     switch (field) {
       case 'ord_po':
         {
-          this.FindContractNo();
+          //this.FindContractNo();
           break;
         }
       case 'ord_style':
         {
-          this.FindContractNo();
+          //this.FindContractNo();
           break;
         }
       case 'ord_cargo_status':
@@ -141,7 +143,7 @@ export class OrderEditHeaderComponent {
         }
       case 'ord_color':
         {
-          this.FindContractNo();
+          //this.FindContractNo();
           break;
         }
     }
@@ -163,6 +165,16 @@ export class OrderEditHeaderComponent {
       this.Record.ord_agent_id = _Record.id;
       this.Record.ord_agent_code = _Record.code;
       this.Record.ord_agent_name = _Record.name;
+    }
+    if (_Record.controlname == "BUY-AGENT") {
+      this.Record.ord_buy_agent_id = _Record.id;
+      this.Record.ord_buy_agent_code = _Record.code;
+      this.Record.ord_buy_agent_name = _Record.name;
+    }    
+    if (_Record.controlname == "POD-AGENT") {
+      this.Record.ord_pod_agent_id = _Record.id;
+      this.Record.ord_pod_agent_code = _Record.code;
+      this.Record.ord_pod_agent_name = _Record.name;
     }
     if (_Record.controlname == "POL") {
       this.Record.ord_pol_id = _Record.id;

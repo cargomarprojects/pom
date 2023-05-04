@@ -1,13 +1,17 @@
 <div class="page-body table-responsive">
-
-  <table class="table  table-hover table-sm">
+  <table class="table table-hover table-sm table-bordered">
     <thead class="page-body-thead">
       <tr>
         <th><input type="checkbox" [(ngModel)]="selectcheck" (change)="SelectCheckbox(selectcheck)"></th>
+        <th>UID</th>      
+        <th>EDIT</th>      
         <th>STATUS</th>        
-        <th>AGENT</th>
+        <th>AGENT.POL</th>
         <th>SHIPPER</th>
         <th>CONSIGNEE</th>
+        <th>BUYING.AGENT</th>
+        <th>AGENT.POD</th>
+        <th>INV#</th>
         <th>PO#</th>
         <th>STYLE</th>
         <th>COLOR</th>
@@ -22,17 +26,24 @@
         <th>INSTOCK2</th>        
         <th>TRACK.STATUS</th>
         <th>CARGO.STATUS</th>
-        <th>CREATED</th>
+        <th>CREATED-BY</th>
+        <th>CREATED-DATE</th>
       </tr>
     </thead>
     <tbody class="page-body-tbody" *ngFor="let rec of records">
       <tr [style.color]="rec.ord_status_color">
+        
         <td><input type="checkbox" [(ngModel)]="rec.ord_selected" (change)="handleChange(rec)" ></td>
+        <td>{{rec.ord_uid}}</td>        
+        <td (click)="ActionHandler('EDIT',rec.ord_pkid)" class="hlink" ><i class="fa fa-pencil" ></i></td>        
         <td>{{rec.ord_status}}</td>        
         <td>{{rec.ord_agent_name}}</td>
         <td>{{rec.ord_exp_name}}</td>
         <td>{{rec.ord_imp_name}}</td>
-        <td (click)="ActionHandler('EDIT',rec.ord_pkid)" class="hlink">{{rec.ord_po}}</td>
+        <td>{{rec.ord_buy_agent_name}}</td>
+        <td>{{rec.ord_pod_agent_name}}</td>
+        <td>{{rec.ord_invno}}</td>
+        <td>{{rec.ord_po}}</td>
         <td>{{rec.ord_style}}</td>
         <td>{{rec.ord_color}}</td>
         <td align='right'>{{rec.ord_pkg | number : '1.2-2'}}</td>
@@ -46,7 +57,8 @@
         <td>{{rec.ord_instock2}}</td>
         <td>{{rec.ord_track_status}}</td>                
         <td>{{rec.ord_cargo_status}}</td>
-         <td>{{rec.rec_created_dte}}</td>
+        <td>{{rec.rec_created_by}}</td>
+        <td>{{rec.rec_created_date}}</td>
       </tr>
     </tbody>
   </table>

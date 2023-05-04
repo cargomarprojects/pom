@@ -40,7 +40,8 @@ export class OrderListHeaderComponent implements OnInit {
   where_agent = "CUST_IS_AGENT = 'Y'";
   where_shipper = "CUST_IS_SHIPPER = 'Y'";
   where_consignee = "CUST_IS_CONSIGNEE = 'Y'";
-
+  where_buy_agent = "CUST_IS_BUY_AGENT = 'Y'";
+  
   modalRef: any;
 
 
@@ -70,8 +71,8 @@ export class OrderListHeaderComponent implements OnInit {
 
   ngOnInit() {
     this.SortList = [
-      { "colheadername": "CREATED", "colname": "a.rec_created_date desc" },
-      { "colheadername": "AGENT,SHIPPER,PO", "colname": "agent.cust_name,exp.cust_name,ord_po" }
+      { "colheadername": "UID", "colname": "a.ord_uid" },
+      { "colheadername": "CREATED-DATE", "colname": "a.rec_created_date" }
     ];
   }
 
@@ -99,6 +100,14 @@ export class OrderListHeaderComponent implements OnInit {
       this.query.list_imp_id = _Record.id;
       this.query.list_imp_name = _Record.name;
     }
+    if (_Record.controlname == "BUY-AGENT") {
+      this.query.list_buy_agent_id = _Record.id;
+      this.query.list_buy_agent_name = _Record.name;
+    }        
+    if (_Record.controlname == "AGENT-POD") {
+      this.query.list_pod_agent_id = _Record.id;
+      this.query.list_pod_agent_name = _Record.name;
+    }    
   }
 
  ShowTracking(modalname: any) {

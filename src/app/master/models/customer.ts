@@ -35,6 +35,7 @@ export class Customerm {
 
     cust_sepz_unit: boolean;
 
+    cust_is_buy_agent: boolean;
     cust_is_agent: boolean;
     cust_is_shipper: boolean;
     cust_is_ungst: boolean;

@@ -25,10 +25,22 @@ export interface Joborderm {
   ord_contractno: string;
   ord_exp_code: string;
   ord_imp_code: string;
+  
   ord_agent_id: string;
   ord_agent_code: string;
   ord_agent_name: string;
-  rec_created_dte: string;
+
+  ord_pod_agent_id: string;
+  ord_pod_agent_code: string;
+  ord_pod_agent_name: string;
+
+  ord_buy_agent_id: string;
+  ord_buy_agent_code: string;
+  ord_buy_agent_name: string;
+
+
+  rec_created_by: string;
+  rec_created_date: string;
   remove: string;
   ord_source: string;
   ord_selected: boolean;
@@ -107,6 +119,10 @@ export interface SearchQuery {
   list_imp_name: string,
   list_agent_id: string,
   list_agent_name: string,
+  list_pod_agent_id: string,
+  list_pod_agent_name: string,
+  list_buy_agent_id: string,
+  list_buy_agent_name: string,
   ord_showpending: string,
   report_folder: string,
   file_pkid: string,

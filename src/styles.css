@@ -28,10 +28,8 @@ color: white;
 }
 
 .page-body-tbody {
+  font-size: 11px; 
 
-font-size: 11px; 
-
-cursor: pointer;
 }
 
 
@@ -430,6 +428,7 @@ a {
 .hlink {
   color: red;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 

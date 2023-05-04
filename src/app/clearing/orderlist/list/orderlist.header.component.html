@@ -6,26 +6,25 @@
 
           <div class="form-group row">
             <label class="col-3 col-form-label col-form-label-sm">From</label>
-            <div class="col-9">
+            <div class="col-4">
               <app-date [inputdate]="query.from_date" (ValueChanged)="query.from_date=$event"></app-date>
             </div>
-          </div>
-
-          <div class="form-group row">
-            <label class="col-3 col-form-label col-form-label-sm">To</label>
-            <div class="col-9">
+            <label class="col-1 col-form-label col-form-label-sm">To</label>
+            <div class="col-4">
               <app-date [inputdate]="query.to_date" (ValueChanged)="query.to_date=$event"></app-date>
-            </div>
+            </div>            
           </div>
 
+
           <div class="form-group row">
-            <label class="col-3 col-form-label col-form-label-sm">Agent</label>
+            <label class="col-3 col-form-label col-form-label-sm">Agent.Pol</label>
             <div class="col-9">
               <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
                 [displaydata]="query.list_agent_name" (ValueChanged)="LovSelected($event)" [where]="where_agent">
               </app-autocomplete2>
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-3 col-form-label col-form-label-sm">Shipper</label>
             <div class="col-9">
@@ -45,6 +44,23 @@
             </div>
           </div>
 
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">Buy.Agent</label>
+            <div class="col-9">
+              <app-autocomplete2 [controlname]="'BUY-AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
+                [displaydata]="query.list_buy_agent_name" (ValueChanged)="LovSelected($event)" [where]="where_buy_agent">
+              </app-autocomplete2>
+            </div>
+          </div>          
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">Agent.Pod</label>
+            <div class="col-9">
+              <app-autocomplete2 [controlname]="'AGENT-POD'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
+                [displaydata]="query.list_pod_agent_name" (ValueChanged)="LovSelected($event)" [where]="where_agent">
+              </app-autocomplete2>
+            </div>
+          </div>          
 
 
         </div>

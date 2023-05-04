@@ -68,6 +68,7 @@ export class CustomerComponent {
   Is_Shipper: boolean = false;
   Is_Consignee: boolean = false;
   Is_Agent: boolean = false;
+  Is_Buy_Agent: boolean = false;
   Is_Cha_Forwarder: boolean = false;
   Is_Creditor: boolean = false;
   Is_Others: boolean = false;
@@ -276,6 +277,7 @@ export class CustomerComponent {
       Is_Shipper: this.Is_Shipper,
       Is_Consignee: this.Is_Consignee,
       Is_Agent: this.Is_Agent,
+      Is_Buy_Agent: this.Is_Buy_Agent,
       Is_Cha_Forwarder: this.Is_Cha_Forwarder,
       Is_Creditor: this.Is_Creditor,
       Is_Others: this.Is_Others,

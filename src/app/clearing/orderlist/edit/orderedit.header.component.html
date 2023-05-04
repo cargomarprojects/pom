@@ -1,6 +1,7 @@
 <div class="page-details" *ngIf="Record">
   <div class="row">
     <div class="col-sm-6">
+      
       <div class="form-group row">
         <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Pol.Agent</label>
         <div class="col-sm-5">
@@ -41,6 +42,43 @@
       </div>
 
       <div class="form-group row">
+        <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Buying Agent</label>
+        <div class="col-sm-5">
+          <app-autocomplete2 [controlname]="'BUY-AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
+           [disabled]="(Record.ord_status == 'REPORTED') ? false : true "  
+           [displaydata]="Record.ord_buy_agent_code" (ValueChanged)="LovSelected($event)" [where]="where_buy_agent" #agentlov>
+          </app-autocomplete2>
+        </div>
+        <div class="col-sm-5">
+          <InputBox [(inputModel)]="Record.ord_buy_agent_name" [maxlength]="60" [uppercase]=true></InputBox>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Pod.Agent</label>
+        <div class="col-sm-5">
+          <app-autocomplete2 [controlname]="'POD-AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
+           [disabled]="(Record.ord_status == 'REPORTED') ? false : true "  
+           [displaydata]="Record.ord_pod_agent_code" (ValueChanged)="LovSelected($event)" [where]="where_agent" #agentlov>
+          </app-autocomplete2>
+        </div>
+        <div class="col-sm-5">
+          <InputBox [(inputModel)]="Record.ord_pod_agent_name" [maxlength]="60" [uppercase]=true></InputBox>
+        </div>
+      </div>
+
+
+
+
+      <!-- <div *ngIf="mode == 'EDIT'" class="form-group row">
+        <label class="col-sm-2 col-form-label  col-form-label-sm">PO ID</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control form-control-sm" [(ngModel)]="Record.ord_uid" (blur)="OnBlur('ord_uid')" required maxlength="14" />
+        </div>
+      </div> -->
+
+      <div class="form-group row">
         <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Invoice#</label>
         <div class="col-sm-5">
           <InputBox [(inputModel)]="Record.ord_invno" [maxlength]="30" [uppercase]=true></InputBox>
@@ -49,22 +87,7 @@
         <div class="col-sm-3">
           <InputBox [(inputModel)]="Record.ord_uneco" [maxlength]="5" [uppercase]=true></InputBox>
         </div>
-      </div>
-
-      <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">Description</label>
-        <div class="col-sm-10">
-          <textarea rows="3" class="form-control form-control-sm" [(ngModel)]="Record.ord_desc" required
-            maxlength="100"></textarea>
-        </div>
-      </div>
-
-      <!-- <div *ngIf="mode == 'EDIT'" class="form-group row">
-        <label class="col-sm-2 col-form-label  col-form-label-sm">PO ID</label>
-        <div class="col-sm-10">
-          <input type="number" class="form-control form-control-sm" [(ngModel)]="Record.ord_uid" (blur)="OnBlur('ord_uid')" required maxlength="14" />
-        </div>
-      </div> -->
+      </div>      
 
       <div class="form-group row">
         <label class="col-sm-2 col-form-label  col-form-label-sm">PO</label>
@@ -96,6 +119,14 @@
           <InputBox [(inputModel)]="Record.ord_contractno" [maxlength]="100" [uppercase]=true></InputBox>
         </div>
       </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label col-form-label-sm">Description</label>
+        <div class="col-sm-10">
+          <textarea rows="3" class="form-control form-control-sm" [(ngModel)]="Record.ord_desc" required
+            maxlength="100"></textarea>
+        </div>
+      </div>      
       
 
     </div>

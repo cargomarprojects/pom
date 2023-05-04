@@ -28,8 +28,8 @@
       </div>
 
       <div class="col-2">
-        <input type="checkbox" [(ngModel)]="Is_Cha_Forwarder" />
-        <span>Cha/Forwarder</span>
+        <input type="checkbox" [(ngModel)]="Is_Buy_Agent" />
+        <span>Buying Agent</span>
       </div>
 
       <div class="col-1">
@@ -227,8 +227,8 @@
                 <span>Agent</span>
               </div>
               <div class="col-8 offset-4">
-                <input [disabled]="!canadd" type="checkbox" [(ngModel)]="Record.cust_is_cha" />
-                <span>Cha/Forwarder</span>
+                <input [disabled]="!canadd" type="checkbox" [(ngModel)]="Record.cust_is_buy_agent" />
+                <span>Buying Agent</span>
               </div>
               <div class="col-8 offset-4">
                 <input [disabled]="!canadd" type="checkbox" [(ngModel)]="Record.cust_is_others" />
