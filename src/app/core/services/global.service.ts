@@ -27,7 +27,13 @@ export class GlobalService {
   //public baseLocalServerUrl: string = "";
   //public baseUrl: string = "";
 
-
+  public USER_DATA_LIST = [
+    {'code': 'GENERAL-USER', 'name' :'GENERAL USER'},
+    {'code': 'AGENT', 'name' :'AGENT'},
+    {'code': 'SHIPPER', 'name' :'SHIPPER'},
+    {'code': 'CONSIGNEE', 'name' :'CONSIGNEE'},
+    {'code': 'BUYING-AGENT', 'name' :'BUYING AGENT'}
+  ];
 
   // change this is false in production and update
   public isolderror: boolean = false;

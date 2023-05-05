@@ -35,6 +35,8 @@ export class UserComponent {
     sub: any;
     urlid: string;
 
+    data_list = [];
+
     ErrorMessage = "User Details";
     
     mode = '';
@@ -58,6 +60,8 @@ export class UserComponent {
         this.page_count = 0;
         this.page_rows = 50;
         this.page_current = 0;
+
+        this.data_list  = this.gs.USER_DATA_LIST;
 
         this.InitLov();
         this.List("NEW");
@@ -158,6 +162,7 @@ export class UserComponent {
         this.Record.user_sman_name = '';
         this.Record.user_email_pwd = '';
         this.Record.user_local_server= '';
+        this.Record.user_type_id = 'AGENT-POL'
         this.Record.rec_mode = this.mode;
         this.Record.user_branch_user = false;
 

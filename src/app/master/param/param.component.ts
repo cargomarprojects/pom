@@ -46,7 +46,10 @@ export class ParamComponent {
 
   email: string = '';
 
+  lookup_id = '';
 
+  data_list = [];
+  
   ErrorMessage = "";
 
   mode = '';
@@ -102,6 +105,10 @@ export class ParamComponent {
 
     this.email = '';
 
+    this.lookup_id = '';
+
+    this.data_list =[];
+
     this.code_length = 15;
 
     if (this.type == 'CHALIC') {
@@ -112,12 +119,9 @@ export class ParamComponent {
       this.email = "e-Mail";
     }
 
-
     if (this.type == 'SALESMAN') {
       this.email = "e-Mail";
     }
-
-
 
     if (this.type == 'AIR CARRIER') {
       this.id1 = "3DigitCode";
@@ -140,9 +144,13 @@ export class ParamComponent {
     if (this.type == 'COUNTRY') {
       this.id1 = "Region";
     }
+  
     if (this.type == 'PARAM') {
       this.id1 = "Cust.Code";
+      this.lookup_id = "Type";
+      this.data_list = this.gs.USER_DATA_LIST;
     }
+
     if (this.type == 'SERVICE CONTRACT') {
       this.id3 = "Group";
     }
@@ -251,10 +259,15 @@ export class ParamComponent {
     this.Record.param_id3 = '';
     this.Record.param_id4 = '';
     this.Record.param_email = '';
+    this.Record.param_lookup_id = '';
     this.Record.param_rate = 0;
     this.Record.param_type = this.type;
     this.Record.rec_locked = false;
     this.Record.rec_mode = this.mode;
+
+    if (this.type == 'PARAM') {
+      this.Record.param_lookup_id = 'AGENT-POL';
+    }  
 
   }
 
@@ -448,6 +461,7 @@ export class ParamComponent {
       REC.param_id3 = this.Record.param_id3;
       REC.param_id4 = this.Record.param_id4;
       REC.param_email = this.Record.param_email;
+      REC.param_lookup_id = this.Record.param_lookup_id;
       REC.param_rate = this.Record.param_rate;
 
     }

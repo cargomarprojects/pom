@@ -14,6 +14,8 @@ export class Param {
 
     param_email: string;
 
+    param_lookup_id: string;
+
     param_rate: number;
     rec_mode: string;
 
