@@ -10,6 +10,7 @@ import { Userd } from '../models/userd';
 
 import { UserService } from '../services/user.service';
 import { SearchTable } from '../../shared/models/searchtable';
+import { User_Customer } from '../models/user_customer';
 
 
 @Component({
@@ -42,12 +43,20 @@ export class UserComponent {
     mode = '';
     pkid = '';
 
+    subItem = 'branch';
+
+    cust_id = '';
+    cust_code = '';
+    cust_name = '';
+
     // Array For Displaying List
     RecordList: User[] = [];
     // Single Record for add/edit/view details
     Record: User = new User;
 
     RecordDet: Userd[] = [];
+
+    RecordDet_Customer: User_Customer[] = [];
 
     SALESMANRECORD: SearchTable = new SearchTable();
 
@@ -94,22 +103,57 @@ export class UserComponent {
          this.Record.user_sman_code = _Record.code;
          this.Record.user_sman_name = _Record.name;
       }
+      if (_Record.controlname == "CUSTOMER") {
+        this.cust_id = _Record.id;
+        this.cust_code = _Record.code;
+        this.cust_name = _Record.name;
+      }      
     }
+        
+
+    addCustomer(){
+        if ( this.gs.isBlank(this.cust_id) || this.gs.isBlank(this.cust_code) || this.gs.isBlank(this.cust_name) )
+        {
+            alert ('Invalid Customer');
+            return;
+        }
+        for ( let itm of this.RecordDet_Customer ) {
+            if( itm.user_customer_id == this.cust_id){
+                alert ('Customer Already Exists In The List');
+                return;
+            }
+        }
+        let _rec =  new User_Customer();
+        _rec.user_id = this.pkid;
+        _rec.user_customer_id = this.cust_id;
+        _rec.user_customer_name = this.cust_name;
+
+        this.RecordDet_Customer.push(_rec);
+
+        this.cust_id = '';
+        this.cust_code = '';
+        this.cust_name = '';
+
+    }
+
 
     //function for handling LIST/NEW/EDIT Buttons
     ActionHandler(action : string, id :string ) {
         this.ErrorMessage = '';
+        
         if (action == 'LIST') {
             this.mode = '';
             this.pkid = '';
             this.currentTab = 'LIST';
         }
         else if (action === 'ADD') {
+            this.subItem = 'branch';    
             this.currentTab = 'DETAILS';
             this.mode = 'ADD';
             this.NewRecord();
         }
         else if (action === 'EDIT') {
+            this.subItem = 'branch';    
             this.currentTab = 'DETAILS';
             this.mode = 'EDIT';
             this.pkid = id;
@@ -162,9 +206,11 @@ export class UserComponent {
         this.Record.user_sman_name = '';
         this.Record.user_email_pwd = '';
         this.Record.user_local_server= '';
-        this.Record.user_type_id = 'AGENT-POL'
+        this.Record.user_type_id = 'AGENT'
         this.Record.rec_mode = this.mode;
         this.Record.user_branch_user = false;
+
+        this.RecordDet_Customer = [];
 
         this.InitLov();
     }
@@ -184,6 +230,7 @@ export class UserComponent {
                 this.loading = false;
                 this.LoadData(response.record);
                 this.RecordDet = response.recorddet;
+                this.RecordDet_Customer = response.customerList;
             },
             error => {
                 this.loading = false;
@@ -208,6 +255,7 @@ export class UserComponent {
         this.ErrorMessage = '';
 
         this.Record.RecordDet = this.RecordDet;
+        this.Record.RecordDet_Customer = this.RecordDet_Customer;
 
         this.Record._globalvariables = this.gs.globalVariables;
 
@@ -274,6 +322,16 @@ export class UserComponent {
     
     Close() {
         this.gs.ClosePage('home');
+    }
+
+    changeView(_subItem : string) {
+            this.subItem = _subItem;
+    }
+
+    remove(rec : User_Customer) {
+        if ( !confirm('Remove Record ' + rec.user_customer_name) )
+            return;
+        this.RecordDet_Customer.splice( this.RecordDet_Customer.findIndex( f => f.user_customer_id == rec.user_customer_id),1 );
     }
 
 }
