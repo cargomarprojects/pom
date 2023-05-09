@@ -10,7 +10,7 @@
            [displaydata]="Record.ord_agent_code" (ValueChanged)="LovSelected($event)" [where]="where_agent" #agentlov>
           </app-autocomplete2>
         </div>
-        <div class="col-sm-5 pl-0">
+        <div class="col-sm-5">
           <InputBox [(inputModel)]="Record.ord_agent_name" [maxlength]="60" [uppercase]=true [disabled]="Record.ord_status == 'REPORTED' ? false : true"></InputBox>
         </div>
       </div>
@@ -23,7 +23,7 @@
             [displaydata]="Record.ord_exp_code" (ValueChanged)="LovSelected($event)" [where]="where_shipper">
           </app-autocomplete2>
         </div>
-        <div class="col-sm-5 pl-0">
+        <div class="col-sm-5">
           <InputBox [(inputModel)]="Record.ord_exp_name" [maxlength]="60" [uppercase]=true [disabled]="Record.ord_status == 'REPORTED' ? false : true"></InputBox>
         </div>
       </div>
@@ -36,7 +36,7 @@
             [displaydata]="Record.ord_imp_code" (ValueChanged)="LovSelected($event)" [where]="where_consignee">
           </app-autocomplete2>
         </div>
-        <div class="col-sm-5 pl-0">
+        <div class="col-sm-5">
           <InputBox [(inputModel)]="Record.ord_imp_name" [maxlength]=60 [uppercase]=true [disabled]="Record.ord_status == 'REPORTED' ? false : true"></InputBox>
         </div>
       </div>
@@ -49,7 +49,7 @@
            [displaydata]="Record.ord_buy_agent_code" (ValueChanged)="LovSelected($event)" [where]="where_buy_agent" #agentlov>
           </app-autocomplete2>
         </div>
-        <div class="col-sm-5 pl-0">
+        <div class="col-sm-5">
           <InputBox [(inputModel)]="Record.ord_buy_agent_name" [maxlength]="60" [uppercase]=true [disabled]="Record.ord_status == 'REPORTED' ? false : true"></InputBox>
         </div>
       </div>
@@ -63,7 +63,7 @@
            [displaydata]="Record.ord_pod_agent_code" (ValueChanged)="LovSelected($event)" [where]="where_agent" #agentlov>
           </app-autocomplete2>
         </div>
-        <div class="col-sm-5 pl-0">
+        <div class="col-sm-5">
           <InputBox [(inputModel)]="Record.ord_pod_agent_name" [maxlength]="60" [uppercase]=true [disabled]="Record.ord_status == 'REPORTED' ? false : true"></InputBox>
         </div>
       </div>
