@@ -1,6 +1,6 @@
 
 import { GlobalVariables } from '../../core/models/globalvariables';
-import { User_Customer } from './user_customer';
+import { Userd_Customer } from './userd_customer';
 import { Userd } from './userd';
 
 export class User {
@@ -27,6 +27,6 @@ export class User {
     _globalvariables: GlobalVariables;
 
     RecordDet: Userd[] = [];
-    RecordDet_Customer: User_Customer[] = [];
+    RecordDet_Customer: Userd_Customer[] = [];
 
 }

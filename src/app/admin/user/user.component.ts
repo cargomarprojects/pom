@@ -10,7 +10,7 @@ import { Userd } from '../models/userd';
 
 import { UserService } from '../services/user.service';
 import { SearchTable } from '../../shared/models/searchtable';
-import { User_Customer } from '../models/user_customer';
+import { Userd_Customer } from '../models/userd_customer';
 
 
 @Component({
@@ -56,7 +56,7 @@ export class UserComponent {
 
     RecordDet: Userd[] = [];
 
-    RecordDet_Customer: User_Customer[] = [];
+    RecordDet_Customer: Userd_Customer[] = [];
 
     SALESMANRECORD: SearchTable = new SearchTable();
 
@@ -123,7 +123,7 @@ export class UserComponent {
                 return;
             }
         }
-        let _rec =  new User_Customer();
+        let _rec =  new Userd_Customer();
         _rec.user_id = this.pkid;
         _rec.user_customer_id = this.cust_id;
         _rec.user_customer_name = this.cust_name;
@@ -328,7 +328,7 @@ export class UserComponent {
             this.subItem = _subItem;
     }
 
-    remove(rec : User_Customer) {
+    remove(rec : Userd_Customer) {
         if ( !confirm('Remove Record ' + rec.user_customer_name) )
             return;
         this.RecordDet_Customer.splice( this.RecordDet_Customer.findIndex( f => f.user_customer_id == rec.user_customer_id),1 );
