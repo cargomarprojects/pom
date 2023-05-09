@@ -4,8 +4,6 @@ import { GlobalService } from './core/services/global.service';
 import { environment } from 'src/environments/environment';
 
 
-
-
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',

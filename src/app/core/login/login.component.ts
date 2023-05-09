@@ -128,6 +128,8 @@ export class LoginComponent {
 
     this.loading = true;
 
+    this.gs.globalVariables.appid =  this.gs.getGuid();
+
     this.loginservice.Login(this.username, this.password, this.company_code)
       .subscribe(response => {
         this.loading = false;
@@ -196,7 +198,6 @@ export class LoginComponent {
 
         this.gs.InitdefaultValues();
 
-
         localStorage.setItem('access_token', this.gs.Access_Token);
         localStorage.setItem('company_name', this.gs.Company_Name);
         localStorage.setItem('menu', JSON.stringify(this.gs.MenuList));
@@ -206,7 +207,6 @@ export class LoginComponent {
         localStorage.setItem('dv', JSON.stringify(this.gs.defaultValues));
 
         this.gs.LoadCombo();
-
 
         this.router.navigate(['home'], { replaceUrl: true });
       },

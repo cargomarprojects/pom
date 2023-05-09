@@ -1,5 +1,6 @@
 
 export class GlobalVariables {
+    appid: string ;
     user_pkid: string ;
     user_code: string ;
     user_name: string ;
