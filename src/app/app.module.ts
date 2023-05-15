@@ -33,6 +33,7 @@ import { InterceptorServiceProvider } from './core/services/interceptor.service.
 import { CustomSerializer } from './reducers';
 import { CustomRouteReuseStrategy } from './customReuseRouteStrategy';
 import { RouteReuseStrategy } from '@angular/router';
+import { LoadAppComponent } from './core/load-app/load-app.component';
 
 
 
@@ -68,7 +69,8 @@ import { RouteReuseStrategy } from '@angular/router';
         LoginComponent,
         LoginBranchComponent,
         ContactComponent,
-        LoadingScreenComponent
+        LoadingScreenComponent,
+        LoadAppComponent
     ],
     providers: [
         GlobalService,
