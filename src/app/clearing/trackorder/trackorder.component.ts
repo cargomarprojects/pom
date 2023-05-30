@@ -163,7 +163,8 @@ export class TrackOrderComponent {
     this.mainService.Update(this.Record)
       .subscribe(response => {
         this.loading = false;
-        this.InfoMessage = "Save Complete";
+        // this.InfoMessage = "Save Complete";
+        this.Close();
       },
         error => {
           this.loading = false;
