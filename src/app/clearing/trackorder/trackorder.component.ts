@@ -2,6 +2,7 @@ import { Component, Input, OnInit, OnDestroy, ViewChild, AfterViewInit, Output, 
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../core/services/global.service';
 import { Joborderm } from '../models/joborder';
+import { Tracking_Caption } from '../models/tracking_caption';
 import { TrackOrderService } from '../services/trackorder.service';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
@@ -48,6 +49,7 @@ export class TrackOrderComponent {
   ErrorMessage = "";
   InfoMessage = "";
   Record: Joborderm = <Joborderm>{};
+  TrkCaptionList: Tracking_Caption[] = [];
 
   constructor(
     private mainService: TrackOrderService,
@@ -77,7 +79,29 @@ export class TrackOrderComponent {
 
   // Init Will be called After executing Constructor
   ngOnInit() {
+    this.LoadCaptions(); 
 
+  }
+
+  LoadCaptions() {
+    this.loading = true;
+    let SearchData = {
+      comp_code: this.gs.globalVariables.comp_code,
+      branch_code: this.gs.globalVariables.branch_code,
+      user_code: this.gs.globalVariables.user_code
+    };
+
+    this.ErrorMessage = '';
+    this.InfoMessage = '';
+    this.mainService.GetTrackingCaptions(SearchData)
+      .subscribe(response => {
+        this.loading = false;
+        this.TrkCaptionList = response.list;
+      },
+        error => {
+          this.loading = false;
+          this.ErrorMessage = this.gs.getError(error);
+        });
 
   }
 

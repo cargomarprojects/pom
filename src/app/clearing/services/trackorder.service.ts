@@ -28,5 +28,8 @@ export class TrackOrderService {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/TrackOrder/ChangeStatus', SearchData, this.gs.headerparam2('authorized'));
   }
 
+  GetTrackingCaptions(SearchData :any ) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/TrackOrder/GetTrackingCaptions', SearchData, this.gs.headerparam2('authorized'));
+  }
 }
 
