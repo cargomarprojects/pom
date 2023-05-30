@@ -25,7 +25,7 @@ export interface Joborderm {
   ord_contractno: string;
   ord_exp_code: string;
   ord_imp_code: string;
-  
+
   ord_agent_id: string;
   ord_agent_code: string;
   ord_agent_name: string;
@@ -47,7 +47,7 @@ export interface Joborderm {
   ord_booking_id: string;
   ord_approved: boolean;
   ord_booking_no: string;
-  
+
   ord_boarding1: string;
   ord_boarding2: string;
   ord_instock1: string;
@@ -78,9 +78,20 @@ export interface Joborderm {
   ord_plan_no: number;
   ord_agentref_id: string;
   ord_ftp_status: string;
-  ord_cargo_status_date:string;
-  ord_cargo_readiness_date:string;
-  
+  ord_cargo_status_date: string;
+  ord_cargo_readiness_date: string;
+
+  ord_booking_date_captn: string;
+  ord_rnd_insp_date_captn: string;
+  ord_po_rel_date_captn: string;
+  ord_cargo_ready_date_captn: string;
+  ord_fcr_date_captn:string;
+  ord_insp_date_captn: string;
+  ord_stuf_date_captn: string;
+  ord_whd_date_captn: string;
+  ord_dlv_pol_date_captn: string;
+  ord_dlv_pod_date_captn: string;
+
   job_docno: string;
   rec_mode: string;
   rec_category: string;
@@ -104,12 +115,12 @@ export interface SearchQuery {
   company_code: string,
   branch_code: string,
   year_code: string,
-  
+
   page_count: number,
   page_current: number,
   page_rows: number,
   page_rowcount: number,
-  
+
   job_docno: string,
   ord_po: string,
   ord_invoice: string,
