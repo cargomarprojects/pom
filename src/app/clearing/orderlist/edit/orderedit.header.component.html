@@ -133,6 +133,13 @@
     <div class="col-sm-6">
 
       <div class="form-group row">
+        <label class="col-2 col-form-label col-form-label-sm">Cargo.Ready.Dt</label>
+        <div class="col-4">
+          <app-date [inputdate]="Record.ord_cargo_readiness_date" (ValueChanged)="Record.ord_cargo_readiness_date=$event"></app-date>
+        </div>
+      </div>
+
+      <div class="form-group row">
         <label class="col-2 col-form-label col-form-label-sm">Boarding1</label>
         <div class="col-4">
           <app-date [inputdate]="Record.ord_boarding1" (ValueChanged)="Record.ord_boarding1=$event"></app-date>

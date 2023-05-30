@@ -1,4 +1,3 @@
-
 <div class="page-header">
   <div class="col">
     <label class="col-form-label col-form-label-sm mr-1"><strong>TRACKING</strong></label>
@@ -28,77 +27,78 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">Booking Request Date</label>
+        <label
+          class="col-sm-2 col-form-label col-form-label-sm">{{TrkCaptionList?.length>0?TrkCaptionList[0].trk_caption_name:''}}</label>
         <div class="col-sm-2">
-          <app-date [inputdate]="Record.ord_booking_date" (ValueChanged)="Record.ord_booking_date=$event"></app-date>
+          <app-date [disabled]="TrkCaptionList?.length>0?!TrkCaptionList[0].trk_enabled:true" [inputdate]="Record.ord_booking_date" (ValueChanged)="Record.ord_booking_date=$event"></app-date>
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">Random Inspection Date</label>
+        <label class="col-sm-2 col-form-label col-form-label-sm">{{TrkCaptionList?.length>1?TrkCaptionList[1].trk_caption_name:''}}</label>
         <div class="col-sm-2">
-          <app-date [inputdate]="Record.ord_rnd_insp_date" (ValueChanged)="Record.ord_rnd_insp_date=$event"></app-date>
+          <app-date [disabled]="TrkCaptionList?.length>1?!TrkCaptionList[1].trk_enabled:true" [inputdate]="Record.ord_rnd_insp_date" (ValueChanged)="Record.ord_rnd_insp_date=$event"></app-date>
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">PO Release Date</label>
+        <label class="col-sm-2 col-form-label col-form-label-sm">{{TrkCaptionList?.length>2?TrkCaptionList[2].trk_caption_name:''}}</label>
         <div class="col-sm-2">
-          <app-date [inputdate]="Record.ord_po_rel_date" (ValueChanged)="Record.ord_po_rel_date=$event"></app-date>
+          <app-date [disabled]="TrkCaptionList?.length>2?!TrkCaptionList[2].trk_enabled:true" [inputdate]="Record.ord_po_rel_date" (ValueChanged)="Record.ord_po_rel_date=$event"></app-date>
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">Cargo Ready Date</label>
+        <label class="col-sm-2 col-form-label col-form-label-sm">{{TrkCaptionList?.length>3?TrkCaptionList[3].trk_caption_name:''}}</label>
         <div class="col-sm-2">
-          <app-date [inputdate]="Record.ord_cargo_ready_date" (ValueChanged)="Record.ord_cargo_ready_date=$event">
+          <app-date [disabled]="TrkCaptionList?.length>3?!TrkCaptionList[3].trk_enabled:true" [inputdate]="Record.ord_cargo_ready_date" (ValueChanged)="Record.ord_cargo_ready_date=$event">
           </app-date>
         </div>
       </div>
 
-    <!-- </div>
+      <!-- </div>
     <div class="col-sm-4"> -->
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">FCR Date</label>
+        <label class="col-sm-2 col-form-label col-form-label-sm">{{TrkCaptionList?.length>4?TrkCaptionList[4].trk_caption_name:''}}</label>
         <div class="col-sm-2">
-          <app-date [inputdate]="Record.ord_fcr_date" (ValueChanged)="Record.ord_fcr_date=$event"></app-date>
+          <app-date [disabled]="TrkCaptionList?.length>4?!TrkCaptionList[4].trk_enabled:true" [inputdate]="Record.ord_fcr_date" (ValueChanged)="Record.ord_fcr_date=$event"></app-date>
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">Inspection Date</label>
+        <label class="col-sm-2 col-form-label col-form-label-sm">{{TrkCaptionList?.length>5?TrkCaptionList[5].trk_caption_name:''}}</label>
         <div class="col-sm-2">
-          <app-date [inputdate]="Record.ord_insp_date" (ValueChanged)="Record.ord_insp_date=$event"></app-date>
+          <app-date [disabled]="TrkCaptionList?.length>5?!TrkCaptionList[5].trk_enabled:true" [inputdate]="Record.ord_insp_date" (ValueChanged)="Record.ord_insp_date=$event"></app-date>
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">Stuffing Date</label>
+        <label class="col-sm-2 col-form-label col-form-label-sm">{{TrkCaptionList?.length>6?TrkCaptionList[6].trk_caption_name:''}}</label>
         <div class="col-sm-2">
-          <app-date [inputdate]="Record.ord_stuf_date" (ValueChanged)="Record.ord_stuf_date=$event"></app-date>
+          <app-date [disabled]="TrkCaptionList?.length>6?!TrkCaptionList[6].trk_enabled:true" [inputdate]="Record.ord_stuf_date" (ValueChanged)="Record.ord_stuf_date=$event"></app-date>
         </div>
       </div>
 
 
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">Warehouse Depature Date</label>
+        <label class="col-sm-2 col-form-label col-form-label-sm">{{TrkCaptionList?.length>7?TrkCaptionList[7].trk_caption_name:''}}</label>
         <div class="col-sm-2">
-          <app-date [inputdate]="Record.ord_whd_date" (ValueChanged)="Record.ord_whd_date=$event"></app-date>
+          <app-date [disabled]="TrkCaptionList?.length>7?!TrkCaptionList[7].trk_enabled:true" [inputdate]="Record.ord_whd_date" (ValueChanged)="Record.ord_whd_date=$event"></app-date>
         </div>
       </div>
 
-    <!-- </div>
+      <!-- </div>
     <div class="col-sm-4"> -->
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">Delivery Date POL</label>
+        <label class="col-sm-2 col-form-label col-form-label-sm">{{TrkCaptionList?.length>8?TrkCaptionList[8].trk_caption_name:''}}</label>
         <div class="col-sm-2">
-          <app-date [inputdate]="Record.ord_dlv_pol_date" (ValueChanged)="Record.ord_dlv_pol_date=$event"></app-date>
+          <app-date [disabled]="TrkCaptionList?.length>8?!TrkCaptionList[8].trk_enabled:true" [inputdate]="Record.ord_dlv_pol_date" (ValueChanged)="Record.ord_dlv_pol_date=$event"></app-date>
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">Delivery Date POD</label>
+        <label class="col-sm-2 col-form-label col-form-label-sm">{{TrkCaptionList?.length>9?TrkCaptionList[9].trk_caption_name:''}}</label>
         <div class="col-sm-2">
-          <app-date [inputdate]="Record.ord_dlv_pod_date" (ValueChanged)="Record.ord_dlv_pod_date=$event"></app-date>
+          <app-date [disabled]="TrkCaptionList?.length>9?!TrkCaptionList[9].trk_enabled:true" [inputdate]="Record.ord_dlv_pod_date" (ValueChanged)="Record.ord_dlv_pod_date=$event"></app-date>
         </div>
         <div class="col-sm-2">
           <button [disabled]="loading" (click)="Update()" class="btn btn-primary btn-sm">Save</button>

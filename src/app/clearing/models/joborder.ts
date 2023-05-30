@@ -79,6 +79,7 @@ export interface Joborderm {
   ord_agentref_id: string;
   ord_ftp_status: string;
   ord_cargo_status_date:string;
+  ord_cargo_readiness_date:string;
   
   job_docno: string;
   rec_mode: string;

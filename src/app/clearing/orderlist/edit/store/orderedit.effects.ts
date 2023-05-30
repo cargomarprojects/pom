@@ -92,8 +92,8 @@ export class OrderEditEffects {
                     ord_boarding1 :'',
                     ord_boarding2 :'',
                     ord_instock1 :'',                    
-                    ord_instock2 :''                    
-
+                    ord_instock2 :'',
+                    ord_cargo_readiness_date:''                    
                 };
                 const data = <JobOrderEditModel>{ isError: false, message: '', urlid: routeparam.urlid, menuid: routeparam.menuid, record: record };
                 console.log(data);
