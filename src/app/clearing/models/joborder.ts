@@ -85,12 +85,22 @@ export interface Joborderm {
   ord_rnd_insp_date_captn: string;
   ord_po_rel_date_captn: string;
   ord_cargo_ready_date_captn: string;
-  ord_fcr_date_captn:string;
+  ord_fcr_date_captn: string;
   ord_insp_date_captn: string;
   ord_stuf_date_captn: string;
   ord_whd_date_captn: string;
   ord_dlv_pol_date_captn: string;
   ord_dlv_pod_date_captn: string;
+  ord_booking_date_enabled: boolean;
+  ord_rnd_insp_date_enabled: boolean;
+  ord_po_rel_date_enabled: boolean;
+  ord_cargo_ready_date_enabled: boolean;
+  ord_fcr_date_enabled: boolean;
+  ord_insp_date_enabled: boolean;
+  ord_stuf_date_enabled: boolean;
+  ord_whd_date_enabled: boolean;
+  ord_dlv_pol_date_enabled: boolean;
+  ord_dlv_pod_date_enabled: boolean;
 
   job_docno: string;
   rec_mode: string;
