@@ -125,6 +125,7 @@ export interface SearchQuery {
   company_code: string,
   branch_code: string,
   year_code: string,
+  user_code: string,
 
   page_count: number,
   page_current: number,

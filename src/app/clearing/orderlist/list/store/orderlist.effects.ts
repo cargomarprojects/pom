@@ -36,6 +36,7 @@ export class OrderListEffects {
                 const searchquery = <SearchQuery>{
                     branch_code: this.gs.globalVariables.branch_code,
                     company_code: this.gs.globalVariables.user_company_code,
+                    user_code: this.gs.globalVariables.user_code,
                     searchstring: '',
                     file_pkid: '',
                     from_date: '',
@@ -86,6 +87,7 @@ export class OrderListEffects {
                 searchstring: ent.searchQuery.searchstring,
                 company_code: this.gs.globalVariables.comp_code,
                 branch_code: this.gs.globalVariables.branch_code,
+                user_code: this.gs.globalVariables.user_code,
                 year_code: this.gs.globalVariables.year_code,
                 page_count: ent.pageQuery.page_count,
                 page_current: ent.pageQuery.page_current,
