@@ -40,7 +40,18 @@ export class TrackOrderComponent {
   InitCompleted: boolean = false;
   menu_record: any;
 
-  disableSave = true;
+
+  disableSave0: boolean = true;
+  disableSave1: boolean = true;
+  disableSave2: boolean = true;
+  disableSave3: boolean = true;
+  disableSave4: boolean = true;
+  disableSave5: boolean = true;
+  disableSave6: boolean = true;
+  disableSave7: boolean = true;
+  disableSave8: boolean = true;
+  disableSave9: boolean = true;
+
   loading = false;
   currentTab = 'LIST';
   sub: any;
@@ -97,6 +108,13 @@ export class TrackOrderComponent {
       .subscribe(response => {
         this.loading = false;
         this.TrkCaptionList = response.list;
+
+        for (var i = 0; i < this.TrkCaptionList.length; i++) {
+          if (this.TrkCaptionList[i].trk_enabled) {
+            this.EnableSave(i);
+            break;
+          }
+        }
       },
         error => {
           this.loading = false;
@@ -167,6 +185,7 @@ export class TrackOrderComponent {
     this.mainService.GetRecord(SearchData)
       .subscribe(response => {
         this.loading = false;
+        this.EnableSave(response.enableseq);
         this.LoadData(response.record);
       },
         error => {
@@ -181,7 +200,35 @@ export class TrackOrderComponent {
   }
 
   // Save Data
-  Update() {
+  // Update() {
+
+  //   this.ErrorMessage = '';
+  //   this.InfoMessage = '';
+  //   if (this.Record.ord_pkid.trim().length <= 0) {
+  //     this.ErrorMessage = " Cannot Save Invalid ID";
+  //     alert(this.ErrorMessage);
+  //     return;
+  //   }
+
+  //   this.loading = true;
+  //   this.ErrorMessage = '';
+  //   this.InfoMessage = '';
+  //   this.Record._globalvariables = this.gs.globalVariables;
+  //   this.mainService.Update(this.Record)
+  //     .subscribe(response => {
+  //       this.loading = false;
+  //       // this.InfoMessage = "Save Complete";
+  //       this.Close();
+  //     },
+  //       error => {
+  //         this.loading = false;
+  //         this.ErrorMessage = this.gs.getError(error);
+  //         alert(this.ErrorMessage);
+  //       });
+  // }
+
+  // Save Data
+  Update(_seq: number) {
 
     this.ErrorMessage = '';
     this.InfoMessage = '';
@@ -194,11 +241,13 @@ export class TrackOrderComponent {
     this.loading = true;
     this.ErrorMessage = '';
     this.InfoMessage = '';
+    this.Record.ord_trk_date_seq = _seq;
     this.Record._globalvariables = this.gs.globalVariables;
     this.mainService.Update(this.Record)
       .subscribe(response => {
         this.loading = false;
         // this.InfoMessage = "Save Complete";
+        // this.EnableSave(response.enableseq);
         this.Close();
       },
         error => {
@@ -207,8 +256,6 @@ export class TrackOrderComponent {
           alert(this.ErrorMessage);
         });
   }
-
-
 
   allvalid() {
     let sError: string = "";
@@ -279,6 +326,37 @@ export class TrackOrderComponent {
     this.closeModalWindow.emit();
   }
 
-
+  EnableSave(_seq: number) {
+    this.disableSave0 = true;
+    this.disableSave1 = true;
+    this.disableSave2 = true;
+    this.disableSave3 = true;
+    this.disableSave4 = true;
+    this.disableSave5 = true;
+    this.disableSave6 = true;
+    this.disableSave7 = true;
+    this.disableSave8 = true;
+    this.disableSave9 = true;
+    if (_seq == 0)
+      this.disableSave0 = false;
+    else if (_seq == 1)
+      this.disableSave1 = false;
+    else if (_seq == 2)
+      this.disableSave2 = false;
+    else if (_seq == 3)
+      this.disableSave3 = false;
+    else if (_seq == 4)
+      this.disableSave4 = false;
+    else if (_seq == 5)
+      this.disableSave5 = false;
+    else if (_seq == 6)
+      this.disableSave6 = false;
+    else if (_seq == 7)
+      this.disableSave7 = false;
+    else if (_seq == 8)
+      this.disableSave8 = false;
+    else if (_seq == 9)
+      this.disableSave9 = false;
+  }
 
 }
