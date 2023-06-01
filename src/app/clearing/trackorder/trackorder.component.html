@@ -28,107 +28,107 @@
     <div class="col-sm-12">
       <div class="form-group row">
         <label
-          class="col-sm-3 col-form-label col-form-label-sm">{{TrkCaptionList?.length>0?TrkCaptionList[0].trk_caption_name:'Booking Request Date'}}</label>
+          class="col-sm-3 col-form-label col-form-label-sm">{{GteCaptionName('BKD')}}</label>
         <div class="col-sm-2">
           <app-date [disabled]="disableSave0" [inputdate]="Record.ord_booking_date" (ValueChanged)="Record.ord_booking_date=$event"></app-date>
         </div>
         <div class="col-sm-2">
-          <button [disabled]="disableSave0" (click)="Update(0)" class="btn btn-primary btn-sm">Update</button>
+          <button [disabled]="disableSave0" (click)="Update('BKD')" class="btn btn-primary btn-sm">Update</button>
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">{{TrkCaptionList?.length>1?TrkCaptionList[1].trk_caption_name:'Random Inspection Date'}}</label>
+        <label class="col-sm-3 col-form-label col-form-label-sm">{{GteCaptionName('RND')}}</label>
         <div class="col-sm-2">
           <app-date [disabled]="disableSave1" [inputdate]="Record.ord_rnd_insp_date" (ValueChanged)="Record.ord_rnd_insp_date=$event"></app-date>
         </div>
         <div class="col-sm-2">
-          <button [disabled]="disableSave1" (click)="Update(1)" class="btn btn-primary btn-sm">Update</button>
+          <button [disabled]="disableSave1" (click)="Update('RND')" class="btn btn-primary btn-sm">Update</button>
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">{{TrkCaptionList?.length>2?TrkCaptionList[2].trk_caption_name:'PO Release Date'}}</label>
+        <label class="col-sm-3 col-form-label col-form-label-sm">{{GteCaptionName('POR')}}</label>
         <div class="col-sm-2">
           <app-date [disabled]="disableSave2" [inputdate]="Record.ord_po_rel_date" (ValueChanged)="Record.ord_po_rel_date=$event"></app-date>
         </div>
         <div class="col-sm-2">
-          <button [disabled]="disableSave2" (click)="Update(2)" class="btn btn-primary btn-sm">Update</button>
+          <button [disabled]="disableSave2" (click)="Update('POR')" class="btn btn-primary btn-sm">Update</button>
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">{{TrkCaptionList?.length>3?TrkCaptionList[3].trk_caption_name:'Cargo Ready Date'}}</label>
+        <label class="col-sm-3 col-form-label col-form-label-sm">{{GteCaptionName('CR')}}</label>
         <div class="col-sm-2">
           <app-date [disabled]="disableSave3" [inputdate]="Record.ord_cargo_ready_date" (ValueChanged)="Record.ord_cargo_ready_date=$event">
           </app-date>
         </div>
         <div class="col-sm-2">
-          <button [disabled]="disableSave3" (click)="Update(3)" class="btn btn-primary btn-sm">Update</button>
+          <button [disabled]="disableSave3" (click)="Update('CR')" class="btn btn-primary btn-sm">Update</button>
         </div>
       </div>
 
       <!-- </div>
     <div class="col-sm-4"> -->
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">{{TrkCaptionList?.length>4?TrkCaptionList[4].trk_caption_name:'FCR Date'}}</label>
+        <label class="col-sm-3 col-form-label col-form-label-sm">{{GteCaptionName('FCR')}}</label>
         <div class="col-sm-2">
           <app-date [disabled]="disableSave4" [inputdate]="Record.ord_fcr_date" (ValueChanged)="Record.ord_fcr_date=$event"></app-date>
         </div>
         <div class="col-sm-2">
-          <button [disabled]="disableSave4" (click)="Update(4)" class="btn btn-primary btn-sm">Update</button>
+          <button [disabled]="disableSave4" (click)="Update('FCR')" class="btn btn-primary btn-sm">Update</button>
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">{{TrkCaptionList?.length>5?TrkCaptionList[5].trk_caption_name:'Inspection Date'}}</label>
+        <label class="col-sm-3 col-form-label col-form-label-sm">{{GteCaptionName('INSP')}}</label>
         <div class="col-sm-2">
           <app-date [disabled]="disableSave5" [inputdate]="Record.ord_insp_date" (ValueChanged)="Record.ord_insp_date=$event"></app-date>
         </div>
         <div class="col-sm-2">
-          <button [disabled]="disableSave5" (click)="Update(5)" class="btn btn-primary btn-sm">Update</button>
+          <button [disabled]="disableSave5" (click)="Update('INSP')" class="btn btn-primary btn-sm">Update</button>
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">{{TrkCaptionList?.length>6?TrkCaptionList[6].trk_caption_name:'Stuffing Date'}}</label>
+        <label class="col-sm-3 col-form-label col-form-label-sm">{{GteCaptionName('STUF')}}</label>
         <div class="col-sm-2">
           <app-date [disabled]="disableSave6" [inputdate]="Record.ord_stuf_date" (ValueChanged)="Record.ord_stuf_date=$event"></app-date>
         </div>
         <div class="col-sm-2">
-          <button [disabled]="disableSave6" (click)="Update(6)" class="btn btn-primary btn-sm">Update</button>
+          <button [disabled]="disableSave6" (click)="Update('STUF')" class="btn btn-primary btn-sm">Update</button>
         </div>
       </div>
 
 
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">{{TrkCaptionList?.length>7?TrkCaptionList[7].trk_caption_name:'Warehouse Depature Date'}}</label>
+        <label class="col-sm-3 col-form-label col-form-label-sm">{{GteCaptionName('WHD')}}</label>
         <div class="col-sm-2">
           <app-date [disabled]="disableSave7" [inputdate]="Record.ord_whd_date" (ValueChanged)="Record.ord_whd_date=$event"></app-date>
         </div>
         <div class="col-sm-2">
-          <button [disabled]="disableSave7" (click)="Update(7)" class="btn btn-primary btn-sm">Update</button>
+          <button [disabled]="disableSave7" (click)="Update('WHD')" class="btn btn-primary btn-sm">Update</button>
         </div>
       </div>
 
       <!-- </div>
     <div class="col-sm-4"> -->
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">{{TrkCaptionList?.length>8?TrkCaptionList[8].trk_caption_name:'POL Delivery Date'}}</label>
+        <label class="col-sm-3 col-form-label col-form-label-sm">{{GteCaptionName('DLV.POL')}}</label>
         <div class="col-sm-2">
           <app-date [disabled]="disableSave8" [inputdate]="Record.ord_dlv_pol_date" (ValueChanged)="Record.ord_dlv_pol_date=$event"></app-date>
         </div>
         <div class="col-sm-2">
-          <button [disabled]="disableSave8" (click)="Update(8)" class="btn btn-primary btn-sm">Update</button>
+          <button [disabled]="disableSave8" (click)="Update('DLV.POL')" class="btn btn-primary btn-sm">Update</button>
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">{{TrkCaptionList?.length>9?TrkCaptionList[9].trk_caption_name:'POD Delivery Date'}}</label>
+        <label class="col-sm-3 col-form-label col-form-label-sm">{{GteCaptionName('DLV.POD')}}</label>
         <div class="col-sm-2">
           <app-date [disabled]="disableSave9" [inputdate]="Record.ord_dlv_pod_date" (ValueChanged)="Record.ord_dlv_pod_date=$event"></app-date>
         </div>
         <div class="col-sm-2">
-          <button [disabled]="disableSave9" (click)="Update(9)" class="btn btn-primary btn-sm mr-1">Update</button>
+          <button [disabled]="disableSave9" (click)="Update('DLV.POD')" class="btn btn-primary btn-sm mr-1">Update</button>
           <button class="btn btn-primary btn-sm" (click)="Close()">Close</button>
         </div>
       </div>

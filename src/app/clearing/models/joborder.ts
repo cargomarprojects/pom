@@ -102,7 +102,7 @@ export interface Joborderm {
   ord_dlv_pol_date_enabled: boolean;
   ord_dlv_pod_date_enabled: boolean;
 
-  ord_trk_date_seq: number;
+  ord_trk_date_type: string;
 
   job_docno: string;
   rec_mode: string;

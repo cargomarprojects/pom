@@ -228,7 +228,7 @@ export class TrackOrderComponent {
   // }
 
   // Save Data
-  Update(_seq: number) {
+  Update(_type: string) {
 
     this.ErrorMessage = '';
     this.InfoMessage = '';
@@ -241,7 +241,7 @@ export class TrackOrderComponent {
     this.loading = true;
     this.ErrorMessage = '';
     this.InfoMessage = '';
-    this.Record.ord_trk_date_seq = _seq;
+    this.Record.ord_trk_date_type = _type;
     this.Record._globalvariables = this.gs.globalVariables;
     this.mainService.Update(this.Record)
       .subscribe(response => {
@@ -357,6 +357,14 @@ export class TrackOrderComponent {
       this.disableSave8 = false;
     else if (_seq == 9)
       this.disableSave9 = false;
+  }
+
+  GteCaptionName(_type: string) {
+    var REC = this.TrkCaptionList.find(rec => rec.trk_caption_code == _type);
+    if (REC != null)
+      return REC.trk_caption_name;
+    else
+      return _type;
   }
 
 }
