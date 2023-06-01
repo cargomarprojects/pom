@@ -115,6 +115,10 @@ export class OrderListHeaderComponent implements OnInit {
       alert('No Rows Selected');
       return;
     }
+    if (this.total > 1) {
+      alert('Please Select Single Row And Continue.....');
+      return;
+    }
     this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true  });
     /*
         var urlid = this.gs.getParameter('urlid');
