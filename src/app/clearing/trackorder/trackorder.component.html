@@ -62,15 +62,15 @@
         </div>
       </div>
 
-      <div *ngIf="GetTrkEnabled('CR')" class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">{{GetCaptionName('CR')}}</label>
+      <div *ngIf="GetTrkEnabled('CFS')" class="form-group row">
+        <label class="col-sm-3 col-form-label col-form-label-sm">{{GetCaptionName('CFS')}}</label>
         <div class="col-sm-2">
-          <app-date [disabled]="IsDisableSave('CR')" [inputdate]="Record.ord_cargo_ready_date"
+          <app-date [disabled]="IsDisableSave('CFS')" [inputdate]="Record.ord_cargo_ready_date"
             (ValueChanged)="Record.ord_cargo_ready_date=$event">
           </app-date>
         </div>
         <div class="col-sm-2">
-          <button [disabled]="IsDisableSave('CR')" (click)="Update('CR')" class="btn btn-primary btn-sm">Update</button>
+          <button [disabled]="IsDisableSave('CFS')" (click)="Update('CFS')" class="btn btn-primary btn-sm">Update</button>
         </div>
       </div>
 
@@ -125,25 +125,25 @@
 
       <!-- </div>
     <div class="col-sm-4"> -->
-      <div *ngIf="GetTrkEnabled('DLV.POL')" class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">{{GetCaptionName('DLV.POL')}}</label>
+      <div *ngIf="GetTrkEnabled('DPOL')" class="form-group row">
+        <label class="col-sm-3 col-form-label col-form-label-sm">{{GetCaptionName('DPOL')}}</label>
         <div class="col-sm-2">
-          <app-date [disabled]="IsDisableSave('DLV.POL')" [inputdate]="Record.ord_dlv_pol_date"
+          <app-date [disabled]="IsDisableSave('DPOL')" [inputdate]="Record.ord_dlv_pol_date"
             (ValueChanged)="Record.ord_dlv_pol_date=$event"></app-date>
         </div>
         <div class="col-sm-2">
-          <button [disabled]="IsDisableSave('DLV.POL')" (click)="Update('DLV.POL')"
+          <button [disabled]="IsDisableSave('DPOL')" (click)="Update('DPOL')"
             class="btn btn-primary btn-sm">Update</button>
         </div>
       </div>
-      <div *ngIf="GetTrkEnabled('DLV.POD')" class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">{{GetCaptionName('DLV.POD')}}</label>
+      <div *ngIf="GetTrkEnabled('DPOD')" class="form-group row">
+        <label class="col-sm-3 col-form-label col-form-label-sm">{{GetCaptionName('DPOD')}}</label>
         <div class="col-sm-2">
-          <app-date [disabled]="IsDisableSave('DLV.POD')" [inputdate]="Record.ord_dlv_pod_date"
+          <app-date [disabled]="IsDisableSave('DPOD')" [inputdate]="Record.ord_dlv_pod_date"
             (ValueChanged)="Record.ord_dlv_pod_date=$event"></app-date>
         </div>
         <div class="col-sm-2">
-          <button [disabled]="IsDisableSave('DLV.POD')" (click)="Update('DLV.POD')"
+          <button [disabled]="IsDisableSave('DPOD')" (click)="Update('DPOD')"
             class="btn btn-primary btn-sm">Update</button>
         </div>
       </div>
