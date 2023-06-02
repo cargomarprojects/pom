@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ChangeDetectionStrategy } from '@angular/core';
 import { Joborderm } from '../../models/joborder';
+import { Tracking_Caption } from '../../models/tracking_caption';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/reducers';
-import { SelectDeselctRecord} from './store/orderlist.actions';
+import { SelectDeselctRecord } from './store/orderlist.actions';
 import { GlobalService } from 'src/app/core/services/global.service';
 
 @Component({
@@ -14,37 +15,55 @@ import { GlobalService } from 'src/app/core/services/global.service';
 export class OrderListDetailComponent implements OnInit {
 
 
-
-  records : Joborderm[];
-  @Input() set _records( value : Joborderm[]){
+  trkCaptionList: Tracking_Caption[] = [];
+  records: Joborderm[];
+  @Input() set _records(value: Joborderm[]) {
     this.records = JSON.parse(JSON.stringify(value));
+  }
+
+  @Input() set _trkCaptionList(value: Tracking_Caption[]) {
+    this.trkCaptionList = JSON.parse(JSON.stringify(value));
   }
 
   @Output() EditRecord = new EventEmitter<any>();
 
   selectcheck = false;
-  
 
   constructor(
-    private store : Store<AppState>,
-    private gs : GlobalService
+    private store: Store<AppState>,
+    private gs: GlobalService
   ) { }
-  
+
   ngOnInit() {
+    
   }
 
-  handleChange(rec : Joborderm){
+  
+
+  GetCaptionCode(_type: string) {
+    var REC = this.trkCaptionList.find(rec => rec.trk_caption_code == _type);
+    if (REC != null) {
+      if (REC.trk_enabled)
+        return REC.trk_caption_code;
+      else
+        return '';
+    }
+    else
+      return '';
+  }
+
+  handleChange(rec: Joborderm) {
     var urlid = this.gs.getParameter('urlid');
-    this.store.dispatch( SelectDeselctRecord ({ urlid : urlid, pkid : rec.ord_pkid, ball :false, flag : rec.ord_selected }) );
+    this.store.dispatch(SelectDeselctRecord({ urlid: urlid, pkid: rec.ord_pkid, ball: false, flag: rec.ord_selected }));
   }
 
   ActionHandler(action: string, id: string) {
-    this.EditRecord.emit({action: action , id : id});
-  } 
+    this.EditRecord.emit({ action: action, id: id });
+  }
 
-  SelectCheckbox(flag : boolean){
+  SelectCheckbox(flag: boolean) {
     var urlid = this.gs.getParameter('urlid');
-    this.store.dispatch( SelectDeselctRecord ({ urlid : urlid, pkid : '', ball :true, flag : flag }) );
+    this.store.dispatch(SelectDeselctRecord({ urlid: urlid, pkid: '', ball: true, flag: flag }));
   }
 
 }
