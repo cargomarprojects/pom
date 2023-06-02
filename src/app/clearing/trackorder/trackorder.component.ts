@@ -276,6 +276,7 @@ export class TrackOrderComponent {
   }
 
   IsDisableSave(_dateCode: string) {
+    // if (_dateCode == this.enableDateCode || (this.gs.globalVariables.user_code == 'ADMIN' && this.enableDateCode))
     if (_dateCode == this.enableDateCode)
       return false;
     else
@@ -293,7 +294,7 @@ export class TrackOrderComponent {
   GetTrkEnabled(_type: string) {
     if (!this.gs.HideDisabledTrackingDate)
       return true;
-      
+
     var REC = this.TrkCaptionList.find(rec => rec.trk_caption_code == _type);
     if (REC != null)
       return REC.trk_enabled;

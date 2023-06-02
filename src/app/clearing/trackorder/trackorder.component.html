@@ -125,14 +125,14 @@
 
       <!-- </div>
     <div class="col-sm-4"> -->
-      <div *ngIf="GetTrkEnabled('DPOL')" class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">{{GetCaptionName('DPOL')}}</label>
+      <div *ngIf="GetTrkEnabled('SOB')" class="form-group row">
+        <label class="col-sm-3 col-form-label col-form-label-sm">{{GetCaptionName('SOB')}}</label>
         <div class="col-sm-2">
-          <app-date [disabled]="IsDisableSave('DPOL')" [inputdate]="Record.ord_dlv_pol_date"
+          <app-date [disabled]="IsDisableSave('SOB')" [inputdate]="Record.ord_dlv_pol_date"
             (ValueChanged)="Record.ord_dlv_pol_date=$event"></app-date>
         </div>
         <div class="col-sm-2">
-          <button [disabled]="IsDisableSave('DPOL')" (click)="Update('DPOL')"
+          <button [disabled]="IsDisableSave('SOB')" (click)="Update('SOB')"
             class="btn btn-primary btn-sm">Update</button>
         </div>
       </div>

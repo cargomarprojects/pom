@@ -242,7 +242,7 @@
   </div>
 </div>
 
-<div class="page-box">
+<div class="page-details">
   <div class="col-sm-12">
     <div class="row">
       <div class="col-6">
@@ -259,54 +259,50 @@
 <div *ngIf="Record.ord_booking_date_captn">
   <div class="page-details" *ngIf="Record.rec_mode == 'EDIT'">
     <div class="row">
-      <div class="col-sm-4">
+      <div class="col-sm-12">
         <div *ngIf="Record.ord_booking_date" class="form-group row">
-          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_booking_date_captn}}</label>
-          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_booking_date}}</label>
+          <label class="col-sm-3 col-form-label col-form-label-sm">{{Record.ord_booking_date_captn}}</label>
+          <label class="col-sm-6 col-form-label col-form-label-sm">{{Record.ord_booking_date}}</label>
         </div>
         <div *ngIf="Record.ord_rnd_insp_date" class="form-group row">
-          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_rnd_insp_date_captn}}</label>
-          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_rnd_insp_date}}</label>
+          <label class="col-sm-3 col-form-label col-form-label-sm">{{Record.ord_rnd_insp_date_captn}}</label>
+          <label class="col-sm-6 col-form-label col-form-label-sm">{{Record.ord_rnd_insp_date}}</label>
         </div>
         <div *ngIf="Record.ord_po_rel_date" class="form-group row">
-          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_po_rel_date_captn}}</label>
-          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_po_rel_date}}</label>
+          <label class="col-sm-3 col-form-label col-form-label-sm">{{Record.ord_po_rel_date_captn}}</label>
+          <label class="col-sm-6 col-form-label col-form-label-sm">{{Record.ord_po_rel_date}}</label>
         </div>
         <div *ngIf="Record.ord_cargo_ready_date" class="form-group row">
-          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_cargo_ready_date_captn}}</label>
-          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_cargo_ready_date}}</label>
+          <label class="col-sm-3 col-form-label col-form-label-sm">{{Record.ord_cargo_ready_date_captn}}</label>
+          <label class="col-sm-6 col-form-label col-form-label-sm">{{Record.ord_cargo_ready_date}}</label>
         </div>
 
-      </div>
-
-      <div class="col-sm-4">
+  
         <div *ngIf="Record.ord_fcr_date"  class="form-group row">
-          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_fcr_date_captn}}</label>
-          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_fcr_date}}</label>
+          <label class="col-sm-3 col-form-label col-form-label-sm">{{Record.ord_fcr_date_captn}}</label>
+          <label class="col-sm-6 col-form-label col-form-label-sm">{{Record.ord_fcr_date}}</label>
         </div>
         <div *ngIf="Record.ord_insp_date"  class="form-group row">
-          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_insp_date_captn}}</label>
-          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_insp_date}}</label>
+          <label class="col-sm-3 col-form-label col-form-label-sm">{{Record.ord_insp_date_captn}}</label>
+          <label class="col-sm-6 col-form-label col-form-label-sm">{{Record.ord_insp_date}}</label>
         </div>
         <div *ngIf="Record.ord_stuf_date"  class="form-group row">
-          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_stuf_date_captn}}</label>
-          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_stuf_date}}</label>
+          <label class="col-sm-3 col-form-label col-form-label-sm">{{Record.ord_stuf_date_captn}}</label>
+          <label class="col-sm-6 col-form-label col-form-label-sm">{{Record.ord_stuf_date}}</label>
         </div>
         <div *ngIf="Record.ord_whd_date"  class="form-group row">
-          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_whd_date_captn}}</label>
-          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_whd_date}}</label>
+          <label class="col-sm-3 col-form-label col-form-label-sm">{{Record.ord_whd_date_captn}}</label>
+          <label class="col-sm-6 col-form-label col-form-label-sm">{{Record.ord_whd_date}}</label>
         </div>
 
-      </div>
-
-      <div class="col-sm-4">
+      
         <div *ngIf="Record.ord_dlv_pol_date"  class="form-group row">
-          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_dlv_pol_date_captn}}</label>
-          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_dlv_pol_date}}</label>
+          <label class="col-sm-3 col-form-label col-form-label-sm">{{Record.ord_dlv_pol_date_captn}}</label>
+          <label class="col-sm-6 col-form-label col-form-label-sm">{{Record.ord_dlv_pol_date}}</label>
         </div>
         <div *ngIf="Record.ord_dlv_pod_date"  class="form-group row">
-          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_dlv_pod_date_captn}}</label>
-          <label class="col-6 col-form-label col-form-label-sm">{{Record.ord_dlv_pod_date}}</label>
+          <label class="col-sm-3 col-form-label col-form-label-sm">{{Record.ord_dlv_pod_date_captn}}</label>
+          <label class="col-sm-6 col-form-label col-form-label-sm">{{Record.ord_dlv_pod_date}}</label>
         </div>
       </div>
 
