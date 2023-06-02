@@ -88,6 +88,7 @@
                 <option [value]="'ALL'">ALL</option>
                 <option [value]="'REPORTED'">REPORTED</option>
                 <option [value]="'APPROVED'">APPROVED</option>
+                <option [value]="'REPORTED-APPROVED'">REPORTED + APPROVED</option>
                 <option [value]="'CANCELLED'">CANCELLED</option>
                 <option [value]="'ON HOLD'">ON HOLD</option>
               </select>
@@ -98,7 +99,9 @@
             <label class="col-3 col-form-label col-form-label-sm">Pending</label>
             <div class="col-9">
               <select class="form-control form-control-sm" [(ngModel)]="query.ord_showpending">
-                <option [value]="'Y'">SHOW PENDING ONLY</option>
+                <!-- <option [value]="'Y'">SHOW PENDING ONLY</option> -->
+                <option [value]="'SOB-CONFIRMED'">SOB CONFIRMED</option>
+                <option [value]="'SOB-NOT-CONFIRMED'">SOB NOT CONFIRMED</option>
                 <option [value]="'N'">NA</option>
               </select>
             </div>
