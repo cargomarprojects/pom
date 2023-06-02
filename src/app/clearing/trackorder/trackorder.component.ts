@@ -81,7 +81,7 @@ export class TrackOrderComponent {
 
   // Init Will be called After executing Constructor
   ngOnInit() {
-     this.LoadCaptions();
+    this.LoadCaptions();
   }
 
   LoadCaptions() {
@@ -288,6 +288,17 @@ export class TrackOrderComponent {
       return REC.trk_caption_name;
     else
       return _type;
+  }
+
+  GetTrkEnabled(_type: string) {
+    if (!this.gs.HideDisabledTrackingDate)
+      return true;
+      
+    var REC = this.TrkCaptionList.find(rec => rec.trk_caption_code == _type);
+    if (REC != null)
+      return REC.trk_enabled;
+    else
+      return false;
   }
   EnableLastdate() {
     this.enableDateCode = this.lastDateCode;

@@ -21,22 +21,23 @@ export class GlobalService {
 
   public baseLocalServerUrl: string = "http://localhost:8080";
   public baseUrl: string = "http://localhost:5000";
-  
+
   //public baseUrl: string = "https://localhost:44340";
-  
+
   //public baseLocalServerUrl: string = "";
   //public baseUrl: string = "";
 
   public USER_DATA_LIST = [
-    {'code': 'GENERAL-USER', 'name' :'GENERAL USER'},
-    {'code': 'AGENT', 'name' :'AGENT'},
-    {'code': 'SHIPPER', 'name' :'SHIPPER'},
-    {'code': 'CONSIGNEE', 'name' :'CONSIGNEE'},
-    {'code': 'BUYING-AGENT', 'name' :'BUYING AGENT'}
+    { 'code': 'GENERAL-USER', 'name': 'GENERAL USER' },
+    { 'code': 'AGENT', 'name': 'AGENT' },
+    { 'code': 'SHIPPER', 'name': 'SHIPPER' },
+    { 'code': 'CONSIGNEE', 'name': 'CONSIGNEE' },
+    { 'code': 'BUYING-AGENT', 'name': 'BUYING AGENT' }
   ];
 
   // change this is false in production and update
   public isolderror: boolean = false;
+  public HideDisabledTrackingDate: boolean = true;
 
   public Modules: Modulem[] = [];
   public MenuList: Menum[] = [];
@@ -153,12 +154,12 @@ export class GlobalService {
   }
 
   public LoadCombo() {
-    
+
     this.LoadTradingPartners();
 
   }
 
-  public  LoadTradingPartners() {
+  public LoadTradingPartners() {
 
     let SearchRecord = {
       table: 'PARAM',
@@ -167,9 +168,9 @@ export class GlobalService {
     }
     this.SearchRecord(SearchRecord).subscribe(
       response => {
-        this.TradingPartners =  response.param;
-        this.TradingPartners.push( {param_pkid :'', param_code : 'ALL', param_name : 'ALL', param_id1 : ''})
-         
+        this.TradingPartners = response.param;
+        this.TradingPartners.push({ param_pkid: '', param_code: 'ALL', param_name: 'ALL', param_id1: '' })
+
         //response.param;
 
         localStorage.setItem('tp', JSON.stringify(this.TradingPartners));
@@ -191,7 +192,7 @@ export class GlobalService {
     let body = 'report_folder=' + report_folder + '&filename=' + filename + '&filetype=' + filetype + '&filedisplayname=' + filedisplayname;
     window.open(this.baseUrl + '/api/Admin/User/DownloadFile?' + body, "_blank");
   }
-  
+
   /*
   Downloadfile(filename: string, filetype: string, filedisplayname: string) {
     this.DownloadFile(this.globalVariables.report_folder, filename, filetype, filedisplayname);
@@ -213,7 +214,7 @@ export class GlobalService {
     this.defaultValues.lastmonthdate = this.getNewdate(30);//get today -30 days
 
     this.defaultValues.root_folder = '';
-    this.defaultValues.root_folder = 'c://documents/alldocs/';    
+    this.defaultValues.root_folder = 'c://documents/alldocs/';
     this.defaultValues.sub_folder = '2021';
 
   }

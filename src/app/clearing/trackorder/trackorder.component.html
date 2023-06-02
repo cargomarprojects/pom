@@ -26,41 +26,47 @@
 <div class="page-box">
   <div class="row">
     <div class="col-sm-12">
-      <div class="form-group row">
-        <label
-          class="col-sm-3 col-form-label col-form-label-sm">{{GetCaptionName('BKD')}}</label>
+      <div *ngIf="GetTrkEnabled('BKD')" class="form-group row">
+        <label class="col-sm-3 col-form-label col-form-label-sm">{{GetCaptionName('BKD')}}</label>
         <div class="col-sm-2">
-          <app-date [disabled]="IsDisableSave('BKD')" [inputdate]="Record.ord_booking_date" (ValueChanged)="Record.ord_booking_date=$event"></app-date>
+          <app-date [disabled]="IsDisableSave('BKD')" [inputdate]="Record.ord_booking_date"
+            (ValueChanged)="Record.ord_booking_date=$event"></app-date>
         </div>
         <div class="col-sm-2">
-          <button [disabled]="IsDisableSave('BKD')" (click)="Update('BKD')" class="btn btn-primary btn-sm">Update</button>
+          <button [disabled]="IsDisableSave('BKD')" (click)="Update('BKD')"
+            class="btn btn-primary btn-sm">Update</button>
         </div>
       </div>
 
-      <div class="form-group row">
+      <div *ngIf="GetTrkEnabled('RND')" class="form-group row">
         <label class="col-sm-3 col-form-label col-form-label-sm">{{GetCaptionName('RND')}}</label>
         <div class="col-sm-2">
-          <app-date [disabled]="IsDisableSave('RND')" [inputdate]="Record.ord_rnd_insp_date" (ValueChanged)="Record.ord_rnd_insp_date=$event"></app-date>
+          <app-date [disabled]="IsDisableSave('RND')" [inputdate]="Record.ord_rnd_insp_date"
+            (ValueChanged)="Record.ord_rnd_insp_date=$event"></app-date>
         </div>
         <div class="col-sm-2">
-          <button [disabled]="IsDisableSave('RND')" (click)="Update('RND')" class="btn btn-primary btn-sm">Update</button>
+          <button [disabled]="IsDisableSave('RND')" (click)="Update('RND')"
+            class="btn btn-primary btn-sm">Update</button>
         </div>
       </div>
 
-      <div class="form-group row">
+      <div *ngIf="GetTrkEnabled('POR')" class="form-group row">
         <label class="col-sm-3 col-form-label col-form-label-sm">{{GetCaptionName('POR')}}</label>
         <div class="col-sm-2">
-          <app-date [disabled]="IsDisableSave('POR')" [inputdate]="Record.ord_po_rel_date" (ValueChanged)="Record.ord_po_rel_date=$event"></app-date>
+          <app-date [disabled]="IsDisableSave('POR')" [inputdate]="Record.ord_po_rel_date"
+            (ValueChanged)="Record.ord_po_rel_date=$event"></app-date>
         </div>
         <div class="col-sm-2">
-          <button [disabled]="IsDisableSave('POR')" (click)="Update('POR')" class="btn btn-primary btn-sm">Update</button>
+          <button [disabled]="IsDisableSave('POR')" (click)="Update('POR')"
+            class="btn btn-primary btn-sm">Update</button>
         </div>
       </div>
 
-      <div class="form-group row">
+      <div *ngIf="GetTrkEnabled('CR')" class="form-group row">
         <label class="col-sm-3 col-form-label col-form-label-sm">{{GetCaptionName('CR')}}</label>
         <div class="col-sm-2">
-          <app-date [disabled]="IsDisableSave('CR')" [inputdate]="Record.ord_cargo_ready_date" (ValueChanged)="Record.ord_cargo_ready_date=$event">
+          <app-date [disabled]="IsDisableSave('CR')" [inputdate]="Record.ord_cargo_ready_date"
+            (ValueChanged)="Record.ord_cargo_ready_date=$event">
           </app-date>
         </div>
         <div class="col-sm-2">
@@ -68,75 +74,97 @@
         </div>
       </div>
 
-      <!-- </div>
-    <div class="col-sm-4"> -->
-      <div class="form-group row">
+      <div *ngIf="GetTrkEnabled('FCR')" class="form-group row">
         <label class="col-sm-3 col-form-label col-form-label-sm">{{GetCaptionName('FCR')}}</label>
         <div class="col-sm-2">
-          <app-date [disabled]="IsDisableSave('FCR')" [inputdate]="Record.ord_fcr_date" (ValueChanged)="Record.ord_fcr_date=$event"></app-date>
+          <app-date [disabled]="IsDisableSave('FCR')" [inputdate]="Record.ord_fcr_date"
+            (ValueChanged)="Record.ord_fcr_date=$event"></app-date>
         </div>
         <div class="col-sm-2">
-          <button [disabled]="IsDisableSave('FCR')" (click)="Update('FCR')" class="btn btn-primary btn-sm">Update</button>
+          <button [disabled]="IsDisableSave('FCR')" (click)="Update('FCR')"
+            class="btn btn-primary btn-sm">Update</button>
         </div>
       </div>
 
-      <div class="form-group row">
+      <div *ngIf="GetTrkEnabled('INSP')" class="form-group row">
         <label class="col-sm-3 col-form-label col-form-label-sm">{{GetCaptionName('INSP')}}</label>
         <div class="col-sm-2">
-          <app-date [disabled]="IsDisableSave('INSP')" [inputdate]="Record.ord_insp_date" (ValueChanged)="Record.ord_insp_date=$event"></app-date>
+          <app-date [disabled]="IsDisableSave('INSP')" [inputdate]="Record.ord_insp_date"
+            (ValueChanged)="Record.ord_insp_date=$event"></app-date>
         </div>
         <div class="col-sm-2">
-          <button [disabled]="IsDisableSave('INSP')" (click)="Update('INSP')" class="btn btn-primary btn-sm">Update</button>
+          <button [disabled]="IsDisableSave('INSP')" (click)="Update('INSP')"
+            class="btn btn-primary btn-sm">Update</button>
         </div>
       </div>
 
-      <div class="form-group row">
+      <div *ngIf="GetTrkEnabled('STUF')" class="form-group row">
         <label class="col-sm-3 col-form-label col-form-label-sm">{{GetCaptionName('STUF')}}</label>
         <div class="col-sm-2">
-          <app-date [disabled]="IsDisableSave('STUF')" [inputdate]="Record.ord_stuf_date" (ValueChanged)="Record.ord_stuf_date=$event"></app-date>
+          <app-date [disabled]="IsDisableSave('STUF')" [inputdate]="Record.ord_stuf_date"
+            (ValueChanged)="Record.ord_stuf_date=$event"></app-date>
         </div>
         <div class="col-sm-2">
-          <button [disabled]="IsDisableSave('STUF')" (click)="Update('STUF')" class="btn btn-primary btn-sm">Update</button>
+          <button [disabled]="IsDisableSave('STUF')" (click)="Update('STUF')"
+            class="btn btn-primary btn-sm">Update</button>
         </div>
       </div>
 
 
-      <div class="form-group row">
+      <div *ngIf="GetTrkEnabled('WHD')" class="form-group row">
         <label class="col-sm-3 col-form-label col-form-label-sm">{{GetCaptionName('WHD')}}</label>
         <div class="col-sm-2">
-          <app-date [disabled]="IsDisableSave('WHD')" [inputdate]="Record.ord_whd_date" (ValueChanged)="Record.ord_whd_date=$event"></app-date>
+          <app-date [disabled]="IsDisableSave('WHD')" [inputdate]="Record.ord_whd_date"
+            (ValueChanged)="Record.ord_whd_date=$event"></app-date>
         </div>
         <div class="col-sm-2">
-          <button [disabled]="IsDisableSave('WHD')" (click)="Update('WHD')" class="btn btn-primary btn-sm">Update</button>
+          <button [disabled]="IsDisableSave('WHD')" (click)="Update('WHD')"
+            class="btn btn-primary btn-sm">Update</button>
         </div>
       </div>
 
       <!-- </div>
     <div class="col-sm-4"> -->
-      <div class="form-group row">
+      <div *ngIf="GetTrkEnabled('DLV.POL')" class="form-group row">
         <label class="col-sm-3 col-form-label col-form-label-sm">{{GetCaptionName('DLV.POL')}}</label>
         <div class="col-sm-2">
-          <app-date [disabled]="IsDisableSave('DLV.POL')" [inputdate]="Record.ord_dlv_pol_date" (ValueChanged)="Record.ord_dlv_pol_date=$event"></app-date>
+          <app-date [disabled]="IsDisableSave('DLV.POL')" [inputdate]="Record.ord_dlv_pol_date"
+            (ValueChanged)="Record.ord_dlv_pol_date=$event"></app-date>
         </div>
         <div class="col-sm-2">
-          <button [disabled]="IsDisableSave('DLV.POL')" (click)="Update('DLV.POL')" class="btn btn-primary btn-sm">Update</button>
+          <button [disabled]="IsDisableSave('DLV.POL')" (click)="Update('DLV.POL')"
+            class="btn btn-primary btn-sm">Update</button>
         </div>
       </div>
-      <div class="form-group row">
+      <div *ngIf="GetTrkEnabled('DLV.POD')" class="form-group row">
         <label class="col-sm-3 col-form-label col-form-label-sm">{{GetCaptionName('DLV.POD')}}</label>
         <div class="col-sm-2">
-          <app-date [disabled]="IsDisableSave('DLV.POD')" [inputdate]="Record.ord_dlv_pod_date" (ValueChanged)="Record.ord_dlv_pod_date=$event"></app-date>
+          <app-date [disabled]="IsDisableSave('DLV.POD')" [inputdate]="Record.ord_dlv_pod_date"
+            (ValueChanged)="Record.ord_dlv_pod_date=$event"></app-date>
         </div>
-        <div class="col-sm-4">
-          <button [disabled]="IsDisableSave('DLV.POD')" (click)="Update('DLV.POD')" class="btn btn-primary btn-sm mr-1">Update</button>
-          <button *ngIf="lastDateCode" class="btn btn-primary btn-sm mr-1" (click)="EnableLastdate()">Enable Last Date</button>
-          <button class="btn btn-primary btn-sm" (click)="Close()">Close</button>
+        <div class="col-sm-2">
+          <button [disabled]="IsDisableSave('DLV.POD')" (click)="Update('DLV.POD')"
+            class="btn btn-primary btn-sm">Update</button>
         </div>
       </div>
     </div>
   </div>
 
 </div>
+<div class="page-box">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group row">
+        <div class="offset-sm-3 col-sm-9">
+          <button *ngIf="lastDateCode" class="btn btn-primary btn-sm mr-1" (click)="EnableLastdate()">Edit Last
+            Tracking</button>
+          <button class="btn btn-primary btn-sm" (click)="Close()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- <div class="page-box">
   <div class="row">
     <div class="col-sm-4">
