@@ -8,6 +8,8 @@ import { GlobalVariables } from '../models/globalvariables';
 import { DefaultValues } from '../models/defaultvalues';
 import { Menum } from '../models/menum';
 import { Modulem } from '../models/modulem';
+import { Tracking_Caption } from '../../clearing/models/tracking_caption';
+
 @Injectable()
 export class GlobalService {
   public Token: string;
@@ -41,7 +43,7 @@ export class GlobalService {
 
   public Modules: Modulem[] = [];
   public MenuList: Menum[] = [];
-
+  public trkCaptionList: Tracking_Caption[] = [];
 
   public TradingPartners: any[];
 

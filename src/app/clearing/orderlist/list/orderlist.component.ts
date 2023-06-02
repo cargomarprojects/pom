@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { GlobalService } from '../../../core/services/global.service';
 import { Joborderm, SearchQuery } from '../../models/joborder';
-import { Tracking_Caption } from '../../models/tracking_caption';
 import { Observable } from 'rxjs';
 import { PageQuery } from 'src/app/shared/models/pageQuery';
 import { Store, select } from '@ngrx/store';
@@ -24,7 +23,7 @@ export class OrderListComponent {
   urlid = '';
   menuid = '';
 
-  trkCaptionList: Observable<Tracking_Caption[]>;
+   
   recordlist$: Observable<Joborderm[]>;
   pageQuery$: Observable<PageQuery>;
   searchQuery$: Observable<SearchQuery>;
@@ -48,7 +47,6 @@ export class OrderListComponent {
   ngOnInit() {
 
     this.store.dispatch(FromOrderActions.RequestLoad());
-    this.SearchRecord('trkcaptionlist');
   }
 
   //// Destroy Will be called when this component is closed
@@ -56,21 +54,6 @@ export class OrderListComponent {
 
   }
 
-  SearchRecord(controlname: string) {
-    let SearchData = {
-      table: controlname,
-      comp_code: this.gs.globalVariables.comp_code,
-      branch_code: this.gs.globalVariables.branch_code,
-      user_code: this.gs.globalVariables.user_code
-    };
-    this.gs.SearchRecord(SearchData)
-      .subscribe(response => {
-        this.trkCaptionList = response.trkcaptionlist;
-      },
-        error => {
-          alert(this.gs.getError(error));
-        });
-  }
   searchEvents(actions: any) {
     var urlid = this.gs.getParameter('urlid');
 

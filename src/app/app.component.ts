@@ -51,6 +51,7 @@ export class AppComponent implements OnDestroy {
                     this.gs.globalVariables = JSON.parse(localStorage.getItem('gv'));
                     this.gs.defaultValues = JSON.parse(localStorage.getItem('dv'));
                     this.gs.TradingPartners = JSON.parse(localStorage.getItem('tp'));
+                    this.gs.trkCaptionList = JSON.parse(localStorage.getItem('tcl'));
                     this.gs.Access_Token = localStorage.getItem('access_token');
                     this.gs.Company_Name = localStorage.getItem('company_name');
                     if (this.gs.Access_Token) {

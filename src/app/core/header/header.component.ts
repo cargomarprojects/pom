@@ -43,7 +43,7 @@ export class HeaderComponent {
         localStorage.removeItem('gv');
         localStorage.removeItem('dv');
         localStorage.removeItem('access_token');
-
+        localStorage.removeItem ('tcl');
         this.router.navigate(['login'], { replaceUrl: true });
     }
 

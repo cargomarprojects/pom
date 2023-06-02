@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ChangeDetectionStrategy } from '@angular/core';
 import { Joborderm } from '../../models/joborder';
-import { Tracking_Caption } from '../../models/tracking_caption';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/reducers';
 import { SelectDeselctRecord } from './store/orderlist.actions';
@@ -14,15 +13,9 @@ import { GlobalService } from 'src/app/core/services/global.service';
 
 export class OrderListDetailComponent implements OnInit {
 
-
-  trkCaptionList: Tracking_Caption[] = [];
   records: Joborderm[];
   @Input() set _records(value: Joborderm[]) {
     this.records = JSON.parse(JSON.stringify(value));
-  }
-
-  @Input() set _trkCaptionList(value: Tracking_Caption[]) {
-    this.trkCaptionList = JSON.parse(JSON.stringify(value));
   }
 
   @Output() EditRecord = new EventEmitter<any>();
@@ -35,13 +28,11 @@ export class OrderListDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+
   }
 
-  
-
   GetCaptionCode(_type: string) {
-    var REC = this.trkCaptionList.find(rec => rec.trk_caption_code == _type);
+    var REC = this.gs.trkCaptionList.find(rec => rec.trk_caption_code == _type);
     if (REC != null) {
       if (REC.trk_enabled)
         return REC.trk_caption_code;

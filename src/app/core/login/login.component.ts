@@ -188,6 +188,7 @@ export class LoginComponent {
         this.loading = false;
         this.gs.MenuList = response.list;
         this.gs.Modules = response.modules;
+        this.gs.trkCaptionList= response.trklist;
 
         let data = response.data;
         this.gs.globalVariables.comp_pkid = data.comp_pkid;
@@ -204,7 +205,7 @@ export class LoginComponent {
         localStorage.setItem('modules', JSON.stringify(this.gs.Modules));
         localStorage.setItem('gv', JSON.stringify(this.gs.globalVariables));
         localStorage.setItem('dv', JSON.stringify(this.gs.defaultValues));
-        localStorage.setItem('dv', JSON.stringify(this.gs.defaultValues));
+        localStorage.setItem('tcl', JSON.stringify(this.gs.trkCaptionList));
 
         this.gs.LoadCombo();
 
