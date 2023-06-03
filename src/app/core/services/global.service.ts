@@ -17,6 +17,7 @@ export class GlobalService {
   public IsLoginSuccess: boolean = false;
   public IsAuthenticated: boolean = false;
   public Access_Token: string;
+  public ExpiryDate: Date;
   public globalData: GlobalData;
   public globalVariables: GlobalVariables;
   public defaultValues: DefaultValues;
@@ -313,12 +314,27 @@ export class GlobalService {
   Naviagete(menu_route: string, jsonstring: string) {
     let id = this.getGuid();
     this.router.navigate([menu_route], { queryParams: { id: id, parameter: jsonstring }, replaceUrl: false });
-
   }
 
 
   Naviagate2(menu_route: string, param: any) {
     this.router.navigate([menu_route], { queryParams: param });
+  }
+
+
+  getTokenExpiryDate(seconds : number = 0){
+    let dt = new Date();
+    const milliseconds = seconds * 1000; // 1 seconds = 1000 milliseconds
+    dt = new Date(dt.getTime() + milliseconds);
+    return dt;
+  }
+
+  isTokenExpired(expiryDate : Date){
+    let dt = new Date();
+    if ( dt >= expiryDate )
+      return true;
+    else 
+      return false;
   }
 
 

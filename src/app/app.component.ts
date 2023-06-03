@@ -46,6 +46,11 @@ export class AppComponent implements OnDestroy {
         else {
             if (localStorage.length > 0) {
                 if (localStorage.getItem('access_token')) {
+                    this.gs.ExpiryDate = new Date(localStorage.getItem('expiry_date'));
+                    if ( this.gs.isTokenExpired(this.gs.ExpiryDate)){
+                        this.router.navigate(['login'], { replaceUrl: true });            
+                        return; 
+                    }
                     this.gs.MenuList = JSON.parse(localStorage.getItem('menu'));
                     this.gs.Modules = JSON.parse(localStorage.getItem('modules'));
                     this.gs.globalVariables = JSON.parse(localStorage.getItem('gv'));

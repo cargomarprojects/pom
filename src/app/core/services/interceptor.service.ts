@@ -1,9 +1,11 @@
 
 import { Injectable, Injector } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { finalize } from "rxjs/operators";
+import { Observable, throwError } from 'rxjs';
+import { catchError, finalize, tap } from "rxjs/operators";
 import { LoadingScreenService } from './loadingscreen.service';
+import { Router } from '@angular/router';
+import { LoginService } from './login.service';
 
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
@@ -14,7 +16,11 @@ export class InterceptorService implements HttpInterceptor {
 
     activeRequests: number = 0;
 
-    constructor(private loadingScreenService: LoadingScreenService) {
+    constructor(
+        private loadingScreenService: LoadingScreenService,
+        private router  :Router,
+        private loginservice: LoginService
+        ) {
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -34,6 +40,14 @@ export class InterceptorService implements HttpInterceptor {
             }
             this.activeRequests++;
             return next.handle(request).pipe(
+                catchError ( err => {
+                    if ( err.status == 401){
+                        alert('Authorisation Token Expired');
+                        this.Logout();
+                    }
+                    console.log('interceptor error ', err);
+                    return throwError(err); 
+                }),
                 finalize(() => {
                     this.activeRequests--;
                     if (this.activeRequests === 0) {
@@ -46,6 +60,21 @@ export class InterceptorService implements HttpInterceptor {
             return next.handle(request);
         }
     };
+
+
+    Logout() {
+
+        this.loginservice.Logout();
+
+        localStorage.removeItem ('menu');
+        localStorage.removeItem('modules');
+        localStorage.removeItem('gv');
+        localStorage.removeItem('dv');
+        localStorage.removeItem('access_token');
+        localStorage.removeItem ('tcl');
+        this.router.navigate(['login'], { replaceUrl: true });
+    }
+
 
 }
 
