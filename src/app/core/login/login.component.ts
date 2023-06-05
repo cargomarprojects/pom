@@ -23,8 +23,8 @@ export class LoginComponent {
 
   errorMessage: string;
   ErrorExternalLogin: string = '';
-  errorMessageVersion: string = '1.345';
-  software_version_string: string = '1.345';
+  errorMessageVersion: string = '1.346';
+  software_version_string: string = '1.346';
 
   username: string = '';
   password: string = '';
