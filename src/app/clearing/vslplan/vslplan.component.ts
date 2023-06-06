@@ -28,8 +28,15 @@ export class VslPlanComponent {
     this.ms.page_rows = 10;
     this.ms.page_current = 0;
 
+
+    const data= this.route.snapshot.queryParams;
+
+    
+
+
     // URL Query Parameter 
     this.sub = this.route.queryParams.subscribe(params => {
+      let a=10;
       if (params["parameter"] != "") {
         this.ms.InitCompleted = true;
         var options = JSON.parse(params["parameter"]);
