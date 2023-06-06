@@ -1,6 +1,6 @@
 <div class="page-header">
     <div class="col">
-      <label>{{ms.title}}</label>
+      <label class="col-form-label mr-1">{{ms.title}}</label>
       <button [disabled]="loading" (click)="ActionHandler('ADD','')" class="btn btn-primary btn-sm mr-1">New</button>
       <button class="btn btn-primary btn-sm" (click)="Close()">Close</button>
       <i *ngIf="loading" class="fa fa-spinner"></i>

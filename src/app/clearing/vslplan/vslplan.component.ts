@@ -15,8 +15,8 @@ import { Router } from '@angular/router';
   providers: [VslPlanService]
 })
 export class VslPlanComponent {
-  sub: any;
-  
+  // sub: any;
+
   constructor(
     private modalService: NgbModal,
     private ms: VslPlanService,
@@ -27,24 +27,25 @@ export class VslPlanComponent {
     this.ms.page_count = 0;
     this.ms.page_rows = 10;
     this.ms.page_current = 0;
-
-
-    const data= this.route.snapshot.queryParams;
-
-    
-
+    const data = this.route.snapshot.queryParams;
+    if (data != null) {
+      this.ms.InitCompleted = true;
+      this.ms.menuid = data.menuid;
+      this.ms.type = data.type;
+      this.ms.InitComponent();
+    }
 
     // URL Query Parameter 
-    this.sub = this.route.queryParams.subscribe(params => {
-      let a=10;
-      if (params["parameter"] != "") {
-        this.ms.InitCompleted = true;
-        var options = JSON.parse(params["parameter"]);
-        this.ms.menuid = options.menuid;
-        this.ms.type = options.type;
-        this.ms.InitComponent();
-      }
-    });
+    // this.sub = this.route.queryParams.subscribe(params => {
+    //   let a=10;
+    //   if (params["parameter"] != "") {
+    //     this.ms.InitCompleted = true;
+    //     var options = JSON.parse(params["parameter"]);
+    //     this.ms.menuid = options.menuid;
+    //     this.ms.type = options.type;
+    //     this.ms.InitComponent();
+    //   }
+    // });
   }
 
   // Init Will be called After executing Constructor
@@ -57,7 +58,7 @@ export class VslPlanComponent {
 
   // Destroy Will be called when this component is closed
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    // this.sub.unsubscribe();
   }
 
 
@@ -103,7 +104,7 @@ export class VslPlanComponent {
       mode: action
     };
 
-     this.router.navigate(['clearing/vslplanedit'], { queryParams: parameter });
+    this.router.navigate(['clearing/vslplanedit'], { queryParams: parameter });
   }
 
   OnBlur(field: string) {

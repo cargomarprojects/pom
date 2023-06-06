@@ -13,76 +13,87 @@ import { Location } from '@angular/common';
   providers: [VslPlanService]
 })
 export class VslPlanEditComponent {
-  
-    @Input() menuid: string = '';
-    @Input() type: string = '';
-    @Input() mode: string = '';
-    @Input() pkid: string = '';
 
-     
-
-    InitCompleted: boolean = false;
-    menu_record: any;
-    title:'';
-
-    bChanged: boolean;
-    disableSave = true;
-    loading = false;
-     
-    bPrint: boolean = false;
-    searchstring = '';
-
-    modal: any;
-    sub: any;
-    urlid: string;
-    lock_record: boolean = false;
+  @Input() menuid: string = '';
+  @Input() type: string = '';
+  @Input() mode: string = '';
+  @Input() pkid: string = '';
 
 
-    ErrorMessage = "";
-    InfoMessage = "";
-    
-     
-    Record: Planm = new Planm;
-    RecordList: Planm[] = [];
-    EMPRECORD: SearchTable = new SearchTable();
+
+  InitCompleted: boolean = false;
+  menu_record: any;
+  title: '';
+
+  bChanged: boolean;
+  disableSave = true;
+  loading = false;
+
+  bPrint: boolean = false;
+  searchstring = '';
+
+  modal: any;
+  // sub: any;
+  urlid: string;
+  lock_record: boolean = false;
+
+
+  ErrorMessage = "";
+  InfoMessage = "";
+
+
+  Record: Planm = new Planm;
+  RecordList: Planm[] = [];
+  EMPRECORD: SearchTable = new SearchTable();
   constructor(
     private ms: VslPlanService,
     private route: ActivatedRoute,
     private gs: GlobalService
   ) {
-    this.sub = this.route.queryParams.subscribe(params => {
-        if (params["parameter"] != "") {
-          this.InitCompleted = true;
-          var options = JSON.parse(params["parameter"]);
-          this.menuid = options.menuid;
-          this.type = options.type;
-          this.mode = options.mode;
-          this.pkid = options.pkid;
-          this.InitComponent();
-        }
-      });
+
+    const data = this.route.snapshot.queryParams;
+    if (data != null) {
+      this.InitCompleted = true;
+      this.menuid = data.menuid;
+      this.type = data.type;
+      this.mode = data.mode;
+      this.pkid = data.pkid;
+      this.InitComponent();
+    }
+
+    // this.sub = this.route.queryParams.subscribe(params => {
+    //     if (params["parameter"] != "") {
+    //       this.InitCompleted = true;
+    //       var options = JSON.parse(params["parameter"]);
+    //       this.menuid = options.menuid;
+    //       this.type = options.type;
+    //       this.mode = options.mode;
+    //       this.pkid = options.pkid;
+    //       this.InitComponent();
+    //     }
+    //   });
   }
 
   // Init Will be called After executing Constructor
   ngOnInit() {
     if (!this.InitCompleted) {
-        this.InitComponent();
-      }
-      this.ActionHandler();
-}
-InitComponent() {
+      this.InitComponent();
+    }
+    this.ActionHandler();
+  }
+  InitComponent() {
     this.bPrint = false;
     this.menu_record = this.gs.getMenu(this.menuid);
     if (this.menu_record) {
-        this.title = this.menu_record.menu_name;
-        if (this.menu_record.rights_print)
-            this.bPrint = true;
+      this.title = this.menu_record.menu_name;
+      if (this.menu_record.rights_print)
+        this.bPrint = true;
     }
-     
-}
+
+  }
   // Destroy Will be called when this component is closed
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    // this.sub.unsubscribe();
   }
 
 
@@ -108,12 +119,12 @@ InitComponent() {
     this.ErrorMessage = '';
     this.InfoMessage = '';
     if (this.mode === 'ADD') {
-        this.ResetControls();
-        this.NewRecord();
+      this.ResetControls();
+      this.NewRecord();
     }
     else if (this.mode === 'EDIT') {
-        this.ResetControls();
-        this.GetRecord(this.pkid);
+      this.ResetControls();
+      this.GetRecord(this.pkid);
     }
   }
 
@@ -121,62 +132,62 @@ InitComponent() {
     this.pkid = this.gs.getGuid();
     this.Record = new Planm;
     this.Record.vp_pkid = this.pkid;
-     
-   
+
+
     this.Record.rec_mode = this.mode;
 
-}
-ResetControls() {
+  }
+  ResetControls() {
     this.disableSave = true;
     if (!this.menu_record)
-        return;
+      return;
 
     if (this.menu_record.rights_admin)
-        this.disableSave = false;
+      this.disableSave = false;
     if (this.mode == "ADD" && this.menu_record.rights_add)
-        this.disableSave = false;
+      this.disableSave = false;
     if (this.mode == "EDIT" && this.menu_record.rights_edit)
-        this.disableSave = false;
+      this.disableSave = false;
     if (this.mode == "EDIT")
-        return this.disableSave;
-}
+      return this.disableSave;
+  }
 
 
-// Load a single Record for VIEW/EDIT
-GetRecord(Id: string) {
+  // Load a single Record for VIEW/EDIT
+  GetRecord(Id: string) {
     this.loading = true;
     let SearchData = {
-        pkid: Id,
+      pkid: Id,
     };
     this.ErrorMessage = '';
     this.InfoMessage = '';
     this.ms.GetRecord(SearchData)
-        .subscribe(response => {
-            this.loading = false;
-            this.LoadData(response.record);
-            this.RecordList = response.list;
-        },
-            error => {
-                this.loading = false;
-                this.ErrorMessage = this.gs.getError(error);
-            });
-}
+      .subscribe(response => {
+        this.loading = false;
+        this.LoadData(response.record);
+        this.RecordList = response.list;
+      },
+        error => {
+          this.loading = false;
+          this.ErrorMessage = this.gs.getError(error);
+        });
+  }
 
-LoadData(_Record: Planm) {
+  LoadData(_Record: Planm) {
     this.Record = _Record;
     this.Record.rec_mode = this.mode;
-    
-}
 
-// Save Data
-Save() {
-    
+  }
+
+  // Save Data
+  Save() {
+
     // if (!this.allvalid())
     //     return;
     // this.loading = true;
     // this.ErrorMessage = '';
     // this.InfoMessage = '';
-     
+
     // this.Record._globalvariables = this.gs.globalVariables;
     // this.ms.Save(this.Record)
     //     .subscribe(response => {
@@ -190,15 +201,15 @@ Save() {
     //             this.ErrorMessage = this.gs.getError(error);
     //             alert(this.ErrorMessage);
     //         });
-}
+  }
 
-allvalid() {
+  allvalid() {
     let sError: string = "";
     let bret: boolean = true;
     this.ErrorMessage = '';
     this.InfoMessage = '';
 
-   
+
     // if (this.Record.ded_mon_amt > this.Record.ded_paid_amt) {
     //     bret = false;
     //     sError += "\n\r | Invalid  Amount ";
@@ -208,19 +219,19 @@ allvalid() {
     //     this.ErrorMessage = sError;
     //     alert(this.ErrorMessage);
     // }
-     
+
     return bret;
-}
+  }
 
 
 
 
-OnBlur(field: string) {
-    
-}
+  OnBlur(field: string) {
+
+  }
 
 
- 
+
 
   Close() {
     this.gs.ClosePage('home');
