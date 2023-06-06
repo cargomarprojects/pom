@@ -52,27 +52,7 @@ export class VslPlanService {
       this.title = this.menu_record.menu_name;
     this.List("NEW");
   }
-
-
-  ActionHandler(action: string, id: string) {
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
-    if (action == 'LIST') {
-      this.mode = '';
-      this.pkid = '';
-    }
-    else if (action === 'ADD') {
-      //   this.mode = 'ADD';
-      //   this.ResetControls();
-      //   this.NewRecord();
-    }
-    else if (action === 'EDIT') {
-      //   this.pkid = id;
-      //   this.mode = 'EDIT';
-      //   this.ResetControls();
-      //   this.GetRecord(id,'');
-    }
-  }
+  
 
   ResetControls() {
     this.disableSave = true;

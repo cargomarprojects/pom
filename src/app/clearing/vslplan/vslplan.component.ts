@@ -6,6 +6,8 @@ import { Planm } from '../models/planm';
 import { VslPlanService } from '../services/vslplan.service';
 import { SearchTable } from '../../shared/models/searchtable';
 import { DateComponent } from '../../shared/date/date.component';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vslplan',
@@ -19,6 +21,7 @@ export class VslPlanComponent {
     private modalService: NgbModal,
     private ms: VslPlanService,
     private route: ActivatedRoute,
+    private router: Router,
     private gs: GlobalService
   ) {
     this.ms.page_count = 0;
@@ -69,6 +72,32 @@ export class VslPlanComponent {
     // }
   }
 
+  ActionHandler(action: string, id: string) {
+    this.ms.ErrorMessage = '';
+    this.ms.InfoMessage = '';
+
+    if (action == "ADD" && !this.ms.menu_record.rights_add) {
+      alert('Insufficient User Rights')
+      return;
+    }
+    if (action == "EDIT" && !this.ms.menu_record.rights_edit) {
+      alert('Insufficient User Rights')
+      return;
+    }
+
+    var urlid = this.gs.getParameter('urlid');
+
+    let parameter = {
+      urlid: this.gs.getGuid(),
+      parenturlid: urlid,
+      menuid: this.ms.menuid,
+      pkid: id,
+      origin: 'vessellist',
+      mode: action
+    };
+
+    // this.router.navigate(['clearing/orderedit'], { queryParams: parameter });
+  }
 
   OnBlur(field: string) {
 
