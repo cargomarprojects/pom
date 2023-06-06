@@ -32,7 +32,10 @@ export class VslPlanService {
   mode = '';
   pkid = '';
   where_agent = "CUST_IS_AGENT = 'Y'";
-
+  where_shipper = "CUST_IS_SHIPPER = 'Y'";
+  where_consignee = "CUST_IS_CONSIGNEE = 'Y'";
+  where_buy_agent = "CUST_IS_BUY_AGENT = 'Y'";
+  
   list_pol_agent_name = '';
   list_pod_agent_name = '';
   // Array For Displaying List

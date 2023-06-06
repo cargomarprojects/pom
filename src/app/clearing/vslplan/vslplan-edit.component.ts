@@ -6,6 +6,7 @@ import { VslPlanService } from '../services/vslplan.service';
 import { SearchTable } from '../../shared/models/searchtable';
 import { DateComponent } from '../../shared/date/date.component';
 import { Location } from '@angular/common';
+import { Joborderm } from '../models/joborder';
 
 @Component({
   selector: 'app-vslplan-edit',
@@ -43,7 +44,7 @@ export class VslPlanEditComponent {
 
 
   Record: Planm = new Planm;
-  RecordList: Planm[] = [];
+  RecordList: Joborderm[] = [];
   EMPRECORD: SearchTable = new SearchTable();
   constructor(
     private ms: VslPlanService,
