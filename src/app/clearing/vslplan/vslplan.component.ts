@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy,ViewChild } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../core/services/global.service';
@@ -13,8 +13,8 @@ import { DateComponent } from '../../shared/date/date.component';
   providers: [VslPlanService]
 })
 export class VslPlanComponent {
-    sub: any;
-
+  sub: any;
+  
   constructor(
     private modalService: NgbModal,
     private ms: VslPlanService,
@@ -44,12 +44,12 @@ export class VslPlanComponent {
     }
   }
 
-  
+
   // Destroy Will be called when this component is closed
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-   
+
 
   LovSelected(_Record: SearchTable) {
     // if (_Record.controlname == "SHIPPER") {
@@ -68,15 +68,15 @@ export class VslPlanComponent {
     //   this.Record.ab_imp_name = _Record.name;
     // }
   }
- 
+
 
   OnBlur(field: string) {
-    
+
   }
-   
+
   Close() {
     this.gs.ClosePage('home');
   }
 
-   
+
 }

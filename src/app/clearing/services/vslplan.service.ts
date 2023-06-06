@@ -7,35 +7,38 @@ import { GlobalService } from '../../core/services/global.service';
 @Injectable()
 export class VslPlanService {
 
-    title = 'VESSEL PLANNING';
-    menuid: string = '';
-    type: string = '';
-    InitCompleted: boolean = false;
-    menu_record: any;
-  
-    modal: any;
-   
-    disableSave = true;
-    loading = false;
-     
-    searchstring = '';
-   
-    page_count = 0;
-    page_current = 0;
-    page_rows = 0;
-    page_rowcount = 0;
-    urlid: string;
-     
-    ErrorMessage = "";
-    InfoMessage = "";
-  
-    mode = '';
-    pkid = '';
-  
-    // Array For Displaying List
-    RecordList: Planm[] = [];
-    // Single Record for add/edit/view details
-    Record: Planm = new Planm;
+  title = 'VESSEL PLANNING';
+  menuid: string = '';
+  type: string = '';
+  InitCompleted: boolean = false;
+  menu_record: any;
+
+  modal: any;
+
+  disableSave = true;
+  loading = false;
+
+  searchstring = '';
+
+  page_count = 0;
+  page_current = 0;
+  page_rows = 0;
+  page_rowcount = 0;
+  urlid: string;
+
+  ErrorMessage = "";
+  InfoMessage = "";
+
+  mode = '';
+  pkid = '';
+  where_agent = "CUST_IS_AGENT = 'Y'";
+
+  list_pol_agent_name = '';
+  list_pod_agent_name = '';
+  // Array For Displaying List
+  RecordList: Planm[] = [];
+  // Single Record for add/edit/view details
+  Record: Planm = new Planm;
 
   constructor(
     private http2: HttpClient,
@@ -59,15 +62,15 @@ export class VslPlanService {
       this.pkid = '';
     }
     else if (action === 'ADD') {
-    //   this.mode = 'ADD';
-    //   this.ResetControls();
-    //   this.NewRecord();
+      //   this.mode = 'ADD';
+      //   this.ResetControls();
+      //   this.NewRecord();
     }
     else if (action === 'EDIT') {
-    //   this.pkid = id;
-    //   this.mode = 'EDIT';
-    //   this.ResetControls();
-    //   this.GetRecord(id,'');
+      //   this.pkid = id;
+      //   this.mode = 'EDIT';
+      //   this.ResetControls();
+      //   this.GetRecord(id,'');
     }
   }
 
@@ -113,10 +116,10 @@ export class VslPlanService {
         this.page_current = response.page_current;
         this.page_rowcount = response.page_rowcount;
       },
-      error => {
-        this.loading = false;
-        this.ErrorMessage = this.gs.getError(error);
-      });
+        error => {
+          this.loading = false;
+          this.ErrorMessage = this.gs.getError(error);
+        });
   }
 
 
@@ -128,6 +131,6 @@ export class VslPlanService {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/VslPlan/List', SearchData, this.gs.headerparam2('authorized'));
   }
 
-   
+
 }
 

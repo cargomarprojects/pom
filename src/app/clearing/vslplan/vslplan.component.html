@@ -16,14 +16,23 @@
             <!-- <label style="padding-right:0px" class="col-sm-1 col-form-label col-form-label-sm">From</label>
             <div style="padding-right:0px;padding-left:0px" class="col-sm-1">
               <app-date [inputdate]="gs.globalData.hbl_fromdate" (ValueChanged)="gs.globalData.hbl_fromdate=$event"></app-date>
-            </div>
-            <label style="padding-right:0px" class="col-sm-1 col-form-label col-form-label-sm">To</label>
-            <div style="padding-right:0px;padding-left:0px" class="col-sm-1">
-              <app-date [inputdate]="gs.globalData.hbl_todate" (ValueChanged)="gs.globalData.hbl_todate=$event"></app-date>
             </div> -->
-            <label style="padding-right:0px" class="col-sm-1 col-form-label col-form-label-sm">Search</label>
-            <div class="col-sm-4">
-              <input type="text" class="col form-control form-control-sm" name="Search" [(ngModel)]="searchstring" />
+
+            <label class="col-sm-1 col-form-label col-form-label-sm">Agent.Pol</label>
+            <div class="col-sm-2">
+              <app-autocomplete2 [controlname]="'AGENT-POL'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
+                [displaydata]="ms.list_pol_agent_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_agent">
+              </app-autocomplete2>
+            </div>
+            <label class="col-sm-1 col-form-label col-form-label-sm">Agent.Pod</label>
+            <div class="col-sm-2">
+              <app-autocomplete2 [controlname]="'AGENT-POD'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
+                [displaydata]="ms.list_pod_agent_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_agent">
+              </app-autocomplete2>
+            </div>
+            <label class="col-sm-1 col-form-label col-form-label-sm">Search</label>
+            <div class="col-sm-2">
+              <input type="text" class="col form-control form-control-sm" name="Search" [(ngModel)]="ms.searchstring" />
             </div>
             <div class="col-sm-3">
               <button [disabled]="loading" (click)="ms.List('NEW')" class="btn btn-primary btn-sm">Search</button>
