@@ -12,6 +12,7 @@ import { Linkm2Component } from './linkm2/linkm2.component';
 import {EdiHblComponent } from './edi/edihbl/edihbl.component';
 import { HouseListComponent } from './houselist/houselist.component';
 import { HouseEditComponent } from './houselist/edit/houseedit.component';
+import { VslPlanComponent } from './vslplan/vslplan.component';
 
 const routes: Routes = [
   { path: 'orderlist', component: OrderListComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'edihbls', component: EdiHblComponent },
   { path: 'houselist', component: HouseListComponent },
   { path: 'houseedit', component: HouseEditComponent },
+  { path: 'vslplan', component: VslPlanComponent },
 ];
 
 @NgModule({
