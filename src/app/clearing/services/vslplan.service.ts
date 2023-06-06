@@ -111,6 +111,9 @@ export class VslPlanService {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/VslPlan/List', SearchData, this.gs.headerparam2('authorized'));
   }
 
+  GetRecord(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/VslPlan/GetRecord', SearchData, this.gs.headerparam2('authorized'));
+  }
 
 }
 

@@ -1,0 +1,115 @@
+<div class="page-box">
+
+    <div class="row">
+      <div class="col-sm-4">
+
+        <div class="form-group row">
+          <label class="col-2 col-form-label col-form-label-sm">Planning#</label>
+          <div class="col-4">
+            <input type="text" style="color:red; font-weight:bold" class="form-control form-control-sm" [(ngModel)]="Record.vp_plan_no" [disabled]="true" required maxlength="15" />
+          </div>
+          <label style="padding-left:0" class="col-sm-1 col-form-label col-form-label-sm">Date</label>
+          <div class="col-sm-5">
+            <app-date #vp_plan_date [inputdate]="Record.vp_plan_date" (ValueChanged)="Record.vp_plan_date=$event"></app-date>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group row">
+          <label class="col-2 col-form-label col-form-label-sm">Week#</label>
+          <div class="col-2">
+            <input type="number" class="form-control form-control-sm" [(ngModel)]="Record.vp_week_no" (blur)="OnBlur('vp_week_no')" required maxlength="10" />
+          </div>
+          <label class="col-2 col-form-label col-form-label-sm">Status</label>
+          <div class="col-6">
+            <select class="form-control form-control-sm" [(ngModel)]="Record.vp_status">
+              <option [value]="'IN PROGRESS'">IN PROGRESS</option>
+              <option [value]="'COMPLETED'">COMPLETED</option>
+            </select>
+          </div>
+        </div>
+        <!-- <div class="form-group row">
+          <label class="col-2 col-form-label col-form-label-sm">Comments</label>
+          <div class="col-10">
+            <textarea rows="3" class="form-control form-control-sm" [(ngModel)]="Record.ab_remarks" (blur)="OnBlur('ab_remarks')" maxlength="250"></textarea>
+          </div>
+        </div> -->
+      </div>
+
+      <div class="col-sm-4">
+
+      </div>
+    </div>
+
+    <!-- <div class="page-box">
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="form-group row">
+            <label class="col-1 col-form-label col-form-label-sm">PO#</label>
+            <div class="col-11">
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="ord_po" (blur)="OnBlur('ord_po')" />
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group row">
+            <label class="col-2 col-form-label col-form-label-sm"></label>
+            <div class="col-10">
+              <button [disabled]="loading" (click)="OrderList(Record)" class="btn btn-primary btn-sm">Find</button>
+              <button [disabled]="loading" (click)="TrackOrders(trackorder)" class="btn btn-primary btn-sm">Tracking</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="page-body table-responsive">
+        <table class="table  table-hover table-sm">
+          <thead class="page-body-thead">
+            <tr>
+              <th><input type="checkbox" (click)="SelectDeselect()" [(ngModel)]="ord_selected"></th>
+              <th>OUR.BK#</th>
+              <th>AGENT.BK#</th>
+              <th>SHIPPER</th>
+              <th>CONSIGNEE</th>
+              <th>PO#</th>
+              <th>STYLE</th>
+              <th>COLOR</th>
+              <th>UNECO</th>
+              <th>DESCRIPTION</th>
+              <th>BKD.DT</th>
+              <th>RND.DT</th>
+              <th>POR.DT</th>
+              <th>CR.DT</th>
+              <th>FCR.DT</th>
+              <th>INSP.DT</th>
+              <th>STUF.DT</th>
+              <th>WHD.DT</th>
+            </tr>
+          </thead>
+          <tbody class="page-body-tbody" *ngFor="let rec of Record.OrderList">
+            <tr>
+              <td><input type="checkbox" [(ngModel)]="rec.ord_selected"></td>
+              <td>{{rec.ord_ourbooking_no}}</td>
+              <td>{{rec.ord_booking_no}}</td>
+              <td>{{rec.ord_exp_name}}</td>
+              <td>{{rec.ord_imp_name}}</td>
+              <td>{{rec.ord_po}}</td>
+              <td>{{rec.ord_style}}</td>
+              <td>{{rec.ord_color}}</td>
+              <td>{{rec.ord_uneco}}</td>
+              <td>{{rec.ord_desc}}</td>
+              <td>{{rec.ord_booking_date}}</td>
+              <td>{{rec.ord_rnd_insp_date}}</td>
+              <td>{{rec.ord_po_rel_date}}</td>
+              <td>{{rec.ord_cargo_ready_date}}</td>
+              <td>{{rec.ord_fcr_date}}</td>
+              <td>{{rec.ord_insp_date}}</td>
+              <td>{{rec.ord_stuf_date}}</td>
+              <td>{{rec.ord_whd_date}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div> -->
+  </div>

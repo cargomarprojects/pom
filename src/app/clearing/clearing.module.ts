@@ -32,6 +32,7 @@ import { EdiHblComponent } from './edi/edihbl/edihbl.component';
 import { HouseListComponent } from './houselist/houselist.component';
 import { HouseEditComponent } from './houselist/edit/houseedit.component';
 import { VslPlanComponent } from './vslplan/vslplan.component';
+import { VslPlanEditComponent } from './vslplan/vslplan-edit.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { VslPlanComponent } from './vslplan/vslplan.component';
     EdiHblComponent,
     HouseListComponent,
     HouseEditComponent,
-    VslPlanComponent
+    VslPlanComponent,
+    VslPlanEditComponent
   ],
   imports: [
     SharedModule,

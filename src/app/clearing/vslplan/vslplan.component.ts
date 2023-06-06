@@ -96,7 +96,7 @@ export class VslPlanComponent {
       mode: action
     };
 
-    // this.router.navigate(['clearing/orderedit'], { queryParams: parameter });
+     this.router.navigate(['clearing/vslplanedit'], { queryParams: parameter });
   }
 
   OnBlur(field: string) {
