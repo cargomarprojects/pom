@@ -183,25 +183,26 @@ export class VslPlanEditComponent {
   // Save Data
   Save() {
 
-    // if (!this.allvalid())
-    //     return;
-    // this.loading = true;
-    // this.ErrorMessage = '';
-    // this.InfoMessage = '';
-
-    // this.Record._globalvariables = this.gs.globalVariables;
-    // this.ms.Save(this.Record)
-    //     .subscribe(response => {
-    //         this.loading = false;
-    //         this.InfoMessage = "Save Complete";
-    //         this.mode = 'EDIT';
-    //         this.Record.rec_mode = this.mode;
-    //     },
-    //         error => {
-    //             this.loading = false;
-    //             this.ErrorMessage = this.gs.getError(error);
-    //             alert(this.ErrorMessage);
-    //         });
+    if (!this.allvalid())
+      return;
+    this.loading = true;
+    this.ErrorMessage = '';
+    this.InfoMessage = '';
+    this.Record.vp_type = 'PLANNING';
+    this.Record._globalvariables = this.gs.globalVariables;
+    this.ms.Save(this.Record)
+      .subscribe(response => {
+        this.loading = false;
+        // this.InfoMessage = "Save Complete";
+        this.mode = 'EDIT';
+        this.Record.rec_mode = this.mode;
+        alert('Save Complete');
+      },
+        error => {
+          this.loading = false;
+          this.ErrorMessage = this.gs.getError(error);
+          alert(this.ErrorMessage);
+        });
   }
 
   allvalid() {

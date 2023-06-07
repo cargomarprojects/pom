@@ -135,3 +135,11 @@
     </tbody>
   </table>
 </div>
+<div class="page-details">
+  <div class="col">
+    <button [hidden]="disableSave" [disabled]="loading" (click)="Save()" class="btn btn-success btn-sm mr-1">Save</button>
+    <!-- <button *ngIf="mode != 'ADD'" [disabled]="loading" (click)="GetRecord(Record.vp_pkid,'EXCEL')"
+      class="btn btn-success btn-sm mr-1">Excel</button> -->
+    <button [disabled]="loading" (click)="Close()" class="btn btn-success btn-sm">Return</button>
+  </div>
+</div>

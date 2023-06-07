@@ -118,5 +118,10 @@ export class VslPlanService {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/VslPlan/GetRecord', SearchData, this.gs.headerparam2('authorized'));
   }
 
+  Save(Record: Planm) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/VslPlan/Save', Record, this.gs.headerparam2('authorized'));
+  }
+
+
 }
 
