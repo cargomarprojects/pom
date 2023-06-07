@@ -99,21 +99,26 @@ export class VslPlanEditComponent {
 
 
   LovSelected(_Record: SearchTable) {
-    // if (_Record.controlname == "SHIPPER") {
-    //   this.Record.ab_exp_id = _Record.id;
-    //   this.Record.ab_exp_code = _Record.code;
-    //   this.Record.ab_exp_name = _Record.name;
-    // }
-    // else if (_Record.controlname == "AGENT") {
-    //   this.Record.ab_agent_id = _Record.id;
-    //   this.Record.ab_agent_code = _Record.code;
-    //   this.Record.ab_agent_name = _Record.name;
-    // }
-    // else if (_Record.controlname == "CONSIGNEE") {
-    //   this.Record.ab_imp_id = _Record.id;
-    //   this.Record.ab_imp_code = _Record.code;
-    //   this.Record.ab_imp_name = _Record.name;
-    // }
+    if (_Record.controlname == "VESSEL") {
+      this.Record.vp_vessel_id = _Record.id;
+      this.Record.vp_vessel_code = _Record.code;
+      this.Record.vp_vessel_name = _Record.name;
+    }
+    else if (_Record.controlname == "AGENT-POL") {
+      this.Record.vp_pol_agent_id = _Record.id;
+      this.Record.vp_pol_agent_code = _Record.code;
+      this.Record.vp_pol_agent_name = _Record.name;
+    }
+    else if (_Record.controlname == "AGENT-POD") {
+      this.Record.vp_pod_agent_id = _Record.id;
+      this.Record.vp_pod_agent_code = _Record.code;
+      this.Record.vp_pod_agent_name = _Record.name;
+    }
+    else if (_Record.controlname == "CONSIGNEE") {
+      this.Record.vp_imp_id = _Record.id;
+      this.Record.vp_imp_code = _Record.code;
+      this.Record.vp_imp_name = _Record.name;
+    }
   }
 
   ActionHandler() {
@@ -133,8 +138,24 @@ export class VslPlanEditComponent {
     this.pkid = this.gs.getGuid();
     this.Record = new Planm;
     this.Record.vp_pkid = this.pkid;
-
-
+    this.Record.vp_plan_date = this.gs.defaultValues.today;
+    this.Record.vp_week_no = 0;
+    this.Record.vp_etd = '';
+    this.Record.vp_vessel_id = '';
+    this.Record.vp_vessel_code = '';
+    this.Record.vp_vessel_name = '';
+    this.Record.vp_voyage = '';
+    this.Record.vp_status = 'IN PROGRESS';
+    this.Record.vp_comments = '';
+    this.Record.vp_pol_agent_id = '';
+    this.Record.vp_pol_agent_code = '';
+    this.Record.vp_pol_agent_name = '';
+    this.Record.vp_pod_agent_id = '';
+    this.Record.vp_pod_agent_code = '';
+    this.Record.vp_pod_agent_name = '';
+    this.Record.vp_imp_id = '';
+    this.Record.vp_imp_code = '';
+    this.Record.vp_imp_name = '';
     this.Record.rec_mode = this.mode;
 
   }
@@ -155,10 +176,14 @@ export class VslPlanEditComponent {
 
 
   // Load a single Record for VIEW/EDIT
-  GetRecord(Id: string) {
+  GetRecord(Id: string, _type: string = "") {
     this.loading = true;
     let SearchData = {
       pkid: Id,
+      type: _type,
+      report_folder: this.gs.globalVariables.report_folder,
+      company_code: this.gs.globalVariables.comp_code,
+      branch_code: this.gs.globalVariables.branch_code
     };
     this.ErrorMessage = '';
     this.InfoMessage = '';
@@ -166,18 +191,19 @@ export class VslPlanEditComponent {
       .subscribe(response => {
         this.loading = false;
         this.LoadData(response.record);
-        this.RecordList = response.list;
       },
         error => {
           this.loading = false;
           this.ErrorMessage = this.gs.getError(error);
+          alert(this.ErrorMessage);
+          this.mode='ADD';
+          this.ActionHandler();
         });
   }
 
   LoadData(_Record: Planm) {
     this.Record = _Record;
     this.Record.rec_mode = this.mode;
-
   }
 
   // Save Data
@@ -193,9 +219,13 @@ export class VslPlanEditComponent {
     this.ms.Save(this.Record)
       .subscribe(response => {
         this.loading = false;
+        if (this.mode == 'ADD') {
+          this.Record.vp_plan_no = response.planno;
+        }
         // this.InfoMessage = "Save Complete";
         this.mode = 'EDIT';
         this.Record.rec_mode = this.mode;
+        this.ms.RefreshList(this.Record);
         alert('Save Complete');
       },
         error => {
@@ -211,16 +241,27 @@ export class VslPlanEditComponent {
     this.ErrorMessage = '';
     this.InfoMessage = '';
 
+    if (this.Record.vp_plan_date.trim().length <= 0) {
+      bret = false;
+      sError += "\n\r | Date Cannot Be Blank";
+    }
+    if (this.Record.vp_pol_agent_id.trim().length <= 0) {
+      bret = false;
+      sError += "\n\r | Agent.pol Cannot Be Blank";
+    }
+    if (this.Record.vp_pod_agent_id.trim().length <= 0) {
+      bret = false;
+      sError += "\n\r | Agent.pod Cannot Be Blank";
+    }
+    if (this.Record.vp_week_no <= 0) {
+        bret = false;
+        sError += "\n\r | Week Number Cannot Be Blank";
+    }
 
-    // if (this.Record.ded_mon_amt > this.Record.ded_paid_amt) {
-    //     bret = false;
-    //     sError += "\n\r | Invalid  Amount ";
-    // }
-
-    // if (bret === false) {
-    //     this.ErrorMessage = sError;
-    //     alert(this.ErrorMessage);
-    // }
+    if (bret === false) {
+        this.ErrorMessage = sError;
+        alert(this.ErrorMessage);
+    }
 
     return bret;
   }
@@ -229,7 +270,18 @@ export class VslPlanEditComponent {
 
 
   OnBlur(field: string) {
-
+    switch (field) {
+      case 'vp_voyage':
+        {
+          this.Record.vp_voyage = this.Record.vp_voyage.toUpperCase();
+          break;
+        }
+      case 'vp_comments':
+        {
+          this.Record.vp_comments = this.Record.vp_comments.toUpperCase();
+          break;
+        }
+    }
   }
 
 

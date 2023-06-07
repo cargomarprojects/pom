@@ -1,4 +1,5 @@
 import { GlobalVariables } from '../../core/models/globalvariables';
+import { Joborderm } from '../../clearing/models/joborder';
 
 export class Planm {
 
@@ -27,5 +28,6 @@ export class Planm {
     rec_mode: string;
     rec_category: string;
     _globalvariables: GlobalVariables;
+    OrderList: Joborderm[] = [];
 }
 

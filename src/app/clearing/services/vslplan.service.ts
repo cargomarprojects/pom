@@ -35,8 +35,10 @@ export class VslPlanService {
   where_shipper = "CUST_IS_SHIPPER = 'Y'";
   where_consignee = "CUST_IS_CONSIGNEE = 'Y'";
   where_buy_agent = "CUST_IS_BUY_AGENT = 'Y'";
-  
+
+  list_pol_agent_id = '';
   list_pol_agent_name = '';
+  list_pod_agent_id = '';
   list_pod_agent_name = '';
   // Array For Displaying List
   RecordList: Planm[] = [];
@@ -55,7 +57,7 @@ export class VslPlanService {
       this.title = this.menu_record.menu_name;
     this.List("NEW");
   }
-  
+
 
   ResetControls() {
     this.disableSave = true;
@@ -83,6 +85,8 @@ export class VslPlanService {
       branch_code: this.gs.globalVariables.branch_code,
       user_code: this.gs.globalVariables.user_code,
       year_code: this.gs.globalVariables.year_code,
+      pol_agent_id: this.list_pol_agent_id,
+      pod_agent_id: this.list_pod_agent_id,
       page_count: this.page_count,
       page_current: this.page_current,
       page_rows: this.page_rows,
@@ -106,7 +110,25 @@ export class VslPlanService {
   }
 
 
-
+  RefreshList(_rec:Planm) {
+    if (this.RecordList == null)
+      return;
+    var REC = this.RecordList.find(rec => rec.vp_pkid == _rec.vp_pkid);
+    if (REC == null) {
+      this.RecordList.push(_rec);
+    }
+    else {
+      REC.vp_plan_date = _rec.vp_plan_date;
+      REC.vp_pol_agent_name = _rec.vp_pol_agent_name;
+      REC.vp_pod_agent_name = _rec.vp_pod_agent_name;
+      REC.vp_week_no = _rec.vp_week_no;
+      REC.vp_etd = _rec.vp_etd;
+      REC.vp_vessel_name = _rec.vp_vessel_name;
+      REC.vp_voyage = _rec.vp_voyage;
+      REC.vp_status = _rec.vp_status;
+      REC.vp_comments = _rec.vp_comments;
+    }
+  }
 
 
 

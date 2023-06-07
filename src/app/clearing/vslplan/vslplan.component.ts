@@ -63,21 +63,17 @@ export class VslPlanComponent {
 
 
   LovSelected(_Record: SearchTable) {
-    // if (_Record.controlname == "SHIPPER") {
-    //   this.Record.ab_exp_id = _Record.id;
-    //   this.Record.ab_exp_code = _Record.code;
-    //   this.Record.ab_exp_name = _Record.name;
-    // }
-    // else if (_Record.controlname == "AGENT") {
-    //   this.Record.ab_agent_id = _Record.id;
-    //   this.Record.ab_agent_code = _Record.code;
-    //   this.Record.ab_agent_name = _Record.name;
-    // }
-    // else if (_Record.controlname == "CONSIGNEE") {
-    //   this.Record.ab_imp_id = _Record.id;
-    //   this.Record.ab_imp_code = _Record.code;
-    //   this.Record.ab_imp_name = _Record.name;
-    // }
+    if (_Record.controlname == "AGENT-POL") {
+      this.ms.list_pol_agent_id = _Record.id;
+      this.ms.list_pol_agent_name = _Record.name;
+    }
+    else if (_Record.controlname == "AGENT-POD") {
+      this.ms.list_pod_agent_id = _Record.id;
+      this.ms.list_pod_agent_name = _Record.name;
+    }
+    else if (_Record.controlname == "CONSIGNEE") {
+       
+    }
   }
 
   ActionHandler(action: string, id: string) {

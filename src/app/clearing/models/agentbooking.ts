@@ -1,5 +1,5 @@
 import { GlobalVariables } from '../../core/models/globalvariables';
-import { Joborderm } from '../../Clearing/models/joborder';
+import { Joborderm } from '../../clearing/models/joborder';
 
 export class AgentBookingm {
 
