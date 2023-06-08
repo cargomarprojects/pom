@@ -25,11 +25,12 @@ import { BankInfoComponent } from './bankinfo/bankinfo.component';
 
 import { AddbookdelComponent  } from './customer/addbookdel.component';
 import { BenfComponent   } from './customer/benf.component';
+import { CustGroupComponent } from './customer-group/cust-group.component';
 
 @NgModule({
   imports: [
     SharedModule,
-    MasterRoutingModule
+    MasterRoutingModule,
   ],
   declarations: [
     MasterComponent,
@@ -39,12 +40,12 @@ import { BenfComponent   } from './customer/benf.component';
     AddbookComponent,
     AddressmComponent,
     XmlComponent,
-
     AllnumComponent,
     CustdetComponent,
     BankInfoComponent,
     AddbookdelComponent,
-    BenfComponent
+    BenfComponent,
+    CustGroupComponent
   ],
   providers: [
   ],

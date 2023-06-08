@@ -71,7 +71,8 @@ import { InputBoxNumberComponent } from './inputnumber/inputboxnumber.component'
     FileEditComponent,
     PageComponent,
     InputBoxComponent,
-    InputBoxNumberComponent
+    InputBoxNumberComponent,
+
   ],
   exports: [
     CommonModule,
@@ -96,7 +97,8 @@ import { InputBoxNumberComponent } from './inputnumber/inputboxnumber.component'
     FileEditComponent,
     PageComponent,
     InputBoxComponent,
-    InputBoxNumberComponent
+    InputBoxNumberComponent,
+
   ],
   providers: [
     AlertService,

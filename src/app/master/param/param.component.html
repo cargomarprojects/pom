@@ -180,9 +180,18 @@
         </div>
       </div>
 
+      <div *ngIf="mode =='EDIT' && type=='CUST-GROUP'" class="form-group row">
+        <label class="col-12 col-form-label col-form-label-sm"></label>
+        <label class="col-2 col-form-label col-form-label-sm"></label>
+        <div class="col-10">
+          <span (click)="openCustGroupPage(Record)" class="hlink">Customer Group</span>
+        </div>
+        <label class="col-12 col-form-label col-form-label-sm"></label>
+      </div>
 
 
     </div>
+
   </div>
 
   <div class="row">

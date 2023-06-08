@@ -13,6 +13,7 @@ import { AllnumComponent } from './allnum/allnum.component';
 
 
 import { CustdetComponent } from './customer/custdet.component';
+import { CustGroupComponent } from './customer-group/cust-group.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
     { path: 'xml', component: XmlComponent },
     { path: 'allnum', component: AllnumComponent },
     { path: 'custdet', component: CustdetComponent },
+    { path: 'cust-group', component: CustGroupComponent },
 ];
 
 @NgModule({
