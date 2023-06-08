@@ -29,6 +29,8 @@ export class VslPlanEditComponent {
   bChanged: boolean;
   disableSave = true;
   loading = false;
+  ord_selected = false;
+  chkselected = false;
 
   bPrint: boolean = false;
   searchstring = '';
@@ -134,6 +136,8 @@ export class VslPlanEditComponent {
   }
 
   NewRecord() {
+    this.chkselected = false;
+    this.ord_selected = false;
     this.pkid = this.gs.getGuid();
     this.Record = new Planm;
     this.Record.vp_pkid = this.pkid;
@@ -195,7 +199,7 @@ export class VslPlanEditComponent {
           this.loading = false;
           this.ErrorMessage = this.gs.getError(error);
           alert(this.ErrorMessage);
-          this.mode='ADD';
+          this.mode = 'ADD';
           this.ActionHandler();
         });
   }
@@ -203,6 +207,10 @@ export class VslPlanEditComponent {
   LoadData(_Record: Planm) {
     this.Record = _Record;
     this.Record.rec_mode = this.mode;
+    this.ord_selected = false;
+    if (this.Record.OrderList.length > 0)
+      this.ord_selected = true;
+    this.chkselected = this.ord_selected;
   }
 
   // Save Data
@@ -253,13 +261,13 @@ export class VslPlanEditComponent {
       sError += "\n\r | Agent.pod Cannot Be Blank";
     }
     if (this.Record.vp_week_no <= 0) {
-        bret = false;
-        sError += "\n\r | Week Number Cannot Be Blank";
+      bret = false;
+      sError += "\n\r | Week Number Cannot Be Blank";
     }
 
     if (bret === false) {
-        this.ErrorMessage = sError;
-        alert(this.ErrorMessage);
+      this.ErrorMessage = sError;
+      alert(this.ErrorMessage);
     }
 
     return bret;
@@ -293,7 +301,7 @@ export class VslPlanEditComponent {
     //}
     // if (this.ErrorMessage)
     //   return;
-   
+
     this.loading = true;
     let SearchData = {
       rowtype: this.ms.type,
@@ -319,14 +327,20 @@ export class VslPlanEditComponent {
         //   }
         this.Record.OrderList = response.list;
       },
-      error => {
-        this.loading = false;
-        this.ErrorMessage = this.gs.getError(error);
-        alert(this.ErrorMessage);
-      });
-       
-    }
+        error => {
+          this.loading = false;
+          this.ErrorMessage = this.gs.getError(error);
+          alert(this.ErrorMessage);
+        });
 
+  }
+
+  SelectDeselect() {
+    this.chkselected = !this.chkselected;
+    for (let rec of this.Record.OrderList) {
+      rec.ord_selected = this.chkselected;
+    }
+  }
   Close() {
     this.gs.ClosePage('home');
   }
