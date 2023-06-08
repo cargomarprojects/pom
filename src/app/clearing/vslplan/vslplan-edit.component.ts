@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../core/services/global.service';
 import { Planm } from '../models/planm';
@@ -35,8 +36,11 @@ export class VslPlanEditComponent {
 
   bPrint: boolean = false;
   searchstring = '';
+ public ord_trkids = "";
+ public ord_trkpos = "";
+  total = 0;
 
-  modal: any;
+  modalRef: any;
   urlid: string;
   lock_record: boolean = false;
   ErrorMessage = "";
@@ -44,6 +48,7 @@ export class VslPlanEditComponent {
   Record: Planm = new Planm;
 
   constructor(
+    private modalService: NgbModal,
     private ms: VslPlanService,
     private route: ActivatedRoute,
     private gs: GlobalService
@@ -198,6 +203,7 @@ export class VslPlanEditComponent {
     if (this.Record.OrderList.length > 0)
       this.ord_selected = true;
     this.chkselected = this.ord_selected;
+    this.FindCount();
   }
 
   // Save Data
@@ -261,7 +267,11 @@ export class VslPlanEditComponent {
     return bret;
   }
 
-
+  OnChange(field: string) {
+    if (field == 'ord_selected') {
+      this.FindCount();
+    }
+  }
 
 
   OnBlur(field: string) {
@@ -276,6 +286,15 @@ export class VslPlanEditComponent {
           this.Record.vp_comments = this.Record.vp_comments.toUpperCase();
           break;
         }
+    }
+  }
+
+  FindCount() {
+    this.total = 0;
+    for (let rec of this.Record.OrderList) {
+      if (rec.ord_selected) {
+        this.total++;
+      }
     }
   }
 
@@ -324,14 +343,48 @@ export class VslPlanEditComponent {
   }
 
   SelectDeselect() {
+    this.total = 0;
     this.chkselected = !this.chkselected;
     for (let rec of this.Record.OrderList) {
       rec.ord_selected = this.chkselected;
+      if (rec.ord_selected) {
+        this.total++;
+      }
     }
   }
+
   Close() {
     this.gs.ClosePage('home');
   }
 
+  ShowTracking(modalname: any) {
+    this.total = 0;
+    this.ord_trkids = "";
+    this.ord_trkpos = "";
+    for (let rec of this.Record.OrderList) {
+
+      if (rec.ord_selected) {
+        this.total++;
+        if (this.ord_trkids != "")
+          this.ord_trkids += ",";
+        this.ord_trkids += rec.ord_pkid;
+
+        if (this.ord_trkpos != "")
+          this.ord_trkpos += ", ";
+        this.ord_trkpos += rec.ord_po;
+      }
+    }
+
+
+    if (this.total <= 0) {
+      alert('No Rows Selected');
+      return;
+    }
+    this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
+  }
+
+  CloseModal1() {
+    this.modalRef.close();
+  }
 
 }

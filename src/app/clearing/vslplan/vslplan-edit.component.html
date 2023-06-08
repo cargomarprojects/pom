@@ -9,14 +9,14 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">Planning#</label>
+        <label class="col-sm-2 col-form-label col-form-label-sm">CF#</label>
         <div class="col-sm-4">
           <input type="text" style="color:red; font-weight:bold" class="form-control form-control-sm"
             [(ngModel)]="Record.vp_plan_no" [disabled]="true" required maxlength="15" />
         </div>
         <label class="col-sm-2 col-form-label col-form-label-sm">Date</label>
         <div class="col-sm-4">
-          <app-date [disabled]="ctrlDisable"  #vp_plan_date [inputdate]="Record.vp_plan_date"
+          <app-date  #vp_plan_date [inputdate]="Record.vp_plan_date"
             (ValueChanged)="Record.vp_plan_date=$event"></app-date>
         </div>
       </div>
@@ -52,24 +52,24 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">Week#</label>
         <div class="col-sm-4">
-          <input [disabled]="ctrlDisable"  type="number" class="form-control form-control-sm" [(ngModel)]="Record.vp_week_no"
+          <input  type="number" class="form-control form-control-sm" [(ngModel)]="Record.vp_week_no"
             (blur)="OnBlur('vp_week_no')" required maxlength="10" />
         </div>
         <label class="col-sm-2 col-form-label col-form-label-sm">ETD</label>
         <div class="col-sm-4">
-          <app-date [disabled]="ctrlDisable"  #vp_etd [inputdate]="Record.vp_etd" (ValueChanged)="Record.vp_etd=$event"></app-date>
+          <app-date   #vp_etd [inputdate]="Record.vp_etd" (ValueChanged)="Record.vp_etd=$event"></app-date>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">Vessel</label>
         <div class="col-sm-4">
-          <app-autocomplete2 [disabled]="ctrlDisable"  [controlname]="'VESSEL'" [tabletype]="'VESSEL'" [displaycolumn]="'NAME'"
+          <app-autocomplete2  [controlname]="'VESSEL'" [tabletype]="'VESSEL'" [displaycolumn]="'NAME'"
             [displaydata]="Record.vp_vessel_name" (ValueChanged)="LovSelected($event)">
           </app-autocomplete2>
         </div>
         <label class="col-sm-2 col-form-label col-form-label-sm">Voyage</label>
         <div class="col-sm-4">
-          <input [disabled]="ctrlDisable"  type="text" class="form-control form-control-sm" [(ngModel)]="Record.vp_voyage"
+          <input  type="text" class="form-control form-control-sm" [(ngModel)]="Record.vp_voyage"
             (blur)="OnBlur('vp_voyage')" required maxlength="25" />
         </div>
       </div>
@@ -80,7 +80,7 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">Status</label>
         <div class="col-sm-10">
-          <select [disabled]="ctrlDisable"  class="form-control form-control-sm" [(ngModel)]="Record.vp_status">
+          <select class="form-control form-control-sm" [(ngModel)]="Record.vp_status">
             <option [value]="'IN PROGRESS'">IN PROGRESS</option>
             <option [value]="'COMPLETED'">COMPLETED</option>
           </select>
@@ -89,14 +89,17 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">Comments</label>
         <div class="col-sm-10">
-          <input [disabled]="ctrlDisable"  type="text" class="form-control form-control-sm" [(ngModel)]="Record.vp_comments"
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.vp_comments"
             (blur)="OnBlur('vp_comments')" required maxlength="250" />
         </div>
       </div>
       <div class="form-group row">
         <label class="col-2 col-form-label col-form-label-sm"></label>
         <div class="col-10">
-          <button [disabled]="loading" (click)="OrderList()" class="btn btn-primary btn-sm">Search</button>
+          <button [disabled]="loading" (click)="OrderList()" class="btn btn-primary btn-sm mr-1">Search</button>
+          <button (click)="ShowTracking(trackorder)" class="btn btn-info btn-sm">Tracking
+            <span *ngIf="total>0" class="badge badge-light">{{total}}</span>
+          </button>
         </div>
       </div>
 
@@ -142,7 +145,7 @@
     </thead>
     <tbody class="page-body-tbody" *ngFor="let rec of Record.OrderList">
       <tr>
-        <td><input type="checkbox" [(ngModel)]="rec.ord_selected"></td>
+        <td><input type="checkbox" (change)="OnChange('ord_selected')" [(ngModel)]="rec.ord_selected"></td>
         <td>{{rec.ord_uid}}</td>
         <td>{{rec.ord_status}}</td>
         <td>{{rec.ord_cargo_status}}</td>
@@ -184,3 +187,9 @@
     <button [disabled]="loading" (click)="Close()" class="btn btn-success btn-sm">Return</button>
   </div>
 </div>
+
+<ng-template #trackorder let-c="close" let-d="dismiss">
+  <div class="modal-body">
+    <app-trackorder [ord_pkids]="ord_trkids" [ord_pos]="ord_trkpos" (closeModalWindow)="CloseModal1()"></app-trackorder>
+  </div>
+</ng-template>

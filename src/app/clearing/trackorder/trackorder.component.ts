@@ -29,9 +29,13 @@ export class TrackOrderComponent {
   @Input() public type: string = '';
   @Input() public refno: string = '';
   */
+
+  @Input() public ord_pkids: string = '';
+  @Input() public ord_pos: string = '';
+
   private menuid: string = '';
   private type: string = '';
-  pkid: string;
+  pkid: string = '';
   refno: string = '';
 
   pkid$: Observable<string>;
@@ -81,6 +85,12 @@ export class TrackOrderComponent {
 
   // Init Will be called After executing Constructor
   ngOnInit() {
+    if (!this.gs.isBlank(this.ord_pos))
+      this.refno = this.ord_pos;
+    if (!this.gs.isBlank(this.ord_pkids)) {
+      this.pkid = this.ord_pkids;
+      this.process();
+    }
     this.LoadCaptions();
   }
 

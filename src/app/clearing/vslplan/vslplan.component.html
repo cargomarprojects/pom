@@ -19,21 +19,19 @@
             </app-autocomplete2>
           </div>
         </div>
-
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label col-form-label-sm">Vessel</label>
-          <div class="col-sm-8">
-            <app-autocomplete2 [controlname]="'VESSEL'" [tabletype]="'VESSEL'" [displaycolumn]="'NAME'"
-              [displaydata]="ms.list_vessel_name" (ValueChanged)="LovSelected($event)">
-            </app-autocomplete2>
-          </div>
-        </div>
-
         <div class="form-group row">
           <label class="col-sm-4 col-form-label col-form-label-sm">Agent.Pod</label>
           <div class="col-sm-8">
             <app-autocomplete2 [controlname]="'AGENT-POD'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
               [displaydata]="ms.list_pod_agent_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_agent">
+            </app-autocomplete2>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label col-form-label-sm">Vessel</label>
+          <div class="col-sm-8">
+            <app-autocomplete2 [controlname]="'VESSEL'" [tabletype]="'VESSEL'" [displaycolumn]="'NAME'"
+              [displaydata]="ms.list_vessel_name" (ValueChanged)="LovSelected($event)">
             </app-autocomplete2>
           </div>
         </div>
@@ -82,15 +80,15 @@
     <table class="table  table-hover table-sm">
       <thead class="page-body-thead">
         <tr>
-          <th>PLAN#</th>
+          <th>CF#</th>
           <th>DATE</th>
-          <th>POL.AGENT</th>
-          <th>CONSIGNEE</th>
           <th>WEEK#</th>
           <th>ETD</th>
+          <th>POL.AGENT</th>
+          <th>CONSIGNEE</th>
+          <th>POD.AGENT</th>
           <th>VESSEL</th>
           <th>VOYAGE</th>
-          <th>POD.AGENT</th>
           <th>STATUS</th>
           <th>COMMENTS</th>
         </tr>
@@ -99,13 +97,13 @@
         <tr>
           <td (click)="ActionHandler('EDIT',rec.vp_pkid)" class="hlink">{{rec.vp_plan_no}}</td>
           <td>{{rec.vp_plan_date}}</td>
-          <td>{{rec.vp_pol_agent_name}}</td>
-          <td>{{rec.vp_imp_name}}</td>
           <td>{{rec.vp_week_no}}</td>
           <td>{{rec.vp_etd}}</td>
+          <td>{{rec.vp_pol_agent_name}}</td>
+          <td>{{rec.vp_imp_name}}</td>
+          <td>{{rec.vp_pod_agent_name}}</td>
           <td>{{rec.vp_vessel_name}}</td>
           <td>{{rec.vp_voyage}}</td>
-          <td>{{rec.vp_pod_agent_name}}</td>
           <td>{{rec.vp_status}}</td>
           <td>{{rec.vp_comments}}</td>
         </tr>
