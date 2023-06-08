@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalService } from '../../core/services/global.service';
 import { Param } from '../models/param';
 import { ParamService } from '../services/param.service';
@@ -66,6 +66,7 @@ export class ParamComponent {
   constructor(
     private mainService: ParamService,
     private route: ActivatedRoute,
+    private router : Router,
     private gs: GlobalService
   ) {
     this.page_count = 0;
@@ -147,6 +148,11 @@ export class ParamComponent {
   
     if (this.type == 'PARAM') {
       this.id1 = "Cust.Code";
+      this.lookup_id = "Type";
+      this.data_list = this.gs.USER_DATA_LIST;
+    }
+
+    if (this.type == 'CUST-GROUP') {
       this.lookup_id = "Type";
       this.data_list = this.gs.USER_DATA_LIST;
     }
@@ -266,10 +272,16 @@ export class ParamComponent {
     this.Record.rec_mode = this.mode;
 
     if (this.type == 'PARAM') {
-      this.Record.param_lookup_id = 'AGENT-POL';
+      this.Record.param_lookup_id = 'AGENT';
     }  
+    if (this.type == 'CUST-GROUP') {
+      this.Record.param_lookup_id = 'GENERAL-USER';
+    }      
 
   }
+
+
+
 
   // Load a single Record for VIEW/EDIT
   GetRecord(Id: string) {
@@ -469,6 +481,19 @@ export class ParamComponent {
 
   Close() {
     this.gs.ClosePage('home');
+  }
+
+
+  openCustGroupPage(Rec : Param){
+    var urlid = this.pkid;
+
+    let parameter = {
+      urlid: this.gs.getGuid(),
+      grp_id: Rec.param_pkid,
+      grp_name : Rec.param_name
+    };
+
+    this.router.navigate(['master/cust-group'], { queryParams: parameter });
   }
 
 
