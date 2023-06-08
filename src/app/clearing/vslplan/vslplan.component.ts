@@ -74,6 +74,10 @@ export class VslPlanComponent {
     else if (_Record.controlname == "CONSIGNEE") {
        
     }
+    else if (_Record.controlname == "VESSEL") {
+      this.ms.list_vessel_id = _Record.id;
+      this.ms.list_vessel_name = _Record.name;
+    }
   }
 
   ActionHandler(action: string, id: string) {

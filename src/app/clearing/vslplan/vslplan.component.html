@@ -1,109 +1,137 @@
 <div class="page-header">
-    <div class="col">
-      <label class="col-form-label mr-1">{{ms.title}}</label>
-      <button [disabled]="loading" (click)="ActionHandler('ADD','')" class="btn btn-primary btn-sm mr-1">New</button>
-      <button class="btn btn-primary btn-sm" (click)="Close()">Close</button>
-      <i *ngIf="loading" class="fa fa-spinner"></i>
-    </div>
+  <div class="col">
+    <label class="col-form-label mr-1">{{ms.title}}</label>
+    <button [disabled]="loading" (click)="ActionHandler('ADD','')" class="btn btn-primary btn-sm mr-1">New</button>
+    <button class="btn btn-primary btn-sm" (click)="Close()">Close</button>
+    <i *ngIf="loading" class="fa fa-spinner"></i>
   </div>
-  
-  <div class="page-list">
-    <div class="my-1">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="form-group row">
-            <!-- <label style="padding-right:0px" class="col-sm-1 col-form-label col-form-label-sm">From</label>
-            <div style="padding-right:0px;padding-left:0px" class="col-sm-1">
-              <app-date [inputdate]="gs.globalData.hbl_fromdate" (ValueChanged)="gs.globalData.hbl_fromdate=$event"></app-date>
-            </div> -->
+</div>
 
-            <label class="col-sm-1 col-form-label col-form-label-sm">Agent.Pol</label>
-            <div class="col-sm-2">
-              <app-autocomplete2 [controlname]="'AGENT-POL'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
-                [displaydata]="ms.list_pol_agent_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_agent">
-              </app-autocomplete2>
-            </div>
-            <label class="col-sm-1 col-form-label col-form-label-sm">Agent.Pod</label>
-            <div class="col-sm-2">
-              <app-autocomplete2 [controlname]="'AGENT-POD'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
-                [displaydata]="ms.list_pod_agent_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_agent">
-              </app-autocomplete2>
-            </div>
-            <label class="col-sm-1 col-form-label col-form-label-sm">Search</label>
-            <div class="col-sm-2">
-              <input type="text" class="col form-control form-control-sm" name="Search" [(ngModel)]="ms.searchstring" />
-            </div>
-            <div class="col-sm-3">
-              <button [disabled]="loading" (click)="ms.List('NEW')" class="btn btn-primary btn-sm">Search</button>
-            </div>
+<div class="page-list">
+  <div class="my-1">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label col-form-label-sm">Agent.Pol</label>
+          <div class="col-sm-8">
+            <app-autocomplete2 [controlname]="'AGENT-POL'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
+              [displaydata]="ms.list_pol_agent_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_agent">
+            </app-autocomplete2>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label col-form-label-sm">Vessel</label>
+          <div class="col-sm-8">
+            <app-autocomplete2 [controlname]="'VESSEL'" [tabletype]="'VESSEL'" [displaycolumn]="'NAME'"
+              [displaydata]="ms.list_vessel_name" (ValueChanged)="LovSelected($event)">
+            </app-autocomplete2>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label col-form-label-sm">Agent.Pod</label>
+          <div class="col-sm-8">
+            <app-autocomplete2 [controlname]="'AGENT-POD'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
+              [displaydata]="ms.list_pod_agent_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_agent">
+            </app-autocomplete2>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label col-form-label-sm">Status</label>
+          <div class="col-sm-8">
+            <select class="form-control form-control-sm" [(ngModel)]="ms.list_status">
+              <option [value]="'ALL'">ALL</option>
+              <option [value]="'IN PROGRESS'">IN PROGRESS</option>
+              <option [value]="'COMPLETED'">COMPLETED</option>
+            </select>
           </div>
         </div>
       </div>
-    </div>
-  
-    <div *ngIf="ms.page_count" >
-      <div class="page-list">
-        <ul class="pagination pagination-sm my-1 mx-1">
-          <li class="page-item"><a class="page-link">Page {{ms.page_current}}/{{ms.page_count}} (Records-{{ms.page_rowcount}})</a></li>
-          <li class="page-item"><a class="page-link" (click)="ms.List('FIRST')"><span class="fa fa-backward"></span></a></li>
-          <li class="page-item"><a class="page-link" (click)="ms.List('PREV')"><span class="fa fa-arrow-left"></span></a></li>
-          <li class="page-item"><a class="page-link" (click)="ms.List('NEXT')"><span class="fa fa-arrow-right"></span></a></li>
-          <li class="page-item"><a class="page-link" (click)="ms.List('LAST')"><span class="fa fa-forward"></span></a></li>
-        </ul>
+      <div class="col-sm-4">
+        <div class="form-group row">
+          <div class="col-sm-8  offset-4">
+            <button [disabled]="loading" (click)="ms.List('NEW')" class="btn btn-info btn-sm btn-block">Search</button>
+          </div>
+        </div>
       </div>
-    </div>
-  
-    <div class="page-body table-responsive">
-      <table class="table  table-hover table-sm">
-        <thead class="page-body-thead">
-          <tr>
-            <th>PLAN#</th>
-            <th>DATE</th>
-            <th>POL.AGENT</th>
-            <th>POD.AGENT</th>
-            <th>WEEK#</th>
-            <th>ETD</th>
-            <th>VESSEL</th>
-            <th>VOYAGE</th>
-            <th>STATUS</th>
-            <th>COMMENTS</th>
-         </tr>
-        </thead>
-        <tbody class="page-body-tbody" *ngFor="let rec of ms.RecordList">
-          <tr>
-            <td (click)="ActionHandler('EDIT',rec.vp_pkid)" class="hlink" >{{rec.vp_plan_no}}</td>
-            <td>{{rec.vp_plan_date}}</td>
-            <td>{{rec.vp_pol_agent_name}}</td>
-            <td>{{rec.vp_pod_agent_name}}</td>
-            <td>{{rec.vp_week_no}}</td>
-            <td>{{rec.vp_etd}}</td>
-            <td>{{rec.vp_vessel_name}}</td>
-            <td>{{rec.vp_voyage}}</td>
-            <td>{{rec.vp_status}}</td>
-            <td>{{rec.vp_comments}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  
-    <div *ngIf="ms.page_count">
-      <div class="page-list">
-        <ul class="pagination pagination-sm my-1 mx-1">
-          <li class="page-item"><a class="page-link">Page {{ms.page_current}}/{{ms.page_count}} (Records-{{ms.page_rowcount}})</a></li>
-          <li class="page-item"><a class="page-link" (click)="ms.List('FIRST')"><span class="fa fa-backward"></span></a></li>
-          <li class="page-item"><a class="page-link" (click)="ms.List('PREV')"><span class="fa fa-arrow-left"></span></a></li>
-          <li class="page-item"><a class="page-link" (click)="ms.List('NEXT')"><span class="fa fa-arrow-right"></span></a></li>
-          <li class="page-item"><a class="page-link" (click)="ms.List('LAST')"><span class="fa fa-forward"></span></a></li>
-        </ul>
+      <div class="col-sm-4">
+
       </div>
     </div>
   </div>
-   
-  <div *ngIf="ms.InfoMessage" class="alert alert-success">
-    {{InfoMessage}}
+
+  <div *ngIf="ms.page_count">
+    <div class="page-list">
+      <ul class="pagination pagination-sm my-1 mx-1">
+        <li class="page-item"><a class="page-link">Page {{ms.page_current}}/{{ms.page_count}}
+            (Records-{{ms.page_rowcount}})</a></li>
+        <li class="page-item"><a class="page-link" (click)="ms.List('FIRST')"><span class="fa fa-backward"></span></a>
+        </li>
+        <li class="page-item"><a class="page-link" (click)="ms.List('PREV')"><span class="fa fa-arrow-left"></span></a>
+        </li>
+        <li class="page-item"><a class="page-link" (click)="ms.List('NEXT')"><span class="fa fa-arrow-right"></span></a>
+        </li>
+        <li class="page-item"><a class="page-link" (click)="ms.List('LAST')"><span class="fa fa-forward"></span></a>
+        </li>
+      </ul>
+    </div>
   </div>
-  <div *ngIf="ms.ErrorMessage" class="alert alert-danger">
-    {{ErrorMessage}}
+
+  <div class="page-body table-responsive">
+    <table class="table  table-hover table-sm">
+      <thead class="page-body-thead">
+        <tr>
+          <th>PLAN#</th>
+          <th>DATE</th>
+          <th>POL.AGENT</th>
+          <th>POD.AGENT</th>
+          <th>WEEK#</th>
+          <th>ETD</th>
+          <th>VESSEL</th>
+          <th>VOYAGE</th>
+          <th>STATUS</th>
+          <th>COMMENTS</th>
+        </tr>
+      </thead>
+      <tbody class="page-body-tbody" *ngFor="let rec of ms.RecordList">
+        <tr>
+          <td (click)="ActionHandler('EDIT',rec.vp_pkid)" class="hlink">{{rec.vp_plan_no}}</td>
+          <td>{{rec.vp_plan_date}}</td>
+          <td>{{rec.vp_pol_agent_name}}</td>
+          <td>{{rec.vp_pod_agent_name}}</td>
+          <td>{{rec.vp_week_no}}</td>
+          <td>{{rec.vp_etd}}</td>
+          <td>{{rec.vp_vessel_name}}</td>
+          <td>{{rec.vp_voyage}}</td>
+          <td>{{rec.vp_status}}</td>
+          <td>{{rec.vp_comments}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-   
-  
+
+  <div *ngIf="ms.page_count">
+    <div class="page-list">
+      <ul class="pagination pagination-sm my-1 mx-1">
+        <li class="page-item"><a class="page-link">Page {{ms.page_current}}/{{ms.page_count}}
+            (Records-{{ms.page_rowcount}})</a></li>
+        <li class="page-item"><a class="page-link" (click)="ms.List('FIRST')"><span class="fa fa-backward"></span></a>
+        </li>
+        <li class="page-item"><a class="page-link" (click)="ms.List('PREV')"><span class="fa fa-arrow-left"></span></a>
+        </li>
+        <li class="page-item"><a class="page-link" (click)="ms.List('NEXT')"><span class="fa fa-arrow-right"></span></a>
+        </li>
+        <li class="page-item"><a class="page-link" (click)="ms.List('LAST')"><span class="fa fa-forward"></span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="ms.InfoMessage" class="alert alert-success">
+  {{InfoMessage}}
+</div>
+<div *ngIf="ms.ErrorMessage" class="alert alert-danger">
+  {{ErrorMessage}}
+</div>

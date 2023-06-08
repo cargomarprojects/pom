@@ -40,6 +40,9 @@ export class VslPlanService {
   list_pol_agent_name = '';
   list_pod_agent_id = '';
   list_pod_agent_name = '';
+  list_vessel_id = '';
+  list_vessel_name = '';
+  list_status = 'ALL';
   // Array For Displaying List
   RecordList: Planm[] = [];
   // Single Record for add/edit/view details
@@ -87,6 +90,8 @@ export class VslPlanService {
       year_code: this.gs.globalVariables.year_code,
       pol_agent_id: this.list_pol_agent_id,
       pod_agent_id: this.list_pod_agent_id,
+      vessel_id: this.list_vessel_id,
+      status: this.list_status,
       page_count: this.page_count,
       page_current: this.page_current,
       page_rows: this.page_rows,
