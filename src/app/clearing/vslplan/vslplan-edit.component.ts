@@ -31,6 +31,7 @@ export class VslPlanEditComponent {
   loading = false;
   ord_selected = false;
   chkselected = false;
+  ctrlDisable = false;
 
   bPrint: boolean = false;
   searchstring = '';
@@ -76,7 +77,7 @@ export class VslPlanEditComponent {
         this.bPrint = true;
     }
   }
-  
+
   // Destroy Will be called when this component is closed
   ngOnDestroy() {
     // this.sub.unsubscribe();
@@ -120,6 +121,7 @@ export class VslPlanEditComponent {
   }
 
   NewRecord() {
+    this.ctrlDisable = false;
     this.chkselected = false;
     this.ord_selected = false;
     this.pkid = this.gs.getGuid();
@@ -177,6 +179,7 @@ export class VslPlanEditComponent {
     this.ms.GetRecord(SearchData)
       .subscribe(response => {
         this.loading = false;
+        this.ctrlDisable = response.ctrldisable;
         this.LoadData(response.record);
       },
         error => {
@@ -210,6 +213,7 @@ export class VslPlanEditComponent {
     this.ms.Save(this.Record)
       .subscribe(response => {
         this.loading = false;
+        this.ctrlDisable = response.ctrldisable;
         if (this.mode == 'ADD') {
           this.Record.vp_plan_no = response.planno;
         }
