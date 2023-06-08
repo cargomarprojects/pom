@@ -130,7 +130,7 @@ export class VslPlanService {
     }
   }
 
-
+  
 
   VslList(SearchData: any) {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/VslPlan/List', SearchData, this.gs.headerparam2('authorized'));
@@ -144,6 +144,9 @@ export class VslPlanService {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/VslPlan/Save', Record, this.gs.headerparam2('authorized'));
   }
 
+  OrderList(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/VslPlan/OrderList', SearchData, this.gs.headerparam2('authorized'));
+  }
 
 }
 

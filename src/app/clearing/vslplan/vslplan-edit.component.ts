@@ -44,8 +44,7 @@ export class VslPlanEditComponent {
 
 
   Record: Planm = new Planm;
-  RecordList: Joborderm[] = [];
-  EMPRECORD: SearchTable = new SearchTable();
+
   constructor(
     private ms: VslPlanService,
     private route: ActivatedRoute,
@@ -284,8 +283,49 @@ export class VslPlanEditComponent {
     }
   }
 
+  OrderList() {
 
+    this.ErrorMessage = '';
+    this.InfoMessage = '';
+    //if (this.ord_po.trim().length <= 0) {
 
+    //  this.ErrorMessage += " | PO Cannot Be Blank";
+    //}
+    // if (this.ErrorMessage)
+    //   return;
+   
+    this.loading = true;
+    let SearchData = {
+      rowtype: this.ms.type,
+      planid: this.Record.vp_pkid,
+      polagentid: this.Record.vp_pol_agent_id,
+      podagentid: this.Record.vp_pod_agent_id,
+      consigneeid: this.Record.vp_imp_id,
+      company_code: this.gs.globalVariables.comp_code,
+      branch_code: this.gs.globalVariables.branch_code
+    };
+
+    this.ErrorMessage = '';
+    this.InfoMessage = '';
+    this.ms.OrderList(SearchData)
+      .subscribe(response => {
+        this.loading = false;
+        // var REC = null;
+        //   for (let Rec of response.list) {
+        //     REC = this.Record.OrderList.find(a => a.ord_pkid == Rec.ord_pkid);
+        //     if (REC == null) {
+        //       this.Record.OrderList.push(Rec);
+        //     }
+        //   }
+        this.Record.OrderList = response.list;
+      },
+      error => {
+        this.loading = false;
+        this.ErrorMessage = this.gs.getError(error);
+        alert(this.ErrorMessage);
+      });
+       
+    }
 
   Close() {
     this.gs.ClosePage('home');
