@@ -20,6 +20,10 @@ export class User {
     user_email_pwd: string;
     user_local_server: string;
 
+    user_customer_group_id: string ;
+    user_customer_group_code: string ;
+    user_customer_group_name: string ;
+
     user_type_id : string ;
 
     rec_mode: string;
@@ -27,6 +31,5 @@ export class User {
     _globalvariables: GlobalVariables;
 
     RecordDet: Userd[] = [];
-    RecordDet_Customer: Userd_Customer[] = [];
 
 }

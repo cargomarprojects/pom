@@ -45,9 +45,7 @@ export class UserComponent {
 
     subItem = 'branch';
 
-    cust_id = '';
-    cust_code = '';
-    cust_name = '';
+
 
     // Array For Displaying List
     RecordList: User[] = [];
@@ -56,9 +54,11 @@ export class UserComponent {
 
     RecordDet: Userd[] = [];
 
-    RecordDet_Customer: Userd_Customer[] = [];
+
 
     SALESMANRECORD: SearchTable = new SearchTable();
+
+    CUSTGROUPRECORD: SearchTable = new SearchTable();
 
     constructor(
         private mainService: UserService,
@@ -95,6 +95,16 @@ export class UserComponent {
       this.SALESMANRECORD.code = "";
       this.SALESMANRECORD.name = "";
 
+
+      this.CUSTGROUPRECORD = new SearchTable();
+      this.CUSTGROUPRECORD.controlname = "CUSTOMERGROUP";
+      this.CUSTGROUPRECORD.displaycolumn = "NAME";
+      this.CUSTGROUPRECORD.type = "CUST-GROUP";
+      this.CUSTGROUPRECORD.id = "";
+      this.CUSTGROUPRECORD.code = "";
+      this.CUSTGROUPRECORD.name = "";
+
+
     }
 
     LovSelected(_Record: SearchTable) {
@@ -103,38 +113,15 @@ export class UserComponent {
          this.Record.user_sman_code = _Record.code;
          this.Record.user_sman_name = _Record.name;
       }
-      if (_Record.controlname == "CUSTOMER") {
-        this.cust_id = _Record.id;
-        this.cust_code = _Record.code;
-        this.cust_name = _Record.name;
+      
+      if (_Record.controlname == "CUSTOMERGROUP") {
+        this.Record.user_customer_group_id = _Record.id;
+        this.Record.user_customer_group_code = _Record.code;
+        this.Record.user_customer_group_name = _Record.name;
       }      
     }
         
 
-    addCustomer(){
-        if ( this.gs.isBlank(this.cust_id) || this.gs.isBlank(this.cust_code) || this.gs.isBlank(this.cust_name) )
-        {
-            alert ('Invalid Customer');
-            return;
-        }
-        for ( let itm of this.RecordDet_Customer ) {
-            if( itm.user_customer_id == this.cust_id){
-                alert ('Customer Already Exists In The List');
-                return;
-            }
-        }
-        let _rec =  new Userd_Customer();
-        _rec.user_id = this.pkid;
-        _rec.user_customer_id = this.cust_id;
-        _rec.user_customer_name = this.cust_name;
-
-        this.RecordDet_Customer.push(_rec);
-
-        this.cust_id = '';
-        this.cust_code = '';
-        this.cust_name = '';
-
-    }
 
 
     //function for handling LIST/NEW/EDIT Buttons
@@ -210,7 +197,7 @@ export class UserComponent {
         this.Record.rec_mode = this.mode;
         this.Record.user_branch_user = false;
 
-        this.RecordDet_Customer = [];
+        
 
         this.InitLov();
     }
@@ -230,7 +217,7 @@ export class UserComponent {
                 this.loading = false;
                 this.LoadData(response.record);
                 this.RecordDet = response.recorddet;
-                this.RecordDet_Customer = response.customerList;
+                
             },
             error => {
                 this.loading = false;
@@ -242,9 +229,15 @@ export class UserComponent {
         this.Record = _Record;
         this.Record.rec_mode = this.mode;
         this.InitLov();
+
         this.SALESMANRECORD.id = this.Record.user_sman_id;
         this.SALESMANRECORD.code = this.Record.user_sman_code;
         this.SALESMANRECORD.name = this.Record.user_sman_name;
+
+        this.CUSTGROUPRECORD.id = this.Record.user_customer_group_id;
+        this.CUSTGROUPRECORD.code = this.Record.user_customer_group_code;
+        this.CUSTGROUPRECORD.name = this.Record.user_customer_group_name;
+
     }
 
     // Save Data
@@ -255,7 +248,7 @@ export class UserComponent {
         this.ErrorMessage = '';
 
         this.Record.RecordDet = this.RecordDet;
-        this.Record.RecordDet_Customer = this.RecordDet_Customer;
+        
 
         this.Record._globalvariables = this.gs.globalVariables;
 
@@ -328,10 +321,5 @@ export class UserComponent {
             this.subItem = _subItem;
     }
 
-    remove(rec : Userd_Customer) {
-        if ( !confirm('Remove Record ' + rec.user_customer_name) )
-            return;
-        this.RecordDet_Customer.splice( this.RecordDet_Customer.findIndex( f => f.user_customer_id == rec.user_customer_id),1 );
-    }
 
 }
