@@ -373,7 +373,17 @@ export class GlobalService {
       return false;
   }
 
-
+  getTrackDate(_type: string) {
+    var REC = this.trkCaptionList.find(rec => rec.trk_caption_code == _type);
+    if (REC != null) {
+      if (REC.trk_enabled)
+        return REC.trk_caption_code;
+      else
+        return '';
+    }
+    else
+      return '';
+  }
 
 
 }
