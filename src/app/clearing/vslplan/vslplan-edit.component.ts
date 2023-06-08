@@ -36,15 +36,10 @@ export class VslPlanEditComponent {
   searchstring = '';
 
   modal: any;
-  // sub: any;
   urlid: string;
   lock_record: boolean = false;
-
-
   ErrorMessage = "";
   InfoMessage = "";
-
-
   Record: Planm = new Planm;
 
   constructor(
@@ -63,17 +58,6 @@ export class VslPlanEditComponent {
       this.InitComponent();
     }
 
-    // this.sub = this.route.queryParams.subscribe(params => {
-    //     if (params["parameter"] != "") {
-    //       this.InitCompleted = true;
-    //       var options = JSON.parse(params["parameter"]);
-    //       this.menuid = options.menuid;
-    //       this.type = options.type;
-    //       this.mode = options.mode;
-    //       this.pkid = options.pkid;
-    //       this.InitComponent();
-    //     }
-    //   });
   }
 
   // Init Will be called After executing Constructor
@@ -91,8 +75,8 @@ export class VslPlanEditComponent {
       if (this.menu_record.rights_print)
         this.bPrint = true;
     }
-
   }
+  
   // Destroy Will be called when this component is closed
   ngOnDestroy() {
     // this.sub.unsubscribe();
