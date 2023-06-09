@@ -37,7 +37,7 @@ export class TrackOrderComponent {
   private type: string = '';
   pkid: string = '';
   refno: string = '';
-  
+
   pkid$: Observable<string>;
   refno$: Observable<string>;
 
@@ -170,7 +170,10 @@ export class TrackOrderComponent {
         this.TrkCaptionList = response.list;
         this.enableDateCode = response.enablecode;
         this.lastDateCode = response.lastdatecode;
-        if (response.error) { alert(response.error); }
+        if (response.error) {
+          this.ErrorMessage = response.error;
+          // alert(response.error); 
+        }
         this.LoadData(response.record);
       },
         error => {
