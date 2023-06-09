@@ -72,41 +72,25 @@
   </div>
 </div>
 
-<div *ngIf="currentTab=='DETAILS'" class="page-details">
+<div *ngIf="currentTab=='DETAILS'">
 
-  <div class="row">
-    <div class="col-6">
-      User : {{user_name}} - Company : {{branch_name}}
-    </div>
-
-    <!--     
+  <div class="page-details">
+    <div class="row">
       <div class="col-6">
+        <label class="col-6 col-form-label col-form-label-sm">{{user_name}} </label>
+      </div>
       <div class="form-group row">
-        <label class="col-2 col-form-label col-form-label-sm">Copy to User</label>
-        <div class="col-4">
-          <app-autocomplete #UserLov [inputdata]="USERRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete>
+        <label class="col-2 col-form-label col-form-label-sm mr-5">Module</label>
+        <div *ngFor="let rec of ModuleList">
+          <button [disabled]="loading" class="btn btn-info btn-sm mx-1"
+            (click)="module_name=rec.module_name">{{rec.module_name}}</button>
+          <span>&nbsp;</span>
         </div>
-        <label class="col-1 col-form-label col-form-label-sm">Branch</label>
-        <div class="col-3">
-          <app-autocomplete #BrLov [inputdata]="BRRECORD" (ValueChanged)="LovSelected($event)">
-          </app-autocomplete>
-        </div>
-        <div class="col-2">
-        <button [disabled]="loading" (click)="Copy()" class="btn btn-primary btn-sm">Copy</button>
-      </div>
       </div>
     </div>
-  </div> 
-  -->
+  </div>
 
-    <div class="form-group row">
-      <label class="col-2 col-form-label col-form-label-sm mr-5">Module</label>
-      <div *ngFor="let rec of ModuleList">
-        <button [disabled]="loading" class="btn btn-info btn-sm mx-1"
-          (click)="module_name=rec.module_name">{{rec.module_name}}</button>
-        <span>&nbsp;</span>
-      </div>
-    </div>
+  <div class="page-details">
 
     <div class="table-responsive" style="border:1px solid grey; margin-bottom:1px;">
       <table class="table table-hover table-sm">
@@ -147,17 +131,17 @@
         </tbody>
       </table>
     </div>
-    <br />
+  </div>
 
+  <div class="page-details">
     <div>
       <button [disabled]="loading" (click)="Save()" class="btn btn-primary btn-sm mr-1">Save</button>
       <button [disabled]="loading" (click)="Return2Parent()" class="btn btn-primary btn-sm">Return</button>
-      <i *ngIf="loading" class="fa fa-spinner"></i>
     </div>
-
-
   </div>
 
-  <div *ngIf="ErrorMessage" class="alert alert-info">
-    {{ErrorMessage}}
-  </div>
+</div>
+
+<div *ngIf="ErrorMessage" class="alert alert-info">
+  {{ErrorMessage}}
+</div>
