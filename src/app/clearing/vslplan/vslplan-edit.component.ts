@@ -397,6 +397,8 @@ export class VslPlanEditComponent {
 
   CloseModal1() {
     this.modalRef.close();
+
+    
   }
 
 }
