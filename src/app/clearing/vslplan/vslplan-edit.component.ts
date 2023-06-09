@@ -246,18 +246,22 @@ export class VslPlanEditComponent {
       bret = false;
       sError += "\n\r | Date Cannot Be Blank";
     }
-    if (this.Record.vp_pol_agent_id.trim().length <= 0) {
-      bret = false;
-      sError += "\n\r | Agent.pol Cannot Be Blank";
-    }
-    if (this.Record.vp_pod_agent_id.trim().length <= 0) {
-      bret = false;
-      sError += "\n\r | Agent.pod Cannot Be Blank";
-    }
-    if (this.Record.vp_week_no <= 0) {
-      bret = false;
-      sError += "\n\r | Week Number Cannot Be Blank";
-    }
+    // if (this.Record.vp_pol_agent_id.trim().length <= 0) {
+    //   bret = false;
+    //   sError += "\n\r | Agent.pol Cannot Be Blank";
+    // }
+    // if (this.Record.vp_imp_id.trim().length <= 0) {
+    //   bret = false;
+    //   sError += "\n\r | Consignee Cannot Be Blank";
+    // }
+    // if (this.Record.vp_pod_agent_id.trim().length <= 0) {
+    //   bret = false;
+    //   sError += "\n\r | Agent.pod Cannot Be Blank";
+    // }
+    // if (this.Record.vp_week_no <= 0) {
+    //   bret = false;
+    //   sError += "\n\r | Week Number Cannot Be Blank";
+    // }
 
     if (bret === false) {
       this.ErrorMessage = sError;
