@@ -24,7 +24,7 @@ table {
 }
 
 .page-body-thead {
-  
+  font-size: 9px !important;   
   cursor: pointer;
   background-color: steelblue;
   color: white;
