@@ -40,6 +40,9 @@ export class ModuleComponent {
     // Single Record for add/edit/view details
     Record: Modulem = new Modulem  ;
 
+    menu_record: any;
+    menuid : string ;
+
     constructor(
         private mainService: ModuleService,
         private location: Location,
@@ -50,8 +53,18 @@ export class ModuleComponent {
         this.page_rows = 10;
         this.page_current = 0;
 
+        this.menuid = this.gs.getParameter('menuid');
+        this.InitComponent();
+
         this.List("NEW");
 
+    }
+
+    InitComponent() {
+        this.menu_record = this.gs.getMenu(this.menuid);
+        if (this.menu_record) {
+          this.title = this.menu_record.menu_name;
+        }
     }
 
     // Init Will be called After executing Constructor
