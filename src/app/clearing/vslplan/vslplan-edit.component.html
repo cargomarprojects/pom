@@ -93,10 +93,10 @@
             (blur)="OnBlur('vp_comments')" required maxlength="250" />
         </div>
       </div>
-      <div class="form-group row">
+      <div   *ngIf="mode=='EDIT'" class="form-group row">
         <label class="col-2 col-form-label col-form-label-sm"></label>
         <div class="col-10">
-          <button [disabled]="loading" (click)="OrderList()" class="btn btn-primary btn-sm mr-1">Search</button>
+          <button [disabled]="loading" (click)="OrderList()" class="btn btn-info btn-sm mr-1">Search</button>
           <button (click)="ShowTracking(trackorder)" class="btn btn-info btn-sm">Tracking
             <span *ngIf="total>0" class="badge badge-light">{{total}}</span>
           </button>
@@ -108,7 +108,7 @@
 
   </div>
 </div>
-<div class="page-body table-responsive">
+<div  *ngIf="mode=='EDIT'"  class="page-body table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 262px);">
   <table class="table table-hover table-sm">
     <thead class="page-body-thead">
       <tr>

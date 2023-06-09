@@ -38,6 +38,8 @@ export class VslPlanService {
 
   list_pol_agent_id = '';
   list_pol_agent_name = '';
+  list_imp_id = '';
+  list_imp_name = '';
   list_pod_agent_id = '';
   list_pod_agent_name = '';
   list_vessel_id = '';
@@ -89,6 +91,7 @@ export class VslPlanService {
       user_code: this.gs.globalVariables.user_code,
       year_code: this.gs.globalVariables.year_code,
       pol_agent_id: this.list_pol_agent_id,
+      imp_id: this.list_imp_id,
       pod_agent_id: this.list_pod_agent_id,
       vessel_id: this.list_vessel_id,
       status: this.list_status,

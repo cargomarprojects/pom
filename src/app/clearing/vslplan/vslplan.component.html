@@ -20,6 +20,14 @@
           </div>
         </div>
         <div class="form-group row">
+          <label class="col-sm-4 col-form-label col-form-label-sm">Consignee</label>
+          <div class="col-sm-8">
+            <app-autocomplete2  [controlname]="'CONSIGNEE'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
+              [displaydata]="ms.list_imp_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_consignee">
+            </app-autocomplete2>
+          </div>
+        </div>
+        <div class="form-group row">
           <label class="col-sm-4 col-form-label col-form-label-sm">Agent.Pod</label>
           <div class="col-sm-8">
             <app-autocomplete2 [controlname]="'AGENT-POD'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
@@ -76,7 +84,7 @@
     </div>
   </div>
 
-  <div class="page-body table-responsive">
+  <div class="page-body table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 327px);">
     <table class="table  table-hover table-sm">
       <thead class="page-body-thead">
         <tr>

@@ -72,7 +72,8 @@ export class VslPlanComponent {
       this.ms.list_pod_agent_name = _Record.name;
     }
     else if (_Record.controlname == "CONSIGNEE") {
-       
+      this.ms.list_imp_id = _Record.id;
+      this.ms.list_imp_name = _Record.name;
     }
     else if (_Record.controlname == "VESSEL") {
       this.ms.list_vessel_id = _Record.id;
