@@ -36,8 +36,8 @@ export class VslPlanEditComponent {
 
   bPrint: boolean = false;
   searchstring = '';
- public ord_trkids = "";
- public ord_trkpos = "";
+  public ord_trkids = "";
+  public ord_trkpos = "";
   total = 0;
 
   modalRef: any;
@@ -177,15 +177,20 @@ export class VslPlanEditComponent {
       type: _type,
       report_folder: this.gs.globalVariables.report_folder,
       company_code: this.gs.globalVariables.comp_code,
-      branch_code: this.gs.globalVariables.branch_code
+      branch_code: this.gs.globalVariables.branch_code,
+      user_code: this.gs.globalVariables.user_code
     };
     this.ErrorMessage = '';
     this.InfoMessage = '';
     this.ms.GetRecord(SearchData)
       .subscribe(response => {
         this.loading = false;
-        this.ctrlDisable = response.ctrldisable;
-        this.LoadData(response.record);
+        if (_type == 'EXCEL')
+          this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
+        else {
+          this.ctrlDisable = response.ctrldisable;
+          this.LoadData(response.record);
+        }
       },
         error => {
           this.loading = false;
@@ -206,6 +211,9 @@ export class VslPlanEditComponent {
     this.FindCount();
   }
 
+  Downloadfile(filename: string, filetype: string, filedisplayname: string) {
+    this.gs.DownloadFile(this.gs.globalVariables.report_folder, filename, filetype, filedisplayname);
+  }
   // Save Data
   Save() {
 
