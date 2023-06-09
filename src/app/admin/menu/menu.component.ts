@@ -43,6 +43,9 @@ export class MenuComponent {
     // Single Record for add/edit/view details
     Record: Menum = new Menum;
 
+    menu_record: any;
+    menuid : string ;
+
     constructor(
         private mainService: MenuService,
         private route: ActivatedRoute,
@@ -51,10 +54,20 @@ export class MenuComponent {
         this.page_count = 0;
         this.page_rows = 50;
         this.page_current = 0;
+        
+        this.menuid = this.gs.getParameter('menuid');
+        this.InitComponent();
 
         this.LoadCombo();
-        //this.List("NEW"); this is moved to LoadCombo Function
     }
+
+    InitComponent() {
+        this.menu_record = this.gs.getMenu(this.menuid);
+        if (this.menu_record) {
+          this.title = this.menu_record.menu_name;
+        }
+    }
+    
 
     // Init Will be called After executing Constructor
     ngOnInit() {

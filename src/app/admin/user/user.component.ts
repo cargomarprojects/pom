@@ -45,20 +45,16 @@ export class UserComponent {
 
     subItem = 'branch';
 
-
-
     // Array For Displaying List
     RecordList: User[] = [];
     // Single Record for add/edit/view details
     Record: User = new User;
-
     RecordDet: Userd[] = [];
-
-
-
     SALESMANRECORD: SearchTable = new SearchTable();
-
     CUSTGROUPRECORD: SearchTable = new SearchTable();
+
+    menu_record: any;
+    menuid : string ;
 
     constructor(
         private mainService: UserService,
@@ -72,9 +68,22 @@ export class UserComponent {
 
         this.data_list  = this.gs.USER_DATA_LIST;
 
+                
+        this.menuid = this.gs.getParameter('menuid');
+        this.InitComponent();
+
+
         this.InitLov();
         this.List("NEW");
     }
+
+    InitComponent() {
+        this.menu_record = this.gs.getMenu(this.menuid);
+        if (this.menu_record) {
+          this.title = this.menu_record.menu_name;
+        }
+    }
+    
 
     // Init Will be called After executing Constructor
     ngOnInit() {

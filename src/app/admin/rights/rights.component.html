@@ -7,22 +7,23 @@
   </div>
 </div>
 
+<div *ngIf="currentTab=='LIST'">
 
-<div *ngIf="currentTab=='LIST'" class="page-list">
-
-  <div class="page-search">
-    <div class="row">
-      <label class="col-2">Search</label>
-      <div class="col">
-        <input type="text" class="col form-control form-control-sm" name="Search" [(ngModel)]="searchstring" />
-      </div>
-      <div class="col">
-        <button [disabled]="loading" (click)="List('NEW')" class="btn btn-primary btn-sm">Search</button>
+  <div class="page-list">
+    <div class="page-search">
+      <div class="row">
+        <label class="col-2">Search</label>
+        <div class="col">
+          <input type="text" class="col form-control form-control-sm" name="Search" [(ngModel)]="searchstring" />
+        </div>
+        <div class="col">
+          <button [disabled]="loading" (click)="List('NEW')" class="btn btn-primary btn-sm">Search</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="page-pager">
+  <div class="page-list p-1">
     <div *ngIf="page_count">
       <ul class="pagination pagination-sm">
         <li class="page-item"><a class="page-link">Page {{page_current}}/{{page_count}} (Records-{{page_rowcount}})</a>
@@ -37,31 +38,37 @@
     </div>
   </div>
 
-  <div class="page-body table-responsive">
-    <table class="table table-hover table-sm">
-      <thead class="page-body-thead">
-        <tr>
-          <th>Login ID</th>
-          <th>User Name</th>
-          <th>Email</th>
-        </tr>
-      </thead>
-      <tbody class="page-body-tbody" *ngFor="let rec of RecordMast">
-        <tr (click)="RightsList('NEW',rec)">
-          <td>{{rec.user_code}}</td>
-          <td>{{rec.user_name}}</td>
-          <td>{{rec.user_email}}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="page-list p-1">
+    <div class="page-body table-responsive">
+      <table class="table table-hover table-sm">
+        <thead class="page-body-thead">
+          <tr>
+            <th>Login ID</th>
+            <th>User Name</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody class="page-body-tbody" *ngFor="let rec of RecordMast">
+          <tr (click)="RightsList('NEW',rec)">
+            <td>{{rec.user_code}}</td>
+            <td>{{rec.user_name}}</td>
+            <td>{{rec.user_email}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
-  <div class="page-pager">
+
+
+  <div class="page-list p-1">
     <div *ngIf="page_count">
       <ul class="pagination pagination-sm">
-        <li class="page-item"><a class="page-link">Page {{page_current}}/{{page_count}} (Records-{{page_rowcount}})</a>
+        <li class="page-item"><a class="page-link">Page {{page_current}}/{{page_count}}
+            (Records-{{page_rowcount}})</a>
         </li>
-        <li class="page-item"><a class="page-link" (click)="List('FIRST')"><span class="fa fa-backward"></span></a></li>
+        <li class="page-item"><a class="page-link" (click)="List('FIRST')"><span class="fa fa-backward"></span></a>
+        </li>
         <li class="page-item"><a class="page-link" (click)="List('PREV')"><span class="fa fa-arrow-left"></span></a>
         </li>
         <li class="page-item"><a class="page-link" (click)="List('NEXT')"><span class="fa fa-arrow-right"></span></a>
@@ -71,6 +78,10 @@
     </div>
   </div>
 </div>
+
+
+
+
 
 <div *ngIf="currentTab=='DETAILS'">
 
