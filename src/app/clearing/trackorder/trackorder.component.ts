@@ -208,7 +208,8 @@ export class TrackOrderComponent {
       .subscribe(response => {
         this.loading = false;
         // this.InfoMessage = "Save Complete";
-        this.Close();
+
+        this.closeModalWindow.emit({ saction: 'SAVE', sdate: response.trackdate, sid: this.Record.ord_pkid, sdatetype: _type });
       },
         error => {
           this.loading = false;
