@@ -374,13 +374,13 @@ export class VslPlanEditComponent {
         this.ord_trkids += rec.ord_pkid;
 
         if (this.ord_trkpos != "")
-          this.ord_trkpos += ", ";
+          this.ord_trkpos += ",";
         this.ord_trkpos += rec.ord_po;
       }
     }
 
 
-    if (this.total <= 0) {
+    if (this.gs.isBlank(this.ord_trkids)) {
       alert('No Rows Selected');
       return;
     }

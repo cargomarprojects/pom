@@ -37,7 +37,7 @@ export class TrackOrderComponent {
   private type: string = '';
   pkid: string = '';
   refno: string = '';
-
+  
   pkid$: Observable<string>;
   refno$: Observable<string>;
 
@@ -85,8 +85,6 @@ export class TrackOrderComponent {
 
   // Init Will be called After executing Constructor
   ngOnInit() {
-    if (!this.gs.isBlank(this.ord_pos))
-      this.refno = this.ord_pos;
     if (!this.gs.isBlank(this.ord_pkids)) {
       this.pkid = this.ord_pkids;
       this.process();
