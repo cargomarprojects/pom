@@ -1,13 +1,11 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { GlobalService } from '../../../core/services/global.service';
 import { Joborderm, SearchQuery } from '../../models/joborder';
-import { OrderListService } from '../../services/orderlist.service';
-import { Observable } from 'rxjs';
 import { PageQuery } from 'src/app/shared/models/pageQuery';
- 
+import { OrderListService } from '../../services/orderlist.service';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-orderlist',
@@ -18,7 +16,8 @@ export class OrderListComponent {
 
   urlid = '';
   menuid = '';
-  query:SearchQuery;
+  query: SearchQuery;
+  pageQuery:  PageQuery;
 
   constructor(
     private ms: OrderListService,
@@ -26,12 +25,14 @@ export class OrderListComponent {
     private location: Location,
     private router: Router,
   ) {
-     
+
+
 
   }
   // Init Will be called After executing Constructor
   ngOnInit() {
-    this.query=this.ms.searchQuery;
+    
+
   }
 
   //// Destroy Will be called when this component is closed
@@ -39,7 +40,22 @@ export class OrderListComponent {
 
   }
 
-   
+  // searchEvents(actions: any) {
+  //   var urlid = this.gs.getParameter('urlid');
+
+  //   // if (actions.outputformat == 'MAIL-FTP') {
+  //   if (actions.outputformat == 'EXCEL') {
+  //     this.store.dispatch(FromOrderActions.UpdateQuery({ urlid: urlid, stype: 'EXCEL', query: actions.searchQuery }));
+  //   } 
+  //   else
+  //     this.store.dispatch(FromOrderActions.UpdateQuery({ urlid: urlid, stype: 'NEW', query: actions.searchQuery }));
+  // }
+
+  pageEvents(actions: any) {
+    // var urlid = this.gs.getParameter('urlid');
+    // this.store.dispatch(FromOrderActions.UpdateQuery({ urlid: urlid, stype: actions.action, query: actions.pageQuery }));
+  }
+
   ActionHandler(actions: any) {
     /*
     if (!this.gs.canAdd(this.menuid)) {
