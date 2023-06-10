@@ -196,6 +196,6 @@
 
 <ng-template #trackorder let-c="close" let-d="dismiss">
   <div class="modal-body">
-    <app-trackorder [ord_pkids]="ord_trkids" [ord_pos]="ord_trkpos" (closeModalWindow)="CloseModal1()"></app-trackorder>
+    <app-trackorder [ord_pkids]="ord_trkids" [ord_pos]="ord_trkpos" (closeModalWindow)="CloseModal1($event)"></app-trackorder>
   </div>
 </ng-template>

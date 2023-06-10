@@ -395,10 +395,15 @@ export class VslPlanEditComponent {
     this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
   }
 
-  CloseModal1() {
+  CloseModal1(params: any) {
     this.modalRef.close();
 
-    
+    // for (let rec of this.RecordList.filter(rec => rec.cost_pkid == params.sid)) {
+    //   if (params.saction == "SENT-ON")
+    //     rec.cost_sent_on = params.sdate;
+    //   if (params.saction == "CHECKED-ON")
+    //     rec.cost_checked_on = params.sdate;
+    // }
   }
 
 }
