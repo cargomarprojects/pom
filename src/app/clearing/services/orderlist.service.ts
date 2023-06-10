@@ -17,7 +17,7 @@ export class OrderListService {
   where_consignee = "CUST_IS_CONSIGNEE = 'Y'";
   where_buy_agent = "CUST_IS_BUY_AGENT = 'Y'";
   
-  _record: JobOrderModel;
+  private _record: JobOrderModel;
 
   constructor(
     private http2: HttpClient,
