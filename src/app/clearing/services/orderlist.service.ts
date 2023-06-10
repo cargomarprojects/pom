@@ -17,13 +17,22 @@ export class OrderListService {
   where_consignee = "CUST_IS_CONSIGNEE = 'Y'";
   where_buy_agent = "CUST_IS_BUY_AGENT = 'Y'";
   
-  record: JobOrderModel;
+  _record: JobOrderModel;
 
   constructor(
     private http2: HttpClient,
     private gs: GlobalService) {
+
+      this.record =  {};
   }
 
+  public get record() {
+    return this._record;
+  }
+
+  public set record( value : any) {
+    this._record = value;
+  }
 
   List(_type: string, searchQuery: SearchQuery) {
     this.loading = true;
