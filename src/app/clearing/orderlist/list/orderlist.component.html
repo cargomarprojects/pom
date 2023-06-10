@@ -6,23 +6,192 @@
   </div>
 </div>
 
-<div *ngIf="errorMessage$ | async as msg">
-  <div class="page-list">
-    <div class="alert alert-info">
-      <p class="mb-0">{{msg}}</p>
-    </div>
+<div class="page-details" *ngIf="query">
+  <div class="row">
+          
+        <div class="col-md-5">
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">From</label>
+            <div class="col-4">
+              <app-date [inputdate]="query.from_date" (ValueChanged)="query.from_date=$event"></app-date>
+            </div>
+            <label class="col-1 col-form-label col-form-label-sm">To</label>
+            <div class="col-4">
+              <app-date [inputdate]="query.to_date" (ValueChanged)="query.to_date=$event"></app-date>
+            </div>            
+          </div>
+
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">Agent.Pol</label>
+            <div class="col-9">
+              <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
+                [displaydata]="query.list_agent_name" (ValueChanged)="LovSelected($event)" [where]="where_agent">
+              </app-autocomplete2>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">Shipper</label>
+            <div class="col-9">
+
+              <app-autocomplete2 [controlname]="'SHIPPER'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
+                [displaydata]="query.list_exp_name" (ValueChanged)="LovSelected($event)" [where]="where_shipper">
+              </app-autocomplete2>
+
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">Consignee</label>
+            <div class="col-9">
+              <app-autocomplete2 [controlname]="'CONSIGNEE'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
+                [displaydata]="query.list_imp_name" (ValueChanged)="LovSelected($event)" [where]="where_consignee">
+              </app-autocomplete2>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">Buy.Agent</label>
+            <div class="col-9">
+              <app-autocomplete2 [controlname]="'BUY-AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
+                [displaydata]="query.list_buy_agent_name" (ValueChanged)="LovSelected($event)" [where]="where_buy_agent">
+              </app-autocomplete2>
+            </div>
+          </div>          
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">Agent.Pod</label>
+            <div class="col-9">
+              <app-autocomplete2 [controlname]="'AGENT-POD'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
+                [displaydata]="query.list_pod_agent_name" (ValueChanged)="LovSelected($event)" [where]="where_agent">
+              </app-autocomplete2>
+            </div>
+          </div>          
+
+
+        </div>
+
+        <div class="col-md-4">
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">Invoice#</label>
+            <div class="col-9">
+              <InputBox [(inputModel)]="query.ord_invoice" [maxlength]="30" [uppercase]=true></InputBox>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">Po#</label>
+            <div class="col-9">
+              <InputBox [(inputModel)]="query.ord_po" [maxlength]="1000" [uppercase]=true></InputBox>
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">Status</label>
+            <div class="col-9">
+              <select class="form-control form-control-sm" [(ngModel)]="query.ord_status">
+                <option [value]="'ALL'">ALL</option>
+                <option [value]="'REPORTED'">REPORTED</option>
+                <option [value]="'APPROVED'">APPROVED</option>
+                <option [value]="'REPORTED-APPROVED'">REPORTED + APPROVED</option>
+                <option [value]="'CANCELLED'">CANCELLED</option>
+                <option [value]="'ON HOLD'">ON HOLD</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">Pending</label>
+            <div class="col-9">
+              <select class="form-control form-control-sm" [(ngModel)]="query.ord_showpending">
+                <!-- <option [value]="'Y'">SHOW PENDING ONLY</option> -->
+                <option [value]="'SOB-CONFIRMED'">SOB CONFIRMED</option>
+                <option [value]="'SOB-NOT-CONFIRMED'">SOB NOT CONFIRMED</option>
+                <option [value]="'N'">NA</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">Sort</label>
+            <div class="col-9">
+              <select class="form-control form-control-sm" [(ngModel)]="query.sort_colname">
+                <option *ngFor="let rec of SortList" [value]="rec.colheadername">{{rec.colheadername}}</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+          <div class="form-group row">
+            <div class="col-9 offset-3">
+              <button (click)="List('NEW')" class="btn btn-info btn-sm btn-block">Search</button>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-9 offset-3">
+              <button (click)="ShowTracking(trackorder)" class="btn btn-info btn-sm btn-block">Tracking
+                <span *ngIf="selectedRecordsCount$ | async" class="badge badge-light">{{total}}</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-9 offset-3">
+              <button (click)="ShowStatus(changestatus)" class="btn btn-info btn-sm btn-block">Change PO Status
+                <span *ngIf="selectedRecordsCount$ | async" class="badge badge-light">{{total}}</span>
+              </button>
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+            <div class="col-9 offset-3">
+              <button (click)="List('EXCEL')" class="btn btn-info btn-sm btn-block">Excel</button>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-9 offset-3">
+              <button (click)="ShowHistory(history)" class="btn btn-info btn-sm btn-block">History</button>
+            </div>
+          </div>
+        </div>
+
   </div>
 </div>
 
-<div>
 
-  <app-orderlist-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
-  </app-orderlist-header>
 
-  <App-Page [pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page>
 
-  <app-orderlist-detail [_records]="recordlist$ | async" (EditRecord)="ActionHandler($event)"></app-orderlist-detail>
 
-  <App-Page [pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page>
 
-</div>
+<ng-template #changestatus let-c="close" let-d="dismiss">
+  <div class="modal-body">
+    <app-status (closeModalWindow)="CloseModal1()"></app-status>
+  </div>
+</ng-template>
+
+<ng-template #trackorder let-c="close" let-d="dismiss">
+  <div class="modal-body">
+    <app-trackorder (closeModalWindow)="CloseModal1()"></app-trackorder>
+  </div>
+</ng-template>
+
+<ng-template #history let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">History</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-history [pkid]="orderid" ></app-history>
+  </div>
+</ng-template>
