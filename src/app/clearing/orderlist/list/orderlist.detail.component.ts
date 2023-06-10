@@ -48,7 +48,7 @@ export class OrderListDetailComponent implements OnInit {
     this.store.dispatch(SelectDeselctRecord({ urlid: urlid, pkid: rec.ord_pkid, ball: false, flag: rec.ord_selected }));
   }
 
-  ActionHandler(action: string, id: string) {
+  ActionHandler(action: string, id: string='') {
     this.EditRecord.emit({ action: action, id: id });
   }
 

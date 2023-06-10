@@ -5,7 +5,7 @@ import { PageQuery } from 'src/app/shared/models/pageQuery';
 import { OrderListService } from '../../services/orderlist.service';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-
+import { SearchTable } from 'src/app/shared/models/searchtable';
 
 @Component({
   selector: 'app-orderlist',
@@ -81,6 +81,79 @@ export class OrderListComponent {
 
   Close() {
     this.location.back();
+  }
+  GetCaptionCode(_type: string) {
+    var REC = this.gs.trkCaptionList.find(rec => rec.trk_caption_code == _type);
+    if (REC != null) {
+      if (REC.trk_enabled)
+        return REC.trk_caption_code;
+      else
+        return '';
+    }
+    else
+      return '';
+  }
+
+  handleChange(rec: Joborderm) {
+    var urlid = this.gs.getParameter('urlid');
+    // this.store.dispatch(SelectDeselctRecord({ urlid: urlid, pkid: rec.ord_pkid, ball: false, flag: rec.ord_selected }));
+  }
+
+  ShowHistory(modalname :any) {
+    // if (this.total <= 0) {
+    //   alert('No Rows Selected');
+    //   return;
+    // }
+
+    // this.orderID$.subscribe ( id =>{
+    //   console.log(id);
+    //   this.orderid = id;
+    //   this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
+    // });
+
+    
+  }
+
+  LovSelected(_Record: SearchTable) {
+    // Company Settings
+    if (_Record.controlname == "AGENT") {
+      this.query.list_agent_id = _Record.id;
+      this.query.list_agent_name = _Record.name;
+    }
+    if (_Record.controlname == "SHIPPER") {
+      this.query.list_exp_id = _Record.id;
+      this.query.list_exp_name = _Record.name;
+    }
+    if (_Record.controlname == "CONSIGNEE") {
+      this.query.list_imp_id = _Record.id;
+      this.query.list_imp_name = _Record.name;
+    }
+    if (_Record.controlname == "BUY-AGENT") {
+      this.query.list_buy_agent_id = _Record.id;
+      this.query.list_buy_agent_name = _Record.name;
+    }        
+    if (_Record.controlname == "AGENT-POD") {
+      this.query.list_pod_agent_id = _Record.id;
+      this.query.list_pod_agent_name = _Record.name;
+    }    
+  }
+
+ ShowTracking(modalname: any) {
+    // if (this.total <= 0) {
+    //   alert('No Rows Selected');
+    //   return;
+    // }
+    // this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true  });
+    /*
+        var urlid = this.gs.getParameter('urlid');
+        let parameter = {
+          urlid: urlid,
+          type: '',
+          origin: 'orderlist',
+        };
+        this.router.navigate(['clearing/tracking'], { queryParams: parameter });
+    */
+
   }
 
 }

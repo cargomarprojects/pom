@@ -27,7 +27,7 @@
             <label class="col-3 col-form-label col-form-label-sm">Agent.Pol</label>
             <div class="col-9">
               <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
-                [displaydata]="query.list_agent_name" (ValueChanged)="LovSelected($event)" [where]="where_agent">
+                [displaydata]="query.list_agent_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_agent">
               </app-autocomplete2>
             </div>
           </div>
@@ -37,7 +37,7 @@
             <div class="col-9">
 
               <app-autocomplete2 [controlname]="'SHIPPER'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
-                [displaydata]="query.list_exp_name" (ValueChanged)="LovSelected($event)" [where]="where_shipper">
+                [displaydata]="query.list_exp_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_shipper">
               </app-autocomplete2>
 
             </div>
@@ -46,7 +46,7 @@
             <label class="col-3 col-form-label col-form-label-sm">Consignee</label>
             <div class="col-9">
               <app-autocomplete2 [controlname]="'CONSIGNEE'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
-                [displaydata]="query.list_imp_name" (ValueChanged)="LovSelected($event)" [where]="where_consignee">
+                [displaydata]="query.list_imp_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_consignee">
               </app-autocomplete2>
             </div>
           </div>
@@ -55,7 +55,7 @@
             <label class="col-3 col-form-label col-form-label-sm">Buy.Agent</label>
             <div class="col-9">
               <app-autocomplete2 [controlname]="'BUY-AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
-                [displaydata]="query.list_buy_agent_name" (ValueChanged)="LovSelected($event)" [where]="where_buy_agent">
+                [displaydata]="query.list_buy_agent_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_buy_agent">
               </app-autocomplete2>
             </div>
           </div>          
@@ -64,7 +64,7 @@
             <label class="col-3 col-form-label col-form-label-sm">Agent.Pod</label>
             <div class="col-9">
               <app-autocomplete2 [controlname]="'AGENT-POD'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
-                [displaydata]="query.list_pod_agent_name" (ValueChanged)="LovSelected($event)" [where]="where_agent">
+                [displaydata]="query.list_pod_agent_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_agent">
               </app-autocomplete2>
             </div>
           </div>          
@@ -137,7 +137,7 @@
           <div class="form-group row">
             <div class="col-9 offset-3">
               <button (click)="ShowTracking(trackorder)" class="btn btn-info btn-sm btn-block">Tracking
-                <span *ngIf="selectedRecordsCount$ | async" class="badge badge-light">{{total}}</span>
+                <!-- <span *ngIf="selectedRecordsCount$ | async" class="badge badge-light">{{total}}</span> -->
               </button>
             </div>
           </div>
@@ -145,7 +145,7 @@
           <div class="form-group row">
             <div class="col-9 offset-3">
               <button (click)="ShowStatus(changestatus)" class="btn btn-info btn-sm btn-block">Change PO Status
-                <span *ngIf="selectedRecordsCount$ | async" class="badge badge-light">{{total}}</span>
+                <!-- <span *ngIf="selectedRecordsCount$ | async" class="badge badge-light">{{total}}</span> -->
               </button>
             </div>
           </div>

@@ -12,7 +12,10 @@ export class OrderListService {
   ErrorMessage = "";
   InfoMessage = "";
   loading = false;
-
+  where_agent = "CUST_IS_AGENT = 'Y'";
+  where_shipper = "CUST_IS_SHIPPER = 'Y'";
+  where_consignee = "CUST_IS_CONSIGNEE = 'Y'";
+  where_buy_agent = "CUST_IS_BUY_AGENT = 'Y'";
   record: JobOrderModel;
 
   constructor(
