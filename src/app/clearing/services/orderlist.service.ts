@@ -72,9 +72,9 @@ export class OrderListService {
       .subscribe(response => {
         this.loading = false;
         this.record.records = response.list;
-        searchQuery.page_count = response.page_count;
-        searchQuery.page_current = response.page_current;
-        searchQuery.page_rowcount = response.page_rowcount;
+        this.record.searchQuery.page_count = response.page_count;
+        this.record.searchQuery.page_current = response.page_current;
+        this.record.searchQuery.page_rowcount = response.page_rowcount;
       },
         error => {
           this.loading = false;
