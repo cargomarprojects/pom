@@ -396,14 +396,36 @@ export class VslPlanEditComponent {
   }
 
   CloseModal1(params: any) {
+    if (params.saction == 'SAVE') {
+      var arrPkid = params.sid.split(',');
+      for (var i = 0; i < arrPkid.length; i++) {
+        for (let rec of this.Record.OrderList.filter(rec => rec.ord_pkid == arrPkid[i])) {
+          rec.ord_cargo_status = params.trackstatus;
+          rec.ord_cargo_status_date = params.cargostatusdate;
+          if (params.sdatetype == "BKD")
+            rec.ord_booking_date = params.trackdate;
+          else if (params.sdatetype == "RND")
+            rec.ord_rnd_insp_date = params.trackdate;
+          else if (params.sdatetype == "POR")
+            rec.ord_po_rel_date = params.trackdate;
+          else if (params.sdatetype == "CFS")
+            rec.ord_cargo_ready_date = params.trackdate;
+          else if (params.sdatetype == "FCR")
+            rec.ord_fcr_date = params.trackdate;
+          else if (params.sdatetype == "INSP")
+            rec.ord_insp_date = params.trackdate;
+          else if (params.sdatetype == "STUF")
+            rec.ord_stuf_date = params.trackdate;
+          else if (params.sdatetype == "WHD")
+            rec.ord_whd_date = params.trackdate;
+          else if (params.sdatetype == "SOB")
+            rec.ord_dlv_pol_date = params.trackdate;
+          else if (params.sdatetype == "DPOD")
+            rec.ord_dlv_pod_date = params.trackdate;
+        }
+      }
+    }
     this.modalRef.close();
-
-    // for (let rec of this.RecordList.filter(rec => rec.cost_pkid == params.sid)) {
-    //   if (params.saction == "SENT-ON")
-    //     rec.cost_sent_on = params.sdate;
-    //   if (params.saction == "CHECKED-ON")
-    //     rec.cost_checked_on = params.sdate;
-    // }
   }
 
 }

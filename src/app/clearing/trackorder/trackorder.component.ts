@@ -209,7 +209,7 @@ export class TrackOrderComponent {
         this.loading = false;
         // this.InfoMessage = "Save Complete";
 
-        this.closeModalWindow.emit({ saction: 'SAVE', sdate: response.trackdate, sid: this.Record.ord_pkid, sdatetype: _type });
+        this.closeModalWindow.emit({ saction: 'SAVE', trackdate: response.trackdate, trackstatus: response.trackstatus, sdatetype: _type, sid: this.Record.ord_pkid, cargostatusdate: response.cargostatusdate });
       },
         error => {
           this.loading = false;
@@ -284,7 +284,7 @@ export class TrackOrderComponent {
 
 
   Close() {
-    this.closeModalWindow.emit();
+    this.closeModalWindow.emit({ saction: 'CLOSE' });
   }
 
   IsDisableSave(_dateCode: string) {
