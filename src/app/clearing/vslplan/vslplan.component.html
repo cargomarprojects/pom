@@ -1,9 +1,8 @@
 <div class="page-header">
   <div class="col">
     <label class="col-form-label mr-1">{{ms.title}}</label>
-    <button [disabled]="loading" (click)="ActionHandler('ADD','')" class="btn btn-primary btn-sm mr-1">New</button>
+    <button [disabled]="ms.loading" (click)="ActionHandler('ADD','')" class="btn btn-primary btn-sm mr-1">New</button>
     <button class="btn btn-primary btn-sm" (click)="Close()">Close</button>
-    <i *ngIf="loading" class="fa fa-spinner"></i>
   </div>
 </div>
 
@@ -57,7 +56,7 @@
       <div class="col-sm-4">
         <div class="form-group row">
           <div class="col-sm-8  offset-4">
-            <button [disabled]="loading" (click)="ms.List('NEW')" class="btn btn-info btn-sm btn-block">Search</button>
+            <button [disabled]="ms.loading" (click)="ms.List('NEW')" class="btn btn-info btn-sm btn-block">Search</button>
           </div>
         </div>
       </div>
