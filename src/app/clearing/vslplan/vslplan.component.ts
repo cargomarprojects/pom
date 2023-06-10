@@ -19,10 +19,10 @@ export class VslPlanComponent {
 
   constructor(
     private modalService: NgbModal,
-    private ms: VslPlanService,
+    public ms: VslPlanService,
     private route: ActivatedRoute,
     private router: Router,
-    private gs: GlobalService
+    public gs: GlobalService
   ) {
     this.ms.page_count = 0;
     this.ms.page_rows = 10;

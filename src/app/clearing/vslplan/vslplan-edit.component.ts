@@ -49,9 +49,9 @@ export class VslPlanEditComponent {
 
   constructor(
     private modalService: NgbModal,
-    private ms: VslPlanService,
+    public ms: VslPlanService,
     private route: ActivatedRoute,
-    private gs: GlobalService
+    public gs: GlobalService
   ) {
 
     const data = this.route.snapshot.queryParams;
