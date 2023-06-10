@@ -14,14 +14,14 @@
   </div>
 </div>
 
-<div >
+<div>
 
   <app-orderlist-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
   </app-orderlist-header>
 
   <App-Page [pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page>
 
-  <app-orderlist-detail  [_records]="recordlist$ | async" (EditRecord)="ActionHandler($event)"></app-orderlist-detail>
+  <app-orderlist-detail [_records]="recordlist$ | async" (EditRecord)="ActionHandler($event)"></app-orderlist-detail>
 
   <App-Page [pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page>
 
