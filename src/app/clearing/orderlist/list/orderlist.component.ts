@@ -12,7 +12,7 @@ import { SearchTable } from 'src/app/shared/models/searchtable';
   templateUrl: './orderlist.component.html'
 })
 export class OrderListComponent {
-  
+
   constructor(
     public ms: OrderListService,
     public gs: GlobalService,
@@ -72,7 +72,7 @@ export class OrderListComponent {
   Close() {
     this.location.back();
   }
-  
+
   handleChange(rec: Joborderm) {
     if (rec.ord_selected)
       this.ms.total++;
@@ -90,7 +90,7 @@ export class OrderListComponent {
     }
   }
 
-  
+
   LovSelected(_Record: SearchTable) {
     // Company Settings
     if (_Record.controlname == "AGENT") {
@@ -117,7 +117,7 @@ export class OrderListComponent {
 
 
   CloseModal1(params: any) {
-    if (params.saction == 'SAVE') {
+    if (params.saction == 'TRACK-SAVE') {
       var arrPkid = params.sid.split(',');
       for (var i = 0; i < arrPkid.length; i++) {
         for (let rec of this.ms.record.records.filter(rec => rec.ord_pkid == arrPkid[i])) {
@@ -143,6 +143,13 @@ export class OrderListComponent {
             rec.ord_dlv_pol_date = params.trackdate;
           else if (params.sdatetype == "DPOD")
             rec.ord_dlv_pod_date = params.trackdate;
+        }
+      }
+    } else if (params.saction == 'STATUS-SAVE') {
+      for (let rec1 of params.result) {
+        for (let rec of this.ms.record.records.filter(rec => rec.ord_pkid == rec1.id)) {
+          rec.ord_status = rec1.status;
+          rec.ord_status_color = rec1.color;
         }
       }
     }

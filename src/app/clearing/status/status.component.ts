@@ -91,7 +91,7 @@ export class StatusComponent {
         this.ids = response.list;
         //var urlid = this.gs.getParameter('urlid');
         // this.store.dispatch( FromOrderActions.ChangeStatus({urlid: urlid, pkids: this.ids})  )
-        this.Close();
+        this.closeModalWindow.emit({ saction: 'STATUS-SAVE', result:response.list });
       }, error => {
         this.ErrorMessage = this.gs.getError(error);
         alert(this.ErrorMessage);

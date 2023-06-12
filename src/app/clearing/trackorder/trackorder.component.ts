@@ -184,7 +184,7 @@ export class TrackOrderComponent {
         this.loading = false;
         // this.InfoMessage = "Save Complete";
 
-        this.closeModalWindow.emit({ saction: 'SAVE', trackdate: response.trackdate, trackstatus: response.trackstatus, sdatetype: _type, sid: this.Record.ord_pkid, cargostatusdate: response.cargostatusdate });
+        this.closeModalWindow.emit({ saction: 'TRACK-SAVE', trackdate: response.trackdate, trackstatus: response.trackstatus, sdatetype: _type, sid: this.Record.ord_pkid, cargostatusdate: response.cargostatusdate });
       },
         error => {
           this.loading = false;
