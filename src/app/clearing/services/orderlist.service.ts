@@ -37,20 +37,14 @@ export class OrderListService {
     private modalService: NgbModal,
     private http2: HttpClient,
     private gs: GlobalService) {
-    
-      this.initDefaultValues();
   }
-
-
   public get record() {
     return this._record;
   }
-
   public set record(value: any) {
     this._record = value;
   }
-
-  
+ 
 
   public init(params: any) {
 
@@ -63,20 +57,20 @@ export class OrderListService {
     
     this.menuid = params.menuid;
     
-    this.type =params.type;
+    this.type = params.type;
     
     this.initDefaultValues();
 
     this.LoadCombo();
 
-    this.InitComponent();
+    this.ReadUserRights();
 
     this.List("NEW");
 
     this.initlialized = true;
   }
 
-  InitComponent() {
+  ReadUserRights() {
     this.menu_record = this.gs.getMenu(this.menuid);
     if (this.menu_record)
       this.title = this.menu_record.menu_name;

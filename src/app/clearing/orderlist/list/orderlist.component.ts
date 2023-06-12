@@ -19,9 +19,9 @@ export class OrderListComponent {
     private route: ActivatedRoute,
     private location: Location,
     private router: Router,
-  ) {}
+  ){
+  }
 
-  // Init Will be called After executing Constructor
   ngOnInit() {
     this.gs.checkAppVersion();
     this.ms.init(this.route.snapshot.queryParams);
