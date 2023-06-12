@@ -44,6 +44,7 @@ export class HeaderComponent {
         localStorage.removeItem('dv');
         localStorage.removeItem('access_token');
         localStorage.removeItem ('tcl');
+        localStorage.removeItem ('tp');
         this.router.navigate(['login'], { replaceUrl: true });
     }
 
