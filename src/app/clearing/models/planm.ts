@@ -31,3 +31,39 @@ export class Planm {
     OrderList: Joborderm[] = [];
 }
 
+export interface SearchQuery {
+    type: string,
+    rowtype: string,
+    searchstring: string,
+    company_code: string,
+    branch_code: string,
+    year_code: string,
+    user_code: string,
+    page_count: number,
+    page_current: number,
+    page_rows: number,
+    page_rowcount: number,
+    pol_agent_id: string,
+    imp_id: string,
+    pod_agent_id: string,
+    vessel_id: string,
+    status: string,
+    list_pol_agent_id: string,
+    list_pol_agent_name: string,
+    list_imp_id: string,
+    list_imp_name: string,
+    list_pod_agent_id: string,
+    list_pod_agent_name: string,
+    list_vessel_id: string,
+    list_vessel_name: string,
+    list_status: string
+}
+
+export interface PlanModel {
+    urlid: string;
+    selectedId: string;
+    message: string;
+    isError: boolean;
+    searchQuery: SearchQuery;
+    records: Planm[]
+}

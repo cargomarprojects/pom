@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Planm } from '../models/planm';
+import { Planm, PlanModel, SearchQuery } from '../models/planm';
 import { GlobalService } from '../../core/services/global.service';
 
 @Injectable()
@@ -36,25 +36,21 @@ export class VslPlanService {
   where_consignee = "CUST_IS_CONSIGNEE = 'Y'";
   where_buy_agent = "CUST_IS_BUY_AGENT = 'Y'";
 
-  list_pol_agent_id = '';
-  list_pol_agent_name = '';
-  list_imp_id = '';
-  list_imp_name = '';
-  list_pod_agent_id = '';
-  list_pod_agent_name = '';
-  list_vessel_id = '';
-  list_vessel_name = '';
-  list_status = 'ALL';
-  // Array For Displaying List
-  RecordList: Planm[] = [];
-  // Single Record for add/edit/view details
-  Record: Planm = new Planm;
+  private _record: PlanModel;
 
   constructor(
     private http2: HttpClient,
     private gs: GlobalService) {
+    this.ClearInit();
   }
 
+  public get record() {
+    return this._record;
+  }
+
+  public set record(value: any) {
+    this._record = value;
+  }
 
   InitComponent() {
     this.menu_record = this.gs.getMenu(this.menuid);
@@ -63,6 +59,49 @@ export class VslPlanService {
     this.List("NEW");
   }
 
+  public ClearInit() {
+    this.record = <PlanModel>{
+      urlid: '',
+      selectedId: '',
+      message: '',
+      isError: false,
+      records: [],
+      searchQuery: <SearchQuery>{
+        type: '',
+        rowtype: this.type,
+        searchstring: '',
+        company_code: this.gs.globalVariables.comp_code,
+        branch_code: this.gs.globalVariables.branch_code,
+        year_code: this.gs.globalVariables.year_code,
+        user_code: this.gs.globalVariables.user_code,
+        page_count: 0,
+        page_current: 0,
+        page_rows: 20,
+        page_rowcount: 0,
+        pol_agent_id: '',
+        imp_id: '',
+        pod_agent_id: '',
+        vessel_id: '',
+        status: '',
+        list_pol_agent_id: '',
+        list_pol_agent_name: '',
+        list_imp_id: '',
+        list_imp_name: '',
+        list_pod_agent_id: '',
+        list_pod_agent_name: '',
+        list_vessel_id: '',
+        list_vessel_name: '',
+        list_status: 'ALL'
+      }
+    };
+  }
+
+  public selectRowId(id: string) {
+    this._record.selectedId = id;
+  }
+  public getRowId() {
+    return this._record.selectedId;
+  }
 
   ResetControls() {
     this.disableSave = true;
@@ -85,20 +124,20 @@ export class VslPlanService {
     let SearchData = {
       type: _type,
       rowtype: this.type,
-      searchstring: this.searchstring.toUpperCase(),
+      searchstring: this._record.searchQuery.searchstring.toUpperCase(),
       company_code: this.gs.globalVariables.comp_code,
       branch_code: this.gs.globalVariables.branch_code,
       user_code: this.gs.globalVariables.user_code,
       year_code: this.gs.globalVariables.year_code,
-      pol_agent_id: this.list_pol_agent_id,
-      imp_id: this.list_imp_id,
-      pod_agent_id: this.list_pod_agent_id,
-      vessel_id: this.list_vessel_id,
-      status: this.list_status,
-      page_count: this.page_count,
-      page_current: this.page_current,
-      page_rows: this.page_rows,
-      page_rowcount: this.page_rowcount
+      pol_agent_id: this._record.searchQuery.list_pol_agent_id,
+      imp_id: this._record.searchQuery.list_imp_id,
+      pod_agent_id: this._record.searchQuery.list_pod_agent_id,
+      vessel_id: this._record.searchQuery.list_vessel_id,
+      status: this._record.searchQuery.list_status,
+      page_count: this._record.searchQuery.page_count,
+      page_current: this._record.searchQuery.page_current,
+      page_rows: this._record.searchQuery.page_rows,
+      page_rowcount: this._record.searchQuery.page_rowcount
     };
 
     this.ErrorMessage = '';
@@ -106,10 +145,11 @@ export class VslPlanService {
     this.VslList(SearchData)
       .subscribe(response => {
         this.loading = false;
-        this.RecordList = response.list;
-        this.page_count = response.page_count;
-        this.page_current = response.page_current;
-        this.page_rowcount = response.page_rowcount;
+
+        this.record.records = response.list;
+        this.record.searchQuery.page_count = response.page_count;
+        this.record.searchQuery.page_current = response.page_current;
+        this.record.searchQuery.page_rowcount = response.page_rowcount;
       },
         error => {
           this.loading = false;
@@ -118,12 +158,12 @@ export class VslPlanService {
   }
 
 
-  RefreshList(_rec:Planm) {
-    if (this.RecordList == null)
+  RefreshList(_rec: Planm) {
+    if (this.record.records == null)
       return;
-    var REC = this.RecordList.find(rec => rec.vp_pkid == _rec.vp_pkid);
+    var REC = this.record.records.find(rec => rec.vp_pkid == _rec.vp_pkid);
     if (REC == null) {
-      this.RecordList.push(_rec);
+      this.record.records.push(_rec);
     }
     else {
       REC.vp_plan_date = _rec.vp_plan_date;
@@ -138,7 +178,7 @@ export class VslPlanService {
     }
   }
 
-  
+
 
   VslList(SearchData: any) {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/VslPlan/List', SearchData, this.gs.headerparam2('authorized'));

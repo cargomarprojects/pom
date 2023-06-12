@@ -64,20 +64,20 @@ export class VslPlanComponent {
 
   LovSelected(_Record: SearchTable) {
     if (_Record.controlname == "AGENT-POL") {
-      this.ms.list_pol_agent_id = _Record.id;
-      this.ms.list_pol_agent_name = _Record.name;
+      this.ms.record.searchQuery.list_pol_agent_id = _Record.id;
+      this.ms.record.searchQuery.list_pol_agent_name = _Record.name;
     }
     else if (_Record.controlname == "AGENT-POD") {
-      this.ms.list_pod_agent_id = _Record.id;
-      this.ms.list_pod_agent_name = _Record.name;
+      this.ms.record.searchQuery.list_pod_agent_id = _Record.id;
+      this.ms.record.searchQuery.list_pod_agent_name = _Record.name;
     }
     else if (_Record.controlname == "CONSIGNEE") {
-      this.ms.list_imp_id = _Record.id;
-      this.ms.list_imp_name = _Record.name;
+      this.ms.record.searchQuery.list_imp_id = _Record.id;
+      this.ms.record.searchQuery.list_imp_name = _Record.name;
     }
     else if (_Record.controlname == "VESSEL") {
-      this.ms.list_vessel_id = _Record.id;
-      this.ms.list_vessel_name = _Record.name;
+      this.ms.record.searchQuery.list_vessel_id = _Record.id;
+      this.ms.record.searchQuery.list_vessel_name = _Record.name;
     }
   }
 
