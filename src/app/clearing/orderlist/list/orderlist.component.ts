@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { GlobalService } from '../../../core/services/global.service';
+import { ActivatedRoute } from '@angular/router';
 import { Joborderm, SearchQuery } from '../../models/joborder';
 import { PageQuery } from 'src/app/shared/models/pageQuery';
 import { OrderListService } from '../../services/orderlist.service';
@@ -14,25 +15,30 @@ import { SearchTable } from 'src/app/shared/models/searchtable';
 })
 export class OrderListComponent {
 
-
   urlid = '';
   menuid = '';
-  query: SearchQuery;
-  pageQuery: PageQuery;
-
   constructor(
     public ms: OrderListService,
     private gs: GlobalService,
+    private route: ActivatedRoute,
     private location: Location,
     private router: Router,
   ) {
 
-
+    this.ms.record.searchQuery.page_count = 0;
+    this.ms.record.searchQuery.page_rows = 20;
+    this.ms.record.searchQuery.page_current = 0;
+    const data = this.route.snapshot.queryParams;
+    if (data != null) {
+      this.ms.InitCompleted = true;
+      this.ms.menuid = data.menuid;
+      this.ms.type = data.type;
+      this.ms.InitComponent();
+    }
 
   }
   // Init Will be called After executing Constructor
   ngOnInit() {
-
     this.ms.LoadCombo();
   }
 
@@ -114,24 +120,24 @@ export class OrderListComponent {
   LovSelected(_Record: SearchTable) {
     // Company Settings
     if (_Record.controlname == "AGENT") {
-      this.query.list_agent_id = _Record.id;
-      this.query.list_agent_name = _Record.name;
+      this.ms.record.searchQuery.list_agent_id = _Record.id;
+      this.ms.record.searchQuery.list_agent_name = _Record.name;
     }
     if (_Record.controlname == "SHIPPER") {
-      this.query.list_exp_id = _Record.id;
-      this.query.list_exp_name = _Record.name;
+      this.ms.record.searchQuery.list_exp_id = _Record.id;
+      this.ms.record.searchQuery.list_exp_name = _Record.name;
     }
     if (_Record.controlname == "CONSIGNEE") {
-      this.query.list_imp_id = _Record.id;
-      this.query.list_imp_name = _Record.name;
+      this.ms.record.searchQuery.list_imp_id = _Record.id;
+      this.ms.record.searchQuery.list_imp_name = _Record.name;
     }
     if (_Record.controlname == "BUY-AGENT") {
-      this.query.list_buy_agent_id = _Record.id;
-      this.query.list_buy_agent_name = _Record.name;
+      this.ms.record.searchQuery.list_buy_agent_id = _Record.id;
+      this.ms.record.searchQuery.list_buy_agent_name = _Record.name;
     }
     if (_Record.controlname == "AGENT-POD") {
-      this.query.list_pod_agent_id = _Record.id;
-      this.query.list_pod_agent_name = _Record.name;
+      this.ms.record.searchQuery.list_pod_agent_id = _Record.id;
+      this.ms.record.searchQuery.list_pod_agent_name = _Record.name;
     }
   }
 

@@ -8,7 +8,12 @@ import { PageQuery } from 'src/app/shared/models/pageQuery';
 
 @Injectable({ providedIn: 'root' })
 export class OrderListService {
-
+  
+  title = 'ORDER LIST';
+  menuid: string = '';
+  type: string = '';
+  InitCompleted: boolean = false;
+  menu_record: any;
   total = 0;
   ErrorMessage = "";
   InfoMessage = "";
@@ -36,6 +41,14 @@ export class OrderListService {
   public set record(value: any) {
     this._record = value;
   }
+
+  InitComponent() {
+    this.menu_record = this.gs.getMenu(this.menuid);
+    if (this.menu_record)
+      this.title = this.menu_record.menu_name;
+    // this.List("NEW");
+  }
+
   public ClearInit() {
     this.record = <JobOrderModel>{
       urlid: '',
