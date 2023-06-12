@@ -9,6 +9,7 @@ import { PageQuery } from 'src/app/shared/models/pageQuery';
 @Injectable({ providedIn: 'root' })
 export class OrderListService {
 
+  total = 0;
   ErrorMessage = "";
   InfoMessage = "";
   loading = false;
@@ -45,6 +46,10 @@ export class OrderListService {
         branch_code: this.gs.globalVariables.branch_code,
         company_code: this.gs.globalVariables.user_company_code,
         user_code: this.gs.globalVariables.user_code,
+        page_count: 0,
+        page_current: 0,
+        page_rows: 20,
+        page_rowcount: 0,
         searchstring: '',
         file_pkid: '',
         from_date: '',
@@ -71,20 +76,18 @@ export class OrderListService {
         ftp_is_multipleorder: 'N',
         ftp_is_checklist: 'N',
         ftp_ordpoids: ''
-      },
-      pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: 0, page_rowcount: 0, page_rows: 20 }
+      }
     };
-
-  }
-  LoadCombo()
-  {
+ }
+  LoadCombo() {
     this.SortList = [
       { "colheadername": "UID", "colname": "a.ord_uid" },
       { "colheadername": "CREATED-DATE", "colname": "a.rec_created_date" }
     ];
   }
-  
+
   List(_type: string) {
+    this.total = 0;
     this.loading = true;
     let SearchData = {
       type: _type,

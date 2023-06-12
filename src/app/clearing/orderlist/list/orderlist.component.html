@@ -137,7 +137,7 @@
           <div class="form-group row">
             <div class="col-9 offset-3">
               <button (click)="ShowTracking(trackorder)" class="btn btn-info btn-sm btn-block">Tracking
-                <!-- <span *ngIf="selectedRecordsCount$ | async" class="badge badge-light">{{total}}</span> -->
+                <span *ngIf="ms.total>0" class="badge badge-light">{{ms.total}}</span>
               </button>
             </div>
           </div>
@@ -145,7 +145,7 @@
           <div class="form-group row">
             <div class="col-9 offset-3">
               <button (click)="ShowStatus(changestatus)" class="btn btn-info btn-sm btn-block">Change PO Status
-                <!-- <span *ngIf="selectedRecordsCount$ | async" class="badge badge-light">{{total}}</span> -->
+                <span *ngIf="ms.total>0" class="badge badge-light">{{ms.total}}</span>
               </button>
             </div>
           </div>
@@ -166,7 +166,22 @@
 
   </div>
 </div>
-<App-Page [pageQuery]="pageQuery" (pageEvents)="pageEvents($event)"></App-Page>
+<div *ngIf="ms.record.searchQuery.page_count">
+  <div class="page-list">
+    <ul class="pagination pagination-sm my-1 mx-1">
+      <li class="page-item"><a class="page-link">Page {{ms.record.searchQuery.page_current}}/{{ms.record.searchQuery.page_count}}
+          (Records-{{ms.record.searchQuery.page_rowcount}})</a></li>
+      <li class="page-item"><a class="page-link" (click)="ms.List('FIRST')"><span class="fa fa-backward"></span></a>
+      </li>
+      <li class="page-item"><a class="page-link" (click)="ms.List('PREV')"><span class="fa fa-arrow-left"></span></a>
+      </li>
+      <li class="page-item"><a class="page-link" (click)="ms.List('NEXT')"><span class="fa fa-arrow-right"></span></a>
+      </li>
+      <li class="page-item"><a class="page-link" (click)="ms.List('LAST')"><span class="fa fa-forward"></span></a>
+      </li>
+    </ul>
+  </div>
+</div>
 
 <div class="page-body table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 321px);">
   <table class="table table-hover table-sm table-bordered">
@@ -256,7 +271,22 @@
   </table>
 </div>
 
-<App-Page [pageQuery]="pageQuery" (pageEvents)="pageEvents($event)"></App-Page>
+<div *ngIf="ms.record.searchQuery.page_count">
+  <div class="page-list">
+    <ul class="pagination pagination-sm my-1 mx-1">
+      <li class="page-item"><a class="page-link">Page {{ms.record.searchQuery.page_current}}/{{ms.record.searchQuery.page_count}}
+          (Records-{{ms.record.searchQuery.page_rowcount}})</a></li>
+      <li class="page-item"><a class="page-link" (click)="ms.List('FIRST')"><span class="fa fa-backward"></span></a>
+      </li>
+      <li class="page-item"><a class="page-link" (click)="ms.List('PREV')"><span class="fa fa-arrow-left"></span></a>
+      </li>
+      <li class="page-item"><a class="page-link" (click)="ms.List('NEXT')"><span class="fa fa-arrow-right"></span></a>
+      </li>
+      <li class="page-item"><a class="page-link" (click)="ms.List('LAST')"><span class="fa fa-forward"></span></a>
+      </li>
+    </ul>
+  </div>
+</div>
 
 <ng-template #changestatus let-c="close" let-d="dismiss">
   <div class="modal-body">
