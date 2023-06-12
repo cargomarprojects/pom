@@ -152,17 +152,23 @@ export class OrderListService {
     this.OrdList(SearchData)
       .subscribe(response => {
         this.loading = false;
-        this.record.records = response.list;
-        this.record.searchQuery.page_count = response.page_count;
-        this.record.searchQuery.page_current = response.page_current;
-        this.record.searchQuery.page_rowcount = response.page_rowcount;
+        if (_type == 'EXCEL')
+          this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
+        else {
+          this.record.records = response.list;
+          this.record.searchQuery.page_count = response.page_count;
+          this.record.searchQuery.page_current = response.page_current;
+          this.record.searchQuery.page_rowcount = response.page_rowcount;
+        }
       },
         error => {
           this.loading = false;
           this.ErrorMessage = this.gs.getError(error);
         });
   }
-
+  Downloadfile(filename: string, filetype: string, filedisplayname: string) {
+    this.gs.DownloadFile(this.gs.globalVariables.report_folder, filename, filetype, filedisplayname);
+  }
   ShowTracking(modalname: any) {
     this.total = 0;
     this.ord_trkids = "";
