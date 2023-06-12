@@ -226,8 +226,9 @@
         <th>CREATED.DT</th>
       </tr>
     </thead>
-    <tbody class="page-body-tbody" *ngFor="let rec of ms.record.records">
-      <tr [style.color]="rec.ord_status_color">
+    <tbody class="page-body-tbody" >
+      <tr *ngFor="let rec of ms.record.records" [style.color]="rec.ord_status_color"  (mousedown)="ms.selectRowId(rec.ord_pkid)" 
+      [class.active]="rec.ord_pkid == ms.getRowId()">
 
         <td><input type="checkbox" [(ngModel)]="rec.ord_selected" (change)="handleChange(rec)"></td>
         <td>{{rec.ord_uid}}</td>

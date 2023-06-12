@@ -58,6 +58,7 @@ export class OrderListService {
   public ClearInit() {
     this.record = <JobOrderModel>{
       urlid: '',
+      selectedId: '',
       message: '',
       isError: false,
       records: [],
@@ -97,6 +98,14 @@ export class OrderListService {
         ftp_ordpoids: ''
       }
     };
+  }
+
+
+  public selectRowId(id: string) {
+    this._record.selectedId = id;
+  }
+  public getRowId() {
+    return this._record.selectedId;
   }
   LoadCombo() {
     this.SortList = [

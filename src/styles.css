@@ -113,9 +113,14 @@ hr {
       text-decoration: none;
 }
 
-.table tr.active td {
+/* .table tr.active td {
   background-color: #F0F0F0 !important;
+} */
+
+.table tr.active td {
+  background-color: rgb(154, 203, 243) !important;
 }
+
 
 /* Menu */
 

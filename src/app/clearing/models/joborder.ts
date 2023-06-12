@@ -163,6 +163,7 @@ export class JobOrder_VM {
 
 export interface JobOrderModel {
   urlid: string;
+  selectedId: string;
   message: string;
   isError: boolean;
   searchQuery: SearchQuery;
