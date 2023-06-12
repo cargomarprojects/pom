@@ -32,7 +32,7 @@ export class OrderListComponent {
   // Init Will be called After executing Constructor
   ngOnInit() {
     
-     
+     this.ms.LoadCombo();
   }
 
   //// Destroy Will be called when this component is closed

@@ -37,7 +37,7 @@
             <div class="col-9">
 
               <app-autocomplete2 [controlname]="'SHIPPER'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
-                [displaydata]="query.list_exp_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_shipper">
+                [displaydata]="ms.record.searchQuery.list_exp_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_shipper">
               </app-autocomplete2>
 
             </div>
@@ -46,7 +46,7 @@
             <label class="col-3 col-form-label col-form-label-sm">Consignee</label>
             <div class="col-9">
               <app-autocomplete2 [controlname]="'CONSIGNEE'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
-                [displaydata]="query.list_imp_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_consignee">
+                [displaydata]="ms.record.searchQuery.list_imp_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_consignee">
               </app-autocomplete2>
             </div>
           </div>
@@ -55,7 +55,7 @@
             <label class="col-3 col-form-label col-form-label-sm">Buy.Agent</label>
             <div class="col-9">
               <app-autocomplete2 [controlname]="'BUY-AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
-                [displaydata]="query.list_buy_agent_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_buy_agent">
+                [displaydata]="ms.record.searchQuery.list_buy_agent_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_buy_agent">
               </app-autocomplete2>
             </div>
           </div>          
@@ -64,7 +64,7 @@
             <label class="col-3 col-form-label col-form-label-sm">Agent.Pod</label>
             <div class="col-9">
               <app-autocomplete2 [controlname]="'AGENT-POD'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
-                [displaydata]="query.list_pod_agent_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_agent">
+                [displaydata]="ms.record.searchQuery.list_pod_agent_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_agent">
               </app-autocomplete2>
             </div>
           </div>          
@@ -77,14 +77,14 @@
           <div class="form-group row">
             <label class="col-3 col-form-label col-form-label-sm">Invoice#</label>
             <div class="col-9">
-              <InputBox [(inputModel)]="query.ord_invoice" [maxlength]="30" [uppercase]=true></InputBox>
+              <InputBox [(inputModel)]="ms.record.searchQuery.ord_invoice" [maxlength]="30" [uppercase]=true></InputBox>
             </div>
           </div>
 
           <div class="form-group row">
             <label class="col-3 col-form-label col-form-label-sm">Po#</label>
             <div class="col-9">
-              <InputBox [(inputModel)]="query.ord_po" [maxlength]="1000" [uppercase]=true></InputBox>
+              <InputBox [(inputModel)]="ms.record.searchQuery.ord_po" [maxlength]="1000" [uppercase]=true></InputBox>
             </div>
           </div>
 
@@ -92,7 +92,7 @@
           <div class="form-group row">
             <label class="col-3 col-form-label col-form-label-sm">Status</label>
             <div class="col-9">
-              <select class="form-control form-control-sm" [(ngModel)]="query.ord_status">
+              <select class="form-control form-control-sm" [(ngModel)]="ms.record.searchQuery.ord_status">
                 <option [value]="'ALL'">ALL</option>
                 <option [value]="'REPORTED'">REPORTED</option>
                 <option [value]="'APPROVED'">APPROVED</option>
@@ -106,7 +106,7 @@
           <div class="form-group row">
             <label class="col-3 col-form-label col-form-label-sm">Pending</label>
             <div class="col-9">
-              <select class="form-control form-control-sm" [(ngModel)]="query.ord_showpending">
+              <select class="form-control form-control-sm" [(ngModel)]="ms.record.searchQuery.ord_showpending">
                 <!-- <option [value]="'Y'">SHOW PENDING ONLY</option> -->
                 <option [value]="'SOB-CONFIRMED'">SOB CONFIRMED</option>
                 <option [value]="'SOB-NOT-CONFIRMED'">SOB NOT CONFIRMED</option>
@@ -118,9 +118,9 @@
           <div class="form-group row">
             <label class="col-3 col-form-label col-form-label-sm">Sort</label>
             <div class="col-9">
-              <!-- <select class="form-control form-control-sm" [(ngModel)]="query.sort_colname">
-                <option *ngFor="let rec of SortList" [value]="rec.colheadername">{{rec.colheadername}}</option>
-              </select> -->
+              <select class="form-control form-control-sm" [(ngModel)]="ms.record.searchQuery.sort_colname">
+                <option *ngFor="let rec of ms.SortList" [value]="rec.colheadername">{{rec.colheadername}}</option>
+              </select>
             </div>
           </div>
 
@@ -130,7 +130,7 @@
 
           <div class="form-group row">
             <div class="col-9 offset-3">
-              <button (click)="ms.List('NEW',query)" class="btn btn-info btn-sm btn-block">Search</button>
+              <button (click)="ms.List('NEW')" class="btn btn-info btn-sm btn-block">Search</button>
             </div>
           </div>
 
@@ -211,7 +211,7 @@
         <th>CREATED.DT</th>
       </tr>
     </thead>
-    <tbody class="page-body-tbody" *ngFor="let rec of records">
+    <tbody class="page-body-tbody" *ngFor="let rec of ms.record.records">
       <tr [style.color]="rec.ord_status_color">
 
         <td><input type="checkbox" [(ngModel)]="rec.ord_selected" (change)="handleChange(rec)"></td>

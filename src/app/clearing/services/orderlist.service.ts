@@ -17,6 +17,7 @@ export class OrderListService {
   where_consignee = "CUST_IS_CONSIGNEE = 'Y'";
   where_buy_agent = "CUST_IS_BUY_AGENT = 'Y'";
 
+  SortList: any[];
   private _record: JobOrderModel;
 
   constructor(
@@ -75,6 +76,14 @@ export class OrderListService {
     };
 
   }
+  LoadCombo()
+  {
+    this.SortList = [
+      { "colheadername": "UID", "colname": "a.ord_uid" },
+      { "colheadername": "CREATED-DATE", "colname": "a.rec_created_date" }
+    ];
+  }
+  
   List(_type: string) {
     this.loading = true;
     let SearchData = {
