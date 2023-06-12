@@ -1,12 +1,6 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../core/services/global.service';
-
-import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import { AppState } from 'src/app/reducers';
-// import { SelectPkids, SelectRefNos } from '../orderlist/list/store/orderlist.selctors';
-import { map, tap } from 'rxjs/operators';
 import { Location } from '@angular/common';
 import { TrackOrderService } from '../services/trackorder.service';
 
@@ -15,26 +9,23 @@ import { TrackOrderService } from '../services/trackorder.service';
 @Component({
   selector: 'app-status',
   templateUrl: './status.component.html',
-  providers : [TrackOrderService]
+  providers: [TrackOrderService]
 })
 export class StatusComponent {
   // Local Variables 
   title = 'Track Details';
-
+  @Input() public ord_pkids: string = '';
+  @Input() public ord_pos: string = '';
   @Output() ChangeStatus = new EventEmitter<any>();
   @Output() closeModalWindow = new EventEmitter<any>();
 
 
   private menuid: string = '';
   private type: string = '';
-  pkid: string;
-  refno: string = '';
+  // pkid: string;
+  // refno: string = '';
 
-  pkid$: Observable<string>;
-  refno$: Observable<string>;
-
-
-  ids : any [];
+  ids: any[];
 
   InitCompleted: boolean = false;
   menu_record: any;
@@ -54,26 +45,12 @@ export class StatusComponent {
     private mainService: TrackOrderService,
     private route: ActivatedRoute,
     private gs: GlobalService,
-    private store: Store<AppState>,
     private location: Location,
   ) {
 
     //this.menuid = options.menuid;
     //this.type = options.type;
 
-    // this.pkid$ = this.store.pipe(
-    //   select(SelectPkids),
-    //   tap(x => {
-    //     this.pkid = x;
-    //   })
-    // );
-
-    // this.refno$ = this.store.pipe(
-    //   select(SelectRefNos),
-    //   tap(x => {
-    //     this.refno = x;
-    //   })
-    // );
   }
 
   // Init Will be called After executing Constructor
@@ -90,7 +67,7 @@ export class StatusComponent {
 
     this.ErrorMessage = '';
     this.InfoMessage = '';
-    if (this.pkid.trim().length <= 0) {
+    if (this.gs.isBlank(this.ord_pkids)) {
       this.ErrorMessage = " Cannot Update Invalid ID";
       return;
     }
@@ -99,9 +76,9 @@ export class StatusComponent {
       company_code: this.gs.globalVariables.comp_code,
       branch_code: this.gs.globalVariables.branch_code,
       year_code: this.gs.globalVariables.year_code,
-      pkids: this.pkid,
-      status : this.ord_status,
-      user_code : this.gs.globalVariables.user_code
+      pkids: this.ord_pkids,
+      status: this.ord_status,
+      user_code: this.gs.globalVariables.user_code
     };
 
     this.loading = true;
@@ -112,7 +89,7 @@ export class StatusComponent {
       .subscribe(response => {
         this.InfoMessage = "Save Complete";
         this.ids = response.list;
-        var urlid = this.gs.getParameter('urlid');
+        //var urlid = this.gs.getParameter('urlid');
         // this.store.dispatch( FromOrderActions.ChangeStatus({urlid: urlid, pkids: this.ids})  )
         this.Close();
       }, error => {
@@ -127,7 +104,7 @@ export class StatusComponent {
   }
 
   Close() {
-    this.closeModalWindow.emit();
+    this.closeModalWindow.emit({ saction: 'CLOSE' });
   }
 
 

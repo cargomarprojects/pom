@@ -1,14 +1,14 @@
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Joborderm, SearchQuery, JobOrderModel } from '../models/joborder';
 import { GlobalService } from '../../core/services/global.service';
 import { JobOrder_VM } from '../models/joborder';
 import { PageQuery } from 'src/app/shared/models/pageQuery';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable({ providedIn: 'root' })
 export class OrderListService {
-  
+
   title = 'ORDER LIST';
   menuid: string = '';
   type: string = '';
@@ -24,11 +24,15 @@ export class OrderListService {
   where_buy_agent = "CUST_IS_BUY_AGENT = 'Y'";
   modalRef: any;
   selectcheck: boolean = false;
-  
+  orderid = "";
+  ord_trkids = "";
+  ord_trkpos = "";
+
   SortList: any[];
   private _record: JobOrderModel;
 
   constructor(
+    private modalService: NgbModal,
     private http2: HttpClient,
     private gs: GlobalService) {
 
@@ -48,7 +52,7 @@ export class OrderListService {
     this.menu_record = this.gs.getMenu(this.menuid);
     if (this.menu_record)
       this.title = this.menu_record.menu_name;
-     this.List("NEW");
+    this.List("NEW");
   }
 
   public ClearInit() {
@@ -93,7 +97,7 @@ export class OrderListService {
         ftp_ordpoids: ''
       }
     };
- }
+  }
   LoadCombo() {
     this.SortList = [
       { "colheadername": "UID", "colname": "a.ord_uid" },
@@ -150,6 +154,70 @@ export class OrderListService {
         });
   }
 
+  ShowTracking(modalname: any) {
+    this.total = 0;
+    this.ord_trkids = "";
+    this.ord_trkpos = "";
+    for (let rec of this.record.records) {
+
+      if (rec.ord_selected) {
+        this.total++;
+        if (this.ord_trkids != "")
+          this.ord_trkids += ",";
+        this.ord_trkids += rec.ord_pkid;
+
+        if (this.ord_trkpos != "")
+          this.ord_trkpos += ",";
+        this.ord_trkpos += rec.ord_po;
+      }
+    }
+    if (this.gs.isBlank(this.ord_trkids)) {
+      alert('No Rows Selected');
+      return;
+    }
+    this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
+  }
+
+  ShowStatus(modalname: any) {
+    this.total = 0;
+    this.ord_trkids = "";
+    this.ord_trkpos = "";
+    for (let rec of this.record.records) {
+
+      if (rec.ord_selected) {
+        this.total++;
+        if (this.ord_trkids != "")
+          this.ord_trkids += ",";
+        this.ord_trkids += rec.ord_pkid;
+
+        if (this.ord_trkpos != "")
+          this.ord_trkpos += ",";
+        this.ord_trkpos += rec.ord_po;
+      }
+    }
+    if (this.gs.isBlank(this.ord_trkids)) {
+      alert('No Rows Selected');
+      return;
+    }
+    this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
+
+  }
+
+  ShowHistory(modalname: any) {
+
+    this.orderid = "";
+    for (let rec of this.record.records) {
+      if (rec.ord_selected) {
+        this.orderid = rec.ord_pkid;
+      }
+    }
+
+    if (this.gs.isBlank(this.orderid)) {
+      alert('No Rows Selected');
+      return;
+    }
+    this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
+  }
 
 
   OrdList(SearchData: any) {

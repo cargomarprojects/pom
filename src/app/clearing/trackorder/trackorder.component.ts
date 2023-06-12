@@ -4,11 +4,6 @@ import { GlobalService } from '../../core/services/global.service';
 import { Joborderm } from '../models/joborder';
 import { Tracking_Caption } from '../models/tracking_caption';
 import { TrackOrderService } from '../services/trackorder.service';
-import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import { AppState } from 'src/app/reducers';
-// import { SelectPkids, SelectRefNos } from '../orderlist/list/store/orderlist.selctors';
-import { map, tap } from 'rxjs/operators';
 import { Location } from '@angular/common';
 
 @Component({
@@ -38,9 +33,6 @@ export class TrackOrderComponent {
   pkid: string = '';
   refno: string = '';
 
-  pkid$: Observable<string>;
-  refno$: Observable<string>;
-
   InitCompleted: boolean = false;
   menu_record: any;
 
@@ -61,26 +53,11 @@ export class TrackOrderComponent {
     private mainService: TrackOrderService,
     private route: ActivatedRoute,
     private gs: GlobalService,
-    private store: Store<AppState>,
     private location: Location
 
   ) {
     //this.menuid = options.menuid;
-    //this.type = options.type;
-
-    // this.pkid$ = this.store.pipe(
-    //   select(SelectPkids),
-    //   tap(x => {
-    //     this.pkid = x;
-    //     this.process();
-    //   })
-    // );
-    // this.refno$ = this.store.pipe(
-    //   select(SelectRefNos),
-    //   tap(x => {
-    //     this.refno = x;
-    //   })
-    // );
+    //this.type = options.type;  
   }
 
   // Init Will be called After executing Constructor
@@ -117,8 +94,6 @@ export class TrackOrderComponent {
   process() {
     this.NewRecord();
     if (this.pkid.length > 0) {
-      //   if (this.pkid.indexOf(",") < 0)
-      //     this.GetRecord(this.pkid);
       this.GetRecord(this.pkid);
     }
   }

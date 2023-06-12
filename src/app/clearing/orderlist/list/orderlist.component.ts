@@ -12,8 +12,7 @@ import { SearchTable } from 'src/app/shared/models/searchtable';
   templateUrl: './orderlist.component.html'
 })
 export class OrderListComponent {
-  orderid="";
-
+  
   constructor(
     public ms: OrderListService,
     public gs: GlobalService,
@@ -91,21 +90,7 @@ export class OrderListComponent {
     }
   }
 
-  ShowHistory(modalname: any) {
-    // if (this.total <= 0) {
-    //   alert('No Rows Selected');
-    //   return;
-    // }
-
-    // this.orderID$.subscribe ( id =>{
-    //   console.log(id);
-    //   this.orderid = id;
-    //   this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
-    // });
-
-
-  }
-
+  
   LovSelected(_Record: SearchTable) {
     // Company Settings
     if (_Record.controlname == "AGENT") {
@@ -130,41 +115,6 @@ export class OrderListComponent {
     }
   }
 
-  ShowTracking(modalname: any) {
-    // if (this.total <= 0) {
-    //   alert('No Rows Selected');
-    //   return;
-    // }
-    // this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true  });
-    /*
-        var urlid = this.gs.getParameter('urlid');
-        let parameter = {
-          urlid: urlid,
-          type: '',
-          origin: 'orderlist',
-        };
-        this.router.navigate(['clearing/tracking'], { queryParams: parameter });
-    */
-
-  }
-  
-  ShowStatus(modalname: any) {
-    // if (this.total <= 0) {
-    //   alert('No Rows Selected');
-    //   return;
-    // }
-    // this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true  });
-    /*
-        var urlid = this.gs.getParameter('urlid');
-        let parameter = {
-          urlid: urlid,
-          type: '',
-          origin: 'orderlist',
-        };
-        this.router.navigate(['clearing/tracking'], { queryParams: parameter });
-    */
-
-  }
 
   CloseModal1(params: any) {
     if (params.saction == 'SAVE') {

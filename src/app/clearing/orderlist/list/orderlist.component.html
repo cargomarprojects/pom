@@ -136,7 +136,7 @@
 
           <div class="form-group row">
             <div class="col-9 offset-3">
-              <button (click)="ShowTracking(trackorder)" class="btn btn-info btn-sm btn-block">Tracking
+              <button (click)="ms.ShowTracking(trackorder)" class="btn btn-info btn-sm btn-block">Tracking
                 <span *ngIf="ms.total>0" class="badge badge-light">{{ms.total}}</span>
               </button>
             </div>
@@ -144,7 +144,7 @@
 
           <div class="form-group row">
             <div class="col-9 offset-3">
-              <button (click)="ShowStatus(changestatus)" class="btn btn-info btn-sm btn-block">Change PO Status
+              <button (click)="ms.ShowStatus(changestatus)" class="btn btn-info btn-sm btn-block">Change PO Status
                 <span *ngIf="ms.total>0" class="badge badge-light">{{ms.total}}</span>
               </button>
             </div>
@@ -159,7 +159,7 @@
 
           <div class="form-group row">
             <div class="col-9 offset-3">
-              <button (click)="ShowHistory(history)" class="btn btn-info btn-sm btn-block">History</button>
+              <button (click)="ms.ShowHistory(history)" class="btn btn-info btn-sm btn-block">History</button>
             </div>
           </div>
         </div>
@@ -290,13 +290,13 @@
 
 <ng-template #changestatus let-c="close" let-d="dismiss">
   <div class="modal-body">
-    <app-status (closeModalWindow)="CloseModal1($event)"></app-status>
+    <app-status [ord_pkids]="ms.ord_trkids" [ord_pos]="ms.ord_trkpos"  (closeModalWindow)="CloseModal1($event)"></app-status>
   </div>
 </ng-template>
 
 <ng-template #trackorder let-c="close" let-d="dismiss">
   <div class="modal-body">
-    <app-trackorder (closeModalWindow)="CloseModal1($event)"></app-trackorder>
+    <app-trackorder [ord_pkids]="ms.ord_trkids" [ord_pos]="ms.ord_trkpos"  (closeModalWindow)="CloseModal1($event)"></app-trackorder>
   </div>
 </ng-template>
 
@@ -308,6 +308,6 @@
     </button>
   </div>
   <div class="modal-body">
-    <app-history [pkid]="orderid" ></app-history>
+    <app-history [pkid]="ms.orderid" ></app-history>
   </div>
 </ng-template>
