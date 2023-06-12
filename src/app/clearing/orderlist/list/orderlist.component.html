@@ -212,16 +212,16 @@
         <th>INSTOCK1</th>
         <th>INSTOCK2</th>
         <th>TRACK.STATUS</th> -->
-        <th *ngIf="GetCaptionCode('BKD')">{{GetCaptionCode('BKD')}}</th>
-        <th *ngIf="GetCaptionCode('RND')">{{GetCaptionCode('RND')}}</th>
-        <th *ngIf="GetCaptionCode('POR')">{{GetCaptionCode('POR')}}</th>
-        <th *ngIf="GetCaptionCode('CFS')">{{GetCaptionCode('CFS')}}</th>
-        <th *ngIf="GetCaptionCode('FCR')">{{GetCaptionCode('FCR')}}</th>
-        <th *ngIf="GetCaptionCode('INSP')">{{GetCaptionCode('INSP')}}</th>
-        <th *ngIf="GetCaptionCode('STUF')">{{GetCaptionCode('STUF')}}</th>
-        <th *ngIf="GetCaptionCode('WHD')">{{GetCaptionCode('WHD')}}</th>
-        <th *ngIf="GetCaptionCode('SOB')">{{GetCaptionCode('SOB')}}</th>
-        <th *ngIf="GetCaptionCode('DPOD')">{{GetCaptionCode('DPOD')}}</th>
+        <th *ngIf="gs.getTrackDate('BKD')">{{gs.getTrackDate('BKD')}}</th>
+        <th *ngIf="gs.getTrackDate('RND')">{{gs.getTrackDate('RND')}}</th>
+        <th *ngIf="gs.getTrackDate('POR')">{{gs.getTrackDate('POR')}}</th>
+        <th *ngIf="gs.getTrackDate('CFS')">{{gs.getTrackDate('CFS')}}</th>
+        <th *ngIf="gs.getTrackDate('FCR')">{{gs.getTrackDate('FCR')}}</th>
+        <th *ngIf="gs.getTrackDate('INSP')">{{gs.getTrackDate('INSP')}}</th>
+        <th *ngIf="gs.getTrackDate('STUF')">{{gs.getTrackDate('STUF')}}</th>
+        <th *ngIf="gs.getTrackDate('WHD')">{{gs.getTrackDate('WHD')}}</th>
+        <th *ngIf="gs.getTrackDate('SOB')">{{gs.getTrackDate('SOB')}}</th>
+        <th *ngIf="gs.getTrackDate('DPOD')">{{gs.getTrackDate('DPOD')}}</th>
         <th>CREATED.BY</th>
         <th>CREATED.DT</th>
       </tr>
@@ -254,16 +254,16 @@
         <td>{{rec.ord_instock1}}</td>
         <td>{{rec.ord_instock2}}</td>
         <td>{{rec.ord_track_status}}</td>                 -->
-        <td *ngIf="GetCaptionCode('BKD')">{{rec.ord_booking_date}}</td>
-        <td *ngIf="GetCaptionCode('RND')">{{rec.ord_rnd_insp_date}}</td>
-        <td *ngIf="GetCaptionCode('POR')">{{rec.ord_po_rel_date}}</td>
-        <td *ngIf="GetCaptionCode('CFS')">{{rec.ord_cargo_ready_date}}</td>
-        <td *ngIf="GetCaptionCode('FCR')">{{rec.ord_fcr_date}}</td>
-        <td *ngIf="GetCaptionCode('INSP')">{{rec.ord_insp_date}}</td>
-        <td *ngIf="GetCaptionCode('STUF')">{{rec.ord_stuf_date}}</td>
-        <td *ngIf="GetCaptionCode('WHD')">{{rec.ord_whd_date}}</td>
-        <td *ngIf="GetCaptionCode('SOB')">{{rec.ord_dlv_pol_date}}</td>
-        <td *ngIf="GetCaptionCode('DPOD')">{{rec.ord_dlv_pod_date}}</td>
+        <td *ngIf="gs.getTrackDate('BKD')">{{rec.ord_booking_date}}</td>
+        <td *ngIf="gs.getTrackDate('RND')">{{rec.ord_rnd_insp_date}}</td>
+        <td *ngIf="gs.getTrackDate('POR')">{{rec.ord_po_rel_date}}</td>
+        <td *ngIf="gs.getTrackDate('CFS')">{{rec.ord_cargo_ready_date}}</td>
+        <td *ngIf="gs.getTrackDate('FCR')">{{rec.ord_fcr_date}}</td>
+        <td *ngIf="gs.getTrackDate('INSP')">{{rec.ord_insp_date}}</td>
+        <td *ngIf="gs.getTrackDate('STUF')">{{rec.ord_stuf_date}}</td>
+        <td *ngIf="gs.getTrackDate('WHD')">{{rec.ord_whd_date}}</td>
+        <td *ngIf="gs.getTrackDate('SOB')">{{rec.ord_dlv_pol_date}}</td>
+        <td *ngIf="gs.getTrackDate('DPOD')">{{rec.ord_dlv_pod_date}}</td>
         <td>{{rec.rec_created_by}}</td>
         <td>{{rec.rec_created_date}}</td>
       </tr>

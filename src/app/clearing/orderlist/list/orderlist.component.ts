@@ -69,18 +69,7 @@ export class OrderListComponent {
   Close() {
     this.location.back();
   }
-  GetCaptionCode(_type: string) {
-    var REC = this.gs.trkCaptionList.find(rec => rec.trk_caption_code == _type);
-    if (REC != null) {
-      if (REC.trk_enabled)
-        return REC.trk_caption_code;
-      else
-        return '';
-    }
-    else
-      return '';
-  }
-
+  
   handleChange(rec: Joborderm) {
     if (rec.ord_selected)
       this.ms.total++;
