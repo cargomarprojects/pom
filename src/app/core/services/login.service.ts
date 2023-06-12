@@ -20,10 +20,9 @@ export class LoginService {
     return this.http2.post<any>(this.gs.baseUrl + "/Token", body, this.gs.headerparam2('login', company_code));
   }
 
+
   Logout() {
-    this.gs.IsLoginSuccess = false;
-    this.gs.IsAuthenticated = false;
-    this.gs.Access_Token = '';
+    this.gs.logout();
   }
 
   LoadMenu(SearchData: any) {

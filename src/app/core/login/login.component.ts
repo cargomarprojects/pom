@@ -130,7 +130,6 @@ export class LoginComponent {
       .subscribe(response => {
         this.loading = false;
         let user = response;
-
         if (user && user.access_token) {
           this.gs.ExpiryDate = this.gs.getTokenExpiryDate(response.expires_in);
           console.log('Expiry Date ', this.gs.ExpiryDate);
@@ -146,7 +145,7 @@ export class LoginComponent {
           this.gs.globalVariables.sman_name = user.usersmanname;
           this.gs.baseLocalServerUrl = user.userlocalserver;
           this.gs.globalVariables.ipaddress = user.useripaddress;
-          this.gs.globalVariables.tokenid = user.usertokenid;
+          this.gs.globalVariables.appid = user.usertokenid;
           this.gs.globalVariables.user_branch_user = user.user_branch_user;
           this.gs.globalVariables.branch_code = '';
           this.gs.globalVariables.year_code = '';
@@ -176,7 +175,7 @@ export class LoginComponent {
       branchid: '',
       yearid: '',
       ipaddress: this.gs.globalVariables.ipaddress,
-      tokenid: this.gs.globalVariables.tokenid
+      tokenid: this.gs.globalVariables.appid
     };
 
     this.loading = true;
@@ -199,6 +198,7 @@ export class LoginComponent {
 
         localStorage.setItem('expiry_date', this.gs.ExpiryDate.toString());
         localStorage.setItem('access_token', this.gs.Access_Token);
+        localStorage.setItem('appid', this.gs.globalVariables.appid);
         localStorage.setItem('company_name', this.gs.Company_Name);
         localStorage.setItem('menu', JSON.stringify(this.gs.MenuList));
         localStorage.setItem('modules', JSON.stringify(this.gs.Modules));

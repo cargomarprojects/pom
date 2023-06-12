@@ -13,7 +13,6 @@ export class GlobalVariables {
     hide_ho_entries: string;
 
     ipaddress : string;
-    tokenid : string;
     
     comp_pkid: string;
     comp_code: string;

@@ -3,8 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Joborderm, SearchQuery, JobOrderModel } from '../models/joborder';
 import { GlobalService } from '../../core/services/global.service';
 import { JobOrder_VM } from '../models/joborder';
-import { PageQuery } from 'src/app/shared/models/pageQuery';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable({ providedIn: 'root' })
 export class OrderListService {
@@ -12,7 +11,10 @@ export class OrderListService {
   title = 'ORDER LIST';
   menuid: string = '';
   type: string = '';
-  InitCompleted: boolean = false;
+  
+  public initlialized = false;
+  private appid = ''
+
   menu_record: any;
   total = 0;
   ErrorMessage = "";
@@ -35,10 +37,10 @@ export class OrderListService {
     private modalService: NgbModal,
     private http2: HttpClient,
     private gs: GlobalService) {
-
-    // this.record = {};
-    this.ClearInit();
+    
+      this.initDefaultValues();
   }
+
 
   public get record() {
     return this._record;
@@ -48,14 +50,40 @@ export class OrderListService {
     this._record = value;
   }
 
+  
+
+  public init(params: any) {
+
+    if (this.appid != this.gs.globalVariables.appid) {
+        this.appid = this.gs.globalVariables.appid;
+        this.initlialized = false;
+    }
+    if (this.initlialized)
+        return;
+    
+    this.menuid = params.menuid;
+    
+    this.type =params.type;
+    
+    this.initDefaultValues();
+
+    this.LoadCombo();
+
+    this.InitComponent();
+
+    this.List("NEW");
+
+    this.initlialized = true;
+  }
+
   InitComponent() {
     this.menu_record = this.gs.getMenu(this.menuid);
     if (this.menu_record)
       this.title = this.menu_record.menu_name;
-    this.List("NEW");
   }
 
-  public ClearInit() {
+  initDefaultValues() {
+
     this.record = <JobOrderModel>{
       urlid: '',
       selectedId: '',
@@ -107,6 +135,7 @@ export class OrderListService {
   public getRowId() {
     return this._record.selectedId;
   }
+  
   LoadCombo() {
     this.SortList = [
       { "colheadername": "UID", "colname": "a.ord_uid" },

@@ -19,23 +19,12 @@ export class OrderListComponent {
     private route: ActivatedRoute,
     private location: Location,
     private router: Router,
-  ) {
+  ) {}
 
-    this.ms.record.searchQuery.page_count = 0;
-    this.ms.record.searchQuery.page_rows = 20;
-    this.ms.record.searchQuery.page_current = 0;
-    const data = this.route.snapshot.queryParams;
-    if (data != null) {
-      this.ms.InitCompleted = true;
-      this.ms.menuid = data.menuid;
-      this.ms.type = data.type;
-      this.ms.InitComponent();
-    }
-
-  }
   // Init Will be called After executing Constructor
   ngOnInit() {
-    this.ms.LoadCombo();
+    this.gs.checkAppVersion();
+    this.ms.init(this.route.snapshot.queryParams);
   }
 
   //// Destroy Will be called when this component is closed
@@ -60,6 +49,7 @@ export class OrderListComponent {
       urlid: this.gs.getGuid(),
       parenturlid: urlid,
       menuid: this.gs.getParameter('menuid'),
+      appid : this.gs.globalVariables.appid,
       pkid: id,
       origin: 'orderlist',
       mode: action
@@ -90,9 +80,7 @@ export class OrderListComponent {
     }
   }
 
-
   LovSelected(_Record: SearchTable) {
-    // Company Settings
     if (_Record.controlname == "AGENT") {
       this.ms.record.searchQuery.list_agent_id = _Record.id;
       this.ms.record.searchQuery.list_agent_name = _Record.name;

@@ -322,18 +322,18 @@ export class GlobalService {
   }
 
 
-  getTokenExpiryDate(seconds : number = 0){
+  getTokenExpiryDate(seconds: number = 0) {
     let dt = new Date();
     const milliseconds = seconds * 1000; // 1 seconds = 1000 milliseconds
     dt = new Date(dt.getTime() + milliseconds);
     return dt;
   }
 
-  isTokenExpired(expiryDate : Date){
+  isTokenExpired(expiryDate: Date) {
     let dt = new Date();
-    if ( dt >= expiryDate )
+    if (dt >= expiryDate)
       return true;
-    else 
+    else
       return false;
   }
 
@@ -385,5 +385,40 @@ export class GlobalService {
       return '';
   }
 
+
+  getURLParam(param: string) {
+    return new URLSearchParams(window.location.search).get(param);
+  }
+
+  public checkAppVersion() {
+    const _id = this.getURLParam('appid');
+    if (this.globalVariables.appid == _id) {
+      return true;
+    }
+    if (_id == undefined || _id == null || _id == '')
+      alert('Page Expired, APPID not found');
+    else
+      alert('Page Expired');
+    this.logout();
+    return false;
+  }
+
+
+  logout() {
+    this.IsLoginSuccess = false;
+    this.IsAuthenticated = false;
+    this.Access_Token = '';
+
+    localStorage.removeItem('menu');
+    localStorage.removeItem('modules');
+    localStorage.removeItem('gv');
+    localStorage.removeItem('dv');
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('tcl');
+    localStorage.removeItem('tp');
+
+    this.router.navigate(['login'], { replaceUrl: true });
+
+  }
 
 }
