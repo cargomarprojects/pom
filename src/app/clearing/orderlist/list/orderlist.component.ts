@@ -45,7 +45,6 @@ export class OrderListComponent {
   ActionHandler(action: string, id: string) {
     this.ms.ErrorMessage = '';
     this.ms.InfoMessage = '';
-
     if (action == "ADD" && !this.ms.menu_record.rights_add) {
       alert('Insufficient User Rights')
       return;
