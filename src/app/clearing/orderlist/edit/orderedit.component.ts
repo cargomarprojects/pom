@@ -130,7 +130,7 @@ export class OrderEditComponent {
       this.disableSave = false;
     if (this.mode == "EDIT" && this.menu_record.rights_edit)
       this.disableSave = false;
-    if (this.mode == "EDIT")
+    
       return this.disableSave;
   }
 
