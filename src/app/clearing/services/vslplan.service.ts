@@ -10,56 +10,62 @@ export class VslPlanService {
   title = 'VESSEL PLANNING';
   menuid: string = '';
   type: string = '';
-  InitCompleted: boolean = false;
-  menu_record: any;
 
+  public initlialized = false;
+  private appid = ''
+
+  menu_record: any;
   modal: any;
 
   disableSave = true;
   loading = false;
 
-  searchstring = '';
-
-  page_count = 0;
-  page_current = 0;
-  page_rows = 0;
-  page_rowcount = 0;
-  urlid: string;
-
-  ErrorMessage = "";
-  InfoMessage = "";
-
-  mode = '';
-  pkid = '';
   where_agent = "CUST_IS_AGENT = 'Y'";
   where_shipper = "CUST_IS_SHIPPER = 'Y'";
   where_consignee = "CUST_IS_CONSIGNEE = 'Y'";
   where_buy_agent = "CUST_IS_BUY_AGENT = 'Y'";
+  searchstring = '';
+  ErrorMessage = "";
+  InfoMessage = "";
 
   private _record: PlanModel;
 
   constructor(
     private http2: HttpClient,
     private gs: GlobalService) {
-    this.ClearInit();
   }
-
   public get record() {
     return this._record;
   }
-
   public set record(value: any) {
     this._record = value;
   }
 
-  InitComponent() {
-    this.menu_record = this.gs.getMenu(this.menuid);
-    if (this.menu_record)
-      this.title = this.menu_record.menu_name;
+  public init(params: any) {
+
+    if (this.appid != this.gs.globalVariables.appid) {
+      this.appid = this.gs.globalVariables.appid;
+      this.initlialized = false;
+    }
+    if (this.initlialized)
+      return;
+
+    this.menuid = params.menuid;
+
+    this.type = params.type;
+
+    this.initDefaultValues();
+
+    this.LoadCombo();
+
+    this.ReadUserRights();
+
     this.List("NEW");
+
+    this.initlialized = true;
   }
 
-  public ClearInit() {
+  initDefaultValues() {
     this.record = <PlanModel>{
       urlid: '',
       selectedId: '',
@@ -95,6 +101,11 @@ export class VslPlanService {
       }
     };
   }
+  ReadUserRights() {
+    this.menu_record = this.gs.getMenu(this.menuid);
+    if (this.menu_record)
+      this.title = this.menu_record.menu_name;
+  }
 
   public selectRowId(id: string) {
     this._record.selectedId = id;
@@ -103,19 +114,8 @@ export class VslPlanService {
     return this._record.selectedId;
   }
 
-  ResetControls() {
-    this.disableSave = true;
-    if (!this.menu_record)
-      return;
+  LoadCombo() {
 
-    if (this.menu_record.rights_admin)
-      this.disableSave = false;
-    if (this.mode == "ADD" && this.menu_record.rights_add)
-      this.disableSave = false;
-    if (this.mode == "EDIT" && this.menu_record.rights_edit)
-      this.disableSave = false;
-
-    return this.disableSave;
   }
 
   // Query List Data

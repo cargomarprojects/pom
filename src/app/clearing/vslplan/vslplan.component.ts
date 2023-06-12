@@ -2,7 +2,7 @@ import { Component, Input, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../core/services/global.service';
-import { Planm,SearchQuery } from '../models/planm';
+import { Planm, SearchQuery } from '../models/planm';
 import { VslPlanService } from '../services/vslplan.service';
 import { SearchTable } from '../../shared/models/searchtable';
 import { DateComponent } from '../../shared/date/date.component';
@@ -15,8 +15,6 @@ import { Router } from '@angular/router';
   providers: [VslPlanService]
 })
 export class VslPlanComponent {
-  // sub: any;
-
   constructor(
     private modalService: NgbModal,
     public ms: VslPlanService,
@@ -24,35 +22,12 @@ export class VslPlanComponent {
     private router: Router,
     public gs: GlobalService
   ) {
-    this.ms.page_count = 0;
-    this.ms.page_rows = 10;
-    this.ms.page_current = 0;
-    const data = this.route.snapshot.queryParams;
-    if (data != null) {
-      this.ms.InitCompleted = true;
-      this.ms.menuid = data.menuid;
-      this.ms.type = data.type;
-      this.ms.InitComponent();
-    }
-
-    // URL Query Parameter 
-    // this.sub = this.route.queryParams.subscribe(params => {
-    //   let a=10;
-    //   if (params["parameter"] != "") {
-    //     this.ms.InitCompleted = true;
-    //     var options = JSON.parse(params["parameter"]);
-    //     this.ms.menuid = options.menuid;
-    //     this.ms.type = options.type;
-    //     this.ms.InitComponent();
-    //   }
-    // });
   }
 
   // Init Will be called After executing Constructor
   ngOnInit() {
-    if (!this.ms.InitCompleted) {
-      this.ms.InitComponent();
-    }
+    this.gs.checkAppVersion();
+    this.ms.init(this.route.snapshot.queryParams);
   }
 
 
@@ -100,6 +75,7 @@ export class VslPlanComponent {
       urlid: this.gs.getGuid(),
       parenturlid: urlid,
       menuid: this.gs.getParameter('menuid'),
+      appid : this.gs.globalVariables.appid,
       pkid: id,
       origin: 'vessellist',
       mode: action
