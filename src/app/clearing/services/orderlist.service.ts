@@ -46,7 +46,7 @@ export class OrderListService {
     this.menu_record = this.gs.getMenu(this.menuid);
     if (this.menu_record)
       this.title = this.menu_record.menu_name;
-    // this.List("NEW");
+     this.List("NEW");
   }
 
   public ClearInit() {

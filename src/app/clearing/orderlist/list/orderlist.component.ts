@@ -2,7 +2,6 @@ import { Component, Input, OnInit, OnDestroy, ViewChild, AfterViewInit, ChangeDe
 import { GlobalService } from '../../../core/services/global.service';
 import { ActivatedRoute } from '@angular/router';
 import { Joborderm, SearchQuery } from '../../models/joborder';
-import { PageQuery } from 'src/app/shared/models/pageQuery';
 import { OrderListService } from '../../services/orderlist.service';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
@@ -10,13 +9,10 @@ import { SearchTable } from 'src/app/shared/models/searchtable';
 
 @Component({
   selector: 'app-orderlist',
-  templateUrl: './orderlist.component.html',
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './orderlist.component.html'
 })
 export class OrderListComponent {
-
-  urlid = '';
-  menuid = '';
+   
   constructor(
     public ms: OrderListService,
     private gs: GlobalService,
