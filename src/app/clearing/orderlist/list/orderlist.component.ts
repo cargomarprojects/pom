@@ -11,7 +11,7 @@ import { SearchTable } from 'src/app/shared/models/searchtable';
 @Component({
   selector: 'app-orderlist',
   templateUrl: './orderlist.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OrderListComponent {
 
