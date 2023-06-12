@@ -2,7 +2,7 @@ import { Component, Input, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../core/services/global.service';
-import { Planm } from '../models/planm';
+import { Planm,SearchQuery } from '../models/planm';
 import { VslPlanService } from '../services/vslplan.service';
 import { SearchTable } from '../../shared/models/searchtable';
 import { DateComponent } from '../../shared/date/date.component';
@@ -99,7 +99,7 @@ export class VslPlanComponent {
     let parameter = {
       urlid: this.gs.getGuid(),
       parenturlid: urlid,
-      menuid: this.ms.menuid,
+      menuid: this.gs.getParameter('menuid'),
       pkid: id,
       origin: 'vessellist',
       mode: action
