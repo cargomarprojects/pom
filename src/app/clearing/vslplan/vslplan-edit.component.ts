@@ -11,8 +11,7 @@ import { Joborderm } from '../models/joborder';
 
 @Component({
   selector: 'app-vslplan-edit',
-  templateUrl: './vslplan-edit.component.html',
-  providers: [VslPlanService]
+  templateUrl: './vslplan-edit.component.html'
 })
 export class VslPlanEditComponent {
 
@@ -45,7 +44,7 @@ export class VslPlanEditComponent {
   lock_record: boolean = false;
   ErrorMessage = "";
   InfoMessage = "";
-  Record: Planm = new Planm;
+  Record: Planm = <Planm>{};
 
   constructor(
     private modalService: NgbModal,
@@ -68,9 +67,6 @@ export class VslPlanEditComponent {
 
   // Init Will be called After executing Constructor
   ngOnInit() {
-    if (!this.InitCompleted) {
-      this.InitComponent();
-    }
     this.ActionHandler();
   }
   InitComponent() {
@@ -116,16 +112,16 @@ export class VslPlanEditComponent {
     this.ErrorMessage = '';
     this.InfoMessage = '';
     if (this.mode === 'ADD') {
-      this.ResetControls();
-      this.NewRecord();
+      this.resetControls();
+      this.newRecord();
     }
     else if (this.mode === 'EDIT') {
-      this.ResetControls();
-      this.GetRecord(this.pkid);
+      this.resetControls();
+      this.getRecord(this.pkid);
     }
   }
 
-  NewRecord() {
+  newRecord() {
     this.ctrlDisable = false;
     this.chkselected = false;
     this.ord_selected = false;
@@ -153,7 +149,7 @@ export class VslPlanEditComponent {
     this.Record.rec_mode = this.mode;
 
   }
-  ResetControls() {
+  resetControls() {
     this.disableSave = true;
     if (!this.menu_record)
       return;
@@ -170,7 +166,7 @@ export class VslPlanEditComponent {
 
 
   // Load a single Record for VIEW/EDIT
-  GetRecord(Id: string, _type: string = "") {
+  getRecord(Id: string, _type: string = "") {
     this.loading = true;
     let SearchData = {
       pkid: Id,

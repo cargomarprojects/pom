@@ -11,8 +11,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vslplan',
-  templateUrl: './vslplan.component.html',
-  providers: [VslPlanService]
+  templateUrl: './vslplan.component.html' 
 })
 export class VslPlanComponent {
   constructor(

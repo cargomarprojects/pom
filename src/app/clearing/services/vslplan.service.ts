@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Planm, PlanModel, SearchQuery } from '../models/planm';
 import { GlobalService } from '../../core/services/global.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class VslPlanService {
 
   title = 'VESSEL PLANNING';
