@@ -20,19 +20,19 @@ export class OrderListComponent {
   pageQuery:  PageQuery;
 
   constructor(
-    private ms: OrderListService,
+    public ms: OrderListService,
     private gs: GlobalService,
     private location: Location,
     private router: Router,
   ) {
 
-
+    
 
   }
   // Init Will be called After executing Constructor
   ngOnInit() {
     
-
+     
   }
 
   //// Destroy Will be called when this component is closed
@@ -72,7 +72,8 @@ export class OrderListComponent {
       menuid: this.gs.getParameter('menuid'),
       pkid: actions.id,
       origin: 'orderlist',
-      mode: actions
+      mode: actions 
+      
     };
 
     this.router.navigate(['clearing/orderedit'], { queryParams: parameter });

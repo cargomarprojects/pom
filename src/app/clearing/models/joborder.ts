@@ -120,7 +120,7 @@ export class JobOrder_VM {
   ord_source: string;
 }
 
-export interface SearchQuery {
+ export interface SearchQuery {
   type: string,
   rowtype: string,
   searchstring: string,

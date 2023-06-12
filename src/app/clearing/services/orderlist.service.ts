@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Joborderm, SearchQuery, JobOrderModel } from '../models/joborder';
 import { GlobalService } from '../../core/services/global.service';
 import { JobOrder_VM } from '../models/joborder';
-
+import { PageQuery } from 'src/app/shared/models/pageQuery';
 
 @Injectable({ providedIn: 'root' })
 export class OrderListService {
@@ -16,54 +16,95 @@ export class OrderListService {
   where_shipper = "CUST_IS_SHIPPER = 'Y'";
   where_consignee = "CUST_IS_CONSIGNEE = 'Y'";
   where_buy_agent = "CUST_IS_BUY_AGENT = 'Y'";
-  
+
   private _record: JobOrderModel;
 
   constructor(
     private http2: HttpClient,
     private gs: GlobalService) {
 
-      this.record =  {};
+    // this.record = {};
+    this.ClearInit();
   }
 
   public get record() {
     return this._record;
   }
 
-  public set record( value : any) {
+  public set record(value: any) {
     this._record = value;
   }
+  public ClearInit() {
+    this.record = <JobOrderModel>{
+      urlid: '',
+      message: '',
+      isError: false,
+      records: [],
+      searchQuery: <SearchQuery>{
+        branch_code: this.gs.globalVariables.branch_code,
+        company_code: this.gs.globalVariables.user_company_code,
+        user_code: this.gs.globalVariables.user_code,
+        searchstring: '',
+        file_pkid: '',
+        from_date: '',
+        job_docno: '',
+        list_agent_id: '',
+        list_agent_name: '',
+        list_exp_id: '',
+        list_exp_name: '',
+        list_imp_id: '',
+        list_imp_name: '',
+        list_buy_agent_id: '',
+        list_buy_agent_name: '',
+        list_pod_agent_id: '',
+        list_pod_agent_name: '',
+        ord_invoice: '',
+        ord_po: '',
+        report_folder: '',
+        to_date: '',
+        sort_colname: 'UID',
+        sort_colvalue: 'a.ord_uid',
+        ord_status: 'ALL',
+        ord_showpending: 'N',
+        ftp_transfertype: 'ORDERLIST',
+        ftp_is_multipleorder: 'N',
+        ftp_is_checklist: 'N',
+        ftp_ordpoids: ''
+      },
+      pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: 0, page_rowcount: 0, page_rows: 20 }
+    };
 
-  List(_type: string, searchQuery: SearchQuery) {
+  }
+  List(_type: string) {
     this.loading = true;
     let SearchData = {
       type: _type,
       rowtype: '',
-      searchstring: searchQuery.searchstring,
+      searchstring: this._record.searchQuery.searchstring,
       company_code: this.gs.globalVariables.comp_code,
       branch_code: this.gs.globalVariables.branch_code,
       user_code: this.gs.globalVariables.user_code,
       year_code: this.gs.globalVariables.year_code,
-      page_count: searchQuery.page_count,
-      page_current: searchQuery.page_current,
-      page_rows: searchQuery.page_rows,
-      page_rowcount: searchQuery.page_rowcount,
-      job_docno: searchQuery.job_docno,
-      ord_po: searchQuery.ord_po,
-      ord_invoice: searchQuery.ord_invoice,
-      from_date: searchQuery.from_date,
-      to_date: searchQuery.to_date,
-      list_exp_id: searchQuery.list_exp_id,
-      list_imp_id: searchQuery.list_imp_id,
-      list_agent_id: searchQuery.list_agent_id,
-      list_buy_agent_id: searchQuery.list_buy_agent_id,
-      list_pod_agent_id: searchQuery.list_pod_agent_id,
-      ord_showpending: searchQuery.ord_showpending,
+      page_count: this._record.searchQuery.page_count,
+      page_current: this._record.searchQuery.page_current,
+      page_rows: this._record.searchQuery.page_rows,
+      page_rowcount: this._record.searchQuery.page_rowcount,
+      job_docno: this._record.searchQuery.job_docno,
+      ord_po: this._record.searchQuery.ord_po,
+      ord_invoice: this._record.searchQuery.ord_invoice,
+      from_date: this._record.searchQuery.from_date,
+      to_date: this._record.searchQuery.to_date,
+      list_exp_id: this._record.searchQuery.list_exp_id,
+      list_imp_id: this._record.searchQuery.list_imp_id,
+      list_agent_id: this._record.searchQuery.list_agent_id,
+      list_buy_agent_id: this._record.searchQuery.list_buy_agent_id,
+      list_pod_agent_id: this._record.searchQuery.list_pod_agent_id,
+      ord_showpending: this._record.searchQuery.ord_showpending,
       report_folder: this.gs.globalVariables.report_folder,
       file_pkid: this.gs.getGuid(),
-      ord_status: searchQuery.ord_status,
-      sort_colname: searchQuery.sort_colvalue,
-      ftp_transfertype: searchQuery.ftp_transfertype
+      ord_status: this._record.searchQuery.ord_status,
+      sort_colname: this._record.searchQuery.sort_colvalue,
+      ftp_transfertype: this._record.searchQuery.ftp_transfertype
     };
 
     this.ErrorMessage = '';

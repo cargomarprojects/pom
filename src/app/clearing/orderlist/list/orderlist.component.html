@@ -14,11 +14,11 @@
           <div class="form-group row">
             <label class="col-3 col-form-label col-form-label-sm">From</label>
             <div class="col-4">
-              <app-date [inputdate]="query.from_date" (ValueChanged)="query.from_date=$event"></app-date>
+              <app-date [inputdate]="ms.record.searchQuery.from_date" (ValueChanged)="ms.record.searchQuery.from_date=$event"></app-date>
             </div>
             <label class="col-1 col-form-label col-form-label-sm">To</label>
             <div class="col-4">
-              <app-date [inputdate]="query.to_date" (ValueChanged)="query.to_date=$event"></app-date>
+              <app-date [inputdate]="ms.record.searchQuery.to_date" (ValueChanged)="ms.record.searchQuery.to_date=$event"></app-date>
             </div>            
           </div>
 
@@ -27,7 +27,7 @@
             <label class="col-3 col-form-label col-form-label-sm">Agent.Pol</label>
             <div class="col-9">
               <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
-                [displaydata]="query.list_agent_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_agent">
+                [displaydata]="ms.record.searchQuery.list_agent_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_agent">
               </app-autocomplete2>
             </div>
           </div>

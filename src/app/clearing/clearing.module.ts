@@ -14,16 +14,16 @@ import { WeekPlanningComponent } from './weekplanning/weekplanning.component';
 import { EdiOrderComponent } from './edi/ediorder/ediorder.component';
 import { EdiOrdUpdateComponent} from './ediordupdate/ediordupdate.component';
 
-import { OrderListReducer } from './orderlist/list/store/orderlist.reducer';
-import { OrderListEffects } from './orderlist/list/store/orderlist.effects';
+// import { OrderListReducer } from './orderlist/list/store/orderlist.reducer';
+// import { OrderListEffects } from './orderlist/list/store/orderlist.effects';
 import { OrderListComponent } from './orderlist/list/orderlist.component';
-import { OrderListHeaderComponent } from './orderlist/list/orderlist.header.component';
+// import { OrderListHeaderComponent } from './orderlist/list/orderlist.header.component';
 
 import { OrderEditReducer } from './orderlist/edit/store/orderedit.reducer';
 import { OrderEditEffects } from './orderlist/edit/store/orderedit.effects';
 import { OrderEditComponent } from './orderlist/edit/orderedit.component';
 import { OrderEditHeaderComponent } from './orderlist/edit/orderedit.header.component';
-import { OrderListDetailComponent } from './orderlist/list/orderlist.detail.component';
+// import { OrderListDetailComponent } from './orderlist/list/orderlist.detail.component';
 import { StatusComponent } from './status/status.component';
 import { EdiComponent } from './edi/edi.component';
 import { Linkm2Component } from './linkm2/linkm2.component';
@@ -39,7 +39,7 @@ import { VslPlanEditComponent } from './vslplan/vslplan-edit.component';
     JobOrderComponent,
     JobContainerComponent,
     OrderListComponent,
-    OrderListHeaderComponent,
+    // OrderListHeaderComponent,
     OrderEditComponent,
     OrderEditHeaderComponent,
     AgentBookComponent,
@@ -47,7 +47,7 @@ import { VslPlanEditComponent } from './vslplan/vslplan-edit.component';
     WeekPlanningComponent,
     EdiOrderComponent,
     EdiOrdUpdateComponent,
-    OrderListDetailComponent,
+    // OrderListDetailComponent,
     StatusComponent,
     EdiComponent,
     Linkm2Component,
@@ -61,9 +61,9 @@ import { VslPlanEditComponent } from './vslplan/vslplan-edit.component';
   imports: [
     SharedModule,
     ClearingRoutingModule,
-    StoreModule.forFeature('orderlist', OrderListReducer),
-    StoreModule.forFeature('orderrecord', OrderEditReducer  ),
-    EffectsModule.forFeature([ OrderListEffects, OrderEditEffects])
+    // StoreModule.forFeature('orderlist', OrderListReducer),
+    StoreModule.forFeature('orderrecord', OrderEditReducer  )
+    // EffectsModule.forFeature([ OrderListEffects, OrderEditEffects])
   ],  
   providers: [
   ],

@@ -5,12 +5,12 @@ import { GlobalService } from '../../core/services/global.service';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/reducers';
-import { SelectPkids, SelectRefNos } from '../orderlist/list/store/orderlist.selctors';
+// import { SelectPkids, SelectRefNos } from '../orderlist/list/store/orderlist.selctors';
 import { map, tap } from 'rxjs/operators';
 import { Location } from '@angular/common';
 import { TrackOrderService } from '../services/trackorder.service';
 
-import * as FromOrderActions from '../orderlist/list/store/orderlist.actions';
+// import * as FromOrderActions from '../orderlist/list/store/orderlist.actions';
 
 @Component({
   selector: 'app-status',
@@ -61,19 +61,19 @@ export class StatusComponent {
     //this.menuid = options.menuid;
     //this.type = options.type;
 
-    this.pkid$ = this.store.pipe(
-      select(SelectPkids),
-      tap(x => {
-        this.pkid = x;
-      })
-    );
+    // this.pkid$ = this.store.pipe(
+    //   select(SelectPkids),
+    //   tap(x => {
+    //     this.pkid = x;
+    //   })
+    // );
 
-    this.refno$ = this.store.pipe(
-      select(SelectRefNos),
-      tap(x => {
-        this.refno = x;
-      })
-    );
+    // this.refno$ = this.store.pipe(
+    //   select(SelectRefNos),
+    //   tap(x => {
+    //     this.refno = x;
+    //   })
+    // );
   }
 
   // Init Will be called After executing Constructor
@@ -113,7 +113,7 @@ export class StatusComponent {
         this.InfoMessage = "Save Complete";
         this.ids = response.list;
         var urlid = this.gs.getParameter('urlid');
-        this.store.dispatch( FromOrderActions.ChangeStatus({urlid: urlid, pkids: this.ids})  )
+        // this.store.dispatch( FromOrderActions.ChangeStatus({urlid: urlid, pkids: this.ids})  )
         this.Close();
       }, error => {
         this.ErrorMessage = this.gs.getError(error);
