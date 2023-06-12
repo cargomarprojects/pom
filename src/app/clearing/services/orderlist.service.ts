@@ -22,7 +22,9 @@ export class OrderListService {
   where_shipper = "CUST_IS_SHIPPER = 'Y'";
   where_consignee = "CUST_IS_CONSIGNEE = 'Y'";
   where_buy_agent = "CUST_IS_BUY_AGENT = 'Y'";
-
+  modalRef: any;
+  selectcheck: boolean = false;
+  
   SortList: any[];
   private _record: JobOrderModel;
 

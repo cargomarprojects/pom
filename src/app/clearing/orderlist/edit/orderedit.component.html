@@ -1,20 +1,323 @@
-
 <div class="page-header">
   <div class="col">
-    <label>Order Details</label>
+    <label class="col-form-label mr-1">{{title}}</label>
     <button class="btn btn-primary btn-sm mx-1" (click)="newRecord()">New</button>
     <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
   </div>
 </div>
+<div class="page-details">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group row">
+        <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Pol.Agent</label>
+        <div class="col-sm-5">
+          <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
+           [disabled]="(Record.ord_status == 'REPORTED') ? false : true "  
+           [displaydata]="Record.ord_agent_code" (ValueChanged)="LovSelected($event)" [where]="ms.where_agent" #agentlov>
+          </app-autocomplete2>
+        </div>
+        <div class="col-sm-5">
+          <InputBox [(inputModel)]="Record.ord_agent_name" [maxlength]="60" [uppercase]=true [disabled]="Record.ord_status == 'REPORTED' ? false : true"></InputBox>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Shipper</label>
+        <div class="col-sm-5">
+          <app-autocomplete2 [controlname]="'SHIPPER'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
+            [disabled]="(Record.ord_status == 'REPORTED') ? false : true "  
+            [displaydata]="Record.ord_exp_code" (ValueChanged)="LovSelected($event)" [where]="ms.where_shipper">
+          </app-autocomplete2>
+        </div>
+        <div class="col-sm-5">
+          <InputBox [(inputModel)]="Record.ord_exp_name" [maxlength]="60" [uppercase]=true [disabled]="Record.ord_status == 'REPORTED' ? false : true"></InputBox>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Consignee</label>
+        <div class="col-sm-5">
+          <app-autocomplete2 [controlname]="'CONSIGNEE'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
+            [disabled]="(Record.ord_status == 'REPORTED') ? false : true "  
+            [displaydata]="Record.ord_imp_code" (ValueChanged)="LovSelected($event)" [where]="ms.where_consignee">
+          </app-autocomplete2>
+        </div>
+        <div class="col-sm-5">
+          <InputBox [(inputModel)]="Record.ord_imp_name" [maxlength]=60 [uppercase]=true [disabled]="Record.ord_status == 'REPORTED' ? false : true"></InputBox>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Buying Agent</label>
+        <div class="col-sm-5">
+          <app-autocomplete2 [controlname]="'BUY-AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
+           [disabled]="(Record.ord_status == 'REPORTED') ? false : true "  
+           [displaydata]="Record.ord_buy_agent_code" (ValueChanged)="LovSelected($event)" [where]="ms.where_buy_agent" #agentlov>
+          </app-autocomplete2>
+        </div>
+        <div class="col-sm-5">
+          <InputBox [(inputModel)]="Record.ord_buy_agent_name" [maxlength]="60" [uppercase]=true [disabled]="Record.ord_status == 'REPORTED' ? false : true"></InputBox>
+        </div>
+      </div>
 
 
-<div *ngIf="errorMessage$ | async as msg">
-  <div class="page-list">
-    <div class="alert alert-info">
-      <p class="mb-0">{{msg}}</p>
+      <div class="form-group row">
+        <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Pod.Agent</label>
+        <div class="col-sm-5">
+          <app-autocomplete2 [controlname]="'POD-AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
+           [disabled]="(Record.ord_status == 'REPORTED') ? false : true "  
+           [displaydata]="Record.ord_pod_agent_code" (ValueChanged)="LovSelected($event)" [where]="ms.where_agent" #agentlov>
+          </app-autocomplete2>
+        </div>
+        <div class="col-sm-5">
+          <InputBox [(inputModel)]="Record.ord_pod_agent_name" [maxlength]="60" [uppercase]=true [disabled]="Record.ord_status == 'REPORTED' ? false : true"></InputBox>
+        </div>
+      </div>
+
+
+
+
+      <!-- <div *ngIf="mode == 'EDIT'" class="form-group row">
+        <label class="col-sm-2 col-form-label  col-form-label-sm">PO ID</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control form-control-sm" [(ngModel)]="Record.ord_uid" (blur)="OnBlur('ord_uid')" required maxlength="14" />
+        </div>
+      </div> -->
+
+      <div class="form-group row">
+        <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Invoice#</label>
+        <div class="col-sm-5">
+          <InputBox [(inputModel)]="Record.ord_invno" [maxlength]="30" [uppercase]=true></InputBox>
+        </div>
+        <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">UNECO</label>
+        <div class="col-sm-3">
+          <InputBox [(inputModel)]="Record.ord_uneco" [maxlength]="5" [uppercase]=true></InputBox>
+        </div>
+      </div>      
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label  col-form-label-sm">PO</label>
+        <div class="col-sm-10">
+          <InputBox [(inputModel)]="Record.ord_po" [maxlength]="60" [uppercase]=true (blur)="OnBlur('ord_po')">
+          </InputBox>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label col-form-label-sm">Style#</label>
+        <div class="col-sm-10">
+          <InputBox [(inputModel)]="Record.ord_style" [maxlength]="60" [uppercase]=true (blur)="OnBlur('ord_style')">
+          </InputBox>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label col-form-label-sm">Color</label>
+        <div class="col-sm-10">
+          <InputBox [(inputModel)]="Record.ord_color" [maxlength]="60" [uppercase]=true (blur)="OnBlur('ord_color')">
+          </InputBox>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label col-form-label-sm">Contract#</label>
+        <div class="col-sm-10">
+          <InputBox [(inputModel)]="Record.ord_contractno" [maxlength]="100" [uppercase]=true></InputBox>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label col-form-label-sm">Description</label>
+        <div class="col-sm-10">
+          <textarea rows="3" class="form-control form-control-sm" [(ngModel)]="Record.ord_desc" (blur)="OnBlur('ord_desc')" required
+            maxlength="100"></textarea>
+        </div>
+      </div>      
+      
+
+    </div>
+    <div class="col-sm-6">
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label col-form-label-sm">Cargo.Ready.Dt</label>
+        <div class="col-4">
+          <app-date [inputdate]="Record.ord_cargo_readiness_date" (ValueChanged)="Record.ord_cargo_readiness_date=$event"></app-date>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label col-form-label-sm">Boarding1</label>
+        <div class="col-4">
+          <app-date [inputdate]="Record.ord_boarding1" (ValueChanged)="Record.ord_boarding1=$event"></app-date>
+        </div>
+        <label class="col-2 col-form-label col-form-label-sm">Boarding2</label>
+        <div class="col-4">
+          <app-date [inputdate]="Record.ord_boarding2" (ValueChanged)="Record.ord_boarding2=$event"></app-date>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label col-form-label-sm">Instock1</label>
+        <div class="col-4">
+          <app-date [inputdate]="Record.ord_instock1" (ValueChanged)="Record.ord_instock1=$event"></app-date>
+        </div>
+        <label class="col-2 col-form-label col-form-label-sm">Instock2</label>
+        <div class="col-4">
+          <app-date [inputdate]="Record.ord_instock2" (ValueChanged)="Record.ord_instock2=$event"></app-date>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label col-form-label-sm">Pkgs</label>
+        <div class="col-4">
+          <InputBoxNumber [(inputModel)]="Record.ord_pkg" [maxlength]="10" [dec]="0"></InputBoxNumber>
+        </div>
+        <label class="col-2 col-form-label col-form-label-sm">Pcs</label>
+        <div class="col-4">
+          <InputBoxNumber [(inputModel)]="Record.ord_pcs" [maxlength]="14" [dec]="3"></InputBoxNumber>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label col-form-label-sm">Nt.Wt</label>
+        <div class="col-4">
+          <InputBoxNumber [(inputModel)]="Record.ord_ntwt" [maxlength]="14" [dec]="3"></InputBoxNumber>
+        </div>
+        <label class="col-2 col-form-label col-form-label-sm">Gr.Wt</label>
+        <div class="col-4">
+          <InputBoxNumber [(inputModel)]="Record.ord_grwt" [maxlength]="14" [dec]="3"></InputBoxNumber>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label col-form-label-sm">Cbm</label>
+        <div class="col-4">
+          <InputBoxNumber [(inputModel)]="Record.ord_cbm" [maxlength]="14" [dec]="3"></InputBoxNumber>
+        </div>
+
+        <label class="col-2 col-form-label  col-form-label-sm">HS.Code</label>
+        <div class="col-4">
+          <InputBox [(inputModel)]="Record.ord_hs_code" [maxlength]="15" [uppercase]=true></InputBox>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Cargo.Status</label>
+        <div class="col-sm-10">
+          <textarea rows="3" disabled class="form-control form-control-sm" [(ngModel)]="Record.ord_cargo_status"
+            (blur)="OnBlur('ord_cargo_status')" required maxlength="250"></textarea>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label col-form-label-sm">Transport.Way</label>
+        <div class="col-4">
+          <select class="form-control form-control-sm" [(ngModel)]="Record.rec_category">
+            <option [value]="'SEA EXPORT'">SEA</option>
+            <option [value]="'AIR EXPORT'">AIR</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label col-form-label-sm">POL</label>
+        <div class="col-4">
+          <app-autocomplete2 [controlname]="'POL'" [tabletype]="'PORT'" [displaycolumn]="'NAME'"
+            [displaydata]="Record.ord_pol" (ValueChanged)="LovSelected($event)">
+          </app-autocomplete2>
+        </div>
+        <div class="col-6">
+          <InputBox [(inputModel)]="Record.ord_pol" [maxlength]=60 [uppercase]=true></InputBox>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label col-form-label-sm">POD</label>
+        <div class="col-4">
+          <app-autocomplete2 [controlname]="'POD'" [tabletype]="'PORT'" [displaycolumn]="'NAME'"
+            [displaydata]="Record.ord_pod" (ValueChanged)="LovSelected($event)">
+          </app-autocomplete2>
+        </div>
+        <div class="col-6">
+          <InputBox [(inputModel)]="Record.ord_pod" [maxlength]=60 [uppercase]=true></InputBox>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="page-details">
+  <div class="col-sm-12">
+    <div class="row">
+      <div class="col-6">
+        <label class="col-form-label col-form-label-sm">Status : {{Record.ord_status}}</label>
+      </div>
+      <div class="col-6" *ngIf="Record.ord_status == 'REPORTED'">
+          <button [hidden]="disableSave"  (click)="Save()" class="btn btn-success btn-sm">Save</button>
+        </div>
     </div>
   </div>
 </div>
 
 
-<App-OrderEditHeader [_record]="record$ | async" (save)="save($event)" ></App-OrderEditHeader>
+<div *ngIf="Record.ord_booking_date_captn">
+  <div class="page-details" *ngIf="Record.rec_mode == 'EDIT'">
+    <div class="row">
+      <div class="col-sm-12">
+        <div *ngIf="Record.ord_booking_date" class="form-group row">
+          <label class="col-sm-3 col-form-label col-form-label-sm">{{Record.ord_booking_date_captn}}</label>
+          <label class="col-sm-6 col-form-label col-form-label-sm">{{Record.ord_booking_date}}</label>
+        </div>
+        <div *ngIf="Record.ord_rnd_insp_date" class="form-group row">
+          <label class="col-sm-3 col-form-label col-form-label-sm">{{Record.ord_rnd_insp_date_captn}}</label>
+          <label class="col-sm-6 col-form-label col-form-label-sm">{{Record.ord_rnd_insp_date}}</label>
+        </div>
+        <div *ngIf="Record.ord_po_rel_date" class="form-group row">
+          <label class="col-sm-3 col-form-label col-form-label-sm">{{Record.ord_po_rel_date_captn}}</label>
+          <label class="col-sm-6 col-form-label col-form-label-sm">{{Record.ord_po_rel_date}}</label>
+        </div>
+        <div *ngIf="Record.ord_cargo_ready_date" class="form-group row">
+          <label class="col-sm-3 col-form-label col-form-label-sm">{{Record.ord_cargo_ready_date_captn}}</label>
+          <label class="col-sm-6 col-form-label col-form-label-sm">{{Record.ord_cargo_ready_date}}</label>
+        </div>
+
+  
+        <div *ngIf="Record.ord_fcr_date"  class="form-group row">
+          <label class="col-sm-3 col-form-label col-form-label-sm">{{Record.ord_fcr_date_captn}}</label>
+          <label class="col-sm-6 col-form-label col-form-label-sm">{{Record.ord_fcr_date}}</label>
+        </div>
+        <div *ngIf="Record.ord_insp_date"  class="form-group row">
+          <label class="col-sm-3 col-form-label col-form-label-sm">{{Record.ord_insp_date_captn}}</label>
+          <label class="col-sm-6 col-form-label col-form-label-sm">{{Record.ord_insp_date}}</label>
+        </div>
+        <div *ngIf="Record.ord_stuf_date"  class="form-group row">
+          <label class="col-sm-3 col-form-label col-form-label-sm">{{Record.ord_stuf_date_captn}}</label>
+          <label class="col-sm-6 col-form-label col-form-label-sm">{{Record.ord_stuf_date}}</label>
+        </div>
+        <div *ngIf="Record.ord_whd_date"  class="form-group row">
+          <label class="col-sm-3 col-form-label col-form-label-sm">{{Record.ord_whd_date_captn}}</label>
+          <label class="col-sm-6 col-form-label col-form-label-sm">{{Record.ord_whd_date}}</label>
+        </div>
+
+      
+        <div *ngIf="Record.ord_dlv_pol_date"  class="form-group row">
+          <label class="col-sm-3 col-form-label col-form-label-sm">{{Record.ord_dlv_pol_date_captn}}</label>
+          <label class="col-sm-6 col-form-label col-form-label-sm">{{Record.ord_dlv_pol_date}}</label>
+        </div>
+        <div *ngIf="Record.ord_dlv_pod_date"  class="form-group row">
+          <label class="col-sm-3 col-form-label col-form-label-sm">{{Record.ord_dlv_pod_date_captn}}</label>
+          <label class="col-sm-6 col-form-label col-form-label-sm">{{Record.ord_dlv_pod_date}}</label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div *ngIf="InfoMessage" class="alert alert-success">
+  {{InfoMessage}}
+</div>
+<div *ngIf="ErrorMessage" class="alert alert-danger">
+  {{ErrorMessage}}
+</div>

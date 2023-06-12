@@ -7,8 +7,6 @@ import { LoginService } from '../services/login.service';
 import { AppState } from 'src/app/reducers';
 import { Store } from '@ngrx/store';
 
-// import * as fromorderlist from 'src/app/clearing/orderlist/list/store/orderlist.actions';
-import * as fromorderedit from 'src/app/clearing/orderlist/edit/store/orderedit.actions';
 import { HouseListService } from 'src/app/clearing/services/houselist.service';
 import { EdiHblService } from 'src/app/clearing/services/edihbl.service';
 import { EdiOrderService } from 'src/app/clearing/services/ediorder.service';
@@ -56,8 +54,6 @@ export class LoginComponent {
     this.username = 'admin';
     this.password = 'admin';
 
-    // this.store.dispatch(fromorderlist.RESET());
-    this.store.dispatch(fromorderedit.RESET());
     this.gs = gs1;
     this.LoadCombo();
     this.InitAllService();

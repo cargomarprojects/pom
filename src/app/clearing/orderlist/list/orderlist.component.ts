@@ -12,10 +12,11 @@ import { SearchTable } from 'src/app/shared/models/searchtable';
   templateUrl: './orderlist.component.html'
 })
 export class OrderListComponent {
-   
+  orderid="";
+
   constructor(
     public ms: OrderListService,
-    private gs: GlobalService,
+    public gs: GlobalService,
     private route: ActivatedRoute,
     private location: Location,
     private router: Router,
@@ -42,24 +43,27 @@ export class OrderListComponent {
   ngOnDestroy() {
   }
 
-  ActionHandler(actions: any) {
-    /*
-    if (!this.gs.canAdd(this.menuid)) {
+  ActionHandler(action: string, id: string) {
+    this.ms.ErrorMessage = '';
+    this.ms.InfoMessage = '';
+
+    if (action == "ADD" && !this.ms.menu_record.rights_add) {
       alert('Insufficient User Rights')
-      return; 
+      return;
     }
-    */
+    if (action == "EDIT" && !this.ms.menu_record.rights_edit) {
+      alert('Insufficient User Rights')
+      return;
+    }
+
     var urlid = this.gs.getParameter('urlid');
-
-
     let parameter = {
       urlid: this.gs.getGuid(),
       parenturlid: urlid,
       menuid: this.gs.getParameter('menuid'),
-      pkid: actions.id,
+      pkid: id,
       origin: 'orderlist',
-      mode: actions
-
+      mode: action
     };
 
     this.router.navigate(['clearing/orderedit'], { queryParams: parameter });
@@ -142,6 +146,57 @@ export class OrderListComponent {
         this.router.navigate(['clearing/tracking'], { queryParams: parameter });
     */
 
+  }
+  
+  ShowStatus(modalname: any) {
+    // if (this.total <= 0) {
+    //   alert('No Rows Selected');
+    //   return;
+    // }
+    // this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true  });
+    /*
+        var urlid = this.gs.getParameter('urlid');
+        let parameter = {
+          urlid: urlid,
+          type: '',
+          origin: 'orderlist',
+        };
+        this.router.navigate(['clearing/tracking'], { queryParams: parameter });
+    */
+
+  }
+
+  CloseModal1(params: any) {
+    if (params.saction == 'SAVE') {
+      var arrPkid = params.sid.split(',');
+      for (var i = 0; i < arrPkid.length; i++) {
+        for (let rec of this.ms.record.records.filter(rec => rec.ord_pkid == arrPkid[i])) {
+          rec.ord_cargo_status = params.trackstatus;
+          rec.ord_cargo_status_date = params.cargostatusdate;
+          if (params.sdatetype == "BKD")
+            rec.ord_booking_date = params.trackdate;
+          else if (params.sdatetype == "RND")
+            rec.ord_rnd_insp_date = params.trackdate;
+          else if (params.sdatetype == "POR")
+            rec.ord_po_rel_date = params.trackdate;
+          else if (params.sdatetype == "CFS")
+            rec.ord_cargo_ready_date = params.trackdate;
+          else if (params.sdatetype == "FCR")
+            rec.ord_fcr_date = params.trackdate;
+          else if (params.sdatetype == "INSP")
+            rec.ord_insp_date = params.trackdate;
+          else if (params.sdatetype == "STUF")
+            rec.ord_stuf_date = params.trackdate;
+          else if (params.sdatetype == "WHD")
+            rec.ord_whd_date = params.trackdate;
+          else if (params.sdatetype == "SOB")
+            rec.ord_dlv_pol_date = params.trackdate;
+          else if (params.sdatetype == "DPOD")
+            rec.ord_dlv_pod_date = params.trackdate;
+        }
+      }
+    }
+    this.ms.modalRef.close();
   }
 
 }
