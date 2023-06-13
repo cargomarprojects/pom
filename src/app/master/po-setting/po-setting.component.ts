@@ -152,10 +152,15 @@ export class PoSettingComponent {
         return bret;
     }
 
+    OnBlur(feild: string, _rec: PO_Settings) {
+
+        if (feild == 'ps_code')
+            _rec.ps_code = _rec.ps_code.toUpperCase();
+    }
 
     Close() {
-        this.gs.ClosePage('home');
+        this.location.back();
     }
-     
+
 
 }

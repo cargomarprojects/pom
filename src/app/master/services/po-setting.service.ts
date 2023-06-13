@@ -11,11 +11,11 @@ export class POSettingService {
     }
 
     GetRecord(SearchData: any) {
-      return this.http2.post<any>(this.gs.baseUrl + '/api/Master/Customer/GetPOSettingList', SearchData, this.gs.headerparam2('authorized'));
+      return this.http2.post<any>(this.gs.baseUrl + '/api/Master/POSetting/GetRecord', SearchData, this.gs.headerparam2('authorized'));
     }
 
     Save(Record: PO_Settings_VM) {
-      return this.http2.post<any>(this.gs.baseUrl + '/api/Master/Customer/SavePOSetting', Record, this.gs.headerparam2('authorized'));
+      return this.http2.post<any>(this.gs.baseUrl + '/api/Master/POSetting/Save', Record, this.gs.headerparam2('authorized'));
     }
    
     

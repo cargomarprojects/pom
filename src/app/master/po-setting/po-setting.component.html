@@ -18,11 +18,14 @@
             </thead>
             <tbody class="page-body-tbody" *ngFor="let rec of RecordList">
                 <tr>
-                    <td>{{rec.ps_ctr}}</td>
-                    <td>{{rec.ps_code}}</td>
-                    <td>{{rec.ps_name}}</td>
-                    <td>{{rec.ps_cargo_status}}</td>
-                    <td>{{rec.ps_enabled}}</td>
+                    <td style="padding:0px 0px 0px 0px"><input type="number" name="ctr" disabled class="form-control form-control-sm" [(ngModel)]="rec.ps_ctr" (blur)="OnBlur('ps_ctr',rec)" required maxlength="14" /></td>
+                    <td style="padding:0px 0px 0px 0px"><input type="text" name="ps_code" class="form-control form-control-sm" [(ngModel)]="rec.ps_code" (blur)="OnBlur('ps_code',rec)" required maxlength="15" /></td>
+                    <td style="padding:0px 0px 0px 0px"><input type="text" name="ps_name" class="form-control form-control-sm" [(ngModel)]="rec.ps_name" (blur)="OnBlur('ps_name',rec)" required maxlength="100" /></td>
+                    <td style="padding:0px 0px 0px 0px"><input type="text" name="ps_cargo_status" class="form-control form-control-sm" [(ngModel)]="rec.ps_cargo_status" (blur)="OnBlur('ps_cargo_status',rec)" required maxlength="60" /></td>
+                    <td style="padding:0px 0px 0px 0px"><select class="form-control form-control-sm" [(ngModel)]="rec.ps_enabled">
+                        <option [value]="'Y'">YES</option>
+                        <option [value]="'N'">NO</option>
+                      </select></td>
                 </tr>
             </tbody>
         </table>
@@ -30,7 +33,7 @@
 </div>
 <div class="page-list">
     <div class="col my-1">
-        <button class="btn btn-primary btn-sm ml-2" (click)="Close()">Save</button>
+        <button class="btn btn-primary btn-sm ml-2" (click)="Save()">Save</button>
         <button class="btn btn-primary btn-sm ml-2" (click)="Close()">Return</button>
     </div>
 </div>
