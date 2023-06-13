@@ -29,6 +29,7 @@ export class OrderListService {
   orderid = "";
   ord_trkids = "";
   ord_trkpos = "";
+  trkdt_alldisplay = "Y";
 
   SortList: any[];
   private _record: JobOrderModel;
@@ -178,6 +179,7 @@ export class OrderListService {
         if (_type == 'EXCEL')
           this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
         else {
+          this.trkdt_alldisplay = response.trkdt_alldisplay;
           this.record.records = response.list;
           this.record.searchQuery.page_count = response.page_count;
           this.record.searchQuery.page_current = response.page_current;
@@ -218,7 +220,7 @@ export class OrderListService {
       REC.ord_pod = _rec.ord_pod;
     }
   }
-  
+
   ShowTracking(modalname: any) {
     this.total = 0;
     this.ord_trkids = "";
