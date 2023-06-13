@@ -29,7 +29,7 @@ export class OrderListService {
   orderid = "";
   ord_trkids = "";
   ord_trkpos = "";
-  trkdt_alldisplay = "Y";
+  trkdt_alldisplay = "N";
 
   SortList: any[];
   private _record: JobOrderModel;

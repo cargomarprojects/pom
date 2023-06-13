@@ -39,7 +39,8 @@ export class VslPlanEditComponent {
   public ord_trkpos = "";
   total = 0;
   selectedId="";
-
+  trkdt_alldisplay="N";
+  
   modalRef: any;
   urlid: string;
   lock_record: boolean = false;
@@ -192,6 +193,7 @@ export class VslPlanEditComponent {
           this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
         else {
           this.ctrlDisable = response.ctrldisable;
+          this.trkdt_alldisplay = response.trkdt_alldisplay;
           this.LoadData(response.record);
         }
       },
