@@ -496,5 +496,16 @@ export class ParamComponent {
     this.router.navigate(['master/cust-group'], { queryParams: parameter });
   }
 
+  openPoSettingPage(Rec : Param){
+    var urlid = this.pkid;
+
+    let parameter = {
+      urlid: this.gs.getGuid(),
+      grp_id: Rec.param_pkid,
+      grp_name : Rec.param_name
+    };
+
+    this.router.navigate(['master/po-setting'], { queryParams: parameter });
+  }
 
 }

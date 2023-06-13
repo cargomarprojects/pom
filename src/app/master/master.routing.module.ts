@@ -14,7 +14,7 @@ import { AllnumComponent } from './allnum/allnum.component';
 
 import { CustdetComponent } from './customer/custdet.component';
 import { CustGroupComponent } from './customer-group/cust-group.component';
-
+import { PoSettingComponent } from './po-setting/po-setting.component';
 
 const routes: Routes = [
     { path: 'param', component: ParamComponent },
@@ -25,6 +25,7 @@ const routes: Routes = [
     { path: 'allnum', component: AllnumComponent },
     { path: 'custdet', component: CustdetComponent },
     { path: 'cust-group', component: CustGroupComponent },
+    { path: 'po-setting', component: PoSettingComponent },
 ];
 
 @NgModule({

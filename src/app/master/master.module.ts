@@ -26,6 +26,7 @@ import { BankInfoComponent } from './bankinfo/bankinfo.component';
 import { AddbookdelComponent  } from './customer/addbookdel.component';
 import { BenfComponent   } from './customer/benf.component';
 import { CustGroupComponent } from './customer-group/cust-group.component';
+import { PoSettingComponent } from './po-setting/po-setting.component';
 
 @NgModule({
   imports: [
@@ -45,7 +46,8 @@ import { CustGroupComponent } from './customer-group/cust-group.component';
     BankInfoComponent,
     AddbookdelComponent,
     BenfComponent,
-    CustGroupComponent
+    CustGroupComponent,
+    PoSettingComponent
   ],
   providers: [
   ],
