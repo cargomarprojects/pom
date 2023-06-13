@@ -82,7 +82,7 @@ export class VslPlanService {
         user_code: this.gs.globalVariables.user_code,
         page_count: 0,
         page_current: 0,
-        page_rows: 2,
+        page_rows: 20,
         page_rowcount: 0,
         pol_agent_id: '',
         imp_id: '',

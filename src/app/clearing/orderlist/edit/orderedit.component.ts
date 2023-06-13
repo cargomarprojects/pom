@@ -288,8 +288,10 @@ export class OrderEditComponent {
     this.ms.Save(this.Record)
       .subscribe(response => {
         this.loading = false;
-        if (this.mode == 'ADD')
+        if (this.mode == 'ADD') {
           this.Record.ord_uid = response.uidno;
+          this.Record.ord_status_color = 'BLUE';
+        }
         // this.InfoMessage = "Save Complete";
         this.mode = 'EDIT';
         this.Record.rec_mode = this.mode;
