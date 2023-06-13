@@ -291,7 +291,7 @@ export class OrderEditComponent {
         // this.InfoMessage = "Save Complete";
         this.mode = 'EDIT';
         this.Record.rec_mode = this.mode;
-        // this.ms.RefreshList(this.Record);
+        this.ms.RefreshList(this.Record);
         alert('Save Complete');
       },
         error => {

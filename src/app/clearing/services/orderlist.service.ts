@@ -11,7 +11,7 @@ export class OrderListService {
   title = 'ORDER LIST';
   menuid: string = '';
   type: string = '';
-  
+
   public initlialized = false;
   private appid = ''
 
@@ -44,21 +44,21 @@ export class OrderListService {
   public set record(value: any) {
     this._record = value;
   }
- 
+
 
   public init(params: any) {
 
     if (this.appid != this.gs.globalVariables.appid) {
-        this.appid = this.gs.globalVariables.appid;
-        this.initlialized = false;
+      this.appid = this.gs.globalVariables.appid;
+      this.initlialized = false;
     }
     if (this.initlialized)
-        return;
-    
+      return;
+
     this.menuid = params.menuid;
-    
+
     this.type = params.type;
-    
+
     this.initDefaultValues();
 
     this.LoadCombo();
@@ -129,7 +129,7 @@ export class OrderListService {
   public getRowId() {
     return this._record.selectedId;
   }
-  
+
   LoadCombo() {
     this.SortList = [
       { "colheadername": "UID", "colname": "a.ord_uid" },
@@ -192,6 +192,33 @@ export class OrderListService {
   Downloadfile(filename: string, filetype: string, filedisplayname: string) {
     this.gs.DownloadFile(this.gs.globalVariables.report_folder, filename, filetype, filedisplayname);
   }
+
+  RefreshList(_rec: Joborderm) {
+    if (this.record.records == null)
+      return;
+    var REC = this.record.records.find(rec => rec.ord_pkid == _rec.ord_pkid);
+    if (REC == null) {
+      this.record.records.push(_rec);
+    }
+    else {
+      REC.ord_agent_name = _rec.ord_agent_name;
+      REC.ord_agent_name = _rec.ord_agent_name;
+      REC.ord_exp_name = _rec.ord_exp_name;
+      REC.ord_imp_name = _rec.ord_imp_name;
+      REC.ord_buy_agent_name = _rec.ord_buy_agent_name;
+      REC.ord_pod_agent_name = _rec.ord_pod_agent_name;
+      REC.ord_invno = _rec.ord_invno;
+      REC.ord_po = _rec.ord_po;
+      REC.ord_style = _rec.ord_style;
+      REC.ord_color = _rec.ord_color;
+      REC.ord_pkg = _rec.ord_pkg;
+      REC.ord_pcs = _rec.ord_pcs;
+      REC.ord_cbm = _rec.ord_cbm;
+      REC.ord_pol = _rec.ord_pol;
+      REC.ord_pod = _rec.ord_pod;
+    }
+  }
+  
   ShowTracking(modalname: any) {
     this.total = 0;
     this.ord_trkids = "";
