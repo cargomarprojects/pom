@@ -373,7 +373,7 @@ export class GlobalService {
       return false;
   }
 
-  getTrackDate(_type: string) {
+  public getTrackDate(_type: string) {
     var REC = this.trkCaptionList.find(rec => rec.trk_caption_code == _type);
     if (REC != null) {
       if (REC.trk_enabled)
@@ -385,6 +385,47 @@ export class GlobalService {
       return '';
   }
 
+  public getDateddMMMyyyy(_sdate: string) {
+    if (_sdate.indexOf("-") >= 0) {
+      var arrmon = _sdate.split('-');
+      if (+arrmon[0] > 1000) {
+        if (arrmon[2].length == 2)
+          _sdate = arrmon[2] + "-" + this.getMonName(+arrmon[1]) + "-" + arrmon[0];
+        else
+          _sdate = "0" + arrmon[2] + "-" + this.getMonName(+arrmon[1]) + "-" + arrmon[0];
+      }
+    }
+    return _sdate;
+  }
+
+  getMonName(_mn: number) {
+    let mName = "";
+    if (_mn == 1)
+      mName = "JAN";
+    else if (_mn == 2)
+      mName = "FEB";
+    else if (_mn == 3)
+      mName = "MAR";
+    else if (_mn == 4)
+      mName = "APR";
+    else if (_mn == 5)
+      mName = "MAY";
+    else if (_mn == 6)
+      mName = "JUN";
+    else if (_mn == 7)
+      mName = "JUL";
+    else if (_mn == 8)
+      mName = "AUG";
+    else if (_mn == 9)
+      mName = "SEP";
+    else if (_mn == 10)
+      mName = "OCT";
+    else if (_mn == 11)
+      mName = "NOV";
+    else if (_mn == 12)
+      mName = "DEC";
+    return mName;
+  }
 
   getURLParam(param: string) {
     return new URLSearchParams(window.location.search).get(param);

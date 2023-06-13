@@ -166,19 +166,17 @@ export class VslPlanService {
       this.record.records.push(_rec);
     }
     else {
-      REC.vp_plan_date = _rec.vp_plan_date;
+      REC.vp_plan_date = this.gs.getDateddMMMyyyy(_rec.vp_plan_date);
       REC.vp_pol_agent_name = _rec.vp_pol_agent_name;
       REC.vp_pod_agent_name = _rec.vp_pod_agent_name;
       REC.vp_week_no = _rec.vp_week_no;
-      REC.vp_etd = _rec.vp_etd;
+      REC.vp_etd = this.gs.getDateddMMMyyyy(_rec.vp_etd);
       REC.vp_vessel_name = _rec.vp_vessel_name;
       REC.vp_voyage = _rec.vp_voyage;
       REC.vp_status = _rec.vp_status;
       REC.vp_comments = _rec.vp_comments;
     }
   }
-
-
 
   VslList(SearchData: any) {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/VslPlan/List', SearchData, this.gs.headerparam2('authorized'));
