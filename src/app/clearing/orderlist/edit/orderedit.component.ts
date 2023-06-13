@@ -130,8 +130,8 @@ export class OrderEditComponent {
       this.disableSave = false;
     if (this.mode == "EDIT" && this.menu_record.rights_edit)
       this.disableSave = false;
-    
-      return this.disableSave;
+
+    return this.disableSave;
   }
 
   // Load a single Record for VIEW/EDIT
@@ -288,6 +288,8 @@ export class OrderEditComponent {
     this.ms.Save(this.Record)
       .subscribe(response => {
         this.loading = false;
+        if (this.mode == 'ADD')
+          this.Record.ord_uid = response.uidno;
         // this.InfoMessage = "Save Complete";
         this.mode = 'EDIT';
         this.Record.rec_mode = this.mode;
@@ -322,7 +324,7 @@ export class OrderEditComponent {
     if (this.gs.isBlank(this.Record.ord_pod_agent_id)) {
       bret = false;
       sError += " Agent(Destination) Cannot Be Blank";
-    }    
+    }
 
     if (this.gs.isBlank(this.Record.ord_po)) {
       bret = false;
