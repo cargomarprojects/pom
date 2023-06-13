@@ -78,7 +78,8 @@ export class OrderListService {
   }
 
   initDefaultValues() {
-
+    this.total = 0;
+    this.trkdt_alldisplay = "N";
     this.record = <JobOrderModel>{
       urlid: '',
       selectedId: '',
