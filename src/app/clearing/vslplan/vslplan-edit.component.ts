@@ -38,6 +38,7 @@ export class VslPlanEditComponent {
   public ord_trkids = "";
   public ord_trkpos = "";
   total = 0;
+  selectedId="";
 
   modalRef: any;
   urlid: string;
@@ -84,6 +85,12 @@ export class VslPlanEditComponent {
     // this.sub.unsubscribe();
   }
 
+  selectRowId(id: string) {
+    this.selectedId = id;
+  }
+  getRowId() {
+    return this.selectedId;
+  }
 
   LovSelected(_Record: SearchTable) {
     if (_Record.controlname == "VESSEL") {
