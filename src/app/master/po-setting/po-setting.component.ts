@@ -46,7 +46,7 @@ export class PoSettingComponent {
 
     Record: PO_Settings_VM;
     RecordList: PO_Settings[] = [];
-
+    DefaultList: PO_Settings[] = [];
 
     constructor(
         private mainService: POSettingService,
@@ -104,6 +104,7 @@ export class PoSettingComponent {
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
                 this.loading = false;
+                this.DefaultList = response.defaultlist;
                 this.RecordList = response.list;
             },
                 error => {
@@ -157,7 +158,12 @@ export class PoSettingComponent {
         if (feild == 'ps_code')
             _rec.ps_code = _rec.ps_code.toUpperCase();
     }
-
+    LoadDefault() {
+        if (!confirm('Load Default')) {
+            return;
+          }
+        this.RecordList = this.DefaultList;
+    }
     Close() {
         this.location.back();
     }
