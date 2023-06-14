@@ -37,10 +37,11 @@ export class VslPlanEditComponent {
   searchstring = '';
   public ord_trkids = "";
   public ord_trkpos = "";
+  public ord_imp_grp_id = "";
   total = 0;
-  selectedId="";
-  trkdt_alldisplay="N";
-  
+  selectedId = "";
+  trkdt_alldisplay = "N";
+
   modalRef: any;
   urlid: string;
   lock_record: boolean = false;
@@ -168,8 +169,8 @@ export class VslPlanEditComponent {
       this.disableSave = false;
     if (this.mode == "EDIT" && this.menu_record.rights_edit)
       this.disableSave = false;
-     
-      return this.disableSave;
+
+    return this.disableSave;
   }
 
 
@@ -378,9 +379,15 @@ export class VslPlanEditComponent {
     this.total = 0;
     this.ord_trkids = "";
     this.ord_trkpos = "";
+    this.ord_imp_grp_id = "";
+    let bMultplrGrpId = false;
     for (let rec of this.Record.OrderList) {
 
       if (rec.ord_selected) {
+
+        if (this.total == 0)
+          this.ord_imp_grp_id = rec.ord_imp_grp_id;
+
         this.total++;
         if (this.ord_trkids != "")
           this.ord_trkids += ",";
@@ -389,14 +396,22 @@ export class VslPlanEditComponent {
         if (this.ord_trkpos != "")
           this.ord_trkpos += ",";
         this.ord_trkpos += rec.ord_po;
+
+        if (this.ord_imp_grp_id != rec.ord_imp_grp_id)
+          bMultplrGrpId = true;
       }
     }
-
 
     if (this.gs.isBlank(this.ord_trkids)) {
       alert('No Rows Selected');
       return;
     }
+
+    if (bMultplrGrpId) {
+      alert('Invalid Consignee Group Selected');
+      return;
+    }
+
     this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
   }
 

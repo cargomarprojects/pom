@@ -114,6 +114,26 @@ export class OrderEditComponent {
     this.Record.ord_instock1 = '';
     this.Record.ord_instock2 = '';
     this.Record.ord_cargo_readiness_date = ''
+    this.Record.ord_booking_date_captn  = '';
+    this.Record.ord_booking_date  = '';
+    this.Record.ord_rnd_insp_date_captn = ''; 
+    this.Record.ord_rnd_insp_date  = '';
+    this.Record.ord_po_rel_date_captn  = '';
+    this.Record.ord_po_rel_date  = '';
+    this.Record.ord_cargo_ready_date_captn = ''; 
+    this.Record.ord_cargo_ready_date  = '';
+    this.Record.ord_fcr_date_captn  = '';
+    this.Record.ord_fcr_date  = '';
+    this.Record.ord_insp_date_captn = ''; 
+    this.Record.ord_insp_date  = '';
+    this.Record.ord_stuf_date_captn  = '';
+    this.Record.ord_stuf_date  = '';
+    this.Record.ord_whd_date_captn  = '';
+    this.Record.ord_whd_date  = '';
+    this.Record.ord_dlv_pol_date_captn = ''; 
+    this.Record.ord_dlv_pol_date  = '';
+    this.Record.ord_dlv_pod_date_captn  = '';
+    this.Record.ord_dlv_pod_date  = '';
     this.Record.rec_mode = 'ADD';
     this.Record.rec_category = 'SEA EXPORT';
 
@@ -325,7 +345,7 @@ export class OrderEditComponent {
     }
     if (this.gs.isBlank(this.Record.ord_pod_agent_id)) {
       bret = false;
-      sError += " Agent(Destination) Cannot Be Blank";
+      sError += "\n\r | Agent(Destination) Cannot Be Blank";
     }
 
     if (this.gs.isBlank(this.Record.ord_po)) {
