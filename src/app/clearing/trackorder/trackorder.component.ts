@@ -180,6 +180,7 @@ export class TrackOrderComponent {
     this.ErrorMessage = '';
     this.InfoMessage = '';
     this.Record.ord_trk_date_type = _type;
+    this.Record.ord_imp_grp_id = this.ord_imp_grp_id;
     this.Record._globalvariables = this.gs.globalVariables;
     this.mainService.Update(this.Record)
       .subscribe(response => {
