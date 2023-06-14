@@ -103,6 +103,7 @@ export interface Joborderm {
   ord_dlv_pod_date_enabled: boolean;
 
   ord_trk_date_type: string;
+  ord_imp_grp_id: string;
 
   job_docno: string;
   rec_mode: string;
@@ -120,7 +121,7 @@ export class JobOrder_VM {
   ord_source: string;
 }
 
- export interface SearchQuery {
+export interface SearchQuery {
   type: string,
   rowtype: string,
   searchstring: string,

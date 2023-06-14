@@ -27,6 +27,7 @@ export class TrackOrderComponent {
 
   @Input() public ord_pkids: string = '';
   @Input() public ord_pos: string = '';
+  @Input() public ord_imp_grp_id: string = '';
 
   private menuid: string = '';
   private type: string = '';
@@ -134,6 +135,7 @@ export class TrackOrderComponent {
     this.loading = true;
     let SearchData = {
       pkid: Id,
+      ord_imp_grp_id: this.ord_imp_grp_id
     };
 
     this.mode = "EDIT";

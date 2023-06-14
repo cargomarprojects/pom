@@ -307,7 +307,7 @@
 
 <ng-template #trackorder let-c="close" let-d="dismiss">
   <div class="modal-body">
-    <app-trackorder [ord_pkids]="ms.ord_trkids" [ord_pos]="ms.ord_trkpos"
+    <app-trackorder [ord_pkids]="ms.ord_trkids" [ord_pos]="ms.ord_trkpos" [ord_imp_grp_id]="ms.ord_imp_grp_id"
       (closeModalWindow)="CloseModal1($event)"></app-trackorder>
   </div>
 </ng-template>

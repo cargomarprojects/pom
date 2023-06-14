@@ -29,6 +29,7 @@ export class OrderListService {
   orderid = "";
   ord_trkids = "";
   ord_trkpos = "";
+  ord_imp_grp_id = "";
   trkdt_alldisplay = "N";
 
   SortList: any[];
@@ -226,9 +227,15 @@ export class OrderListService {
     this.total = 0;
     this.ord_trkids = "";
     this.ord_trkpos = "";
+    this.ord_imp_grp_id = "";
+    let bMultplrGrpId = false;
     for (let rec of this.record.records) {
 
       if (rec.ord_selected) {
+
+        if (this.total == 0)
+          this.ord_imp_grp_id = rec.ord_imp_grp_id;
+
         this.total++;
         if (this.ord_trkids != "")
           this.ord_trkids += ",";
@@ -237,12 +244,20 @@ export class OrderListService {
         if (this.ord_trkpos != "")
           this.ord_trkpos += ",";
         this.ord_trkpos += rec.ord_po;
+
+        if (this.ord_imp_grp_id != rec.ord_imp_grp_id)
+          bMultplrGrpId = true;
       }
     }
     if (this.gs.isBlank(this.ord_trkids)) {
       alert('No Rows Selected');
       return;
     }
+    if (bMultplrGrpId) {
+      alert('Invalid Consignee Group Selected');
+      return;
+    }
+
     this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
   }
 
