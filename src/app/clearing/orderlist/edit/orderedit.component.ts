@@ -136,7 +136,7 @@ export class OrderEditComponent {
     this.Record.ord_dlv_pod_date  = '';
     this.Record.rec_mode = 'ADD';
     this.Record.rec_category = 'SEA EXPORT';
-
+    this.Record.ord_imp_grp_id  = '';
   }
 
   resetControls() {
@@ -311,6 +311,7 @@ export class OrderEditComponent {
         if (this.mode == 'ADD') {
           this.Record.ord_uid = response.uidno;
           this.Record.ord_status_color = 'BLUE';
+          this.Record.ord_imp_grp_id  = response.grpid;
         }
         // this.InfoMessage = "Save Complete";
         this.mode = 'EDIT';
