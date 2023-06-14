@@ -138,7 +138,7 @@
           <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.param_id4" required
             maxlength="60" />
         </div>
-      </div> 
+      </div>
 
       <div *ngIf="data_list.length > 0" class="form-group row">
         <label class="col-2 col-form-label  col-form-label-sm">{{lookup_id}}</label>
@@ -182,8 +182,8 @@
           <span (click)="openCustGroupPage(Record)" class="hlink">Customer Group</span>
         </div>
         <label class="col-12 col-form-label col-form-label-sm"></label>
-        <label class="col-2 col-form-label col-form-label-sm"></label>
-        <div class="col-10">
+        <label *ngIf="gs.globalVariables.user_code=='ADMIN'" class="col-2 col-form-label col-form-label-sm"></label>
+        <div *ngIf="gs.globalVariables.user_code=='ADMIN'" class="col-10">
           <span (click)="openPoSettingPage(Record)" class="hlink">PO Settings</span>
         </div>
         <label class="col-12 col-form-label col-form-label-sm"></label>

@@ -67,7 +67,7 @@ export class ParamComponent {
     private mainService: ParamService,
     private route: ActivatedRoute,
     private router : Router,
-    private gs: GlobalService
+    public gs: GlobalService
   ) {
     this.page_count = 0;
     this.page_rows = 10;
@@ -270,7 +270,6 @@ export class ParamComponent {
     this.Record.param_type = this.type;
     this.Record.rec_locked = false;
     this.Record.rec_mode = this.mode;
-
     if (this.type == 'PARAM') {
       this.Record.param_lookup_id = 'AGENT';
     }  
