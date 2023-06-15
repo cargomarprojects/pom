@@ -193,7 +193,7 @@ export class VslPlanService {
       return;
     }
 
-    msg = _rec.vp_hide == "Y" ? "Show Record" : "Hide Record";
+    msg = _rec.vp_hide == "Y" ? "Show CF# "+_rec.vp_plan_no.toString() : "Hide CF# "+_rec.vp_plan_no.toString();
     if (!confirm(msg)) {
       return;
     }
