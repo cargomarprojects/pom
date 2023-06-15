@@ -57,7 +57,8 @@ export interface SearchQuery {
     list_pod_agent_name: string,
     list_vessel_id: string,
     list_vessel_name: string,
-    list_status: string
+    list_status: string,
+    list_hide:boolean
 }
 
 export interface PlanModel {

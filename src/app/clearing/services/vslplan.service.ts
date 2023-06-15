@@ -27,6 +27,7 @@ export class VslPlanService {
   searchstring = '';
   ErrorMessage = "";
   InfoMessage = "";
+  show_hide_caption = "HIDE";
 
   private _record: PlanModel;
 
@@ -97,7 +98,8 @@ export class VslPlanService {
         list_pod_agent_name: '',
         list_vessel_id: '',
         list_vessel_name: '',
-        list_status: 'ALL'
+        list_status: 'ALL',
+        list_hide: false
       }
     };
   }
@@ -120,6 +122,8 @@ export class VslPlanService {
 
   // Query List Data
   List(_type: string) {
+
+    this.show_hide_caption = this._record.searchQuery.list_hide ? "SHOW" : "HIDE";
     this.loading = true;
     let SearchData = {
       type: _type,
@@ -134,6 +138,7 @@ export class VslPlanService {
       pod_agent_id: this._record.searchQuery.list_pod_agent_id,
       vessel_id: this._record.searchQuery.list_vessel_id,
       status: this._record.searchQuery.list_status,
+      hide: this._record.searchQuery.list_hide,
       page_count: this._record.searchQuery.page_count,
       page_current: this._record.searchQuery.page_current,
       page_rows: this._record.searchQuery.page_rows,
@@ -234,7 +239,7 @@ export class VslPlanService {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/VslPlan/OrderList', SearchData, this.gs.headerparam2('authorized'));
   }
 
-HideRecord(SearchData: any) {
+  HideRecord(SearchData: any) {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/VslPlan/HideRecord', SearchData, this.gs.headerparam2('authorized'));
   }
 }
