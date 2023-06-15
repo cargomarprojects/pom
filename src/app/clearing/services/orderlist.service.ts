@@ -14,7 +14,7 @@ export class OrderListService {
 
   public initlialized = false;
   private appid = ''
-
+  public canDelete: boolean;
   menu_record: any;
   total = 0;
   ErrorMessage = "";
@@ -73,9 +73,13 @@ export class OrderListService {
   }
 
   ReadUserRights() {
+    this.canDelete = false;
     this.menu_record = this.gs.getMenu(this.menuid);
-    if (this.menu_record)
+    if (this.menu_record) {
       this.title = this.menu_record.menu_name;
+      if (this.menu_record.rights_delete)
+        this.canDelete = true;
+    }
   }
 
   initDefaultValues() {
@@ -304,6 +308,38 @@ export class OrderListService {
     this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
   }
 
+  DeleteRow(_rec:Joborderm) {
+
+    if (!confirm("DELETE " + _rec.ord_uid)) {
+        return;
+    }
+    this.loading = true;
+    let SearchData = {
+      pkid: _rec.ord_pkid,
+      company_code: this.gs.globalVariables.comp_code,
+      branch_code: this.gs.globalVariables.branch_code,
+      user_code: this.gs.globalVariables.user_code
+    };
+    this.ErrorMessage = '';
+    this.InfoMessage = '';
+
+    this.DeleteRecord(SearchData)
+        .subscribe(response => {
+          this.loading = false;
+            if (response.retvalue == false) {
+              this.ErrorMessage = response.error;
+                alert(this.ErrorMessage);
+            }
+            else {
+                this.record.records.splice(this.record.records.findIndex(rec => rec.ord_pkid == _rec.ord_pkid), 1);
+            }
+             
+        }, error => {
+          this.loading = false;
+          this.ErrorMessage = this.gs.getError(error);
+            alert(this.ErrorMessage);
+        });
+}
 
   OrdList(SearchData: any) {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/OrderList/List', SearchData, this.gs.headerparam2('authorized'));
@@ -328,6 +364,7 @@ export class OrderListService {
   GenerateXmlEdiMexico(SearchData: any) {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Xml/XmlEdi/GenerateXmlEdiMexico', SearchData, this.gs.headerparam2('authorized'));
   }
+  
   DeleteRecord(SearchData: any) {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/OrderList/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
   }
