@@ -178,6 +178,46 @@ export class VslPlanService {
     }
   }
 
+  ChangeShowHide(_rec: Planm) {
+
+    let msg = "";
+    this.ErrorMessage = '';
+    if (_rec.vp_pkid.trim().length <= 0) {
+      this.ErrorMessage = "Invalid Record";
+      alert(this.ErrorMessage);
+      return;
+    }
+
+    msg = _rec.vp_hide == "Y" ? "Show Record" : "Hide Record";
+    if (!confirm(msg)) {
+      return;
+    }
+
+    this.loading = true;
+    let SearchData = {
+      pkid: _rec.vp_pkid,
+      hide: _rec.vp_hide,
+      company_code: this.gs.globalVariables.comp_code,
+      branch_code: this.gs.globalVariables.branch_code,
+      user_code: this.gs.globalVariables.user_code
+    };
+    this.ErrorMessage = '';
+    this.InfoMessage = '';
+    this.HideRecord(SearchData)
+      .subscribe(response => {
+        this.loading = false;
+        this.record.records.splice(this.record.records.findIndex(rec => rec.vp_pkid == _rec.vp_pkid), 1);
+      },
+        error => {
+          this.loading = false;
+          this.ErrorMessage = this.gs.getError(error);
+          alert(this.ErrorMessage);
+        });
+
+  }
+
+
+
   VslList(SearchData: any) {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/VslPlan/List', SearchData, this.gs.headerparam2('authorized'));
   }
@@ -194,5 +234,8 @@ export class VslPlanService {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/VslPlan/OrderList', SearchData, this.gs.headerparam2('authorized'));
   }
 
+HideRecord(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/VslPlan/HideRecord', SearchData, this.gs.headerparam2('authorized'));
+  }
 }
 

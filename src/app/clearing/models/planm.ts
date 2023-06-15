@@ -24,6 +24,7 @@ export class Planm {
     vp_imp_code: string;
     vp_imp_name: string;
     vp_type: string;
+    vp_hide:string;
 
     rec_mode: string;
     rec_category: string;
