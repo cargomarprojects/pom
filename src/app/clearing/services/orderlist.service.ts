@@ -120,7 +120,8 @@ export class OrderListService {
         ftp_transfertype: 'ORDERLIST',
         ftp_is_multipleorder: 'N',
         ftp_is_checklist: 'N',
-        ftp_ordpoids: ''
+        ftp_ordpoids: '',
+        list_hide: false
       }
     };
   }
@@ -170,7 +171,8 @@ export class OrderListService {
       file_pkid: this.gs.getGuid(),
       ord_status: this._record.searchQuery.ord_status,
       sort_colname: this._record.searchQuery.sort_colvalue,
-      ftp_transfertype: this._record.searchQuery.ftp_transfertype
+      ftp_transfertype: this._record.searchQuery.ftp_transfertype,
+      hide: this._record.searchQuery.list_hide
     };
 
     this.ErrorMessage = '';

@@ -159,7 +159,8 @@ export interface SearchQuery {
   ftp_transfertype: string,
   ftp_is_multipleorder: string,
   ftp_is_checklist: string,
-  ftp_ordpoids: string
+  ftp_ordpoids: string,
+  list_hide: boolean
 }
 
 export interface JobOrderModel {
