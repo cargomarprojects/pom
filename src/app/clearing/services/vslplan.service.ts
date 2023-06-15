@@ -19,6 +19,7 @@ export class VslPlanService {
 
   disableSave = true;
   loading = false;
+  public bAdmin = false;
 
   where_agent = "CUST_IS_AGENT = 'Y'";
   where_shipper = "CUST_IS_SHIPPER = 'Y'";
@@ -104,9 +105,13 @@ export class VslPlanService {
     };
   }
   ReadUserRights() {
+    this.bAdmin = false;
     this.menu_record = this.gs.getMenu(this.menuid);
-    if (this.menu_record)
+    if (this.menu_record) {
       this.title = this.menu_record.menu_name;
+      if (this.menu_record.rights_admin)
+        this.bAdmin = true;
+    }
   }
 
   public selectRowId(id: string) {
@@ -193,7 +198,7 @@ export class VslPlanService {
       return;
     }
 
-    msg = _rec.vp_hide == "Y" ? "Show CF# "+_rec.vp_plan_no.toString() : "Hide CF# "+_rec.vp_plan_no.toString();
+    msg = _rec.vp_hide == "Y" ? "Show CF# " + _rec.vp_plan_no.toString() : "Hide CF# " + _rec.vp_plan_no.toString();
     if (!confirm(msg)) {
       return;
     }
