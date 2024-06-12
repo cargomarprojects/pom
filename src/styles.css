@@ -326,6 +326,22 @@ hr {
 }
 
 .page-header {
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  gap: 2px;
+  color: chocolate;
+  margin-top: 2px;
+
+  padding: 3px;
+
+  border-color: lightgray;
+  border-style: solid;
+  border-width: 1px 1px 0px 1px;
+
+}
+
+.page-header {
   margin-top: 2px;
   border-left: 1px;
   border-top: 1px;
