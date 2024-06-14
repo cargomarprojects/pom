@@ -1,8 +1,45 @@
 import { GlobalVariables } from '../../core/models/globalvariables';
 import { PageQuery } from 'src/app/shared/models/pageQuery';
 
-export interface Joborderm {
+export class Joborderh {
+  ordh_pkid: string;
+  ordh_exp_id: string;
+  ordh_exp_name: string;
+  ordh_imp_id: string;
+  ordh_imp_name: string;
+  ordh_exp_code: string;
+  ordh_imp_code: string;
+  ordh_agent_id: string;
+  ordh_agent_code: string;
+  ordh_agent_name: string;
+  ordh_pod_agent_id: string;
+  ordh_pod_agent_code: string;
+  ordh_pod_agent_name: string;
+  ordh_buy_agent_id: string;
+  ordh_buy_agent_code: string;
+  ordh_buy_agent_name: string;
+  ordh_boarding1: string;
+  ordh_boarding2: string;
+  ordh_instock1: string;
+  ordh_instock2: string;
+  ordh_pol: string;
+  ordh_pod: string;
+  ordh_pol_id: string;
+  ordh_pod_id: string;
+  ordh_pol_code: string;
+  ordh_pod_code: string;
+  ordh_cargo_readiness_date: string;
+  ordh_detList: Joborderm[] = [];
+  ordh_status:string;
+  
+  rec_mode: string;
+  rec_category: string;
+  _globalvariables: GlobalVariables;
+}
+
+export class Joborderm {
   ord_pkid: string;
+  ord_header_id: string;
   ord_parent_id: string;
   ord_exp_id: string;
   ord_exp_name: string;
@@ -110,7 +147,6 @@ export interface Joborderm {
   rec_category: string;
   _globalvariables: GlobalVariables;
 }
-
 export class JobOrder_VM {
   globalvariables: GlobalVariables;
   JobOrder: Joborderm[] = [];

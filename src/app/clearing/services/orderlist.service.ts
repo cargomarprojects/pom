@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Joborderm, SearchQuery, JobOrderModel } from '../models/joborder';
+import { Joborderh,Joborderm, SearchQuery, JobOrderModel } from '../models/joborder';
 import { GlobalService } from '../../core/services/global.service';
 import { JobOrder_VM } from '../models/joborder';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -349,7 +349,7 @@ export class OrderListService {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/OrderList/GetRecord', SearchData, this.gs.headerparam2('authorized'));
   }
 
-  Save(Record: Joborderm) {
+  Save(Record: Joborderh) {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/OrderList/Save', Record, this.gs.headerparam2('authorized'));
   }
 
