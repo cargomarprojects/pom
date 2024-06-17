@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Joborderh,Joborderm, SearchQuery, JobOrderModel } from '../models/joborder';
+import { Joborderh, Joborderm, SearchQuery, JobOrderModel } from '../models/joborder';
 import { GlobalService } from '../../core/services/global.service';
 import { JobOrder_VM } from '../models/joborder';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -211,21 +211,22 @@ export class OrderListService {
       this.record.records.push(_rec);
     }
     else {
-      REC.ord_agent_name = _rec.ord_agent_name;
-      REC.ord_agent_name = _rec.ord_agent_name;
-      REC.ord_exp_name = _rec.ord_exp_name;
-      REC.ord_imp_name = _rec.ord_imp_name;
-      REC.ord_buy_agent_name = _rec.ord_buy_agent_name;
-      REC.ord_pod_agent_name = _rec.ord_pod_agent_name;
-      REC.ord_invno = _rec.ord_invno;
-      REC.ord_po = _rec.ord_po;
-      REC.ord_style = _rec.ord_style;
-      REC.ord_color = _rec.ord_color;
-      REC.ord_pkg = _rec.ord_pkg;
-      REC.ord_pcs = _rec.ord_pcs;
-      REC.ord_cbm = _rec.ord_cbm;
-      REC.ord_pol = _rec.ord_pol;
-      REC.ord_pod = _rec.ord_pod;
+      // REC.ord_agent_name = _rec.ord_agent_name;
+      // REC.ord_agent_name = _rec.ord_agent_name;
+      // REC.ord_exp_name = _rec.ord_exp_name;
+      // REC.ord_imp_name = _rec.ord_imp_name;
+      // REC.ord_buy_agent_name = _rec.ord_buy_agent_name;
+      // REC.ord_pod_agent_name = _rec.ord_pod_agent_name;
+      // REC.ord_invno = _rec.ord_invno;
+      // REC.ord_po = _rec.ord_po;
+      // REC.ord_style = _rec.ord_style;
+      // REC.ord_color = _rec.ord_color;
+      // REC.ord_pkg = _rec.ord_pkg;
+      // REC.ord_pcs = _rec.ord_pcs;
+      // REC.ord_cbm = _rec.ord_cbm;
+      // REC.ord_pol = _rec.ord_pol;
+      // REC.ord_pod = _rec.ord_pod;
+      REC = _rec;
     }
   }
 
@@ -308,10 +309,10 @@ export class OrderListService {
     this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
   }
 
-  DeleteRow(_rec:Joborderm) {
+  DeleteRow(_rec: Joborderm) {
 
     if (!confirm("DELETE " + _rec.ord_uid)) {
-        return;
+      return;
     }
     this.loading = true;
     let SearchData = {
@@ -324,22 +325,22 @@ export class OrderListService {
     this.InfoMessage = '';
 
     this.DeleteRecord(SearchData)
-        .subscribe(response => {
-          this.loading = false;
-            if (response.retvalue == false) {
-              this.ErrorMessage = response.error;
-                alert(this.ErrorMessage);
-            }
-            else {
-                this.record.records.splice(this.record.records.findIndex(rec => rec.ord_pkid == _rec.ord_pkid), 1);
-            }
-             
-        }, error => {
-          this.loading = false;
-          this.ErrorMessage = this.gs.getError(error);
-            alert(this.ErrorMessage);
-        });
-}
+      .subscribe(response => {
+        this.loading = false;
+        if (response.retvalue == false) {
+          this.ErrorMessage = response.error;
+          alert(this.ErrorMessage);
+        }
+        else {
+          this.record.records.splice(this.record.records.findIndex(rec => rec.ord_pkid == _rec.ord_pkid), 1);
+        }
+
+      }, error => {
+        this.loading = false;
+        this.ErrorMessage = this.gs.getError(error);
+        alert(this.ErrorMessage);
+      });
+  }
 
   OrdList(SearchData: any) {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/OrderList/List', SearchData, this.gs.headerparam2('authorized'));
@@ -364,7 +365,7 @@ export class OrderListService {
   GenerateXmlEdiMexico(SearchData: any) {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Xml/XmlEdi/GenerateXmlEdiMexico', SearchData, this.gs.headerparam2('authorized'));
   }
-  
+
   DeleteRecord(SearchData: any) {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/OrderList/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
   }

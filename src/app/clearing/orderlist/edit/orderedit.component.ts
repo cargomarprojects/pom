@@ -85,6 +85,7 @@ export class OrderEditComponent {
 
   newRecord() {
     this.pkid = this.gs.getGuid();
+    this.Record = new Joborderh();
     this.Record.ordh_pkid = this.pkid;
     this.Record.ordh_exp_id = '';
     this.Record.ordh_exp_name = '';
@@ -162,6 +163,7 @@ export class OrderEditComponent {
   loadData(_Record: Joborderh) {
     this.Record = _Record;
     this.Record.rec_mode = this.mode;
+    this.NewDetRecord();
   }
 
 
@@ -187,31 +189,31 @@ export class OrderEditComponent {
           this.Recorddet.ord_desc = this.Recorddet.ord_desc.toUpperCase();
           break;
         }
-      case 'ord_cbm':
-        {
-          this.Recorddet.ord_cbm = this.gs.roundWeight(this.Recorddet.ord_cbm, "CBM");
-          break;
-        }
-      case 'ord_pcs':
-        {
-          this.Recorddet.ord_pcs = this.gs.roundWeight(this.Recorddet.ord_pcs, "PCS");
-          break;
-        }
-      case 'ord_pkg':
-        {
-          this.Recorddet.ord_pkg = this.gs.roundWeight(this.Recorddet.ord_pkg, "PKG");
-          break;
-        }
-      case 'ord_grwt':
-        {
-          this.Recorddet.ord_grwt = this.gs.roundWeight(this.Recorddet.ord_grwt, "GRWT");
-          break;
-        }
-      case 'ord_ntwt':
-        {
-          this.Recorddet.ord_ntwt = this.gs.roundWeight(this.Recorddet.ord_ntwt, "NTWT");
-          break;
-        }
+      // case 'ord_cbm':
+      //   {
+      //     this.Recorddet.ord_cbm = this.gs.roundWeight(this.Recorddet.ord_cbm, "CBM");
+      //     break;
+      //   }
+      // case 'ord_pcs':
+      //   {
+      //     this.Recorddet.ord_pcs = this.gs.roundWeight(this.Recorddet.ord_pcs, "PCS");
+      //     break;
+      //   }
+      // case 'ord_pkg':
+      //   {
+      //     this.Recorddet.ord_pkg = this.gs.roundWeight(this.Recorddet.ord_pkg, "PKG");
+      //     break;
+      //   }
+      // case 'ord_grwt':
+      //   {
+      //     this.Recorddet.ord_grwt = this.gs.roundWeight(this.Recorddet.ord_grwt, "GRWT");
+      //     break;
+      //   }
+      // case 'ord_ntwt':
+      //   {
+      //     this.Recorddet.ord_ntwt = this.gs.roundWeight(this.Recorddet.ord_ntwt, "NTWT");
+      //     break;
+      //   }
       case 'ord_color':
         {
           //this.FindContractNo();
@@ -249,11 +251,13 @@ export class OrderEditComponent {
     }
     if (_Record.controlname == "POL") {
       this.Record.ordh_pol_id = _Record.id;
-      this.Record.ordh_pol = _Record.code;
+      this.Record.ordh_pol_code = _Record.code;
+      this.Record.ordh_pol = _Record.name;
     }
     else if (_Record.controlname == "POD") {
       this.Record.ordh_pod_id = _Record.id;
-      this.Record.ordh_pod = _Record.code;
+      this.Record.ordh_pod_code = _Record.code;
+      this.Record.ordh_pod = _Record.name;
     }
   }
 
@@ -283,31 +287,27 @@ export class OrderEditComponent {
 
     if (!this.allvalid())
       return;
-    this.SaveParent();
+
     this.loading = true;
     this.ErrorMessage = '';
     this.InfoMessage = '';
     this.Record._globalvariables = this.gs.globalVariables;
+    // this.SaveParent();
+
     this.ms.Save(this.Record)
       .subscribe(response => {
         this.loading = false;
-        let bOk = false;
         if (this.mode == 'ADD')
-          bOk = true;
-
-        // if (this.mode == 'ADD') {
-        //   this.Record.ord_uid = response.uidno;
-        //   this.Record.ord_status_color = 'BLUE';
-        //   this.Record.ord_imp_grp_id = response.grpid;
-        // }
-        // this.InfoMessage = "Save Complete";
-        this.mode = 'EDIT';
+          // if (this.mode == 'ADD') {
+          //   this.Record.ord_uid = response.uidno;
+          //   this.Record.ord_status_color = 'BLUE';
+          //   this.Record.ord_imp_grp_id = response.grpid;
+          // }
+          // this.InfoMessage = "Save Complete";
+          this.mode = 'EDIT';
         this.Record.rec_mode = this.mode;
-        for (let rec of this.Record.ordh_detList) {
-          if (bOk) {
-            rec.ord_status_color = 'BLUE';
-            rec.ord_imp_grp_id = response.grpid;
-          }
+        for (let rec of response.list) {
+          rec.ord_imp_grp_id = response.grpid;
           this.ms.RefreshList(rec);
         }
         alert('Save Complete');
@@ -356,27 +356,36 @@ export class OrderEditComponent {
   }
 
   SaveParent() {
-    for (let rec of this.Record.ordh_detList) {
-      rec.ord_agent_id = this.Record.ordh_agent_id;
-      rec.ord_agent_code = this.Record.ordh_agent_code;
-      rec.ord_agent_name = this.Record.ordh_agent_name;
-      rec.ord_pod_agent_id = this.Record.ordh_pod_agent_id;
-      rec.ord_pod_agent_code = this.Record.ordh_pod_agent_code;
-      rec.ord_pod_agent_name = this.Record.ordh_pod_agent_name;
-      rec.ord_buy_agent_id = this.Record.ordh_buy_agent_id;
-      rec.ord_buy_agent_code = this.Record.ordh_buy_agent_code;
-      rec.ord_buy_agent_name = this.Record.ordh_buy_agent_name;
-      rec.ord_exp_id = this.Record.ordh_exp_id;
-      rec.ord_exp_code = this.Record.ordh_exp_code;
-      rec.ord_exp_name = this.Record.ordh_exp_name;
-      rec.ord_imp_id = this.Record.ordh_imp_id;
-      rec.ord_imp_code = this.Record.ordh_imp_code;
-      rec.ord_imp_name = this.Record.ordh_imp_name;
-      rec.ord_boarding1 = '';
-      rec.ord_boarding2 = '';
-      rec.ord_instock1 = '';
-      rec.ord_instock2 = '';
-      rec.ord_cargo_readiness_date = '';
+    for (var i = 0; i < this.Record.ordh_detList.length; i++) {
+      this.Record.ordh_detList[i].ord_header_id = this.Record.ordh_pkid;
+      this.Record.ordh_detList[i].rec_category = this.Record.rec_category;
+      this.Record.ordh_detList[i]._globalvariables = this.Record._globalvariables;
+      this.Record.ordh_detList[i].ord_agent_id = this.Record.ordh_agent_id;
+      this.Record.ordh_detList[i].ord_agent_code = this.Record.ordh_agent_code;
+      this.Record.ordh_detList[i].ord_agent_name = this.Record.ordh_agent_name;
+      this.Record.ordh_detList[i].ord_pod_agent_id = this.Record.ordh_pod_agent_id;
+      this.Record.ordh_detList[i].ord_pod_agent_code = this.Record.ordh_pod_agent_code;
+      this.Record.ordh_detList[i].ord_pod_agent_name = this.Record.ordh_pod_agent_name;
+      this.Record.ordh_detList[i].ord_buy_agent_id = this.Record.ordh_buy_agent_id;
+      this.Record.ordh_detList[i].ord_buy_agent_code = this.Record.ordh_buy_agent_code;
+      this.Record.ordh_detList[i].ord_buy_agent_name = this.Record.ordh_buy_agent_name;
+      this.Record.ordh_detList[i].ord_exp_id = this.Record.ordh_exp_id;
+      this.Record.ordh_detList[i].ord_exp_code = this.Record.ordh_exp_code;
+      this.Record.ordh_detList[i].ord_exp_name = this.Record.ordh_exp_name;
+      this.Record.ordh_detList[i].ord_imp_id = this.Record.ordh_imp_id;
+      this.Record.ordh_detList[i].ord_imp_code = this.Record.ordh_imp_code;
+      this.Record.ordh_detList[i].ord_imp_name = this.Record.ordh_imp_name;
+      this.Record.ordh_detList[i].ord_boarding1 = this.Record.ordh_boarding1
+      this.Record.ordh_detList[i].ord_boarding2 = this.Record.ordh_boarding2
+      this.Record.ordh_detList[i].ord_instock1 = this.Record.ordh_instock1
+      this.Record.ordh_detList[i].ord_instock2 = this.Record.ordh_instock2;
+      this.Record.ordh_detList[i].ord_cargo_readiness_date = this.Record.ordh_cargo_readiness_date;
+      this.Record.ordh_detList[i].ord_pol = this.Record.ordh_pol;
+      this.Record.ordh_detList[i].ord_pol_id = this.Record.ordh_pol_id;
+      this.Record.ordh_detList[i].ord_pol_code = this.Record.ordh_pol_code;
+      this.Record.ordh_detList[i].ord_pod = this.Record.ordh_pod;
+      this.Record.ordh_detList[i].ord_pod_id = this.Record.ordh_pod_id;
+      this.Record.ordh_detList[i].ord_pod_code = this.Record.ordh_pod_code;
     }
   }
 
@@ -411,19 +420,20 @@ export class OrderEditComponent {
     } else {
       var REC2 = this.Record.ordh_detList.find(rec => rec.ord_pkid == this.Recorddet.ord_pkid);
       if (REC2 != null) {
-        REC2.ord_invno = this.Recorddet.ord_invno;
-        REC2.ord_uneco = this.Recorddet.ord_uneco;
-        REC2.ord_po = this.Recorddet.ord_po;
-        REC2.ord_style = this.Recorddet.ord_style;
-        REC2.ord_color = this.Recorddet.ord_color;
-        REC2.ord_contractno = this.Recorddet.ord_contractno;
-        REC2.ord_pkg = this.Recorddet.ord_pkg;
-        REC2.ord_pcs = this.Recorddet.ord_pcs;
-        REC2.ord_ntwt = this.Recorddet.ord_ntwt;
-        REC2.ord_grwt = this.Recorddet.ord_grwt;
-        REC2.ord_cbm = this.Recorddet.ord_cbm;
-        REC2.ord_hs_code = this.Recorddet.ord_hs_code;
-        REC2.ord_desc = this.Recorddet.ord_desc;
+        // REC2.ord_invno = this.Recorddet.ord_invno;
+        // REC2.ord_uneco = this.Recorddet.ord_uneco;
+        // REC2.ord_po = this.Recorddet.ord_po;
+        // REC2.ord_style = this.Recorddet.ord_style;
+        // REC2.ord_color = this.Recorddet.ord_color;
+        // REC2.ord_contractno = this.Recorddet.ord_contractno;
+        // REC2.ord_pkg = this.Recorddet.ord_pkg;
+        // REC2.ord_pcs = this.Recorddet.ord_pcs;
+        // REC2.ord_ntwt = this.Recorddet.ord_ntwt;
+        // REC2.ord_grwt = this.Recorddet.ord_grwt;
+        // REC2.ord_cbm = this.Recorddet.ord_cbm;
+        // REC2.ord_hs_code = this.Recorddet.ord_hs_code;
+        // REC2.ord_desc = this.Recorddet.ord_desc;
+        REC2 = this.Recorddet;
       }
     }
     this.isPrevDetails = true;
@@ -433,6 +443,7 @@ export class OrderEditComponent {
   NewDetRecord() {
     this.detailMode = "ADD";
     let _preRecDet = this.Recorddet;
+    this.Recorddet = new Joborderm();
     this.Recorddet.ord_pkid = this.gs.getGuid();;
     this.Recorddet.ord_header_id = this.pkid;
     this.Recorddet.ord_status = 'REPORTED';
@@ -475,6 +486,8 @@ export class OrderEditComponent {
       this.Recorddet.ord_uneco = _preRecDet.ord_uneco;
       this.Recorddet.ord_color = _preRecDet.ord_color;
       this.Recorddet.ord_style = _preRecDet.ord_style;
+      this.Recorddet.ord_contractno = _preRecDet.ord_contractno;
+      this.Recorddet.ord_desc = _preRecDet.ord_desc;
     }
   }
 
@@ -482,22 +495,22 @@ export class OrderEditComponent {
   EditRecord(_rec: Joborderm) {
     this.detailMode = "EDIT";
     this.Recorddet = new Joborderm();
-    // this.Recorddet = _rec;
-    this.Recorddet.ord_pkid = _rec.ord_pkid;
-    this.Recorddet.ord_header_id = this.pkid;
-    this.Recorddet.ord_invno = _rec.ord_invno;
-    this.Recorddet.ord_uneco = _rec.ord_uneco;
-    this.Recorddet.ord_po = _rec.ord_po;
-    this.Recorddet.ord_style = _rec.ord_style;
-    this.Recorddet.ord_color = _rec.ord_color;
-    this.Recorddet.ord_contractno = _rec.ord_contractno;
-    this.Recorddet.ord_pkg = _rec.ord_pkg;
-    this.Recorddet.ord_pcs = _rec.ord_pcs;
-    this.Recorddet.ord_ntwt = _rec.ord_ntwt;
-    this.Recorddet.ord_grwt = _rec.ord_grwt;
-    this.Recorddet.ord_cbm = _rec.ord_cbm;
-    this.Recorddet.ord_hs_code = _rec.ord_hs_code;
-    this.Recorddet.ord_desc = _rec.ord_desc;
+    this.Recorddet = _rec;
+    // this.Recorddet.ord_pkid = _rec.ord_pkid;
+    // this.Recorddet.ord_header_id = this.pkid;
+    // this.Recorddet.ord_invno = _rec.ord_invno;
+    // this.Recorddet.ord_uneco = _rec.ord_uneco;
+    // this.Recorddet.ord_po = _rec.ord_po;
+    // this.Recorddet.ord_style = _rec.ord_style;
+    // this.Recorddet.ord_color = _rec.ord_color;
+    // this.Recorddet.ord_contractno = _rec.ord_contractno;
+    // this.Recorddet.ord_pkg = _rec.ord_pkg;
+    // this.Recorddet.ord_pcs = _rec.ord_pcs;
+    // this.Recorddet.ord_ntwt = _rec.ord_ntwt;
+    // this.Recorddet.ord_grwt = _rec.ord_grwt;
+    // this.Recorddet.ord_cbm = _rec.ord_cbm;
+    // this.Recorddet.ord_hs_code = _rec.ord_hs_code;
+    // this.Recorddet.ord_desc = _rec.ord_desc;
   }
 
 }
