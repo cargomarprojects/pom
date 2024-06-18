@@ -31,7 +31,9 @@ export class Joborderh {
   ordh_cargo_readiness_date: string;
   ordh_detList: Joborderm[] = [];
   ordh_status:string;
-  
+  ordh_date:string;
+  ordh_remarks:string;
+
   rec_mode: string;
   rec_category: string;
   _globalvariables: GlobalVariables;
