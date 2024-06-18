@@ -88,6 +88,7 @@ export class OrderEditComponent {
 
 
   newRecord() {
+    this.ErrorMessage='';
     this.pkid = this.gs.getGuid();
     this.Record = new Joborderh();
     this.Record.ordh_pkid = this.pkid;
@@ -329,7 +330,7 @@ export class OrderEditComponent {
     this.ErrorMessage = '';
     this.InfoMessage = '';
 
-    
+
     if (this.gs.isBlank(this.Record.ordh_exp_id)) {
       bret = false;
       sError += "\n\r | Shipper Cannot Be Blank";
@@ -351,6 +352,10 @@ export class OrderEditComponent {
     //   bret = false;
     //   sError += "\n\r | PO Cannot Be Blank";
     // }
+    if (this.Record.ordh_detList.length <= 0) {
+      bret = false;
+      sError += "\n\r | Order List Cannot Be Blank";
+    }
 
     if (bret === false) {
       this.ErrorMessage = sError;
@@ -436,7 +441,7 @@ export class OrderEditComponent {
     this.Recorddet.ord_grwt = 0;
     this.Recorddet.ord_cbm = 0;
     this.Recorddet.ord_hs_code = '';
-    this.Recorddet.ord_uneco ='';
+    this.Recorddet.ord_uneco = '';
     this.Recorddet.ord_booking_date_captn = '';
     this.Recorddet.ord_booking_date = '';
     this.Recorddet.ord_rnd_insp_date_captn = '';
