@@ -8,97 +8,85 @@
 
 <div class="page-details">
   <div class="row">
-
-    <div class="col-md-5">
-
+    <div class="col-sm-5">
       <div class="form-group row">
-        <label class="col-3 col-form-label col-form-label-sm">From</label>
-        <div class="col-4">
+        <label class="col-sm-3 col-form-label col-form-label-sm">From</label>
+        <div class="col-sm-4">
           <app-date [inputdate]="ms.record.searchQuery.from_date"
             (ValueChanged)="ms.record.searchQuery.from_date=$event"></app-date>
         </div>
-        <label class="col-1 col-form-label col-form-label-sm">To</label>
-        <div class="col-4">
+        <label class="col-sm-1 col-form-label col-form-label-sm">To</label>
+        <div class="col-sm-4">
           <app-date [inputdate]="ms.record.searchQuery.to_date"
             (ValueChanged)="ms.record.searchQuery.to_date=$event"></app-date>
         </div>
       </div>
-
-
       <div class="form-group row">
-        <label class="col-3 col-form-label col-form-label-sm">Agent.Pol</label>
-        <div class="col-9">
+        <label class="col-sm-3 col-form-label col-form-label-sm">Agent.Pol</label>
+        <div class="col-sm-9">
           <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
             [displaydata]="ms.record.searchQuery.list_agent_name" (ValueChanged)="LovSelected($event)"
             [where]="ms.where_agent">
           </app-autocomplete2>
         </div>
       </div>
-
       <div class="form-group row">
-        <label class="col-3 col-form-label col-form-label-sm">Shipper</label>
-        <div class="col-9">
-
+        <label class="col-sm-3 col-form-label col-form-label-sm">Shipper</label>
+        <div class="col-sm-9">
           <app-autocomplete2 [controlname]="'SHIPPER'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
             [displaydata]="ms.record.searchQuery.list_exp_name" (ValueChanged)="LovSelected($event)"
             [where]="ms.where_shipper">
           </app-autocomplete2>
-
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-3 col-form-label col-form-label-sm">Consignee</label>
-        <div class="col-9">
+        <label class="col-sm-3 col-form-label col-form-label-sm">Consignee</label>
+        <div class="col-sm-9">
           <app-autocomplete2 [controlname]="'CONSIGNEE'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
             [displaydata]="ms.record.searchQuery.list_imp_name" (ValueChanged)="LovSelected($event)"
             [where]="ms.where_consignee">
           </app-autocomplete2>
         </div>
       </div>
-
       <div class="form-group row">
-        <label class="col-3 col-form-label col-form-label-sm">Buy.Agent</label>
-        <div class="col-9">
+        <label class="col-sm-3 col-form-label col-form-label-sm">Buy.Agent</label>
+        <div class="col-sm-9">
           <app-autocomplete2 [controlname]="'BUY-AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
             [displaydata]="ms.record.searchQuery.list_buy_agent_name" (ValueChanged)="LovSelected($event)"
             [where]="ms.where_buy_agent">
           </app-autocomplete2>
         </div>
       </div>
-
       <div class="form-group row">
-        <label class="col-3 col-form-label col-form-label-sm">Agent.Pod</label>
-        <div class="col-9">
+        <label class="col-sm-3 col-form-label col-form-label-sm">Agent.Pod</label>
+        <div class="col-sm-9">
           <app-autocomplete2 [controlname]="'AGENT-POD'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
             [displaydata]="ms.record.searchQuery.list_pod_agent_name" (ValueChanged)="LovSelected($event)"
             [where]="ms.where_agent">
           </app-autocomplete2>
         </div>
       </div>
-
-
     </div>
 
     <div class="col-md-4">
-
       <div class="form-group row">
-        <label class="col-3 col-form-label col-form-label-sm">Invoice#</label>
-        <div class="col-9">
+        <label class="col-sm-3 col-form-label col-form-label-sm">Invoice#</label>
+        <div class="col-sm-9">
           <InputBox [(inputModel)]="ms.record.searchQuery.ord_invoice" [maxlength]="30" [uppercase]=true></InputBox>
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-3 col-form-label col-form-label-sm">Po#</label>
-        <div class="col-9">
+        <label class="col-sm-3 col-form-label col-form-label-sm">Po#</label>
+        <div class="col-sm-9">
           <InputBox [(inputModel)]="ms.record.searchQuery.ord_po" [maxlength]="1000" [uppercase]=true></InputBox>
         </div>
       </div>
 
 
       <div class="form-group row">
-        <label class="col-3 col-form-label col-form-label-sm">Status</label>
-        <div class="col-9">
+        <label class="col-sm-3 col-form-label col-form-label-sm">Status</label>
+        <div class="col-sm-9">
           <select class="form-control form-control-sm" [(ngModel)]="ms.record.searchQuery.ord_status">
             <option [value]="'ALL'">ALL</option>
             <option [value]="'REPORTED'">REPORTED</option>
@@ -111,8 +99,8 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-3 col-form-label col-form-label-sm">Pending</label>
-        <div class="col-9">
+        <label class="col-sm-3 col-form-label col-form-label-sm">Pending</label>
+        <div class="col-sm-9">
           <select class="form-control form-control-sm" [(ngModel)]="ms.record.searchQuery.ord_showpending">
             <!-- <option [value]="'Y'">SHOW PENDING ONLY</option> -->
             <option [value]="'SOB-CONFIRMED'">SOB CONFIRMED</option>
@@ -123,8 +111,8 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-3 col-form-label col-form-label-sm">Sort</label>
-        <div class="col-9">
+        <label class="col-sm-3 col-form-label col-form-label-sm">Sort</label>
+        <div class="col-sm-9">
           <select class="form-control form-control-sm" [(ngModel)]="ms.record.searchQuery.sort_colname">
             <option *ngFor="let rec of ms.SortList" [value]="rec.colheadername">{{rec.colheadername}}</option>
           </select>
@@ -132,10 +120,14 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-3 col-form-label col-form-label-sm"></label>
-        <div class="col-9">
+        <label class="col-sm-3 col-form-label col-form-label-sm"></label>
+        <div class="col-sm-5">
           <input type="checkbox" [(ngModel)]="ms.record.searchQuery.list_hide" id="_ordhide" />
           <label class="col-form-label col-form-label-sm" for="_ordhide">Show Hide Records</label>
+        </div>
+        <div class="col-sm-4">
+          <input type="checkbox" [(ngModel)]="ms.record.searchQuery.list_orderwise" id="_orddet" />
+          <label class="col-form-label col-form-label-sm" for="_orddet">Show Orderwise</label>
         </div>
       </div>
 
@@ -144,36 +136,36 @@
     <div class="col-md-3">
 
       <div class="form-group row">
-        <div class="col-9 offset-3">
+        <div class="col-sm-9 offset-3">
           <button (click)="ms.List('NEW')" class="btn btn-info btn-sm btn-block">Search</button>
         </div>
       </div>
 
       <div class="form-group row">
-        <div class="col-9 offset-3">
+        <div class="col-sm-9 offset-3">
           <button (click)="ms.ShowTracking(trackorder)" class="btn btn-info btn-sm btn-block">Tracking
             <span *ngIf="ms.total>0" class="badge badge-light">{{ms.total}}</span>
           </button>
         </div>
       </div>
 
-      <div class="form-group row">
-        <div class="col-9 offset-3">
+      <!-- <div class="form-group row">
+        <div class="col-sm-9 offset-3">
           <button (click)="ms.ShowStatus(changestatus)" class="btn btn-info btn-sm btn-block">Change PO Status
             <span *ngIf="ms.total>0" class="badge badge-light">{{ms.total}}</span>
           </button>
         </div>
-      </div>
+      </div> -->
 
 
-      <div class="form-group row">
-        <div class="col-9 offset-3">
+      <div *ngIf="ms.record.searchQuery.list_orderwise" class="form-group row">
+        <div class="col-sm-9 offset-3">
           <button (click)="ms.List('EXCEL')" class="btn btn-info btn-sm btn-block">Excel</button>
         </div>
       </div>
 
-      <div class="form-group row">
-        <div class="col-9 offset-3">
+      <div *ngIf="ms.record.searchQuery.list_orderwise" class="form-group row">
+        <div class="col-sm-9 offset-3">
           <button (click)="ms.ShowHistory(history)" class="btn btn-info btn-sm btn-block">History</button>
         </div>
       </div>
@@ -199,7 +191,44 @@
   </div>
 </div>
 
-<div class="page-body table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 321px);">
+<div *ngIf="ms.ord_list_type=='SUMMARY'" class="page-body table-responsive fixedTableHead  my-0 p-0"
+  style="height: calc(100vh - 321px);">
+  <table class="table table-hover table-sm table-bordered">
+    <thead class="page-body-thead">
+      <tr>
+        <th><input type="checkbox" [(ngModel)]="ms.selectcheck" (change)="SelectCheckbox(ms.selectcheck)"></th>
+        <th>EDIT</th>
+        <th>DATE</th>
+        <th>AGENT.POL</th>
+        <th>SHIPPER</th>
+        <th>CONSIGNEE</th>
+        <th>BUYING.AGENT</th>
+        <th>AGENT.POD</th>
+        <th>POL</th>
+        <th>POD</th>
+        <th>REMARKS</th>
+      </tr>
+    </thead>
+    <tbody class="page-body-tbody">
+      <tr *ngFor="let rec of ms.record.records" 
+        (mousedown)="ms.selectRowId(rec.ord_header_id)" [class.active]="rec.ord_header_id == ms.getRowId()">
+        <td><input type="checkbox" [(ngModel)]="rec.ord_selected" (change)="handleChange(rec)"></td>
+        <td (click)="ActionHandler('EDIT',rec.ord_header_id)" class="hlink"><i class="fa fa-pencil"></i></td>
+        <td>{{rec.ord_date}}</td>
+        <td>{{rec.ord_agent_name}}</td>
+        <td>{{rec.ord_exp_name}}</td>
+        <td>{{rec.ord_imp_name}}</td>
+        <td>{{rec.ord_buy_agent_name}}</td>
+        <td>{{rec.ord_pod_agent_name}}</td>
+        <td>{{rec.ord_pol}}</td>
+        <td>{{rec.ord_pod}}</td>
+        <td>{{rec.ord_remarks}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="ms.ord_list_type=='DETAILS'" class="page-body table-responsive fixedTableHead  my-0 p-0"
+  style="height: calc(100vh - 321px);">
   <table class="table table-hover table-sm table-bordered">
     <thead class="page-body-thead">
       <tr>
@@ -285,12 +314,11 @@
         <td>{{rec.rec_created_by}}</td>
         <td>{{rec.rec_created_date}}</td>
         <td *ngIf="ms.canDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
-          (click)="ms.DeleteRow(rec)"></i></td>
+            (click)="ms.DeleteRow(rec)"></i></td>
       </tr>
     </tbody>
   </table>
 </div>
-
 <div *ngIf="ms.record.searchQuery.page_count">
   <div class="page-list">
     <ul class="pagination pagination-sm my-1 mx-1">
@@ -318,7 +346,7 @@
 
 <ng-template #trackorder let-c="close" let-d="dismiss">
   <div class="modal-body">
-    <app-trackorder [ord_pkids]="ms.ord_trkids" [ord_pos]="ms.ord_trkpos" [ord_imp_grp_id]="ms.ord_imp_grp_id"
+    <app-trackorder [ord_pkids]="ms.ord_trkids" [ord_pos]="ms.ord_trkpos" [ord_imp_grp_id]="ms.ord_imp_grp_id" [ord_header_id]="ms.ord_trkheaderid"
       (closeModalWindow)="CloseModal1($event)"></app-trackorder>
   </div>
 </ng-template>

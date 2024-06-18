@@ -31,6 +31,8 @@ export class OrderListService {
   ord_trkpos = "";
   ord_imp_grp_id = "";
   trkdt_alldisplay = "N";
+  ord_trkheaderid = "";
+  public ord_list_type: string = "SUMMARY";
 
   SortList: any[];
   private _record: JobOrderModel;
@@ -118,14 +120,15 @@ export class OrderListService {
         report_folder: '',
         to_date: '',
         sort_colname: 'UID',
-        sort_colvalue: 'a.ord_uid',
+        sort_colvalue: 'a.rec_created_date',
         ord_status: 'ALL',
         ord_showpending: 'N',
         ftp_transfertype: 'ORDERLIST',
         ftp_is_multipleorder: 'N',
         ftp_is_checklist: 'N',
         ftp_ordpoids: '',
-        list_hide: false
+        list_hide: false,
+        list_orderwise: false
       }
     };
   }
@@ -176,8 +179,13 @@ export class OrderListService {
       ord_status: this._record.searchQuery.ord_status,
       sort_colname: this._record.searchQuery.sort_colvalue,
       ftp_transfertype: this._record.searchQuery.ftp_transfertype,
-      hide: this._record.searchQuery.list_hide
+      hide: this._record.searchQuery.list_hide,
+      orderwise: this._record.searchQuery.list_orderwise
     };
+
+    this.ord_list_type = "SUMMARY";
+    if (this._record.searchQuery.list_orderwise)
+      this.ord_list_type = "DETAILS"
 
     this.ErrorMessage = '';
     this.InfoMessage = '';
@@ -208,25 +216,25 @@ export class OrderListService {
       return;
     var REC = this.record.records.find(rec => rec.ord_pkid == _rec.ord_pkid);
     if (REC == null) {
+      _rec.ord_date = this.gs.defaultValues.today;
       this.record.records.push(_rec);
     }
     else {
-      // REC.ord_agent_name = _rec.ord_agent_name;
-      // REC.ord_agent_name = _rec.ord_agent_name;
-      // REC.ord_exp_name = _rec.ord_exp_name;
-      // REC.ord_imp_name = _rec.ord_imp_name;
-      // REC.ord_buy_agent_name = _rec.ord_buy_agent_name;
-      // REC.ord_pod_agent_name = _rec.ord_pod_agent_name;
-      // REC.ord_invno = _rec.ord_invno;
-      // REC.ord_po = _rec.ord_po;
-      // REC.ord_style = _rec.ord_style;
-      // REC.ord_color = _rec.ord_color;
-      // REC.ord_pkg = _rec.ord_pkg;
-      // REC.ord_pcs = _rec.ord_pcs;
-      // REC.ord_cbm = _rec.ord_cbm;
-      // REC.ord_pol = _rec.ord_pol;
-      // REC.ord_pod = _rec.ord_pod;
-      REC = _rec;
+      REC.ord_agent_name = _rec.ord_agent_name;
+      REC.ord_agent_name = _rec.ord_agent_name;
+      REC.ord_exp_name = _rec.ord_exp_name;
+      REC.ord_imp_name = _rec.ord_imp_name;
+      REC.ord_buy_agent_name = _rec.ord_buy_agent_name;
+      REC.ord_pod_agent_name = _rec.ord_pod_agent_name;
+      REC.ord_invno = _rec.ord_invno;
+      REC.ord_po = _rec.ord_po;
+      REC.ord_style = _rec.ord_style;
+      REC.ord_color = _rec.ord_color;
+      REC.ord_pkg = _rec.ord_pkg;
+      REC.ord_pcs = _rec.ord_pcs;
+      REC.ord_cbm = _rec.ord_cbm;
+      REC.ord_pol = _rec.ord_pol;
+      REC.ord_pod = _rec.ord_pod;
     }
   }
 
@@ -235,7 +243,9 @@ export class OrderListService {
     this.ord_trkids = "";
     this.ord_trkpos = "";
     this.ord_imp_grp_id = "";
+    this.ord_trkheaderid = "";
     let bMultplrGrpId = false;
+
     for (let rec of this.record.records) {
 
       if (rec.ord_selected) {
@@ -244,25 +254,44 @@ export class OrderListService {
           this.ord_imp_grp_id = rec.ord_imp_grp_id;
 
         this.total++;
-        if (this.ord_trkids != "")
-          this.ord_trkids += ",";
-        this.ord_trkids += rec.ord_pkid;
 
-        if (this.ord_trkpos != "")
-          this.ord_trkpos += ",";
-        this.ord_trkpos += rec.ord_po;
+        if (this.ord_list_type == "SUMMARY") {
+          this.ord_trkheaderid = rec.ord_header_id;
+        } else {
 
-        if (this.ord_imp_grp_id != rec.ord_imp_grp_id)
-          bMultplrGrpId = true;
+          if (this.ord_trkids != "")
+            this.ord_trkids += ",";
+          this.ord_trkids += rec.ord_pkid;
+
+          if (this.ord_trkpos != "")
+            this.ord_trkpos += ",";
+          this.ord_trkpos += rec.ord_po;
+
+          if (this.ord_imp_grp_id != rec.ord_imp_grp_id)
+            bMultplrGrpId = true;
+        }
+
       }
     }
-    if (this.gs.isBlank(this.ord_trkids)) {
-      alert('No Rows Selected');
-      return;
-    }
-    if (bMultplrGrpId) {
-      alert('Invalid Consignee Group Selected');
-      return;
+    if (this.ord_list_type == "SUMMARY") {
+      if (this.gs.isBlank(this.ord_trkheaderid)) {
+        alert('No Rows Selected');
+        return;
+      }
+      if (this.total > 1) {
+        alert('Please select any one record and continue.....');
+        return;
+      }
+
+    } else {
+      if (this.gs.isBlank(this.ord_trkids)) {
+        alert('No Rows Selected');
+        return;
+      }
+      if (bMultplrGrpId) {
+        alert('Invalid Consignee Group Selected');
+        return;
+      }
     }
 
     this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });

@@ -144,6 +144,9 @@ export class Joborderm {
   ord_trk_date_type: string;
   ord_imp_grp_id: string;
 
+  ord_date: string;
+  ord_remarks: string;
+
   job_docno: string;
   rec_mode: string;
   rec_category: string;
@@ -198,7 +201,8 @@ export interface SearchQuery {
   ftp_is_multipleorder: string,
   ftp_is_checklist: string,
   ftp_ordpoids: string,
-  list_hide: boolean
+  list_hide: boolean,
+  list_orderwise: boolean
 }
 
 export interface JobOrderModel {

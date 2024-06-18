@@ -28,14 +28,17 @@ export class TrackOrderComponent {
   @Input() public ord_pkids: string = '';
   @Input() public ord_pos: string = '';
   @Input() public ord_imp_grp_id: string = '';
+  @Input() public ord_header_id: string = '';
 
   private menuid: string = '';
   private type: string = '';
   pkid: string = '';
   refno: string = '';
 
+
   InitCompleted: boolean = false;
   menu_record: any;
+  masterwise: boolean = false;
 
   enableDateCode: string = "";
   lastDateCode: string = "";
@@ -65,7 +68,14 @@ export class TrackOrderComponent {
   ngOnInit() {
     if (!this.gs.isBlank(this.ord_pkids)) {
       this.pkid = this.ord_pkids;
+      this.masterwise = false;
       this.process();
+    } else {
+      if (!this.gs.isBlank(this.ord_header_id)) {
+        this.pkid = this.ord_header_id;
+        this.masterwise = true;
+        this.process();
+      }
     }
     this.LoadCaptions();
   }
@@ -102,7 +112,12 @@ export class TrackOrderComponent {
 
   NewRecord() {
     this.Record = <Joborderm>{};
-    this.Record.ord_pkid = this.pkid;
+    this.Record.ord_pkid = '';
+    this.Record.ord_header_id = '';
+    if (this.masterwise)
+      this.Record.ord_header_id = this.pkid;
+    else
+      this.Record.ord_pkid = this.pkid;
     this.Record.ord_booking_date = '';
     this.Record.ord_rnd_insp_date = '';
     this.Record.ord_po_rel_date = '';
@@ -135,7 +150,8 @@ export class TrackOrderComponent {
     this.loading = true;
     let SearchData = {
       pkid: Id,
-      ord_imp_grp_id: this.ord_imp_grp_id
+      ord_imp_grp_id: this.ord_imp_grp_id,
+      masterwise: this.masterwise
     };
 
     this.mode = "EDIT";
