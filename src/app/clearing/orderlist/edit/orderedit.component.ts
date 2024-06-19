@@ -30,6 +30,7 @@ export class OrderEditComponent {
   loading = false;
   modal: any;
 
+  tot_det_rows: number = 0;
   isPrevDetails: boolean = false;
   detailMode = "ADD";
   ErrorMessage = "";
@@ -172,6 +173,7 @@ export class OrderEditComponent {
   loadData(_Record: Joborderh) {
     this.Record = _Record;
     this.Record.rec_mode = this.mode;
+    this.tot_det_rows = _Record.ordh_detList.length;
     this.NewDetRecord();
   }
 
@@ -305,16 +307,19 @@ export class OrderEditComponent {
     this.ms.Save(this.Record)
       .subscribe(response => {
         this.loading = false;
-        if (this.mode == 'ADD')
-          // if (this.mode == 'ADD') {
-          //   this.Record.ord_uid = response.uidno;
-          //   this.Record.ord_status_color = 'BLUE';
-          //   this.Record.ord_imp_grp_id = response.grpid;
-          // }
-          // this.InfoMessage = "Save Complete";
-          this.mode = 'EDIT';
+        // if (this.mode == 'ADD') {
+        //   this.Record.ord_uid = response.uidno;
+        //   this.Record.ord_status_color = 'BLUE';
+        //   this.Record.ord_imp_grp_id = response.grpid;
+        // }
+        // this.InfoMessage = "Save Complete";
+        this.mode = 'EDIT';
         this.Record.rec_mode = this.mode;
+        this.tot_det_rows = response.list.length;
         for (let rec of response.list) {
+          for (let rec2 of this.Record.ordh_detList.filter(rec2 => rec2.ord_pkid == rec.ord_pkid)) {
+              rec2.ord_uid = rec.ord_uid;
+          }
           rec.ord_imp_grp_id = response.grpid;
           this.ms.RefreshList(rec);
         }
@@ -435,6 +440,7 @@ export class OrderEditComponent {
     this.Recorddet = new Joborderm();
     this.Recorddet.ord_pkid = this.gs.getGuid();;
     this.Recorddet.ord_header_id = this.pkid;
+    this.Recorddet.ord_uid = 0;
     this.Recorddet.ord_status = 'REPORTED';
     this.Recorddet.ord_desc = '';
     this.Recorddet.ord_cargo_status = '';
@@ -546,6 +552,7 @@ export class OrderEditComponent {
           this.Record.ordh_detList.splice(this.Record.ordh_detList.findIndex(rec => rec.ord_pkid == _rec.ord_pkid), 1);
           if (!this.gs.isBlank(this.ms.record.records))
             this.ms.record.records.splice(this.ms.record.records.findIndex(rec => rec.ord_pkid == _rec.ord_pkid), 1);
+          this.tot_det_rows = this.Record.ordh_detList.length;
         }
 
       }, error => {
@@ -560,6 +567,10 @@ export class OrderEditComponent {
   }
 
   ShowTracking(modalname: any) {
+    if (this.tot_det_rows != this.Record.ordh_detList.length) {
+      alert('Unsaved data found, Please save and continue.......');
+      return;
+    }
     this.modal = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
   }
 }

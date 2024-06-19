@@ -27,6 +27,7 @@
         <label class="col-2 col-form-label col-form-label-sm">PO Status</label>
         <div class="col-10">
           <select class="form-control form-control-sm" [(ngModel)]="ord_status">
+            <option [value]="'SENT FOR APPROVAL'">SENT FOR APPROVAL</option>
             <option [value]="'APPROVED'">APPROVED</option>
             <option [value]="'ON HOLD'">ON HOLD</option>
             <option [value]="'CANCELLED'">CANCELLED</option>            
@@ -59,8 +60,9 @@
     <div class="col-sm-12">
       <div>
         <h4>APPROVED CAN NOT BE CHANGED</h4>
-        <h4>REPORTED CAN BE CHANGED TO  APPROVED OR ON HOLD</h4>
-        <h4>ON HOLD  CAN BE CHANGED TO  APPROVED OR CANCELLED</h4>
+        <h4>REPORTED CAN BE CHANGED TO SENT FOR APPROVAL OR APPROVED OR ON HOLD</h4>
+        <h4>SENT FOR APPROVAL CAN BE CHANGED TO APPROVED OR ON HOLD</h4>
+        <h4>ON HOLD CAN BE CHANGED TO APPROVED OR CANCELLED</h4>
       </div>
     </div>
   </div>

@@ -271,17 +271,19 @@
       <thead class="page-body-thead">
         <tr>
           <th>SL#</th>
+          <th>UID</th>
+          <th>STATUS</th>
           <th>INV#</th>
           <th>PO#</th>
           <th>STYLE</th>
           <th>COLOR</th>
+          <th class="text-left">HS.CODE</th>
           <th class="text-left">DESC</th>
           <th class="text-right">PKGS</th>
           <th class="text-right">PCS</th>
           <th class="text-right">NT.WT</th>
           <th class="text-right">GR.WT</th>
           <th class="text-right">CBM</th>
-          <th class="text-left">HS.CODE</th>
           <th>CARO.READY.DT</th>
           <th>BOARDING1</th>
           <th>BOARDING2</th>
@@ -294,17 +296,19 @@
         <tr *ngFor="let rec of Record.ordh_detList; let i = index" (mousedown)="ms.selectRowId(rec.ord_pkid)"
           [class.active]="rec.ord_pkid == ms.getRowId()">
           <td class="hlink" (click)="EditRecord(rec)">{{i+1}}</td>
+          <td>{{rec.ord_uid}}</td>
+          <td>{{rec.ord_status}}</td>
           <td>{{rec.ord_invno}}</td>
           <td>{{rec.ord_po}}</td>
           <td>{{rec.ord_style}}</td>
           <td>{{rec.ord_color}}</td>
+          <td>{{rec.ord_hs_code}}</td>
           <td>{{rec.ord_desc}}</td>
           <td align='right'>{{rec.ord_pkg | number : '1.2-2'}}</td>
           <td align='right'>{{rec.ord_pcs | number : '1.2-2'}}</td>
           <td align='right'>{{rec.ord_ntwt | number : '1.3-3'}}</td>
           <td align='right'>{{rec.ord_grwt | number : '1.3-3'}}</td>
           <td align='right'>{{rec.ord_cbm | number : '1.3-3'}}</td>
-          <td>{{rec.ord_hs_code}}</td>
           <td>{{rec.ord_cargo_readiness_date | date : gs.DATE_DISPLAY_FORMAT}}</td>
           <td>{{rec.ord_boarding1 | date : gs.DATE_DISPLAY_FORMAT}}</td>
           <td>{{rec.ord_boarding2 | date : gs.DATE_DISPLAY_FORMAT}}</td>
@@ -332,7 +336,7 @@
         <label class="col-form-label col-form-label-sm"></label>
       </div>
       <div class="col-sm-6">
-        <button [hidden]="disableSave" (click)="Save()" class="btn btn-success btn-md mr-1">Save</button>
+        <button *ngIf="Record.ordh_status == 'REPORTED'" [hidden]="disableSave" (click)="Save()" class="btn btn-success btn-md mr-1">Save</button>
         <button *ngIf="mode=='EDIT'" (click)="ShowTracking(trackorder2)" class="btn btn-success btn-md">Tracking</button>
       </div>
     </div>

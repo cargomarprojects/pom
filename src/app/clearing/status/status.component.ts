@@ -16,6 +16,7 @@ export class StatusComponent {
   title = 'Track Details';
   @Input() public ord_pkids: string = '';
   @Input() public ord_pos: string = '';
+  @Input() public ord_header_id: string = '';
   @Output() ChangeStatus = new EventEmitter<any>();
   @Output() closeModalWindow = new EventEmitter<any>();
 
@@ -39,7 +40,7 @@ export class StatusComponent {
   ErrorMessage = "";
   InfoMessage = "";
 
-  ord_status = 'APPROVED';
+  ord_status = 'SENT FOR APPROVAL';
 
   constructor(
     private mainService: TrackOrderService,
@@ -67,7 +68,7 @@ export class StatusComponent {
 
     this.ErrorMessage = '';
     this.InfoMessage = '';
-    if (this.gs.isBlank(this.ord_pkids)) {
+    if (this.gs.isBlank(this.ord_pkids) && this.gs.isBlank(this.ord_header_id)) {
       this.ErrorMessage = " Cannot Update Invalid ID";
       return;
     }
@@ -78,7 +79,8 @@ export class StatusComponent {
       year_code: this.gs.globalVariables.year_code,
       pkids: this.ord_pkids,
       status: this.ord_status,
-      user_code: this.gs.globalVariables.user_code
+      user_code: this.gs.globalVariables.user_code,
+      header_id: this.ord_header_id
     };
 
     this.loading = true;
@@ -91,7 +93,7 @@ export class StatusComponent {
         this.ids = response.list;
         //var urlid = this.gs.getParameter('urlid');
         // this.store.dispatch( FromOrderActions.ChangeStatus({urlid: urlid, pkids: this.ids})  )
-        this.closeModalWindow.emit({ saction: 'STATUS-SAVE', result:response.list });
+        this.closeModalWindow.emit({ saction: 'STATUS-SAVE', result: response.list });
       }, error => {
         this.ErrorMessage = this.gs.getError(error);
         alert(this.ErrorMessage);
