@@ -22,15 +22,6 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">Agent.Pol</label>
-        <div class="col-sm-9">
-          <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
-            [displaydata]="ms.record.searchQuery.list_agent_name" (ValueChanged)="LovSelected($event)"
-            [where]="ms.where_agent">
-          </app-autocomplete2>
-        </div>
-      </div>
-      <div class="form-group row">
         <label class="col-sm-3 col-form-label col-form-label-sm">Shipper</label>
         <div class="col-sm-9">
           <app-autocomplete2 [controlname]="'SHIPPER'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
@@ -54,6 +45,15 @@
           <app-autocomplete2 [controlname]="'BUY-AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
             [displaydata]="ms.record.searchQuery.list_buy_agent_name" (ValueChanged)="LovSelected($event)"
             [where]="ms.where_buy_agent">
+          </app-autocomplete2>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label col-form-label-sm">Agent.Pol</label>
+        <div class="col-sm-9">
+          <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
+            [displaydata]="ms.record.searchQuery.list_agent_name" (ValueChanged)="LovSelected($event)"
+            [where]="ms.where_agent">
           </app-autocomplete2>
         </div>
       </div>
@@ -199,29 +199,29 @@
         <th><input type="checkbox" [(ngModel)]="ms.selectcheck" (change)="SelectCheckbox(ms.selectcheck)"></th>
         <th>EDIT</th>
         <th>DATE</th>
-        <th>AGENT.POL</th>
         <th>SHIPPER</th>
         <th>CONSIGNEE</th>
         <th>BUYING.AGENT</th>
-        <th>AGENT.POD</th>
         <th>POL</th>
         <th>POD</th>
+        <th>AGENT.POL</th>
+        <th>AGENT.POD</th>
         <th>REMARKS</th>
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of ms.record.records" 
-        (mousedown)="ms.selectRowId(rec.ord_header_id)" [class.active]="rec.ord_header_id == ms.getRowId()">
+      <tr *ngFor="let rec of ms.record.records" (mousedown)="ms.selectRowId(rec.ord_header_id)"
+        [class.active]="rec.ord_header_id == ms.getRowId()">
         <td><input type="checkbox" [(ngModel)]="rec.ord_selected" (change)="handleChange(rec)"></td>
         <td (click)="ActionHandler('EDIT',rec.ord_header_id)" class="hlink"><i class="fa fa-pencil"></i></td>
         <td>{{rec.ord_date}}</td>
-        <td>{{rec.ord_agent_name}}</td>
         <td>{{rec.ord_exp_name}}</td>
         <td>{{rec.ord_imp_name}}</td>
         <td>{{rec.ord_buy_agent_name}}</td>
-        <td>{{rec.ord_pod_agent_name}}</td>
         <td>{{rec.ord_pol}}</td>
         <td>{{rec.ord_pod}}</td>
+        <td>{{rec.ord_agent_name}}</td>
+        <td>{{rec.ord_pod_agent_name}}</td>
         <td>{{rec.ord_remarks}}</td>
       </tr>
     </tbody>
@@ -238,11 +238,13 @@
         <th>STATUS</th>
         <th>CARGO.STATUS</th>
         <th>CARGO.STATUS.DT</th>
-        <th>AGENT.POL</th>
         <th>SHIPPER</th>
         <th>CONSIGNEE</th>
         <th>BUYING.AGENT</th>
-        <th>AGENT.POD</th>
+        <th>POL</th>
+        <th>POD</th>
+        <th>AGENT.POL</th>
+        <th>AGENT.POD</th>     
         <th>INV#</th>
         <th>PO#</th>
         <th>STYLE</th>
@@ -250,8 +252,6 @@
         <th class="text-right">PKGS</th>
         <th class="text-right">PCS</th>
         <th class="text-right">CBM</th>
-        <th>POL</th>
-        <th>POD</th>
         <!-- <th>BOARDING1</th>
         <th>BOARDING2</th>
         <th>INSTOCK1</th>
@@ -282,10 +282,12 @@
         <td>{{rec.ord_status}}</td>
         <td>{{rec.ord_cargo_status}}</td>
         <td>{{rec.ord_cargo_status_date}}</td>
-        <td>{{rec.ord_agent_name}}</td>
         <td>{{rec.ord_exp_name}}</td>
         <td>{{rec.ord_imp_name}}</td>
         <td>{{rec.ord_buy_agent_name}}</td>
+        <td>{{rec.ord_pol}}</td>
+        <td>{{rec.ord_pod}}</td>
+        <td>{{rec.ord_agent_name}}</td>
         <td>{{rec.ord_pod_agent_name}}</td>
         <td>{{rec.ord_invno}}</td>
         <td>{{rec.ord_po}}</td>
@@ -294,8 +296,6 @@
         <td align='right'>{{rec.ord_pkg | number : '1.2-2'}}</td>
         <td align='right'>{{rec.ord_pcs | number : '1.2-2'}}</td>
         <td align='right'>{{rec.ord_cbm | number : '1.3-3'}}</td>
-        <td>{{rec.ord_pol}}</td>
-        <td>{{rec.ord_pod}}</td>
         <!-- <td>{{rec.ord_boarding1}}</td>
         <td>{{rec.ord_boarding2}}</td>
         <td>{{rec.ord_instock1}}</td>
@@ -346,8 +346,8 @@
 
 <ng-template #trackorder let-c="close" let-d="dismiss">
   <div class="modal-body">
-    <app-trackorder [ord_pkids]="ms.ord_trkids" [ord_pos]="ms.ord_trkpos" [ord_imp_grp_id]="ms.ord_imp_grp_id" [ord_header_id]="ms.ord_trkheaderid"
-      (closeModalWindow)="CloseModal1($event)"></app-trackorder>
+    <app-trackorder [ord_pkids]="ms.ord_trkids" [ord_pos]="ms.ord_trkpos" [ord_imp_grp_id]="ms.ord_imp_grp_id"
+      [ord_header_id]="ms.ord_trkheaderid" (closeModalWindow)="CloseModal1($event)"></app-trackorder>
   </div>
 </ng-template>
 

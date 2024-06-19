@@ -186,10 +186,18 @@ export class TrackOrderComponent {
 
     this.ErrorMessage = '';
     this.InfoMessage = '';
-    if (this.Record.ord_pkid.trim().length <= 0) {
-      this.ErrorMessage = " Cannot Save Invalid ID";
-      alert(this.ErrorMessage);
-      return;
+    if (this.masterwise) {
+      if (this.Record.ord_header_id.trim().length <= 0) {
+        this.ErrorMessage = " Cannot Save Invalid ID";
+        alert(this.ErrorMessage);
+        return;
+      }
+    } else {
+      if (this.Record.ord_pkid.trim().length <= 0) {
+        this.ErrorMessage = " Cannot Save Invalid ID";
+        alert(this.ErrorMessage);
+        return;
+      }
     }
 
     this.loading = true;

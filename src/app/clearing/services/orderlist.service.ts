@@ -119,7 +119,7 @@ export class OrderListService {
         ord_po: '',
         report_folder: '',
         to_date: '',
-        sort_colname: 'UID',
+        sort_colname: 'CREATED-DATE',
         sort_colvalue: 'a.rec_created_date',
         ord_status: 'ALL',
         ord_showpending: 'N',
@@ -279,7 +279,7 @@ export class OrderListService {
         return;
       }
       if (this.total > 1) {
-        alert('Please select any one record and continue.....');
+        alert('Please select one record and continue.....');
         return;
       }
 

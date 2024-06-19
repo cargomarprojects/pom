@@ -5,6 +5,7 @@ import { Joborderh, Joborderm } from '../../models/joborder';
 import { OrderListService } from '../../services/orderlist.service';
 import { SearchTable } from '../../../shared/models/searchtable';
 import { InputBoxComponent } from '../../../shared/input/inputbox.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'App-OrderEdit',
@@ -27,6 +28,7 @@ export class OrderEditComponent {
   bAdmin = false;
   disableSave = true;
   loading = false;
+  modal: any;
 
   isPrevDetails: boolean = false;
   detailMode = "ADD";
@@ -36,6 +38,7 @@ export class OrderEditComponent {
   Recorddet: Joborderm = new Joborderm;
 
   constructor(
+    private modalService: NgbModal,
     public ms: OrderListService,
     private route: ActivatedRoute,
     private gs: GlobalService
@@ -88,7 +91,7 @@ export class OrderEditComponent {
 
 
   newRecord() {
-    this.ErrorMessage='';
+    this.ErrorMessage = '';
     this.pkid = this.gs.getGuid();
     this.Record = new Joborderh();
     this.Record.ordh_pkid = this.pkid;
@@ -107,17 +110,17 @@ export class OrderEditComponent {
     this.Record.ordh_buy_agent_id = '';
     this.Record.ordh_buy_agent_code = '';
     this.Record.ordh_buy_agent_name = '';
-    this.Record.ordh_boarding1 = '';
-    this.Record.ordh_boarding2 = '';
-    this.Record.ordh_instock1 = '';
-    this.Record.ordh_instock2 = '';
+    // this.Record.ordh_boarding1 = '';
+    // this.Record.ordh_boarding2 = '';
+    // this.Record.ordh_instock1 = '';
+    // this.Record.ordh_instock2 = '';
     this.Record.ordh_pol = '';
     this.Record.ordh_pod = '';
     this.Record.ordh_pol_id = '';
     this.Record.ordh_pod_id = '';
     this.Record.ordh_pol_code = '';
     this.Record.ordh_pod_code = '';
-    this.Record.ordh_cargo_readiness_date = '';
+    // this.Record.ordh_cargo_readiness_date = '';
     this.Record.ordh_detList = new Array<Joborderm>();
     this.Record.ordh_status = 'REPORTED';
     this.Record.ordh_date = this.gs.defaultValues.today;
@@ -415,6 +418,11 @@ export class OrderEditComponent {
         REC2.ord_cbm = this.Recorddet.ord_cbm;
         REC2.ord_hs_code = this.Recorddet.ord_hs_code;
         REC2.ord_desc = this.Recorddet.ord_desc;
+        REC2.ord_boarding1 = this.Recorddet.ord_boarding1;
+        REC2.ord_boarding2 = this.Recorddet.ord_boarding2;
+        REC2.ord_instock1 = this.Recorddet.ord_instock1;
+        REC2.ord_instock2 = this.Recorddet.ord_instock2;
+        REC2.ord_cargo_readiness_date = this.Recorddet.ord_cargo_readiness_date;
       }
     }
     this.isPrevDetails = true;
@@ -442,6 +450,11 @@ export class OrderEditComponent {
     this.Recorddet.ord_cbm = 0;
     this.Recorddet.ord_hs_code = '';
     this.Recorddet.ord_uneco = '';
+    this.Recorddet.ord_boarding1 = '';
+    this.Recorddet.ord_boarding2 = '';
+    this.Recorddet.ord_instock1 = '';
+    this.Recorddet.ord_instock2 = '';
+    this.Recorddet.ord_cargo_readiness_date = '';
     this.Recorddet.ord_booking_date_captn = '';
     this.Recorddet.ord_booking_date = '';
     this.Recorddet.ord_rnd_insp_date_captn = '';
@@ -473,6 +486,11 @@ export class OrderEditComponent {
       this.Recorddet.ord_style = _preRecDet.ord_style;
       this.Recorddet.ord_contractno = _preRecDet.ord_contractno;
       this.Recorddet.ord_desc = _preRecDet.ord_desc;
+      this.Recorddet.ord_boarding1 = _preRecDet.ord_boarding1;
+      this.Recorddet.ord_boarding2 = _preRecDet.ord_boarding2;
+      this.Recorddet.ord_instock1 = _preRecDet.ord_instock1;
+      this.Recorddet.ord_instock2 = _preRecDet.ord_instock2;
+      this.Recorddet.ord_cargo_readiness_date = _preRecDet.ord_cargo_readiness_date;
     }
   }
 
@@ -495,6 +513,11 @@ export class OrderEditComponent {
     this.Recorddet.ord_cbm = _rec.ord_cbm;
     this.Recorddet.ord_hs_code = _rec.ord_hs_code;
     this.Recorddet.ord_desc = _rec.ord_desc;
+    this.Recorddet.ord_boarding1 = _rec.ord_boarding1;
+    this.Recorddet.ord_boarding2 = _rec.ord_boarding2;
+    this.Recorddet.ord_instock1 = _rec.ord_instock1;
+    this.Recorddet.ord_instock2 = _rec.ord_instock2;
+    this.Recorddet.ord_cargo_readiness_date = _rec.ord_cargo_readiness_date;
   }
 
   DeleteRow(_rec: Joborderm) {
@@ -530,5 +553,13 @@ export class OrderEditComponent {
         this.ErrorMessage = this.gs.getError(error);
         alert(this.ErrorMessage);
       });
+  }
+
+  CloseModal1(params: any) {
+    this.modal.close();
+  }
+
+  ShowTracking(modalname: any) {
+    this.modal = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
   }
 }
