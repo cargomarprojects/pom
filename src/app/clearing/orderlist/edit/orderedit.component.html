@@ -13,8 +13,7 @@
         <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Shipper</label>
         <div class="col-sm-4 pr-0">
           <app-autocomplete2 [controlname]="'SHIPPER'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
-            [disabled]="(Record.ordh_status == 'REPORTED') ? false : true " [displaydata]="Record.ordh_exp_code"
-            (ValueChanged)="LovSelected($event)" [where]="ms.where_shipper">
+            [displaydata]="Record.ordh_exp_code" (ValueChanged)="LovSelected($event)" [where]="ms.where_shipper">
           </app-autocomplete2>
         </div>
         <div class="col-sm-6 pr-0">
@@ -26,8 +25,7 @@
         <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Consignee</label>
         <div class="col-sm-4 pr-0">
           <app-autocomplete2 [controlname]="'CONSIGNEE'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
-            [disabled]="(Record.ordh_status == 'REPORTED') ? false : true " [displaydata]="Record.ordh_imp_code"
-            (ValueChanged)="LovSelected($event)" [where]="ms.where_consignee">
+            [displaydata]="Record.ordh_imp_code" (ValueChanged)="LovSelected($event)" [where]="ms.where_consignee">
           </app-autocomplete2>
         </div>
         <div class="col-sm-6 pr-0">
@@ -38,8 +36,8 @@
         <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Buying.Agent</label>
         <div class="col-sm-4 pr-0">
           <app-autocomplete2 [controlname]="'BUY-AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
-            [disabled]="(Record.ordh_status == 'REPORTED') ? false : true " [displaydata]="Record.ordh_buy_agent_code"
-            (ValueChanged)="LovSelected($event)" [where]="ms.where_buy_agent" #agentlov>
+            [displaydata]="Record.ordh_buy_agent_code" (ValueChanged)="LovSelected($event)" [where]="ms.where_buy_agent"
+            #agentlov>
           </app-autocomplete2>
         </div>
         <div class="col-sm-6 pr-0">
@@ -54,8 +52,8 @@
         <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Pol.Agent</label>
         <div class="col-sm-4 pr-0">
           <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
-            [disabled]="(Record.ordh_status == 'REPORTED') ? false : true " [displaydata]="Record.ordh_agent_code"
-            (ValueChanged)="LovSelected($event)" [where]="ms.where_agent" #agentlov>
+            [displaydata]="Record.ordh_agent_code" (ValueChanged)="LovSelected($event)" [where]="ms.where_agent"
+            #agentlov>
           </app-autocomplete2>
         </div>
         <div class="col-sm-6 pr-0">
@@ -67,8 +65,8 @@
         <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Pod.Agent</label>
         <div class="col-sm-4 pr-0">
           <app-autocomplete2 [controlname]="'POD-AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
-            [disabled]="(Record.ordh_status == 'REPORTED') ? false : true " [displaydata]="Record.ordh_pod_agent_code"
-            (ValueChanged)="LovSelected($event)" [where]="ms.where_agent" #agentlov>
+            [displaydata]="Record.ordh_pod_agent_code" (ValueChanged)="LovSelected($event)" [where]="ms.where_agent"
+            #agentlov>
           </app-autocomplete2>
         </div>
         <div class="col-sm-6 pr-0">
@@ -336,8 +334,10 @@
         <label class="col-form-label col-form-label-sm"></label>
       </div>
       <div class="col-sm-6">
-        <button *ngIf="Record.ordh_status == 'REPORTED'" [hidden]="disableSave" (click)="Save()" class="btn btn-success btn-md mr-1">Save</button>
-        <button *ngIf="mode=='EDIT'" (click)="ShowTracking(trackorder2)" class="btn btn-success btn-md">Tracking</button>
+        <button *ngIf="Record.ordh_status == 'REPORTED'" [hidden]="disableSave" (click)="Save()"
+          class="btn btn-success btn-md mr-1">Save</button>
+        <button *ngIf="mode=='EDIT'" (click)="ShowTracking(trackorder2)"
+          class="btn btn-success btn-md">Tracking</button>
       </div>
     </div>
   </div>
