@@ -29,7 +29,7 @@ export class GlobalService {
 
   //public baseLocalServerUrl: string = "";
   //public baseUrl: string = "";
-  public DATE_DISPLAY_FORMAT = "dd/MM/yyyy";
+  public DATE_DISPLAY_FORMAT = "dd-MMM-yyyy";
 
   public USER_DATA_LIST = [
     { 'code': 'GENERAL-USER', 'name': 'GENERAL USER' },
