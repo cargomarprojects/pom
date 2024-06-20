@@ -353,15 +353,17 @@ hr {
   font-size: medium;
 }
 
+ 
 .page-header {
-  margin-top: 2px;
+  margin-top: 1px;
   border-left: 1px;
   border-top: 1px;
   border-right: 1px;
-  border-bottom: 0px;
+  border-bottom: 1px;
   border-style: solid;
   border-color: rgba(0, 0, 0, .125);
-  padding: 3px;
+  padding: 2px;
+  color: chocolate;
   background-color: #D3D3D3;
 }
 
