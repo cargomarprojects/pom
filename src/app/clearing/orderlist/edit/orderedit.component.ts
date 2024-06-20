@@ -307,21 +307,19 @@ export class OrderEditComponent {
     this.ms.Save(this.Record)
       .subscribe(response => {
         this.loading = false;
-        // if (this.mode == 'ADD') {
-        //   this.Record.ord_uid = response.uidno;
-        //   this.Record.ord_status_color = 'BLUE';
-        //   this.Record.ord_imp_grp_id = response.grpid;
-        // }
-        // this.InfoMessage = "Save Complete";
         this.mode = 'EDIT';
         this.Record.rec_mode = this.mode;
         this.tot_det_rows = response.list.length;
+        let bok: Boolean = true;
         for (let rec of response.list) {
           for (let rec2 of this.Record.ordh_detList.filter(rec2 => rec2.ord_pkid == rec.ord_pkid)) {
-              rec2.ord_uid = rec.ord_uid;
+            rec2.ord_uid = rec.ord_uid;
           }
           rec.ord_imp_grp_id = response.grpid;
-          this.ms.RefreshList(rec);
+          if (bok) {
+            bok = false;
+            this.ms.RefreshList(rec);
+          }
         }
         alert('Save Complete');
       },
