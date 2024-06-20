@@ -15,10 +15,12 @@ body {
   font-family: 'roboto';
   font-size: 12px;
   height: 100%;
+  background-color: #D3D3D3;
 }
 
 .router {
   margin-top: 13px;
+  background-color: #D3D3D3;
 }
 
 table {
@@ -35,7 +37,14 @@ table {
 /* .page-body-tbody {
   font-size: 10px !important;
 }  */
-
+/* .page-link {
+  background-color:#D3D3D3;
+  border-color: rgba(0, 0, 0, .125);
+} */
+/* .page-item {
+  background-color:#D3D3D3;
+  border-color: rgba(0, 0, 0, .125);
+} */
 
 container {
   margin: 0;
@@ -125,6 +134,7 @@ hr {
 
 .table tr.active td {
   background-color: rgb(154, 203, 243) !important;
+
 }
 
 
@@ -306,6 +316,7 @@ hr {
   border-color: rgba(0, 0, 0, .125);
   padding: 2px;
   margin: 1px;
+  background-color: #D3D3D3;
 }
 
 .page-box-entry {
@@ -338,7 +349,8 @@ hr {
   border-color: lightgray;
   border-style: solid;
   border-width: 1px 1px 0px 1px;
-
+  background-color: #D3D3D3;
+  font-size: medium;
 }
 
 .page-header {
@@ -350,10 +362,12 @@ hr {
   border-style: solid;
   border-color: rgba(0, 0, 0, .125);
   padding: 3px;
+  background-color: #D3D3D3;
 }
 
 .page-list {
   border: 1px solid rgba(0, 0, 0, .125);
+  background-color: #D3D3D3;
 }
 
 .page-search {
@@ -367,13 +381,14 @@ hr {
 .page-body {
   border: 1px solid rgba(0, 0, 0, .125);
   padding: 3px;
-  background-color: snow;
+  background-color: #D3D3D3;
 }
 
 
 .page-footer {
   border: 1px solid rgba(0, 0, 0, .125);
   padding: 1px;
+  background-color: #D3D3D3;
 }
 
 .page-pager {
@@ -381,10 +396,13 @@ hr {
   margin-bottom: 3px;
   cursor: pointer;
   border: 1px solid rgba(0, 0, 0, .125);
+  background-color: #D3D3D3;
 }
 
 .pagination {
   margin-bottom: 0px;
+  background-color: #D3D3D3;
+  color: #007ee9;
 }
 
 .alert {
@@ -395,7 +413,8 @@ hr {
 
 .page-details {
   padding: 10px;
-  border: 1px solid rgba(0, 0, 0, .125)
+  border: 1px solid rgba(0, 0, 0, .125);
+  background-color: #D3D3D3;
 }
 
 .abs-center-x {
@@ -418,8 +437,9 @@ hr {
   text-decoration: underline;
 }
 
-a {
+.a {
   cursor: pointer;
+  background-color: #D3D3D3;
 }
 
 .border-left {
@@ -731,4 +751,16 @@ input[type=number]::-webkit-outer-spin-button {
   padding: 5px;
   text-align: left;
   width: 200px;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, .125);
+}
+
+.jumbotron {
+  background-image: url("./assets/images/home.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 350px;
 }
