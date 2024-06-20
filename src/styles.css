@@ -37,10 +37,10 @@ table {
 /* .page-body-tbody {
   font-size: 10px !important;
 }  */
-/* .page-link {
-  background-color:#D3D3D3;
-  border-color: rgba(0, 0, 0, .125);
-} */
+.page-link {
+  border-color: rgba(0, 0, 0, .125)!important;
+  background-color:#D3D3D3 !important;
+}
 /* .page-item {
   background-color:#D3D3D3;
   border-color: rgba(0, 0, 0, .125);
