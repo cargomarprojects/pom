@@ -1,6 +1,6 @@
 <div class="page-box py-2">
   <div class="col">
-    <label class="col-form-label mr-1">{{title}}</label>
+    <label style="color: chocolate;font-size: medium;" class="col-form-label mr-1">{{title}}</label>
     <button class="btn btn-info btn-sm mx-1" (click)="newRecord()">New</button>
     <button class="btn btn-info btn-sm mr-1" (click)="Close()">Return</button>
   </div>
@@ -262,8 +262,7 @@
 </div>
 
 <div class="page-box py-2">
-  <div class="table-responsive fixedTableHead  my-0 p-0" 
-    [style.height]="Record.ordh_detList.length>10?'258px':'auto'"
+  <div class="table-responsive fixedTableHead  my-0 p-0" [style.height]="Record.ordh_detList.length>10?'258px':'auto'"
     [style.overflow-y]="Record.ordh_detList.length>10?'scroll':'auto'">
     <table class="table table-hover table-sm table-bordered">
       <thead class="page-body-thead">
@@ -406,7 +405,7 @@
   {{ErrorMessage}}
 </div>
 <ng-template #trackorder2 let-c="close" let-d="dismiss">
-  <div class="modal-body">
+  <div class="modal-body p-2">
     <app-trackorder [ord_pkids]="''" [ord_pos]="''" [ord_imp_grp_id]="Record.ordh_imp_grp_id"
       [ord_header_id]="Record.ordh_pkid" (closeModalWindow)="CloseModal1($event)"></app-trackorder>
   </div>
