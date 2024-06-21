@@ -30,8 +30,7 @@ export class OrderEditComponent {
   loading = false;
   modal: any;
 
-  selectedId:string= "";
-  tot_det_rows: number = 0;
+  selectedId: string = "";
   isPrevDetails: boolean = false;
   detailMode = "ADD";
   ErrorMessage = "";
@@ -175,7 +174,6 @@ export class OrderEditComponent {
   loadData(_Record: Joborderh) {
     this.Record = _Record;
     this.Record.rec_mode = this.mode;
-    this.tot_det_rows = _Record.ordh_detList.length;
     this.NewDetRecord();
   }
 
@@ -311,13 +309,14 @@ export class OrderEditComponent {
         this.loading = false;
         this.mode = 'EDIT';
         this.Record.rec_mode = this.mode;
+        this.Record.ordh_status = response.ordStatus;
         this.Record.ordh_detList = response.list;
-        this.tot_det_rows = this.Record.ordh_detList.length;
         for (let rec of this.Record.ordh_detList) {
           rec.ord_imp_grp_id = response.grpid;
         }
         this.ms.RefreshList(this.Record);
         alert('Save Complete');
+        this.Record.ordh_detList_deleted = new Array<Joborderm>();
       },
         error => {
           this.loading = false;
