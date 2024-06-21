@@ -434,6 +434,7 @@ export class OrderEditComponent {
     this.Recorddet.ord_header_id = this.pkid;
     this.Recorddet.ord_uid = 0;
     this.Recorddet.ord_status = 'REPORTED';
+    this.Recorddet.ord_status_color = 'BLUE';
     this.Recorddet.ord_desc = '';
     this.Recorddet.ord_cargo_status = '';
     this.Recorddet.ord_invno = '';

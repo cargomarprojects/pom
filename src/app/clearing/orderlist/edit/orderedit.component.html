@@ -291,7 +291,7 @@
       </thead>
       <tbody class="page-body-tbody">
         <tr *ngFor="let rec of Record.ordh_detList; let i = index" (mousedown)="ms.selectRowId(rec.ord_pkid)"
-          [class.active]="rec.ord_pkid == ms.getRowId()">
+          [class.active]="rec.ord_pkid == ms.getRowId()" [style.color]="rec.ord_status_color">
           <td class="hlink" (click)="EditRecord(rec)">{{i+1}}</td>
           <td>{{rec.ord_uid}}</td>
           <td>{{rec.ord_status}}</td>
