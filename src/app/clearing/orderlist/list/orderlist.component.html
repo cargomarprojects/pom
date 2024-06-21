@@ -236,6 +236,7 @@
           <th><input type="checkbox" [(ngModel)]="ms.selectcheck" (change)="SelectCheckbox(ms.selectcheck)"></th>
           <th>UID</th>
           <th>EDIT</th>
+          <th>DATE</th>
           <th>STATUS</th>
           <th>CARGO.STATUS</th>
           <th>CARGO.STATUS.DT</th>
@@ -280,6 +281,7 @@
           <td><input type="checkbox" [(ngModel)]="rec.ord_selected" (change)="handleChange(rec)"></td>
           <td>{{rec.ord_uid}}</td>
           <td (click)="ActionHandler('EDIT',rec.ord_header_id)" class="hlink"><i class="fa fa-pencil"></i></td>
+          <td>{{rec.ord_date}}</td>
           <td>{{rec.ord_status}}</td>
           <td>{{rec.ord_cargo_status}}</td>
           <td>{{rec.ord_cargo_status_date}}</td>

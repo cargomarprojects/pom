@@ -269,6 +269,7 @@
         <tr>
           <th>SL#</th>
           <th>UID</th>
+          <th>DATE</th>
           <th>STATUS</th>
           <th>INV#</th>
           <th>PO#</th>
@@ -290,10 +291,11 @@
         </tr>
       </thead>
       <tbody class="page-body-tbody">
-        <tr *ngFor="let rec of Record.ordh_detList; let i = index" (mousedown)="ms.selectRowId(rec.ord_pkid)"
-          [class.active]="rec.ord_pkid == ms.getRowId()" [style.color]="rec.ord_status_color">
+        <tr *ngFor="let rec of Record.ordh_detList; let i = index" (mousedown)="selectRowId(rec.ord_pkid)"
+          [class.active]="rec.ord_pkid == getRowId()" [style.color]="rec.ord_status_color">
           <td class="hlink" (click)="EditRecord(rec)">{{i+1}}</td>
           <td>{{rec.ord_uid}}</td>
+          <td style="text-transform:uppercase">{{rec.ord_date | date : gs.DATE_DISPLAY_FORMAT}}</td>
           <td>{{rec.ord_status}}</td>
           <td>{{rec.ord_invno}}</td>
           <td>{{rec.ord_po}}</td>
@@ -335,8 +337,8 @@
       <div class="col-sm-6">
         <button *ngIf="Record.ordh_status == 'REPORTED'" [hidden]="disableSave" (click)="Save()"
           class="btn btn-success btn-md mr-1">Save</button>
-        <button *ngIf="mode=='EDIT'" (click)="ShowTracking(trackorder2)"
-          class="btn btn-success btn-md">Tracking</button>
+        <!-- <button *ngIf="mode=='EDIT'" (click)="ShowTracking(trackorder2)"
+          class="btn btn-success btn-md">Tracking</button> -->
       </div>
     </div>
   </div>

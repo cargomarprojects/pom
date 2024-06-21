@@ -30,6 +30,7 @@ export class OrderEditComponent {
   loading = false;
   modal: any;
 
+  selectedId:string= "";
   tot_det_rows: number = 0;
   isPrevDetails: boolean = false;
   detailMode = "ADD";
@@ -123,6 +124,7 @@ export class OrderEditComponent {
     this.Record.ordh_pod_code = '';
     // this.Record.ordh_cargo_readiness_date = '';
     this.Record.ordh_detList = new Array<Joborderm>();
+    this.Record.ordh_detList_deleted = new Array<Joborderm>();
     this.Record.ordh_status = 'REPORTED';
     this.Record.ordh_date = this.gs.defaultValues.today;
     this.Record.ordh_remarks = '';
@@ -435,6 +437,7 @@ export class OrderEditComponent {
     this.Recorddet.ord_uid = 0;
     this.Recorddet.ord_status = 'REPORTED';
     this.Recorddet.ord_status_color = 'BLUE';
+    this.Recorddet.ord_date = this.gs.defaultValues.today;
     this.Recorddet.ord_desc = '';
     this.Recorddet.ord_cargo_status = '';
     this.Recorddet.ord_invno = '';
@@ -524,46 +527,27 @@ export class OrderEditComponent {
     if (!confirm("Delete selected row")) {
       return;
     }
-    this.loading = true;
-    let SearchData = {
-      pkid: _rec.ord_pkid,
-      company_code: this.gs.globalVariables.comp_code,
-      branch_code: this.gs.globalVariables.branch_code,
-      user_code: this.gs.globalVariables.user_code
-    };
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
-
-    this.ms.DeleteRecord(SearchData)
-      .subscribe(response => {
-        this.loading = false;
-        if (response.retvalue == false) {
-          this.ErrorMessage = response.error;
-          alert(this.ErrorMessage);
-        }
-        else {
-          this.Record.ordh_detList.splice(this.Record.ordh_detList.findIndex(rec => rec.ord_pkid == _rec.ord_pkid), 1);
-          if (!this.gs.isBlank(this.ms.record.records))
-            this.ms.record.records.splice(this.ms.record.records.findIndex(rec => rec.ord_pkid == _rec.ord_pkid), 1);
-          this.tot_det_rows = this.Record.ordh_detList.length;
-        }
-
-      }, error => {
-        this.loading = false;
-        this.ErrorMessage = this.gs.getError(error);
-        alert(this.ErrorMessage);
-      });
+    this.Record.ordh_detList.splice(this.Record.ordh_detList.findIndex(rec => rec.ord_pkid == _rec.ord_pkid), 1);
+    if (this.gs.isBlank(this.Record.ordh_detList_deleted))
+      this.Record.ordh_detList_deleted = new Array<Joborderm>();
+    this.Record.ordh_detList_deleted.push(_rec)
   }
 
   CloseModal1(params: any) {
     this.modal.close();
   }
 
-  ShowTracking(modalname: any) {
-    if (this.tot_det_rows != this.Record.ordh_detList.length) {
-      alert('Unsaved data found, Please save and continue.......');
-      return;
-    }
-    this.modal = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
+  // ShowTracking(modalname: any) {
+  //   if (this.tot_det_rows != this.Record.ordh_detList.length) {
+  //     alert('Unsaved data found, Please save and continue.......');
+  //     return;
+  //   }
+  //   this.modal = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
+  // }
+  selectRowId(id: string) {
+    this.selectedId = id;
+  }
+  getRowId() {
+    return this.selectedId;
   }
 }
