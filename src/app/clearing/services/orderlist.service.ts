@@ -211,30 +211,54 @@ export class OrderListService {
     this.gs.DownloadFile(this.gs.globalVariables.report_folder, filename, filetype, filedisplayname);
   }
 
-  RefreshList(_rec: Joborderm) {
+  RefreshList(_record: Joborderh) {
     if (this.record.records == null)
       return;
-    var REC = this.record.records.find(rec => rec.ord_header_id == _rec.ord_header_id);
-    if (REC == null) {
-      _rec.ord_date = this.gs.defaultValues.today;
-      this.record.records.push(_rec);
-    }
-    else {
-      REC.ord_agent_name = _rec.ord_agent_name;
-      REC.ord_agent_name = _rec.ord_agent_name;
-      REC.ord_exp_name = _rec.ord_exp_name;
-      REC.ord_imp_name = _rec.ord_imp_name;
-      REC.ord_buy_agent_name = _rec.ord_buy_agent_name;
-      REC.ord_pod_agent_name = _rec.ord_pod_agent_name;
-      // REC.ord_invno = _rec.ord_invno;
-      // REC.ord_po = _rec.ord_po;
-      // REC.ord_style = _rec.ord_style;
-      // REC.ord_color = _rec.ord_color;
-      // REC.ord_pkg = _rec.ord_pkg;
-      // REC.ord_pcs = _rec.ord_pcs;
-      // REC.ord_cbm = _rec.ord_cbm;
-      REC.ord_pol = _rec.ord_pol;
-      REC.ord_pod = _rec.ord_pod;
+
+    if (this.ord_list_type == "SUMMARY") {
+      for (let _rec of _record.ordh_detList) {
+        var REC = this.record.records.find(rec => rec.ord_header_id == _rec.ord_header_id);
+        if (REC == null) {
+          _rec.ord_date = this.gs.defaultValues.today;
+          this.record.records.push(_rec);
+        }
+        else {
+          REC.ord_agent_name = _rec.ord_agent_name;
+          REC.ord_agent_name = _rec.ord_agent_name;
+          REC.ord_exp_name = _rec.ord_exp_name;
+          REC.ord_imp_name = _rec.ord_imp_name;
+          REC.ord_buy_agent_name = _rec.ord_buy_agent_name;
+          REC.ord_pod_agent_name = _rec.ord_pod_agent_name;
+          REC.ord_pol = _rec.ord_pol;
+          REC.ord_pod = _rec.ord_pod;
+        }
+        break;
+      }
+    } else {
+      for (let _rec of _record.ordh_detList) {
+        var REC = this.record.records.find(rec => rec.ord_pkid == _rec.ord_pkid);
+        if (REC == null) {
+          _rec.ord_date = this.gs.defaultValues.today;
+          this.record.records.push(_rec);
+        }
+        else {
+          REC.ord_agent_name = _rec.ord_agent_name;
+          REC.ord_agent_name = _rec.ord_agent_name;
+          REC.ord_exp_name = _rec.ord_exp_name;
+          REC.ord_imp_name = _rec.ord_imp_name;
+          REC.ord_buy_agent_name = _rec.ord_buy_agent_name;
+          REC.ord_pod_agent_name = _rec.ord_pod_agent_name;
+          REC.ord_invno = _rec.ord_invno;
+          REC.ord_po = _rec.ord_po;
+          REC.ord_style = _rec.ord_style;
+          REC.ord_color = _rec.ord_color;
+          REC.ord_pkg = _rec.ord_pkg;
+          REC.ord_pcs = _rec.ord_pcs;
+          REC.ord_cbm = _rec.ord_cbm;
+          REC.ord_pol = _rec.ord_pol;
+          REC.ord_pod = _rec.ord_pod;
+        }
+      }
     }
   }
 

@@ -309,18 +309,12 @@ export class OrderEditComponent {
         this.loading = false;
         this.mode = 'EDIT';
         this.Record.rec_mode = this.mode;
-        this.tot_det_rows = response.list.length;
-        let bok: Boolean = true;
-        for (let rec of response.list) {
-          for (let rec2 of this.Record.ordh_detList.filter(rec2 => rec2.ord_pkid == rec.ord_pkid)) {
-            rec2.ord_uid = rec.ord_uid;
-          }
+        this.Record.ordh_detList = response.list;
+        this.tot_det_rows = this.Record.ordh_detList.length;
+        for (let rec of this.Record.ordh_detList) {
           rec.ord_imp_grp_id = response.grpid;
-          if (bok) {
-            bok = false;
-            this.ms.RefreshList(rec);
-          }
         }
+        this.ms.RefreshList(this.Record);
         alert('Save Complete');
       },
         error => {
