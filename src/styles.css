@@ -344,7 +344,7 @@ hr {
   color: chocolate;
   margin-top: 2px;
 
-  padding: 3px;
+  padding: 2px;
 
   border-color: lightgray;
   border-style: solid;
@@ -365,6 +365,7 @@ hr {
   padding: 2px;
   color: chocolate;
   background-color: #D3D3D3;
+  font-size: medium;
 }
 
 .page-list {
