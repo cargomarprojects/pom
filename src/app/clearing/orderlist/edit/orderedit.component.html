@@ -337,6 +337,8 @@
       <div class="col-sm-6">
         <button *ngIf="Record.ordh_status == 'REPORTED'" [hidden]="disableSave" (click)="Save()"
           class="btn btn-success btn-md mr-1">Save</button>
+           <button *ngIf="mode=='EDIT'" (click)="ShowHistory(history)"
+          class="btn btn-success btn-md">History</button>
         <!-- <button *ngIf="mode=='EDIT'" (click)="ShowTracking(trackorder2)"
           class="btn btn-success btn-md">Tracking</button> -->
       </div>
@@ -410,5 +412,16 @@
   <div class="modal-body p-2">
     <app-trackorder [ord_pkids]="''" [ord_pos]="''" [ord_imp_grp_id]="Record.ordh_imp_grp_id"
       [ord_header_id]="Record.ordh_pkid" (closeModalWindow)="CloseModal1($event)"></app-trackorder>
+  </div>
+</ng-template>
+<ng-template #history let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">History</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-userhistory [pkid]="Record.ordh_pkid"></app-userhistory>
   </div>
 </ng-template>

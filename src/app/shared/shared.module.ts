@@ -43,7 +43,7 @@ import { FileEditComponent } from './fileupload/fileedit.component';
 import { PageComponent } from './page/page.component';
 import { InputBoxComponent } from './input/inputbox.component';
 import { InputBoxNumberComponent } from './inputnumber/inputboxnumber.component';
-
+import { UserHistoryComponent } from './userhistory/userhistory.component';
 
 @NgModule({
   imports: [
@@ -72,7 +72,7 @@ import { InputBoxNumberComponent } from './inputnumber/inputboxnumber.component'
     PageComponent,
     InputBoxComponent,
     InputBoxNumberComponent,
-
+    UserHistoryComponent
   ],
   exports: [
     CommonModule,
@@ -98,7 +98,7 @@ import { InputBoxNumberComponent } from './inputnumber/inputboxnumber.component'
     PageComponent,
     InputBoxComponent,
     InputBoxNumberComponent,
-
+    UserHistoryComponent
   ],
   providers: [
     AlertService,

@@ -543,6 +543,10 @@ export class OrderEditComponent {
   //   }
   //   this.modal = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
   // }
+
+  ShowHistory(modalname: any) {
+    this.modal = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
+  }
   selectRowId(id: string) {
     this.selectedId = id;
   }

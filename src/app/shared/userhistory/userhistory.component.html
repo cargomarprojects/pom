@@ -1,0 +1,65 @@
+<div *ngIf="page_count">
+    <div class="page-box">
+        <ul class="pagination pagination-sm my-1 mx-1">
+            <li class="page-item"><a class="page-link">Page
+                    {{page_current}}/{{page_count}}
+                    (Records-{{page_rowcount}})</a></li>
+            <li class="page-item"><a class="page-link" (click)="List('FIRST')"><span class="fa fa-backward"></span></a>
+            </li>
+            <li class="page-item"><a class="page-link" (click)="List('PREV')"><span class="fa fa-arrow-left"></span></a>
+            </li>
+            <li class="page-item"><a class="page-link" (click)="List('NEXT')"><span
+                        class="fa fa-arrow-right"></span></a>
+            </li>
+            <li class="page-item"><a class="page-link" (click)="List('LAST')"><span class="fa fa-forward"></span></a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="page-box py-2">
+    <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 355px);">
+        <table class="table table-hover table-sm table-bordered">
+            <thead class="page-body-thead">
+                <tr>
+                    <th>ACTION</th>
+                    <th>DATE</th>
+                    <th>USER</th>
+                    <th>CAPTION</th>
+                    <th>OLD VALUE</th>
+                    <th>NEW VALUE</th>
+                    <th>VERSION</th>
+                </tr>
+            </thead>
+            <tbody class="page-body-tbody">
+                <tr *ngFor="let rec of RecordList" (mousedown)="selectRowId(rec.uh_pkid)"
+                    [class.active]="rec.uh_pkid == getRowId()">
+                    <td>{{rec.uh_action}}</td>
+                    <td>{{rec.rec_created_date}}</td>
+                    <td>{{rec.rec_created_by}}</td>
+                    <td>{{rec.uh_caption}}</td>
+                    <td>{{rec.uh_old_value}}</td>
+                    <td>{{rec.uh_new_value}}</td>
+                    <td>{{rec.rec_version}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div *ngIf="page_count">
+    <div class="page-box">
+        <ul class="pagination pagination-sm my-1 mx-1">
+            <li class="page-item"><a class="page-link">Page
+                    {{page_current}}/{{page_count}}
+                    (Records-{{page_rowcount}})</a></li>
+            <li class="page-item"><a class="page-link" (click)="List('FIRST')"><span class="fa fa-backward"></span></a>
+            </li>
+            <li class="page-item"><a class="page-link" (click)="List('PREV')"><span class="fa fa-arrow-left"></span></a>
+            </li>
+            <li class="page-item"><a class="page-link" (click)="List('NEXT')"><span
+                        class="fa fa-arrow-right"></span></a>
+            </li>
+            <li class="page-item"><a class="page-link" (click)="List('LAST')"><span class="fa fa-forward"></span></a>
+            </li>
+        </ul>
+    </div>
+</div>
