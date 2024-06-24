@@ -129,6 +129,7 @@ export class OrderEditComponent {
     this.Record.ordh_remarks = '';
     this.Record.rec_mode = 'ADD';
     this.Record.rec_category = 'SEA EXPORT';
+    this.Record.rec_version = 0;
     // this.Record.ord_imp_grp_id  = '';
     this.NewDetRecord();
   }
@@ -311,6 +312,7 @@ export class OrderEditComponent {
         this.Record.rec_mode = this.mode;
         this.Record.ordh_status = response.ordStatus;
         this.Record.ordh_detList = response.list;
+        this.Record.rec_version = response.version;
         for (let rec of this.Record.ordh_detList) {
           rec.ord_imp_grp_id = response.grpid;
         }
@@ -356,6 +358,11 @@ export class OrderEditComponent {
     if (this.Record.ordh_detList.length <= 0) {
       bret = false;
       sError += "\n\r | Order List Cannot Be Blank";
+    }
+
+    if (this.detailMode == "EDIT") {
+      bret = false;
+      sError += "\n\r | Please Update row and continue.......";
     }
 
     if (bret === false) {
@@ -527,9 +534,8 @@ export class OrderEditComponent {
       return;
     }
     this.Record.ordh_detList.splice(this.Record.ordh_detList.findIndex(rec => rec.ord_pkid == _rec.ord_pkid), 1);
-    if (this.gs.isBlank(this.Record.ordh_detList_deleted))
-      this.Record.ordh_detList_deleted = new Array<Joborderm>();
-    this.Record.ordh_detList_deleted.push(_rec)
+    if (!this.gs.isBlank(this.ms.record.records))
+      this.ms.record.records.splice(this.ms.record.records.findIndex(rec => rec.ord_pkid == _rec.ord_pkid), 1);
   }
 
   CloseModal1(params: any) {

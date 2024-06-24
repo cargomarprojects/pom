@@ -38,6 +38,7 @@ export class Joborderh {
 
   rec_mode: string;
   rec_category: string;
+  rec_version: number;
   _globalvariables: GlobalVariables;
 }
 
@@ -152,6 +153,7 @@ export class Joborderm {
   job_docno: string;
   rec_mode: string;
   rec_category: string;
+  rec_version: number;
   _globalvariables: GlobalVariables;
 }
 export class JobOrder_VM {

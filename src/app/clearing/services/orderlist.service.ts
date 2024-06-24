@@ -259,9 +259,7 @@ export class OrderListService {
           REC.ord_pod = _rec.ord_pod;
         }
       }
-      for (let _rec of _record.ordh_detList_deleted) {
-        this.record.records.splice(this.record.records.findIndex(rec => rec.ord_pkid == _rec.ord_pkid), 1);
-      }
+       
     }
   }
 
