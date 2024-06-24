@@ -2,6 +2,7 @@
 import { GlobalVariables } from '../../core/models/globalvariables';
 
 export class UserHistory {
+    uh_row_color:string;
     uh_pkid: string;
     uh_parent_id: string;
     uh_source: string;

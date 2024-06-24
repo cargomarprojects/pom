@@ -165,7 +165,7 @@
         </div>
       </div>
 
-      <div *ngIf="ms.ord_list_type=='DETAILS'" class="form-group row">
+      <div class="form-group row">
         <div class="col-sm-9 offset-3">
           <button (click)="ms.ShowHistory(history)" class="btn btn-info btn-sm btn-block">History</button>
         </div>
@@ -355,7 +355,7 @@
   </div>
 </ng-template>
 
-<ng-template #history let-c="close" let-d="dismiss">
+<ng-template #historyold let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title">History</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -364,5 +364,17 @@
   </div>
   <div class="modal-body">
     <app-history [pkid]="ms.orderid"></app-history>
+  </div>
+</ng-template>
+
+<ng-template #history let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">History</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-userhistory [pkid]="ms.ord_trkheaderid" [subid]="ms.ord_trkids" ></app-userhistory>
   </div>
 </ng-template>

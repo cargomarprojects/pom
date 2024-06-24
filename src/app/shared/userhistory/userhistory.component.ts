@@ -12,13 +12,14 @@ export class UserHistoryComponent {
     title = 'History Details';
     @Input() public pkid: string = '';
     @Input() public type: string = '';
+    @Input() public subid: string = '';
     InitCompleted: boolean = false;
     disableSave = true;
     loading = false;
     currentTab = 'LIST';
     page_count: 0;
     page_current: 0;
-    page_rows: 20;
+    page_rows: 25;
     page_rowcount: 0;
     selectedId: string = "";
     sub: any;
@@ -32,7 +33,7 @@ export class UserHistoryComponent {
         private gs: GlobalService
     ) {
         this.page_count = 0;
-        this.page_rows = 20;
+        this.page_rows = 25;
         this.page_current = 0;
     }
     // Init Will be called After executing Constructor
@@ -65,6 +66,7 @@ export class UserHistoryComponent {
             table: 'userhistory',
             type: _type,
             pkid: this.pkid,
+            subid: this.subid,
             rowtype: this.type,
             company_code: this.gs.globalVariables.comp_code,
             branch_code: this.gs.globalVariables.branch_code,

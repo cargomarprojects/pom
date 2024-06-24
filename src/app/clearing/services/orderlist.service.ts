@@ -369,16 +369,23 @@ export class OrderListService {
   }
 
   ShowHistory(modalname: any) {
-
-    this.orderid = "";
+    this.total = 0;
+    this.ord_trkids = "";
+    this.ord_trkheaderid = "";
     for (let rec of this.record.records) {
       if (rec.ord_selected) {
-        this.orderid = rec.ord_pkid;
+        this.ord_trkids = rec.ord_pkid;
+        this.ord_trkheaderid = rec.ord_header_id;
+        this.total++;
       }
     }
 
-    if (this.gs.isBlank(this.orderid)) {
+    if (this.gs.isBlank(this.ord_trkheaderid)) {
       alert('No Rows Selected');
+      return;
+    }
+    if (this.total > 1) {
+      alert('Please select one record and continue.....');
       return;
     }
     this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
