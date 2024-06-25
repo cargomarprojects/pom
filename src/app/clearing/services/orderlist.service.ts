@@ -259,7 +259,7 @@ export class OrderListService {
           REC.ord_pod = _rec.ord_pod;
         }
       }
-       
+
     }
   }
 
@@ -372,8 +372,12 @@ export class OrderListService {
     this.ord_trkheaderid = "";
     for (let rec of this.record.records) {
       if (rec.ord_selected) {
-        this.ord_trkids = rec.ord_pkid;
-        this.ord_trkheaderid = rec.ord_header_id;
+        if (this.ord_list_type == "SUMMARY") {
+          this.ord_trkheaderid = rec.ord_header_id;
+        } else {
+          this.ord_trkids = rec.ord_pkid;
+          this.ord_trkheaderid = rec.ord_header_id;
+        }
         this.total++;
       }
     }

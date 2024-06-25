@@ -75,12 +75,12 @@ export class OrderEditComponent {
     this.ErrorMessage = '';
     this.InfoMessage = '';
     if (_mode === 'ADD') {
-      this.mode = 'ADD'
+      this.mode =_mode;
       this.resetControls();
       this.newRecord();
     }
     else if (_mode === 'EDIT') {
-      this.mode = 'EDIT'
+      this.mode = _mode
       this.resetControls();
       this.getRecord(this.pkid);
     }
@@ -341,13 +341,22 @@ export class OrderEditComponent {
       bret = false;
       sError += "\n\r | Consignee Cannot Be Blank";
     }
-    if (this.gs.isBlank(this.Record.ordh_agent_id)) {
+    // if (this.gs.isBlank(this.Record.ordh_agent_id)) {
+    //   bret = false;
+    //   sError += " Agent(Origin) Cannot Be Blank";
+    // }
+    // if (this.gs.isBlank(this.Record.ordh_pod_agent_id)) {
+    //   bret = false;
+    //   sError += "\n\r | Agent(Destination) Cannot Be Blank";
+    // }
+
+    if (this.gs.isBlank(this.Record.ordh_pol)) {
       bret = false;
-      sError += " Agent(Origin) Cannot Be Blank";
+      sError += " POL Cannot Be Blank";
     }
-    if (this.gs.isBlank(this.Record.ordh_pod_agent_id)) {
+    if (this.gs.isBlank(this.Record.ordh_pod)) {
       bret = false;
-      sError += "\n\r | Agent(Destination) Cannot Be Blank";
+      sError += "\n\r | POD Cannot Be Blank";
     }
 
     // if (this.gs.isBlank(this.Record.ord_po)) {
