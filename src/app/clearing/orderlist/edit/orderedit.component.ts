@@ -58,7 +58,7 @@ export class OrderEditComponent {
 
   // Init Will be called After executing Constructor
   ngOnInit() {
-    this.ActionHandler();
+    this.ActionHandler(this.mode);
   }
 
   InitComponent() {
@@ -71,14 +71,16 @@ export class OrderEditComponent {
     }
   }
 
-  ActionHandler() {
+  ActionHandler(_mode: string) {
     this.ErrorMessage = '';
     this.InfoMessage = '';
-    if (this.mode === 'ADD') {
+    if (_mode === 'ADD') {
+      this.mode = 'ADD'
       this.resetControls();
       this.newRecord();
     }
-    else if (this.mode === 'EDIT') {
+    else if (_mode === 'EDIT') {
+      this.mode = 'EDIT'
       this.resetControls();
       this.getRecord(this.pkid);
     }
@@ -123,7 +125,6 @@ export class OrderEditComponent {
     this.Record.ordh_pod_code = '';
     // this.Record.ordh_cargo_readiness_date = '';
     this.Record.ordh_detList = new Array<Joborderm>();
-    this.Record.ordh_detList_deleted = new Array<Joborderm>();
     this.Record.ordh_status = 'REPORTED';
     this.Record.ordh_date = this.gs.defaultValues.today;
     this.Record.ordh_remarks = '';
@@ -167,8 +168,7 @@ export class OrderEditComponent {
           this.loading = false;
           this.ErrorMessage = this.gs.getError(error);
           alert(this.ErrorMessage);
-          this.mode = 'ADD';
-          this.ActionHandler();
+          this.ActionHandler('ADD');
         });
   }
 
@@ -318,7 +318,6 @@ export class OrderEditComponent {
         }
         this.ms.RefreshList(this.Record);
         alert('Save Complete');
-        this.Record.ordh_detList_deleted = new Array<Joborderm>();
       },
         error => {
           this.loading = false;
@@ -541,14 +540,6 @@ export class OrderEditComponent {
   CloseModal1(params: any) {
     this.modal.close();
   }
-
-  // ShowTracking(modalname: any) {
-  //   if (this.tot_det_rows != this.Record.ordh_detList.length) {
-  //     alert('Unsaved data found, Please save and continue.......');
-  //     return;
-  //   }
-  //   this.modal = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
-  // }
 
   ShowHistory(modalname: any) {
     this.modal = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });

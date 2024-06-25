@@ -30,7 +30,6 @@ export class Joborderh {
   ordh_pod_code: string;
   ordh_cargo_readiness_date: string;
   ordh_detList: Joborderm[] = [];
-  ordh_detList_deleted: Joborderm[] = [];
   ordh_status: string;
   ordh_date: string;
   ordh_remarks: string;
