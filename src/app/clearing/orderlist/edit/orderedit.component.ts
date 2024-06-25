@@ -42,7 +42,7 @@ export class OrderEditComponent {
     private modalService: NgbModal,
     public ms: OrderListService,
     private route: ActivatedRoute,
-    private gs: GlobalService
+    public gs: GlobalService
   ) {
     // URL Query Parameter 
     const data = this.route.snapshot.queryParams;
