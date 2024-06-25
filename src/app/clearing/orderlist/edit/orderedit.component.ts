@@ -16,7 +16,7 @@ export class OrderEditComponent {
   title = 'Order List';
   @Input() menuid: string = '';
   @Input() type: string = '';
-  @Input() mode: string = '';
+  @Input() mode: string = 'ADD';
   @Input() pkid: string = '';
 
   // @ViewChild('inv_no') private inv_no_ctrl: InputBoxComponent;
@@ -71,16 +71,16 @@ export class OrderEditComponent {
     }
   }
 
-  ActionHandler(_mode: string) {
+  ActionHandler(_action: string) {
     this.ErrorMessage = '';
     this.InfoMessage = '';
-    if (_mode === 'ADD') {
-      this.mode =_mode;
+    if (_action === 'ADD') {
+      this.mode = "ADD";
       this.resetControls();
       this.newRecord();
     }
-    else if (_mode === 'EDIT') {
-      this.mode = _mode
+    else if (_action === 'EDIT') {
+      this.mode = "EDIT"
       this.resetControls();
       this.getRecord(this.pkid);
     }
@@ -128,7 +128,6 @@ export class OrderEditComponent {
     this.Record.ordh_status = 'REPORTED';
     this.Record.ordh_date = this.gs.defaultValues.today;
     this.Record.ordh_remarks = '';
-    this.Record.rec_mode = 'ADD';
     this.Record.rec_category = 'SEA EXPORT';
     this.Record.rec_version = 0;
     // this.Record.ord_imp_grp_id  = '';
@@ -492,7 +491,7 @@ export class OrderEditComponent {
     this.Recorddet.ord_dlv_pod_date_captn = '';
     this.Recorddet.ord_dlv_pod_date = '';
     this.Recorddet.rec_mode = this.detailMode;
-    this.Recorddet.rec_category = 'SEA EXPORT';
+    this.Recorddet.rec_category = this.Record.rec_category;
     this.Recorddet.ord_imp_grp_id = '';
 
     if (this.isPrevDetails) {
