@@ -50,7 +50,7 @@ export class UserHistoryComponent {
     List(_type: string) {
         this.InfoMessage = '';
         this.ErrorMessage = '';
-        if (this.pkid.trim().length <= 0) {
+        if (this.pkid.trim().length <= 0 && this.subid.trim().length <= 0) {
             this.ErrorMessage = "Invalid ID";
             alert(this.ErrorMessage);
             return;

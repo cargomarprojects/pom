@@ -30,6 +30,8 @@ export class OrderEditComponent {
   loading = false;
   modal: any;
 
+  orderHeaderPkid: string = "";
+  orderPkid: string = "";
   selectedId: string = "";
   isPrevDetails: boolean = false;
   detailMode = "ADD";
@@ -536,6 +538,10 @@ export class OrderEditComponent {
   }
 
   DeleteRow(_rec: Joborderm) {
+    if (_rec.ord_status == "APPROVED") {
+      alert('Cannot Delete, Approved');
+      return;
+    }
 
     if (!confirm("Delete selected row")) {
       return;
@@ -549,7 +555,9 @@ export class OrderEditComponent {
     this.modal.close();
   }
 
-  ShowHistory(modalname: any) {
+  ShowHistory(modalname: any, _ordhPkid: string, _ordPkid: string) {
+    this.orderHeaderPkid = _ordhPkid;
+    this.orderPkid = _ordPkid;
     this.modal = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
   }
   selectRowId(id: string) {

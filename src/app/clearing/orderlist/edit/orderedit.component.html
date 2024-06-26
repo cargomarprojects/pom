@@ -287,6 +287,7 @@
           <th>BOARDING2</th>
           <th>INSTOCK1</th>
           <th>INSTOCK2</th>
+          <th>HISTORY</th>
           <th *ngIf="ms.canDelete" class='text-center'>DELETE</th>
         </tr>
       </thead>
@@ -313,6 +314,8 @@
           <td style="text-transform:uppercase">{{rec.ord_boarding2 | date : gs.DATE_DISPLAY_FORMAT}}</td>
           <td style="text-transform:uppercase">{{rec.ord_instock1 | date : gs.DATE_DISPLAY_FORMAT}}</td>
           <td style="text-transform:uppercase">{{rec.ord_instock2 | date : gs.DATE_DISPLAY_FORMAT}}</td>
+          <td (click)="ShowHistory(history,'',rec.ord_pkid)" class="hlink"><i class="fa fa-history fa-lg pointer"></i>
+          </td>
           <td *ngIf="ms.canDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
               (click)="DeleteRow(rec)"></i></td>
         </tr>
@@ -337,7 +340,7 @@
       <div class="col-sm-6">
         <button *ngIf="Record.ordh_status == 'REPORTED'" [hidden]="disableSave" (click)="Save()"
           class="btn btn-success btn-md mr-1">Save</button>
-           <button *ngIf="mode=='EDIT'" (click)="ShowHistory(history)"
+        <button *ngIf="mode=='EDIT'" (click)="ShowHistory(history,Record.ordh_pkid,'')"
           class="btn btn-success btn-md">History</button>
         <!-- <button *ngIf="mode=='EDIT'" (click)="ShowTracking(trackorder2)"
           class="btn btn-success btn-md">Tracking</button> -->
@@ -422,6 +425,6 @@
     </button>
   </div>
   <div class="modal-body">
-    <app-userhistory [pkid]="Record.ordh_pkid"></app-userhistory>
+    <app-userhistory [pkid]="orderHeaderPkid" [subid]="orderPkid"></app-userhistory>
   </div>
 </ng-template>

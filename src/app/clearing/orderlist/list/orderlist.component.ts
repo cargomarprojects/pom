@@ -19,7 +19,7 @@ export class OrderListComponent {
     private route: ActivatedRoute,
     private location: Location,
     private router: Router,
-  ){
+  ) {
   }
 
   ngOnInit() {
@@ -48,7 +48,7 @@ export class OrderListComponent {
       urlid: this.gs.getGuid(),
       parenturlid: urlid,
       menuid: this.gs.getParameter('menuid'),
-      appid : this.gs.globalVariables.appid,
+      appid: this.gs.globalVariables.appid,
       pkid: id,
       origin: 'orderlist',
       mode: action
@@ -77,6 +77,10 @@ export class OrderListComponent {
         this.ms.total++;
       }
     }
+  }
+
+  SetShowHide(flag: boolean) {
+    this.ms.showhidecheck = flag;
   }
 
   LovSelected(_Record: SearchTable) {
