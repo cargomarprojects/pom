@@ -79,10 +79,6 @@ export class OrderListComponent {
     }
   }
 
-  SetShowHide(flag: boolean) {
-    this.ms.showhidecheck = flag;
-  }
-
   LovSelected(_Record: SearchTable) {
     if (_Record.controlname == "AGENT") {
       this.ms.record.searchQuery.list_agent_id = _Record.id;

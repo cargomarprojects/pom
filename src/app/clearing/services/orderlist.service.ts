@@ -26,7 +26,6 @@ export class OrderListService {
   where_buy_agent = "CUST_IS_BUY_AGENT = 'Y'";
   modalRef: any;
   selectcheck: boolean = false;
-  showhidecheck: boolean = false;
   orderid = "";
   ord_trkids = "";
   ord_trkpos = "";
