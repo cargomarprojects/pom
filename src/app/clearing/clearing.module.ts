@@ -21,6 +21,7 @@ import { VslPlanComponent } from './vslplan/vslplan.component';
 import { VslPlanEditComponent } from './vslplan/vslplan-edit.component';
 import { MblmListComponent } from './mblm/list/mblmlist.component';
 import { MblmEditComponent } from './mblm/edit/mblmedit.component';
+import { CntrComponent } from './mblm/edit/cntr.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { MblmEditComponent } from './mblm/edit/mblmedit.component';
     VslPlanComponent,
     VslPlanEditComponent,
     MblmListComponent,
-    MblmEditComponent
+    MblmEditComponent,
+    CntrComponent
   ],
   imports: [
     SharedModule,

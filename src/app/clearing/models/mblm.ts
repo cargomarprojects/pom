@@ -16,6 +16,21 @@ export class Blm {
   _globalvariables: GlobalVariables;
 }
 
+export class Containerm {
+  cntr_pkid: string;
+  cntr_slno: number;
+  cntr_no: string;
+  cntr_type_id: string;
+  cntr_type_code: string;
+  cntr_type_name: string;
+  
+//   ordh_detList: Joborderm[] = [];
+   
+  rec_mode: string;
+  rec_category: string;
+  rec_version: number;
+  _globalvariables: GlobalVariables;
+}
  
 export class Blm_VM {
   globalvariables: GlobalVariables;
