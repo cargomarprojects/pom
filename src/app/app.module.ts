@@ -34,56 +34,58 @@ import { CustomSerializer } from './reducers';
 import { CustomRouteReuseStrategy } from './customReuseRouteStrategy';
 import { RouteReuseStrategy } from '@angular/router';
 import { LoadAppComponent } from './core/load-app/load-app.component';
+import { ToastComponent } from './core/toast/toast.component';
 
 
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        NgbModule,
-        CommonModule,
-        FormsModule,
-        HttpClientModule,
-        AppRoutingModule,
-        StoreModule.forRoot(reducers, {
-            metaReducers,
-            runtimeChecks: {
-                strictStateImmutability: true,
-                strictActionImmutability: true,
-            },
-        }),
-        EffectsModule.forRoot([]),
-        StoreRouterConnectingModule.forRoot({ 
-            stateKey : 'router',
-            serializer: CustomSerializer
-        }),
-        StoreDevtoolsModule.instrument({
-            maxAge: 25, // Retains last 25 states
-            logOnly: environment.production, // Restrict extension to log-only mode
-        }),
-    ],
-    declarations: [
-        AppComponent,
-        HomeComponent,
-        HeaderComponent,
-        LoginComponent,
-        LoginBranchComponent,
-        ContactComponent,
-        LoadingScreenComponent,
-        LoadAppComponent
-    ],
-    providers: [
-        GlobalService,
-        LoginService,
-        LoadingScreenService,
-        InterceptorServiceProvider,
-        {
-            provide: RouteReuseStrategy,
-            useClass: CustomRouteReuseStrategy
-        }
-    ],
-    bootstrap: [
-        AppComponent
-    ]
+  imports: [
+    BrowserModule,
+    NgbModule,
+    CommonModule,
+    FormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+      },
+    }),
+    EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router',
+      serializer: CustomSerializer
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+    }),
+  ],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    HeaderComponent,
+    LoginComponent,
+    LoginBranchComponent,
+    ContactComponent,
+    LoadingScreenComponent,
+    LoadAppComponent,
+    ToastComponent
+  ],
+  providers: [
+    GlobalService,
+    LoginService,
+    LoadingScreenService,
+    InterceptorServiceProvider,
+    {
+      provide: RouteReuseStrategy,
+      useClass: CustomRouteReuseStrategy
+    }
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

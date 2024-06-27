@@ -12,7 +12,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './orderedit.component.html'
 })
 export class OrderEditComponent {
-  // Local Variables 
+  // Local Variables
   title = 'Order List';
   @Input() menuid: string = '';
   @Input() type: string = '';
@@ -46,7 +46,7 @@ export class OrderEditComponent {
     private route: ActivatedRoute,
     public gs: GlobalService
   ) {
-    // URL Query Parameter 
+    // URL Query Parameter
     const data = this.route.snapshot.queryParams;
     if (data != null) {
       this.InitCompleted = true;
@@ -318,12 +318,14 @@ export class OrderEditComponent {
           rec.ord_imp_grp_id = response.grpid;
         }
         this.ms.RefreshList(this.Record);
-        alert('Save Complete');
+        //alert('Save Complete');
+        this.gs.showToastScreen(['Save Complete']);
       },
         error => {
           this.loading = false;
           this.ErrorMessage = this.gs.getError(error);
-          alert(this.ErrorMessage);
+          this.gs.showToastScreen([this.ErrorMessage]);
+          //alert(this.ErrorMessage);
         });
   }
 

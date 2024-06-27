@@ -779,8 +779,6 @@ new style
   align-items: center;
   gap: 6px;
   color: chocolate;
-  margin: 2px 2px 2px 1px;
-  padding: 12px;
 
   border-left: 1px;
   border-top: 1px;
@@ -788,9 +786,8 @@ new style
   border-bottom: 1px;
   border-style: solid;
   border-color: rgba(0, 0, 0, .125);
-  padding: 6px;
+  padding: 10px 10px 10px 10px;
   margin: 1px;
-
 }
 
 

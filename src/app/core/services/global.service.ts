@@ -9,6 +9,7 @@ import { DefaultValues } from '../models/defaultvalues';
 import { Menum } from '../models/menum';
 import { Modulem } from '../models/modulem';
 import { Tracking_Caption } from '../../clearing/models/tracking_caption';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class GlobalService {
@@ -21,6 +22,10 @@ export class GlobalService {
   public globalData: GlobalData;
   public globalVariables: GlobalVariables;
   public defaultValues: DefaultValues;
+
+  private _toast: Subject<string[]> = new Subject<string[]>();
+  public readonly toast$ = this._toast.asObservable();
+
 
   public baseLocalServerUrl: string = "http://localhost:8080";
   public baseUrl: string = "http://localhost:5000";
@@ -462,5 +467,15 @@ export class GlobalService {
     this.router.navigate(['login'], { replaceUrl: true });
 
   }
+
+
+  public showToastScreen(msg: string[]) {
+    this._toast.next(msg);
+  }
+  public hideToastScreen() {
+    this._toast.next([]);
+  }
+
+
 
 }
