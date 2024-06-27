@@ -38,9 +38,10 @@ table {
   font-size: 10px !important;
 }  */
 .page-link {
-  border-color: rgba(0, 0, 0, .125)!important;
-  background-color:#D3D3D3 !important;
+  border-color: rgba(0, 0, 0, .125) !important;
+  background-color: #D3D3D3 !important;
 }
+
 /* .page-item {
   background-color:#D3D3D3;
   border-color: rgba(0, 0, 0, .125);
@@ -353,7 +354,7 @@ hr {
   font-size: medium;
 }
 
- 
+
 .page-header {
   margin-top: 1px;
   border-left: 1px;
@@ -766,4 +767,30 @@ tr:nth-child(even) {
   background-repeat: no-repeat;
   background-size: contain;
   height: 350px;
+}
+
+/*
+new style
+*/
+
+.page-header-flex {
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  gap: 6px;
+  color: chocolate;
+
+  border-left: 1px;
+  border-top: 1px;
+  border-right: 1px;
+  border-bottom: 1px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, .125);
+  padding: 10px 10px 10px 10px;
+  margin: 1px;
+}
+
+
+.btn {
+  box-shadow: 2px 2px 6px 0px grey;
 }
