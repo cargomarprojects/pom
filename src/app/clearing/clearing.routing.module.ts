@@ -14,6 +14,8 @@ import { HouseListComponent } from './houselist/houselist.component';
 import { HouseEditComponent } from './houselist/edit/houseedit.component';
 import { VslPlanComponent } from './vslplan/vslplan.component';
 import { VslPlanEditComponent } from './vslplan/vslplan-edit.component';
+import { MblmListComponent } from './mblm/list/mblmlist.component';
+import { MblmEditComponent } from './mblm/edit/mblmedit.component';
 
 
 const routes: Routes = [
@@ -30,6 +32,8 @@ const routes: Routes = [
   { path: 'houseedit', component: HouseEditComponent },
   { path: 'vslplan', component: VslPlanComponent },
   { path: 'vslplanedit', component: VslPlanEditComponent },
+  { path: 'mblmlist', component: MblmListComponent },
+  { path: 'mblmedit', component: MblmEditComponent },
 ];
 
 @NgModule({

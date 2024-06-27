@@ -1,0 +1,89 @@
+<div class="page-box py-2">
+    <div class="col">
+        <label style="color: chocolate;font-size: medium;">{{ms.title}}</label>
+        <button class="btn btn-primary btn-sm mx-1" (click)="ActionHandler('ADD','')">New</button>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+<div class="page-box py-2">
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label col-form-label-sm">Search</label>
+                <div class="col-sm-10">
+                    <InputBox [(inputModel)]="ms.record.searchQuery.searchstring" [maxlength]="500" [uppercase]=true>
+                    </InputBox>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group row">
+                <div class="col-sm-9 offset-">
+                    <button (click)="ms.List('NEW')" class="btn btn-info btn-sm btn-block">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="ms.record.searchQuery.page_count">
+    <div class="page-box">
+        <ul class="pagination pagination-sm my-1 mx-1">
+            <li class="page-item"><a class="page-link">Page
+                    {{ms.record.searchQuery.page_current}}/{{ms.record.searchQuery.page_count}}
+                    (Records-{{ms.record.searchQuery.page_rowcount}})</a></li>
+            <li class="page-item"><a class="page-link" (click)="ms.List('FIRST')"><span
+                        class="fa fa-backward"></span></a>
+            </li>
+            <li class="page-item"><a class="page-link" (click)="ms.List('PREV')"><span
+                        class="fa fa-arrow-left"></span></a>
+            </li>
+            <li class="page-item"><a class="page-link" (click)="ms.List('NEXT')"><span
+                        class="fa fa-arrow-right"></span></a>
+            </li>
+            <li class="page-item"><a class="page-link" (click)="ms.List('LAST')"><span class="fa fa-forward"></span></a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="page-box py-2">
+    <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 355px);">
+        <table class="table table-hover table-sm table-bordered">
+            <thead class="page-body-thead">
+                <tr>
+                    <th>EDIT</th>
+                    <th>MBL#</th>
+                    <th>DATE</th>
+                </tr>
+            </thead>
+            <tbody class="page-body-tbody">
+                <tr *ngFor="let rec of ms.record.records" (mousedown)="ms.selectRowId(rec.bl_pkid)"
+                    [class.active]="rec.bl_pkid == ms.getRowId()">
+                    <td (click)="ActionHandler('EDIT',rec.bl_pkid)" class="hlink"><i class="fa fa-pencil"></i>
+                    </td>
+                    <td>{{rec.bl_no}}</td>
+                    <td>{{rec.bl_date}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div *ngIf="ms.record.searchQuery.page_count">
+    <div class="page-box">
+        <ul class="pagination pagination-sm my-1 mx-1">
+            <li class="page-item"><a class="page-link">Page
+                    {{ms.record.searchQuery.page_current}}/{{ms.record.searchQuery.page_count}}
+                    (Records-{{ms.record.searchQuery.page_rowcount}})</a></li>
+            <li class="page-item"><a class="page-link" (click)="ms.List('FIRST')"><span
+                        class="fa fa-backward"></span></a>
+            </li>
+            <li class="page-item"><a class="page-link" (click)="ms.List('PREV')"><span
+                        class="fa fa-arrow-left"></span></a>
+            </li>
+            <li class="page-item"><a class="page-link" (click)="ms.List('NEXT')"><span
+                        class="fa fa-arrow-right"></span></a>
+            </li>
+            <li class="page-item"><a class="page-link" (click)="ms.List('LAST')"><span class="fa fa-forward"></span></a>
+            </li>
+        </ul>
+    </div>
+</div>

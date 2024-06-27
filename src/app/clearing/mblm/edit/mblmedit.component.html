@@ -1,0 +1,44 @@
+<div class="page-box py-2">
+    <div class="col">
+        <label style="color: chocolate;font-size: medium;" class="col-form-label mr-1">{{title}}</label>
+        <button class="btn btn-info btn-sm mx-1" (click)="ActionHandler('ADD')">New</button>
+        <button class="btn btn-info btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div class="page-box py-2">
+    <div class="row">
+        <div class="col-sm-4 mx-0 px-0">
+            <div class="form-group row">
+                <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Mbl#</label>
+                <div class="col-sm-10 pr-0">
+                    <InputBox [(inputModel)]="Record.bl_no" [maxlength]="100" [uppercase]=true></InputBox>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 mx-0 px-0">
+            <div class="form-group row">
+                <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Date</label>
+                <div class="col-sm-10 pr-0">
+                    <app-date [inputdate]="Record.bl_date" (ValueChanged)="Record.bl_date=$event"></app-date>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 mx-0 px-0">
+            <div class="form-group row">
+                <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                <div class="col-sm-10 pr-0">
+                    <button [hidden]="disableSave" (click)="Save()" class="btn btn-success btn-md mr-1">Save</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+ 
+<div *ngIf="InfoMessage" class="alert alert-success">
+    {{InfoMessage}}
+</div>
+<div *ngIf="ErrorMessage" class="alert alert-danger">
+    {{ErrorMessage}}
+</div>
