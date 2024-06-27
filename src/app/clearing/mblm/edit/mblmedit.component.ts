@@ -96,10 +96,14 @@ export class MblmEditComponent {
     this.pkid = this.gs.getGuid();
     this.Record = new Blm();
     this.Record.bl_pkid = this.pkid;
+    this.Record.bl_slno = undefined;
     this.Record.bl_date = this.gs.defaultValues.today;
-    this.Record.bl_type = 'MBL-SE';
+    if (this.type == "SEA EXPORT")
+      this.Record.bl_type = 'MBL-SE';
+    else
+      this.Record.bl_type = 'MBL-AE';
     // this.Record.ordh_detList = new Array<Joborderm>();
-    this.Record.rec_category = 'SEA EXPORT';
+    this.Record.rec_category = this.type;
     this.Record.rec_version = 0;
     this.Record.rec_mode = this.mode;
     this.NewDetRecord();
@@ -195,10 +199,14 @@ export class MblmEditComponent {
     this.loading = true;
     this.ErrorMessage = '';
     this.InfoMessage = '';
+    this.Record.rec_category = this.type;
     this.Record._globalvariables = this.gs.globalVariables;
     this.ms.Save(this.Record)
       .subscribe(response => {
         this.loading = false;
+        if (this.mode == 'ADD') {
+          this.Record.bl_slno = response.slno;
+        }
         this.mode = 'EDIT';
         this.Record.rec_mode = this.mode;
         this.Record.rec_version = response.version;

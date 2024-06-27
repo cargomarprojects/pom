@@ -47,8 +47,9 @@ export class MblmListComponent {
     let parameter = {
       urlid: this.gs.getGuid(),
       parenturlid: urlid,
-      menuid: this.gs.getParameter('menuid'),
       appid: this.gs.globalVariables.appid,
+      menuid: this.gs.getParameter('menuid'),
+      type: this.ms.type,
       pkid: id,
       origin: 'mblmlist',
       mode: action
@@ -69,15 +70,15 @@ export class MblmListComponent {
     //   this.ms.total--;
   }
 
-//   SelectCheckbox(flag: boolean) {
-//     this.ms.total = 0;
-//     for (let rec of this.ms.record.records) {
-//       rec.ord_selected = flag;
-//       if (rec.ord_selected) {
-//         this.ms.total++;
-//       }
-//     }
-//   }
+  //   SelectCheckbox(flag: boolean) {
+  //     this.ms.total = 0;
+  //     for (let rec of this.ms.record.records) {
+  //       rec.ord_selected = flag;
+  //       if (rec.ord_selected) {
+  //         this.ms.total++;
+  //       }
+  //     }
+  //   }
 
   LovSelected(_Record: SearchTable) {
     // if (_Record.controlname == "AGENT") {

@@ -3,6 +3,7 @@ import { PageQuery } from 'src/app/shared/models/pageQuery';
 
 export class Blm {
   bl_pkid: string;
+  bl_slno: number;
   bl_type: string;
   bl_no: string;
   bl_date: string;

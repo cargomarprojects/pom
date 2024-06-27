@@ -8,7 +8,15 @@
 
 <div class="page-box py-2">
     <div class="row">
-        <div class="col-sm-4 mx-0 px-0">
+        <div class="col-sm-3 mx-0 px-0">
+            <div class="form-group row">
+                <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Sl#</label>
+                <div class="col-sm-10 pr-0">
+                    <input type="text" style="color:red; font-weight:bold" class="form-control form-control-sm" [(ngModel)]="Record.bl_slno" [disabled]="true" required maxlength="15" />
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 mx-0 px-0">
             <div class="form-group row">
                 <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Mbl#</label>
                 <div class="col-sm-10 pr-0">
@@ -16,7 +24,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4 mx-0 px-0">
+        <div class="col-sm-3 mx-0 px-0">
             <div class="form-group row">
                 <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Date</label>
                 <div class="col-sm-10 pr-0">
@@ -24,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4 mx-0 px-0">
+        <div class="col-sm-3 mx-0 px-0">
             <div class="form-group row">
                 <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm"></label>
                 <div class="col-sm-10 pr-0">

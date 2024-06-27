@@ -1,9 +1,7 @@
-<div class="page-box py-2">
-    <div class="col">
-        <label style="color: chocolate;font-size: medium;">{{ms.title}}</label>
-        <button class="btn btn-primary btn-sm mx-1" (click)="ActionHandler('ADD','')">New</button>
-        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
-    </div>
+<div class="page-header-flex">
+    <h5>{{ms.title}}</h5>
+    <button class="btn btn-primary btn-sm mx-1" (click)="ActionHandler('ADD','')">New</button>
+    <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
 </div>
 <div class="page-box py-2">
     <div class="row">
@@ -50,6 +48,7 @@
         <table class="table table-hover table-sm table-bordered">
             <thead class="page-body-thead">
                 <tr>
+                    <th>SL#</th>
                     <th>EDIT</th>
                     <th>MBL#</th>
                     <th>DATE</th>
@@ -58,6 +57,7 @@
             <tbody class="page-body-tbody">
                 <tr *ngFor="let rec of ms.record.records" (mousedown)="ms.selectRowId(rec.bl_pkid)"
                     [class.active]="rec.bl_pkid == ms.getRowId()">
+                    <td>{{rec.bl_slno}}</td>
                     <td (click)="ActionHandler('EDIT',rec.bl_pkid)" class="hlink"><i class="fa fa-pencil"></i>
                     </td>
                     <td>{{rec.bl_no}}</td>
