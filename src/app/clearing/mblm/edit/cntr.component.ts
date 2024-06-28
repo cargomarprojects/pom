@@ -19,13 +19,11 @@ export class CntrComponent {
     @Input() menuid: string = '';
     @Input() type: string = '';
     @Input() parentid: string = '';
-
+    @Input() RecordList: Containerm[] = [];
+    
     modal: any;
-
     selectedId: string = '';
-
     loading = false;
-
     CntrTypes: string = "";
 
     private errorMessage: string[] = [];
@@ -37,7 +35,7 @@ export class CntrComponent {
 
 
     // Array For Displaying List
-    RecordList: Containerm[] = [];
+    
     // Single Record for add/edit/view details
     Record: Containerm = new Containerm;
 
@@ -51,7 +49,8 @@ export class CntrComponent {
 
     // Init Will be called After executing Constructor
     ngOnInit() {
-        this.List('NEW');
+        // this.List('NEW');
+        this.ActionHandler("ADD", null);
     }
 
     // Destroy Will be called when this component is closed
@@ -122,27 +121,27 @@ export class CntrComponent {
     }
 
     List(_type: string) {
-        this.loading = true;
-        let SearchData = {
-            type: _type,
-            rowtype: this.type,
-            parentid: this.parentid,
-            company_code: this.gs.globalVariables.comp_code,
-            branch_code: this.gs.globalVariables.branch_code,
-            year_code: this.gs.globalVariables.year_code
-        };
-        this.errorMessage = [];
-        this.ms.List(SearchData)
-            .subscribe(response => {
-                this.loading = false;
-                this.RecordList = response.list;
-                this.ActionHandler("ADD", null);
-            },
-                error => {
-                    this.loading = false;
-                    this.errorMessage.push(this.gs.getError(error));
-                    this.gs.showToastScreen(this.errorMessage);
-                });
+        // this.loading = true;
+        // let SearchData = {
+        //     type: _type,
+        //     rowtype: this.type,
+        //     parentid: this.parentid,
+        //     company_code: this.gs.globalVariables.comp_code,
+        //     branch_code: this.gs.globalVariables.branch_code,
+        //     year_code: this.gs.globalVariables.year_code
+        // };
+        // this.errorMessage = [];
+        // this.ms.List(SearchData)
+        //     .subscribe(response => {
+        //         this.loading = false;
+        //         this.RecordList = response.list;
+        //         this.ActionHandler("ADD", null);
+        //     },
+        //         error => {
+        //             this.loading = false;
+        //             this.errorMessage.push(this.gs.getError(error));
+        //             this.gs.showToastScreen(this.errorMessage);
+        //         });
     }
 
     NewRecord() {
@@ -154,6 +153,7 @@ export class CntrComponent {
         this.Record.cntr_type_id = '';
         this.Record.cntr_type_code = '';
         this.Record.rec_mode = this.mode;
+        this.Record.rec_version = 0;
     }
 
     // Load a single Record for VIEW/EDIT
@@ -194,6 +194,7 @@ export class CntrComponent {
         this.ms.Save(this.Record)
             .subscribe(response => {
                 this.loading = false;
+                this.Record.rec_version = response.version;
                 this.errorMessage.push("Save Complete");
                 this.RefreshList();
                 this.ActionHandler("ADD", null);

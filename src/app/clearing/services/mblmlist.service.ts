@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Blm, SearchQuery, BlmModel } from '../models/mblm';
 import { GlobalService } from '../../core/services/global.service';
-import { Blm_VM } from '../models/mblm';
+import { Blm_VM,Containerm } from '../models/mblm';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable({ providedIn: 'root' })

@@ -4,7 +4,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label col-form-label-sm pr-0">Container#</label>
                 <div class="col-sm-10 pr-0">
-                    <InputBox #inv_no [(inputModel)]="Record.cnt_no" [maxlength]="15" [uppercase]=true></InputBox>
+                    <InputBox #inv_no [(inputModel)]="Record.cntr_no" [maxlength]="15" [uppercase]=true></InputBox>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
                 <label class="col-sm-4 col-form-label  col-form-label-sm pr-0"></label>
                 <div class="col-sm-8 pr-0">
                     <button [disabled]="loading" (click)="Save()"
-                        class="btn btn-primary btn-sm mr-1 mt-1">Add</button>
+                        class="btn btn-primary btn-sm mr-1 mt-1">{{mode==='ADD'?'Add':'Update'}}</button>
                     <button [disabled]="loading" (click)="ActionHandler('ADD','')" class="btn btn-primary btn-sm mt-1">Clear</button>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                     [class.active]="rec.cntr_pkid == getRowId()" >
                     <td class="hlink" (click)="ActionHandler('EDIT',rec.cntr_pkid)">{{i+1}}</td>
                     <td>{{rec.cntr_no}}</td>
-                    <td>{{rec.cntr_type}}</td>
+                    <td>{{rec.cntr_type_code}}</td>
                 </tr>
             </tbody>
         </table>

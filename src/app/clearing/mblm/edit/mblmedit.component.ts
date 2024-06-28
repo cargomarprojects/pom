@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
-import { Blm } from '../../models/mblm';
+import { Blm, Containerm } from '../../models/mblm';
 import { MblmListService } from '../../services/mblmlist.service';
 import { SearchTable } from '../../../shared/models/searchtable';
 import { InputBoxComponent } from '../../../shared/input/inputbox.component';
@@ -33,6 +33,7 @@ export class MblmEditComponent {
   detailMode = "ADD";
   ErrorMessage = "";
   InfoMessage = "";
+  CntrList: Containerm[] = [];
   Record: Blm = <Blm>{};
   //   Recorddet: Joborderm = new Joborderm;
 
@@ -106,6 +107,7 @@ export class MblmEditComponent {
     this.Record.rec_category = this.type;
     this.Record.rec_version = 0;
     this.Record.rec_mode = this.mode;
+    this.CntrList = new Array<Containerm>();
     this.NewDetRecord();
   }
 
@@ -137,6 +139,7 @@ export class MblmEditComponent {
       .subscribe(response => {
         this.loading = false;
         this.loadData(response.record);
+        this.CntrList = response.cntrlist;
       },
         error => {
           this.loading = false;

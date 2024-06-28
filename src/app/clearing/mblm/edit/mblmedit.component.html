@@ -37,7 +37,7 @@
             <div class="form-group row">
                 <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm"></label>
                 <div class="col-sm-10 pr-0">
-                    <button [hidden]="disableSave" (click)="Save()" class="btn btn-success btn-md mr-1">Save</button>
+                    <button [hidden]="disableSave" (click)="Save()" class="btn btn-success btn-md mr-1">{{mode==='ADD'?'Save':'Update'}}</button>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
     </div>
 </div>
 <div *ngIf="mode=='EDIT'">
-    <app-cntr [parentid]="pkid" [type]="type" [menuid]="menuid"></app-cntr>
+    <app-cntr [parentid]="pkid" [type]="type" [menuid]="menuid" [RecordList]="CntrList"></app-cntr>
 </div>
 
 
