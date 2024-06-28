@@ -19,7 +19,7 @@ export class LinkCntrHblComponent {
     @Input() type: string = '';
     @Input() parentid: string = '';
     @Input() RecordList: Containerd[] = [];
-    
+
     modal: any;
     selectedId: string = '';
     loading = false;
@@ -34,7 +34,7 @@ export class LinkCntrHblComponent {
 
 
     // Array For Displaying List
-    
+
     // Single Record for add/edit/view details
     Record: Containerd = new Containerd;
 
@@ -113,7 +113,7 @@ export class LinkCntrHblComponent {
             this.mode = 'EDIT';
             this.ResetControls();
             this.pkid = id;
-            // this.GetRecord(id);
+            this.GetRecord(id);
         }
 
     }
@@ -161,30 +161,31 @@ export class LinkCntrHblComponent {
     }
 
     // Load a single Record for VIEW/EDIT
-    // GetRecord(Id: string) {
-    //     this.loading = true;
+    GetRecord(Id: string) {
+        this.loading = true;
 
-    //     let SearchData = {
-    //         pkid: Id,
-    //     };
-    //     this.errorMessage = [];
+        let SearchData = {
+            pkid: Id,
+        };
+        this.errorMessage = [];
 
-    //     this.ms.GetRecord(SearchData)
-    //         .subscribe(response => {
-    //             this.loading = false;
-    //             this.LoadData(response.record);
-    //         },
-    //             error => {
-    //                 this.loading = false;
-    //                 this.errorMessage.push(this.gs.getError(error));
-    //                 this.gs.showToastScreen(this.errorMessage);
-    //             });
-    // }
+        this.ms.GetRecordLink(SearchData)
+            .subscribe(response => {
+                this.loading = false;
+                this.LoadData(response.record);
+            },
+                error => {
+                    this.loading = false;
+                    this.errorMessage.push(this.gs.getError(error));
+                    this.gs.showToastScreen(this.errorMessage);
+                });
+    }
 
-    // LoadData(_Record: Containerd) {
-    //     this.Record = _Record;
-    //     this.Record.rec_mode = this.mode;
-    // }
+    LoadData(_Record: Containerd) {
+        this.Record = _Record;
+        this.Record.rec_mode = this.mode;
+    }
+
     // Save Data
     Save() {
 
@@ -259,7 +260,7 @@ export class LinkCntrHblComponent {
             parentid: this.parentid
         };
         this.errorMessage = [];
-        
+
         this.ms.DeleteRecord(SearchData)
             .subscribe(response => {
                 this.loading = false;

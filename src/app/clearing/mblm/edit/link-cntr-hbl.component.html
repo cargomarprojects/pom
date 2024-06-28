@@ -35,7 +35,7 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label  col-form-label-sm pr-0"></label>
                 <div class="col-sm-8 pr-0">
-                    <button [disabled]="loading" (click)="Save()" class="btn btn-primary btn-sm mr-1 mt-1">Add</button>
+                    <button [disabled]="loading" (click)="Save()" class="btn btn-primary btn-sm mr-1 mt-1">{{mode==='ADD'?'Add':'Update'}}</button>
                     <button [disabled]="loading" (click)="ActionHandler('ADD','')"
                         class="btn btn-primary btn-sm mt-1">Clear</button>
                 </div>
@@ -57,7 +57,7 @@
             <tbody class="page-body-tbody">
                 <tr *ngFor="let rec of RecordList; let i = index" (mousedown)="selectRowId(rec.cntrd_pkid)"
                     [class.active]="rec.cntrd_pkid == getRowId()">
-                    <td>{{i+1}}</td>
+                    <td class="hlink" (click)="ActionHandler('EDIT',rec.cntrd_pkid)">{{i+1}}</td>
                     <!-- <td>{{rec.cntrd_mbl_no}}</td> -->
                     <td>{{rec.cntrd_hbl_no}}</td>
                     <td>{{rec.cntrd_cntr_no}}</td>
