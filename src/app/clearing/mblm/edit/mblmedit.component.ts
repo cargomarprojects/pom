@@ -34,6 +34,7 @@ export class MblmEditComponent {
   ErrorMessage = "";
   InfoMessage = "";
   CntrList: Containerm[] = [];
+  HblList: Blm[] = [];
   Record: Blm = <Blm>{};
   //   Recorddet: Joborderm = new Joborderm;
 
@@ -99,15 +100,17 @@ export class MblmEditComponent {
     this.Record.bl_pkid = this.pkid;
     this.Record.bl_slno = undefined;
     this.Record.bl_date = this.gs.defaultValues.today;
+    this.Record.bl_type = '';
     if (this.type == "SEA EXPORT")
       this.Record.bl_type = 'MBL-SE';
-    else
+    else if (this.type == "AIR EXPORT")
       this.Record.bl_type = 'MBL-AE';
     // this.Record.ordh_detList = new Array<Joborderm>();
     this.Record.rec_category = this.type;
     this.Record.rec_version = 0;
     this.Record.rec_mode = this.mode;
     this.CntrList = new Array<Containerm>();
+    this.HblList = new Array<Blm>();
     this.NewDetRecord();
   }
 
@@ -131,7 +134,10 @@ export class MblmEditComponent {
     this.loading = true;
     let SearchData = {
       pkid: Id,
-      user_code: this.gs.globalVariables.user_code
+      company_code: this.gs.globalVariables.comp_code,
+      branch_code: this.gs.globalVariables.branch_code,
+      user_code: this.gs.globalVariables.user_code,
+      type: this.type
     };
     this.ErrorMessage = '';
     this.InfoMessage = '';
@@ -140,6 +146,7 @@ export class MblmEditComponent {
         this.loading = false;
         this.loadData(response.record);
         this.CntrList = response.cntrlist;
+        this.HblList = response.hbllist;
       },
         error => {
           this.loading = false;

@@ -113,7 +113,7 @@ export class MblmListService {
         this.loading = true;
         let SearchData = {
             type: _type,
-            rowtype: '',
+            rowtype: this.type,
             searchstring: this._record.searchQuery.searchstring,
             company_code: this.gs.globalVariables.comp_code,
             branch_code: this.gs.globalVariables.branch_code,

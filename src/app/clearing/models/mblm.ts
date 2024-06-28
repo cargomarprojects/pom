@@ -23,7 +23,7 @@ export class Containerm {
   cntr_type_id: string;
   cntr_type_code: string;
   cntr_type_name: string;
-  
+  cntr_mbl_id: string;
 //   ordh_detList: Joborderm[] = [];
    
   rec_mode: string;
