@@ -149,7 +149,7 @@ export class MblmEditComponent {
         this.loadData(response.record);
         this.CntrList = response.cntrlist;
         this.HblList = response.hbllist;
-        // this.LinkList = response.linklist;
+        this.LinkList = response.linklist;
       },
         error => {
           this.loading = false;

@@ -50,7 +50,6 @@ export class LinkCntrHblComponent {
     ngOnInit() {
         // this.List('NEW');
         this.ActionHandler("ADD", null);
-        alert(this.parentid)
     }
 
     // Destroy Will be called when this component is closed
@@ -199,7 +198,7 @@ export class LinkCntrHblComponent {
         this.ms.SaveLink(this.Record)
             .subscribe(response => {
                 this.loading = false;
-                this.Record.rec_version = response.version;
+                //this.Record.rec_version = response.version;
                 this.errorMessage.push("Save Complete");
                 this.RefreshList();
                 this.ActionHandler("ADD", null);

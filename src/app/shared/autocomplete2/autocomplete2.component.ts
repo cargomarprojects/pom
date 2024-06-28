@@ -246,7 +246,7 @@ export class AutoComplete2Component {
       this.inputdata.col7 = '';
 
       this.displaydata = '';
-      this.parentid = '';
+      // this.parentid = '';
 
 
 
@@ -265,7 +265,7 @@ export class AutoComplete2Component {
         this._displaydata = _Record.name;
 
 
-      this._parentid = _Record.parentid;
+      // this._parentid = _Record.parentid;
 
 
       this.inputdata.col1 = _Record.col1;
