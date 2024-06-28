@@ -1,5 +1,13 @@
 <div class="page-box py-2">
     <div class="row">
+        <div class="col-sm-12 mx-0 px-0">
+            <div class="form-group row">
+                <label style="color: black;font-weight: bold;background-color: skyblue;"
+                    class="col-sm-12 p-1">CONTAINER DETAILS</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-sm-3 mx-0 px-0">
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label col-form-label-sm pr-0">Container#</label>
@@ -12,10 +20,11 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label col-form-label-sm pr-0">Type</label>
                 <div class="col-sm-10 pr-0">
-                    <app-autocomplete2 [controlname]="'CNTR-TYPE'" [tabletype]="'CONTAINER TYPE'" [displaycolumn]="'CODE'"
-                    [displaydata]="Record.cntr_type_code" (ValueChanged)="LovSelected($event)" [where]="">
-                     </app-autocomplete2>
-                     
+                    <app-autocomplete2 [controlname]="'CNTR-TYPE'" [tabletype]="'CONTAINER TYPE'"
+                        [displaycolumn]="'CODE'" [displaydata]="Record.cntr_type_code"
+                        (ValueChanged)="LovSelected($event)" [where]="">
+                    </app-autocomplete2>
+
                 </div>
             </div>
         </div>
@@ -25,7 +34,8 @@
                 <div class="col-sm-8 pr-0">
                     <button [disabled]="loading" (click)="Save()"
                         class="btn btn-primary btn-sm mr-1 mt-1">{{mode==='ADD'?'Add':'Update'}}</button>
-                    <button [disabled]="loading" (click)="ActionHandler('ADD','')" class="btn btn-primary btn-sm mt-1">Clear</button>
+                    <button [disabled]="loading" (click)="ActionHandler('ADD','')"
+                        class="btn btn-primary btn-sm mt-1">Clear</button>
                 </div>
             </div>
         </div>
@@ -43,7 +53,7 @@
             </thead>
             <tbody class="page-body-tbody">
                 <tr *ngFor="let rec of RecordList; let i = index" (mousedown)="selectRowId(rec.cntr_pkid)"
-                    [class.active]="rec.cntr_pkid == getRowId()" >
+                    [class.active]="rec.cntr_pkid == getRowId()">
                     <td class="hlink" (click)="ActionHandler('EDIT',rec.cntr_pkid)">{{i+1}}</td>
                     <td>{{rec.cntr_no}}</td>
                     <td>{{rec.cntr_type_code}}</td>
