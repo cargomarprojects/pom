@@ -21,9 +21,9 @@ import { VslPlanComponent } from './vslplan/vslplan.component';
 import { VslPlanEditComponent } from './vslplan/vslplan-edit.component';
 import { MblmListComponent } from './mblm/list/mblmlist.component';
 import { MblmEditComponent } from './mblm/edit/mblmedit.component';
-import { CntrComponent } from './mblm/edit/cntr.component';
-import { HblComponent } from './mblm/edit/hbl.component';
-import { LinkCntrHblComponent } from './mblm/edit/link-cntr-hbl.component';
+import { CntrComponent } from './mblm/edit/other/cntr.component';
+import { HblComponent } from './mblm/edit/other/hbl.component';
+import { LinkCntrHblComponent } from './mblm/edit/other/link-cntr-hbl.component';
 
 @NgModule({
   declarations: [

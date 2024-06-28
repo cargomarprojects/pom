@@ -222,14 +222,7 @@ export class MblmListService {
     LoadDefault(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/MblmList/LoadDefault', SearchData, this.gs.headerparam2('authorized'));
     }
-
-    SaveLink(Record: Containerd) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/MblmList/SaveLink', Record, this.gs.headerparam2('authorized'));
-    }
-
-    GetRecordLink(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/MblmList/GetRecordLink', SearchData, this.gs.headerparam2('authorized'));
-    }
+     
 }
 
 

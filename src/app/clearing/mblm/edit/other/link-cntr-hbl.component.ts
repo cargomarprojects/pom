@@ -1,26 +1,25 @@
 import { Component, Input, Output, OnInit, OnDestroy, EventEmitter, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { GlobalService } from '../../../core/services/global.service';
-import { Containerm } from '../../models/mblm';
-import { CntrService } from '../../services/cntr.service';
-
-import { SearchTable } from '../../../shared/models/searchtable';
+import { GlobalService } from '../../../../core/services/global.service';
+import { Containerd } from '../../../models/mblm';
+import { LinkCntrHblService } from '../../../services/linkcntrhbl.service';
+import { SearchTable } from '../../../../shared/models/searchtable';
 
 @Component({
-    selector: 'app-cntr',
-    templateUrl: './cntr.component.html',
-    providers: [CntrService]
+    selector: 'app-link-cntr-hbl',
+    templateUrl: './link-cntr-hbl.component.html',
+    providers: [LinkCntrHblService]
 })
-export class CntrComponent {
+export class LinkCntrHblComponent {
     // Local Variables 
-    title = 'Container List';
+    title = 'Mapping List';
 
     @Input() menuid: string = '';
     @Input() type: string = '';
     @Input() parentid: string = '';
-    @Input() RecordList: Containerm[] = [];
-    
+    @Input() RecordList: Containerd[] = [];
+
     modal: any;
     selectedId: string = '';
     loading = false;
@@ -35,12 +34,12 @@ export class CntrComponent {
 
 
     // Array For Displaying List
-    
+
     // Single Record for add/edit/view details
-    Record: Containerm = new Containerm;
+    Record: Containerd = new Containerd;
 
     constructor(
-        private ms: CntrService,
+        private ms: LinkCntrHblService,
         private route: ActivatedRoute,
         private gs: GlobalService,
         private modalService: NgbModal,
@@ -85,9 +84,13 @@ export class CntrComponent {
 
     LovSelected(_Record: SearchTable) {
 
-        if (_Record.controlname == "CNTR-TYPE") {
-            this.Record.cntr_type_id = _Record.id;
-            this.Record.cntr_type_code = _Record.code;
+        if (_Record.controlname == "CNTR-NO") {
+            this.Record.cntrd_cntr_id = _Record.id;
+            this.Record.cntrd_cntr_no = _Record.code;
+        }
+        if (_Record.controlname == "HOUSE-NO") {
+            this.Record.cntrd_hbl_id = _Record.id;
+            this.Record.cntrd_hbl_no = _Record.code;
         }
 
     }
@@ -145,14 +148,14 @@ export class CntrComponent {
     }
 
     NewRecord() {
-
         this.pkid = this.gs.getGuid();
-        this.Record = new Containerm();
-        this.Record.cntr_pkid = this.pkid;
-        this.Record.cntr_mbl_id = this.parentid;
-        this.Record.cntr_no = '';
-        this.Record.cntr_type_id = '';
-        this.Record.cntr_type_code = '';
+        this.Record = new Containerd();
+        this.Record.cntrd_pkid = this.pkid;
+        this.Record.cntrd_mbl_id = this.parentid;
+        this.Record.cntrd_cntr_id = '';
+        this.Record.cntrd_cntr_no = '';
+        this.Record.cntrd_hbl_id = '';
+        this.Record.cntrd_hbl_no = '';
         this.Record.rec_mode = this.mode;
         this.Record.rec_version = 0;
     }
@@ -178,10 +181,11 @@ export class CntrComponent {
                 });
     }
 
-    LoadData(_Record: Containerm) {
+    LoadData(_Record: Containerd) {
         this.Record = _Record;
         this.Record.rec_mode = this.mode;
     }
+
     // Save Data
     Save() {
 
@@ -196,7 +200,7 @@ export class CntrComponent {
             .subscribe(response => {
                 this.loading = false;
                 this.Record.rec_version = response.version;
-                this.errorMessage.push("Save Complete");
+                //this.errorMessage.push("Save Complete");
                 this.RefreshList();
                 this.ActionHandler("ADD", null);
             },
@@ -212,13 +216,13 @@ export class CntrComponent {
         let bret: boolean = true;
         this.errorMessage = [];
 
-        if (this.Record.cntr_no.length <= 0) {
+        if (this.Record.cntrd_cntr_id.length <= 0) {
             bret = false;
             this.errorMessage.push("Container No Cannot Be Blank");
         }
-        if (this.Record.cntr_type_id.length <= 0) {
+        if (this.Record.cntrd_hbl_id.length <= 0) {
             bret = false;
-            this.errorMessage.push("Container Type Cannot Be Blank");
+            this.errorMessage.push("House No Cannot Be Blank");
         }
 
         if (bret === false) {
@@ -231,13 +235,13 @@ export class CntrComponent {
 
         if (this.RecordList == null)
             return;
-        var REC = this.RecordList.find(rec => rec.cntr_pkid == this.Record.cntr_pkid);
+        var REC = this.RecordList.find(rec => rec.cntrd_pkid == this.Record.cntrd_pkid);
         if (REC == null) {
             this.RecordList.push(this.Record);
         }
         else {
-            REC.cntr_no = this.Record.cntr_no;
-            REC.cntr_type_code = this.Record.cntr_type_code;
+            REC.cntrd_cntr_no = this.Record.cntrd_cntr_no;
+            REC.cntrd_hbl_no = this.Record.cntrd_hbl_no;
         }
     }
 
@@ -256,11 +260,11 @@ export class CntrComponent {
             parentid: this.parentid
         };
         this.errorMessage = [];
-        
+
         this.ms.DeleteRecord(SearchData)
             .subscribe(response => {
                 this.loading = false;
-                this.RecordList.splice(this.RecordList.findIndex(rec => rec.cntr_pkid == Id), 1);
+                this.RecordList.splice(this.RecordList.findIndex(rec => rec.cntrd_pkid == Id), 1);
                 this.ActionHandler('ADD', null);
             },
                 error => {
@@ -278,7 +282,7 @@ export class CntrComponent {
     OnBlur(field: string) {
         switch (field) {
             case 'cntr_no': {
-                this.Record.cntr_no = this.Record.cntr_no.toUpperCase();
+                // this.Record.cntr_no = this.Record.cntr_no.toUpperCase();
                 break;
             }
         }
