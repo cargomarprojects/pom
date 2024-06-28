@@ -23,6 +23,7 @@ import { MblmListComponent } from './mblm/list/mblmlist.component';
 import { MblmEditComponent } from './mblm/edit/mblmedit.component';
 import { CntrComponent } from './mblm/edit/cntr.component';
 import { HblComponent } from './mblm/edit/hbl.component';
+import { LinkCntrHblComponent } from './mblm/edit/link-cntr-hbl.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { HblComponent } from './mblm/edit/hbl.component';
     MblmListComponent,
     MblmEditComponent,
     CntrComponent,
-    HblComponent
+    HblComponent,
+    LinkCntrHblComponent
   ],
   imports: [
     SharedModule,

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Blm, SearchQuery, BlmModel } from '../models/mblm';
+import { Blm,Containerd, SearchQuery, BlmModel } from '../models/mblm';
 import { GlobalService } from '../../core/services/global.service';
 import { Blm_VM,Containerm } from '../models/mblm';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -223,7 +223,9 @@ export class MblmListService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/MblmList/LoadDefault', SearchData, this.gs.headerparam2('authorized'));
     }
 
-
+    SaveLink(Record: Containerd) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/MblmList/SaveLink', Record, this.gs.headerparam2('authorized'));
+    }
 }
 
 

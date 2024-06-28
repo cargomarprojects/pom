@@ -32,6 +32,21 @@ export class Containerm {
   _globalvariables: GlobalVariables;
 }
  
+export class Containerd {
+  cntrd_pkid: string; 
+  cntrd_parent_id: string;
+  cntrd_cntr_no: string;
+  cntrd_mbl_id: string;
+  cntrd_mbl_no: string;
+  cntrd_hbl_id: string;
+  cntrd_hbl_no: string;
+   
+  rec_mode: string;
+  rec_category: string;
+  rec_version: number;
+  _globalvariables: GlobalVariables;
+}
+
 export class Blm_VM {
   globalvariables: GlobalVariables;
   blm: Blm[] = [];
