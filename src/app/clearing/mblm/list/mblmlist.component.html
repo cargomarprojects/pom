@@ -1,7 +1,7 @@
 <div class="page-header-flex">
     <h5>{{ms.title}}</h5>
-    <button class="btn btn-primary btn-sm mx-1" (click)="ActionHandler('ADD','')">New</button>
-    <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    <button class="btn btn-info btn-sm mx-1" (click)="ActionHandler('ADD','')">New</button>
+    <button class="btn btn-info btn-sm mr-1" (click)="Close()">Return</button>
 </div>
 <div class="page-box py-2">
     <div class="row">
@@ -54,8 +54,8 @@
                     <th>DATE</th>
                     <th>PLAN#</th>
                     <th>WEEK#</th>
-                    <th>POL.AGENT</th>
                     <th>CONSIGNEE</th>
+                    <th>POL.AGENT</th>
                     <th>POD.AGENT</th>
                 </tr>
             </thead>
@@ -69,8 +69,8 @@
                     <td>{{rec.bl_date}}</td>
                     <td>{{rec.vp_plan_no==0?'':rec.vp_plan_no}}</td>
                     <td>{{rec.vp_week_no==0?'':rec.vp_week_no}}</td>
-                    <td>{{rec.vp_pol_agent_name}}</td>
                     <td>{{rec.vp_imp_name}}</td>
+                    <td>{{rec.vp_pol_agent_name}}</td>
                     <td>{{rec.vp_pod_agent_name}}</td>
                 </tr>
             </tbody>

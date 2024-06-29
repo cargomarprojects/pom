@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
-import { Blm, Containerm ,Containerd} from '../../models/mblm';
+import { Blm, Containerm, Containerd } from '../../models/mblm';
 import { MblmListService } from '../../services/mblmlist.service';
 import { SearchTable } from '../../../shared/models/searchtable';
 import { InputBoxComponent } from '../../../shared/input/inputbox.component';
@@ -26,6 +26,7 @@ export class MblmEditComponent {
   InitCompleted: boolean = false;
   menu_record: any;
   bAdmin = false;
+  bDocs: boolean = false;
   disableSave = true;
   loading = false;
   modal: any;
@@ -64,11 +65,14 @@ export class MblmEditComponent {
 
   InitComponent() {
     this.bAdmin = false;
+    this.bDocs = false;
     this.menu_record = this.gs.getMenu(this.menuid);
     if (this.menu_record) {
       this.title = this.menu_record.menu_name;
       if (this.menu_record.rights_admin)
         this.bAdmin = true;
+      if (this.menu_record.rights_docs)
+        this.bDocs = true;
     }
   }
 
@@ -358,5 +362,14 @@ export class MblmEditComponent {
   }
   getRowId() {
     return this.selectedId;
+  }
+
+  ShowDocuments(doc: any) {
+    this.ErrorMessage = '';
+    this.open(doc);
+  }
+  
+  open(content: any) {
+    this.modal = this.modalService.open(content, { backdrop: 'static', keyboard: true });
   }
 }

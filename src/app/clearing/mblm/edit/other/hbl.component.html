@@ -44,7 +44,8 @@
                 <tr>
                     <th width="10%">SL#</th>
                     <th width="20%">HOUSE#</th>
-                    <th width="70%">DATE</th>
+                    <th width="20%">DATE</th>
+                    <th *ngIf="bDocs" width="50%">DOCUMENTS</th>
                 </tr>
             </thead>
             <tbody class="page-body-tbody">
@@ -53,8 +54,23 @@
                     <td class="hlink" (click)="ActionHandler('EDIT',rec.bl_pkid)">{{i+1}}</td>
                     <td>{{rec.bl_no}}</td>
                     <td style="text-transform:uppercase">{{rec.bl_date | date : gs.DATE_DISPLAY_FORMAT}}</td>
+                    <td *ngIf="bDocs"  class="hlink" (click)="ShowDocuments(rec.bl_pkid,doc)"><i class="fa fa-file"></i></td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+<ng-template #doc let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Documents</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-upload [pkid]="parentid"  [groupid]="docGroupId" [type]="'HBL-DOCUMENTS'"></app-upload>
+    </div>
+    <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-outline-light" (click)="c('Close click')">Close</button>
+    </div> -->
+</ng-template>

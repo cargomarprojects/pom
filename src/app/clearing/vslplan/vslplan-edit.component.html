@@ -62,7 +62,7 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">Master#</label>
         <div class="col-sm-10 pr-0">
-          <app-autocomplete2 [disabled]="ctrlDisable" [controlname]="'MASTER-NO'" [tabletype]="'MASTER-BL-NOS'"
+          <app-autocomplete2 [controlname]="'MASTER-NO'" [tabletype]="'MASTER-BL-NOS'"
             [displaycolumn]="'NAME'" [displaydata]="Record.vp_mbl_no" (ValueChanged)="LovSelected($event)"
             [where]="">
           </app-autocomplete2>
@@ -70,9 +70,7 @@
       </div>
     </div>
 
-
     <div class="col-sm-4">
-
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">POL</label>
         <div class="col-sm-4 pr-0">

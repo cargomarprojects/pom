@@ -38,6 +38,8 @@
                 <div class="col-sm-10 pr-0">
                     <button [hidden]="disableSave" (click)="Save()"
                         class="btn btn-success btn-md mr-1">{{mode==='ADD'?'Save':'Update'}}</button>
+                    <button [hidden]="disableSave" *ngIf="mode == 'EDIT' && bDocs" (click)="ShowDocuments(doc)"
+                        class="btn btn-success btn-md">Documents</button>
                 </div>
             </div>
         </div>
@@ -58,3 +60,18 @@
 <div *ngIf="ErrorMessage" class="alert alert-danger">
     {{ErrorMessage}}
 </div>
+
+<ng-template #doc let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Documents</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-upload [pkid]="pkid" [type]="'MBL-DOCUMENTS'"></app-upload>
+    </div>
+    <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-outline-light" (click)="c('Close click')">Close</button>
+    </div> -->
+</ng-template>

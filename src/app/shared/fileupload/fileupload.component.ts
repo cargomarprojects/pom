@@ -44,7 +44,7 @@ export class FileUploadComponent {
 
   }
 
-  @ViewChild('fileinput',{static:true}) private fileinput: ElementRef;
+  @ViewChild('fileinput', { static: true }) private fileinputCtrl: ElementRef;
 
   RecordList: documentm[] = [];
 
@@ -180,7 +180,8 @@ export class FileUploadComponent {
         data => {
           this.loading = false;
           this.filesSelected = false;
-          this.fileinput.nativeElement.value = '';
+          if (!this.gs.isBlank(this.fileinputCtrl))
+            this.fileinputCtrl.nativeElement.value = '';
           this.List('NEW');
           alert('Upload Complete');
         },

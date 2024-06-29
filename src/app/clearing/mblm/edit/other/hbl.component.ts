@@ -21,8 +21,11 @@ export class HblComponent {
     @Input() RecordList: Blm[] = [];
 
     modal: any;
+    menu_record: any;
     selectedId: string = '';
     loading = false;
+    bDocs: boolean = false;
+    docGroupId: string = '';
 
     private errorMessage: string[] = [];
 
@@ -41,14 +44,27 @@ export class HblComponent {
         private gs: GlobalService,
         private modalService: NgbModal,
     ) {
+        
     }
+
 
     // Init Will be called After executing Constructor
     ngOnInit() {
         // this.List('NEW');
+        this.InitComponent();
         this.ActionHandler("ADD", null);
     }
 
+    InitComponent() {
+
+        this.bDocs = false;
+        this.menu_record = this.gs.getMenu(this.menuid);
+        if (this.menu_record) {
+            this.title = this.menu_record.menu_name;
+            if (this.menu_record.rights_docs)
+                this.bDocs = true;
+        }
+    }
     // Destroy Will be called when this component is closed
     ngOnDestroy() {
 
@@ -286,6 +302,14 @@ export class HblComponent {
         }
     }
 
+    ShowDocuments(_id: string, doc: any) {
+        this.docGroupId = _id;
+        this.open(doc);
+    }
+
+    open(content: any) {
+        this.modal = this.modalService.open(content, { backdrop: 'static', keyboard: true });
+    }
 }
 
 

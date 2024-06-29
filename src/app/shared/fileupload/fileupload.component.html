@@ -1,11 +1,11 @@
 <div class="page-header">
   <div class="col">
     <label>{{title}}</label>
-    <button [disabled]="loading" (click)="List('LIST')" class="btn btn-primary btn-sm mx-1">Refresh</button>
-    <button [disabled]="loading" (click)="List('LIST','DELETED')" class="btn btn-primary btn-sm mr-1">Show Deleted</button>
+    <button [disabled]="loading" (click)="List('LIST')" class="btn btn-info btn-sm mx-1">Refresh</button>
+    <button [disabled]="loading" (click)="List('LIST','DELETED')" class="btn btn-info btn-sm mr-1">Show
+      Deleted</button>
   </div>
 </div>
-
 <div class="page-list">
 
   <div class="page-body table-responsive">
@@ -34,11 +34,12 @@
             <App-Dialog [id]="{msg:'Delete Y/N', buttons:'yn', selected :false,id:rec.doc_pkid,name:1}"
               (result)="RemoveList($event)"></App-Dialog>
           </td>
-          <td *ngIf="gs.globalVariables.user_code == 'ADMIN'"><i class="fa fa-edit fa-lg pointer" aria-hidden="true" (click)="ShowEdiUpdate(rec)"></i></td>
+          <td *ngIf="gs.globalVariables.user_code == 'ADMIN'"><i class="fa fa-edit fa-lg pointer" aria-hidden="true"
+              (click)="ShowEdiUpdate(rec)"></i></td>
         </tr>
-        <tr *ngIf="rec.row_displayed" >
+        <tr *ngIf="rec.row_displayed">
           <td colspan="4">
-            <app-fileedit  [DocTypeList]="DocTypeList"  [record]="rec"></app-fileedit>
+            <app-fileedit [DocTypeList]="DocTypeList" [record]="rec"></app-fileedit>
           </td>
         </tr>
       </tbody>
@@ -75,7 +76,7 @@
       <div class="form-group row">
         <label class="col-2 col-form-label col-form-label-sm"></label>
         <div class="col-10">
-          <button (click)="uploadFiles()">Upload</button>
+          <button (click)="uploadFiles()" class="btn btn-success btn-sm mx-1">Upload</button>
         </div>
       </div>
 
@@ -116,7 +117,7 @@
   <div class="page-list" *ngIf="show_docs_list">
 
     <div class="page-body table-responsive">
-      <table class="table  table-hover table-sm">
+      <table class="table table-hover table-sm table-bordered">
         <thead class="page-body-thead">
           <tr>
             <th>SELECT</th>
@@ -130,7 +131,7 @@
           </tr>
         </thead>
         <tbody class="page-body-tbody" *ngFor="let rec of RecordList2">
-          <tr >
+          <tr>
             <td>
               <div class="form-check">
                 <input type="checkbox" class="form-check-input" [(ngModel)]="rec.doc_selected">
@@ -142,7 +143,8 @@
             <td (click)="ShowFile(rec.doc_full_name,rec.doc_file_name)">{{rec.doc_file_name}}</td>
             <td (click)="ShowFile(rec.doc_full_name,rec.doc_file_name)">{{rec.doc_file_size}}</td>
             <td (click)="ShowFile(rec.doc_full_name,rec.doc_file_name)">{{rec.rec_deleted_by}}</td>
-            <td *ngIf="gs.globalVariables.user_code == 'ADMIN'"><i class="fa fa-edit fa-lg pointer" aria-hidden="true" (click)="ShowEdiUpdate(rec)"></i></td>
+            <td *ngIf="gs.globalVariables.user_code == 'ADMIN'"><i class="fa fa-edit fa-lg pointer" aria-hidden="true"
+                (click)="ShowEdiUpdate(rec)"></i></td>
           </tr>
           <tr *ngIf="rec.row_displayed">
             <td colspan="5">
