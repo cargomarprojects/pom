@@ -1,10 +1,17 @@
-<div class="page-header">
+<!-- <div class="page-header">
   <div class="col">
     <label class="col-form-label mr-1">{{ms.title}}</label>
     <button [disabled]="ms.loading" (click)="ActionHandler('ADD','')" class="btn btn-primary btn-sm mr-1">New</button>
     <button class="btn btn-primary btn-sm" (click)="Close()">Close</button>
   </div>
+</div> -->
+
+<div class="page-header-flex">
+  <h5>{{ms.title}}</h5>
+  <button [disabled]="ms.loading" (click)="ActionHandler('ADD','')" class="btn btn-primary btn-sm mr-1">New</button>
+    <button class="btn btn-primary btn-sm" (click)="Close()">Close</button>
 </div>
+
 
 <div class="page-list">
   <div class="my-1">
@@ -56,7 +63,7 @@
           <label class="col-sm-4 col-form-label col-form-label-sm"></label>
           <div class="col-sm-8">
             <input type="checkbox" [(ngModel)]="ms.record.searchQuery.list_hide"  id="_vphide" />
-            <label class="col-form-label col-form-label-sm" for="_vphide">Show Hide Records</label>
+            <label class="col-form-label col-form-label-sm" for="_vphide">Show Hidden Records</label>
           </div>
         </div>
       </div>
@@ -95,12 +102,16 @@
       <thead class="page-body-thead">
         <tr>
           <th>CF#</th>
-          <th>DATE</th>
           <th>WEEK#</th>
-          <th>ETD</th>
+          <th>DATE</th>
           <th>POL.AGENT</th>
           <th>CONSIGNEE</th>
           <th>POD.AGENT</th>
+          <th>MASTER#</th>
+          <th>POL</th>
+          <th>ETD</th>
+          <th>POD</th>
+          <th>ETA</th>
           <th>VESSEL</th>
           <th>VOYAGE</th>
           <th>STATUS</th>
@@ -112,12 +123,16 @@
         <tr *ngFor="let rec of ms.record.records"  (mousedown)="ms.selectRowId(rec.vp_pkid)" 
         [class.active]="rec.vp_pkid == ms.getRowId()">
           <td (click)="ActionHandler('EDIT',rec.vp_pkid)" class="hlink">{{rec.vp_plan_no}}</td>
-          <td>{{rec.vp_plan_date}}</td>
           <td>{{rec.vp_week_no}}</td>
-          <td>{{rec.vp_etd}}</td>
+          <td>{{rec.vp_plan_date}}</td>
           <td>{{rec.vp_pol_agent_name}}</td>
           <td>{{rec.vp_imp_name}}</td>
           <td>{{rec.vp_pod_agent_name}}</td>
+          <td>{{rec.vp_mbl_no}}</td>
+          <td>{{rec.vp_pol_name}}</td>
+          <td>{{rec.vp_pol_etd}}</td>
+          <td>{{rec.vp_pod_name}}</td>
+          <td>{{rec.vp_pod_eta}}</td>
           <td>{{rec.vp_vessel_name}}</td>
           <td>{{rec.vp_voyage}}</td>
           <td>{{rec.vp_status}}</td>

@@ -185,6 +185,11 @@ export class VslPlanService {
       REC.vp_voyage = _rec.vp_voyage;
       REC.vp_status = _rec.vp_status;
       REC.vp_comments = _rec.vp_comments;
+      REC.vp_mbl_no = _rec.vp_mbl_no;
+      REC.vp_pol_name = _rec.vp_pol_name;
+      REC.vp_pol_etd = this.gs.getDateddMMMyyyy(_rec.vp_pol_etd);
+      REC.vp_pod_name = _rec.vp_pod_name;
+      REC.vp_pod_eta = this.gs.getDateddMMMyyyy(_rec.vp_pod_eta);
     }
   }
 

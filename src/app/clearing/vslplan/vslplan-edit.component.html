@@ -1,28 +1,40 @@
-<div class="page-header">
+<!-- <div class="page-header">
   <div class="col">
     <label class="col-form-label mr-1">{{title}}</label>
     <button class="btn btn-primary btn-sm" (click)="Close()">Return</button>
     <i *ngIf="loading" class="fa fa-spinner"></i>
   </div>
+</div> -->
+
+<div class="page-header-flex">
+  <h5>{{title}}</h5>
+  <button class="btn btn-primary btn-sm" (click)="Close()">Return</button>
 </div>
+
+
 <div class="page-list">
   <div class="row my-1">
     <div class="col-sm-4">
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">CF#</label>
-        <div class="col-sm-4">
+        <div class="col-sm-3 pr-0">
           <input type="text" style="color:red; font-weight:bold" class="form-control form-control-sm"
             [(ngModel)]="Record.vp_plan_no" [disabled]="true" required maxlength="15" />
         </div>
-        <label class="col-sm-2 col-form-label col-form-label-sm">Date</label>
-        <div class="col-sm-4">
+        <label class="col-sm-1 col-form-label col-form-label-sm pr-0">Week#</label>
+        <div class="col-sm-2 pr-0">
+          <input type="number" class="form-control form-control-sm" [(ngModel)]="Record.vp_week_no"
+            (blur)="OnBlur('vp_week_no')" required maxlength="10" />
+        </div>
+        <label class="col-sm-1 col-form-label col-form-label-sm pr-0">Date</label>
+        <div class="col-sm-3 pr-0">
           <app-date #vp_plan_date [inputdate]="Record.vp_plan_date"
             (ValueChanged)="Record.vp_plan_date=$event"></app-date>
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-2 col-form-label col-form-label-sm">Agent.Pol</label>
-        <div class="col-10">
+        <label class="col-sm-2 col-form-label col-form-label-sm">Agent.Pol</label>
+        <div class="col-sm-10 pr-0">
           <app-autocomplete2 [disabled]="ctrlDisable" [controlname]="'AGENT-POL'" [tabletype]="'CUSTOMER'"
             [displaycolumn]="'NAME'" [displaydata]="Record.vp_pol_agent_name" (ValueChanged)="LovSelected($event)"
             [where]="ms.where_agent">
@@ -30,8 +42,8 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-2 col-form-label col-form-label-sm">Consignee</label>
-        <div class="col-10">
+        <label class="col-sm-2 col-form-label col-form-label-sm">Consignee</label>
+        <div class="col-sm-10 pr-0">
           <app-autocomplete2 [disabled]="ctrlDisable" [controlname]="'CONSIGNEE'" [tabletype]="'CUSTOMER'"
             [displaycolumn]="'NAME'" [displaydata]="Record.vp_imp_name" (ValueChanged)="LovSelected($event)"
             [where]="ms.where_consignee">
@@ -39,45 +51,74 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-2 col-form-label col-form-label-sm">Agent.Pod</label>
-        <div class="col-10">
+        <label class="col-sm-2 col-form-label col-form-label-sm">Agent.Pod</label>
+        <div class="col-sm-10 pr-0">
           <app-autocomplete2 [disabled]="ctrlDisable" [controlname]="'AGENT-POD'" [tabletype]="'CUSTOMER'"
             [displaycolumn]="'NAME'" [displaydata]="Record.vp_pod_agent_name" (ValueChanged)="LovSelected($event)"
             [where]="ms.where_agent">
           </app-autocomplete2>
         </div>
       </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label col-form-label-sm">Master#</label>
+        <div class="col-sm-10 pr-0">
+          <app-autocomplete2 [disabled]="ctrlDisable" [controlname]="'MASTER-NO'" [tabletype]="'MASTER-BL-NOS'"
+            [displaycolumn]="'NAME'" [displaydata]="Record.vp_mbl_no" (ValueChanged)="LovSelected($event)"
+            [where]="">
+          </app-autocomplete2>
+        </div>
+      </div>
     </div>
+
+
     <div class="col-sm-4">
 
-
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">Week#</label>
-        <div class="col-sm-4">
-          <input type="number" class="form-control form-control-sm" [(ngModel)]="Record.vp_week_no"
-            (blur)="OnBlur('vp_week_no')" required maxlength="10" />
+        <label class="col-sm-2 col-form-label col-form-label-sm">POL</label>
+        <div class="col-sm-4 pr-0">
+          <app-autocomplete2 [controlname]="'POL'" [tabletype]="'PORT'" [displaycolumn]="'NAME'"
+            [displaydata]="Record.vp_pol_name" (ValueChanged)="LovSelected($event)">
+          </app-autocomplete2>
         </div>
-        <label class="col-sm-2 col-form-label col-form-label-sm">ETD</label>
-        <div class="col-sm-4">
-          <app-date #vp_etd [inputdate]="Record.vp_etd" (ValueChanged)="Record.vp_etd=$event"></app-date>
+        <div class="col-sm-2 pr-0">
+          <InputBox [disabled]=true [(inputModel)]="Record.vp_pol_code" [maxlength]=60 [uppercase]=true></InputBox>
+        </div>
+        <label class="col-sm-1 col-form-label col-form-label-sm pr-0">ETD</label>
+        <div class="col-sm-3 pr-0">
+          <app-date #vp_etd [inputdate]="Record.vp_pol_etd" (ValueChanged)="Record.vp_pol_etd=$event"></app-date>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label col-form-label-sm">POD</label>
+        <div class="col-sm-4 pr-0">
+          <app-autocomplete2 [controlname]="'POD'" [tabletype]="'PORT'" [displaycolumn]="'NAME'"
+            [displaydata]="Record.vp_pod_name" (ValueChanged)="LovSelected($event)">
+          </app-autocomplete2>
+        </div>
+        <div class="col-sm-2 pr-0">
+          <InputBox [disabled]=true [(inputModel)]="Record.vp_pod_code" [maxlength]=60 [uppercase]=true></InputBox>
+        </div>
+        <label class="col-sm-1 col-form-label col-form-label-sm pr-0">ETA</label>
+        <div class="col-sm-3 pr-0">
+          <app-date #vp_etd [inputdate]="Record.vp_pod_eta" (ValueChanged)="Record.vp_pod_eta=$event"></app-date>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">Vessel</label>
-        <div class="col-sm-10">
+        <div class="col-sm-10 pr-0">
           <app-autocomplete2 [controlname]="'VESSEL'" [tabletype]="'VESSEL'" [displaycolumn]="'NAME'"
             [displaydata]="Record.vp_vessel_name" (ValueChanged)="LovSelected($event)">
           </app-autocomplete2>
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">Voyage</label>
-        <div class="col-sm-4">
+        <label class="col-sm-2 col-form-label col-form-label-sm pr-0">Voyage</label>
+        <div class="col-sm-4 pr-0">
           <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.vp_voyage"
             (blur)="OnBlur('vp_voyage')" required maxlength="25" />
         </div>
-        <label class="col-sm-2 col-form-label col-form-label-sm">Status</label>
-        <div class="col-sm-4">
+        <label class="col-sm-2 col-form-label col-form-label-sm pr-0">Status</label>
+        <div class="col-sm-4 pr-0">
           <select class="form-control form-control-sm" [(ngModel)]="Record.vp_status">
             <option [value]="'IN PROGRESS'">IN PROGRESS</option>
             <option [value]="'COMPLETED'">COMPLETED</option>
@@ -85,8 +126,8 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">Comments</label>
-        <div class="col-sm-10">
+        <label class="col-sm-2 col-form-label col-form-label-sm pr-0">Comments</label>
+        <div class="col-sm-10 pr-0">
           <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.vp_comments"
             (blur)="OnBlur('vp_comments')" required maxlength="250" />
         </div>
@@ -152,8 +193,8 @@
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of Record.OrderList"   (mousedown)="selectRowId(rec.ord_pkid)" 
-      [class.active]="rec.ord_pkid == getRowId()">
+      <tr *ngFor="let rec of Record.OrderList" (mousedown)="selectRowId(rec.ord_pkid)"
+        [class.active]="rec.ord_pkid == getRowId()">
         <td><input type="checkbox" (change)="OnChange('ord_selected')" [(ngModel)]="rec.ord_selected"></td>
         <td>{{rec.ord_uid}}</td>
         <td>{{rec.ord_status}}</td>
@@ -204,6 +245,7 @@
 
 <ng-template #trackorder let-c="close" let-d="dismiss">
   <div class="modal-body">
-    <app-trackorder [ord_pkids]="ord_trkids" [ord_pos]="ord_trkpos"  [ord_imp_grp_id]="ord_imp_grp_id" (closeModalWindow)="CloseModal1($event)"></app-trackorder>
+    <app-trackorder [ord_pkids]="ord_trkids" [ord_pos]="ord_trkpos" [ord_imp_grp_id]="ord_imp_grp_id"
+      (closeModalWindow)="CloseModal1($event)"></app-trackorder>
   </div>
 </ng-template>

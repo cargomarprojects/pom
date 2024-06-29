@@ -24,7 +24,19 @@ export class Planm {
     vp_imp_code: string;
     vp_imp_name: string;
     vp_type: string;
-    vp_hide:string;
+    vp_hide: string;
+
+    vp_mbl_id: string;
+    vp_mbl_no: string;
+    vp_pol_etd: string;
+    vp_pod_eta: string;
+    vp_pol_id: string;
+    vp_pol_code: string;
+    vp_pol_name: string;
+    vp_pod_id: string;
+    vp_pod_code: string;
+    vp_pod_name: string;
+    rec_version: number;
 
     rec_mode: string;
     rec_category: string;
@@ -58,7 +70,7 @@ export interface SearchQuery {
     list_vessel_id: string,
     list_vessel_name: string,
     list_status: string,
-    list_hide:boolean
+    list_hide: boolean
 }
 
 export interface PlanModel {

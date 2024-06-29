@@ -115,6 +115,21 @@ export class VslPlanEditComponent {
       this.Record.vp_imp_code = _Record.code;
       this.Record.vp_imp_name = _Record.name;
     }
+    else if (_Record.controlname == "MASTER-NO") {
+      this.Record.vp_mbl_id = _Record.id;
+      this.Record.vp_mbl_no = _Record.code;
+    }
+    else if (_Record.controlname == "POL") {
+      this.Record.vp_pol_id = _Record.id;
+      this.Record.vp_pol_code = _Record.code;
+      this.Record.vp_pol_name = _Record.name;
+    }
+   else if (_Record.controlname == "POD") {
+      this.Record.vp_pod_id = _Record.id;
+      this.Record.vp_pod_code = _Record.code;
+      this.Record.vp_pod_name = _Record.name;
+    }
+
   }
 
   ActionHandler() {
@@ -155,7 +170,18 @@ export class VslPlanEditComponent {
     this.Record.vp_imp_id = '';
     this.Record.vp_imp_code = '';
     this.Record.vp_imp_name = '';
+    this.Record.vp_mbl_id = '';
+    this.Record.vp_mbl_no = '';
+    this.Record.vp_pol_id = '';
+    this.Record.vp_pol_code = '';
+    this.Record.vp_pol_name = '';
+    this.Record.vp_pol_etd = '';
+    this.Record.vp_pod_id = '';
+    this.Record.vp_pod_code = '';
+    this.Record.vp_pod_name = '';
+    this.Record.vp_pod_eta = ''
     this.Record.rec_mode = this.mode;
+    this.Record.rec_version = 0;
 
   }
   resetControls() {
@@ -240,6 +266,7 @@ export class VslPlanEditComponent {
         // this.InfoMessage = "Save Complete";
         this.mode = 'EDIT';
         this.Record.rec_mode = this.mode;
+        this.Record.rec_version = response.version;
         this.ms.RefreshList(this.Record);
         alert('Save Complete');
       },
