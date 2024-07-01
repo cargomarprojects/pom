@@ -476,6 +476,10 @@ export class GlobalService {
     this._toast.next([]);
   }
 
-
+  trimAll(obj: any) {
+    if (obj == null || obj == undefined)
+      return obj;
+    return obj.toString().trim();
+  }
 
 }

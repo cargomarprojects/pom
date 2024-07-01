@@ -41,7 +41,9 @@ export class LovService {
       return this.http2.post<any>(this.gs.baseUrl + '/api/General/DeleteDocument', SearchData, this.gs.headerparam2('authorized'));
     }
 
-
+    LovList(SearchData: any) {
+      return this.http2.post<any>(this.gs.baseUrl + '/api/Admin/Lov/LovList', SearchData, this.gs.headerparam2('authorized'));
+    }
 
 
 }
