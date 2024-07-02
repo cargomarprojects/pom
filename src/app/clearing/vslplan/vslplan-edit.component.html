@@ -181,6 +181,7 @@
         <th class="text-right">CBM</th>
         <th>POL</th>
         <th>POD</th>
+        <th>HOUSE/CONTAINER</th>
         <th *ngIf="gs.getTrackDate('BKD')||trkdt_alldisplay=='Y'">BKD</th>
         <th *ngIf="gs.getTrackDate('RND')||trkdt_alldisplay=='Y'">RND</th>
         <th *ngIf="gs.getTrackDate('POR')||trkdt_alldisplay=='Y'">POR</th>
@@ -215,6 +216,7 @@
         <td align='right'>{{rec.ord_cbm | number : '1.3-3'}}</td>
         <td>{{rec.ord_pol}}</td>
         <td>{{rec.ord_pod}}</td>
+        <td  class="hlink" (click)="AddHouseContainer(rec.ord_pkid,linkhblcntr)">ADD</td>
         <td *ngIf="gs.getTrackDate('BKD')||trkdt_alldisplay=='Y'">{{rec.ord_booking_date}}</td>
         <td *ngIf="gs.getTrackDate('RND')||trkdt_alldisplay=='Y'">{{rec.ord_rnd_insp_date}}</td>
         <td *ngIf="gs.getTrackDate('POR')||trkdt_alldisplay=='Y'">{{rec.ord_po_rel_date}}</td>
@@ -248,5 +250,11 @@
   <div class="modal-body">
     <app-trackorder [ord_pkids]="ord_trkids" [ord_pos]="ord_trkpos" [ord_imp_grp_id]="ord_imp_grp_id"
       (closeModalWindow)="CloseModal1($event)"></app-trackorder>
+  </div>
+</ng-template>
+
+<ng-template #linkhblcntr let-c="close" let-d="dismiss">
+  <div class="modal-body">
+    <app-link-ord-hbl-cntr [mblid]="Record.vp_mbl_id" [type]="type" [menuid]="menuid"  (closeModalWindow)="CloseModal2($event)"></app-link-ord-hbl-cntr>
   </div>
 </ng-template>

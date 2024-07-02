@@ -24,6 +24,7 @@ import { MblmEditComponent } from './mblm/edit/mblmedit.component';
 import { CntrComponent } from './mblm/edit/other/cntr.component';
 import { HblComponent } from './mblm/edit/other/hbl.component';
 import { LinkCntrHblComponent } from './mblm/edit/other/link-cntr-hbl.component';
+import { LinkOrdHblCntrComponent } from './vslplan/other/link-ord-hbl-cntr.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { LinkCntrHblComponent } from './mblm/edit/other/link-cntr-hbl.component'
     MblmEditComponent,
     CntrComponent,
     HblComponent,
-    LinkCntrHblComponent
+    LinkCntrHblComponent,
+    LinkOrdHblCntrComponent
   ],
   imports: [
     SharedModule,

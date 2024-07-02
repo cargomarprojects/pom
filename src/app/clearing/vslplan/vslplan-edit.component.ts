@@ -124,7 +124,7 @@ export class VslPlanEditComponent {
       this.Record.vp_pol_code = _Record.code;
       this.Record.vp_pol_name = _Record.name;
     }
-   else if (_Record.controlname == "POD") {
+    else if (_Record.controlname == "POD") {
       this.Record.vp_pod_id = _Record.id;
       this.Record.vp_pod_code = _Record.code;
       this.Record.vp_pod_name = _Record.name;
@@ -439,7 +439,8 @@ export class VslPlanEditComponent {
       return;
     }
 
-    this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
+    // this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
+    this.open(modalname);
   }
 
   CloseModal1(params: any) {
@@ -474,5 +475,18 @@ export class VslPlanEditComponent {
     }
     this.modalRef.close();
   }
+  CloseModal2(params: any) {
+    // if (params.saction == 'SAVE') {
 
+    // }
+    this.modalRef.close();
+  }
+
+  AddHouseContainer(_id: string, _content: any) {
+    this.open(_content);
+  }
+
+  open(content: any) {
+    this.modalRef = this.modalService.open(content, { centered: true, backdrop: 'static', keyboard: true });
+  }
 }
