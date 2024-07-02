@@ -270,7 +270,6 @@ export class LinkOrdHblCntrComponent {
                 });
     }
 
-
    Close() {
     this.closeModalWindow.emit({ saction: 'CLOSE' });
   }
