@@ -24,7 +24,8 @@ export class LinkOrdHblCntrComponent {
     selectedId: string = '';
     loading = false;
     CntrTypes: string = "";
-
+    cntrd_selected = false;
+    chkselected = false;
     private errorMessage: string[] = [];
 
     mode = 'ADD';
@@ -146,6 +147,8 @@ export class LinkOrdHblCntrComponent {
     }
 
     NewRecord() {
+        this.chkselected = false;
+        this.cntrd_selected = false;
         this.pkid = this.gs.getGuid();
         this.Record = new Containerd();
         this.Record.cntrd_pkid = this.pkid;
@@ -270,9 +273,9 @@ export class LinkOrdHblCntrComponent {
                 });
     }
 
-   Close() {
-    this.closeModalWindow.emit({ saction: 'CLOSE' });
-  }
+    Close() {
+        this.closeModalWindow.emit({ saction: 'CLOSE' });
+    }
 
     OnBlur(field: string) {
         switch (field) {
@@ -283,6 +286,16 @@ export class LinkOrdHblCntrComponent {
         }
     }
 
+    SelectDeselect() {
+        this.chkselected = !this.chkselected;
+        for (let rec of this.RecordList) {
+            rec.cntrd_selected = this.chkselected;
+        }
+    }
+
+    ResetChkBox(_rec: Containerd) {
+        _rec.cntrd_selected = !_rec.cntrd_selected;
+    }
 }
 
 

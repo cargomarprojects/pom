@@ -8,8 +8,8 @@ export class Blm {
   bl_no: string;
   bl_date: string;
   bl_mbl_id: string;
-//   ordh_detList: Joborderm[] = [];
-   
+  //   ordh_detList: Joborderm[] = [];
+
   rec_mode: string;
   rec_category: string;
   rec_version: number;
@@ -24,16 +24,16 @@ export class Containerm {
   cntr_type_code: string;
   cntr_type_name: string;
   cntr_mbl_id: string;
-//   ordh_detList: Joborderm[] = [];
-   
+  //   ordh_detList: Joborderm[] = [];
+
   rec_mode: string;
   rec_category: string;
   rec_version: number;
   _globalvariables: GlobalVariables;
 }
- 
+
 export class Containerd {
-  cntrd_pkid: string; 
+  cntrd_pkid: string;
   cntrd_cntr_id: string;
   cntrd_cntr_no: string;
   cntrd_mbl_id: string;
@@ -41,6 +41,7 @@ export class Containerd {
   cntrd_hbl_id: string;
   cntrd_hbl_no: string;
   cntrd_slno: number;
+  cntrd_selected: boolean;
   rec_mode: string;
   rec_category: string;
   rec_version: number;
