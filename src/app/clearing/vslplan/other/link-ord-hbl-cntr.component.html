@@ -11,14 +11,16 @@
             <thead class="page-body-thead">
                 <tr>
                     <th width="5%" (click)="SelectDeselect()"><input type="checkbox"  [(ngModel)]="cntrd_selected"></th>
+                    <th width="20%">MASTER#</th>
                     <th width="20%">HOUSE#</th>
-                    <th width="75%">CNTR#</th>
+                    <th width="55%">CNTR#</th>
                 </tr>
             </thead>
             <tbody class="page-body-tbody">
                 <tr *ngFor="let rec of RecordList; let i = index" (mousedown)="selectRowId(rec.cntrd_pkid)"
                     [class.active]="rec.cntrd_pkid == getRowId()">
                     <td  (click)="ResetChkBox(rec)"><input type="checkbox"  [(ngModel)]="rec.cntrd_selected"></td>
+                    <td>{{rec.cntrd_mbl_no}}</td>
                     <td>{{rec.cntrd_hbl_no}}</td>
                     <td>{{rec.cntrd_cntr_no}}</td>
                 </tr>
