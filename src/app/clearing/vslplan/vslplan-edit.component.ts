@@ -38,6 +38,7 @@ export class VslPlanEditComponent {
   public ord_trkids = "";
   public ord_trkpos = "";
   public ord_imp_grp_id = "";
+  public mblid = "";
   total = 0;
   selectedId = "";
   trkdt_alldisplay = "N";
@@ -236,6 +237,7 @@ export class VslPlanEditComponent {
   LoadData(_Record: Planm) {
     this.Record = _Record;
     this.Record.rec_mode = this.mode;
+    this.mblid = this.Record.vp_mbl_id;
     this.ord_selected = false;
     if (this.Record.OrderList.length > 0)
       this.ord_selected = true;
@@ -267,6 +269,7 @@ export class VslPlanEditComponent {
         this.mode = 'EDIT';
         this.Record.rec_mode = this.mode;
         this.Record.rec_version = response.version;
+        this.mblid = this.Record.vp_mbl_id;
         this.ms.RefreshList(this.Record);
         alert('Save Complete');
       },
@@ -483,6 +486,11 @@ export class VslPlanEditComponent {
   }
 
   AddHouseContainer(_id: string, _content: any) {
+    if (this.gs.isBlank(this.mblid)) {
+      alert('Invalid Master#');
+      return;
+    }
+
     this.open(_content);
   }
 
