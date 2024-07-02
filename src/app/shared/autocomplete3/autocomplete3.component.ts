@@ -5,9 +5,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { SearchTable } from '../models/searchtable';
 import { LovService } from '../services/lov.service';
 import { GlobalService } from '../../core/services/global.service';
-//EDIT-AJITH-08-09-2021
-//EDIT-AJITH-17-09-2021
-//EDIT-AJITH-07-10-2021
 
 @Component({
   selector: 'app-autocomplete3',
@@ -16,9 +13,6 @@ import { GlobalService } from '../../core/services/global.service';
 })
 
 export class AutoComplete3Component {
-
-  //   @ViewChild('_cbtn') cbtn_field: ElementRef;
-  //   @ViewChildren('_itms') itms_field: QueryList<ElementRef>;
 
   @Output() ValueChanged = new EventEmitter<SearchTable>();
   @Input() disabled: boolean = false;
@@ -146,12 +140,6 @@ export class AutoComplete3Component {
   }
 
   More() {
-    // if (this.rows_ending_number < this.rows_total)
-    // {
-    //     this.rows_starting_number = this.rows_ending_number +1;
-    //     this.rows_ending_number = this.rows_ending_number + this.rows_to_display;
-    //     this.List('NEXT');
-    // }
     this.rows_starting_number = this.rows_ending_number + 1;
     this.rows_ending_number = this.rows_ending_number + this.rows_to_display;
     this.List('NEXT');
@@ -206,11 +194,7 @@ export class AutoComplete3Component {
 
     this.loginservice.List3(SearchData)
       .subscribe(response => {
-        //this.RecList = response.list;
-        //this.rows_total = response.rows_total;
-
-        // if (this.rows_ending_number >= this.rows_total)
-        //     this.bShowMore = false;
+        this.loading = false;
 
         if (this.gs.isBlank(response.list)) {
           this.SelectedItem('', null);
@@ -218,11 +202,7 @@ export class AutoComplete3Component {
           return;
         }
 
-        //this.RecList.push(...response.list);
-
         this.RecList = response.list;
-
-        this.loading = false;
 
         if (_action == "NEW") {
           if (this.RecList.length === 0) {
@@ -294,9 +274,7 @@ export class AutoComplete3Component {
       this.inputdata.col9 = '';
 
       this.displaydata = '';
-      this.parentid = '';
-
-
+      // this.parentid = '';
 
     }
     else {
