@@ -409,6 +409,11 @@ hr {
   color: #007ee9;
 }
 
+.ulcenter {
+  justify-content: center;
+  display: flex;
+}
+
 .alert {
   margin-top: 2px !important;
   margin-bottom: 2px !important;

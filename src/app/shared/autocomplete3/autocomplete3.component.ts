@@ -17,14 +17,14 @@ import { GlobalService } from '../../core/services/global.service';
 
 export class AutoComplete3Component {
 
-//   @ViewChild('_cbtn') cbtn_field: ElementRef;
-//   @ViewChildren('_itms') itms_field: QueryList<ElementRef>;
+  //   @ViewChild('_cbtn') cbtn_field: ElementRef;
+  //   @ViewChildren('_itms') itms_field: QueryList<ElementRef>;
 
   @Output() ValueChanged = new EventEmitter<SearchTable>();
   @Input() disabled: boolean = false;
 
-  @ViewChild('inputbox', {static: false}) private inputbox: ElementRef;
-  @ViewChild("lov", {static: false}) private lov: ElementRef;
+  @ViewChild('inputbox', { static: false }) private inputbox: ElementRef;
+  @ViewChild("lov", { static: false }) private lov: ElementRef;
   @ViewChildren('lov') inputs: QueryList<ElementRef>;
 
 
@@ -179,7 +179,7 @@ export class AutoComplete3Component {
     }
     else {
       row1 = this.rows_starting_number;
-      row1 = this.rows_ending_number;
+      row2 = this.rows_ending_number;
     }
     if (_action == 'PREV') {
       row1 = this.rows_starting_number - this.rows_to_display;
@@ -204,7 +204,7 @@ export class AutoComplete3Component {
       branch_code: this._branchcode
     };
 
-    this.loginservice.LovList(SearchData)
+    this.loginservice.List3(SearchData)
       .subscribe(response => {
         //this.RecList = response.list;
         //this.rows_total = response.rows_total;
@@ -212,7 +212,7 @@ export class AutoComplete3Component {
         // if (this.rows_ending_number >= this.rows_total)
         //     this.bShowMore = false;
 
-        if (response.list == null) {
+        if (this.gs.isBlank(response.list)) {
           this.SelectedItem('', null);
           this.showDiv = false;
           return;

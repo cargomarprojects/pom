@@ -14,6 +14,7 @@ import { AlertComponent } from './alert/alert.component';
 import { AutoCompleteComponent } from './autocomplete/autocomplete.component';
 
 import { AutoComplete2Component } from './autocomplete2/autocomplete2.component';
+import { AutoComplete3Component } from './autocomplete3/autocomplete3.component';
 
 import { DateComponent } from './date/date.component';
 
@@ -72,7 +73,8 @@ import { UserHistoryComponent } from './userhistory/userhistory.component';
     PageComponent,
     InputBoxComponent,
     InputBoxNumberComponent,
-    UserHistoryComponent
+    UserHistoryComponent,
+    AutoComplete3Component
   ],
   exports: [
     CommonModule,
@@ -98,7 +100,8 @@ import { UserHistoryComponent } from './userhistory/userhistory.component';
     PageComponent,
     InputBoxComponent,
     InputBoxNumberComponent,
-    UserHistoryComponent
+    UserHistoryComponent,
+    AutoComplete3Component
   ],
   providers: [
     AlertService,
