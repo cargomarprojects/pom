@@ -32,14 +32,21 @@ export class VslPlanEditComponent {
   ord_selected = false;
   chkselected = false;
   ctrlDisable = false;
+  ord_hblcntrselected = false;
+  chkhblcntrselected = false;
+  canHblCntrUpdate = false;
 
   bPrint: boolean = false;
   searchstring = '';
+  public orderids = "";
   public ord_trkids = "";
   public ord_trkpos = "";
   public ord_imp_grp_id = "";
   public mblid = "";
   total = 0;
+  total_hblcntr = 0;
+  total_colspan: string = "15";
+
   selectedId = "";
   trkdt_alldisplay = "N";
 
@@ -81,6 +88,7 @@ export class VslPlanEditComponent {
       if (this.menu_record.rights_print)
         this.bPrint = true;
     }
+    this.total_colspan = "15";
   }
 
   // Destroy Will be called when this component is closed
@@ -147,9 +155,12 @@ export class VslPlanEditComponent {
   }
 
   newRecord() {
+    this.Record.vp_locked = false;
     this.ctrlDisable = false;
     this.chkselected = false;
     this.ord_selected = false;
+    this.chkhblcntrselected = false;
+    this.ord_hblcntrselected = false;
     this.pkid = this.gs.getGuid();
     this.Record = new Planm;
     this.Record.vp_pkid = this.pkid;
@@ -242,6 +253,7 @@ export class VslPlanEditComponent {
     if (this.Record.OrderList.length > 0)
       this.ord_selected = true;
     this.chkselected = this.ord_selected;
+    this.setCanUpdateHblCntr();
     this.FindCount();
   }
 
@@ -257,6 +269,7 @@ export class VslPlanEditComponent {
     this.ErrorMessage = '';
     this.InfoMessage = '';
     this.Record.vp_type = 'PLANNING';
+    this.Record.rec_category = this.type;
     this.Record._globalvariables = this.gs.globalVariables;
     this.ms.Save(this.Record)
       .subscribe(response => {
@@ -269,7 +282,11 @@ export class VslPlanEditComponent {
         this.mode = 'EDIT';
         this.Record.rec_mode = this.mode;
         this.Record.rec_version = response.version;
+        if (this.ctrlDisable && this.Record.vp_mbl_id.length > 0)
+          this.Record.vp_locked = true;
+
         this.mblid = this.Record.vp_mbl_id;
+        this.setCanUpdateHblCntr();
         this.ms.RefreshList(this.Record);
         alert('Save Complete');
       },
@@ -319,6 +336,9 @@ export class VslPlanEditComponent {
     if (field == 'ord_selected') {
       this.FindCount();
     }
+    if (field == 'ord_hblcntrselected') {
+      this.FindCount();
+    }
   }
 
 
@@ -338,10 +358,13 @@ export class VslPlanEditComponent {
   }
 
   FindCount() {
-    this.total = 0;
+    this.total = 0; this.total_hblcntr = 0;
     for (let rec of this.Record.OrderList) {
       if (rec.ord_selected) {
         this.total++;
+      }
+      if (rec.ord_hblcntrselected) {
+        this.total_hblcntr++;
       }
     }
   }
@@ -397,6 +420,17 @@ export class VslPlanEditComponent {
       rec.ord_selected = this.chkselected;
       if (rec.ord_selected) {
         this.total++;
+      }
+    }
+  }
+
+  SelectDeselectHblCntr() {
+    this.total_hblcntr = 0;
+    this.chkhblcntrselected = !this.chkhblcntrselected;
+    for (let rec of this.Record.OrderList) {
+      rec.ord_hblcntrselected = this.chkhblcntrselected;
+      if (rec.ord_hblcntrselected) {
+        this.total_hblcntr++;
       }
     }
   }
@@ -479,15 +513,54 @@ export class VslPlanEditComponent {
     this.modalRef.close();
   }
   CloseModal2(params: any) {
-    // if (params.saction == 'SAVE') {
-
-    // }
+    if (params.saction == 'SAVE') {
+      this.OrderList();
+    }
     this.modalRef.close();
   }
 
-  AddHouseContainer(_id: string, _content: any) {
+  UpdateHouseContainer(_content: any) {
     if (this.gs.isBlank(this.mblid)) {
       alert('Invalid Master#');
+      return;
+    }
+
+    this.total_hblcntr = 0;
+    this.orderids = "";
+    this.ord_imp_grp_id = "";
+    let bMultplrGrpId = false;
+    let blankplanId = false;
+    for (let rec of this.Record.OrderList) {
+
+      if (rec.ord_hblcntrselected) {
+
+        if (this.total_hblcntr == 0)
+          this.ord_imp_grp_id = rec.ord_imp_grp_id;
+
+        this.total_hblcntr++;
+        if (this.orderids != "")
+          this.orderids += ",";
+        this.orderids += rec.ord_pkid;
+
+        if (this.ord_imp_grp_id != rec.ord_imp_grp_id)
+          bMultplrGrpId = true;
+        if (this.gs.isBlank(rec.ord_plan_id))
+          blankplanId = true;
+      }
+    }
+
+    if (this.gs.isBlank(this.orderids)) {
+      alert('No Rows Selected');
+      return;
+    }
+
+    if (bMultplrGrpId) {
+      alert('Invalid Consignee Group Selected');
+      return;
+    }
+
+    if (blankplanId) {
+      alert('Missing Data Found, Please save and continue.......');
       return;
     }
 
@@ -497,4 +570,47 @@ export class VslPlanEditComponent {
   open(content: any) {
     this.modalRef = this.modalService.open(content, { centered: true, backdrop: 'static', keyboard: true });
   }
+
+  setCanUpdateHblCntr() {
+    this.canHblCntrUpdate = false;
+    for (let rec of this.Record.OrderList) {
+      if (!this.gs.isBlank(rec.ord_plan_id)) {
+        this.canHblCntrUpdate = true;
+        break;
+      }
+    }
+  }
+
+  ShowHideRecord(_rec: Joborderm) {
+    if (!_rec.row_displayed) {
+      this.OrderLinkList(_rec);
+    }
+    _rec.row_displayed = !_rec.row_displayed;
+  }
+
+  OrderLinkList(_rec: Joborderm) {
+    this.ErrorMessage = '';
+    this.InfoMessage = '';
+    this.loading = true;
+    let SearchData = {
+      rowtype: this.ms.type,
+      orderid: _rec.ord_pkid,
+      company_code: this.gs.globalVariables.comp_code,
+      branch_code: this.gs.globalVariables.branch_code
+    };
+    this.ErrorMessage = '';
+    this.InfoMessage = '';
+    this.ms.OrderLinkList(SearchData)
+      .subscribe(response => {
+        this.loading = false;
+        _rec.LinkHblCntrList = response.list;
+      },
+        error => {
+          this.loading = false;
+          this.ErrorMessage = this.gs.getError(error);
+          alert(this.ErrorMessage);
+        });
+
+  }
+
 }

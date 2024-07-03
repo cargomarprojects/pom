@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vslplan',
-  templateUrl: './vslplan.component.html' 
+  templateUrl: './vslplan.component.html'
 })
 export class VslPlanComponent {
   constructor(
@@ -32,7 +32,7 @@ export class VslPlanComponent {
 
   // Destroy Will be called when this component is closed
   ngOnDestroy() {
-     
+
   }
 
 
@@ -74,8 +74,9 @@ export class VslPlanComponent {
       urlid: this.gs.getGuid(),
       parenturlid: urlid,
       menuid: this.gs.getParameter('menuid'),
-      appid : this.gs.globalVariables.appid,
+      appid: this.gs.globalVariables.appid,
       pkid: id,
+      type: this.ms.type,
       origin: 'vessellist',
       mode: action
     };

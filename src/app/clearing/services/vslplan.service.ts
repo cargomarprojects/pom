@@ -252,5 +252,9 @@ export class VslPlanService {
   HideRecord(SearchData: any) {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/VslPlan/HideRecord', SearchData, this.gs.headerparam2('authorized'));
   }
+
+  OrderLinkList(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/VslPlan/OrderLinkList', SearchData, this.gs.headerparam2('authorized'));
+  }
 }
 

@@ -1,5 +1,6 @@
 import { GlobalVariables } from '../../core/models/globalvariables';
 import { PageQuery } from 'src/app/shared/models/pageQuery';
+import { Containerd } from './mblm';
 
 export class Joborderh {
   ordh_pkid: string;
@@ -148,9 +149,13 @@ export class Joborderm {
 
   ord_date: string;
   ord_remarks: string;
-
+  ord_hblcntrselected: boolean;
+  ord_plan_id: string;
+  row_displayed: boolean = false;
+  
   job_docno: string;
   rec_mode: string;
+  LinkHblCntrList: Containerd[] = [];
   rec_category: string;
   rec_version: number;
   _globalvariables: GlobalVariables;
