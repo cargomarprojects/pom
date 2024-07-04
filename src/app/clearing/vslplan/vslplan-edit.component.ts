@@ -45,8 +45,7 @@ export class VslPlanEditComponent {
   public mblid = "";
   total = 0;
   total_hblcntr = 0;
-  total_colspan: string = "15";
-
+  
   selectedId = "";
   trkdt_alldisplay = "N";
 
@@ -88,7 +87,6 @@ export class VslPlanEditComponent {
       if (this.menu_record.rights_print)
         this.bPrint = true;
     }
-    this.total_colspan = "15";
   }
 
   // Destroy Will be called when this component is closed
@@ -594,7 +592,7 @@ export class VslPlanEditComponent {
     this.InfoMessage = '';
     this.loading = true;
     let SearchData = {
-      rowtype: this.ms.type,
+      rowtype: this.type,
       orderid: _rec.ord_pkid,
       company_code: this.gs.globalVariables.comp_code,
       branch_code: this.gs.globalVariables.branch_code
