@@ -514,7 +514,8 @@ export class VslPlanEditComponent {
   }
   CloseModal2(params: any) {
     if (params.saction == 'SAVE') {
-      this.OrderList();
+      // this.OrderList();
+      this.getRecord(this.pkid);
     }
     this.modalRef.close();
   }

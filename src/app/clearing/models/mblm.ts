@@ -9,6 +9,8 @@ export class Blm {
   bl_date: string;
   bl_mbl_id: string;
   //   ordh_detList: Joborderm[] = [];
+  bl_hbl_nos: string;
+  bl_cntr_nos: string;
 
   rec_mode: string;
   rec_category: string;
@@ -36,6 +38,7 @@ export class Containerd {
   cntrd_pkid: string;
   cntrd_cntr_id: string;
   cntrd_cntr_no: string;
+  cntrd_cntr_type:string;
   cntrd_mbl_id: string;
   cntrd_mbl_no: string;
   cntrd_hbl_id: string;

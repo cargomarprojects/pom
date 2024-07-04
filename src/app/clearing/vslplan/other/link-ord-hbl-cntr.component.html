@@ -5,24 +5,46 @@
     </div>
 </div>
 <div class="page-box">
-    <div class="table-responsive fixedTableHead  my-0 p-0" [style.height]="RecordList.length>5?'132px':'auto'"
-        [style.overflow-y]="RecordList.length>5?'scroll':'auto'">
+    <div *ngIf="type=='SEA EXPORT'" class="table-responsive fixedTableHead  my-0 p-0"
+        [style.height]="RecordList.length>5?'132px':'auto'" [style.overflow-y]="RecordList.length>5?'scroll':'auto'">
         <table class="table table-hover table-sm table-bordered">
             <thead class="page-body-thead">
                 <tr>
-                    <th width="5%" (click)="SelectDeselect()"><input type="checkbox"  [(ngModel)]="cntrd_selected"></th>
+                    <th width="5%" (click)="SelectDeselect()"><input type="checkbox" [(ngModel)]="cntrd_selected"></th>
                     <th width="20%">MASTER#</th>
                     <th width="20%">HOUSE#</th>
-                    <th width="55%">CNTR#</th>
+                    <th width="20%">CNTR#</th>
+                    <th width="35%">TYPE</th>
                 </tr>
             </thead>
             <tbody class="page-body-tbody">
                 <tr *ngFor="let rec of RecordList; let i = index" (mousedown)="selectRowId(rec.cntrd_pkid)"
                     [class.active]="rec.cntrd_pkid == getRowId()">
-                    <td  (click)="ResetChkBox(rec)"><input type="checkbox"  [(ngModel)]="rec.cntrd_selected"></td>
+                    <td (click)="ResetChkBox(rec)"><input type="checkbox" [(ngModel)]="rec.cntrd_selected"></td>
                     <td>{{rec.cntrd_mbl_no}}</td>
                     <td>{{rec.cntrd_hbl_no}}</td>
                     <td>{{rec.cntrd_cntr_no}}</td>
+                    <td>{{rec.cntrd_cntr_type}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="type=='AIR EXPORT'" class="table-responsive fixedTableHead  my-0 p-0"
+        [style.height]="RecordList.length>5?'132px':'auto'" [style.overflow-y]="RecordList.length>5?'scroll':'auto'">
+        <table class="table table-hover table-sm table-bordered">
+            <thead class="page-body-thead">
+                <tr>
+                    <th width="5%" (click)="SelectDeselect()"><input type="checkbox" [(ngModel)]="cntrd_selected"></th>
+                    <th width="20%">MASTER#</th>
+                    <th width="75%">HOUSE#</th>
+                </tr>
+            </thead>
+            <tbody class="page-body-tbody">
+                <tr *ngFor="let rec of RecordList; let i = index" (mousedown)="selectRowId(rec.cntrd_pkid)"
+                    [class.active]="rec.cntrd_pkid == getRowId()">
+                    <td (click)="ResetChkBox(rec)"><input type="checkbox" [(ngModel)]="rec.cntrd_selected"></td>
+                    <td>{{rec.cntrd_mbl_no}}</td>
+                    <td>{{rec.cntrd_hbl_no}}</td>
                 </tr>
             </tbody>
         </table>

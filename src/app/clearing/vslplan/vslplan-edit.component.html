@@ -191,7 +191,8 @@
         <th>POD</th>
         <th *ngIf="canHblCntrUpdate"><input type="checkbox" (click)="SelectDeselectHblCntr()"
             [(ngModel)]="ord_hblcntrselected"></th>
-        <th *ngIf="canHblCntrUpdate">UPDATE</th>
+        <th *ngIf="canHblCntrUpdate">VIEW</th>
+        <th>{{type=='SEA EXPORT'?'HBL[CNTR]#':'HOUSE#' }}  </th>
         <th *ngIf="gs.getTrackDate('BKD')||trkdt_alldisplay=='Y'">BKD</th>
         <th *ngIf="gs.getTrackDate('RND')||trkdt_alldisplay=='Y'">RND</th>
         <th *ngIf="gs.getTrackDate('POR')||trkdt_alldisplay=='Y'">POR</th>
@@ -229,7 +230,8 @@
         <td *ngIf="canHblCntrUpdate">
           <input type="checkbox" (change)="OnChange('ord_hblcntrselected')" [(ngModel)]="rec.ord_hblcntrselected">
         </td>
-        <td *ngIf="canHblCntrUpdate" class="hlink" (click)="ShowHideRecord(rec)">HBL/CNTR</td>
+        <td *ngIf="canHblCntrUpdate" class="hlink" (click)="ShowHideRecord(rec)"><i class="fa fa-eye"></i></td>
+        <td>{{rec.ord_hbl_cntr_nos}}</td>
         <td *ngIf="gs.getTrackDate('BKD')||trkdt_alldisplay=='Y'">{{rec.ord_booking_date}}</td>
         <td *ngIf="gs.getTrackDate('RND')||trkdt_alldisplay=='Y'">{{rec.ord_rnd_insp_date}}</td>
         <td *ngIf="gs.getTrackDate('POR')||trkdt_alldisplay=='Y'">{{rec.ord_po_rel_date}}</td>
@@ -241,7 +243,7 @@
         <td *ngIf="gs.getTrackDate('SOB')||trkdt_alldisplay=='Y'">{{rec.ord_dlv_pol_date}}</td>
         <td *ngIf="gs.getTrackDate('DPOD')||trkdt_alldisplay=='Y'">{{rec.ord_dlv_pod_date}}</td>
       </tr>
-      <tr *ngIf="rec.row_displayed" style="border-color: green;border-style:solid;">
+      <tr  *ngIf="rec.row_displayed" style="border: 2px solid green;">
         <td colspan="100%">
           <div class="table-responsive my-0 p-0">
             <table class="table table-hover table-sm table-bordered">
@@ -250,7 +252,8 @@
                   <th width="10%">SL#</th>
                   <th width="20%">MASTER#</th>
                   <th width="20%">HOUSE#</th>
-                  <th width="50%">CNTR#</th>
+                  <th width="20%" *ngIf="type=='SEA EXPORT'">CNTR#</th>
+                  <th width="30%" *ngIf="type=='SEA EXPORT'">TYPE</th>
                 </tr>
               </thead>
               <tbody class="page-body-tbody">
@@ -258,7 +261,8 @@
                   <td>{{i+1}}</td>
                   <td>{{rec.cntrd_mbl_no}}</td>
                   <td>{{rec.cntrd_hbl_no}}</td>
-                  <td>{{rec.cntrd_cntr_no}}</td>
+                  <td  *ngIf="type=='SEA EXPORT'">{{rec.cntrd_cntr_no}}</td>
+                  <td  *ngIf="type=='SEA EXPORT'">{{rec.cntrd_cntr_type}}</td>
                 </tr>
               </tbody>
             </table>
