@@ -205,6 +205,7 @@ export class OrderListService {
         error => {
           this.loading = false;
           this.ErrorMessage = this.gs.getError(error);
+          alert(this.ErrorMessage);
         });
   }
   Downloadfile(filename: string, filetype: string, filedisplayname: string) {
@@ -454,6 +455,9 @@ export class OrderListService {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/OrderList/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
   }
 
+  OrderLinkList(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/VslPlan/OrderLinkList', SearchData, this.gs.headerparam2('authorized'));
+  }
 }
 
 

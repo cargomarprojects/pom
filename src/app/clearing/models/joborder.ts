@@ -153,7 +153,8 @@ export class Joborderm {
   ord_plan_id: string;
   row_displayed: boolean = false;
   ord_hbl_cntr_nos: string;
-
+  ord_mbl_id: string;
+  ord_mbl_no: string;
   job_docno: string;
   rec_mode: string;
   LinkHblCntrList: Containerd[] = [];

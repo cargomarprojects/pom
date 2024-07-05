@@ -265,6 +265,9 @@
         <th>INSTOCK1</th>
         <th>INSTOCK2</th>
         <th>TRACK.STATUS</th> -->
+          <th>VIEW</th>
+          <th>MASTER</th>
+          <th>HOUSE</th>
           <th *ngIf="gs.getTrackDate('BKD')||ms.trkdt_alldisplay=='Y'">BKD</th>
           <th *ngIf="gs.getTrackDate('RND')||ms.trkdt_alldisplay=='Y'">RND</th>
           <th *ngIf="gs.getTrackDate('POR')||ms.trkdt_alldisplay=='Y'">POR</th>
@@ -280,8 +283,8 @@
           <!-- <th *ngIf="ms.canDelete" class='text-center'>DELETE</th> -->
         </tr>
       </thead>
-      <tbody class="page-body-tbody">
-        <tr *ngFor="let rec of ms.record.records" [style.color]="rec.ord_status_color"
+      <tbody class="page-body-tbody" *ngFor="let rec of ms.record.records">
+        <tr [style.color]="rec.ord_status_color"
           (mousedown)="ms.selectRowId(rec.ord_pkid)" [class.active]="rec.ord_pkid == ms.getRowId()">
 
           <td><input type="checkbox" [(ngModel)]="rec.ord_selected" (change)="handleChange(rec)"></td>
@@ -310,6 +313,9 @@
         <td>{{rec.ord_instock1}}</td>
         <td>{{rec.ord_instock2}}</td>
         <td>{{rec.ord_track_status}}</td>                 -->
+          <td class="hlink" (click)="ShowHideRecord(rec)"><i class="fa fa-eye"></i></td>
+          <td>{{rec.ord_mbl_no}}</td>
+          <td>{{rec.ord_hbl_cntr_nos}}</td>
           <td *ngIf="gs.getTrackDate('BKD')||ms.trkdt_alldisplay=='Y'">{{rec.ord_booking_date}}</td>
           <td *ngIf="gs.getTrackDate('RND')||ms.trkdt_alldisplay=='Y'">{{rec.ord_rnd_insp_date}}</td>
           <td *ngIf="gs.getTrackDate('POR')||ms.trkdt_alldisplay=='Y'">{{rec.ord_po_rel_date}}</td>
@@ -324,6 +330,32 @@
           <td>{{rec.rec_created_date}}</td>
           <!-- <td *ngIf="ms.canDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
               (click)="ms.DeleteRow(rec)"></i></td> -->
+        </tr>
+        <tr  *ngIf="rec.row_displayed" style="border: 2px solid green;">
+          <td colspan="100%">
+            <div class="table-responsive my-0 p-0">
+              <table class="table table-hover table-sm table-bordered">
+                <thead class="page-body-thead">
+                  <tr>
+                    <th width="10%">SL#</th>
+                    <th width="20%">MASTER#</th>
+                    <th width="20%">HOUSE#</th>
+                    <th width="20%" *ngIf="ms.type=='SEA EXPORT'">CNTR#</th>
+                    <th width="30%" *ngIf="ms.type=='SEA EXPORT'">TYPE</th>
+                  </tr>
+                </thead>
+                <tbody class="page-body-tbody">
+                  <tr *ngFor="let rec of rec.LinkHblCntrList; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{rec.cntrd_mbl_no}}</td>
+                    <td>{{rec.cntrd_hbl_no}}</td>
+                    <td  *ngIf="ms.type=='SEA EXPORT'">{{rec.cntrd_cntr_no}}</td>
+                    <td  *ngIf="ms.type=='SEA EXPORT'">{{rec.cntrd_cntr_type}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>

@@ -143,4 +143,34 @@ export class OrderListComponent {
     this.ms.modalRef.close();
   }
 
+  ShowHideRecord(_rec: Joborderm) {
+    if (!_rec.row_displayed) {
+      this.OrderLinkList(_rec);
+    }
+    _rec.row_displayed = !_rec.row_displayed;
+  }
+
+  OrderLinkList(_rec: Joborderm) {
+    this.ms.ErrorMessage = '';
+    this.ms.InfoMessage = '';
+    this.ms.loading = true;
+    let SearchData = {
+      rowtype: _rec.rec_category,
+      orderid: _rec.ord_pkid,
+      company_code: this.gs.globalVariables.comp_code,
+      branch_code: this.gs.globalVariables.branch_code
+    };
+    this.ms.OrderLinkList(SearchData)
+      .subscribe(response => {
+        this.ms.loading = false;
+        _rec.LinkHblCntrList = response.list;
+      },
+        error => {
+          this.ms.loading = false;
+          this.ms.ErrorMessage = this.gs.getError(error);
+          alert(this.ms.ErrorMessage);
+        });
+
+  }
+
 }

@@ -147,7 +147,7 @@ export class LinkOrdHblCntrComponent {
 
         if (!bOk) {
             bret = false;
-            this.errorMessage.push("No details found");
+            this.errorMessage.push("No rows selected");
         }
 
         if (bret === false) {
