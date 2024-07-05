@@ -148,6 +148,7 @@ export class OrderListComponent {
       this.OrderLinkList(_rec);
     }
     _rec.row_displayed = !_rec.row_displayed;
+    
   }
 
   OrderLinkList(_rec: Joborderm) {

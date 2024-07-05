@@ -235,7 +235,7 @@
   </div>
 </div>
 <div *ngIf="ms.ord_list_type=='DETAILS'" class="page-box py-2">
-  <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 355px);">
+  <div class="table-responsive table-striped fixedTableHead  my-0 p-0" style="height: calc(100vh - 355px);">
     <table class="table table-hover table-sm table-bordered">
       <thead class="page-body-thead">
         <tr>
@@ -283,9 +283,9 @@
           <!-- <th *ngIf="ms.canDelete" class='text-center'>DELETE</th> -->
         </tr>
       </thead>
-      <tbody class="page-body-tbody" *ngFor="let rec of ms.record.records">
-        <tr [style.color]="rec.ord_status_color"
-          (mousedown)="ms.selectRowId(rec.ord_pkid)" [class.active]="rec.ord_pkid == ms.getRowId()">
+      <tbody class="page-body-tbody" *ngFor="let rec of ms.record.records" >
+        <tr [style.color]="rec.ord_status_color" (mousedown)="ms.selectRowId(rec.ord_pkid)"
+          [class.active]="rec.ord_pkid == ms.getRowId()">
 
           <td><input type="checkbox" [(ngModel)]="rec.ord_selected" (change)="handleChange(rec)"></td>
           <td>{{rec.ord_uid}}</td>
@@ -331,7 +331,7 @@
           <!-- <td *ngIf="ms.canDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
               (click)="ms.DeleteRow(rec)"></i></td> -->
         </tr>
-        <tr  *ngIf="rec.row_displayed" style="border: 2px solid green;">
+        <tr *ngIf="rec.row_displayed" style="border: 2px solid green;">
           <td colspan="100%">
             <div class="table-responsive my-0 p-0">
               <table class="table table-hover table-sm table-bordered">
@@ -340,17 +340,17 @@
                     <th width="10%">SL#</th>
                     <th width="20%">MASTER#</th>
                     <th width="20%">HOUSE#</th>
-                    <th width="20%" *ngIf="ms.type=='SEA EXPORT'">CNTR#</th>
-                    <th width="30%" *ngIf="ms.type=='SEA EXPORT'">TYPE</th>
+                    <th width="20%" *ngIf="rec.rec_category=='SEA EXPORT'">CNTR#</th>
+                    <th width="30%" *ngIf="rec.rec_category=='SEA EXPORT'">TYPE</th>
                   </tr>
                 </thead>
                 <tbody class="page-body-tbody">
-                  <tr *ngFor="let rec of rec.LinkHblCntrList; let i = index">
+                  <tr *ngFor="let rec1 of rec.LinkHblCntrList; let i = index">
                     <td>{{i+1}}</td>
-                    <td>{{rec.cntrd_mbl_no}}</td>
-                    <td>{{rec.cntrd_hbl_no}}</td>
-                    <td  *ngIf="ms.type=='SEA EXPORT'">{{rec.cntrd_cntr_no}}</td>
-                    <td  *ngIf="ms.type=='SEA EXPORT'">{{rec.cntrd_cntr_type}}</td>
+                    <td>{{rec1.cntrd_mbl_no}}</td>
+                    <td>{{rec1.cntrd_hbl_no}}</td>
+                    <td *ngIf="rec.rec_category=='SEA EXPORT'">{{rec1.cntrd_cntr_no}}</td>
+                    <td *ngIf="rec.rec_category=='SEA EXPORT'">{{rec1.cntrd_cntr_type}}</td>
                   </tr>
                 </tbody>
               </table>
