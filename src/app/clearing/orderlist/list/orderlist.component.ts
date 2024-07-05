@@ -34,13 +34,11 @@ export class OrderListComponent {
   ActionHandler(action: string, id: string) {
     this.ms.errorMessage = [];
     if (action == "ADD" && !this.ms.menu_record.rights_add) {
-      this.ms.errorMessage.push('Insufficient User Rights')
-      this.gs.showToastScreen(this.ms.errorMessage);
+      this.gs.showToastScreen(['Insufficient User Rights']);
       return;
     }
     if (action == "EDIT" && !this.ms.menu_record.rights_edit) {
-      this.ms.errorMessage.push('Insufficient User Rights')
-      this.gs.showToastScreen(this.ms.errorMessage);
+      this.gs.showToastScreen(['Insufficient User Rights']);
       return;
     }
 

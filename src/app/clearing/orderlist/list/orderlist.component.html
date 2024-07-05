@@ -283,9 +283,10 @@
           <!-- <th *ngIf="ms.canDelete" class='text-center'>DELETE</th> -->
         </tr>
       </thead>
-      <tbody class="page-body-tbody" *ngFor="let rec of ms.record.records; let i = index" >
+      <tbody class="page-body-tbody" *ngFor="let rec of ms.record.records; let i = index">
         <tr [style.color]="rec.ord_status_color" (mousedown)="ms.selectRowId(rec.ord_pkid)"
-          [class.active]="rec.ord_pkid == ms.getRowId()" [style.background-color]="i%2==0?'#D3D3D3':'rgba(0, 0, 0, .125)'">
+          [class.active]="rec.ord_pkid == ms.getRowId()"
+          [style.background-color]="i%2==0?'#D3D3D3':'rgba(0, 0, 0, .125)'">
           <td><input type="checkbox" [(ngModel)]="rec.ord_selected" (change)="handleChange(rec)"></td>
           <td>{{rec.ord_uid}}</td>
           <td (click)="ActionHandler('EDIT',rec.ord_header_id)" class="hlink"><i class="fa fa-pencil"></i></td>

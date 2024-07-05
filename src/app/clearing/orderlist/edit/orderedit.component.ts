@@ -21,7 +21,7 @@ export class OrderEditComponent {
 
   // @ViewChild('inv_no') private inv_no_ctrl: InputBoxComponent;
 
-
+  private errorMessage: string[] = [];
   urlid: string = '';
   InitCompleted: boolean = false;
   menu_record: any;
@@ -35,8 +35,6 @@ export class OrderEditComponent {
   selectedId: string = "";
   isPrevDetails: boolean = false;
   detailMode = "ADD";
-  ErrorMessage = "";
-  InfoMessage = "";
   Record: Joborderh = <Joborderh>{};
   Recorddet: Joborderm = new Joborderm;
 
@@ -74,8 +72,7 @@ export class OrderEditComponent {
   }
 
   ActionHandler(_action: string) {
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
     if (_action === 'ADD') {
       this.mode = "ADD";
       this.resetControls();
@@ -96,7 +93,7 @@ export class OrderEditComponent {
 
 
   newRecord() {
-    this.ErrorMessage = '';
+    this.errorMessage = [];
     this.pkid = this.gs.getGuid();
     this.Record = new Joborderh();
     this.Record.ordh_pkid = this.pkid;
@@ -158,8 +155,7 @@ export class OrderEditComponent {
       pkid: Id,
       user_code: this.gs.globalVariables.user_code
     };
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
     this.ms.GetRecord(SearchData)
       .subscribe(response => {
         this.loading = false;
@@ -167,8 +163,8 @@ export class OrderEditComponent {
       },
         error => {
           this.loading = false;
-          this.ErrorMessage = this.gs.getError(error);
-          alert(this.ErrorMessage);
+          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.errorMessage);
           this.ActionHandler('ADD');
         });
   }
@@ -178,7 +174,6 @@ export class OrderEditComponent {
     this.Record.rec_mode = this.mode;
     this.NewDetRecord();
   }
-
 
   OnBlur(field: string) {
     switch (field) {
@@ -303,8 +298,7 @@ export class OrderEditComponent {
       return;
 
     this.loading = true;
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
     this.Record._globalvariables = this.gs.globalVariables;
     this.ms.Save(this.Record)
       .subscribe(response => {
@@ -318,13 +312,12 @@ export class OrderEditComponent {
           rec.ord_imp_grp_id = response.grpid;
         }
         this.ms.RefreshList(this.Record);
-        //alert('Save Complete');
         this.gs.showToastScreen(['Save Complete']);
       },
         error => {
           this.loading = false;
-          this.ErrorMessage = this.gs.getError(error);
-          this.gs.showToastScreen([this.ErrorMessage]);
+          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.errorMessage);
           //alert(this.ErrorMessage);
         });
   }
@@ -332,53 +325,47 @@ export class OrderEditComponent {
   allvalid() {
     let sError: string = "";
     let bret: boolean = true;
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
 
 
     if (this.gs.isBlank(this.Record.ordh_exp_id)) {
       bret = false;
-      sError += "\n\r | Shipper Cannot Be Blank";
+      this.errorMessage.push("Shipper Cannot Be Blank");
     }
     if (this.gs.isBlank(this.Record.ordh_imp_id)) {
       bret = false;
-      sError += "\n\r | Consignee Cannot Be Blank";
+      this.errorMessage.push("Consignee Cannot Be Blank");
     }
     // if (this.gs.isBlank(this.Record.ordh_agent_id)) {
     //   bret = false;
-    //   sError += " Agent(Origin) Cannot Be Blank";
+    //   this.errorMessage.push("Agent(Origin) Cannot Be Blank");
     // }
     // if (this.gs.isBlank(this.Record.ordh_pod_agent_id)) {
     //   bret = false;
-    //   sError += "\n\r | Agent(Destination) Cannot Be Blank";
+    //   this.errorMessage.push("Agent(Destination) Cannot Be Blank");
     // }
 
     if (this.gs.isBlank(this.Record.ordh_pol)) {
       bret = false;
-      sError += " POL Cannot Be Blank";
+      this.errorMessage.push("POL Cannot Be Blank");
     }
     if (this.gs.isBlank(this.Record.ordh_pod)) {
       bret = false;
-      sError += "\n\r | POD Cannot Be Blank";
+      this.errorMessage.push("POD Cannot Be Blank");
     }
 
-    // if (this.gs.isBlank(this.Record.ord_po)) {
-    //   bret = false;
-    //   sError += "\n\r | PO Cannot Be Blank";
-    // }
     if (this.Record.ordh_detList.length <= 0) {
       bret = false;
-      sError += "\n\r | Order List Cannot Be Blank";
+      this.errorMessage.push("Order List Cannot Be Blank");
     }
 
     if (this.detailMode == "EDIT") {
       bret = false;
-      sError += "\n\r | Please Update row and continue.......";
+      this.errorMessage.push("Please Update row and continue.......");
     }
 
     if (bret === false) {
-      this.ErrorMessage = sError;
-      alert(this.ErrorMessage);
+      this.gs.showToastScreen(this.errorMessage);
     }
 
     return bret;
@@ -393,26 +380,25 @@ export class OrderEditComponent {
 
     let sError: string = "";
     let bret: boolean = true;
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
 
     if (this.gs.isBlank(this.Recorddet.ord_invno)) {
       bret = false;
-      sError += " | Invoice number cannot be blank";
+      this.errorMessage.push("Invoice number cannot be blank");
     }
 
     if (this.gs.isBlank(this.Recorddet.ord_po)) {
       bret = false;
-      sError += " | PO cannot be blank";
+      this.errorMessage.push("PO cannot be blank");
     }
 
     if (this.gs.isBlank(this.Recorddet.ord_desc)) {
       bret = false;
-      sError += " | Description cannot be blank";
+      this.errorMessage.push("Description cannot be blank");
     }
 
     if (bret === false) {
-      alert(sError);
+      this.gs.showToastScreen(this.errorMessage);
       return;
     }
 
@@ -446,6 +432,7 @@ export class OrderEditComponent {
   }
 
   NewDetRecord() {
+    this.errorMessage = [];
     this.detailMode = "ADD";
     let _preRecDet = this.Recorddet;
     this.Recorddet = new Joborderm();
@@ -540,8 +527,9 @@ export class OrderEditComponent {
   }
 
   DeleteRow(_rec: Joborderm) {
+    this.errorMessage = [];
     if (_rec.ord_status == "APPROVED") {
-      alert('Cannot Delete, Approved');
+      this.gs.showToastScreen(['Cannot Delete, Approved']);
       return;
     }
 

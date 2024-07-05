@@ -302,25 +302,21 @@ export class OrderListService {
     }
     if (this.ord_list_type == "SUMMARY") {
       if (this.gs.isBlank(this.ord_trkheaderid)) {
-        this.errorMessage.push('No Rows Selected');
-        this.gs.showToastScreen(this.errorMessage);
+        this.gs.showToastScreen(['No Rows Selected']);
         return;
       }
       if (this.total > 1) {
-        this.errorMessage.push('Please select one record and continue.....');
-        this.gs.showToastScreen(this.errorMessage);
+        this.gs.showToastScreen(['Please select one record and continue.....']);
         return;
       }
 
     } else {
       if (this.gs.isBlank(this.ord_trkids)) {
-        this.errorMessage.push('No Rows Selected');
-        this.gs.showToastScreen(this.errorMessage);
+        this.gs.showToastScreen(['No Rows Selected']);
         return;
       }
       if (bMultplrGrpId) {
-        this.errorMessage.push('Invalid Consignee Group Selected');
-        this.gs.showToastScreen(this.errorMessage);
+        this.gs.showToastScreen(['Invalid Consignee Group Selected']);
         return;
       }
     }
@@ -355,13 +351,11 @@ export class OrderListService {
 
     if (this.ord_list_type == "SUMMARY") {
       if (this.gs.isBlank(this.ord_trkheaderid)) {
-        this.errorMessage.push('No Rows Selected');
-        this.gs.showToastScreen(this.errorMessage);
+        this.gs.showToastScreen(['No Rows Selected']);
         return;
       }
       if (this.total > 1) {
-        this.errorMessage.push('Please select one record and continue.....');
-        this.gs.showToastScreen(this.errorMessage);
+        this.gs.showToastScreen(['Please select one record and continue.....']);
         return;
       }
 
@@ -393,13 +387,11 @@ export class OrderListService {
     }
 
     if (this.gs.isBlank(this.ord_trkheaderid)) {
-      this.errorMessage.push('No Rows Selected');
-      this.gs.showToastScreen(this.errorMessage);
+      this.gs.showToastScreen(['No Rows Selected']);
       return;
     }
     if (this.total > 1) {
-      this.errorMessage.push('Please select one record and continue.....');
-      this.gs.showToastScreen(this.errorMessage);
+      this.gs.showToastScreen(['Please select one record and continue.....']);
       return;
     }
     this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
