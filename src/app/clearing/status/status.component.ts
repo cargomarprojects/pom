@@ -37,8 +37,9 @@ export class StatusComponent {
   sub: any;
   urlid: string;
   mode = 'EDIT';
-  ErrorMessage = "";
-  InfoMessage = "";
+  private errorMessage: string[] = [];
+  // ErrorMessage = "";
+  // InfoMessage = "";
 
   ord_status = 'SENT FOR APPROVAL';
 
@@ -65,11 +66,10 @@ export class StatusComponent {
   }
 
   save() {
-
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
     if (this.gs.isBlank(this.ord_pkids) && this.gs.isBlank(this.ord_header_id)) {
-      this.ErrorMessage = " Cannot Update Invalid ID";
+      this.errorMessage.push("Cannot Update Invalid ID");
+      this.gs.showToastScreen(this.errorMessage);
       return;
     }
 
@@ -84,19 +84,18 @@ export class StatusComponent {
     };
 
     this.loading = true;
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
-
+    this.errorMessage = [];
     this.mainService.ChangeStatus(SearchData)
       .subscribe(response => {
-        this.InfoMessage = "Save Complete";
+        this.errorMessage.push("Save Complete");
+        this.gs.showToastScreen(this.errorMessage);
         this.ids = response.list;
         //var urlid = this.gs.getParameter('urlid');
         // this.store.dispatch( FromOrderActions.ChangeStatus({urlid: urlid, pkids: this.ids})  )
         this.closeModalWindow.emit({ saction: 'STATUS-SAVE', result: response.list });
       }, error => {
-        this.ErrorMessage = this.gs.getError(error);
-        alert(this.ErrorMessage);
+        this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+        this.gs.showToastScreen(this.errorMessage);
       });
 
   }

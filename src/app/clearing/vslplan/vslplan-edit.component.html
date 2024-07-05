@@ -206,9 +206,9 @@
         <th *ngIf="gs.getTrackDate('DPOD')||trkdt_alldisplay=='Y'">DPOD</th>
       </tr>
     </thead>
-    <tbody class="page-body-tbody" *ngFor="let rec of Record.OrderList" >
+    <tbody class="page-body-tbody" *ngFor="let rec of Record.OrderList; let i = index" >
       <tr (mousedown)="selectRowId(rec.ord_pkid)"
-      [class.active]="rec.ord_pkid == getRowId()">
+      [class.active]="rec.ord_pkid == getRowId()"  [style.background-color]="i%2==0?'#D3D3D3':'rgba(0, 0, 0, .125)'">
         <td><input type="checkbox" (change)="OnChange('ord_selected')" [(ngModel)]="rec.ord_selected"></td>
         <td>{{rec.ord_uid}}</td>
         <td>{{rec.ord_status}}</td>

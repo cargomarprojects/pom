@@ -83,7 +83,9 @@ export class GlobalService {
     else
       return error.error.Message;
   }
-
+  public getErrorArray(error: any) {
+    return error.split(',');
+  }
   /*
   public headerparam(type: string, company_code: string = '') {
     let headers = new Headers();
