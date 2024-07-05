@@ -143,11 +143,13 @@ export class OrderListComponent {
   }
 
   ShowHideRecord(_rec: Joborderm) {
+    if (!_rec.ord_mbl_no)
+      return;
+
     if (!_rec.row_displayed) {
       this.OrderLinkList(_rec);
     }
     _rec.row_displayed = !_rec.row_displayed;
-    
   }
 
   OrderLinkList(_rec: Joborderm) {

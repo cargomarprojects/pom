@@ -313,7 +313,7 @@
         <td>{{rec.ord_instock1}}</td>
         <td>{{rec.ord_instock2}}</td>
         <td>{{rec.ord_track_status}}</td>                 -->
-          <td class="hlink" (click)="ShowHideRecord(rec)"><i class="fa fa-eye"></i></td>
+          <td class="hlink" (click)="ShowHideRecord(rec)"><i *ngIf="rec.ord_mbl_no" class="fa fa-eye"></i></td>
           <td>{{rec.ord_mbl_no}}</td>
           <td>{{rec.ord_hbl_cntr_nos}}</td>
           <td *ngIf="gs.getTrackDate('BKD')||ms.trkdt_alldisplay=='Y'">{{rec.ord_booking_date}}</td>
