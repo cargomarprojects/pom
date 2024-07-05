@@ -45,15 +45,14 @@ export class VslPlanEditComponent {
   public mblid = "";
   total = 0;
   total_hblcntr = 0;
-  
+
   selectedId = "";
   trkdt_alldisplay = "N";
 
   modalRef: any;
   urlid: string;
   lock_record: boolean = false;
-  ErrorMessage = "";
-  InfoMessage = "";
+  errorMessage: string[] = [];
   Record: Planm = <Planm>{};
 
   constructor(
@@ -140,8 +139,7 @@ export class VslPlanEditComponent {
   }
 
   ActionHandler() {
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
     if (this.mode === 'ADD') {
       this.resetControls();
       this.newRecord();
@@ -194,6 +192,7 @@ export class VslPlanEditComponent {
     this.Record.rec_version = 0;
 
   }
+
   resetControls() {
     this.disableSave = true;
     if (!this.menu_record)
@@ -221,8 +220,7 @@ export class VslPlanEditComponent {
       branch_code: this.gs.globalVariables.branch_code,
       user_code: this.gs.globalVariables.user_code
     };
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
     this.ms.GetRecord(SearchData)
       .subscribe(response => {
         this.loading = false;
@@ -236,8 +234,8 @@ export class VslPlanEditComponent {
       },
         error => {
           this.loading = false;
-          this.ErrorMessage = this.gs.getError(error);
-          alert(this.ErrorMessage);
+          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.errorMessage);
           this.mode = 'ADD';
           this.ActionHandler();
         });
@@ -264,8 +262,7 @@ export class VslPlanEditComponent {
     if (!this.allvalid())
       return;
     this.loading = true;
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
     this.Record.vp_type = 'PLANNING';
     this.Record.rec_category = this.type;
     this.Record._globalvariables = this.gs.globalVariables;
@@ -286,45 +283,43 @@ export class VslPlanEditComponent {
         this.mblid = this.Record.vp_mbl_id;
         this.setCanUpdateHblCntr();
         this.ms.RefreshList(this.Record);
-        alert('Save Complete');
+        this.gs.showToastScreen(['Save Complete']);
       },
         error => {
           this.loading = false;
-          this.ErrorMessage = this.gs.getError(error);
-          alert(this.ErrorMessage);
+          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.errorMessage);
         });
   }
 
   allvalid() {
     let sError: string = "";
     let bret: boolean = true;
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
 
     if (this.Record.vp_plan_date.trim().length <= 0) {
       bret = false;
-      sError += "\n\r | Date Cannot Be Blank";
+      this.errorMessage.push("Date Cannot Be Blank");
     }
     // if (this.Record.vp_pol_agent_id.trim().length <= 0) {
     //   bret = false;
-    //   sError += "\n\r | Agent.pol Cannot Be Blank";
+    //   this.errorMessage.push("Agent.pol Cannot Be Blank");
     // }
     // if (this.Record.vp_imp_id.trim().length <= 0) {
     //   bret = false;
-    //   sError += "\n\r | Consignee Cannot Be Blank";
+    //  this.errorMessage.push("Consignee Cannot Be Blank");
     // }
     // if (this.Record.vp_pod_agent_id.trim().length <= 0) {
     //   bret = false;
-    //   sError += "\n\r | Agent.pod Cannot Be Blank";
+    //   this.errorMessage.push("Agent.pod Cannot Be Blank");
     // }
     // if (this.Record.vp_week_no <= 0) {
     //   bret = false;
-    //   sError += "\n\r | Week Number Cannot Be Blank";
+    //   this.errorMessage.push("Week Number Cannot Be Blank");
     // }
 
     if (bret === false) {
-      this.ErrorMessage = sError;
-      alert(this.ErrorMessage);
+      this.gs.showToastScreen(this.errorMessage);
     }
 
     return bret;
@@ -369,14 +364,11 @@ export class VslPlanEditComponent {
 
   OrderList() {
 
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
-    //if (this.ord_po.trim().length <= 0) {
-
-    //  this.ErrorMessage += " | PO Cannot Be Blank";
-    //}
-    // if (this.ErrorMessage)
-    //   return;
+    this.errorMessage = [];
+    // if (this.ord_po.trim().length <= 0) {
+    //       this.gs.showToastScreen(["PO Cannot Be Blank"])
+    //       return;
+    // }
 
     this.loading = true;
     let SearchData = {
@@ -389,8 +381,7 @@ export class VslPlanEditComponent {
       branch_code: this.gs.globalVariables.branch_code
     };
 
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
     this.ms.OrderList(SearchData)
       .subscribe(response => {
         this.loading = false;
@@ -405,8 +396,8 @@ export class VslPlanEditComponent {
       },
         error => {
           this.loading = false;
-          this.ErrorMessage = this.gs.getError(error);
-          alert(this.ErrorMessage);
+          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.errorMessage);
         });
 
   }
@@ -438,6 +429,7 @@ export class VslPlanEditComponent {
   }
 
   ShowTracking(modalname: any) {
+    this.errorMessage = [];
     this.total = 0;
     this.ord_trkids = "";
     this.ord_trkpos = "";
@@ -465,12 +457,12 @@ export class VslPlanEditComponent {
     }
 
     if (this.gs.isBlank(this.ord_trkids)) {
-      alert('No Rows Selected');
+      this.gs.showToastScreen(['No Rows Selected']);
       return;
     }
 
     if (bMultplrGrpId) {
-      alert('Invalid Consignee Group Selected');
+      this.gs.showToastScreen(['Invalid Consignee Group Selected']);
       return;
     }
 
@@ -520,7 +512,7 @@ export class VslPlanEditComponent {
 
   UpdateHouseContainer(_content: any) {
     if (this.gs.isBlank(this.mblid)) {
-      alert('Invalid Master#');
+      this.gs.showToastScreen(['Invalid Master#']);
       return;
     }
 
@@ -530,7 +522,6 @@ export class VslPlanEditComponent {
     let bMultplrGrpId = false;
     let blankplanId = false;
     for (let rec of this.Record.OrderList) {
-
       if (rec.ord_hblcntrselected) {
 
         if (this.total_hblcntr == 0)
@@ -549,17 +540,17 @@ export class VslPlanEditComponent {
     }
 
     if (this.gs.isBlank(this.orderids)) {
-      alert('No Rows Selected');
+      this.gs.showToastScreen(['No Rows Selected']);
       return;
     }
 
     if (bMultplrGrpId) {
-      alert('Invalid Consignee Group Selected');
+      this.gs.showToastScreen(['Invalid Consignee Group Selected']);
       return;
     }
 
     if (blankplanId) {
-      alert('Missing Data Found, Please save and continue.......');
+      this.gs.showToastScreen(['Missing Data Found, Please save and continue.......']);
       return;
     }
 
@@ -588,8 +579,7 @@ export class VslPlanEditComponent {
   }
 
   OrderLinkList(_rec: Joborderm) {
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
     this.loading = true;
     let SearchData = {
       rowtype: this.type,
@@ -597,8 +587,6 @@ export class VslPlanEditComponent {
       company_code: this.gs.globalVariables.comp_code,
       branch_code: this.gs.globalVariables.branch_code
     };
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
     this.ms.OrderLinkList(SearchData)
       .subscribe(response => {
         this.loading = false;
@@ -606,10 +594,9 @@ export class VslPlanEditComponent {
       },
         error => {
           this.loading = false;
-          this.ErrorMessage = this.gs.getError(error);
-          alert(this.ErrorMessage);
+          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.errorMessage);
         });
-
   }
 
 }

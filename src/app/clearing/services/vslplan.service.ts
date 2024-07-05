@@ -26,9 +26,10 @@ export class VslPlanService {
   where_consignee = "CUST_IS_CONSIGNEE = 'Y'";
   where_buy_agent = "CUST_IS_BUY_AGENT = 'Y'";
   searchstring = '';
-  ErrorMessage = "";
-  InfoMessage = "";
+  // ErrorMessage = "";
+  // InfoMessage = "";
   show_hide_caption = "HIDE";
+  public errorMessage: string[] = [];
 
   private _record: PlanModel;
 
@@ -150,8 +151,7 @@ export class VslPlanService {
       page_rowcount: this._record.searchQuery.page_rowcount
     };
 
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
     this.VslList(SearchData)
       .subscribe(response => {
         this.loading = false;
@@ -163,7 +163,7 @@ export class VslPlanService {
       },
         error => {
           this.loading = false;
-          this.ErrorMessage = this.gs.getError(error);
+          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
         });
   }
 
@@ -196,10 +196,9 @@ export class VslPlanService {
   ChangeShowHide(_rec: Planm) {
 
     let msg = "";
-    this.ErrorMessage = '';
+    this.errorMessage = [];
     if (_rec.vp_pkid.trim().length <= 0) {
-      this.ErrorMessage = "Invalid Record";
-      alert(this.ErrorMessage);
+      this.gs.showToastScreen(["Invalid Record"])
       return;
     }
 
@@ -216,8 +215,7 @@ export class VslPlanService {
       branch_code: this.gs.globalVariables.branch_code,
       user_code: this.gs.globalVariables.user_code
     };
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
     this.HideRecord(SearchData)
       .subscribe(response => {
         this.loading = false;
@@ -225,8 +223,8 @@ export class VslPlanService {
       },
         error => {
           this.loading = false;
-          this.ErrorMessage = this.gs.getError(error);
-          alert(this.ErrorMessage);
+          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.errorMessage);
         });
 
   }
