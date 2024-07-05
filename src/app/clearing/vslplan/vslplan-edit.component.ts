@@ -572,6 +572,8 @@ export class VslPlanEditComponent {
   }
 
   ShowHideRecord(_rec: Joborderm) {
+    if (!_rec.ord_mbl_no)
+      return;
     if (!_rec.row_displayed) {
       this.OrderLinkList(_rec);
     }
