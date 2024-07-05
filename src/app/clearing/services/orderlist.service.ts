@@ -17,8 +17,9 @@ export class OrderListService {
   public canDelete: boolean;
   menu_record: any;
   total = 0;
-  ErrorMessage = "";
-  InfoMessage = "";
+  // ErrorMessage = "";
+  // InfoMessage = "";
+  public errorMessage: string[] = [];
   loading = false;
   where_agent = "CUST_IS_AGENT = 'Y'";
   where_shipper = "CUST_IS_SHIPPER = 'Y'";
@@ -187,8 +188,7 @@ export class OrderListService {
     if (this._record.searchQuery.list_orderwise)
       this.ord_list_type = "DETAILS"
 
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
     this.OrdList(SearchData)
       .subscribe(response => {
         this.loading = false;
@@ -204,8 +204,8 @@ export class OrderListService {
       },
         error => {
           this.loading = false;
-          this.ErrorMessage = this.gs.getError(error);
-          alert(this.ErrorMessage);
+          this.errorMessage= this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.errorMessage);
         });
   }
   Downloadfile(filename: string, filetype: string, filedisplayname: string) {
@@ -265,6 +265,7 @@ export class OrderListService {
   }
 
   ShowTracking(modalname: any) {
+    this.errorMessage = [];
     this.total = 0;
     this.ord_trkids = "";
     this.ord_trkpos = "";
@@ -301,21 +302,25 @@ export class OrderListService {
     }
     if (this.ord_list_type == "SUMMARY") {
       if (this.gs.isBlank(this.ord_trkheaderid)) {
-        alert('No Rows Selected');
+        this.errorMessage.push('No Rows Selected');
+        this.gs.showToastScreen(this.errorMessage);
         return;
       }
       if (this.total > 1) {
-        alert('Please select one record and continue.....');
+        this.errorMessage.push('Please select one record and continue.....');
+        this.gs.showToastScreen(this.errorMessage);
         return;
       }
 
     } else {
       if (this.gs.isBlank(this.ord_trkids)) {
-        alert('No Rows Selected');
+        this.errorMessage.push('No Rows Selected');
+        this.gs.showToastScreen(this.errorMessage);
         return;
       }
       if (bMultplrGrpId) {
-        alert('Invalid Consignee Group Selected');
+        this.errorMessage.push('Invalid Consignee Group Selected');
+        this.gs.showToastScreen(this.errorMessage);
         return;
       }
     }
@@ -324,6 +329,7 @@ export class OrderListService {
   }
 
   ShowStatus(modalname: any) {
+    this.errorMessage = [];
     this.total = 0;
     this.ord_trkids = "";
     this.ord_trkpos = "";
@@ -349,17 +355,19 @@ export class OrderListService {
 
     if (this.ord_list_type == "SUMMARY") {
       if (this.gs.isBlank(this.ord_trkheaderid)) {
-        alert('No Rows Selected');
+        this.errorMessage.push('No Rows Selected');
+        this.gs.showToastScreen(this.errorMessage);
         return;
       }
       if (this.total > 1) {
-        alert('Please select one record and continue.....');
+        this.errorMessage.push('Please select one record and continue.....');
+        this.gs.showToastScreen(this.errorMessage);
         return;
       }
 
     } else {
       if (this.gs.isBlank(this.ord_trkids)) {
-        alert('No Rows Selected');
+        this.errorMessage.push('No Rows Selected');
         return;
       }
     }
@@ -368,6 +376,7 @@ export class OrderListService {
   }
 
   ShowHistory(modalname: any) {
+    this.errorMessage = [];
     this.total = 0;
     this.ord_trkids = "";
     this.ord_trkheaderid = "";
@@ -384,11 +393,13 @@ export class OrderListService {
     }
 
     if (this.gs.isBlank(this.ord_trkheaderid)) {
-      alert('No Rows Selected');
+      this.errorMessage.push('No Rows Selected');
+      this.gs.showToastScreen(this.errorMessage);
       return;
     }
     if (this.total > 1) {
-      alert('Please select one record and continue.....');
+      this.errorMessage.push('Please select one record and continue.....');
+      this.gs.showToastScreen(this.errorMessage);
       return;
     }
     this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
@@ -406,15 +417,13 @@ export class OrderListService {
       branch_code: this.gs.globalVariables.branch_code,
       user_code: this.gs.globalVariables.user_code
     };
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
-
+    this.errorMessage = [];
     this.DeleteRecord(SearchData)
       .subscribe(response => {
         this.loading = false;
         if (response.retvalue == false) {
-          this.ErrorMessage = response.error;
-          alert(this.ErrorMessage);
+          this.errorMessage = this.gs.getErrorArray(response.error);
+          this.gs.showToastScreen(this.errorMessage);
         }
         else {
           this.record.records.splice(this.record.records.findIndex(rec => rec.ord_pkid == _rec.ord_pkid), 1);
@@ -422,8 +431,8 @@ export class OrderListService {
 
       }, error => {
         this.loading = false;
-        this.ErrorMessage = this.gs.getError(error);
-        alert(this.ErrorMessage);
+        this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+        this.gs.showToastScreen(this.errorMessage);
       });
   }
 

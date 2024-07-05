@@ -32,14 +32,15 @@ export class OrderListComponent {
   }
 
   ActionHandler(action: string, id: string) {
-    this.ms.ErrorMessage = '';
-    this.ms.InfoMessage = '';
+    this.ms.errorMessage = [];
     if (action == "ADD" && !this.ms.menu_record.rights_add) {
-      alert('Insufficient User Rights')
+      this.ms.errorMessage.push('Insufficient User Rights')
+      this.gs.showToastScreen(this.ms.errorMessage);
       return;
     }
     if (action == "EDIT" && !this.ms.menu_record.rights_edit) {
-      alert('Insufficient User Rights')
+      this.ms.errorMessage.push('Insufficient User Rights')
+      this.gs.showToastScreen(this.ms.errorMessage);
       return;
     }
 
@@ -152,8 +153,7 @@ export class OrderListComponent {
   }
 
   OrderLinkList(_rec: Joborderm) {
-    this.ms.ErrorMessage = '';
-    this.ms.InfoMessage = '';
+    this.ms.errorMessage = [];
     this.ms.loading = true;
     let SearchData = {
       rowtype: _rec.rec_category,
@@ -168,8 +168,8 @@ export class OrderListComponent {
       },
         error => {
           this.ms.loading = false;
-          this.ms.ErrorMessage = this.gs.getError(error);
-          alert(this.ms.ErrorMessage);
+          this.ms.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.ms.errorMessage);
         });
 
   }
