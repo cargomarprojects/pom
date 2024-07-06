@@ -51,16 +51,6 @@
     <app-hbl [parentid]="pkid" [type]="type" [menuid]="menuid" [RecordList]="HblList"></app-hbl>
     <app-link-cntr-hbl [parentid]="pkid" [type]="type" [menuid]="menuid" [RecordList]="LinkList"></app-link-cntr-hbl>
 </div>
-
-
-
-<div *ngIf="InfoMessage" class="alert alert-success">
-    {{InfoMessage}}
-</div>
-<div *ngIf="ErrorMessage" class="alert alert-danger">
-    {{ErrorMessage}}
-</div>
-
 <ng-template #doc let-c="close" let-d="dismiss">
     <div class="modal-header">
         <h4 class="modal-title">Documents</h4>

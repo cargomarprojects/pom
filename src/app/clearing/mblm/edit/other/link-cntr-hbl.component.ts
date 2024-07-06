@@ -176,7 +176,7 @@ export class LinkCntrHblComponent {
             },
                 error => {
                     this.loading = false;
-                    this.errorMessage.push(this.gs.getError(error));
+                    this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
                     this.gs.showToastScreen(this.errorMessage);
                 });
     }
@@ -206,7 +206,7 @@ export class LinkCntrHblComponent {
             },
                 error => {
                     this.loading = false;
-                    this.errorMessage.push(this.gs.getError(error));
+                    this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
                     this.gs.showToastScreen(this.errorMessage);
                 });
     }
@@ -269,7 +269,7 @@ export class LinkCntrHblComponent {
             },
                 error => {
                     this.loading = false;
-                    this.errorMessage.push(this.gs.getError(error));
+                    this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
                     this.gs.showToastScreen(this.errorMessage);
                 });
     }

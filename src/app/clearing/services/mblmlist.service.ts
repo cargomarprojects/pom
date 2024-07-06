@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Blm,Containerd, SearchQuery, BlmModel } from '../models/mblm';
+import { Blm, Containerd, SearchQuery, BlmModel } from '../models/mblm';
 import { GlobalService } from '../../core/services/global.service';
-import { Blm_VM,Containerm } from '../models/mblm';
+import { Blm_VM, Containerm } from '../models/mblm';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable({ providedIn: 'root' })
@@ -17,8 +17,7 @@ export class MblmListService {
     public canDelete: boolean;
     menu_record: any;
     total = 0;
-    ErrorMessage = "";
-    InfoMessage = "";
+    public errorMessage: string[] = [];
     loading = false;
     //   where_buy_agent = "CUST_IS_BUY_AGENT = 'Y'";
     modalRef: any;
@@ -125,8 +124,7 @@ export class MblmListService {
             report_folder: this.gs.globalVariables.report_folder,
             file_pkid: this.gs.getGuid()
         };
-        this.ErrorMessage = '';
-        this.InfoMessage = '';
+        this.errorMessage = [];
         this.MblList(SearchData)
             .subscribe(response => {
                 this.loading = false;
@@ -141,7 +139,8 @@ export class MblmListService {
             },
                 error => {
                     this.loading = false;
-                    this.ErrorMessage = this.gs.getError(error);
+                    this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+                    this.gs.showToastScreen(this.errorMessage);
                 });
     }
     Downloadfile(filename: string, filetype: string, filedisplayname: string) {
@@ -182,15 +181,14 @@ export class MblmListService {
             branch_code: this.gs.globalVariables.branch_code,
             user_code: this.gs.globalVariables.user_code
         };
-        this.ErrorMessage = '';
-        this.InfoMessage = '';
+        this.errorMessage = [];
 
         this.DeleteRecord(SearchData)
             .subscribe(response => {
                 this.loading = false;
                 if (response.retvalue == false) {
-                    this.ErrorMessage = response.error;
-                    alert(this.ErrorMessage);
+                    this.errorMessage = this.gs.getErrorArray(response.error);
+                    this.gs.showToastScreen(this.errorMessage);
                 }
                 else {
                     this.record.records.splice(this.record.records.findIndex(rec => rec.bl_pkid == _rec.bl_pkid), 1);
@@ -198,8 +196,8 @@ export class MblmListService {
 
             }, error => {
                 this.loading = false;
-                this.ErrorMessage = this.gs.getError(error);
-                alert(this.ErrorMessage);
+                this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+                this.gs.showToastScreen(this.errorMessage);
             });
     }
 
@@ -222,7 +220,7 @@ export class MblmListService {
     LoadDefault(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/MblmList/LoadDefault', SearchData, this.gs.headerparam2('authorized'));
     }
-     
+
 }
 
 

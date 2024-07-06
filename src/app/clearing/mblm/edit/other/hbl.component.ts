@@ -44,7 +44,7 @@ export class HblComponent {
         private gs: GlobalService,
         private modalService: NgbModal,
     ) {
-        
+
     }
 
 
@@ -191,7 +191,7 @@ export class HblComponent {
             },
                 error => {
                     this.loading = false;
-                    this.errorMessage.push(this.gs.getError(error));
+                    this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
                     this.gs.showToastScreen(this.errorMessage);
                 });
     }
@@ -214,13 +214,13 @@ export class HblComponent {
             .subscribe(response => {
                 this.loading = false;
                 this.Record.rec_version = response.version;
-                this.errorMessage.push("Save Complete");
+                // this.gs.showToastScreen(["Save Complete"]);
                 this.RefreshList();
                 this.ActionHandler("ADD", null);
             },
                 error => {
                     this.loading = false;
-                    this.errorMessage.push(this.gs.getError(error));
+                    this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
                     this.gs.showToastScreen(this.errorMessage);
                 });
     }
@@ -274,7 +274,6 @@ export class HblComponent {
             parentid: this.parentid
         };
         this.errorMessage = [];
-
         this.ms.DeleteRecord(SearchData)
             .subscribe(response => {
                 this.loading = false;
@@ -283,7 +282,7 @@ export class HblComponent {
             },
                 error => {
                     this.loading = false;
-                    this.errorMessage.push(this.gs.getError(error));
+                    this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
                     this.gs.showToastScreen(this.errorMessage);
                 });
     }

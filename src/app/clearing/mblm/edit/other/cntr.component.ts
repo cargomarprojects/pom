@@ -19,7 +19,7 @@ export class CntrComponent {
     @Input() type: string = '';
     @Input() parentid: string = '';
     @Input() RecordList: Containerm[] = [];
-    
+
     modal: any;
     selectedId: string = '';
     loading = false;
@@ -34,7 +34,7 @@ export class CntrComponent {
 
 
     // Array For Displaying List
-    
+
     // Single Record for add/edit/view details
     Record: Containerm = new Containerm;
 
@@ -172,7 +172,7 @@ export class CntrComponent {
             },
                 error => {
                     this.loading = false;
-                    this.errorMessage.push(this.gs.getError(error));
+                    this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
                     this.gs.showToastScreen(this.errorMessage);
                 });
     }
@@ -195,13 +195,13 @@ export class CntrComponent {
             .subscribe(response => {
                 this.loading = false;
                 this.Record.rec_version = response.version;
-                this.errorMessage.push("Save Complete");
+                // this.gs.showToastScreen(["Save Complete"]);
                 this.RefreshList();
                 this.ActionHandler("ADD", null);
             },
                 error => {
                     this.loading = false;
-                    this.errorMessage.push(this.gs.getError(error));
+                    this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
                     this.gs.showToastScreen(this.errorMessage);
                 });
     }
@@ -255,7 +255,7 @@ export class CntrComponent {
             parentid: this.parentid
         };
         this.errorMessage = [];
-        
+
         this.ms.DeleteRecord(SearchData)
             .subscribe(response => {
                 this.loading = false;
@@ -264,7 +264,7 @@ export class CntrComponent {
             },
                 error => {
                     this.loading = false;
-                    this.errorMessage.push(this.gs.getError(error));
+                    this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
                     this.gs.showToastScreen(this.errorMessage);
                 });
     }

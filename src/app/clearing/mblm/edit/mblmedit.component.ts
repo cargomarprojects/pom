@@ -32,8 +32,7 @@ export class MblmEditComponent {
   modal: any;
   selectedId: string = "";
   detailMode = "ADD";
-  ErrorMessage = "";
-  InfoMessage = "";
+  errorMessage: string[] = [];
   CntrList: Containerm[] = [];
   HblList: Blm[] = [];
   LinkList: Containerd[] = [];
@@ -77,9 +76,8 @@ export class MblmEditComponent {
   }
 
   ActionHandler(_action: string) {
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
-    if (_action === 'ADD') {
+    this.errorMessage = [];
+      if (_action === 'ADD') {
       this.mode = "ADD";
       this.resetControls();
       this.newRecord();
@@ -99,7 +97,7 @@ export class MblmEditComponent {
 
 
   newRecord() {
-    this.ErrorMessage = '';
+    this.errorMessage = [];
     this.pkid = this.gs.getGuid();
     this.Record = new Blm();
     this.Record.bl_pkid = this.pkid;
@@ -110,14 +108,12 @@ export class MblmEditComponent {
       this.Record.bl_type = 'MBL-SE';
     else if (this.type == "AIR EXPORT")
       this.Record.bl_type = 'MBL-AE';
-    // this.Record.ordh_detList = new Array<Joborderm>();
     this.Record.rec_category = this.type;
     this.Record.rec_version = 0;
     this.Record.rec_mode = this.mode;
     this.CntrList = new Array<Containerm>();
     this.HblList = new Array<Blm>();
     this.LinkList = new Array<Containerd>();
-    this.NewDetRecord();
   }
 
   resetControls() {
@@ -145,8 +141,7 @@ export class MblmEditComponent {
       user_code: this.gs.globalVariables.user_code,
       type: this.type
     };
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
     this.ms.GetRecord(SearchData)
       .subscribe(response => {
         this.loading = false;
@@ -157,8 +152,8 @@ export class MblmEditComponent {
       },
         error => {
           this.loading = false;
-          this.ErrorMessage = this.gs.getError(error);
-          alert(this.ErrorMessage);
+          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.errorMessage);
           this.ActionHandler('ADD');
         });
   }
@@ -166,7 +161,6 @@ export class MblmEditComponent {
   loadData(_Record: Blm) {
     this.Record = _Record;
     this.Record.rec_mode = this.mode;
-    this.NewDetRecord();
   }
 
 
@@ -177,14 +171,11 @@ export class MblmEditComponent {
           this.Record.bl_no = this.Record.bl_no.toUpperCase();
           break;
         }
-
-
       // case 'ord_cbm':
       //   {
       //     this.Recorddet.ord_cbm = this.gs.roundWeight(this.Recorddet.ord_cbm, "CBM");
       //     break;
       //   }
-
       case 'ord_color':
         {
           //this.FindContractNo();
@@ -214,8 +205,7 @@ export class MblmEditComponent {
       return;
 
     this.loading = true;
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
     this.Record.rec_category = this.type;
     this.Record._globalvariables = this.gs.globalVariables;
     this.ms.Save(this.Record)
@@ -228,129 +218,37 @@ export class MblmEditComponent {
         this.Record.rec_mode = this.mode;
         this.Record.rec_version = response.version;
         this.ms.RefreshList(this.Record);
-        alert('Save Complete');
+        this.gs.showToastScreen(['Save Complete']);
       },
         error => {
           this.loading = false;
-          this.ErrorMessage = this.gs.getError(error);
-          alert(this.ErrorMessage);
+          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.errorMessage);
         });
   }
 
   allvalid() {
-    let sError: string = "";
     let bret: boolean = true;
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
 
     if (this.gs.isBlank(this.Record.bl_no)) {
       bret = false;
-      sError += "\n\r | MBL# Cannot Be Blank";
+      this.errorMessage.push("Master# Cannot Be Blank");
     }
     if (this.gs.isBlank(this.Record.bl_date)) {
       bret = false;
-      sError += "\n\r | MBL Date Cannot Be Blank";
+      this.errorMessage.push("Master Date Cannot Be Blank");
     }
 
-
     if (bret === false) {
-      this.ErrorMessage = sError;
-      alert(this.ErrorMessage);
+      this.gs.showToastScreen(this.errorMessage);
     }
 
     return bret;
   }
 
-
   Close() {
     this.gs.ClosePage('home', false);
-  }
-
-  AddRecord() {
-
-    let sError: string = "";
-    let bret: boolean = true;
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
-
-    // if (this.gs.isBlank(this.Recorddet.ord_invno)) {
-    //   bret = false;
-    //   sError += " | Invoice number cannot be blank";
-    // }
-
-    // if (this.gs.isBlank(this.Recorddet.ord_po)) {
-    //   bret = false;
-    //   sError += " | PO cannot be blank";
-    // }
-
-    // if (this.gs.isBlank(this.Recorddet.ord_desc)) {
-    //   bret = false;
-    //   sError += " | Description cannot be blank";
-    // }
-
-    // if (bret === false) {
-    //   alert(sError);
-    //   return;
-    // }
-
-    // if (this.detailMode == "ADD") {
-    //   this.Record.ordh_detList.push(this.Recorddet);
-    // } else {
-    //   var REC2 = this.Record.ordh_detList.find(rec => rec.ord_pkid == this.Recorddet.ord_pkid);
-    //   if (REC2 != null) {
-    //     REC2.ord_invno = this.Recorddet.ord_invno;
-    //     REC2.ord_uneco = this.Recorddet.ord_uneco;
-    //     REC2.ord_po = this.Recorddet.ord_po;
-    //     REC2.ord_style = this.Recorddet.ord_style;
-    //     REC2.ord_color = this.Recorddet.ord_color;
-    //     REC2.ord_contractno = this.Recorddet.ord_contractno;
-    //     REC2.ord_pkg = this.Recorddet.ord_pkg;
-    //     REC2.ord_pcs = this.Recorddet.ord_pcs;
-    //     REC2.ord_ntwt = this.Recorddet.ord_ntwt;
-    //     REC2.ord_grwt = this.Recorddet.ord_grwt;
-    //     REC2.ord_cbm = this.Recorddet.ord_cbm;
-    //     REC2.ord_hs_code = this.Recorddet.ord_hs_code;
-    //     REC2.ord_desc = this.Recorddet.ord_desc;
-    //     REC2.ord_boarding1 = this.Recorddet.ord_boarding1;
-    //     REC2.ord_boarding2 = this.Recorddet.ord_boarding2;
-    //     REC2.ord_instock1 = this.Recorddet.ord_instock1;
-    //     REC2.ord_instock2 = this.Recorddet.ord_instock2;
-    //     REC2.ord_cargo_readiness_date = this.Recorddet.ord_cargo_readiness_date;
-    //   }
-    // }
-    // this.isPrevDetails = true;
-    this.NewDetRecord();
-  }
-
-  NewDetRecord() {
-    this.detailMode = "ADD";
-    // let _preRecDet = this.Recorddet;
-    // this.Recorddet = new Joborderm();
-    // this.Recorddet.ord_pkid = this.gs.getGuid();;
-    // this.Recorddet.ord_header_id = this.pkid;
-    // this.Recorddet.ord_uid = 0;
-    // this.Recorddet.ord_status = 'REPORTED';
-
-  }
-
-
-  EditRecord(_rec: Blm) {
-    this.detailMode = "EDIT";
-    // this.Recorddet = new Joborderm();
-    // this.Recorddet.ord_pkid = _rec.ord_pkid;
-    // this.Recorddet.ord_header_id = this.pkid;
-    // this.Recorddet.ord_invno = _rec.ord_invno;
-    // this.Recorddet.ord_uneco = _rec.ord_uneco;
-
-  }
-
-  DeleteRow(_rec: Blm) {
-
-    if (!confirm("Delete selected row")) {
-      return;
-    }
-    // if (!this.gs.isBlank(this.ms.record.records))
-    //   this.ms.record.records.splice(this.ms.record.records.findIndex(rec => rec.ord_pkid == _rec.ord_pkid), 1);
   }
 
   CloseModal1(params: any) {
@@ -365,7 +263,7 @@ export class MblmEditComponent {
   }
 
   ShowDocuments(doc: any) {
-    this.ErrorMessage = '';
+    this.errorMessage = [];
     this.open(doc);
   }
   

@@ -32,14 +32,13 @@ export class MblmListComponent {
   }
 
   ActionHandler(action: string, id: string) {
-    this.ms.ErrorMessage = '';
-    this.ms.InfoMessage = '';
+    this.ms.errorMessage = [];
     if (action == "ADD" && !this.ms.menu_record.rights_add) {
-      alert('Insufficient User Rights')
+      this.gs.showToastScreen(['Insufficient User Rights'])
       return;
     }
     if (action == "EDIT" && !this.ms.menu_record.rights_edit) {
-      alert('Insufficient User Rights')
+      this.gs.showToastScreen(['Insufficient User Rights'])
       return;
     }
 
