@@ -34,7 +34,7 @@ export class VslPlanEditComponent {
   ctrlDisable = false;
   ord_hblcntrselected = false;
   chkhblcntrselected = false;
-  canHblCntrUpdate = false;
+  colHblCntrVisible = false;
 
   bPrint: boolean = false;
   searchstring = '';
@@ -249,7 +249,7 @@ export class VslPlanEditComponent {
     if (this.Record.OrderList.length > 0)
       this.ord_selected = true;
     this.chkselected = this.ord_selected;
-    this.setCanUpdateHblCntr();
+    this.setColHblCntrVisible();
     this.FindCount();
   }
 
@@ -277,11 +277,15 @@ export class VslPlanEditComponent {
         this.mode = 'EDIT';
         this.Record.rec_mode = this.mode;
         this.Record.rec_version = response.version;
+        this.mblid = this.Record.vp_mbl_id;
+        for (let rec of this.Record.OrderList) {
+          if (rec.ord_selected)
+            rec.ord_plan_id = this.Record.vp_pkid;
+        }
         if (this.ctrlDisable && this.Record.vp_mbl_id.length > 0)
           this.Record.vp_locked = true;
 
-        this.mblid = this.Record.vp_mbl_id;
-        this.setCanUpdateHblCntr();
+        this.setColHblCntrVisible();
         this.ms.RefreshList(this.Record);
         this.gs.showToastScreen(['Save Complete']);
       },
@@ -561,11 +565,11 @@ export class VslPlanEditComponent {
     this.modalRef = this.modalService.open(content, { centered: true, backdrop: 'static', keyboard: true });
   }
 
-  setCanUpdateHblCntr() {
-    this.canHblCntrUpdate = false;
+  setColHblCntrVisible() {
+    this.colHblCntrVisible = false;
     for (let rec of this.Record.OrderList) {
       if (!this.gs.isBlank(rec.ord_plan_id)) {
-        this.canHblCntrUpdate = true;
+        this.colHblCntrVisible = true;
         break;
       }
     }
