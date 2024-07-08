@@ -26,6 +26,7 @@ import { HblComponent } from './mblm/edit/other/hbl.component';
 import { LinkCntrHblComponent } from './mblm/edit/other/link-cntr-hbl.component';
 import { LinkOrdHblCntrComponent } from './vslplan/other/link-ord-hbl-cntr.component';
 import { TrkComponent } from './mblm/edit/other/trk.component';
+import { TransitComponent } from './mblm/edit/other/transit.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { TrkComponent } from './mblm/edit/other/trk.component';
     HblComponent,
     LinkCntrHblComponent,
     LinkOrdHblCntrComponent,
-    TrkComponent
+    TrkComponent,
+    TransitComponent
   ],
   imports: [
     SharedModule,

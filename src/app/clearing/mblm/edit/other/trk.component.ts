@@ -283,6 +283,21 @@ export class TrkComponent {
         }
     }
 
+    ModifiedRecords(params: any) {
+         
+    
+        // if (params.type == "TRANSIT") {
+        //   if (params.saction == "ADD")
+        //     this.NewTransitRecord();
+        //   if (params.saction == "REMOVE") {
+        //     this.Record.TransitList.splice(this.Record.TransitList.findIndex(rec => rec.trk_pkid == params.sid), 1);
+        //     if (this.Record.TransitList.length == 0)
+        //       this.NewTransitRecord();
+        //   }
+        // }
+        
+      }
+
 }
 
 
