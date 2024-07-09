@@ -36,6 +36,7 @@ export class MblmEditComponent {
   CntrList: Containerm[] = [];
   HblList: Blm[] = [];
   LinkList: Containerd[] = [];
+  TrackList: Blm[] = [];
   Record: Blm = <Blm>{};
   //   Recorddet: Joborderm = new Joborderm;
 
@@ -114,6 +115,7 @@ export class MblmEditComponent {
     this.CntrList = new Array<Containerm>();
     this.HblList = new Array<Blm>();
     this.LinkList = new Array<Containerd>();
+    this.TrackList = new Array<Blm>();
   }
 
   resetControls() {
@@ -149,6 +151,7 @@ export class MblmEditComponent {
         this.CntrList = response.cntrlist;
         this.HblList = response.hbllist;
         this.LinkList = response.linklist;
+        this.TrackList = response.tracklist;
       },
         error => {
           this.loading = false;

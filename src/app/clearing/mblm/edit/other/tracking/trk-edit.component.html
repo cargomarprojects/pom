@@ -201,7 +201,8 @@
                                 maxlength="150" />
                         </div>
                         <div class="col-sm-3">
-                            <button [disabled]="loading" (click)="Save()" class="btn btn-primary btn-sm mr-1 mt-1">Save</button>
+                            <button [disabled]="loading" (click)="Save()" class="btn btn-primary btn-sm mr-1">Save</button>
+                            <button (click)="Close()" class="btn btn-primary btn-sm" >Close</button>
                             <!-- <button *ngIf="mode == 'EDIT'" [disabled]="loading" (click)="ShowHistory(tracking)"
                                 class="btn btn-success btn-sm">Container Tracking</button> -->
                         </div>

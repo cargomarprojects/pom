@@ -46,7 +46,7 @@
     </div>
 </div>
 <div *ngIf="mode=='EDIT'">
-    <app-trk-edit [pkid]="pkid" [mode]="'EDIT'" [type]="type" [menuid]="menuid"  ></app-trk-edit>
+    <app-trk-list [parentid]="pkid" [type]="type" [menuid]="menuid" [RecordList]="TrackList" ></app-trk-list>
     <app-cntr *ngIf="type=='SEA EXPORT'" [parentid]="pkid" [type]="type" [menuid]="menuid" [RecordList]="CntrList"></app-cntr>
     <app-hbl [parentid]="pkid" [type]="type" [menuid]="menuid" [RecordList]="HblList"></app-hbl>
     <app-link-cntr-hbl *ngIf="type=='SEA EXPORT'" [parentid]="pkid" [type]="type" [menuid]="menuid" [RecordList]="LinkList"></app-link-cntr-hbl>

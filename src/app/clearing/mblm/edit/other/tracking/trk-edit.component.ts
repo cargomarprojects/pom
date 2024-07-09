@@ -20,6 +20,7 @@ export class TrkEditComponent {
     @Input() type: string = '';
     @Input() mode: string = 'ADD';
     @Input() pkid: string = '';
+    @Output() closeModalWindow = new EventEmitter<any>();
     modal: any;
     selectedId: string = '';
     loading = false;
@@ -252,8 +253,9 @@ export class TrkEditComponent {
                 this.loading = false;
                 this.Record.rec_version = response.version;
                 // this.gs.showToastScreen(["Save Complete"]);
-                this.RefreshList();
+                // this.RefreshList();
                 // this.ActionHandler("ADD", null);
+                this.closeModalWindow.emit({ saction: 'SAVE', result: this.Record });
             },
                 error => {
                     this.loading = false;
@@ -324,7 +326,8 @@ export class TrkEditComponent {
     }
 
     Close() {
-        this.gs.ClosePage('home');
+        // this.gs.ClosePage('home');
+        this.closeModalWindow.emit({ saction: 'CLOSE' });
     }
 
     OnBlur(field: string) {

@@ -1,0 +1,50 @@
+<div class="page-box  mt-2">
+    <div class="row">
+        <div class="col-sm-12 mx-0 px-0">
+            <div class="form-group row">
+                <label style="color: black;font-weight: bold;background-color: skyblue;" class="col-sm-12 p-1">Tracking
+                    Details</label>
+            </div>
+        </div>
+    </div>
+    <hr class="my=2">
+    <div class="table-responsive fixedTableHead  my-0 p-0" [style.height]="RecordList.length>5?'132px':'auto'"
+        [style.overflow-y]="RecordList.length>5?'scroll':'auto'">
+        <table class="table table-hover table-sm table-bordered">
+            <thead class="page-body-thead">
+                <tr>
+                    <th>EDIT</th>
+                    <th>MASTER#</th>
+                    <th>VESSEL</th>
+                    <th>VOYAGE</th>
+                    <th>POL</th>
+                    <th>ETD</th>
+                    <th>CONFM</th>
+                    <th>POD</th>
+                    <th>ETA</th>
+                    <th>CONFM</th>
+                </tr>
+            </thead>
+            <tbody class="page-body-tbody">
+                <tr *ngFor="let rec of RecordList; let i = index">
+                    <td (click)="ShowTracking(trackingdet)" class="hlink"><i class="fa fa-pencil"></i>
+                    </td>
+                    <td>{{rec.bl_no}}</td>
+                    <td>{{rec.bl_vessel_name}}</td>
+                    <td>{{rec.bl_vessel_no}}</td>
+                    <td>{{rec.bl_pol_name}}</td>
+                    <td>{{rec.bl_pol_etd}}</td>
+                    <td>{{rec.bl_pol_etd_confirm?'Y':'N'}}</td>
+                    <td>{{rec.bl_pod_name}}</td>
+                    <td>{{rec.bl_pod_eta}}</td>
+                    <td>{{rec.bl_pod_eta_confirm?'Y':'N'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<ng-template #trackingdet let-c="close" let-d="dismiss">
+    <div class="modal-body p-2">
+         <app-trk-edit [pkid]="parentid" [mode]="'EDIT'" [type]="type" [menuid]="menuid" (closeModalWindow)="CloseModal($event)"  ></app-trk-edit>
+    </div>
+  </ng-template>
