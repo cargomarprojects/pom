@@ -2,14 +2,15 @@ import { Component, Input, Output, OnInit, OnDestroy, EventEmitter, ViewChild } 
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { GlobalService } from '../../../../core/services/global.service';
-import { Containerm } from '../../../models/mblm';
-import { CntrService } from '../../../services/cntr.service';
+import { Blm } from '../../../models/mblm';
+import { TrkService } from '../../../services/trk.service';
 import { SearchTable } from '../../../../shared/models/searchtable';
+import { Trackingm } from '../../../models/tracking';
 
 @Component({
     selector: 'app-trk',
     templateUrl: './trk.component.html',
-    providers: [CntrService]
+    providers: [TrkService]
 })
 export class TrkComponent {
     // Local Variables 
@@ -17,29 +18,22 @@ export class TrkComponent {
 
     @Input() menuid: string = '';
     @Input() type: string = '';
-    @Input() parentid: string = '';
-    @Input() RecordList: Containerm[] = [];
-
+    @Input() mode: string = 'ADD';
+    @Input() pkid: string = '';
     modal: any;
     selectedId: string = '';
     loading = false;
     CntrTypes: string = "";
 
     private errorMessage: string[] = [];
-
-    mode = 'ADD';
-    pkid = '';
     ctr: number;
-
-
-
     // Array For Displaying List
 
     // Single Record for add/edit/view details
-    Record: Containerm = new Containerm;
+    Record: Blm = new Blm;
 
     constructor(
-        private ms: CntrService,
+        private ms: TrkService,
         private route: ActivatedRoute,
         private gs: GlobalService,
         private modalService: NgbModal,
@@ -49,7 +43,7 @@ export class TrkComponent {
     // Init Will be called After executing Constructor
     ngOnInit() {
         // this.List('NEW');
-        this.ActionHandler("ADD", null);
+        this.ActionHandler(this.mode, this.pkid);
     }
 
     // Destroy Will be called when this component is closed
@@ -84,11 +78,26 @@ export class TrkComponent {
 
     LovSelected(_Record: SearchTable) {
 
-        if (_Record.controlname == "CNTR-TYPE") {
-            this.Record.cntr_type_id = _Record.id;
-            this.Record.cntr_type_code = _Record.code;
+        if (_Record.controlname == "POL") {
+            this.Record.bl_pol_id = _Record.id;
+            this.Record.bl_pol_code = _Record.code;
+            this.Record.bl_pol_name = _Record.name;
         }
-
+        if (_Record.controlname == "VESSEL") {
+            this.Record.bl_vessel_id = _Record.id;
+            this.Record.bl_vessel_code = _Record.code;
+            this.Record.bl_vessel_name = _Record.name;
+        }
+        if (_Record.controlname == "POD") {
+            this.Record.bl_pod_id = _Record.id;
+            this.Record.bl_pod_code = _Record.code;
+            this.Record.bl_pod_name = _Record.name;
+        }
+        if (_Record.controlname == "POFD") {
+            this.Record.bl_pofd_id = _Record.id;
+            this.Record.bl_pofd_code = _Record.code;
+            this.Record.bl_pofd_name = _Record.name;
+        }
     }
 
 
@@ -144,27 +153,71 @@ export class TrkComponent {
     }
 
     NewRecord() {
-
         this.pkid = this.gs.getGuid();
-        this.Record = new Containerm();
-        this.Record.cntr_pkid = this.pkid;
-        this.Record.cntr_mbl_id = this.parentid;
-        this.Record.cntr_no = '';
-        this.Record.cntr_type_id = '';
-        this.Record.cntr_type_code = '';
+        this.Record = new Blm();
+        this.Record.bl_pkid = this.pkid;
+        this.Record.bl_pol_id = '';
+        this.Record.bl_pol_code = '';
+        this.Record.bl_pol_name = '';
+        this.Record.bl_pod_id = '';
+        this.Record.bl_pod_code = '';
+        this.Record.bl_pod_name = '';
+        this.Record.bl_pofd_id = '';
+        this.Record.bl_pofd_code = '';
+        this.Record.bl_pofd_name = '';
+        this.Record.bl_vessel_id = '';
+        this.Record.bl_vessel_code = '';
+        this.Record.bl_vessel_name = '';
+        this.Record.bl_vessel_no = '';
+        this.Record.bl_pol_etd = '';
+        this.Record.bl_pol_eta = '';
+        this.Record.bl_pod_eta = '';
+        this.Record.bl_pofd_eta = '';
+        this.Record.bl_pol_etd_confirm = false;
+        this.Record.bl_pol_eta_confirm = false;
+        this.Record.bl_pod_eta_confirm = false;
+        this.Record.bl_pofd_eta_confirm = false;
+        this.Record.bl_si_cutoff = '';
+        this.Record.bl_cy_cutoff = '';
+        this.Record.bl_track_comments = '';
+        this.Record.TransitList = new Array<Trackingm>();
         this.Record.rec_mode = this.mode;
         this.Record.rec_version = 0;
+        this.NewTransitRecord();
     }
 
+    NewTransitRecord() {
+        let Rec: Trackingm = new Trackingm;
+        Rec.trk_pkid = this.gs.getGuid();
+        Rec.trk_parent_id = this.Record.bl_pkid;
+        Rec.rec_category = this.type;
+        Rec.trk_vsl_id = '';
+        Rec.trk_vsl_code = '';
+        Rec.trk_vsl_name = '';
+        Rec.trk_voyage = '';
+        Rec.trk_pol_id = '';
+        Rec.trk_pol_code = '';
+        Rec.trk_pol_name = '';
+        Rec.trk_pol_etd = '';
+        Rec.trk_pol_etd_confirm = false;
+        Rec.trk_pod_id = '';
+        Rec.trk_pod_code = '';
+        Rec.trk_pod_name = '';
+        Rec.trk_pod_eta = '';
+        Rec.trk_pod_eta_confirm = false;
+        Rec.trk_vsl_count = 0;
+        Rec.trk_si_cutoff = '';
+        Rec.trk_cy_cutoff = '';
+        Rec.row_colour = 'darkslategray';
+        this.Record.TransitList.push(Rec);
+    }
     // Load a single Record for VIEW/EDIT
     GetRecord(Id: string) {
         this.loading = true;
-
         let SearchData = {
             pkid: Id,
         };
         this.errorMessage = [];
-
         this.ms.GetRecord(SearchData)
             .subscribe(response => {
                 this.loading = false;
@@ -177,10 +230,13 @@ export class TrkComponent {
                 });
     }
 
-    LoadData(_Record: Containerm) {
+    LoadData(_Record: Blm) {
         this.Record = _Record;
         this.Record.rec_mode = this.mode;
+        if (this.Record.TransitList.length == 0)
+            this.NewTransitRecord();
     }
+
     // Save Data
     Save() {
 
@@ -211,13 +267,33 @@ export class TrkComponent {
         let bret: boolean = true;
         this.errorMessage = [];
 
-        if (this.Record.cntr_no.length <= 0) {
+        if (this.Record.bl_vessel_id.trim().length <= 0) {
             bret = false;
-            this.errorMessage.push("Container No Cannot Be Blank");
+            this.errorMessage.push("Vessel Cannot Be Blank");
         }
-        if (this.Record.cntr_type_id.length <= 0) {
+        if (this.Record.bl_pol_id.trim().length <= 0) {
             bret = false;
-            this.errorMessage.push("Container Type Cannot Be Blank");
+            this.errorMessage.push("POL Cannot Be Blank");
+        }
+        if (this.Record.bl_pol_etd.trim().length <= 0) {
+            bret = false;
+            this.errorMessage.push("ETD Cannot Be Blank");
+        }
+        if (this.Record.bl_pod_id.trim().length <= 0) {
+            bret = false;
+            this.errorMessage.push("POD Cannot Be Blank");
+        }
+        if (this.Record.bl_pod_eta.trim().length <= 0) {
+            bret = false;
+            this.errorMessage.push("ETA Cannot Be Blank");
+        }
+        if (this.Record.bl_pofd_id.trim().length <= 0) {
+            bret = false;
+            this.errorMessage.push("POFD Cannot Be Blank");
+        }
+        if (this.Record.bl_pofd_eta.trim().length <= 0) {
+            bret = false;
+            this.errorMessage.push("POFD ETA Cannot Be Blank");
         }
 
         if (bret === false) {
@@ -228,16 +304,16 @@ export class TrkComponent {
 
     RefreshList() {
 
-        if (this.RecordList == null)
-            return;
-        var REC = this.RecordList.find(rec => rec.cntr_pkid == this.Record.cntr_pkid);
-        if (REC == null) {
-            this.RecordList.push(this.Record);
-        }
-        else {
-            REC.cntr_no = this.Record.cntr_no;
-            REC.cntr_type_code = this.Record.cntr_type_code;
-        }
+        // if (this.RecordList == null)
+        //     return;
+        // var REC = this.RecordList.find(rec => rec.cntr_pkid == this.Record.cntr_pkid);
+        // if (REC == null) {
+        //     this.RecordList.push(this.Record);
+        // }
+        // else {
+        //     REC.cntr_no = this.Record.cntr_no;
+        //     REC.cntr_type_code = this.Record.cntr_type_code;
+        // }
     }
 
     selectRowId(id: string) {
@@ -247,56 +323,39 @@ export class TrkComponent {
         return this.selectedId;
     }
 
-
-    RemoveRecord(Id: string) {
-        this.loading = true;
-        let SearchData = {
-            pkid: Id,
-            parentid: this.parentid
-        };
-        this.errorMessage = [];
-
-        this.ms.DeleteRecord(SearchData)
-            .subscribe(response => {
-                this.loading = false;
-                this.RecordList.splice(this.RecordList.findIndex(rec => rec.cntr_pkid == Id), 1);
-                this.ActionHandler('ADD', null);
-            },
-                error => {
-                    this.loading = false;
-                    this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
-                    this.gs.showToastScreen(this.errorMessage);
-                });
-    }
-
-
     Close() {
         this.gs.ClosePage('home');
     }
 
     OnBlur(field: string) {
         switch (field) {
-            case 'cntr_no': {
-                this.Record.cntr_no = this.Record.cntr_no.toUpperCase();
+            case 'bl_vessel_no': {
+                this.Record.bl_vessel_no = this.Record.bl_vessel_no.toUpperCase();
                 break;
             }
+            case 'bl_track_comments': {
+                this.Record.bl_track_comments = this.Record.bl_track_comments.toUpperCase();
+                break;
+            }
+
         }
     }
 
     ModifiedRecords(params: any) {
-         
-    
-        // if (params.type == "TRANSIT") {
-        //   if (params.saction == "ADD")
-        //     this.NewTransitRecord();
-        //   if (params.saction == "REMOVE") {
-        //     this.Record.TransitList.splice(this.Record.TransitList.findIndex(rec => rec.trk_pkid == params.sid), 1);
-        //     if (this.Record.TransitList.length == 0)
-        //       this.NewTransitRecord();
-        //   }
-        // }
-        
-      }
+        if (params.type == "TRANSIT") {
+            if (params.saction == "ADD")
+                this.NewTransitRecord();
+            if (params.saction == "REMOVE") {
+                this.Record.TransitList.splice(this.Record.TransitList.findIndex(rec => rec.trk_pkid == params.sid), 1);
+                if (this.Record.TransitList.length == 0)
+                    this.NewTransitRecord();
+            }
+        }
+    }
+
+    // AddTransit() {
+    //     this.NewTransitRecord();
+    // }
 
 }
 

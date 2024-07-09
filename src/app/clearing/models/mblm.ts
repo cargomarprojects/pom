@@ -1,5 +1,6 @@
 import { GlobalVariables } from '../../core/models/globalvariables';
 import { PageQuery } from 'src/app/shared/models/pageQuery';
+import { Trackingm } from '../models/tracking';
 
 export class Blm {
   bl_pkid: string;
@@ -11,6 +12,31 @@ export class Blm {
   //   ordh_detList: Joborderm[] = [];
   bl_hbl_nos: string;
   bl_cntr_nos: string;
+  bl_pol_id: string;
+  bl_pol_code: string;
+  bl_pol_name: string;
+  bl_pod_id: string;
+  bl_pod_code: string;
+  bl_pod_name: string;
+  bl_pofd_id: string;
+  bl_pofd_code: string;
+  bl_pofd_name: string;
+  bl_vessel_id: string;
+  bl_vessel_code: string;
+  bl_vessel_name: string;
+  bl_vessel_no: string;
+  bl_pol_etd: string;
+  bl_pol_eta: string;
+  bl_pod_eta: string;
+  bl_pofd_eta: string;
+  bl_pol_etd_confirm: boolean;
+  bl_pol_eta_confirm: boolean;
+  bl_pod_eta_confirm: boolean;
+  bl_pofd_eta_confirm: boolean;
+  bl_si_cutoff: string;
+  bl_cy_cutoff: string;
+  bl_track_comments: string;
+  TransitList: Trackingm[] = [];
 
   rec_mode: string;
   rec_category: string;
@@ -38,7 +64,7 @@ export class Containerd {
   cntrd_pkid: string;
   cntrd_cntr_id: string;
   cntrd_cntr_no: string;
-  cntrd_cntr_type:string;
+  cntrd_cntr_type: string;
   cntrd_mbl_id: string;
   cntrd_mbl_no: string;
   cntrd_hbl_id: string;
