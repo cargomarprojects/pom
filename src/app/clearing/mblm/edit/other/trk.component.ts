@@ -253,7 +253,7 @@ export class TrkComponent {
                 this.Record.rec_version = response.version;
                 // this.gs.showToastScreen(["Save Complete"]);
                 this.RefreshList();
-                this.ActionHandler("ADD", null);
+                // this.ActionHandler("ADD", null);
             },
                 error => {
                     this.loading = false;

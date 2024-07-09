@@ -11,12 +11,12 @@
                 <div class="form-group row">
                     <div class="col-sm-6 pr-0">
                         <app-autocomplete2 [controlname]="'POL'" [tabletype]="'SEA PORT'" [displaycolumn]="'CODE'"
-                            [displaydata]="Record.trk_pol_code" (ValueChanged)="LovSelected($event)" [where]="">
+                            [displaydata]="mRecord.trk_pol_code" (ValueChanged)="LovSelected($event)" [where]="">
                         </app-autocomplete2>
                     </div>
                     <div class="col-sm-6 pr-0">
                         <input type="text" disabled class="form-control form-control-sm"
-                            [(ngModel)]="Record.trk_pol_name" />
+                            [(ngModel)]="mRecord.trk_pol_name" />
                     </div>
                 </div>
             </div>
@@ -24,19 +24,19 @@
                 <div class="form-group row">
                     <div class="col-sm-6 pr-0">
                         <app-autocomplete2 [controlname]="'VESSEL'" [tabletype]="'VESSEL'" [displaycolumn]="'CODE'"
-                            [displaydata]="Record.trk_vsl_code" (ValueChanged)="LovSelected($event)" [where]="">
+                            [displaydata]="mRecord.trk_vsl_code" (ValueChanged)="LovSelected($event)" [where]="">
                         </app-autocomplete2>
                     </div>
                     <div class="col-sm-6 pr-0">
                         <input type="text" disabled class="form-control form-control-sm"
-                            [(ngModel)]="Record.trk_vsl_name" />
+                            [(ngModel)]="mRecord.trk_vsl_name" />
                     </div>
                 </div>
             </div>
             <div class="col-sm-1 mx-0 px-0">
                 <div class="form-group row">
                     <div class="col-sm-12 pr-0">
-                        <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.trk_voyage"
+                        <input type="text" class="form-control form-control-sm" [(ngModel)]="mRecord.trk_voyage"
                             (blur)="OnBlur('trk_voyage')" required maxlength="15" />
                     </div>
                 </div>
@@ -44,8 +44,8 @@
             <div class="col-sm-2 mx-0 px-0">
                 <div class="form-group row">
                     <div class="col-sm-12 pr-0">
-                        <app-date [inputdate]="Record.trk_si_cutoff"
-                            (ValueChanged)="Record.trk_si_cutoff=$event"></app-date>
+                        <app-date [inputdate]="mRecord.trk_si_cutoff"
+                            (ValueChanged)="mRecord.trk_si_cutoff=$event"></app-date>
                     </div>
                 </div>
             </div>
@@ -56,16 +56,16 @@
             <div class="col-sm-3 mx-0 px-0">
                 <div class="form-group row">
                     <div class="col-sm-12 pr-0">
-                        <app-date [inputdate]="Record.trk_cy_cutoff"
-                            (ValueChanged)="Record.trk_cy_cutoff=$event"></app-date>
+                        <app-date [inputdate]="mRecord.trk_cy_cutoff"
+                            (ValueChanged)="mRecord.trk_cy_cutoff=$event"></app-date>
                     </div>
                 </div>
             </div>
             <div class="col-sm-3 mx-0 px-0">
                 <div class="form-group row">
                     <div class="col-sm-12 pr-0">
-                        <app-date [inputdate]="Record.trk_pol_etd"
-                            (ValueChanged)="Record.trk_pol_etd=$event"></app-date>
+                        <app-date [inputdate]="mRecord.trk_pol_etd"
+                            (ValueChanged)="mRecord.trk_pol_etd=$event"></app-date>
                     </div>
                 </div>
             </div>
@@ -74,22 +74,22 @@
                     <div class="col-sm-3 mx-0 px-0">
                         <div class="form-group row">
                             <div class="col-sm-12 my-1 pr-0">
-                                <input type="checkbox" [(ngModel)]="Record.trk_pol_etd_confirm">
+                                <input type="checkbox" [(ngModel)]="mRecord.trk_pol_etd_confirm">
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-5 mx-0 px-0">
                         <div class="form-group row">
                             <div class="col-sm-12 pr-0">
-                                <app-date [inputdate]="Record.trk_pod_eta"
-                                    (ValueChanged)="Record.trk_pod_eta=$event"></app-date>
+                                <app-date [inputdate]="mRecord.trk_pod_eta"
+                                    (ValueChanged)="mRecord.trk_pod_eta=$event"></app-date>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-2 mx-0 px-0">
                         <div class="form-group row">
                             <div class="col-sm-12 my-1 pr-0">
-                                <input type="checkbox" [(ngModel)]="Record.trk_pod_eta_confirm">
+                                <input type="checkbox" [(ngModel)]="mRecord.trk_pod_eta_confirm">
                             </div>
                         </div>
                     </div>
