@@ -1,18 +1,18 @@
 import { Component, Input, Output, OnInit, OnDestroy, EventEmitter, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { GlobalService } from '../../../../core/services/global.service';
-import { Blm } from '../../../models/mblm';
-import { TrkService } from '../../../services/trk.service';
-import { SearchTable } from '../../../../shared/models/searchtable';
-import { Trackingm } from '../../../models/tracking';
+import { GlobalService } from '../../../../../core/services/global.service';
+import { Blm } from '../../../../models/mblm';
+import { TrkService } from '../../../../services/trk.service';
+import { SearchTable } from '../../../../../shared/models/searchtable';
+import { Trackingm } from '../../../../models/tracking';
 
 @Component({
-    selector: 'app-trk',
-    templateUrl: './trk.component.html',
+    selector: 'app-trk-edit',
+    templateUrl: './trk-edit.component.html',
     providers: [TrkService]
 })
-export class TrkComponent {
+export class TrkEditComponent {
     // Local Variables 
     title = 'Tracking List';
 

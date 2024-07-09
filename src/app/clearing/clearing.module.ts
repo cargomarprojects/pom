@@ -25,8 +25,8 @@ import { CntrComponent } from './mblm/edit/other/cntr.component';
 import { HblComponent } from './mblm/edit/other/hbl.component';
 import { LinkCntrHblComponent } from './mblm/edit/other/link-cntr-hbl.component';
 import { LinkOrdHblCntrComponent } from './vslplan/other/link-ord-hbl-cntr.component';
-import { TrkComponent } from './mblm/edit/other/trk.component';
-import { TransitComponent } from './mblm/edit/other/transit.component';
+import { TrkEditComponent } from './mblm/edit/other/tracking/trk-edit.component';
+import { TransitComponent } from './mblm/edit/other/tracking/transit.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +54,7 @@ import { TransitComponent } from './mblm/edit/other/transit.component';
     HblComponent,
     LinkCntrHblComponent,
     LinkOrdHblCntrComponent,
-    TrkComponent,
+    TrkEditComponent,
     TransitComponent
   ],
   imports: [

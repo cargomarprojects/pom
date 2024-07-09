@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GlobalService } from '../../../../core/services/global.service';
-import { Trackingm } from '../../../models/tracking';
-import { SearchTable } from '../../../../shared/models/searchtable';
+import { GlobalService } from '../../../../../core/services/global.service';
+import { Trackingm } from '../../../../models/tracking';
+import { SearchTable } from '../../../../../shared/models/searchtable';
 
 @Component({
   selector: 'app-transit',
