@@ -7,11 +7,11 @@
   </div>
 </div>
 <div class="page-list">
-
   <div class="page-body table-responsive">
     <table class="table  table-hover table-sm">
       <thead class="page-body-thead">
         <tr>
+          <th>DOWNLOAD</th>
           <th>UPLOAD-BY</th>
           <th>UPLOAD-DATE</th>
           <th>TYPE</th>
@@ -24,12 +24,13 @@
       </thead>
       <tbody class="page-body-tbody" *ngFor="let rec of RecordList">
         <tr>
-          <td (click)="ShowFile(rec.doc_full_name,rec.doc_file_name)">{{rec.rec_created_by}}</td>
-          <td (click)="ShowFile(rec.doc_full_name,rec.doc_file_name)">{{rec.rec_created_date}}</td>
-          <td (click)="ShowFile(rec.doc_full_name,rec.doc_file_name)">{{rec.doc_catg_name}}</td>
-          <td (click)="ShowFile(rec.doc_full_name,rec.doc_file_name)">{{rec.doc_file_name}}</td>
-          <td (click)="ShowFile(rec.doc_full_name,rec.doc_file_name)">{{rec.doc_file_size}}</td>
-          <td (click)="ShowFile(rec.doc_full_name,rec.doc_file_name)">{{rec.rec_deleted_by}}</td>
+          <td><i class="fa fa-download fa-lg pointer" aria-hidden="true" (click)="ShowFile(rec.doc_full_name,rec.doc_file_name)" ></i></td>
+          <td>{{rec.rec_created_by}}</td>
+          <td>{{rec.rec_created_date}}</td>
+          <td>{{rec.doc_catg_name}}</td>
+          <td>{{rec.doc_file_name}}</td>
+          <td>{{rec.doc_file_size}}</td>
+          <td>{{rec.rec_deleted_by}}</td>
           <td *ngIf="canupload">
             <App-Dialog [id]="{msg:'Delete Y/N', buttons:'yn', selected :false,id:rec.doc_pkid,name:1}"
               (result)="RemoveList($event)"></App-Dialog>
@@ -121,6 +122,7 @@
         <thead class="page-body-thead">
           <tr>
             <th>SELECT</th>
+            <th>DOWNLOAD</th>
             <th>UPLOAD-BY</th>
             <th>UPLOAD-DATE</th>
             <th>TYPE</th>
@@ -137,12 +139,13 @@
                 <input type="checkbox" class="form-check-input" [(ngModel)]="rec.doc_selected">
               </div>
             </td>
-            <td (click)="ShowFile(rec.doc_full_name,rec.doc_file_name)">{{rec.rec_created_by}}</td>
-            <td (click)="ShowFile(rec.doc_full_name,rec.doc_file_name)">{{rec.rec_created_date}}</td>
-            <td (click)="ShowFile(rec.doc_full_name,rec.doc_file_name)">{{rec.doc_catg_name}}</td>
-            <td (click)="ShowFile(rec.doc_full_name,rec.doc_file_name)">{{rec.doc_file_name}}</td>
-            <td (click)="ShowFile(rec.doc_full_name,rec.doc_file_name)">{{rec.doc_file_size}}</td>
-            <td (click)="ShowFile(rec.doc_full_name,rec.doc_file_name)">{{rec.rec_deleted_by}}</td>
+            <td><i class="fa fa-download fa-lg pointer" aria-hidden="true" (click)="ShowFile(rec.doc_full_name,rec.doc_file_name)" ></i></td>
+            <td >{{rec.rec_created_by}}</td>
+            <td >{{rec.rec_created_date}}</td>
+            <td >{{rec.doc_catg_name}}</td>
+            <td >{{rec.doc_file_name}}</td>
+            <td >{{rec.doc_file_size}}</td>
+            <td >{{rec.rec_deleted_by}}</td>
             <td *ngIf="gs.globalVariables.user_code == 'ADMIN'"><i class="fa fa-edit fa-lg pointer" aria-hidden="true"
                 (click)="ShowEdiUpdate(rec)"></i></td>
           </tr>

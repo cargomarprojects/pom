@@ -119,12 +119,16 @@ export class TrkListComponent {
     Close() {
         this.gs.ClosePage('home');
     }
-    
+
     ShowTracking(modalname: any) {
         this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
     }
 
     CloseModal(params: any) {
+
+        if (params.saction == "SAVE") {
+            this.RecordList = params.list;
+        }
         this.modalRef.close();
     }
 

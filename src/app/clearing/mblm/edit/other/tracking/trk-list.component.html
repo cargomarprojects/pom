@@ -3,7 +3,8 @@
         <div class="col-sm-12 mx-0 px-0">
             <div class="form-group row">
                 <label style="color: black;font-weight: bold;background-color: skyblue;" class="col-sm-12 p-1">Tracking
-                    Details</label>
+                    Details<i (click)="ShowTracking(trackingdet)" style="color: red;"
+                        class="fa fa-truck ml-2 pointer"></i></label>
             </div>
         </div>
     </div>
@@ -14,10 +15,14 @@
             <thead class="page-body-thead">
                 <tr>
                     <th>SL#</th>
+                    <th><span *ngIf="type=='SEA EXPORT'||type=='SEA IMPORT'">VESSEL.CODE</span><span
+                            *ngIf="type=='AIR EXPORT'||type=='AIR IMPORT'">AIRLINE.CODE</span></th>
                     <th><span *ngIf="type=='SEA EXPORT'||type=='SEA IMPORT'">VESSEL</span><span
                             *ngIf="type=='AIR EXPORT'||type=='AIR IMPORT'">AIRLINE</span></th>
                     <th><span *ngIf="type=='SEA EXPORT'||type=='SEA IMPORT'">VOYAGE</span><span
                             *ngIf="type=='AIR EXPORT'||type=='AIR IMPORT'">FLIGHT#</span></th>
+
+
                     <th>POL.CODE</th>
                     <th>POL.NAME</th>
                     <th>ETD</th>
@@ -30,8 +35,9 @@
             </thead>
             <tbody class="page-body-tbody">
                 <tr *ngFor="let rec of RecordList; let i = index" (mousedown)="selectRowId(rec.trk_pkid)"
-                [class.active]="rec.trk_pkid == getRowId()">
-                    <td (click)="ShowTracking(trackingdet)" class="hlink">{{rec.trk_pkid=='ADD'?'ADD':i+1}}</td>
+                    [class.active]="rec.trk_pkid == getRowId()">
+                    <td>{{i+1}}</td>
+                    <td>{{rec.trk_vsl_code}}</td>
                     <td>{{rec.trk_vsl_name}}</td>
                     <td>{{rec.trk_voyage}}</td>
                     <td>{{rec.trk_pol_code}}</td>

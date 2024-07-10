@@ -255,7 +255,7 @@ export class TrkEditComponent {
                 // this.gs.showToastScreen(["Save Complete"]);
                 // this.RefreshList();
                 // this.ActionHandler("ADD", null);
-                this.closeModalWindow.emit({ saction: 'SAVE', result: this.Record });
+                this.closeModalWindow.emit({ saction: 'SAVE', list: response.tracklist });
             },
                 error => {
                     this.loading = false;
