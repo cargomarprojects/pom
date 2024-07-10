@@ -24,9 +24,7 @@ export class TransitComponent {
   currentTab = 'LIST';
   sub: any;
   urlid: string;
-  POLRECORD: SearchTable = new SearchTable();
   // PODRECORD: SearchTable = new SearchTable();
-  VESSELRECORD: SearchTable = new SearchTable();
   ErrorMessage = "";
   InfoMessage = "";
   constructor(
@@ -54,7 +52,6 @@ export class TransitComponent {
       this.InitComponent();
     }
     this.LoadCombo();
-    this.InitLov();
   }
 
   InitComponent() {
@@ -74,40 +71,7 @@ export class TransitComponent {
 
   }
 
-
-  InitLov() {
-
-    // this.POLRECORD = new SearchTable();
-    // this.POLRECORD.controlname = "POL";
-    // this.POLRECORD.displaycolumn = "CODE";
-    // if (this.type === "SEA EXPORT"||this.type === "SEA IMPORT")
-    //   this.POLRECORD.type = 'SEA PORT';
-    // else
-    //   this.POLRECORD.type = 'AIR PORT';
-    // this.POLRECORD.id = this.mRecord.trk_pol_id;
-    // this.POLRECORD.code = this.mRecord.trk_pol_code;
-    // this.POLRECORD.name = this.mRecord.trk_pol_name;
-
-    // this.PODRECORD = new SearchTable();
-    // this.PODRECORD.controlname = "POD";
-    // this.PODRECORD.displaycolumn = "CODE";
-    // this.PODRECORD.type = 'SEA PORT';
-    // this.PODRECORD.id = "";
-    // this.PODRECORD.code = "";
-    // this.PODRECORD.name = "";
-
-    // this.VESSELRECORD = new SearchTable();
-    // this.VESSELRECORD.controlname = "VSL";
-    // this.VESSELRECORD.displaycolumn = "CODE";
-    // if (this.type === "SEA EXPORT"||this.type === "SEA IMPORT")
-    //   this.VESSELRECORD.type = 'VESSEL';
-    // else
-    //   this.VESSELRECORD.type = 'AIR CARRIER';
-    // this.VESSELRECORD.id = this.mRecord.trk_vsl_id;
-    // this.VESSELRECORD.code = this.mRecord.trk_vsl_code;
-    // this.VESSELRECORD.name = this.mRecord.trk_vsl_name;
-  }
-
+ 
   LovSelected(_Record: SearchTable) {
     if (_Record.controlname == "POL") {
       this.mRecord.trk_pol_id = _Record.id;

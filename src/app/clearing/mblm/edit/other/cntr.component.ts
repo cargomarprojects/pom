@@ -237,6 +237,7 @@ export class CntrComponent {
         else {
             REC.cntr_no = this.Record.cntr_no;
             REC.cntr_type_code = this.Record.cntr_type_code;
+            REC.cntr_seal_no = this.Record.cntr_seal_no;
         }
     }
 

@@ -7,6 +7,7 @@ export class Blm {
   bl_slno: number;
   bl_type: string;
   bl_no: string;
+  bl_book_no: string;
   bl_date: string;
   bl_mbl_id: string;
   //   ordh_detList: Joborderm[] = [];
@@ -51,6 +52,8 @@ export class Containerm {
   cntr_type_id: string;
   cntr_type_code: string;
   cntr_type_name: string;
+  cntr_seal_no:string;
+  
   cntr_mbl_id: string;
   //   ordh_detList: Joborderm[] = [];
 

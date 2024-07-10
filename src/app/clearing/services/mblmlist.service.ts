@@ -157,6 +157,8 @@ export class MblmListService {
         }
         else {
             REC.bl_date = _record.bl_date;
+            REC.bl_no = _record.bl_no;
+            REC.bl_book_no = _record.bl_book_no;
             // REC.ord_agent_name = _rec.ord_agent_name;
             // REC.ord_exp_name = _rec.ord_exp_name;
             // REC.ord_imp_name = _rec.ord_imp_name;

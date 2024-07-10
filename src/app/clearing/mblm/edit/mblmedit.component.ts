@@ -103,6 +103,8 @@ export class MblmEditComponent {
     this.Record = new Blm();
     this.Record.bl_pkid = this.pkid;
     this.Record.bl_slno = undefined;
+    this.Record.bl_no ='';
+    this.Record.bl_book_no = '';
     this.Record.bl_date = this.gs.defaultValues.today;
     this.Record.bl_type = '';
     if (this.type == "SEA EXPORT")
@@ -174,6 +176,11 @@ export class MblmEditComponent {
           this.Record.bl_no = this.Record.bl_no.toUpperCase();
           break;
         }
+        // case 'bl_book_no':
+        //   {
+        //     this.Record.bl_book_no = this.Record.bl_book_no.toUpperCase();
+        //     break;
+        //   }
       // case 'ord_cbm':
       //   {
       //     this.Recorddet.ord_cbm = this.gs.roundWeight(this.Recorddet.ord_cbm, "CBM");
