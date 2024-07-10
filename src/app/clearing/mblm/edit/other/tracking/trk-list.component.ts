@@ -2,7 +2,7 @@ import { Component, Input, Output, OnInit, OnDestroy, EventEmitter, ViewChild } 
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { GlobalService } from '../../../../../core/services/global.service';
-import { Blm } from '../../../../models/mblm';
+import { Trackingm } from '../../../../models/tracking';
 import { TrkService } from '../../../../services/trk.service';
 import { SearchTable } from '../../../../../shared/models/searchtable';
 
@@ -18,7 +18,7 @@ export class TrkListComponent {
     @Input() menuid: string = '';
     @Input() type: string = '';
     @Input() parentid: string = '';
-    @Input() RecordList: Blm[] = [];
+    @Input() RecordList: Trackingm[] = [];
 
     modal: any;
     selectedId: string = '';
@@ -36,7 +36,7 @@ export class TrkListComponent {
     // Array For Displaying List
 
     // Single Record for add/edit/view details
-    Record: Blm = new Blm;
+    Record: Trackingm = new Trackingm;
 
     constructor(
         private ms: TrkService,
@@ -109,6 +109,12 @@ export class TrkListComponent {
         //         });
     }
 
+    selectRowId(id: string) {
+        this.selectedId = id;
+    }
+    getRowId() {
+        return this.selectedId;
+    }
 
     Close() {
         this.gs.ClosePage('home');
