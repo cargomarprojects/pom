@@ -24,13 +24,14 @@ export class CntrComponent {
     selectedId: string = '';
     loading = false;
     CntrTypes: string = "";
+    menu_record: any;
 
     private errorMessage: string[] = [];
 
     mode = 'ADD';
     pkid = '';
     ctr: number;
-
+    bDelete: boolean = false;
 
 
     // Array For Displaying List
@@ -48,10 +49,19 @@ export class CntrComponent {
 
     // Init Will be called After executing Constructor
     ngOnInit() {
+        this.InitComponent();
         // this.List('NEW');
         this.ActionHandler("ADD", null);
     }
-
+    InitComponent() {
+        this.bDelete = false;
+        this.menu_record = this.gs.getMenu(this.menuid);
+        if (this.menu_record) {
+            this.title = this.menu_record.menu_name;
+            if (this.menu_record.rights_delete)
+                this.bDelete = true;
+        }
+    }
     // Destroy Will be called when this component is closed
     ngOnDestroy() {
 
@@ -248,20 +258,32 @@ export class CntrComponent {
         return this.selectedId;
     }
 
+    DeleteRow(_rec: Containerm) {
+        this.errorMessage = [];
+        if (!confirm("Delete selected row")) {
+            return;
+        }
 
-    RemoveRecord(Id: string) {
         this.loading = true;
         let SearchData = {
-            pkid: Id,
-            parentid: this.parentid
+            pkid: _rec.cntr_pkid,
+            mblid: _rec.cntr_mbl_id,
+            cntrno: _rec.cntr_no,
+            company_code: this.gs.globalVariables.comp_code,
+            branch_code: this.gs.globalVariables.branch_code,
+            user_code: this.gs.globalVariables.user_code
         };
         this.errorMessage = [];
 
         this.ms.DeleteRecord(SearchData)
             .subscribe(response => {
                 this.loading = false;
-                this.RecordList.splice(this.RecordList.findIndex(rec => rec.cntr_pkid == Id), 1);
-                this.ActionHandler('ADD', null);
+                if (response.error) {
+                    this.gs.showToastScreen([response.error]);
+                } else {
+                    this.RecordList.splice(this.RecordList.findIndex(rec => rec.cntr_pkid == _rec.cntr_pkid), 1);
+                    this.ActionHandler('ADD', null);
+                }
             },
                 error => {
                     this.loading = false;
