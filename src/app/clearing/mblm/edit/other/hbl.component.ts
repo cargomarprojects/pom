@@ -25,7 +25,9 @@ export class HblComponent {
     selectedId: string = '';
     loading = false;
     bDocs: boolean = false;
+    bDelete: boolean = false;
     docGroupId: string = '';
+  
 
     private errorMessage: string[] = [];
 
@@ -56,13 +58,15 @@ export class HblComponent {
     }
 
     InitComponent() {
-
+        this.bDelete = false;
         this.bDocs = false;
         this.menu_record = this.gs.getMenu(this.menuid);
         if (this.menu_record) {
             this.title = this.menu_record.menu_name;
             if (this.menu_record.rights_docs)
                 this.bDocs = true;
+            if (this.menu_record.rights_delete)
+                this.bDelete = true;
         }
     }
     // Destroy Will be called when this component is closed
@@ -267,18 +271,26 @@ export class HblComponent {
     }
 
 
-    RemoveRecord(Id: string) {
+    DeleteRow(_rec: Blm) {
         this.loading = true;
         let SearchData = {
-            pkid: Id,
-            parentid: this.parentid
+            pkid: _rec.bl_pkid,
+            mblid: _rec.bl_mbl_id,
+            blno: _rec.bl_no,
+            company_code: this.gs.globalVariables.comp_code,
+            branch_code: this.gs.globalVariables.branch_code,
+            user_code: this.gs.globalVariables.user_code
         };
         this.errorMessage = [];
         this.ms.DeleteRecord(SearchData)
             .subscribe(response => {
                 this.loading = false;
-                this.RecordList.splice(this.RecordList.findIndex(rec => rec.bl_pkid == Id), 1);
-                this.ActionHandler('ADD', null);
+                if (response.error) {
+                    this.gs.showToastScreen([response.error]);
+                } else {
+                    this.RecordList.splice(this.RecordList.findIndex(rec => rec.bl_pkid == _rec.bl_pkid), 1);
+                    this.ActionHandler('ADD', null);
+                }
             },
                 error => {
                     this.loading = false;
@@ -308,6 +320,34 @@ export class HblComponent {
 
     open(content: any) {
         this.modal = this.modalService.open(content, { backdrop: 'static', keyboard: true });
+    }
+
+    getWidth(_type: string) {
+        let _width: any;
+
+        if (_type == "DT-COL") {
+            _width = '20%';
+            if (!this.bDocs && !this.bDelete)
+                _width = '70%';
+            else if (this.bDocs && this.bDelete)
+                _width = '20%';
+        }
+        if (_type == "DOC-COL") {
+            _width = '10%';
+            if (this.bDocs && this.bDelete)
+                _width = '10%';
+            else if (this.bDocs)
+                _width = '50%';
+        }
+        if (_type == "DEL-COL") {
+            _width = '40%';
+            if (this.bDocs && this.bDelete)
+                _width = '40%';
+            else if (this.bDelete)
+                _width = '50%';
+        }
+
+        return _width;
     }
 }
 
