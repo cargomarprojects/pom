@@ -84,7 +84,7 @@ export class GlobalService {
       return error.error.Message;
   }
   public getErrorArray(error: any) {
-    return error.split(',');
+    return error.split('~');
   }
   /*
   public headerparam(type: string, company_code: string = '') {

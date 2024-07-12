@@ -52,7 +52,8 @@
                     <!-- <th width="20%">MBL#</th> -->
                     <th width="20%">HOUSE#</th>
                     <th width="20%">CONTAINER#</th>
-                    <th width="50%">TYPE</th>
+                    <th width="bDelete?10%:50%">TYPE</th>
+                    <th width="40%" *ngIf="bDelete" class='text-left'>DELETE</th>
                 </tr>
             </thead>
             <tbody class="page-body-tbody">
@@ -63,6 +64,8 @@
                     <td>{{rec.cntrd_hbl_no}}</td>
                     <td>{{rec.cntrd_cntr_no}}</td>
                     <td>{{rec.cntrd_cntr_type}}</td>
+                    <td *ngIf="bDelete" class="p-0 text-left"><i class="fa fa-trash  fa-lg pointer ml-1"
+                        aria-hidden="true" (click)="DeleteRow(rec)"></i></td>
                 </tr>
             </tbody>
         </table>

@@ -24,13 +24,14 @@ export class LinkCntrHblComponent {
     selectedId: string = '';
     loading = false;
     CntrTypes: string = "";
+    menu_record: any;
 
     private errorMessage: string[] = [];
 
     mode = 'ADD';
     pkid = '';
     ctr: number;
-
+    bDelete: boolean = false;
 
 
     // Array For Displaying List
@@ -48,10 +49,20 @@ export class LinkCntrHblComponent {
 
     // Init Will be called After executing Constructor
     ngOnInit() {
+        this.InitComponent();
         // this.List('NEW');
         this.ActionHandler("ADD", null);
     }
 
+    InitComponent() {
+        this.bDelete = false;
+        this.menu_record = this.gs.getMenu(this.menuid);
+        if (this.menu_record) {
+            this.title = this.menu_record.menu_name;
+            if (this.menu_record.rights_delete)
+                this.bDelete = true;
+        }
+    }
     // Destroy Will be called when this component is closed
     ngOnDestroy() {
 
@@ -253,19 +264,34 @@ export class LinkCntrHblComponent {
     }
 
 
-    RemoveRecord(Id: string) {
+    DeleteRow(_rec: Containerd) {
+        this.errorMessage = [];
+        if (!confirm("Delete selected row")) {
+            return;
+        }
+
         this.loading = true;
         let SearchData = {
-            pkid: Id,
-            parentid: this.parentid
+            pkid: _rec.cntrd_pkid,
+            mblid: _rec.cntrd_mbl_id,
+            cntrno: _rec.cntrd_cntr_no,
+            blno: _rec.cntrd_hbl_no,
+            company_code: this.gs.globalVariables.comp_code,
+            branch_code: this.gs.globalVariables.branch_code,
+            user_code: this.gs.globalVariables.user_code
         };
         this.errorMessage = [];
 
         this.ms.DeleteRecord(SearchData)
             .subscribe(response => {
                 this.loading = false;
-                this.RecordList.splice(this.RecordList.findIndex(rec => rec.cntrd_pkid == Id), 1);
-                this.ActionHandler('ADD', null);
+                if (response.error) {
+                    this.errorMessage = this.gs.getErrorArray(response.error);
+                    this.gs.showToastScreen(this.errorMessage);
+                } else {
+                    this.RecordList.splice(this.RecordList.findIndex(rec => rec.cntrd_pkid == _rec.cntrd_pkid), 1);
+                    this.ActionHandler('ADD', null);
+                }
             },
                 error => {
                     this.loading = false;
