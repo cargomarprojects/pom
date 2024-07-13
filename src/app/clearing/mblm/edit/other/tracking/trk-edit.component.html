@@ -302,7 +302,7 @@
                     <div class="form-group row">
                         <label class="col-sm-1  col-form-label col-form-label-sm pr-0">POD</label>
                         <div class="col-sm-2 pr-0">
-                            <app-autocomplete2 [controlname]="'POD'" [tabletype]="'SEA PORT'" [displaycolumn]="'CODE'"
+                            <app-autocomplete2 [controlname]="'POD'" [tabletype]="type=='SEA EXPORT'?'SEA PORT':'AIR PORT'" [displaycolumn]="'CODE'"
                                 [displaydata]="Record.bl_pod_code" (ValueChanged)="LovSelected($event)" [where]="">
                             </app-autocomplete2>
                         </div>
@@ -321,7 +321,7 @@
                     <div class="form-group row">
                         <label class="col-sm-1  col-form-label col-form-label-sm pr-0">POFD</label>
                         <div class="col-sm-2 pr-0">
-                            <app-autocomplete2 [controlname]="'POFD'" [tabletype]="'SEA PORT'" [displaycolumn]="'CODE'"
+                            <app-autocomplete2 [controlname]="'POFD'" [tabletype]="type=='SEA EXPORT'?'SEA PORT':'AIR PORT'" [displaycolumn]="'CODE'"
                                 [displaydata]="Record.bl_pofd_code" (ValueChanged)="LovSelected($event)" [where]="">
                             </app-autocomplete2>
                         </div>
