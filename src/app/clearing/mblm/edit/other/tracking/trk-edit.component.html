@@ -8,7 +8,8 @@
         </div>
     </div>
     <hr class="mb-1">
-    <div class="row">
+
+    <div *ngIf="type=='SEA EXPORT'" class="row">
         <div class="col-sm-8 mx-0 px-0">
             <div class="row">
                 <div class="col-sm-1 mx-0 px-0">
@@ -147,13 +148,153 @@
             </div>
         </div>
     </div>
+    <div *ngIf="type=='AIR EXPORT'" class="row">
+        <div class="col-sm-8 mx-0 px-0">
+            <div class="row">
+                <div class="col-sm-1 mx-0 px-0">
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-form-label col-form-label-sm pr-0">DESC</label>
+                    </div>
+                    <hr class="my-1">
+                    <div class="form-group row">
+                        <label class="col-sm-12  col-form-label col-form-label-sm pr-0">POL</label>
+                    </div>
+                </div>
+                <div class="col-sm-4 mx-0 px-0">
+                    <div class="form-group row">
+                        <label class="col-sm-12  col-form-label col-form-label-sm pr-0">PORT</label>
+                    </div>
+                    <hr class="my-1">
+                    <div class="form-group row">
+                        <div class="col-sm-6 pr-0">
+                            <app-autocomplete2 [controlname]="'POL'"
+                                [tabletype]="'AIR PORT'" [displaycolumn]="'CODE'"
+                                [displaydata]="Record.bl_pol_code" (ValueChanged)="LovSelected($event)" [where]="">
+                            </app-autocomplete2>
+                        </div>
+                        <div class="col-sm-6 pr-0">
+                            <input type="text" disabled class="form-control form-control-sm"
+                                [(ngModel)]="Record.bl_pol_name" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5 mx-0 px-0">
+                    <div class="form-group row">
+                        <label class="col-sm-12  col-form-label col-form-label-sm pr-0">AIRLINE</label>
+                    </div>
+                    <hr class="my-1">
+                    <div class="form-group row">
+                        <div class="col-sm-5 pr-0">
+                            <app-autocomplete2 [controlname]="'VESSEL'"
+                                [tabletype]="'AIR CARRIER'" [displaycolumn]="'CODE'"
+                                [displaydata]="Record.bl_vessel_code" (ValueChanged)="LovSelected($event)" [where]="">
+                            </app-autocomplete2>
+                        </div>
+                        <div class="col-sm-7 pr-0">
+                            <input type="text" disabled class="form-control form-control-sm"
+                                [(ngModel)]="Record.bl_vessel_name" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 mx-0 px-0">
+                    <div class="form-group row">
+                        <label class="col-sm-12  col-form-label col-form-label-sm pr-0">FLIGHT#</label>
+                    </div>
+                    <hr class="my-1">
+                    <div class="form-group row">
+                        <div class="col-sm-12 pr-0">
+                            <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.bl_vessel_no"
+                                (blur)="OnBlur('bl_vessel_no')" required maxlength="15" />
+                        </div>
+                    </div>
+                </div>
+                <!-- <div *ngIf="type=='SEA EXPORT'" class="col-sm-2 mx-0 px-0">
+                    <div class="form-group row">
+                        <label class="col-sm-12  col-form-label col-form-label-sm pr-0">SI CUT-OFF</label>
+                    </div>
+                    <hr class="my-1">
+                    <div class="form-group row">
+                        <div class="col-sm-12 pr-0">
+                            <app-date [inputdate]="Record.bl_si_cutoff"
+                                (ValueChanged)="Record.bl_si_cutoff=$event"></app-date>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div class="col-sm-4 mx-0 px-0">
+            <div class="row">
+                <!-- <div class="col-sm-3 mx-0 px-0">
+                    <div class="form-group row">
+                        <label class="col-sm-12  col-form-label col-form-label-sm pr-0">CY CUT-OFF</label>
+                    </div>
+                    <hr class="my-1">
+                    <div class="form-group row">
+                        <div class="col-sm-12 pr-0">
+                            <app-date [inputdate]="Record.bl_cy_cutoff"
+                                (ValueChanged)="Record.bl_cy_cutoff=$event"></app-date>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="col-sm-4 mx-0 px-0">
+                    <div class="form-group row">
+                        <label class="col-sm-12  col-form-label col-form-label-sm pr-0">ETD-[POL]</label>
+                    </div>
+                    <hr class="my-1">
+                    <div class="form-group row">
+                        <div class="col-sm-12 pr-0">
+                            <app-date [inputdate]="Record.bl_pol_etd"
+                                (ValueChanged)="Record.bl_pol_etd=$event"></app-date>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8 mx-0 px-0">
+                    <div class="row">
+                        <div class="col-sm-3 mx-0 px-0">
+                            <div class="form-group row">
+                                <label class="col-sm-12  col-form-label col-form-label-sm pr-0">CONFM</label>
+                            </div>
+                            <hr class="my-1">
+                            <div class="form-group row">
+                                <div class="col-sm-12 my-1 pr-0">
+                                    <input type="checkbox" [(ngModel)]="Record.bl_pol_etd_confirm">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5 mx-0 px-0">
+                            <div class="form-group row">
+                                <label class="col-sm-12  col-form-label col-form-label-sm pr-0">ETA-[POD]</label>
+                            </div>
+                            <hr class="my-1">
+                            <div class="form-group row">
+                                <div class="col-sm-12 pr-0">
+                                    <app-date [inputdate]="Record.bl_pol_eta"
+                                        (ValueChanged)="Record.bl_pol_eta=$event"></app-date>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 mx-0 px-0">
+                            <div class="form-group row">
+                                <label class="col-sm-12  col-form-label col-form-label-sm pr-0">CONFM</label>
+                            </div>
+                            <hr class="my-1">
+                            <div class="form-group row">
+                                <div class="col-sm-12 my-1 pr-0">
+                                    <input type="checkbox" [(ngModel)]="Record.bl_pol_eta_confirm">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <hr class="my-1">
     <div *ngFor="let rec of Record.TransitList">
         <app-transit [mRecord]="rec" [type]="type" (ModifiedRecords)="ModifiedRecords($event)">
         </app-transit>
         <hr class="my-1">
     </div>
-    <!-- <hr> -->
     <div class="row">
         <div class="col-sm-8 mx-0 px-0">
             <div class="row">
@@ -196,20 +337,6 @@
                         <label class="col-sm-1  col-form-label col-form-label-sm pr-0" for="blpofdeta"><input
                                 type="checkbox" [(ngModel)]="Record.bl_pofd_eta_confirm" id="blpofdeta">CONFM</label>
                     </div>
-                    
-                    <!-- <div class="form-group row">
-                        <label class="col-sm-1  col-form-label col-form-label-sm pr-0">REMARKS</label>
-                        <div class="col-sm-8  pr-0">
-                            <input type="text" class="form-control form-control-sm"
-                                [(ngModel)]="Record.bl_track_comments" (blur)="OnBlur('bl_track_comments')" required
-                                maxlength="150" />
-                        </div>
-                        <div class="col-sm-3">
-                            <button [disabled]="loading" (click)="Save()"
-                                class="btn btn-primary btn-sm mr-1">Save</button>
-                            <button (click)="Close()" class="btn btn-primary btn-sm">Close</button>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -220,13 +347,11 @@
             <div class="form-group row">
                 <label class="col-sm-1  col-form-label col-form-label-sm pr-0">REMARKS</label>
                 <div class="col-sm-8  pr-0">
-                    <input type="text" class="form-control form-control-sm"
-                        [(ngModel)]="Record.bl_track_comments" (blur)="OnBlur('bl_track_comments')" required
-                        maxlength="150" />
+                    <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.bl_track_comments"
+                        (blur)="OnBlur('bl_track_comments')" required maxlength="150" />
                 </div>
                 <div class="col-sm-3">
-                    <button [disabled]="loading" (click)="Save()"
-                        class="btn btn-primary btn-sm mr-1">Save</button>
+                    <button [disabled]="loading" (click)="Save()" class="btn btn-primary btn-sm mr-1">Save</button>
                     <button (click)="Close()" class="btn btn-primary btn-sm">Close</button>
                     <!-- <button *ngIf="mode == 'EDIT'" [disabled]="loading" (click)="ShowHistory(tracking)"
                         class="btn btn-success btn-sm">Container Tracking</button> -->
