@@ -46,7 +46,7 @@ export class VslPlanService {
 
   public init(params: any) {
 
-    if (this.appid != this.gs.globalVariables.appid) {
+    if (this.appid != this.gs.globalVariables.appid || this.menuid != params.menuid) {
       this.appid = this.gs.globalVariables.appid;
       this.initlialized = false;
     }
