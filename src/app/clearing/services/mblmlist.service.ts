@@ -39,10 +39,17 @@ export class MblmListService {
 
     public init(params: any) {
 
-        if (this.appid != this.gs.globalVariables.appid) {
+        // if (this.appid != this.gs.globalVariables.appid) {
+        //     this.appid = this.gs.globalVariables.appid;
+        //     this.initlialized = false;
+        // }
+
+
+        if (this.appid != this.gs.globalVariables.appid || this.menuid != params.menuid) {
             this.appid = this.gs.globalVariables.appid;
             this.initlialized = false;
         }
+
         if (this.initlialized)
             return;
 
