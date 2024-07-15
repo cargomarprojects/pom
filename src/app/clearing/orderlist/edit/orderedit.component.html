@@ -81,7 +81,7 @@
       <div class="form-group row">
         <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Mode</label>
         <div class="col-sm-10 pr-0">
-          <select class="form-control form-control-sm" [(ngModel)]="Record.rec_category">
+          <select [disabled]="mode=='EDIT'" class="form-control form-control-sm" [(ngModel)]="Record.rec_category">
             <option [value]="'SEA EXPORT'">SEA</option>
             <option [value]="'AIR EXPORT'">AIR</option>
           </select>

@@ -129,6 +129,7 @@ export class OrderEditComponent {
     this.Record.ordh_remarks = '';
     this.Record.rec_category = 'SEA EXPORT';
     this.Record.rec_version = 0;
+    this.Record.rec_mode = this.mode;
     // this.Record.ord_imp_grp_id  = '';
     this.NewDetRecord();
   }
