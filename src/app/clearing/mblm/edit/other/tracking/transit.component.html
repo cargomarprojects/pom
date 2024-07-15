@@ -10,9 +10,9 @@
             <div class="col-sm-4 mx-0 px-0">
                 <div class="form-group row">
                     <div class="col-sm-6 pr-0">
-                        <app-autocomplete2 [controlname]="'POL'" [tabletype]="'SEA PORT'" [displaycolumn]="'CODE'"
+                        <app-autocomplete3 [controlname]="'POL'" [tabletype]="'PARAM'" [subtype]="'SEA PORT'" [displaycolumn]="'CODE'"
                             [displaydata]="mRecord.trk_pol_code" (ValueChanged)="LovSelected($event)" [where]="">
-                        </app-autocomplete2>
+                        </app-autocomplete3>
                     </div>
                     <div class="col-sm-6 pr-0">
                         <input type="text" disabled class="form-control form-control-sm"
@@ -23,9 +23,9 @@
             <div class="col-sm-4 mx-0 px-0">
                 <div class="form-group row">
                     <div class="col-sm-6 pr-0">
-                        <app-autocomplete2 [controlname]="'VESSEL'" [tabletype]="'VESSEL'" [displaycolumn]="'CODE'"
+                        <app-autocomplete3 [controlname]="'VESSEL'" [tabletype]="'PARAM'"  [subtype]="'VESSEL'" [displaycolumn]="'CODE'"
                             [displaydata]="mRecord.trk_vsl_code" (ValueChanged)="LovSelected($event)" [where]="">
-                        </app-autocomplete2>
+                        </app-autocomplete3>
                     </div>
                     <div class="col-sm-6 pr-0">
                         <input type="text" disabled class="form-control form-control-sm"
@@ -175,9 +175,9 @@
             <div class="col-sm-4 mx-0 px-0">
                 <div class="form-group row">
                     <div class="col-sm-6 pr-0">
-                        <app-autocomplete2 [controlname]="'POL'" [tabletype]="'AIR PORT'" [displaycolumn]="'CODE'"
+                        <app-autocomplete3 [controlname]="'POL'" [tabletype]="'PARAM'" [subtype]="'AIR PORT'" [displaycolumn]="'CODE'"
                             [displaydata]="mRecord.trk_pol_code" (ValueChanged)="LovSelected($event)" [where]="">
-                        </app-autocomplete2>
+                        </app-autocomplete3>
                     </div>
                     <div class="col-sm-6 pr-0">
                         <input type="text" disabled class="form-control form-control-sm"
@@ -188,9 +188,9 @@
             <div class="col-sm-5 mx-0 px-0">
                 <div class="form-group row">
                     <div class="col-sm-5 pr-0">
-                        <app-autocomplete2 [controlname]="'VESSEL'" [tabletype]="'AIR CARRIER'" [displaycolumn]="'CODE'"
+                        <app-autocomplete3 [controlname]="'VESSEL'" [tabletype]="'PARAM'"  [subtype]="'AIR CARRIER'" [displaycolumn]="'CODE'"
                             [displaydata]="mRecord.trk_vsl_code" (ValueChanged)="LovSelected($event)" [where]="">
-                        </app-autocomplete2>
+                        </app-autocomplete3>
                     </div>
                     <div class="col-sm-7 pr-0">
                         <input type="text" disabled class="form-control form-control-sm"

@@ -28,9 +28,9 @@
                     <hr class="my-1">
                     <div class="form-group row">
                         <div class="col-sm-6 pr-0">
-                            <app-autocomplete2 [controlname]="'POL'" [tabletype]="'SEA PORT'" [displaycolumn]="'CODE'"
+                            <app-autocomplete3 [controlname]="'POL'" [tabletype]="'PARAM'" [subtype]="'SEA PORT'" [displaycolumn]="'CODE'"
                                 [displaydata]="Record.bl_pol_code" (ValueChanged)="LovSelected($event)" [where]="">
-                            </app-autocomplete2>
+                            </app-autocomplete3>
                         </div>
                         <div class="col-sm-6 pr-0">
                             <input type="text" disabled class="form-control form-control-sm"
@@ -45,9 +45,9 @@
                     <hr class="my-1">
                     <div class="form-group row">
                         <div class="col-sm-6 pr-0">
-                            <app-autocomplete2 [controlname]="'VESSEL'" [tabletype]="'VESSEL'" [displaycolumn]="'CODE'"
+                            <app-autocomplete3 [controlname]="'VESSEL'" [tabletype]="'PARAM'" [subtype]="'VESSEL'" [displaycolumn]="'CODE'"
                                 [displaydata]="Record.bl_vessel_code" (ValueChanged)="LovSelected($event)" [where]="">
-                            </app-autocomplete2>
+                            </app-autocomplete3>
                         </div>
                         <div class="col-sm-6 pr-0">
                             <input type="text" disabled class="form-control form-control-sm"
@@ -167,10 +167,10 @@
                     <hr class="my-1">
                     <div class="form-group row">
                         <div class="col-sm-6 pr-0">
-                            <app-autocomplete2 [controlname]="'POL'"
-                                [tabletype]="'AIR PORT'" [displaycolumn]="'CODE'"
+                            <app-autocomplete3 [controlname]="'POL'"
+                            [tabletype]="'PARAM'"  [subtype]="'AIR PORT'" [displaycolumn]="'CODE'"
                                 [displaydata]="Record.bl_pol_code" (ValueChanged)="LovSelected($event)" [where]="">
-                            </app-autocomplete2>
+                            </app-autocomplete3>
                         </div>
                         <div class="col-sm-6 pr-0">
                             <input type="text" disabled class="form-control form-control-sm"
@@ -185,10 +185,10 @@
                     <hr class="my-1">
                     <div class="form-group row">
                         <div class="col-sm-5 pr-0">
-                            <app-autocomplete2 [controlname]="'VESSEL'"
-                                [tabletype]="'AIR CARRIER'" [displaycolumn]="'CODE'"
+                            <app-autocomplete3 [controlname]="'VESSEL'"
+                            [tabletype]="'PARAM'" [subtype]="'AIR CARRIER'" [displaycolumn]="'CODE'"
                                 [displaydata]="Record.bl_vessel_code" (ValueChanged)="LovSelected($event)" [where]="">
-                            </app-autocomplete2>
+                            </app-autocomplete3>
                         </div>
                         <div class="col-sm-7 pr-0">
                             <input type="text" disabled class="form-control form-control-sm"
@@ -302,9 +302,9 @@
                     <div class="form-group row">
                         <label class="col-sm-1  col-form-label col-form-label-sm pr-0">POD</label>
                         <div class="col-sm-2 pr-0">
-                            <app-autocomplete2 [controlname]="'POD'" [tabletype]="type=='SEA EXPORT'?'SEA PORT':'AIR PORT'" [displaycolumn]="'CODE'"
+                            <app-autocomplete3 [controlname]="'POD'" [tabletype]="'PARAM'" [subtype]="type=='SEA EXPORT'?'SEA PORT':'AIR PORT'" [displaycolumn]="'CODE'"
                                 [displaydata]="Record.bl_pod_code" (ValueChanged)="LovSelected($event)" [where]="">
-                            </app-autocomplete2>
+                            </app-autocomplete3>
                         </div>
                         <div class="col-sm-2 pr-0">
                             <input type="text" disabled class="form-control form-control-sm"
@@ -321,9 +321,9 @@
                     <div class="form-group row">
                         <label class="col-sm-1  col-form-label col-form-label-sm pr-0">POFD</label>
                         <div class="col-sm-2 pr-0">
-                            <app-autocomplete2 [controlname]="'POFD'" [tabletype]="type=='SEA EXPORT'?'SEA PORT':'AIR PORT'" [displaycolumn]="'CODE'"
+                            <app-autocomplete3 [controlname]="'POFD'"  [tabletype]="'PARAM'" [subtype]="type=='SEA EXPORT'?'SEA PORT':'AIR PORT'" [displaycolumn]="'CODE'"
                                 [displaydata]="Record.bl_pofd_code" (ValueChanged)="LovSelected($event)" [where]="">
-                            </app-autocomplete2>
+                            </app-autocomplete3>
                         </div>
                         <div class="col-sm-2 pr-0">
                             <input type="text" disabled class="form-control form-control-sm"
