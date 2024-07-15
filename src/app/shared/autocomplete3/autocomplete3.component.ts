@@ -172,10 +172,16 @@ export class AutoComplete3Component {
     if (_action == 'PREV') {
       row1 = this.rows_starting_number - this.rows_to_display;
       row2 = this.rows_ending_number - this.rows_to_display;
+      if (row1 < 0) {
+        row1 = 1;
+        row2 = this.rows_to_display;
+      }
     }
     if (_action == 'NEXT') {
       row1 = this.rows_ending_number + 1;
       row2 = this.rows_ending_number + this.rows_to_display;
+      if (row1 > this.rows_total)
+        row1 = this.rows_total;
     }
 
     let SearchData = {
@@ -195,7 +201,7 @@ export class AutoComplete3Component {
     this.loginservice.List3(SearchData)
       .subscribe(response => {
         this.loading = false;
-
+        this.rows_total = response.rowstotal;
         if (this.gs.isBlank(response.list)) {
           this.SelectedItem('', null);
           this.showDiv = false;
