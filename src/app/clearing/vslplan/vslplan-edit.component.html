@@ -35,28 +35,28 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">Agent.Pol</label>
         <div class="col-sm-10 pr-0">
-          <app-autocomplete2 [disabled]="ctrlDisable" [controlname]="'AGENT-POL'" [tabletype]="'CUSTOMER'"
+          <app-autocomplete3 [disabled]="ctrlDisable" [controlname]="'AGENT-POL'" [tabletype]="'CUSTOMER'"
             [displaycolumn]="'NAME'" [displaydata]="Record.vp_pol_agent_name" (ValueChanged)="LovSelected($event)"
             [where]="ms.where_agent">
-          </app-autocomplete2>
+          </app-autocomplete3>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">Consignee</label>
         <div class="col-sm-10 pr-0">
-          <app-autocomplete2 [disabled]="ctrlDisable" [controlname]="'CONSIGNEE'" [tabletype]="'CUSTOMER'"
+          <app-autocomplete3 [disabled]="ctrlDisable" [controlname]="'CONSIGNEE'" [tabletype]="'CUSTOMER'"
             [displaycolumn]="'NAME'" [displaydata]="Record.vp_imp_name" (ValueChanged)="LovSelected($event)"
             [where]="ms.where_consignee">
-          </app-autocomplete2>
+          </app-autocomplete3>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">Agent.Pod</label>
         <div class="col-sm-10 pr-0">
-          <app-autocomplete2 [disabled]="ctrlDisable" [controlname]="'AGENT-POD'" [tabletype]="'CUSTOMER'"
+          <app-autocomplete3 [disabled]="ctrlDisable" [controlname]="'AGENT-POD'" [tabletype]="'CUSTOMER'"
             [displaycolumn]="'NAME'" [displaydata]="Record.vp_pod_agent_name" (ValueChanged)="LovSelected($event)"
             [where]="ms.where_agent">
-          </app-autocomplete2>
+          </app-autocomplete3>
         </div>
       </div>
       <div class="form-group row">
@@ -77,9 +77,9 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">POL</label>
         <div class="col-sm-4 pr-0">
-          <app-autocomplete2 [controlname]="'POL'" [tabletype]="'PORT'" [displaycolumn]="'NAME'"
+          <app-autocomplete3 [controlname]="'POL'" [tabletype]="'PARAM'" [subtype]="type=='SEA EXPORT'?'SEA PORT':'AIR PORT'" [displaycolumn]="'NAME'"
             [displaydata]="Record.vp_pol_name" (ValueChanged)="LovSelected($event)">
-          </app-autocomplete2>
+          </app-autocomplete3>
         </div>
         <div class="col-sm-2 pr-0">
           <InputBox [disabled]=true [(inputModel)]="Record.vp_pol_code" [maxlength]=60 [uppercase]=true></InputBox>
@@ -92,9 +92,9 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">POD</label>
         <div class="col-sm-4 pr-0">
-          <app-autocomplete2 [controlname]="'POD'" [tabletype]="'PORT'" [displaycolumn]="'NAME'"
+          <app-autocomplete3 [controlname]="'POD'" [tabletype]="'PARAM'" [subtype]="type=='SEA EXPORT'?'SEA PORT':'AIR PORT'" [displaycolumn]="'NAME'"
             [displaydata]="Record.vp_pod_name" (ValueChanged)="LovSelected($event)">
-          </app-autocomplete2>
+          </app-autocomplete3>
         </div>
         <div class="col-sm-2 pr-0">
           <InputBox [disabled]=true [(inputModel)]="Record.vp_pod_code" [maxlength]=60 [uppercase]=true></InputBox>
@@ -107,9 +107,9 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">{{type=='SEA EXPORT'?'Vessel':'Airline'}}</label>
         <div class="col-sm-10 pr-0">
-          <app-autocomplete2 [controlname]="'VESSEL'" [tabletype]="type=='SEA EXPORT'?'VESSEL':'AIR CARRIER'"
+          <app-autocomplete3 [controlname]="'VESSEL'" [tabletype]="'PARAM'" [subtype]="type=='SEA EXPORT'?'VESSEL':'AIR CARRIER'"
             [displaycolumn]="'NAME'" [displaydata]="Record.vp_vessel_name" (ValueChanged)="LovSelected($event)">
-          </app-autocomplete2>
+          </app-autocomplete3>
         </div>
       </div>
       <div class="form-group row">
