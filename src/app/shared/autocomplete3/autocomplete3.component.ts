@@ -177,11 +177,11 @@ export class AutoComplete3Component {
         row2 = this.rows_to_display;
       }
     }
-    if (_action == 'NEXT') {
+    if (_action == 'NEXT' && this.rows_ending_number <this.rows_total) {
       row1 = this.rows_ending_number + 1;
       row2 = this.rows_ending_number + this.rows_to_display;
-      if (row1 > this.rows_total)
-        row1 = this.rows_total;
+      // if (row1 > this.rows_total)
+      //   row1 = this.rows_total;
     }
 
     let SearchData = {
