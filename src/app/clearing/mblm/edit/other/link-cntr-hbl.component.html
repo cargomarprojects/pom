@@ -12,10 +12,10 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label col-form-label-sm pr-0">House#</label>
                 <div class="col-sm-10 pr-0">
-                    <app-autocomplete2 [controlname]="'HOUSE-NO'" [tabletype]="'LINK-MASTER-HOUSE'" [displaycolumn]="'CODE'"
+                    <app-autocomplete3 [controlname]="'HOUSE-NO'" [tabletype]="'LINK-MASTER-HOUSE'" [displaycolumn]="'CODE'"
                         [displaydata]="Record.cntrd_hbl_no" [parentid]="parentid" (ValueChanged)="LovSelected($event)"
                         [where]="">
-                    </app-autocomplete2>
+                    </app-autocomplete3>
 
                 </div>
             </div>
@@ -24,10 +24,10 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label col-form-label-sm pr-0">Container#</label>
                 <div class="col-sm-10 pr-0">
-                    <app-autocomplete2 [controlname]="'CNTR-NO'" [tabletype]="'LINK-MASTER-CONTAINER'" [displaycolumn]="'CODE'"
+                    <app-autocomplete3 [controlname]="'CNTR-NO'" [tabletype]="'LINK-MASTER-CONTAINER'" [displaycolumn]="'CODE'"
                         [displaydata]="Record.cntrd_cntr_no" [parentid]="parentid" (ValueChanged)="LovSelected($event)"
                         [where]="">
-                    </app-autocomplete2>
+                    </app-autocomplete3>
                 </div>
             </div>
         </div>

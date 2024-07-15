@@ -20,10 +20,10 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label col-form-label-sm pr-0">Type</label>
                 <div class="col-sm-4 pr-0">
-                    <app-autocomplete2 [controlname]="'CNTR-TYPE'" [tabletype]="'CONTAINER TYPE'"
+                    <app-autocomplete3 [controlname]="'CNTR-TYPE'" [tabletype]="'PARAM'" [subtype]="'CONTAINER TYPE'"
                         [displaycolumn]="'CODE'" [displaydata]="Record.cntr_type_code"
                         (ValueChanged)="LovSelected($event)" [where]="">
-                    </app-autocomplete2>
+                    </app-autocomplete3>
                 </div>
                 <label class="col-sm-2 col-form-label col-form-label-sm pr-0">Seal#</label>
                 <div class="col-sm-4 pr-0">

@@ -291,7 +291,7 @@ export class AutoComplete3Component {
         this._displaydata = _Record.name;
 
 
-      this._parentid = _Record.parentid;
+      // this._parentid = _Record.parentid;
       this.inputdata.subtype = _Record.subtype;
       this.inputdata.type = _Record.type;
       this.inputdata.col1 = _Record.col1;
