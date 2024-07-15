@@ -45,9 +45,9 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-4 col-form-label col-form-label-sm">Vessel</label>
+        <label class="col-sm-4 col-form-label col-form-label-sm">{{ms.type=='SEA EXPORT'?'Vessel':'Airline'}}</label>
         <div class="col-sm-8">
-          <app-autocomplete2 [controlname]="'VESSEL'" [tabletype]="'VESSEL'" [displaycolumn]="'NAME'"
+          <app-autocomplete2 [controlname]="'VESSEL'" [tabletype]="ms.type=='SEA EXPORT'?'VESSEL':'AIR CARRIER'" [displaycolumn]="'NAME'"
             [displaydata]="ms.record.searchQuery.list_vessel_name" (ValueChanged)="LovSelected($event)">
           </app-autocomplete2>
         </div>
@@ -116,8 +116,8 @@
           <th>ETD</th>
           <th>POD</th>
           <th>ETA</th>
-          <th>VESSEL</th>
-          <th>VOYAGE</th>
+          <th>{{ms.type=='SEA EXPORT'?'VESSEL':'AIRLINE'}}</th>
+          <th>{{ms.type=='SEA EXPORT'?'VOYAGE':'FLIGHT#'}}</th>
           <th>STATUS</th>
           <th>COMMENTS</th>
           <th *ngIf="ms.bAdmin">{{ms.show_hide_caption}}</th>
