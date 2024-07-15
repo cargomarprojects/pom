@@ -31,46 +31,46 @@
       <div class="form-group row">
         <label class="col-sm-3 col-form-label col-form-label-sm">Shipper</label>
         <div class="col-sm-9">
-          <app-autocomplete2 [controlname]="'SHIPPER'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
+          <app-autocomplete3 [controlname]="'SHIPPER'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
             [displaydata]="ms.record.searchQuery.list_exp_name" (ValueChanged)="LovSelected($event)"
             [where]="ms.where_shipper">
-          </app-autocomplete2>
+          </app-autocomplete3>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-3 col-form-label col-form-label-sm">Consignee</label>
         <div class="col-sm-9">
-          <app-autocomplete2 [controlname]="'CONSIGNEE'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
+          <app-autocomplete3 [controlname]="'CONSIGNEE'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
             [displaydata]="ms.record.searchQuery.list_imp_name" (ValueChanged)="LovSelected($event)"
             [where]="ms.where_consignee">
-          </app-autocomplete2>
+          </app-autocomplete3>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-3 col-form-label col-form-label-sm">Buy.Agent</label>
         <div class="col-sm-9">
-          <app-autocomplete2 [controlname]="'BUY-AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
+          <app-autocomplete3 [controlname]="'BUY-AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
             [displaydata]="ms.record.searchQuery.list_buy_agent_name" (ValueChanged)="LovSelected($event)"
             [where]="ms.where_buy_agent">
-          </app-autocomplete2>
+          </app-autocomplete3>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-3 col-form-label col-form-label-sm">Agent.Pol</label>
         <div class="col-sm-9">
-          <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
+          <app-autocomplete3 [controlname]="'AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
             [displaydata]="ms.record.searchQuery.list_agent_name" (ValueChanged)="LovSelected($event)"
             [where]="ms.where_agent">
-          </app-autocomplete2>
+          </app-autocomplete3>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-3 col-form-label col-form-label-sm">Agent.Pod</label>
         <div class="col-sm-9">
-          <app-autocomplete2 [controlname]="'AGENT-POD'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
+          <app-autocomplete3 [controlname]="'AGENT-POD'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
             [displaydata]="ms.record.searchQuery.list_pod_agent_name" (ValueChanged)="LovSelected($event)"
             [where]="ms.where_agent">
-          </app-autocomplete2>
+          </app-autocomplete3>
         </div>
       </div>
     </div>

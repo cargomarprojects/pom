@@ -16,9 +16,9 @@
       <div class="form-group row">
         <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Shipper</label>
         <div class="col-sm-4 pr-0">
-          <app-autocomplete2 [controlname]="'SHIPPER'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
+          <app-autocomplete3 [controlname]="'SHIPPER'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
             [displaydata]="Record.ordh_exp_code" (ValueChanged)="LovSelected($event)" [where]="ms.where_shipper">
-          </app-autocomplete2>
+          </app-autocomplete3>
         </div>
         <div class="col-sm-6 pr-0">
           <InputBox [(inputModel)]="Record.ordh_exp_name" [maxlength]="60" [uppercase]=true [disabled]=true></InputBox>
@@ -28,9 +28,9 @@
       <div class="form-group row">
         <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Consignee</label>
         <div class="col-sm-4 pr-0">
-          <app-autocomplete2 [controlname]="'CONSIGNEE'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
+          <app-autocomplete3 [controlname]="'CONSIGNEE'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
             [displaydata]="Record.ordh_imp_code" (ValueChanged)="LovSelected($event)" [where]="ms.where_consignee">
-          </app-autocomplete2>
+          </app-autocomplete3>
         </div>
         <div class="col-sm-6 pr-0">
           <InputBox [(inputModel)]="Record.ordh_imp_name" [maxlength]=60 [uppercase]=true [disabled]=true></InputBox>
@@ -39,10 +39,10 @@
       <div class="form-group row">
         <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Buying.Agent</label>
         <div class="col-sm-4 pr-0">
-          <app-autocomplete2 [controlname]="'BUY-AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
+          <app-autocomplete3 [controlname]="'BUY-AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
             [displaydata]="Record.ordh_buy_agent_code" (ValueChanged)="LovSelected($event)" [where]="ms.where_buy_agent"
             #agentlov>
-          </app-autocomplete2>
+          </app-autocomplete3>
         </div>
         <div class="col-sm-6 pr-0">
           <InputBox [(inputModel)]="Record.ordh_buy_agent_name" [maxlength]="60" [uppercase]=true [disabled]=true>
@@ -55,10 +55,10 @@
       <div class="form-group row">
         <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Pol.Agent</label>
         <div class="col-sm-4 pr-0">
-          <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
+          <app-autocomplete3 [controlname]="'AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
             [displaydata]="Record.ordh_agent_code" (ValueChanged)="LovSelected($event)" [where]="ms.where_agent"
             #agentlov>
-          </app-autocomplete2>
+          </app-autocomplete3>
         </div>
         <div class="col-sm-6 pr-0">
           <InputBox [(inputModel)]="Record.ordh_agent_name" [maxlength]="60" [uppercase]=true [disabled]=true>
@@ -68,10 +68,10 @@
       <div class="form-group row">
         <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">Pod.Agent</label>
         <div class="col-sm-4 pr-0">
-          <app-autocomplete2 [controlname]="'POD-AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
+          <app-autocomplete3 [controlname]="'POD-AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'CODE'"
             [displaydata]="Record.ordh_pod_agent_code" (ValueChanged)="LovSelected($event)" [where]="ms.where_agent"
             #agentlov>
-          </app-autocomplete2>
+          </app-autocomplete3>
         </div>
         <div class="col-sm-6 pr-0">
           <InputBox [(inputModel)]="Record.ordh_pod_agent_name" [maxlength]="60" [uppercase]=true [disabled]=true>
@@ -93,9 +93,9 @@
       <div class="form-group row">
         <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">POL</label>
         <div class="col-sm-4 pr-0">
-          <app-autocomplete2 [controlname]="'POL'" [tabletype]="'PORT'" [displaycolumn]="'CODE'"
+          <app-autocomplete3 [controlname]="'POL'" [tabletype]="'PARAM'" [subtype]="'PORT'" [displaycolumn]="'CODE'"
             [displaydata]="Record.ordh_pol_code" (ValueChanged)="LovSelected($event)">
-          </app-autocomplete2>
+          </app-autocomplete3>
         </div>
         <div class="col-sm-6 pr-0">
           <InputBox [disabled]=true [(inputModel)]="Record.ordh_pol" [maxlength]=60 [uppercase]=true></InputBox>
@@ -104,9 +104,9 @@
       <div class="form-group row">
         <label style="padding-right:0" class="col-sm-2 col-form-label col-form-label-sm">POD</label>
         <div class="col-sm-4 pr-0">
-          <app-autocomplete2 [controlname]="'POD'" [tabletype]="'PORT'" [displaycolumn]="'CODE'"
+          <app-autocomplete3 [controlname]="'POD'" [tabletype]="'PARAM'" [subtype]="'PORT'" [displaycolumn]="'CODE'"
             [displaydata]="Record.ordh_pod_code" (ValueChanged)="LovSelected($event)">
-          </app-autocomplete2>
+          </app-autocomplete3>
         </div>
         <div class="col-sm-6 pr-0">
           <InputBox [disabled]=true [(inputModel)]="Record.ordh_pod" [maxlength]=60 [uppercase]=true></InputBox>
