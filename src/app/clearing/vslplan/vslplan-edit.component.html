@@ -67,7 +67,7 @@
             [where]="">
           </app-autocomplete2> -->
           <app-autocomplete3 [controlname]="'MASTER-NO'" [tabletype]="'MASTER-BL-NOS'" [displaycolumn]="'NAME'"
-            [displaydata]="Record.vp_mbl_no" (ValueChanged)="LovSelected($event)" [where]="">
+            [displaydata]="Record.vp_mbl_no" (ValueChanged)="LovSelected($event)" [where]="sWhere">
           </app-autocomplete3>
         </div>
       </div>

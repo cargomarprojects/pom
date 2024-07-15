@@ -43,6 +43,7 @@ export class VslPlanEditComponent {
   public ord_trkpos = "";
   public ord_imp_grp_id = "";
   public mblid = "";
+  public sWhere = "";
   total = 0;
   total_hblcntr = 0;
 
@@ -79,6 +80,7 @@ export class VslPlanEditComponent {
     this.ActionHandler();
   }
   InitComponent() {
+     this.sWhere = "a.rec_category='" + this.type + "'";
     this.bPrint = false;
     this.menu_record = this.gs.getMenu(this.menuid);
     if (this.menu_record) {
@@ -187,7 +189,7 @@ export class VslPlanEditComponent {
     this.Record.vp_pod_id = '';
     this.Record.vp_pod_code = '';
     this.Record.vp_pod_name = '';
-    this.Record.vp_pod_eta = ''
+    this.Record.vp_pod_eta = '';
     this.Record.rec_mode = this.mode;
     this.Record.rec_version = 0;
 
