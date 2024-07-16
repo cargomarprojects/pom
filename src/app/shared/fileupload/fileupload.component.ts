@@ -21,7 +21,7 @@ export class FileUploadComponent {
   @Input() public defaultdoctype: string = '';
 
   title = 'Documents';
-
+  selectedId = "";
   ErrorMessage: string = '';
   InfoMessage: string = '';
 
@@ -343,6 +343,11 @@ export class FileUploadComponent {
 
   }
 
-
+  selectRowId(id: string) {
+    this.selectedId = id;
+  }
+  getRowId() {
+    return this.selectedId;
+  }
 
 }
