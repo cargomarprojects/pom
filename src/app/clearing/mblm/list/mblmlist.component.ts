@@ -7,6 +7,7 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { SearchTable } from 'src/app/shared/models/searchtable';
 
+// Ajith 23-07-2024
 @Component({
   selector: 'app-mblmlist',
   templateUrl: './mblmlist.component.html'
