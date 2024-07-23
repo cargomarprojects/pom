@@ -14,7 +14,8 @@ import { SearchTable } from 'src/app/shared/models/searchtable';
 })
 export class OrderListComponent {
 
-  mblid:string;
+  public mblid: string = '';
+  public hblids: string = '';
   modal: any;
   constructor(
     public ms: OrderListService,
@@ -178,14 +179,15 @@ export class OrderListComponent {
 
   }
 
-  ShowDocuments(_id: string, doc: any) {
+  ShowDocuments(_id: string, _subid: string, doc: any) {
     if (!_id)
       return;
     this.mblid = _id;
+    this.hblids = _subid;
     this.open(doc);
-}
-open(content: any) {
-  this.modal = this.modalService.open(content, { backdrop: 'static', keyboard: true });
-}
+  }
+  open(content: any) {
+    this.modal = this.modalService.open(content, { backdrop: 'static', keyboard: true });
+  }
 
 }
