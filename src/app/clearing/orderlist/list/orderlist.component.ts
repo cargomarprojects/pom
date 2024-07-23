@@ -179,6 +179,8 @@ export class OrderListComponent {
   }
 
   ShowDocuments(_id: string, doc: any) {
+    if (!_id)
+      return;
     this.mblid = _id;
     this.open(doc);
 }

@@ -43,7 +43,7 @@ export class HblComponent {
     constructor(
         private ms: HblService,
         private route: ActivatedRoute,
-        private gs: GlobalService,
+        public gs: GlobalService,
         private modalService: NgbModal,
     ) {
 

@@ -32,7 +32,7 @@ export class AutoComplete3Component {
     this._displaycolumn = value;
   }
 
-  private _tabletype: string;
+  public _tabletype: string;
   @Input() set tabletype(value: string) {
     this._tabletype = value;
   }
@@ -106,8 +106,7 @@ export class AutoComplete3Component {
   loading = false;
 
   _selectedItem: SearchTable;
-
-
+  
   constructor(
     private elementRef: ElementRef,
     private route: ActivatedRoute,

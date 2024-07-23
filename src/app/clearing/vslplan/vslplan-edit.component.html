@@ -284,13 +284,6 @@
   </div>
 </div>
 
-<div *ngIf="InfoMessage" class="alert alert-success">
-  {{InfoMessage}}
-</div>
-<div *ngIf="ErrorMessage" class="alert alert-danger">
-  {{ErrorMessage}}
-</div>
-
 <ng-template #trackorder let-c="close" let-d="dismiss">
   <div class="modal-body">
     <app-trackorder [ord_pkids]="ord_trkids" [ord_pos]="ord_trkpos" [ord_imp_grp_id]="ord_imp_grp_id"
