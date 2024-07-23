@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { GlobalService } from '../../../core/services/global.service';
 import { ActivatedRoute } from '@angular/router';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Joborderm, SearchQuery } from '../../models/joborder';
 import { OrderListService } from '../../services/orderlist.service';
 import { Location } from '@angular/common';
@@ -13,12 +14,15 @@ import { SearchTable } from 'src/app/shared/models/searchtable';
 })
 export class OrderListComponent {
 
+  mblid:string;
+  modal: any;
   constructor(
     public ms: OrderListService,
     public gs: GlobalService,
     private route: ActivatedRoute,
     private location: Location,
     private router: Router,
+    private modalService: NgbModal,
   ) {
   }
 
@@ -173,5 +177,13 @@ export class OrderListComponent {
         });
 
   }
+
+  ShowDocuments(_id: string, doc: any) {
+    this.mblid = _id;
+    this.open(doc);
+}
+open(content: any) {
+  this.modal = this.modalService.open(content, { backdrop: 'static', keyboard: true });
+}
 
 }

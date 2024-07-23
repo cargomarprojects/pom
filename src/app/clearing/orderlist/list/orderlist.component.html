@@ -268,6 +268,7 @@
           <th>VIEW</th>
           <th>MASTER</th>
           <th>HOUSE</th>
+          <th *ngIf="ms.bDocs">DOCS</th>
           <th *ngIf="gs.getTrackDate('BKD')||ms.trkdt_alldisplay=='Y'">BKD</th>
           <th *ngIf="gs.getTrackDate('RND')||ms.trkdt_alldisplay=='Y'">RND</th>
           <th *ngIf="gs.getTrackDate('POR')||ms.trkdt_alldisplay=='Y'">POR</th>
@@ -316,6 +317,8 @@
           <td class="hlink" (click)="ShowHideRecord(rec)"><i *ngIf="rec.ord_mbl_no" class="fa fa-eye"></i></td>
           <td>{{rec.ord_mbl_no}}</td>
           <td>{{rec.ord_hbl_cntr_nos}}</td>
+          <td *ngIf="ms.bDocs" class="hlink" (click)="ShowDocuments(rec.ord_mbl_id,doc)"><i
+            class="fa fa-file fa-lg pointer ml-1"></i></td>
           <td *ngIf="gs.getTrackDate('BKD')||ms.trkdt_alldisplay=='Y'">{{rec.ord_booking_date}}</td>
           <td *ngIf="gs.getTrackDate('RND')||ms.trkdt_alldisplay=='Y'">{{rec.ord_rnd_insp_date}}</td>
           <td *ngIf="gs.getTrackDate('POR')||ms.trkdt_alldisplay=='Y'">{{rec.ord_po_rel_date}}</td>
@@ -415,4 +418,18 @@
   <div class="modal-body">
     <app-userhistory [pkid]="ms.ord_trkheaderid" [subid]="ms.ord_trkids"></app-userhistory>
   </div>
+</ng-template>
+<ng-template #doc let-c="close" let-d="dismiss">
+  <div class="modal-header">
+      <h4 class="modal-title">Documents</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      <app-upload [pkid]="mblid" [type]="'MBL-DOCUMENTS'"></app-upload>
+  </div>
+  <!-- <div class="modal-footer">
+      <button type="button" class="btn btn-outline-light" (click)="c('Close click')">Close</button>
+  </div> -->
 </ng-template>

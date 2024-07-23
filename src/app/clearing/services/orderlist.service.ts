@@ -15,6 +15,7 @@ export class OrderListService {
   public initlialized = false;
   private appid = ''
   public canDelete: boolean;
+  public bDocs: boolean = false;
   menu_record: any;
   total = 0;
   // ErrorMessage = "";
@@ -77,11 +78,14 @@ export class OrderListService {
 
   ReadUserRights() {
     this.canDelete = false;
+    this.bDocs = false;
     this.menu_record = this.gs.getMenu(this.menuid);
     if (this.menu_record) {
       this.title = this.menu_record.menu_name;
       if (this.menu_record.rights_delete)
         this.canDelete = true;
+      if (this.menu_record.rights_docs)
+        this.bDocs = true;
     }
   }
 
