@@ -9,15 +9,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { reducers, metaReducers } from './reducers';
-import { environment } from '../environments/environment';
-
-import { StoreRouterConnectingModule, NavigationActionTiming, RouterState } from '@ngrx/router-store';
-
-
 import { GlobalService } from './core/services/global.service';
 import { LoginService } from './core/services/login.service';
 import { HomeComponent } from './core/home/home.component';
@@ -30,7 +21,6 @@ import { InterceptorService } from './core/services/interceptor.service';
 import { LoadingScreenService } from './core/services/loadingscreen.service';
 import { InterceptorServiceProvider } from './core/services/interceptor.service.provider';
 
-import { CustomSerializer } from './reducers';
 import { CustomRouteReuseStrategy } from './customReuseRouteStrategy';
 import { RouteReuseStrategy } from '@angular/router';
 import { LoadAppComponent } from './core/load-app/load-app.component';
@@ -46,22 +36,6 @@ import { ToastComponent } from './core/toast/toast.component';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    StoreModule.forRoot(reducers, {
-      metaReducers,
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true,
-      },
-    }),
-    EffectsModule.forRoot([]),
-    StoreRouterConnectingModule.forRoot({
-      stateKey: 'router',
-      serializer: CustomSerializer
-    }),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-      logOnly: environment.production, // Restrict extension to log-only mode
-    }),
   ],
   declarations: [
     AppComponent,

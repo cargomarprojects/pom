@@ -1,11 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { ClearingRoutingModule } from './clearing.routing.module';
-import { JobOrderComponent } from './order/joborder.component';
-import { JobContainerComponent } from './container/jobcontainer.component';
-import { AgentBookComponent } from './agentbook/agentbook.component';
 import { TrackOrderComponent } from './trackorder/trackorder.component';
-import { WeekPlanningComponent } from './weekplanning/weekplanning.component';
 import { EdiOrderComponent } from './edi/ediorder/ediorder.component';
 import { EdiOrdUpdateComponent} from './ediordupdate/ediordupdate.component';
 import { OrderListComponent } from './orderlist/list/orderlist.component';
@@ -31,13 +27,9 @@ import { TransitComponent } from './mblm/edit/other/tracking/transit.component';
 
 @NgModule({
   declarations: [
-    JobOrderComponent,
-    JobContainerComponent,
     OrderListComponent,
     OrderEditComponent,
-    AgentBookComponent,
     TrackOrderComponent,
-    WeekPlanningComponent,
     EdiOrderComponent,
     EdiOrdUpdateComponent,
     StatusComponent,

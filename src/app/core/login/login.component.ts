@@ -3,10 +3,6 @@ import { Router } from '@angular/router';
 import { Companym } from '../models/company';
 import { GlobalService } from '../services/global.service';
 import { LoginService } from '../services/login.service';
-
-import { AppState } from 'src/app/reducers';
-import { Store } from '@ngrx/store';
-
 import { HouseListService } from 'src/app/clearing/services/houselist.service';
 import { EdiHblService } from 'src/app/clearing/services/edihbl.service';
 import { EdiOrderService } from 'src/app/clearing/services/ediorder.service';
@@ -43,7 +39,7 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private gs1: GlobalService,
-    private store: Store<AppState>,
+    // private store: Store<AppState>,
     private loginservice: LoginService,
     private hs: HouseListService,
     private edihs: EdiHblService,

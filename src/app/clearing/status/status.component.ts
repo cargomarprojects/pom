@@ -4,8 +4,6 @@ import { GlobalService } from '../../core/services/global.service';
 import { Location } from '@angular/common';
 import { TrackOrderService } from '../services/trackorder.service';
 
-// import * as FromOrderActions from '../orderlist/list/store/orderlist.actions';
-
 @Component({
   selector: 'app-status',
   templateUrl: './status.component.html',
@@ -90,8 +88,6 @@ export class StatusComponent {
         this.errorMessage.push("Save Complete");
         this.gs.showToastScreen(this.errorMessage);
         this.ids = response.list;
-        //var urlid = this.gs.getParameter('urlid');
-        // this.store.dispatch( FromOrderActions.ChangeStatus({urlid: urlid, pkids: this.ids})  )
         this.closeModalWindow.emit({ saction: 'STATUS-SAVE', result: response.list });
       }, error => {
         this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
