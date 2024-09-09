@@ -37,6 +37,9 @@ export class Blm {
   bl_si_cutoff: string;
   bl_cy_cutoff: string;
   bl_track_comments: string;
+  bl_carrier_id: string;
+  bl_carrier_code: string;
+  bl_carrier_name: string;
   TransitList: Trackingm[] = [];
 
   rec_mode: string;

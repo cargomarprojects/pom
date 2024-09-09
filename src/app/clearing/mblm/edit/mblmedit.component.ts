@@ -78,7 +78,7 @@ export class MblmEditComponent {
 
   ActionHandler(_action: string) {
     this.errorMessage = [];
-      if (_action === 'ADD') {
+    if (_action === 'ADD') {
       this.mode = "ADD";
       this.resetControls();
       this.newRecord();
@@ -103,9 +103,12 @@ export class MblmEditComponent {
     this.Record = new Blm();
     this.Record.bl_pkid = this.pkid;
     this.Record.bl_slno = undefined;
-    this.Record.bl_no ='';
+    this.Record.bl_no = '';
     this.Record.bl_book_no = '';
     this.Record.bl_date = this.gs.defaultValues.today;
+    this.Record.bl_carrier_id = '';
+    this.Record.bl_carrier_code = '';
+    this.Record.bl_carrier_name = '';
     this.Record.bl_type = '';
     if (this.type == "SEA EXPORT")
       this.Record.bl_type = 'MBL-SE';
@@ -176,11 +179,11 @@ export class MblmEditComponent {
           this.Record.bl_no = this.Record.bl_no.toUpperCase();
           break;
         }
-        // case 'bl_book_no':
-        //   {
-        //     this.Record.bl_book_no = this.Record.bl_book_no.toUpperCase();
-        //     break;
-        //   }
+      // case 'bl_book_no':
+      //   {
+      //     this.Record.bl_book_no = this.Record.bl_book_no.toUpperCase();
+      //     break;
+      //   }
       // case 'ord_cbm':
       //   {
       //     this.Recorddet.ord_cbm = this.gs.roundWeight(this.Recorddet.ord_cbm, "CBM");
@@ -196,11 +199,11 @@ export class MblmEditComponent {
 
 
   LovSelected(_Record: SearchTable) {
-    // if (_Record.controlname == "SHIPPER") {
-    //   this.Record.ordh_exp_id = _Record.id;
-    //   this.Record.ordh_exp_name = _Record.name;
-    //   this.Record.ordh_exp_code = _Record.code;
-    // }
+    if (_Record.controlname == "CARRIER") {
+      this.Record.bl_carrier_id = _Record.id;
+      this.Record.bl_carrier_name = _Record.name;
+      this.Record.bl_carrier_code = _Record.code;
+    }
 
   }
 
@@ -276,7 +279,7 @@ export class MblmEditComponent {
     this.errorMessage = [];
     this.open(doc);
   }
-  
+
   open(content: any) {
     this.modal = this.modalService.open(content, { backdrop: 'static', keyboard: true });
   }
