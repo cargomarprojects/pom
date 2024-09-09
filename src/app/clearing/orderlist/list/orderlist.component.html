@@ -242,7 +242,7 @@
 </div>
 
 <div class="page-body" *ngIf="ms.ord_list_type=='DETAILS'">
-  <div class="table-responsive table-striped fixedTableHead  my-0 p-0" style="height: calc(100vh - 380px);">
+  <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 380px);">
     <table class="table table-hover table-sm table-bordered">
       <thead class="page-body-thead">
         <tr>
@@ -294,8 +294,7 @@
       </thead>
       <tbody class="page-body-tbody" *ngFor="let rec of ms.record.records; let i = index">
         <tr [style.color]="rec.ord_status_color" (mousedown)="ms.selectRowId(rec.ord_pkid)"
-          [class.active]="rec.ord_pkid == ms.getRowId()"
-          [style.background-color]="i%2==0?'#D3D3D3':'rgba(0, 0, 0, .125)'">
+          [class.active]="rec.ord_pkid == ms.getRowId()">
           <td><input type="checkbox" [(ngModel)]="rec.ord_selected" (change)="handleChange(rec)"></td>
           <td>{{rec.ord_uid}}</td>
           <td (click)="ActionHandler('EDIT',rec.ord_header_id)" class="hlink"><i class="fa fa-pencil"></i></td>
