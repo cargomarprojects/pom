@@ -7,16 +7,17 @@
   </div>
 </div> -->
 
-<div class="page-box">
-  <div class="col-sm my-2">
+<div class="page-header">
+  <div class="col-sm">
     <label class="col-form-label col-form-label-sm mr-1"><strong>{{title}}</strong></label>
     <button [disabled]="loading" (click)="List('LIST')" class="btn btn-info btn-sm mx-1">Refresh</button>
     <button [disabled]="loading" (click)="List('LIST','DELETED')" class="btn btn-info btn-sm mr-1">Show
       Deleted</button>
+    <button class="btn btn-info btn-sm mr-1" (click)="Close()">Close</button>
   </div>
 </div>
 
-<div class="page-box py-2">
+<div class="page-body {{canupload?'':'line-bottom'}}">
   <div class="table-responsive fixedTableHead  my-0 p-0">
     <table class="table table-hover table-sm table-bordered">
       <thead class="page-body-thead">
@@ -60,7 +61,7 @@
   </div>
 </div>
 
-<div class="page-box py-2" *ngIf="canupload">
+<div class="page-body line-bottom" *ngIf="canupload">
   <div class="row">
     <div class="col-sm-6">
       <div class="form-group row my-1">

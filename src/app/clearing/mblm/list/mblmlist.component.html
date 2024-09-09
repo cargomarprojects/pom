@@ -1,9 +1,9 @@
-<div class="page-header-flex">
+<div class="page-header">
     <h5>{{ms.title}}</h5>
     <button class="btn btn-info btn-sm mx-1" (click)="ActionHandler('ADD','')">New</button>
     <button class="btn btn-info btn-sm mr-1" (click)="Close()">Return</button>
 </div>
-<div class="page-box py-2">
+<div class="page-body">
     <div class="row">
         <div class="col-sm-5">
             <div class="form-group row">
@@ -24,7 +24,7 @@
     </div>
 </div>
 <div *ngIf="ms.record.searchQuery.page_count">
-    <div class="page-box">
+    <div class="page-pagination">
         <ul class="pagination pagination-sm my-1 mx-1">
             <li class="page-item"><a class="page-link">Page
                     {{ms.record.searchQuery.page_current}}/{{ms.record.searchQuery.page_count}}
@@ -43,8 +43,8 @@
         </ul>
     </div>
 </div>
-<div class="page-box py-2">
-    <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 235px);">
+<div class="page-body">
+    <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 215px);">
         <table class="table table-hover table-sm table-bordered">
             <thead class="page-body-thead">
                 <tr>
@@ -86,7 +86,7 @@
     </div>
 </div>
 <div *ngIf="ms.record.searchQuery.page_count">
-    <div class="page-box">
+    <div class="page-pagination line-bottom">
         <ul class="pagination pagination-sm my-1 mx-1">
             <li class="page-item"><a class="page-link">Page
                     {{ms.record.searchQuery.page_current}}/{{ms.record.searchQuery.page_count}}

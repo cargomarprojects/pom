@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input,Output, ViewChild, ElementRef,EventEmitter } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
@@ -19,7 +19,8 @@ export class FileUploadComponent {
   @Input() public type: string = '';
   @Input() public canupload: boolean = true;
   @Input() public defaultdoctype: string = '';
-
+  @Output() closeModalWindow = new EventEmitter<any>();
+  
   title = 'Documents';
   selectedId = "";
   ErrorMessage: string = '';
@@ -349,5 +350,10 @@ export class FileUploadComponent {
   getRowId() {
     return this.selectedId;
   }
+
+  Close() {
+    this.closeModalWindow.emit({ saction: 'CLOSE' });
+  }
+
 
 }

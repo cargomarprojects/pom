@@ -189,5 +189,7 @@ export class OrderListComponent {
   open(content: any) {
     this.modal = this.modalService.open(content, { backdrop: 'static', keyboard: true });
   }
-
+  CloseModal2(params: any) {
+    this.modal.close();
+  }
 }
