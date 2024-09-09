@@ -13,7 +13,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class OrderEditComponent {
   // Local Variables
-  title = 'Order List';
+  title = 'Order Details';
   @Input() menuid: string = '';
   @Input() type: string = '';
   @Input() mode: string = 'ADD';
@@ -65,7 +65,7 @@ export class OrderEditComponent {
     this.bAdmin = false;
     this.menu_record = this.gs.getMenu(this.menuid);
     if (this.menu_record) {
-      this.title = this.menu_record.menu_name;
+      //this.title = this.menu_record.menu_name;
       if (this.menu_record.rights_admin)
         this.bAdmin = true;
     }

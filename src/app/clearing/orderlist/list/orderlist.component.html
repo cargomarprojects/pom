@@ -6,30 +6,34 @@
   </div>
 </div> -->
 
-<div class="page-header-flex">
+<div class="page-header">
   <h5>Order List</h5>
   <button class="btn btn-info btn-sm" (click)="ActionHandler('ADD','')">New</button>
   <button class="btn btn-info btn-sm" (click)="Close()">Return</button>
 </div>
 
-
-<div class="page-box py-2">
+<div class="page-body">
   <div class="row">
-    <div class="col-sm-5">
+
+    <div class="col-sm-4">
+
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">From</label>
-        <div class="col-sm-4">
+        <label class="col-sm-3 form-label form-label-sm">From</label>
+        <div class="col-sm-9">
           <app-date [inputdate]="ms.record.searchQuery.from_date"
             (ValueChanged)="ms.record.searchQuery.from_date=$event"></app-date>
         </div>
-        <label class="col-sm-1 col-form-label col-form-label-sm">To</label>
-        <div class="col-sm-4">
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 form-label form-label-sm">To</label>
+        <div class="col-sm-9">
           <app-date [inputdate]="ms.record.searchQuery.to_date"
             (ValueChanged)="ms.record.searchQuery.to_date=$event"></app-date>
         </div>
       </div>
+
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">Shipper</label>
+        <label class="col-sm-3 form-label form-label-sm">Shipper</label>
         <div class="col-sm-9">
           <app-autocomplete3 [controlname]="'SHIPPER'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
             [displaydata]="ms.record.searchQuery.list_exp_name" (ValueChanged)="LovSelected($event)"
@@ -38,7 +42,7 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">Consignee</label>
+        <label class="col-sm-3 form-label form-label-sm">Consignee</label>
         <div class="col-sm-9">
           <app-autocomplete3 [controlname]="'CONSIGNEE'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
             [displaydata]="ms.record.searchQuery.list_imp_name" (ValueChanged)="LovSelected($event)"
@@ -47,7 +51,7 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">Buy.Agent</label>
+        <label class="col-sm-3 form-label form-label-sm">Buy.Agent</label>
         <div class="col-sm-9">
           <app-autocomplete3 [controlname]="'BUY-AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
             [displaydata]="ms.record.searchQuery.list_buy_agent_name" (ValueChanged)="LovSelected($event)"
@@ -56,7 +60,7 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">Agent.Pol</label>
+        <label class="col-sm-3 form-label form-label-sm">Agent.Pol</label>
         <div class="col-sm-9">
           <app-autocomplete3 [controlname]="'AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
             [displaydata]="ms.record.searchQuery.list_agent_name" (ValueChanged)="LovSelected($event)"
@@ -65,7 +69,7 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">Agent.Pod</label>
+        <label class="col-sm-3 form-label form-label-sm">Agent.Pod</label>
         <div class="col-sm-9">
           <app-autocomplete3 [controlname]="'AGENT-POD'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
             [displaydata]="ms.record.searchQuery.list_pod_agent_name" (ValueChanged)="LovSelected($event)"
@@ -75,16 +79,16 @@
       </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-sm-4">
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">Invoice#</label>
+        <label class="col-sm-3 form-label form-label-sm">Invoice#</label>
         <div class="col-sm-9">
           <InputBox [(inputModel)]="ms.record.searchQuery.ord_invoice" [maxlength]="30" [uppercase]=true></InputBox>
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">Po#</label>
+        <label class="col-sm-3 form-label form-label-sm">Po#</label>
         <div class="col-sm-9">
           <InputBox [(inputModel)]="ms.record.searchQuery.ord_po" [maxlength]="1000" [uppercase]=true></InputBox>
         </div>
@@ -92,7 +96,7 @@
 
 
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">Status</label>
+        <label class="col-sm-3 form-label form-label-sm">Status</label>
         <div class="col-sm-9">
           <select class="form-control form-control-sm" [(ngModel)]="ms.record.searchQuery.ord_status">
             <option [value]="'ALL'">ALL</option>
@@ -107,7 +111,7 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">Pending</label>
+        <label class="col-sm-3 form-label form-label-sm">Pending</label>
         <div class="col-sm-9">
           <select class="form-control form-control-sm" [(ngModel)]="ms.record.searchQuery.ord_showpending">
             <!-- <option [value]="'Y'">SHOW PENDING ONLY</option> -->
@@ -119,7 +123,7 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">Sort</label>
+        <label class="col-sm-3 form-label form-label-sm">Sort</label>
         <div class="col-sm-9">
           <select class="form-control form-control-sm" [(ngModel)]="ms.record.searchQuery.sort_colname">
             <option *ngFor="let rec of ms.SortList" [value]="rec.colheadername">{{rec.colheadername}}</option>
@@ -128,20 +132,20 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label col-form-label-sm"></label>
+        <label class="col-sm-3 form-label form-label-sm"></label>
         <div class="col-sm-5">
           <input type="checkbox" [(ngModel)]="ms.record.searchQuery.list_hide" id="_ordhide" />
           <label class="col-form-label col-form-label-sm" for="_ordhide">Show Hidden Records</label>
         </div>
         <div class="col-sm-4">
           <input type="checkbox" [(ngModel)]="ms.record.searchQuery.list_orderwise" id="_orddet" />
-          <label class="col-form-label col-form-label-sm" for="_orddet">Show Orderwise</label>
+          <label class="col-form-label col-form-label-sm" for="_orddet">Show Order wise</label>
         </div>
       </div>
 
     </div>
 
-    <div class="col-md-3">
+    <div class="col-sm-4">
 
       <div class="form-group row">
         <div class="col-sm-9 offset-3">
@@ -180,8 +184,9 @@
 
   </div>
 </div>
+
 <div *ngIf="ms.record.searchQuery.page_count">
-  <div class="page-box">
+  <div class="page-pagination">
     <ul class="pagination pagination-sm my-1 mx-1">
       <li class="page-item"><a class="page-link">Page
           {{ms.record.searchQuery.page_current}}/{{ms.record.searchQuery.page_count}}
@@ -197,8 +202,9 @@
     </ul>
   </div>
 </div>
-<div *ngIf="ms.ord_list_type=='SUMMARY'" class="page-box py-2">
-  <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 355px);">
+
+<div class="page-body" *ngIf="ms.ord_list_type=='SUMMARY'">
+  <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 380px);">
     <table class="table table-hover table-sm table-bordered">
       <thead class="page-body-thead">
         <tr>
@@ -234,8 +240,9 @@
     </table>
   </div>
 </div>
-<div *ngIf="ms.ord_list_type=='DETAILS'" class="page-box py-2">
-  <div class="table-responsive table-striped fixedTableHead  my-0 p-0" style="height: calc(100vh - 355px);">
+
+<div class="page-body" *ngIf="ms.ord_list_type=='DETAILS'">
+  <div class="table-responsive table-striped fixedTableHead  my-0 p-0" style="height: calc(100vh - 380px);">
     <table class="table table-hover table-sm table-bordered">
       <thead class="page-body-thead">
         <tr>
@@ -366,9 +373,10 @@
     </table>
   </div>
 </div>
+
 <div *ngIf="ms.record.searchQuery.page_count">
-  <div class="page-box">
-    <ul class="pagination pagination-sm my-1 mx-1">
+  <div class="page-pagination line-bottom">
+    <ul class="pagination page-pagination-sm  my-1 mx-1">
       <li class="page-item"><a class="page-link">Page
           {{ms.record.searchQuery.page_current}}/{{ms.record.searchQuery.page_count}}
           (Records-{{ms.record.searchQuery.page_rowcount}})</a></li>

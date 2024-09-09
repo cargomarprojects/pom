@@ -1,12 +1,12 @@
-
-
 <div *ngIf="gs.IsAuthenticated">
-  
+
   <!-- <nav class="navbar fixed-top  navbar-expand-lg navbar-light text-white" style="background-image: linear-gradient(rgb(18, 69, 105), rgb(97, 147, 183));"> -->
   <nav class="navbar fixed-top  navbar-expand-lg navbar-light text-white" style="background-color: steelblue;">
 
     <!-- <a class="navbar-brand" ><h5 class="mt-2" style="color:white">{{gs.Company_Name}}</h5></a> -->
-    <a class="navbar-brand" ><h5 class="mt-2" style="color:white">PO Tracker</h5></a>
+    <a class="navbar-brand">
+      <h5 class="mt-2" style="color:white">PO Tracker</h5>
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -22,7 +22,8 @@
           </a>
           <div class="dropdown-menu pb-0" aria-labelledby="navbarDropdown">
             <div *ngFor="let rec of gs.MenuList" class="menulist">
-              <a *ngIf="rech.module_name == rec.menu_module_name && rec.menu_displayed" class="dropdown-item border-bottom" (click)="LoadPage(rec)">{{rec.menu_name}}</a>
+              <a *ngIf="rech.module_name == rec.menu_module_name && rec.menu_displayed"
+                class="dropdown-item border-bottom" (click)="LoadPage(rec)">{{rec.menu_name}}</a>
             </div>
           </div>
         </li>
