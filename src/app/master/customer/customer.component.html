@@ -9,7 +9,7 @@
 
 <div *ngIf="currentTab=='LIST'" class="page-list">
 
-  <div class="page-search">
+  <div class="page-body">
     <div class="row">
 
       <div class="col-2">
@@ -38,7 +38,7 @@
       </div>
     </div>
   </div>
-  <div class="page-search">
+  <div class="page-body">
     <div class="row">
       <label class="col-2">Search</label>
       <div class="col">
@@ -51,7 +51,7 @@
     </div>
   </div>
 
-  <div class="page-pager">
+  <div class="page-pagination">
     <div *ngIf="page_count">
       <ul class="pagination pagination-sm">
         <li class="page-item"><a class="page-link">Page {{page_current}}/{{page_count}} (Records-{{page_rowcount}})</a>
@@ -67,7 +67,7 @@
   </div>
 
   <div class="page-body table-responsive">
-    <table class="table  table-hover table-sm table-bordered">
+    <table class="table  table-hover table-sm table-bordered fixedTableHead">
       <thead class="page-body-thead">
         <tr>
           <th>CODE</th>
@@ -104,7 +104,7 @@
     </table>
   </div>
 
-  <div class="page-pager">
+  <div class="page-pagination line-bottom">
     <div *ngIf="page_count">
       <ul class="pagination pagination-sm">
         <li class="page-item"><a class="page-link">Page {{page_current}}/{{page_count}} (Records-{{page_rowcount}})</a>
@@ -126,7 +126,7 @@
   <ngb-tabset>
     <ngb-tab title="Basic Details">
       <ng-template ngbTabContent>
-        <div class="page-box">
+        <div class="page-body">
 
 
           <div class="row">
@@ -243,14 +243,14 @@
 
 
 
-        <div class="page-box">
+        <div class="page-body">
           <app-addressm #addressComponent [RecordList]="Record.AddressList" [StateList]="StateList"
             [CountryList]="CountryList" [customer_id]="pkid" [bAdmin]="bAdmin2" [bDelete]="bDelete"
             [pan_no]="Record.cust_panno" [bShipper]="Record.cust_is_shipper" [bForeigner]="Record.cust_is_foreigner"
             [bUnregistered]="Record.cust_is_ungst"></app-addressm>
         </div>
 
-        <div class="page-box">
+        <div class="page-body line-bottom">
           <div class="col">
             <button [hidden]="disableSave" (click)="Save()" class="btn btn-success btn-sm mr-1">Save</button>
             <button (click)="ActionHandler('LIST','')" class="btn btn-success btn-sm mr-1">Return</button>
