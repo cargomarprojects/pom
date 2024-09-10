@@ -86,7 +86,7 @@
         </tr>
       </thead>
       <tbody class="page-body-tbody">
-        <tr  *ngFor="let rec of RecordList">
+        <tr *ngFor="let rec of RecordList">
           <td (click)="ActionHandler('EDIT',rec.cust_pkid)">{{rec.cust_code}}</td>
           <td (click)="ActionHandler('EDIT',rec.cust_pkid)">{{rec.cust_name}}</td>
           <td (click)="ActionHandler('EDIT',rec.cust_pkid)">{{rec.cust_group}}</td>
@@ -133,7 +133,7 @@
 
             <div class="col-sm-6">
               <div class="form-group row">
-                <label class="col-4 col-form-label col-form-label-sm" >Code</label>
+                <label class="col-4 col-form-label col-form-label-sm">Code</label>
                 <div class="col-8">
                   <input [disabled]="!canadd" type="text" class="form-control form-control-sm"
                     [(ngModel)]="Record.cust_code" required maxlength="15" />
@@ -251,11 +251,13 @@
         </div>
 
         <div class="page-body line-bottom">
-          <div class="col my-1 mx-1 ">
-            <button [hidden]="disableSave" (click)="Save()" class="btn btn-success btn-sm mr-1">Save</button>
-            <button (click)="ActionHandler('LIST','')" class="btn btn-success btn-sm mr-1">Return</button>
-            <button *ngIf="mode == 'EDIT'" (click)="ShowHistory(history)"
-              class="btn btn-success btn-sm mr-1">History</button>
+          <div class="form-group row">
+            <div class="col">
+              <button [hidden]="disableSave" (click)="Save()" class="btn btn-success btn-sm mr-1">Save</button>
+              <button (click)="ActionHandler('LIST','')" class="btn btn-success btn-sm mr-1">Return</button>
+              <button *ngIf="mode == 'EDIT'" (click)="ShowHistory(history)"
+                class="btn btn-success btn-sm mr-1">History</button>
+            </div>
           </div>
         </div>
 
