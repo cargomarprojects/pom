@@ -6,13 +6,12 @@
   </div>
 </div> -->
 
-<div class="page-header-flex">
+<div class="page-header">
   <h5>{{title}}</h5>
-  <button class="btn btn-primary btn-sm" (click)="Close()">Return</button>
+  <button class="btn btn-info btn-sm" (click)="Close()">Return</button>
 </div>
 
-
-<div class="page-list">
+<div class="page-body">
   <div class="row my-1">
     <div class="col-sm-4">
       <div class="form-group row">
@@ -77,7 +76,8 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">POL</label>
         <div class="col-sm-4 pr-0">
-          <app-autocomplete3 [controlname]="'POL'" [tabletype]="'PARAM'" [subtype]="type=='SEA EXPORT'?'SEA PORT':'AIR PORT'" [displaycolumn]="'NAME'"
+          <app-autocomplete3 [controlname]="'POL'" [tabletype]="'PARAM'"
+            [subtype]="type=='SEA EXPORT'?'SEA PORT':'AIR PORT'" [displaycolumn]="'NAME'"
             [displaydata]="Record.vp_pol_name" (ValueChanged)="LovSelected($event)">
           </app-autocomplete3>
         </div>
@@ -92,7 +92,8 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">POD</label>
         <div class="col-sm-4 pr-0">
-          <app-autocomplete3 [controlname]="'POD'" [tabletype]="'PARAM'" [subtype]="type=='SEA EXPORT'?'SEA PORT':'AIR PORT'" [displaycolumn]="'NAME'"
+          <app-autocomplete3 [controlname]="'POD'" [tabletype]="'PARAM'"
+            [subtype]="type=='SEA EXPORT'?'SEA PORT':'AIR PORT'" [displaycolumn]="'NAME'"
             [displaydata]="Record.vp_pod_name" (ValueChanged)="LovSelected($event)">
           </app-autocomplete3>
         </div>
@@ -107,8 +108,9 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label col-form-label-sm">{{type=='SEA EXPORT'?'Vessel':'Airline'}}</label>
         <div class="col-sm-10 pr-0">
-          <app-autocomplete3 [controlname]="'VESSEL'" [tabletype]="'PARAM'" [subtype]="type=='SEA EXPORT'?'VESSEL':'AIR CARRIER'"
-            [displaycolumn]="'NAME'" [displaydata]="Record.vp_vessel_name" (ValueChanged)="LovSelected($event)">
+          <app-autocomplete3 [controlname]="'VESSEL'" [tabletype]="'PARAM'"
+            [subtype]="type=='SEA EXPORT'?'VESSEL':'AIR CARRIER'" [displaycolumn]="'NAME'"
+            [displaydata]="Record.vp_vessel_name" (ValueChanged)="LovSelected($event)">
           </app-autocomplete3>
         </div>
       </div>
@@ -165,122 +167,125 @@
 
   </div>
 </div>
-<div *ngIf="mode=='EDIT'" class="page-body table-responsive fixedTableHead  my-0 p-0"
-  style="height: calc(100vh - 290px);">
-  <table class="table table-hover table-sm table-bordered">
-    <thead class="page-body-thead">
-      <tr>
-        <th><input type="checkbox" (click)="SelectDeselect()" [(ngModel)]="ord_selected"></th>
-        <th>UID</th>
-        <th>STATUS</th>
-        <th>CARGO.STATUS</th>
-        <th>CARGO.STATUS.DT</th>
-        <th>AGENT.POL</th>
-        <th>SHIPPER</th>
-        <th>CONSIGNEE</th>
-        <th>BUYING.AGENT</th>
-        <th>AGENT.POD</th>
-        <th>INV#</th>
-        <th>PO#</th>
-        <th>STYLE</th>
-        <th>COLOR</th>
-        <th class="text-right">PKGS</th>
-        <th class="text-right">PCS</th>
-        <th class="text-right">CBM</th>
-        <th>POL</th>
-        <th>POD</th>
-        <th *ngIf="colHblCntrVisible && Record.vp_locked"><input type="checkbox" (click)="SelectDeselectHblCntr()"
-            [(ngModel)]="ord_hblcntrselected"></th>
-        <th *ngIf="colHblCntrVisible && Record.vp_locked">VIEW</th>
-        <th>MASTER</th>
-        <th>HOUSE</th>
-        <th *ngIf="gs.getTrackDate('BKD')||trkdt_alldisplay=='Y'">BKD</th>
-        <th *ngIf="gs.getTrackDate('RND')||trkdt_alldisplay=='Y'">RND</th>
-        <th *ngIf="gs.getTrackDate('POR')||trkdt_alldisplay=='Y'">POR</th>
-        <th *ngIf="gs.getTrackDate('CFS')||trkdt_alldisplay=='Y'">CFS</th>
-        <th *ngIf="gs.getTrackDate('FCR')||trkdt_alldisplay=='Y'">FCR</th>
-        <th *ngIf="gs.getTrackDate('INSP')||trkdt_alldisplay=='Y'">INSP</th>
-        <th *ngIf="gs.getTrackDate('STUF')||trkdt_alldisplay=='Y'">STUF</th>
-        <th *ngIf="gs.getTrackDate('WHD')||trkdt_alldisplay=='Y'">WHD</th>
-        <th *ngIf="gs.getTrackDate('SOB')||trkdt_alldisplay=='Y'">SOB</th>
-        <th *ngIf="gs.getTrackDate('DPOD')||trkdt_alldisplay=='Y'">DPOD</th>
-      </tr>
-    </thead>
-    <tbody class="page-body-tbody" *ngFor="let rec of Record.OrderList; let i = index">
-      <tr (mousedown)="selectRowId(rec.ord_pkid)" [class.active]="rec.ord_pkid == getRowId()"
-        [style.background-color]="i%2==0?'#D3D3D3':'rgba(0, 0, 0, .125)'">
-        <td><input type="checkbox" (change)="OnChange('ord_selected')" [(ngModel)]="rec.ord_selected"></td>
-        <td>{{rec.ord_uid}}</td>
-        <td>{{rec.ord_status}}</td>
-        <td>{{rec.ord_cargo_status}}</td>
-        <td>{{rec.ord_cargo_status_date}}</td>
-        <td>{{rec.ord_agent_name}}</td>
-        <td>{{rec.ord_exp_name}}</td>
-        <td>{{rec.ord_imp_name}}</td>
-        <td>{{rec.ord_buy_agent_name}}</td>
-        <td>{{rec.ord_pod_agent_name}}</td>
-        <td>{{rec.ord_invno}}</td>
-        <td>{{rec.ord_po}}</td>
-        <td>{{rec.ord_style}}</td>
-        <td>{{rec.ord_color}}</td>
-        <td align='right'>{{rec.ord_pkg | number : '1.2-2'}}</td>
-        <td align='right'>{{rec.ord_pcs | number : '1.2-2'}}</td>
-        <td align='right'>{{rec.ord_cbm | number : '1.3-3'}}</td>
-        <td>{{rec.ord_pol}}</td>
-        <td>{{rec.ord_pod}}</td>
-        <td *ngIf="colHblCntrVisible && Record.vp_locked">
-          <input *ngIf="rec.ord_plan_id" type="checkbox" (change)="OnChange('ord_hblcntrselected')"
-            [(ngModel)]="rec.ord_hblcntrselected">
-        </td>
-        <td *ngIf="colHblCntrVisible && Record.vp_locked" class="hlink" (click)="ShowHideRecord(rec)"><i
-            *ngIf="rec.ord_mbl_no" class="fa fa-eye"></i></td>
-        <td>{{rec.ord_mbl_no}}</td>
-        <td>{{rec.ord_hbl_cntr_nos}}</td>
-        <td *ngIf="gs.getTrackDate('BKD')||trkdt_alldisplay=='Y'">{{rec.ord_booking_date}}</td>
-        <td *ngIf="gs.getTrackDate('RND')||trkdt_alldisplay=='Y'">{{rec.ord_rnd_insp_date}}</td>
-        <td *ngIf="gs.getTrackDate('POR')||trkdt_alldisplay=='Y'">{{rec.ord_po_rel_date}}</td>
-        <td *ngIf="gs.getTrackDate('CFS')||trkdt_alldisplay=='Y'">{{rec.ord_cargo_ready_date}}</td>
-        <td *ngIf="gs.getTrackDate('FCR')||trkdt_alldisplay=='Y'">{{rec.ord_fcr_date}}</td>
-        <td *ngIf="gs.getTrackDate('INSP')||trkdt_alldisplay=='Y'">{{rec.ord_insp_date}}</td>
-        <td *ngIf="gs.getTrackDate('STUF')||trkdt_alldisplay=='Y'">{{rec.ord_stuf_date}}</td>
-        <td *ngIf="gs.getTrackDate('WHD')||trkdt_alldisplay=='Y'">{{rec.ord_whd_date}}</td>
-        <td *ngIf="gs.getTrackDate('SOB')||trkdt_alldisplay=='Y'">{{rec.ord_dlv_pol_date}}</td>
-        <td *ngIf="gs.getTrackDate('DPOD')||trkdt_alldisplay=='Y'">{{rec.ord_dlv_pod_date}}</td>
-      </tr>
-      <tr *ngIf="rec.row_displayed" style="border: 2px solid green;">
-        <td colspan="100%">
-          <div class="table-responsive my-0 p-0">
-            <table class="table table-hover table-sm table-bordered">
-              <thead class="page-body-thead">
-                <tr>
-                  <th width="10%">SL#</th>
-                  <th width="20%">MASTER#</th>
-                  <th width="20%">HOUSE#</th>
-                  <th width="20%" *ngIf="type=='SEA EXPORT'">CNTR#</th>
-                  <th width="30%" *ngIf="type=='SEA EXPORT'">TYPE</th>
-                </tr>
-              </thead>
-              <tbody class="page-body-tbody">
-                <tr *ngFor="let rec of rec.LinkHblCntrList; let i = index">
-                  <td>{{i+1}}</td>
-                  <td>{{rec.cntrd_mbl_no}}</td>
-                  <td>{{rec.cntrd_hbl_no}}</td>
-                  <td *ngIf="type=='SEA EXPORT'">{{rec.cntrd_cntr_no}}</td>
-                  <td *ngIf="type=='SEA EXPORT'">{{rec.cntrd_cntr_type}}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+
+<div *ngIf="mode=='EDIT'" class="page-body">
+  <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 290px);">
+    <table class="table table-hover table-sm table-bordered">
+      <thead class="page-body-thead">
+        <tr>
+          <th><input type="checkbox" (click)="SelectDeselect()" [(ngModel)]="ord_selected"></th>
+          <th>UID</th>
+          <th>STATUS</th>
+          <th>CARGO.STATUS</th>
+          <th>CARGO.STATUS.DT</th>
+          <th>AGENT.POL</th>
+          <th>SHIPPER</th>
+          <th>CONSIGNEE</th>
+          <th>BUYING.AGENT</th>
+          <th>AGENT.POD</th>
+          <th>INV#</th>
+          <th>PO#</th>
+          <th>STYLE</th>
+          <th>COLOR</th>
+          <th class="text-right">PKGS</th>
+          <th class="text-right">PCS</th>
+          <th class="text-right">CBM</th>
+          <th>POL</th>
+          <th>POD</th>
+          <th *ngIf="colHblCntrVisible && Record.vp_locked"><input type="checkbox" (click)="SelectDeselectHblCntr()"
+              [(ngModel)]="ord_hblcntrselected"></th>
+          <th *ngIf="colHblCntrVisible && Record.vp_locked">VIEW</th>
+          <th>MASTER</th>
+          <th>HOUSE</th>
+          <th *ngIf="gs.getTrackDate('BKD')||trkdt_alldisplay=='Y'">BKD</th>
+          <th *ngIf="gs.getTrackDate('RND')||trkdt_alldisplay=='Y'">RND</th>
+          <th *ngIf="gs.getTrackDate('POR')||trkdt_alldisplay=='Y'">POR</th>
+          <th *ngIf="gs.getTrackDate('CFS')||trkdt_alldisplay=='Y'">CFS</th>
+          <th *ngIf="gs.getTrackDate('FCR')||trkdt_alldisplay=='Y'">FCR</th>
+          <th *ngIf="gs.getTrackDate('INSP')||trkdt_alldisplay=='Y'">INSP</th>
+          <th *ngIf="gs.getTrackDate('STUF')||trkdt_alldisplay=='Y'">STUF</th>
+          <th *ngIf="gs.getTrackDate('WHD')||trkdt_alldisplay=='Y'">WHD</th>
+          <th *ngIf="gs.getTrackDate('SOB')||trkdt_alldisplay=='Y'">SOB</th>
+          <th *ngIf="gs.getTrackDate('DPOD')||trkdt_alldisplay=='Y'">DPOD</th>
+        </tr>
+      </thead>
+      <tbody class="page-body-tbody" *ngFor="let rec of Record.OrderList; let i = index">
+        <tr (mousedown)="selectRowId(rec.ord_pkid)" [class.active]="rec.ord_pkid == getRowId()">
+          <td><input type="checkbox" (change)="OnChange('ord_selected')" [(ngModel)]="rec.ord_selected"></td>
+          <td>{{rec.ord_uid}}</td>
+          <td>{{rec.ord_status}}</td>
+          <td>{{rec.ord_cargo_status}}</td>
+          <td>{{rec.ord_cargo_status_date}}</td>
+          <td>{{rec.ord_agent_name}}</td>
+          <td>{{rec.ord_exp_name}}</td>
+          <td>{{rec.ord_imp_name}}</td>
+          <td>{{rec.ord_buy_agent_name}}</td>
+          <td>{{rec.ord_pod_agent_name}}</td>
+          <td>{{rec.ord_invno}}</td>
+          <td>{{rec.ord_po}}</td>
+          <td>{{rec.ord_style}}</td>
+          <td>{{rec.ord_color}}</td>
+          <td align='right'>{{rec.ord_pkg | number : '1.2-2'}}</td>
+          <td align='right'>{{rec.ord_pcs | number : '1.2-2'}}</td>
+          <td align='right'>{{rec.ord_cbm | number : '1.3-3'}}</td>
+          <td>{{rec.ord_pol}}</td>
+          <td>{{rec.ord_pod}}</td>
+          <td *ngIf="colHblCntrVisible && Record.vp_locked">
+            <input *ngIf="rec.ord_plan_id" type="checkbox" (change)="OnChange('ord_hblcntrselected')"
+              [(ngModel)]="rec.ord_hblcntrselected">
+          </td>
+          <td *ngIf="colHblCntrVisible && Record.vp_locked" class="hlink" (click)="ShowHideRecord(rec)"><i
+              *ngIf="rec.ord_mbl_no" class="fa fa-eye"></i></td>
+          <td>{{rec.ord_mbl_no}}</td>
+          <td>{{rec.ord_hbl_cntr_nos}}</td>
+          <td *ngIf="gs.getTrackDate('BKD')||trkdt_alldisplay=='Y'">{{rec.ord_booking_date}}</td>
+          <td *ngIf="gs.getTrackDate('RND')||trkdt_alldisplay=='Y'">{{rec.ord_rnd_insp_date}}</td>
+          <td *ngIf="gs.getTrackDate('POR')||trkdt_alldisplay=='Y'">{{rec.ord_po_rel_date}}</td>
+          <td *ngIf="gs.getTrackDate('CFS')||trkdt_alldisplay=='Y'">{{rec.ord_cargo_ready_date}}</td>
+          <td *ngIf="gs.getTrackDate('FCR')||trkdt_alldisplay=='Y'">{{rec.ord_fcr_date}}</td>
+          <td *ngIf="gs.getTrackDate('INSP')||trkdt_alldisplay=='Y'">{{rec.ord_insp_date}}</td>
+          <td *ngIf="gs.getTrackDate('STUF')||trkdt_alldisplay=='Y'">{{rec.ord_stuf_date}}</td>
+          <td *ngIf="gs.getTrackDate('WHD')||trkdt_alldisplay=='Y'">{{rec.ord_whd_date}}</td>
+          <td *ngIf="gs.getTrackDate('SOB')||trkdt_alldisplay=='Y'">{{rec.ord_dlv_pol_date}}</td>
+          <td *ngIf="gs.getTrackDate('DPOD')||trkdt_alldisplay=='Y'">{{rec.ord_dlv_pod_date}}</td>
+        </tr>
+        <tr *ngIf="rec.row_displayed" style="border: 2px solid green;">
+          <td colspan="100%">
+            <div class="table-responsive my-0 p-0">
+              <table class="table table-hover table-sm table-bordered">
+                <thead class="page-body-thead">
+                  <tr>
+                    <th width="10%">SL#</th>
+                    <th width="20%">MASTER#</th>
+                    <th width="20%">HOUSE#</th>
+                    <th width="20%" *ngIf="type=='SEA EXPORT'">CNTR#</th>
+                    <th width="30%" *ngIf="type=='SEA EXPORT'">TYPE</th>
+                  </tr>
+                </thead>
+                <tbody class="page-body-tbody">
+                  <tr *ngFor="let rec of rec.LinkHblCntrList; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{rec.cntrd_mbl_no}}</td>
+                    <td>{{rec.cntrd_hbl_no}}</td>
+                    <td *ngIf="type=='SEA EXPORT'">{{rec.cntrd_cntr_no}}</td>
+                    <td *ngIf="type=='SEA EXPORT'">{{rec.cntrd_cntr_type}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
-<div class="page-details">
-  <div class="col">
-    <button [hidden]="disableSave" [disabled]="loading||Record.vp_locked" (click)="Save()"
-      class="btn btn-success btn-sm mr-1">Save</button>
-    <button [disabled]="loading" (click)="Close()" class="btn btn-success btn-sm">Return</button>
+<div class="page-body line-bottom">
+  <div class="form-group row">
+    <div class="col">
+      <button [hidden]="disableSave" [disabled]="loading||Record.vp_locked" (click)="Save()"
+        class="btn btn-success btn-sm mr-1">Save</button>
+      <button [disabled]="loading" (click)="Close()" class="btn btn-success btn-sm">Return</button>
+    </div>
   </div>
 </div>
 
