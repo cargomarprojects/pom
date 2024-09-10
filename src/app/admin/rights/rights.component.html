@@ -1,46 +1,40 @@
 <div class="page-header">
   <div class="col">
     <label class="col-form-label">{{title}}</label>
-    <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-primary btn-sm mx-1">List</button>
-    <button class="btn btn-primary btn-sm" (click)="Close()">Close</button>
+    <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-info btn-sm mx-1">List</button>
+    <button class="btn btn-info btn-sm" (click)="Close()">Close</button>
 
   </div>
 </div>
 
 <div *ngIf="currentTab=='LIST'">
-
-  <div class="page-list">
-    <div class="page-search">
-      <div class="row">
-        <label class="col-2">Search</label>
-        <div class="col">
-          <input type="text" class="col form-control form-control-sm" name="Search" [(ngModel)]="searchstring" />
-        </div>
-        <div class="col">
-          <button [disabled]="loading" (click)="List('NEW')" class="btn btn-primary btn-sm">Search</button>
-        </div>
+  <div class="page-body">
+    <div class="row">
+      <label class="col-2">Search</label>
+      <div class="col">
+        <input type="text" class="col form-control form-control-sm" name="Search" [(ngModel)]="searchstring" />
+      </div>
+      <div class="col">
+        <button [disabled]="loading" (click)="List('NEW')" class="btn btn-info btn-sm">Search</button>
       </div>
     </div>
   </div>
-
-  <div class="page-list p-1">
-    <div *ngIf="page_count">
-      <ul class="pagination pagination-sm">
-        <li class="page-item"><a class="page-link">Page {{page_current}}/{{page_count}} (Records-{{page_rowcount}})</a>
-        </li>
-        <li class="page-item"><a class="page-link" (click)="List('FIRST')"><span class="fa fa-backward"></span></a></li>
-        <li class="page-item"><a class="page-link" (click)="List('PREV')"><span class="fa fa-arrow-left"></span></a>
-        </li>
-        <li class="page-item"><a class="page-link" (click)="List('NEXT')"><span class="fa fa-arrow-right"></span></a>
-        </li>
-        <li class="page-item"><a class="page-link" (click)="List('LAST')"><span class="fa fa-forward"></span></a></li>
-      </ul>
-    </div>
+  <div *ngIf="page_count" class="page-pagination">
+    <ul class="pagination pagination-sm my-1 mx-1">
+      <li class="page-item"><a class="page-link">Page {{page_current}}/{{page_count}} (Records-{{page_rowcount}})</a>
+      </li>
+      <li class="page-item"><a class="page-link" (click)="List('FIRST')"><span class="fa fa-backward"></span></a></li>
+      <li class="page-item"><a class="page-link" (click)="List('PREV')"><span class="fa fa-arrow-left"></span></a>
+      </li>
+      <li class="page-item"><a class="page-link" (click)="List('NEXT')"><span class="fa fa-arrow-right"></span></a>
+      </li>
+      <li class="page-item"><a class="page-link" (click)="List('LAST')"><span class="fa fa-forward"></span></a></li>
+    </ul>
   </div>
 
-  <div class="page-list p-1">
-    <div class="page-body table-responsive">
-      <table class="table table-hover table-sm">
+  <div class="page-body">
+    <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 215px);">
+      <table class="table table-hover table-sm table-bordered">
         <thead class="page-body-thead">
           <tr>
             <th>Login ID</th>
@@ -48,8 +42,8 @@
             <th>Email</th>
           </tr>
         </thead>
-        <tbody class="page-body-tbody" *ngFor="let rec of RecordMast">
-          <tr (click)="RightsList('NEW',rec)">
+        <tbody class="page-body-tbody">
+          <tr *ngFor="let rec of RecordMast" (click)="RightsList('NEW',rec)">
             <td>{{rec.user_code}}</td>
             <td>{{rec.user_name}}</td>
             <td>{{rec.user_email}}</td>
@@ -59,33 +53,25 @@
     </div>
   </div>
 
-
-
-  <div class="page-list p-1">
-    <div *ngIf="page_count">
-      <ul class="pagination pagination-sm">
-        <li class="page-item"><a class="page-link">Page {{page_current}}/{{page_count}}
-            (Records-{{page_rowcount}})</a>
-        </li>
-        <li class="page-item"><a class="page-link" (click)="List('FIRST')"><span class="fa fa-backward"></span></a>
-        </li>
-        <li class="page-item"><a class="page-link" (click)="List('PREV')"><span class="fa fa-arrow-left"></span></a>
-        </li>
-        <li class="page-item"><a class="page-link" (click)="List('NEXT')"><span class="fa fa-arrow-right"></span></a>
-        </li>
-        <li class="page-item"><a class="page-link" (click)="List('LAST')"><span class="fa fa-forward"></span></a></li>
-      </ul>
-    </div>
+  <div *ngIf="page_count" class="page-pagination line-bottom">
+    <ul class="pagination pagination-sm  my-1 mx-1">
+      <li class="page-item"><a class="page-link">Page {{page_current}}/{{page_count}}
+          (Records-{{page_rowcount}})</a>
+      </li>
+      <li class="page-item"><a class="page-link" (click)="List('FIRST')"><span class="fa fa-backward"></span></a>
+      </li>
+      <li class="page-item"><a class="page-link" (click)="List('PREV')"><span class="fa fa-arrow-left"></span></a>
+      </li>
+      <li class="page-item"><a class="page-link" (click)="List('NEXT')"><span class="fa fa-arrow-right"></span></a>
+      </li>
+      <li class="page-item"><a class="page-link" (click)="List('LAST')"><span class="fa fa-forward"></span></a></li>
+    </ul>
   </div>
 </div>
 
-
-
-
-
 <div *ngIf="currentTab=='DETAILS'">
 
-  <div class="page-details">
+  <div class="page-body">
     <div class="row">
       <div class="col-6">
         <label class="col-6 col-form-label col-form-label-sm">{{user_name}} </label>
@@ -101,10 +87,10 @@
     </div>
   </div>
 
-  <div class="page-details">
+  <div class="page-body">
 
-    <div class="table-responsive" style="border:1px solid grey; margin-bottom:1px;">
-      <table class="table table-hover table-sm">
+    <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 200px);">
+      <table class="table table-hover table-sm table-bordered">
         <thead class="page-body-thead">
           <tr>
             <th>Module</th>
@@ -144,10 +130,10 @@
     </div>
   </div>
 
-  <div class="page-details">
-    <div>
-      <button [disabled]="loading" (click)="Save()" class="btn btn-primary btn-sm mr-1">Save</button>
-      <button [disabled]="loading" (click)="Return2Parent()" class="btn btn-primary btn-sm">Return</button>
+  <div class="page-body line-bottom">
+    <div class="my-1 mx-1">
+      <button [disabled]="loading" (click)="Save()" class="btn btn-success btn-sm mr-1">Save</button>
+      <button [disabled]="loading" (click)="Return2Parent()" class="btn btn-success btn-sm">Return</button>
     </div>
   </div>
 

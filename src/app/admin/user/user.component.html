@@ -1,168 +1,165 @@
 <div class="page-header">
   <div class="col">
     <label>{{title}}</label>
-    <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-primary btn-sm mx-1">List</button>
-    <button [disabled]="loading" (click)="ActionHandler('ADD','')" class="btn btn-primary btn-sm mr-1">New</button>
-    <button class="btn btn-primary btn-sm" (click)="Close()">Close</button>
+    <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-info btn-sm mx-1">List</button>
+    <button [disabled]="loading" (click)="ActionHandler('ADD','')" class="btn btn-info btn-sm mr-1">New</button>
+    <button class="btn btn-info btn-sm" (click)="Close()">Close</button>
     <i *ngIf="loading" class="fa fa-spinner"></i>
   </div>
 </div>
 
-<div *ngIf="currentTab=='LIST'" class="page-list">
+<div *ngIf="currentTab=='LIST'">
 
-  <div class="page-search">
+  <div class="page-body">
     <div class="row">
       <label class="col-2">Search</label>
       <div class="col">
         <input type="text" class="col form-control form-control-sm" name="Search" [(ngModel)]="searchstring" />
       </div>
       <div class="col">
-        <button [disabled]="loading" (click)="List('NEW')" class="btn btn-primary btn-sm">Search</button>
+        <button [disabled]="loading" (click)="List('NEW')" class="btn btn-info btn-sm">Search</button>
       </div>
     </div>
   </div>
 
-  <div class="page-pager">
-    <div *ngIf="page_count">
-      <ul class="pagination pagination-sm">
-        <li class="page-item"><a class="page-link" >Page {{page_current}}/{{page_count}} (Records-{{page_rowcount}})</a>
-        </li>
-        <li class="page-item"><a class="page-link" (click)="List('FIRST')"><span class="fa fa-backward"></span></a></li>
-        <li class="page-item"><a class="page-link" (click)="List('PREV')"><span class="fa fa-arrow-left"></span></a>
-        </li>
-        <li class="page-item"><a class="page-link" (click)="List('NEXT')"><span class="fa fa-arrow-right"></span></a>
-        </li>
-        <li class="page-item"><a class="page-link" (click)="List('LAST')"><span class="fa fa-forward"></span></a></li>
-      </ul>
+  <div *ngIf="page_count" class="page-pagination">
+    <ul class="pagination pagination-sm  my-1 mx-1">
+      <li class="page-item"><a class="page-link">Page {{page_current}}/{{page_count}} (Records-{{page_rowcount}})</a>
+      </li>
+      <li class="page-item"><a class="page-link" (click)="List('FIRST')"><span class="fa fa-backward"></span></a></li>
+      <li class="page-item"><a class="page-link" (click)="List('PREV')"><span class="fa fa-arrow-left"></span></a>
+      </li>
+      <li class="page-item"><a class="page-link" (click)="List('NEXT')"><span class="fa fa-arrow-right"></span></a>
+      </li>
+      <li class="page-item"><a class="page-link" (click)="List('LAST')"><span class="fa fa-forward"></span></a></li>
+    </ul>
+  </div>
+  <div class="page-body">
+    <div class="table-responsive fixedTableHead">
+      <table class="table table-hover table-sm table-bordered">
+        <thead class="page-body-thead">
+          <tr>
+            <th>LOGIN ID</th>
+            <th>NAME</th>
+            <th>EMAIL</th>
+            <th>TYPE</th>
+            <th>SALESMAN</th>
+            <th>BRANCH</th>
+            <th>SERVER</th>
+            <th>BR.USER</th>
+          </tr>
+        </thead>
+        <tbody class="page-body-tbody">
+          <tr *ngFor="let rec of RecordList" (click)="ActionHandler('EDIT',rec.user_pkid)">
+            <td>{{rec.user_code}}</td>
+            <td>{{rec.user_name}}</td>
+            <td>{{rec.user_email}}</td>
+            <td>{{rec.user_type_id}}</td>
+            <td>{{rec.user_sman_name}}</td>
+            <td>{{rec.user_branch_name}}</td>
+            <td>{{rec.user_local_server}}</td>
+            <td>{{rec.user_branch_user ? 'YES' : 'NO'}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-
-  <div class="page-body table-responsive">
-    <table class="table  table-hover table-sm">
-      <thead class="page-body-thead">
-        <tr>
-          <th>LOGIN ID</th>
-          <th>NAME</th>
-          <th>EMAIL</th>
-          <th>TYPE</th>
-          <th>SALESMAN</th>
-          <th>BRANCH</th>
-          <th>SERVER</th>
-          <th>BR.USER</th>
-        </tr>
-      </thead>
-      <tbody class="page-body-tbody" *ngFor="let rec of RecordList">
-        <tr (click)="ActionHandler('EDIT',rec.user_pkid)">
-          <td>{{rec.user_code}}</td>
-          <td>{{rec.user_name}}</td>
-          <td>{{rec.user_email}}</td>
-          <td>{{rec.user_type_id}}</td>
-          <td>{{rec.user_sman_name}}</td>
-          <td>{{rec.user_branch_name}}</td>
-          <td>{{rec.user_local_server}}</td>
-          <td>{{rec.user_branch_user ? 'YES' : 'NO'}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="page-pager">
-    <div *ngIf="page_count">
-      <ul class="pagination pagination-sm">
-        <li class="page-item"><a class="page-link">Page {{page_current}}/{{page_count}} (Records-{{page_rowcount}})</a>
-        </li>
-        <li class="page-item"><a class="page-link" (click)="List('FIRST')"><span class="fa fa-backward"></span></a></li>
-        <li class="page-item"><a class="page-link" (click)="List('PREV')"><span class="fa fa-arrow-left"></span></a>
-        </li>
-        <li class="page-item"><a class="page-link" (click)="List('NEXT')"><span class="fa fa-arrow-right"></span></a>
-        </li>
-        <li class="page-item"><a class="page-link" (click)="List('LAST')"><span class="fa fa-forward"></span></a></li>
-      </ul>
-    </div>
+  <div *ngIf="page_count" class="page-pagination line-bottom">
+    <ul class="pagination pagination-sm my-1 mx-1">
+      <li class="page-item"><a class="page-link">Page {{page_current}}/{{page_count}} (Records-{{page_rowcount}})</a>
+      </li>
+      <li class="page-item"><a class="page-link" (click)="List('FIRST')"><span class="fa fa-backward"></span></a></li>
+      <li class="page-item"><a class="page-link" (click)="List('PREV')"><span class="fa fa-arrow-left"></span></a>
+      </li>
+      <li class="page-item"><a class="page-link" (click)="List('NEXT')"><span class="fa fa-arrow-right"></span></a>
+      </li>
+      <li class="page-item"><a class="page-link" (click)="List('LAST')"><span class="fa fa-forward"></span></a></li>
+    </ul>
   </div>
 </div>
 
 
+
 <div *ngIf="currentTab=='DETAILS'" class="page-details">
-
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="form-group row">
-        <label class="col-3 col-form-label col-form-label-sm">Login ID</label>
-        <div class="col-9">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.user_code" required
-            maxlength="15" />
+  <div class="page-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label class="col-3 col-form-label col-form-label-sm">Login ID</label>
+          <div class="col-9">
+            <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.user_code" required
+              maxlength="15" />
+          </div>
         </div>
-      </div>
 
-      <div class="form-group row">
-        <label class="col-3 col-form-label  col-form-label-sm">Name</label>
-        <div class="col-9">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.user_name" required
-            maxlength="30" />
+        <div class="form-group row">
+          <label class="col-3 col-form-label  col-form-label-sm">Name</label>
+          <div class="col-9">
+            <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.user_name" required
+              maxlength="30" />
+          </div>
         </div>
-      </div>
 
-      <div class="form-group row">
-        <label class="col-3 col-form-label  col-form-label-sm">Password</label>
-        <div class="col-9">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.user_password" required
-            maxlength="50" />
+        <div class="form-group row">
+          <label class="col-3 col-form-label  col-form-label-sm">Password</label>
+          <div class="col-9">
+            <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.user_password" required
+              maxlength="50" />
+          </div>
         </div>
-      </div>
 
-      <div class="form-group row">
-        <label class="col-3 col-form-label  col-form-label-sm">Email</label>
-        <div class="col-9">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.user_email" required
-            maxlength="100" />
+        <div class="form-group row">
+          <label class="col-3 col-form-label  col-form-label-sm">Email</label>
+          <div class="col-9">
+            <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.user_email" required
+              maxlength="100" />
+          </div>
         </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-3 col-form-label  col-form-label-sm">Email.Password</label>
-        <div class="col-9">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.user_email_pwd" required
-            maxlength="50" />
+        <div class="form-group row">
+          <label class="col-3 col-form-label  col-form-label-sm">Email.Password</label>
+          <div class="col-9">
+            <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.user_email_pwd" required
+              maxlength="50" />
+          </div>
         </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-3 col-form-label col-form-label-sm">Salesman</label>
-        <div class="col-9">
-          <app-autocomplete #smanLov [inputdata]="SALESMANRECORD"
-            (ValueChanged)="LovSelected($event)"></app-autocomplete>
+        <div class="form-group row">
+          <label class="col-3 col-form-label col-form-label-sm">Salesman</label>
+          <div class="col-9">
+            <app-autocomplete #smanLov [inputdata]="SALESMANRECORD"
+              (ValueChanged)="LovSelected($event)"></app-autocomplete>
+          </div>
         </div>
-      </div>
 
-      <div class="form-group row">
-        <label class="col-3 col-form-label  col-form-label-sm">Local Server</label>
-        <div class="col-9">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.user_local_server" required
-            maxlength="250" />
+        <div class="form-group row">
+          <label class="col-3 col-form-label  col-form-label-sm">Local Server</label>
+          <div class="col-9">
+            <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.user_local_server" required
+              maxlength="250" />
+          </div>
         </div>
-      </div>
 
 
-      <div class="form-group row">
-        <label class="col-3 col-form-label  col-form-label-sm">Type</label>
-        <div class="col-9">
-          <select class="form-control form-control-sm" [(ngModel)]="Record.user_type_id">
-            <option *ngFor="let itm of data_list" [value]="itm.code">{{itm.name}}</option>
-          </select>
+        <div class="form-group row">
+          <label class="col-3 col-form-label  col-form-label-sm">Type</label>
+          <div class="col-9">
+            <select class="form-control form-control-sm" [(ngModel)]="Record.user_type_id">
+              <option *ngFor="let itm of data_list" [value]="itm.code">{{itm.name}}</option>
+            </select>
+          </div>
         </div>
-      </div>
 
 
-      <div class="form-group row">
-        <label class="col-3 col-form-label col-form-label-sm">Customer Group</label>
-        <div class="col-9">
-          <app-autocomplete #CustGrpLov [inputdata]="CUSTGROUPRECORD"
-            (ValueChanged)="LovSelected($event)"></app-autocomplete>
+        <div class="form-group row">
+          <label class="col-3 col-form-label col-form-label-sm">Customer Group</label>
+          <div class="col-9">
+            <app-autocomplete #CustGrpLov [inputdata]="CUSTGROUPRECORD"
+              (ValueChanged)="LovSelected($event)"></app-autocomplete>
+          </div>
         </div>
-      </div>
 
 
 
-      <!-- <div class="form-group row">
+        <!-- <div class="form-group row">
         <label class="col-3 col-form-label  col-form-label-sm"></label>
         <div class="col-9">
           <div class="form-check">
@@ -172,58 +169,55 @@
         </div>
       </div> -->
 
-    </div>
-
-    <div class="col-sm-6">
-
-      <div class="row border p-1">
-        <button class="btn btn-info btn-sm mx-1" [ngClass]="{'btn-danger' : subItem=='branch' }"
-          (click)="changeView('branch')">Branches</button>
-
       </div>
 
+      <div class="col-sm-6">
 
-      <div class="row border p-1" *ngIf="subItem=='branch'">
-        <div class="table-responsive">
-          <table class="table   table-hover table-sm table-bordered">
-            <thead class="page-body-thead">
-              <tr>
-                <th>SELECTED</th>
-                <th>DEFAULT</th>
-                <th>BRANCH</th>
-              </tr>
-            </thead>
-            <tbody class="page-body-tbody" *ngFor="let rec of RecordDet">
-              <tr>
-                <td><input type="checkbox" [(ngModel)]="rec.user_selected" /></td>
-                <td><input type="checkbox" [(ngModel)]="rec.user_default_branch_id" /></td>
-                <td>{{rec.user_branch_name}}</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="row border p-1">
+          <button class="btn btn-info btn-sm mx-1" [ngClass]="{'btn-info' : subItem=='branch' }"
+            (click)="changeView('branch')">Branches</button>
+
         </div>
+
+
+        <div class="page-body line-bottom p-1" *ngIf="subItem=='branch'">
+          <div class="table-responsive fixedTableHead">
+            <table class="table table-hover table-sm table-bordered">
+              <thead class="page-body-thead">
+                <tr>
+                  <th>SELECTED</th>
+                  <th>DEFAULT</th>
+                  <th>BRANCH</th>
+                </tr>
+              </thead>
+              <tbody class="page-body-tbody" >
+                <tr *ngFor="let rec of RecordDet">
+                  <td><input type="checkbox" [(ngModel)]="rec.user_selected" /></td>
+                  <td><input type="checkbox" [(ngModel)]="rec.user_default_branch_id" /></td>
+                  <td>{{rec.user_branch_name}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
       </div>
 
-
-
-
-
     </div>
-
   </div>
-
-
-
 </div>
 
 <div *ngIf="currentTab=='DETAILS'" class="page-details">
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="form-group row">
-        <div class="offset-2 col-10">
-          <button [disabled]="loading" (click)="Save()" class="btn btn-primary btn-sm mr-1">Save</button>
-          <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-primary btn-sm">Return</button>
-          <i *ngIf="loading" class="fa fa-spinner"></i>
+  <div class="page-body line-bottom">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <div class="offset-2 col-10">
+            <button [disabled]="loading" (click)="Save()" class="btn btn-success btn-sm mr-1">Save</button>
+            <button [disabled]="loading" (click)="ActionHandler('LIST','')"
+              class="btn btn-success btn-sm">Return</button>
+            <i *ngIf="loading" class="fa fa-spinner"></i>
+          </div>
         </div>
       </div>
     </div>

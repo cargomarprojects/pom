@@ -1,9 +1,9 @@
 <div class="page-header">
   <div class="col">
     <label>{{title}}</label>
-    <button (click)="ActionHandler('LIST','')" class="btn btn-primary btn-sm mr-1">List</button>
-    <button (click)="ActionHandler('ADD','')" class="btn btn-primary btn-sm mr-1">New</button>
-    <button class="btn btn-primary btn-sm" (click)="Close()">Return</button>
+    <button (click)="ActionHandler('LIST','')" class="btn btn-info btn-sm mr-1">List</button>
+    <button (click)="ActionHandler('ADD','')" class="btn btn-info btn-sm mr-1">New</button>
+    <button class="btn btn-info btn-sm" (click)="Close()">Return</button>
   </div>
 </div>
 
@@ -45,15 +45,15 @@
         <input type="text" class="col form-control form-control-sm" name="Search" [(ngModel)]="searchstring" />
       </div>
       <div class="col">
-        <button (click)="List('NEW')" class="btn btn-primary btn-sm mr-1">Search</button>
-        <button *ngIf="bAdmin2" (click)="List('EXCEL')" class="btn btn-primary btn-sm">EXCEL</button>
+        <button (click)="List('NEW')" class="btn btn-info btn-sm mr-1">Search</button>
+        <button *ngIf="bAdmin2" (click)="List('EXCEL')" class="btn btn-info btn-sm">EXCEL</button>
       </div>
     </div>
   </div>
 
   <div class="page-pagination">
     <div *ngIf="page_count">
-      <ul class="pagination pagination-sm">
+      <ul class="pagination pagination-sm my-1 mx-1">
         <li class="page-item"><a class="page-link">Page {{page_current}}/{{page_count}} (Records-{{page_rowcount}})</a>
         </li>
         <li class="page-item"><a class="page-link" (click)="List('FIRST')"><span class="fa fa-backward"></span></a></li>
@@ -106,7 +106,7 @@
 
   <div class="page-pagination line-bottom">
     <div *ngIf="page_count">
-      <ul class="pagination pagination-sm">
+      <ul class="pagination pagination-sm my-1 mx-1">
         <li class="page-item"><a class="page-link">Page {{page_current}}/{{page_count}} (Records-{{page_rowcount}})</a>
         </li>
         <li class="page-item"><a class="page-link" (click)="List('FIRST')"><span class="fa fa-backward"></span></a></li>
@@ -251,7 +251,7 @@
         </div>
 
         <div class="page-body line-bottom">
-          <div class="col">
+          <div class="col my-1 mx-1 ">
             <button [hidden]="disableSave" (click)="Save()" class="btn btn-success btn-sm mr-1">Save</button>
             <button (click)="ActionHandler('LIST','')" class="btn btn-success btn-sm mr-1">Return</button>
             <button *ngIf="mode == 'EDIT'" (click)="ShowHistory(history)"
@@ -271,12 +271,6 @@
   </ngb-tabset>
 </div>
 <br />
-
-
-
-
-
-
 
 
 <div *ngIf="InfoMessage" class="alert alert-success">

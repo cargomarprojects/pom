@@ -24,8 +24,8 @@
           <th *ngIf="bDelete" width="4%">DELETE</th>
         </tr>
       </thead>
-      <tbody class="page-body-tbody" *ngFor="let rec of RecordList">
-        <tr>
+      <tbody class="page-body-tbody" >
+        <tr *ngFor="let rec of RecordList">
           <td (click)="ActionHandler('EDIT',rec)">{{rec.add_branch_slno}}</td>
           <td (click)="ActionHandler('EDIT',rec)">{{rec.add_contact}}</td>
           <td (click)="ActionHandler('EDIT',rec)">{{rec.add_tel}}</td>
