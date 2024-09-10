@@ -148,3 +148,17 @@ i {
   top: 0;
   background-color: steelblue;
 }
+
+.hlink {
+  color: chocolate;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.modal-custom {
+  margin: auto;
+  width: 50%;
+  height: 50%;
+  top: 50%;
+  left: 50%;
+}
