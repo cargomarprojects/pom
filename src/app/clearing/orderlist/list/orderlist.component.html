@@ -206,8 +206,8 @@
 <div class="page-body" *ngIf="ms.ord_list_type=='SUMMARY'">
   <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 380px);">
     <table class="table table-hover table-sm table-bordered">
-      <thead class="page-body-thead">
-        <tr>
+      <thead class="table-success">
+        <tr class="table-header">
           <th><input type="checkbox" [(ngModel)]="ms.selectcheck" (change)="SelectCheckbox(ms.selectcheck)"></th>
           <th>EDIT</th>
           <th>DATE</th>
@@ -223,7 +223,7 @@
       </thead>
       <tbody class="page-body-tbody">
         <tr *ngFor="let rec of ms.record.records" (mousedown)="ms.selectRowId(rec.ord_header_id)"
-          [class.active]="rec.ord_header_id == ms.getRowId()">
+          [ngClass]="{'table-info':rec.ord_header_id == ms.getRowId()}">
           <td><input type="checkbox" [(ngModel)]="rec.ord_selected" (change)="handleChange(rec)"></td>
           <td (click)="ActionHandler('EDIT',rec.ord_header_id)" class="hlink"><i class="fa fa-pencil"></i></td>
           <td>{{rec.ord_date}}</td>
@@ -436,7 +436,8 @@
     </button>
   </div> -->
   <div class="modal-body">
-    <app-upload [pkid]="mblid" [groupid]="hblids" [type]="'MBL-DOCUMENTS'" [canupload]=false (closeModalWindow)="CloseModal2($event)"></app-upload>
+    <app-upload [pkid]="mblid" [groupid]="hblids" [type]="'MBL-DOCUMENTS'" [canupload]=false
+      (closeModalWindow)="CloseModal2($event)"></app-upload>
   </div>
   <!-- <div class="modal-footer">
       <button type="button" class="btn btn-outline-light" (click)="c('Close click')">Close</button>

@@ -146,7 +146,7 @@ i {
 .fixedTableHead thead th {
   position: sticky;
   top: 0;
-  background-color: steelblue;
+  /* background-color: steelblue; */
 }
 
 .hlink {
