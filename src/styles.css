@@ -187,3 +187,10 @@ i {
   max-width: 1200px !important;
 }
 
+.jumbotron {
+  background-image: url("./assets/images/home.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 350px;
+}
