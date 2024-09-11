@@ -1,5 +1,5 @@
 <div *ngIf="page_count">
-    <div class="page-box">
+    <div class="page-pagination">
         <ul class="pagination pagination-sm my-1 mx-1">
             <li class="page-item"><a class="page-link">Page
                     {{page_current}}/{{page_count}}
@@ -16,7 +16,7 @@
         </ul>
     </div>
 </div>
-<div class="page-box py-2">
+<div class="page-body {{page_count<=0?'line-bottom':''}}">
     <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 338px);">
         <table class="table table-hover table-sm table-bordered">
             <thead class="page-body-thead">
@@ -31,8 +31,8 @@
                 </tr>
             </thead>
             <tbody class="page-body-tbody">
-                <tr *ngFor="let rec of RecordList" [style.color]="rec.uh_row_color" (mousedown)="selectRowId(rec.uh_pkid)"
-                    [class.active]="rec.uh_pkid == getRowId()">
+                <tr *ngFor="let rec of RecordList" [style.color]="rec.uh_row_color"
+                    (mousedown)="selectRowId(rec.uh_pkid)" [class.active]="rec.uh_pkid == getRowId()">
                     <td>{{rec.rec_created_by}}</td>
                     <td>{{rec.rec_created_date}}</td>
                     <td>{{rec.uh_caption}}</td>
@@ -46,7 +46,7 @@
     </div>
 </div>
 <div *ngIf="page_count">
-    <div class="page-box">
+    <div class="page-pagination line-bottom">
         <ul class="pagination pagination-sm my-1 mx-1">
             <li class="page-item"><a class="page-link">Page
                     {{page_current}}/{{page_count}}

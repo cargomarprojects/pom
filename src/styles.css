@@ -174,3 +174,8 @@ i {
   border: 0px solid black;
 }
 
+.ulcenter {
+  justify-content: center;
+  display: flex;
+}
+
