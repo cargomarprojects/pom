@@ -179,3 +179,11 @@ i {
   display: flex;
 }
 
+.modal-dialog {
+  position: relative;
+  overflow-y: auto;
+  overflow-x: auto;
+  width: auto;
+  max-width: 1200px !important;
+}
+
