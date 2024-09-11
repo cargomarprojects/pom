@@ -1,10 +1,8 @@
 <div class="page-header">
-  <div class="col">
-    <label>{{title}}</label>
-    <button (click)="ActionHandler('LIST','')" class="btn btn-info btn-sm mx-1">List</button>
-    <button (click)="ActionHandler('ADD','')" class="btn btn-info btn-sm mr-1">New</button>
-    <button class="btn btn-info btn-sm" (click)="Close()">Return</button>
-  </div>
+  <h5>{{title}}</h5>
+  <button (click)="ActionHandler('LIST','')" class="btn btn-info btn-sm">List</button>
+  <button (click)="ActionHandler('ADD','')" class="btn btn-info btn-sm">New</button>
+  <button class="btn btn-info btn-sm" (click)="Close()">Return</button>
 </div>
 
 <div *ngIf="currentTab=='LIST'" class="page-list">

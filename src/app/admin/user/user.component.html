@@ -1,11 +1,9 @@
 <div class="page-header">
-  <div class="col">
-    <label>{{title}}</label>
-    <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-info btn-sm mx-1">List</button>
-    <button [disabled]="loading" (click)="ActionHandler('ADD','')" class="btn btn-info btn-sm mr-1">New</button>
-    <button class="btn btn-info btn-sm" (click)="Close()">Close</button>
-    <i *ngIf="loading" class="fa fa-spinner"></i>
-  </div>
+  <h5>{{title}}</h5>
+  <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-info btn-sm">List</button>
+  <button [disabled]="loading" (click)="ActionHandler('ADD','')" class="btn btn-info btn-sm">New</button>
+  <button class="btn btn-info btn-sm" (click)="Close()">Close</button>
+  <i *ngIf="loading" class="fa fa-spinner"></i>
 </div>
 
 <div *ngIf="currentTab=='LIST'">
@@ -85,54 +83,54 @@
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group row">
-          <label class="col-3 col-form-label col-form-label-sm">Login ID</label>
-          <div class="col-9">
+          <label class="col-sm-3 col-form-label col-form-label-sm">Login ID</label>
+          <div class="col-sm-9">
             <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.user_code" required
               maxlength="15" />
           </div>
         </div>
 
         <div class="form-group row">
-          <label class="col-3 col-form-label  col-form-label-sm">Name</label>
-          <div class="col-9">
+          <label class="col-sm-3 col-form-label  col-form-label-sm">Name</label>
+          <div class="col-sm-9">
             <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.user_name" required
               maxlength="30" />
           </div>
         </div>
 
         <div class="form-group row">
-          <label class="col-3 col-form-label  col-form-label-sm">Password</label>
-          <div class="col-9">
+          <label class="col-sm-3 col-form-label  col-form-label-sm">Password</label>
+          <div class="col-sm-9">
             <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.user_password" required
               maxlength="50" />
           </div>
         </div>
 
         <div class="form-group row">
-          <label class="col-3 col-form-label  col-form-label-sm">Email</label>
-          <div class="col-9">
+          <label class="col-sm-3 col-form-label  col-form-label-sm">Email</label>
+          <div class="col-sm-9">
             <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.user_email" required
               maxlength="100" />
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-3 col-form-label  col-form-label-sm">Email.Password</label>
-          <div class="col-9">
+          <label class="col-sm-3 col-form-label  col-form-label-sm">Email.Password</label>
+          <div class="col-sm-9">
             <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.user_email_pwd" required
               maxlength="50" />
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-3 col-form-label col-form-label-sm">Salesman</label>
-          <div class="col-9">
+          <label class="col-sm-3 col-form-label col-form-label-sm">Salesman</label>
+          <div class="col-sm-9">
             <app-autocomplete #smanLov [inputdata]="SALESMANRECORD"
               (ValueChanged)="LovSelected($event)"></app-autocomplete>
           </div>
         </div>
 
         <div class="form-group row">
-          <label class="col-3 col-form-label  col-form-label-sm">Local Server</label>
-          <div class="col-9">
+          <label class="col-sm-3 col-form-label  col-form-label-sm">Local Server</label>
+          <div class="col-sm-9">
             <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.user_local_server" required
               maxlength="250" />
           </div>
@@ -140,8 +138,8 @@
 
 
         <div class="form-group row">
-          <label class="col-3 col-form-label  col-form-label-sm">Type</label>
-          <div class="col-9">
+          <label class="col-sm-3 col-form-label  col-form-label-sm">Type</label>
+          <div class="col-sm-9">
             <select class="form-control form-control-sm" [(ngModel)]="Record.user_type_id">
               <option *ngFor="let itm of data_list" [value]="itm.code">{{itm.name}}</option>
             </select>
@@ -150,8 +148,8 @@
 
 
         <div class="form-group row">
-          <label class="col-3 col-form-label col-form-label-sm">Customer Group</label>
-          <div class="col-9">
+          <label class="col-sm-3 col-form-label col-form-label-sm">Customer Group</label>
+          <div class="col-sm-9">
             <app-autocomplete #CustGrpLov [inputdata]="CUSTGROUPRECORD"
               (ValueChanged)="LovSelected($event)"></app-autocomplete>
           </div>
@@ -173,14 +171,14 @@
 
       <div class="col-sm-6">
 
-        <div class="row border p-1">
-          <button class="btn btn-info btn-sm mx-1" [ngClass]="{'btn-info' : subItem=='branch' }"
+        <div class="page-body">
+          <button class="btn btn-info btn-sm my-1 mx-1" [ngClass]="{'btn-info' : subItem=='branch' }"
             (click)="changeView('branch')">Branches</button>
 
         </div>
 
 
-        <div class="page-body line-bottom p-1" *ngIf="subItem=='branch'">
+        <div class="page-body line-bottom" *ngIf="subItem=='branch'">
           <div class="table-responsive fixedTableHead">
             <table class="table table-hover table-sm table-bordered">
               <thead class="page-body-thead">
@@ -190,7 +188,7 @@
                   <th>BRANCH</th>
                 </tr>
               </thead>
-              <tbody class="page-body-tbody" >
+              <tbody class="page-body-tbody">
                 <tr *ngFor="let rec of RecordDet">
                   <td><input type="checkbox" [(ngModel)]="rec.user_selected" /></td>
                   <td><input type="checkbox" [(ngModel)]="rec.user_default_branch_id" /></td>
@@ -212,7 +210,7 @@
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group row">
-          <div class="offset-2 col-10">
+          <div class="offset-3 col-sm-9">
             <button [disabled]="loading" (click)="Save()" class="btn btn-success btn-sm mr-1">Save</button>
             <button [disabled]="loading" (click)="ActionHandler('LIST','')"
               class="btn btn-success btn-sm">Return</button>

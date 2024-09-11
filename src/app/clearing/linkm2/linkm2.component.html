@@ -1,14 +1,12 @@
 <div class="page-header" *ngIf="showheader">
-  <div class="col">
-    <label>{{title}}</label>
-    <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-primary btn-sm mx-1">List</button>
-    <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Close</button>
-  </div>
+  <h5>{{title}}</h5>
+  <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-info btn-sm">List</button>
+  <button class="btn btn-info btn-sm" (click)="Close()">Close</button>
 </div>
 
 <div *ngIf="currentTab=='LIST'" class="page-list">
 
-  <div class="page-search">
+  <div class="page-body">
     <div class="row">
 
       <div class="col-sm-4">
@@ -17,7 +15,7 @@
           <label class="col-3 col-form-label col-form-label-sm">Partner</label>
           <div class="col-9">
             <select class="form-control form-control-sm" [(ngModel)]="link_sender">
-              <option  *ngFor="let rec of TradingPartners" value="{{rec.param_code}}">{{rec.param_code}}</option>
+              <option *ngFor="let rec of TradingPartners" value="{{rec.param_code}}">{{rec.param_code}}</option>
             </select>
           </div>
         </div>
@@ -89,7 +87,7 @@
       <div class="col-sm-4">
         <div class="form-group row">
           <div class="col-9 offset-3">
-            <button (click)="List('NEW')" class="btn btn-primary btn-sm">Search</button>
+            <button (click)="List('NEW')" class="btn btn-info btn-sm">Search</button>
           </div>
         </div>
       </div>
@@ -99,60 +97,60 @@
     </div>
   </div>
 
-
-  <div class="page-body table-responsive">
-    <table class="table  table-hover table-sm">
-      <thead class="page-body-thead">
-        <tr>
-          <th>TRADING-PARTNER</th>
-          <th>TYPE</th>
-          <th>CATEGORY</th>
-          <th>SUB-CATEGORY</th>
-          <th>SOURCE-NAME</th>
-          <th>LINK-TYPE</th>
-          <th>TARGET-ID</th>
-          <th>TARGET-NAME</th>
-          <th>LINKED</th>
-          <th>REMOVE</th>
-        </tr>
-      </thead>
-      <tbody class="page-body-tbody" *ngFor="let rec of RecordList">
-        <tr >
-          <td (click)="ActionHandler('EDIT',rec.link_pkid)" class="hlink" >{{rec.link_messagesender}}</td>
-          <td>{{rec.link_type}}</td>
-          <td>{{rec.link_category}}</td>
-          <td>{{rec.link_subcategory}}</td>
-          <td (click)="ActionHandler('EDIT',rec.link_pkid)" class="undline" >{{rec.link_source_name}}</td>
-          <td>{{rec.link_mode}}</td>
-          <td>{{rec.link_target_id}}</td>
-          <td>{{rec.link_target_name}}</td>
-          <td>{{rec.link_status}}</td>          
-          <td>
-            <span>
-              <App-Dialog
-                [id]="{msg:'Remove Linking Y/N', buttons:'yn', selected :false,id:rec.link_pkid,name:rec.link_source_name}"
-                (result)="RemoveList($event)"></App-Dialog>
-            </span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="page-body line-bottom">
+    <div class="table-responsive  fixedTableHead  ">
+      <table class="table  table-hover table-sm table-bordered">
+        <thead class="page-body-thead">
+          <tr>
+            <th>TRADING-PARTNER</th>
+            <th>TYPE</th>
+            <th>CATEGORY</th>
+            <th>SUB-CATEGORY</th>
+            <th>SOURCE-NAME</th>
+            <th>LINK-TYPE</th>
+            <th>TARGET-ID</th>
+            <th>TARGET-NAME</th>
+            <th>LINKED</th>
+            <th>REMOVE</th>
+          </tr>
+        </thead>
+        <tbody class="page-body-tbody" *ngFor="let rec of RecordList">
+          <tr>
+            <td (click)="ActionHandler('EDIT',rec.link_pkid)" class="hlink">{{rec.link_messagesender}}</td>
+            <td>{{rec.link_type}}</td>
+            <td>{{rec.link_category}}</td>
+            <td>{{rec.link_subcategory}}</td>
+            <td (click)="ActionHandler('EDIT',rec.link_pkid)" class="undline">{{rec.link_source_name}}</td>
+            <td>{{rec.link_mode}}</td>
+            <td>{{rec.link_target_id}}</td>
+            <td>{{rec.link_target_name}}</td>
+            <td>{{rec.link_status}}</td>
+            <td>
+              <span>
+                <App-Dialog
+                  [id]="{msg:'Remove Linking Y/N', buttons:'yn', selected :false,id:rec.link_pkid,name:rec.link_source_name}"
+                  (result)="RemoveList($event)"></App-Dialog>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-
 
 </div>
 
 
 <div *ngIf="currentTab=='DETAILS'" class="page-details">
 
-  <div class="page-box">
+  <div class="page-body">
 
     <div class="row">
 
       <div class="col-sm-6">
 
         <div class="form-group row">
-          <label class="col-2 col-form-label col-form-label-sm" >Group</label>
+          <label class="col-2 col-form-label col-form-label-sm">Group</label>
           <div class="col-10">
             <input type="text" disabled class="form-control form-control-sm" [(ngModel)]="Record.link_messagesender" />
           </div>
@@ -185,9 +183,9 @@
 
             <label class="col-2 col-form-label col-form-label-sm">Target</label>
             <div class="col-10">
-             <app-autocomplete2 [controlname]="controlname" [tabletype]="tabletype" [tabletype]="subtype" [displaycolumn]="'NAME'"
-              [displaydata]="displaydata" (ValueChanged)="LovSelected($event)" >
-            </app-autocomplete2>
+              <app-autocomplete2 [controlname]="controlname" [tabletype]="tabletype" [tabletype]="subtype"
+                [displaycolumn]="'NAME'" [displaydata]="displaydata" (ValueChanged)="LovSelected($event)">
+              </app-autocomplete2>
 
 
 
@@ -213,7 +211,7 @@
 
   </div>
 
-  <div class="page-box">
+  <div class="page-body line-bottom">
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group row">

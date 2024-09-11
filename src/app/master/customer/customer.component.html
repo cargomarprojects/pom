@@ -1,10 +1,8 @@
-<div class="page-header">
-  <div class="col">
-    <label>{{title}}</label>
-    <button (click)="ActionHandler('LIST','')" class="btn btn-info btn-sm mr-1">List</button>
-    <button (click)="ActionHandler('ADD','')" class="btn btn-info btn-sm mr-1">New</button>
-    <button class="btn btn-info btn-sm" (click)="Close()">Return</button>
-  </div>
+<div class="page-header {{currentTab=='DETAILS'?'line-bottom':''}}">
+  <h5>{{title}}</h5>
+  <button (click)="ActionHandler('LIST','')" class="btn btn-info btn-sm">List</button>
+  <button (click)="ActionHandler('ADD','')" class="btn btn-info btn-sm">New</button>
+  <button class="btn btn-info btn-sm" (click)="Close()">Return</button>
 </div>
 
 <div *ngIf="currentTab=='LIST'" class="page-list">
@@ -241,8 +239,6 @@
 
         </div>
 
-
-
         <div class="page-body">
           <app-addressm #addressComponent [RecordList]="Record.AddressList" [StateList]="StateList"
             [CountryList]="CountryList" [customer_id]="pkid" [bAdmin]="bAdmin2" [bDelete]="bDelete"
@@ -252,7 +248,7 @@
 
         <div class="page-body line-bottom">
           <div class="form-group row">
-            <div class="col">
+            <div class="col-sm my-1">
               <button [hidden]="disableSave" (click)="Save()" class="btn btn-success btn-sm mr-1">Save</button>
               <button (click)="ActionHandler('LIST','')" class="btn btn-success btn-sm mr-1">Return</button>
               <button *ngIf="mode == 'EDIT'" (click)="ShowHistory(history)"

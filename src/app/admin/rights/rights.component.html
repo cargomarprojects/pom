@@ -1,10 +1,7 @@
 <div class="page-header">
-  <div class="col">
-    <label class="col-form-label">{{title}}</label>
-    <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-info btn-sm mx-1">List</button>
-    <button class="btn btn-info btn-sm" (click)="Close()">Close</button>
-
-  </div>
+  <h5>{{title}}</h5>
+  <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-info btn-sm">List</button>
+  <button class="btn btn-info btn-sm" (click)="Close()">Close</button>
 </div>
 
 <div *ngIf="currentTab=='LIST'">
@@ -79,7 +76,7 @@
       <div class="form-group row">
         <label class="col-2 col-form-label col-form-label-sm mr-5">Module</label>
         <div *ngFor="let rec of ModuleList">
-          <button [disabled]="loading" class="btn btn-info btn-sm mx-1"
+          <button [disabled]="loading" class="btn btn-info btn-sm mr-1"
             (click)="module_name=rec.module_name">{{rec.module_name}}</button>
           <span>&nbsp;</span>
         </div>
@@ -131,12 +128,13 @@
   </div>
 
   <div class="page-body line-bottom">
-    <div class="my-1 mx-1">
-      <button [disabled]="loading" (click)="Save()" class="btn btn-success btn-sm mr-1">Save</button>
-      <button [disabled]="loading" (click)="Return2Parent()" class="btn btn-success btn-sm">Return</button>
+    <div class="form-group row">
+      <div class="col-sm my-1 mx-1">
+        <button [disabled]="loading" (click)="Save()" class="btn btn-success btn-sm mr-1">Save</button>
+        <button [disabled]="loading" (click)="Return2Parent()" class="btn btn-success btn-sm">Return</button>
+      </div>
     </div>
   </div>
-
 </div>
 
 <div *ngIf="ErrorMessage" class="alert alert-info">
