@@ -20,8 +20,8 @@
 <div class="page-body {{canupload?'':'line-bottom'}}">
   <div class="table-responsive fixedTableHead  my-0 p-0">
     <table class="table table-hover table-sm table-bordered">
-      <thead class="page-body-thead">
-        <tr>
+      <thead class="table-success">
+        <tr class="table-header">
           <th>DOWNLOAD</th>
           <th>UPLOAD-BY</th>
           <th>UPLOAD-DATE</th>
@@ -34,8 +34,7 @@
         </tr>
       </thead>
       <tbody class="page-body-tbody" *ngFor="let rec of RecordList; let i = index">
-        <tr (mousedown)="selectRowId(rec.doc_pkid)" [class.active]="rec.doc_pkid == getRowId()"
-          [style.background-color]="i%2==0?'#D3D3D3':'rgba(0, 0, 0, .125)'">
+        <tr (mousedown)="selectRowId(rec.doc_pkid)" [ngClass]="{'table-info':rec.doc_pkid == getRowId()}">
           <td><i class="fa fa-download fa-lg pointer" aria-hidden="true"
               (click)="ShowFile(rec.doc_full_name,rec.doc_file_name)"></i></td>
           <td>{{rec.rec_created_by}}</td>
