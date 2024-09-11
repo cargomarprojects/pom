@@ -171,8 +171,8 @@
 <div *ngIf="mode=='EDIT'" class="page-body">
   <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 290px);">
     <table class="table table-hover table-sm table-bordered">
-      <thead class="page-body-thead">
-        <tr>
+      <thead class="table-success">
+        <tr class="table-header">
           <th><input type="checkbox" (click)="SelectDeselect()" [(ngModel)]="ord_selected"></th>
           <th>UID</th>
           <th>STATUS</th>
@@ -210,7 +210,7 @@
         </tr>
       </thead>
       <tbody class="page-body-tbody" *ngFor="let rec of Record.OrderList; let i = index">
-        <tr (mousedown)="selectRowId(rec.ord_pkid)" [class.active]="rec.ord_pkid == getRowId()">
+        <tr (mousedown)="selectRowId(rec.ord_pkid)" [ngClass]="{'table-info':rec.ord_pkid == getRowId()}">
           <td><input type="checkbox" (change)="OnChange('ord_selected')" [(ngModel)]="rec.ord_selected"></td>
           <td>{{rec.ord_uid}}</td>
           <td>{{rec.ord_status}}</td>

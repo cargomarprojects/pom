@@ -12,8 +12,8 @@
     <div class="table-responsive fixedTableHead  my-0 p-0" [style.height]="RecordList.length>5?'264px':'auto'"
         [style.overflow-y]="RecordList.length>10?'scroll':'auto'">
         <table class="table table-hover table-sm table-bordered">
-            <thead class="page-body-thead">
-                <tr>
+            <thead class="table-success">
+                <tr class="table-header">
                     <th>SL#</th>
                     <th><span *ngIf="type=='SEA EXPORT'||type=='SEA IMPORT'">VESSEL.CODE</span><span
                             *ngIf="type=='AIR EXPORT'||type=='AIR IMPORT'">AIRLINE.CODE</span></th>
@@ -33,7 +33,7 @@
             </thead>
             <tbody class="page-body-tbody">
                 <tr *ngFor="let rec of RecordList; let i = index" (mousedown)="selectRowId(rec.trk_pkid)"
-                    [class.active]="rec.trk_pkid == getRowId()">
+                    [ngClass]="{'table-info':rec.trk_pkid == getRowId()}">
                     <td>{{i+1}}</td>
                     <td>{{rec.trk_vsl_code}}</td>
                     <td>{{rec.trk_vsl_name}}</td>

@@ -47,7 +47,8 @@
       <div class="form-group row">
         <label class="col-sm-4 col-form-label col-form-label-sm">{{ms.type=='SEA EXPORT'?'Vessel':'Airline'}}</label>
         <div class="col-sm-8">
-          <app-autocomplete3 [controlname]="'VESSEL'" [tabletype]="'PARAM'" [subtype]="ms.type=='SEA EXPORT'?'VESSEL':'AIR CARRIER'" [displaycolumn]="'NAME'"
+          <app-autocomplete3 [controlname]="'VESSEL'" [tabletype]="'PARAM'"
+            [subtype]="ms.type=='SEA EXPORT'?'VESSEL':'AIR CARRIER'" [displaycolumn]="'NAME'"
             [displaydata]="ms.record.searchQuery.list_vessel_name" (ValueChanged)="LovSelected($event)">
           </app-autocomplete3>
         </div>
@@ -103,9 +104,10 @@
 <div class="page-body">
   <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 345px);">
     <table class="table  table-hover table-sm table-bordered">
-      <thead class="page-body-thead">
-        <tr>
+      <thead class="table-success">
+        <tr class="table-header">
           <th>CF#</th>
+          <th>EDIT</th>
           <th>WEEK#</th>
           <th>DATE</th>
           <th>POL.AGENT</th>
@@ -125,8 +127,10 @@
       </thead>
       <tbody class="page-body-tbody">
         <tr *ngFor="let rec of ms.record.records" (mousedown)="ms.selectRowId(rec.vp_pkid)"
-          [class.active]="rec.vp_pkid == ms.getRowId()">
-          <td (click)="ActionHandler('EDIT',rec.vp_pkid)" class="hlink">{{rec.vp_plan_no}}</td>
+          [ngClass]="{'table-info':rec.vp_pkid == ms.getRowId()}">
+          <td>{{rec.vp_plan_no}}</td>
+          <td (click)="ActionHandler('EDIT',rec.vp_pkid)" class="hlink"><i class="fa fa-pencil"></i>
+          </td>
           <td>{{rec.vp_week_no}}</td>
           <td>{{rec.vp_plan_date}}</td>
           <td>{{rec.vp_pol_agent_name}}</td>

@@ -39,8 +39,8 @@
     <hr class="my-1">
     <div class="table-responsive fixedTableHead  my-0 p-0">
         <table class="table table-hover table-sm table-bordered">
-            <thead class="page-body-thead">
-                <tr>
+            <thead class="table-success">
+                <tr class="table-header">
                     <th width="10%">SL#</th>
                     <th width="20%">HOUSE#</th>
                     <th width="getWidth('DT-COL')">DATE</th>
@@ -50,7 +50,7 @@
             </thead>
             <tbody class="page-body-tbody">
                 <tr *ngFor="let rec of RecordList; let i = index" (mousedown)="selectRowId(rec.bl_pkid)"
-                    [class.active]="rec.bl_pkid == getRowId()">
+                    [ngClass]="{'table-info':rec.bl_pkid == getRowId()}">
                     <td class="hlink" (click)="ActionHandler('EDIT',rec.bl_pkid)">{{i+1}}</td>
                     <td>{{rec.bl_no}}</td>
                     <td style="text-transform:uppercase">{{rec.bl_date | date : gs.DATE_DISPLAY_FORMAT}}</td>
