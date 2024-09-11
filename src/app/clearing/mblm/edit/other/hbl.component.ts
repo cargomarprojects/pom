@@ -27,7 +27,7 @@ export class HblComponent {
     bDocs: boolean = false;
     bDelete: boolean = false;
     docGroupId: string = '';
-  
+
 
     private errorMessage: string[] = [];
 
@@ -348,6 +348,10 @@ export class HblComponent {
         }
 
         return _width;
+    }
+
+    CloseModal2(params: any) {
+        this.modal.close();
     }
 }
 
