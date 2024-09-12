@@ -65,6 +65,7 @@ export class LinkOrdHblCntrComponent {
             type: _type,
             rowtype: this.type,
             mblid: this.mblid,
+            orderid: this.orderid,
             company_code: this.gs.globalVariables.comp_code,
             branch_code: this.gs.globalVariables.branch_code,
             year_code: this.gs.globalVariables.year_code
@@ -138,21 +139,21 @@ export class LinkOrdHblCntrComponent {
         let bret: boolean = true;
         this.errorMessage = [];
         let bOk: boolean = false;
-        for (let rec of this.RecordList) {
-            if (rec.cntrd_selected) {
-                bOk = true;
-                break;
-            }
-        }
+        // for (let rec of this.RecordList) {
+        //     if (rec.cntrd_selected) {
+        //         bOk = true;
+        //         break;
+        //     }
+        // }
 
-        if (!bOk) {
-            bret = false;
-            this.errorMessage.push("No rows selected");
-        }
+        // if (!bOk) {
+        //     bret = false;
+        //     this.errorMessage.push("No rows selected");
+        // }
 
-        if (bret === false) {
-            this.gs.showToastScreen(this.errorMessage);
-        }
+        // if (bret === false) {
+        //     this.gs.showToastScreen(this.errorMessage);
+        // }
         return bret;
     }
 
