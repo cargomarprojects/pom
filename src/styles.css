@@ -194,3 +194,15 @@ i {
   background-size: contain;
   height: 350px;
 }
+
+hr {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  line-height: 1px;
+}
+
+/* .hr {
+  margin-top: 1px;
+  margin-bottom: 1px;
+} */
+ 
