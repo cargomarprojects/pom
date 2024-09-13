@@ -6,6 +6,7 @@ import { Blm } from '../../../../models/mblm';
 import { TrkService } from '../../../../services/trk.service';
 import { SearchTable } from '../../../../../shared/models/searchtable';
 import { Trackingm } from '../../../../models/tracking';
+import { Param } from '../../../../../master/models/param';
 
 @Component({
     selector: 'app-trk-edit',
@@ -25,7 +26,7 @@ export class TrkEditComponent {
     selectedId: string = '';
     loading = false;
     CntrTypes: string = "";
-
+    StatusList: Param[] = [];
     private errorMessage: string[] = [];
     ctr: number;
     // Array For Displaying List
@@ -45,6 +46,7 @@ export class TrkEditComponent {
     ngOnInit() {
         // this.List('NEW');
         this.ActionHandler(this.mode, this.pkid);
+        this.LoadDefault();
     }
 
     // Destroy Will be called when this component is closed
@@ -54,25 +56,21 @@ export class TrkEditComponent {
 
     LoadDefault() {
 
-        // this.loading = true;
-        // let SearchData = {
-        //   pkid: this.parentid,
-        //   comp_code: this.gs.globalVariables.comp_code,
-        //   branch_code: this.gs.globalVariables.branch_code,
+        this.loading = true;
+        let SearchData = {
+          comp_code: this.gs.globalVariables.comp_code,
+          branch_code: this.gs.globalVariables.branch_code,
+        };
 
-        // };
-
-        // this.ErrorMessage = '';
-        // this.InfoMessage = '';
-        // this.ms.LoadDefault(SearchData)
-        //   .subscribe(response => {
-        //     this.loading = false;
-        //   },
-        //     error => {
-        //       this.loading = false;
-        //       this.ErrorMessage = this.gs.getError(error);
-        //       alert(this.ErrorMessage);
-        //     });
+        this.ms.LoadDefault(SearchData)
+          .subscribe(response => {
+            this.loading = false;
+            this.StatusList = response.statuslist;
+          },
+            error => {
+              this.loading = false;
+              alert(this.gs.getError(error));
+            });
 
     }
 
@@ -209,6 +207,8 @@ export class TrkEditComponent {
         Rec.trk_vsl_count = 0;
         Rec.trk_si_cutoff = '';
         Rec.trk_cy_cutoff = '';
+        Rec.trk_status = 'ARRI';
+        Rec.trk_desc = 'POL';
         Rec.row_colour = 'darkslategray';
         this.Record.TransitList.push(Rec);
     }

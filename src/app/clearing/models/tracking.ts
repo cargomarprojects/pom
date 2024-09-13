@@ -34,7 +34,7 @@ export class Trackingm {
   row_colour:string;
   trk_si_cutoff: string;
   trk_cy_cutoff: string;
-
+  trk_status: string;
   _globalvariables: GlobalVariables;
 }
 

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../../../core/services/global.service';
 import { Trackingm } from '../../../../models/tracking';
 import { SearchTable } from '../../../../../shared/models/searchtable';
+import { Param } from '../../../../../master/models/param';
 
 @Component({
   selector: 'app-transit',
@@ -16,6 +17,7 @@ export class TransitComponent {
   @Input() public pkid: string = '';
   @Input() public type: string = '';
   @Input() mRecord: Trackingm = new Trackingm;
+  @Input() statuslist: Param[] = [];
 
   InitCompleted: boolean = false;
   menu_record: any;
