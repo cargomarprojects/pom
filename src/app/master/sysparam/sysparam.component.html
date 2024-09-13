@@ -1,7 +1,7 @@
 <div class="page-header">
   <h5>{{title}}</h5>
-  <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-info btn-sm mr-1">List</button>
-  <button class="btn btn-info btn-sm mr-1" (click)="Close()">Close</button>
+  <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-info btn-sm">List</button>
+  <button class="btn btn-info btn-sm" (click)="Close()">Close</button>
   <i *ngIf="loading" class="fa fa-spinner"></i>
 </div>
 
@@ -38,7 +38,7 @@
   </div>
 
   <div class="page-body">
-    <div class="table-responsive  fixedTableHead ">
+    <div class="table-responsive  fixedTableHead   my-0 p-0" style="height: calc(100vh - 228px);">
       <table class="table table-hover table-sm table-bordered">
         <thead class="page-body-thead">
           <tr>
@@ -129,7 +129,7 @@
   </div>
 
 </div>
-<br />
+<!-- <br /> -->
 
 <App-Wait [visible]="loading"></App-Wait>
 

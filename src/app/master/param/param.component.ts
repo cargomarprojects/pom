@@ -70,7 +70,7 @@ export class ParamComponent {
     public gs: GlobalService
   ) {
     this.page_count = 0;
-    this.page_rows = 10;
+    this.page_rows = 25;
     this.page_current = 0;
     this.menuid = this.gs.getParameter('menuid');
     this.type = this.gs.getParameter('type');
