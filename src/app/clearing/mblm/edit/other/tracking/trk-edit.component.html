@@ -18,7 +18,7 @@
                         <label class="col-sm-7 col-form-label col-form-label-sm pr-0">STATUS</label>
                     </div>
                 </div>
-    
+
                 <div class="col-sm-5 mx-0 px-0">
                     <div class="form-group row">
                         <label class="col-sm-6 col-form-label col-form-label-sm pr-0">PORT</label>
@@ -30,7 +30,7 @@
                         <label class="col-sm-12 col-form-label col-form-label-sm pr-0">VOYAGE</label>
                     </div>
                 </div>
-    
+
                 <div class="col-sm-4 mx-0 px-0">
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label col-form-label-sm pr-0">SI CUT-OFF</label>
@@ -61,9 +61,9 @@
                     <hr class="my-1">
                     <div class="form-group row">
                         <div class="col-sm-6 pr-0">
-                            <app-autocomplete3 [controlname]="'POL'"
-                            [tabletype]="'PARAM'"  [subtype]="'AIR PORT'" [displaycolumn]="'CODE'"
-                                [displaydata]="Record.bl_pol_code" (ValueChanged)="LovSelected($event)" [where]="">
+                            <app-autocomplete3 [controlname]="'POL'" [tabletype]="'PARAM'" [subtype]="'AIR PORT'"
+                                [displaycolumn]="'CODE'" [displaydata]="Record.bl_pol_code"
+                                (ValueChanged)="LovSelected($event)" [where]="">
                             </app-autocomplete3>
                         </div>
                         <div class="col-sm-6 pr-0">
@@ -79,9 +79,9 @@
                     <hr class="my-1">
                     <div class="form-group row">
                         <div class="col-sm-5 pr-0">
-                            <app-autocomplete3 [controlname]="'VESSEL'"
-                            [tabletype]="'PARAM'" [subtype]="'AIR CARRIER'" [displaycolumn]="'CODE'"
-                                [displaydata]="Record.bl_vessel_code" (ValueChanged)="LovSelected($event)" [where]="">
+                            <app-autocomplete3 [controlname]="'VESSEL'" [tabletype]="'PARAM'" [subtype]="'AIR CARRIER'"
+                                [displaycolumn]="'CODE'" [displaydata]="Record.bl_vessel_code"
+                                (ValueChanged)="LovSelected($event)" [where]="">
                             </app-autocomplete3>
                         </div>
                         <div class="col-sm-7 pr-0">
@@ -184,8 +184,9 @@
         </div>
     </div>
     <hr class="my-1">
-    <div *ngFor="let rec of Record.TransitList">
-        <app-transit [mRecord]="rec" [type]="type" [statuslist]="StatusList" (ModifiedRecords)="ModifiedRecords($event)">
+    <div *ngFor="let rec of Record.TransitList; let i = index">
+        <app-transit [mRecord]="rec" [type]="type" [statuslist]="StatusList" [rowindex]="i" (click)="SetRowIndex(i)"
+            (ModifiedRecords)="ModifiedRecords($event)">
         </app-transit>
         <hr class="my-1">
     </div>
@@ -196,8 +197,9 @@
                     <div class="form-group row">
                         <label class="col-sm-1  col-form-label col-form-label-sm pr-0">POD</label>
                         <div class="col-sm-2 pr-0">
-                            <app-autocomplete3 [controlname]="'POD'" [tabletype]="'PARAM'" [subtype]="'AIR PORT'" [displaycolumn]="'CODE'"
-                                [displaydata]="Record.bl_pod_code" (ValueChanged)="LovSelected($event)" [where]="">
+                            <app-autocomplete3 [controlname]="'POD'" [tabletype]="'PARAM'" [subtype]="'AIR PORT'"
+                                [displaycolumn]="'CODE'" [displaydata]="Record.bl_pod_code"
+                                (ValueChanged)="LovSelected($event)" [where]="">
                             </app-autocomplete3>
                         </div>
                         <div class="col-sm-2 pr-0">
@@ -215,8 +217,9 @@
                     <div class="form-group row">
                         <label class="col-sm-1  col-form-label col-form-label-sm pr-0">POFD</label>
                         <div class="col-sm-2 pr-0">
-                            <app-autocomplete3 [controlname]="'POFD'"  [tabletype]="'PARAM'" [subtype]="'AIR PORT'" [displaycolumn]="'CODE'"
-                                [displaydata]="Record.bl_pofd_code" (ValueChanged)="LovSelected($event)" [where]="">
+                            <app-autocomplete3 [controlname]="'POFD'" [tabletype]="'PARAM'" [subtype]="'AIR PORT'"
+                                [displaycolumn]="'CODE'" [displaydata]="Record.bl_pofd_code"
+                                (ValueChanged)="LovSelected($event)" [where]="">
                             </app-autocomplete3>
                         </div>
                         <div class="col-sm-2 pr-0">
@@ -235,7 +238,7 @@
             </div>
         </div>
     </div>
-    <hr *ngIf="type=='AIR EXPORT'"  class="my-1">
+    <hr *ngIf="type=='AIR EXPORT'" class="my-1">
     <div class="row">
         <div class="col-sm-8 mx-0 px-0">
             <div class="form-group row">
@@ -250,6 +253,20 @@
                     <!-- <button *ngIf="mode == 'EDIT'" [disabled]="loading" (click)="ShowHistory(tracking)"
                         class="btn btn-success btn-sm">Container Tracking</button> -->
                 </div>
+            </div>
+        </div>
+        <div *ngIf="type=='SEA EXPORT'"  class="col-sm-4 mx-0 px-0">
+            <div class="form-group row">
+                <div class="col-12">
+                    <button *ngIf="Record.TransitList.length" class="btn btn-info btn-sm mr-1" (click)="changePosition('UP')"><span
+                            class="fa fa-arrow-up"></span></button>
+                    <button *ngIf="Record.TransitList.length" class="btn btn-info btn-sm mr-1" (click)="changePosition('DOWN')"><span
+                            class="fa fa-arrow-down"></span></button>
+                    <label *ngIf="Record.TransitList.length" class="col-form-label col-form-label-sm">Click a row and use arrows to move
+                        between
+                        rows</label>
+                </div>
+
             </div>
         </div>
     </div>

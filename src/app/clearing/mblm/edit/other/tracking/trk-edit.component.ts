@@ -33,6 +33,7 @@ export class TrkEditComponent {
 
     // Single Record for add/edit/view details
     Record: Blm = new Blm;
+    selectedRowIndex: number = -1;
 
     constructor(
         private ms: TrkService,
@@ -185,7 +186,7 @@ export class TrkEditComponent {
         this.NewTransitRecord();
     }
 
-    NewTransitRecord() {
+    NewTransitRecord(_idx: number = -1) {
         let Rec: Trackingm = new Trackingm;
         Rec.trk_pkid = this.gs.getGuid();
         Rec.trk_parent_id = this.Record.bl_pkid;
@@ -210,7 +211,10 @@ export class TrkEditComponent {
         Rec.trk_status = 'NA';
         Rec.trk_desc = 'NA';
         Rec.row_colour = 'darkslategray';
-        this.Record.TransitList.push(Rec);
+        if (_idx >= 0 && this.type == "SEA EXPORT")
+            this.Record.TransitList.splice(_idx + 1, 0, Rec);
+        else
+            this.Record.TransitList.push(Rec);
     }
     // Load a single Record for VIEW/EDIT
     GetRecord(Id: string) {
@@ -275,12 +279,64 @@ export class TrkEditComponent {
                 if (rec.trk_desc == "POL" && rec.trk_status == "DEPA") {
                     bPOL = true;
                     this.Record.bl_pol_id = rec.trk_pol_id;
-                    this.Record.bl_vessel_id =rec.trk_vsl_id;
-                    this.Record.bl_vessel_no =rec.trk_voyage;
+                    this.Record.bl_vessel_id = rec.trk_vsl_id;
+                    this.Record.bl_vessel_no = rec.trk_voyage;
+                    this.Record.bl_si_cutoff = rec.trk_si_cutoff;
+                    this.Record.bl_cy_cutoff = rec.trk_cy_cutoff;
+                    this.Record.bl_pol_etd = rec.trk_pol_etd;
+                    this.Record.bl_pol_etd_confirm = rec.trk_pol_etd_confirm;
+
                 }
                 if (rec.trk_desc == "POD" && rec.trk_status == "ARRI") {
                     bPOD = true;
+                    this.Record.bl_pod_id = rec.trk_pol_id;
+                    this.Record.bl_pod_eta = rec.trk_pol_etd;
+                    this.Record.bl_pod_eta_confirm = rec.trk_pol_etd_confirm;
                 }
+
+                if (rec.trk_desc == "NA") {
+                    if (this.errorMessage.indexOf("Desc Cannot Be NA") < 0) {
+                        bret = false;
+                        this.errorMessage.push("Desc Cannot Be NA");
+                    }
+                }
+                if (rec.trk_status == "NA") {
+                    if (this.errorMessage.indexOf("Status Cannot Be NA") < 0) {
+                        bret = false;
+                        this.errorMessage.push("Status Cannot Be NA");
+                    }
+                }
+                if (this.gs.isBlank(rec.trk_pol_name)) {
+                    if (this.errorMessage.indexOf("Port Cannot Be Blank") < 0) {
+                        bret = false;
+                        this.errorMessage.push("Port Cannot Be Blank");
+                    }
+                }
+                if (this.gs.isBlank(rec.trk_pol_etd)) {
+                    if (this.errorMessage.indexOf("Date Cannot Be Blank") < 0) {
+                        bret = false;
+                        this.errorMessage.push("Date Cannot Be Blank");
+                    }
+                }
+
+
+
+            }
+            this.Record.bl_pofd_id = "";
+            this.Record.bl_pofd_eta = "";
+            this.Record.bl_pofd_eta_confirm = false;
+
+            if (!bPOL) {
+                bret = false;
+                this.errorMessage.push("POL not found");
+            }
+
+            if (!bPOD) {
+                bret = false;
+                this.errorMessage.push("POD not found");
+            }
+
+            for (let rec of this.Record.TransitList) {
 
             }
 
@@ -367,7 +423,7 @@ export class TrkEditComponent {
     ModifiedRecords(params: any) {
         if (params.type == "TRANSIT") {
             if (params.saction == "ADD")
-                this.NewTransitRecord();
+                this.NewTransitRecord(params.rindex);
             if (params.saction == "REMOVE") {
                 this.Record.TransitList.splice(this.Record.TransitList.findIndex(rec => rec.trk_pkid == params.sid), 1);
                 if (this.Record.TransitList.length == 0)
@@ -379,6 +435,30 @@ export class TrkEditComponent {
     // AddTransit() {
     //     this.NewTransitRecord();
     // }
+    SetRowIndex(_indx: number) {
+        this.selectedRowIndex = _indx;
+    }
+
+    changePosition(thistype: string) {
+        if (this.selectedRowIndex == -1)
+            return;
+        let _newindx: number = this.selectedRowIndex;
+
+        if (thistype == 'UP')
+            _newindx--;
+        if (thistype == 'DOWN')
+            _newindx++;
+
+        if (_newindx >= 0 && _newindx < this.Record.TransitList.length) {
+            this.swapItem(this.selectedRowIndex, _newindx);
+            this.selectedRowIndex = _newindx;
+        }
+    }
+    swapItem(slot1: number, slot2: number) {
+        var tempVal = this.Record.TransitList[slot2];
+        this.Record.TransitList[slot2] = this.Record.TransitList[slot1];
+        this.Record.TransitList[slot1] = tempVal;
+    }
 
 }
 

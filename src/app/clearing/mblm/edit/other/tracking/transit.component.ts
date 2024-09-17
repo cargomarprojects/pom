@@ -18,6 +18,7 @@ export class TransitComponent {
   @Input() public type: string = '';
   @Input() mRecord: Trackingm = new Trackingm;
   @Input() statuslist: Param[] = [];
+  @Input() public rowindex: number = -1;
 
   InitCompleted: boolean = false;
   menu_record: any;
@@ -73,7 +74,7 @@ export class TransitComponent {
 
   }
 
- 
+
   LovSelected(_Record: SearchTable) {
     if (_Record.controlname == "POL") {
       this.mRecord.trk_pol_id = _Record.id;
@@ -90,12 +91,12 @@ export class TransitComponent {
 
   AddRow() {
     if (this.ModifiedRecords != null)
-      this.ModifiedRecords.emit({ saction: 'ADD', type: 'TRANSIT', sid: this.mRecord.trk_pkid });
+      this.ModifiedRecords.emit({ saction: 'ADD', type: 'TRANSIT', sid: this.mRecord.trk_pkid, rindex: this.rowindex });
   }
 
   RemoveRow() {
     if (this.ModifiedRecords != null)
-      this.ModifiedRecords.emit({ saction: 'REMOVE', type: 'TRANSIT', sid: this.mRecord.trk_pkid });
+      this.ModifiedRecords.emit({ saction: 'REMOVE', type: 'TRANSIT', sid: this.mRecord.trk_pkid, rindex: this.rowindex });
   }
 
   OnBlur(field: string) {
