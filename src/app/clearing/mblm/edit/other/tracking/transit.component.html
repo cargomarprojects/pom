@@ -6,10 +6,11 @@
                 <div class="form-group row">
                     <div class="col-sm-5 pr-0">
                         <select class="form-control form-control-sm" [(ngModel)]="mRecord.trk_desc">
+                            <option [value]="'NA'">NA</option>
                             <option [value]="'POL'">POL</option>
                             <option [value]="'TRANSIT'">TRANSIT</option>
                             <option [value]="'POD'">POD</option>
-                            <option [value]="'POFD'">POFD</option>
+                            <!-- <option [value]="'POFD'">POFD</option> -->
                         </select>
                     </div>
                     <div class="col-sm-7 pr-0">

@@ -58,19 +58,19 @@ export class TrkEditComponent {
 
         this.loading = true;
         let SearchData = {
-          comp_code: this.gs.globalVariables.comp_code,
-          branch_code: this.gs.globalVariables.branch_code,
+            comp_code: this.gs.globalVariables.comp_code,
+            branch_code: this.gs.globalVariables.branch_code,
         };
 
         this.ms.LoadDefault(SearchData)
-          .subscribe(response => {
-            this.loading = false;
-            this.StatusList = response.statuslist;
-          },
-            error => {
-              this.loading = false;
-              alert(this.gs.getError(error));
-            });
+            .subscribe(response => {
+                this.loading = false;
+                this.StatusList = response.statuslist;
+            },
+                error => {
+                    this.loading = false;
+                    alert(this.gs.getError(error));
+                });
 
     }
 
@@ -207,8 +207,8 @@ export class TrkEditComponent {
         Rec.trk_vsl_count = 0;
         Rec.trk_si_cutoff = '';
         Rec.trk_cy_cutoff = '';
-        Rec.trk_status = 'ARRI';
-        Rec.trk_desc = 'POL';
+        Rec.trk_status = 'NA';
+        Rec.trk_desc = 'NA';
         Rec.row_colour = 'darkslategray';
         this.Record.TransitList.push(Rec);
     }
@@ -268,34 +268,54 @@ export class TrkEditComponent {
         let sError: string = "";
         let bret: boolean = true;
         this.errorMessage = [];
+        let bPOL: boolean = false;
+        let bPOD: boolean = false;
+        if (this.type == "SEA EXPORT") {
+            for (let rec of this.Record.TransitList) {
+                if (rec.trk_desc == "POL" && rec.trk_status == "DEPA") {
+                    bPOL = true;
+                    this.Record.bl_pol_id = rec.trk_pol_id;
+                    this.Record.bl_vessel_id =rec.trk_vsl_id;
+                    this.Record.bl_vessel_no =rec.trk_voyage;
+                }
+                if (rec.trk_desc == "POD" && rec.trk_status == "ARRI") {
+                    bPOD = true;
+                }
 
-        if (this.Record.bl_vessel_id.trim().length <= 0) {
-            bret = false;
-            this.errorMessage.push("Vessel Cannot Be Blank");
-        }
-        if (this.Record.bl_pol_id.trim().length <= 0) {
-            bret = false;
-            this.errorMessage.push("POL Cannot Be Blank");
-        }
-        if (this.Record.bl_pol_etd.trim().length <= 0) {
-            bret = false;
-            this.errorMessage.push("ETD Cannot Be Blank");
-        }
-        if (this.Record.bl_pod_id.trim().length <= 0) {
-            bret = false;
-            this.errorMessage.push("POD Cannot Be Blank");
-        }
-        if (this.Record.bl_pod_eta.trim().length <= 0) {
-            bret = false;
-            this.errorMessage.push("ETA Cannot Be Blank");
-        }
-        if (this.Record.bl_pofd_id.trim().length <= 0) {
-            bret = false;
-            this.errorMessage.push("POFD Cannot Be Blank");
-        }
-        if (this.Record.bl_pofd_eta.trim().length <= 0) {
-            bret = false;
-            this.errorMessage.push("POFD ETA Cannot Be Blank");
+            }
+
+        } else if (this.type == "AIR EXPORT") {
+            if (this.Record.bl_vessel_id.trim().length <= 0) {
+                bret = false;
+                if (this.type == "AIR EXPORT")
+                    this.errorMessage.push("Airline Cannot Be Blank");
+                else
+                    this.errorMessage.push("Vessel Cannot Be Blank");
+            }
+            if (this.Record.bl_pol_id.trim().length <= 0) {
+                bret = false;
+                this.errorMessage.push("POL Cannot Be Blank");
+            }
+            if (this.Record.bl_pol_etd.trim().length <= 0) {
+                bret = false;
+                this.errorMessage.push("ETD Cannot Be Blank");
+            }
+            if (this.Record.bl_pod_id.trim().length <= 0) {
+                bret = false;
+                this.errorMessage.push("POD Cannot Be Blank");
+            }
+            if (this.Record.bl_pod_eta.trim().length <= 0) {
+                bret = false;
+                this.errorMessage.push("ETA Cannot Be Blank");
+            }
+            if (this.Record.bl_pofd_id.trim().length <= 0) {
+                bret = false;
+                this.errorMessage.push("POFD Cannot Be Blank");
+            }
+            if (this.Record.bl_pofd_eta.trim().length <= 0) {
+                bret = false;
+                this.errorMessage.push("POFD ETA Cannot Be Blank");
+            }
         }
 
         if (bret === false) {
