@@ -1,14 +1,14 @@
-<div class="page-body mt-2 line-bottom">
-    <div class="row">
-        <div class="col-sm-12 mx-0 px-0">
+<div class="p-4 mt-4" style="background-color: rgb(235, 235, 235);height:325px;">
+    <div class="row mx-0 px-0">
+        <div class="col-sm-12 p-0">
             <div class="form-group row">
                 <label style="color: black;font-weight: bold;background-color: skyblue;"
                     class="col-sm-12 p-1">House/Container Mapping</label>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-3 mx-0 px-0">
+    <div class="row page-body line-bottom p-2"  style="background-color: rgb(225, 225, 225);">
+        <div class="col-sm-4 mx-0 px-0">
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label col-form-label-sm pr-0">House#</label>
                 <div class="col-sm-10 pr-0">
@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-3 mx-0 px-0">
+        <div class="col-sm-4 mx-0 px-0">
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label col-form-label-sm pr-0">Container#</label>
                 <div class="col-sm-10 pr-0">
@@ -31,10 +31,10 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-2 mx-0 px-0">
+        <div class="col-sm-4 mx-0 px-0">
             <div class="form-group row">
-                <label class="col-sm-4 col-form-label  col-form-label-sm pr-0"></label>
-                <div class="col-sm-8 pr-0">
+                <label class="col-sm-2 col-form-label  col-form-label-sm pr-0"></label>
+                <div class="col-sm-10 pr-0">
                     <button [disabled]="loading" (click)="Save()"
                         class="btn btn-success btn-sm mr-1 mt-1">{{mode==='ADD'?'Add':'Update'}}</button>
                     <button [disabled]="loading" (click)="ActionHandler('ADD','')"
@@ -43,12 +43,13 @@
             </div>
         </div>
     </div>
-    <hr class="my-1">
-    <div class="table-responsive fixedTableHead  my-0 p-0">
+    <!-- <hr class="my-1"> -->
+    <div class="table-responsive fixedTableHead  my-0 mt-2 p-2" style="background-color: white;">
         <table class="table table-hover table-sm table-bordered">
             <thead class="table-success">
                 <tr class="table-header">
-                    <th width="10%">SL#</th>
+                    <th width="5%">SL#</th>
+                    <th width="5%">EDIT</th>
                     <!-- <th width="20%">MBL#</th> -->
                     <th width="20%">HOUSE#</th>
                     <th width="20%">CONTAINER#</th>
@@ -59,7 +60,8 @@
             <tbody class="page-body-tbody">
                 <tr *ngFor="let rec of RecordList; let i = index" (mousedown)="selectRowId(rec.cntrd_pkid)"
                     [ngClass]="{'table-info':rec.cntrd_pkid == getRowId()}">
-                    <td class="hlink" (click)="ActionHandler('EDIT',rec.cntrd_pkid)">{{i+1}}</td>
+                    <td >{{i+1}}</td>
+                    <td class="hlink" (click)="ActionHandler('EDIT',rec.cntrd_pkid)"><i class="fa fa-pencil"></i></td>
                     <!-- <td>{{rec.cntrd_mbl_no}}</td> -->
                     <td>{{rec.cntrd_hbl_no}}</td>
                     <td>{{rec.cntrd_cntr_no}}</td>

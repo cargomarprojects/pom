@@ -207,3 +207,6 @@ hr {
   margin-bottom: 1px;
 } */
  
+.fixwidth th {
+  min-width: 60px;
+}

@@ -319,7 +319,7 @@ export class HblComponent {
     }
 
     open(content: any) {
-        this.modal = this.modalService.open(content, { backdrop: 'static', keyboard: true });
+        this.modal = this.modalService.open(content, {centered: true, backdrop: 'static', keyboard: true });
     }
 
     getWidth(_type: string) {
