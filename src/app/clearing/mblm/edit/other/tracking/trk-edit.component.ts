@@ -276,6 +276,7 @@ export class TrkEditComponent {
         let bPOD: boolean = false;
         if (this.type == "SEA EXPORT") {
             for (let rec of this.Record.TransitList) {
+                rec.trk_source = "MANUAL";
                 if (rec.trk_desc == "POL" && rec.trk_status == "DEPA") {
                     bPOL = true;
                     this.Record.bl_pol_id = rec.trk_pol_id;
@@ -319,8 +320,6 @@ export class TrkEditComponent {
                     }
                 }
 
-
-
             }
             this.Record.bl_pofd_id = "";
             this.Record.bl_pofd_eta = "";
@@ -334,10 +333,6 @@ export class TrkEditComponent {
             if (!bPOD) {
                 bret = false;
                 this.errorMessage.push("POD not found");
-            }
-
-            for (let rec of this.Record.TransitList) {
-
             }
 
         } else if (this.type == "AIR EXPORT") {

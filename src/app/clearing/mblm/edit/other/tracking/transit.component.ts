@@ -108,6 +108,16 @@ export class TransitComponent {
           this.mRecord.trk_voyage = this.mRecord.trk_voyage.toUpperCase().trim();
           break;
         }
+        case 'trk_vsl_name':
+        {
+          this.mRecord.trk_vsl_name = this.mRecord.trk_vsl_name.toUpperCase().trim();
+          break;
+        }
+        case 'trk_pol_name':
+        {
+          this.mRecord.trk_pol_name = this.mRecord.trk_pol_name.toUpperCase().trim();
+          break;
+        }
     }
   }
 

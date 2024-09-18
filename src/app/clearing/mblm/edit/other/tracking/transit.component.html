@@ -33,7 +33,7 @@
                     </div>
                     <div class="col-sm-3 pr-0">
                         <input type="text"  class="form-control form-control-sm"
-                            [(ngModel)]="mRecord.trk_pol_name" />
+                            [(ngModel)]="mRecord.trk_pol_name" (blur)="OnBlur('trk_pol_name')" />
                     </div>
                     <div class="col-sm-3 pr-0">
                         <app-autocomplete3 [controlname]="'VESSEL'" [tabletype]="'PARAM'" [subtype]="'VESSEL'"
@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-sm-3 pr-0">
                         <input type="text"  class="form-control form-control-sm"
-                            [(ngModel)]="mRecord.trk_vsl_name" />
+                            [(ngModel)]="mRecord.trk_vsl_name" (blur)="OnBlur('trk_vsl_name')" />
                     </div>
                 </div>
             </div>

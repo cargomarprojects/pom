@@ -9,18 +9,49 @@
         </div>
     </div>
     <hr class="my-1">
-    <div class="table-responsive fixedTableHead  my-0 p-0" [style.height]="RecordList.length>5?'264px':'auto'"
+    <div *ngIf="type=='SEA EXPORT'||type=='SEA IMPORT'" class="table-responsive fixedTableHead  my-0 p-0" [style.height]="RecordList.length>5?'264px':'auto'"
         [style.overflow-y]="RecordList.length>10?'scroll':'auto'">
         <table class="table table-hover table-sm table-bordered">
             <thead class="table-success">
                 <tr class="table-header">
                     <th>SL#</th>
-                    <th><span *ngIf="type=='SEA EXPORT'||type=='SEA IMPORT'">VESSEL.CODE</span><span
-                            *ngIf="type=='AIR EXPORT'||type=='AIR IMPORT'">AIRLINE.CODE</span></th>
-                    <th><span *ngIf="type=='SEA EXPORT'||type=='SEA IMPORT'">VESSEL.NAME</span><span
-                            *ngIf="type=='AIR EXPORT'||type=='AIR IMPORT'">AIRLINE.NAME</span></th>
-                    <th><span *ngIf="type=='SEA EXPORT'||type=='SEA IMPORT'">VOYAGE</span><span
-                            *ngIf="type=='AIR EXPORT'||type=='AIR IMPORT'">FLIGHT#</span></th>
+                    <th>DESC</th>
+                    <th>STATUS</th>
+                    <th>PORT.CODE</th>
+                    <th>PORT.NAME</th>
+                    <th>VESSEL.CODE</th>
+                    <th>VESSEL.NAME</th>
+                    <th>VOYAGE</th>
+                    <th>DATE</th>
+                    <th>CONFM</th>
+                </tr>
+            </thead>
+            <tbody class="page-body-tbody">
+                <tr *ngFor="let rec of RecordList; let i = index" (mousedown)="selectRowId(rec.trk_pkid)"
+                    [ngClass]="{'table-info':rec.trk_pkid == getRowId()}">
+                    <td>{{i+1}}</td>
+                    <td>{{rec.trk_desc}}</td>
+                    <td>{{rec.trk_status}}</td>
+                    <td>{{rec.trk_pol_code}}</td>
+                    <td>{{rec.trk_pol_name}}</td>
+                    <td>{{rec.trk_vsl_code}}</td>
+                    <td>{{rec.trk_vsl_name}}</td>
+                    <td>{{rec.trk_voyage}}</td>
+                    <td>{{rec.trk_pol_etd}}</td>
+                    <td>{{rec.trk_pol_etd_confirm ? 'Y' : 'N'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="type=='AIR EXPORT'||type=='AIR IMPORT'" class="table-responsive fixedTableHead  my-0 p-0" [style.height]="RecordList.length>5?'264px':'auto'"
+        [style.overflow-y]="RecordList.length>10?'scroll':'auto'">
+        <table class="table table-hover table-sm table-bordered">
+            <thead class="table-success">
+                <tr class="table-header">
+                    <th>SL#</th>
+                    <th>AIRLINE.CODE</th>
+                    <th>AIRLINE.NAME</th>
+                    <th>FLIGHT#</th>
                     <th>POL.CODE</th>
                     <th>POL.NAME</th>
                     <th>ETD</th>
