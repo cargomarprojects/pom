@@ -43,6 +43,7 @@
     <table class="table  table-hover table-sm table-bordered">
       <thead class="page-body-thead">
         <tr>
+          <th>EDIT</th>
           <th>CODE</th>
           <th>NAME</th>
           <th *ngIf="type == 'CURRENCY'">{{param_rate_caption}}</th>
@@ -53,8 +54,9 @@
         </tr>
       </thead>
       <tbody class="page-body-tbody">
-        <tr *ngFor="let rec of RecordList;  let i = index" (click)="ActionHandler('EDIT',rec.param_pkid, i)"
+        <tr *ngFor="let rec of RecordList;  let i = index" 
           [class.active]="i == selectedRowIndex">
+          <td (click)="ActionHandler('EDIT',rec.param_pkid, i)"  class="hlink"><i class="fa fa-pencil"></i></td>
           <td>{{rec.param_code}}</td>
           <td>{{rec.param_name}}</td>
           <td *ngIf="type == 'CURRENCY'">{{rec.param_rate}}</td>
