@@ -1,0 +1,70 @@
+<mat-toolbar class="toolbar-color-theme">
+
+
+  <mat-icon (click)="toggleMenu()" class="hand-cursor">menu</mat-icon>
+
+
+  <div class="logo">
+    <a routerLink="/home">
+      <img src="assets/images/dvtlogo.png">
+      <span class="title">{{title}}</span>
+    </a>
+  </div>
+
+
+  <span class="toolbar-item-spacer"></span>
+
+
+  <span *ngIf="gs.IsAuthenticated" id="userName" class="mx-2">{{gs.globalVariables.user_name}}</span>
+
+  <ng-container *ngIf="gs.IsAuthenticated">
+    <button class="ms-4 btn btn-sm btn-success" (click)="logout()">Logout</button>
+  </ng-container>
+
+  <ng-container *ngIf="!gs.IsAuthenticated">
+    <button class="btn btn-sm btn-success" routerLink="/login">Login</button>
+  </ng-container>
+
+
+</mat-toolbar>
+
+<mat-sidenav-container autosize="true">
+
+
+  <mat-sidenav #sidenav [ngClass]="!isCollapsed ? 'expanded' : ''" [mode]="isMobile ? 'over' : 'side'"
+    [opened]="isMobile ? 'false' : 'true'">
+
+
+    <mat-nav-list *ngIf="gs.IsAuthenticated">
+
+      <ng-container *ngFor="let rech of gs.Modules">
+
+        <ng-container *ngIf="!isCollapsed">
+          <span class="entry">
+            <span>{{rech.module_name}}</span>
+          </span>
+        </ng-container>
+
+        <ng-container *ngFor="let rec of gs.MenuList">
+          <a *ngIf="rech.module_name == rec.menu_module_name && rec.menu_displayed" mat-list-item
+            (click)="LoadPage(rec)">
+            <span class="entry">
+              <mat-icon color="accent">home</mat-icon>
+              <span *ngIf="!isCollapsed">{{rec.menu_name}}</span>
+            </span>
+          </a>
+        </ng-container>
+
+      </ng-container>
+
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+
+
+  <mat-sidenav-content class="router">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

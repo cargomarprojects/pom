@@ -1,0 +1,78 @@
+.toolbar-item-spacer {
+  flex: 1 1 auto;
+}
+
+h1 {
+  padding: 0 1rem;
+}
+
+h2 {
+  padding: 1rem;
+}
+
+
+.logo {
+  margin: 2px;
+}
+
+.logo a {
+  text-decoration: none;
+}
+
+.title {
+  margin-left: 2px;
+  font-size: 18px;
+  color: white;
+}
+
+.title:hover {
+  color: lightblue;
+  transition: 0.5s;
+}
+
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  height: 6rem;
+  z-index: 2;
+}
+
+mat-sidenav-container {
+  height: 100%;
+}
+
+// Move the content down so that it won't be hidden by the toolbar
+mat-sidenav {
+  padding-top: 5rem;
+  transition: width 0.3s ease;
+
+  @media screen and (min-width: 600px) {
+    padding-top: 5rem;
+  }
+
+  .entry {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.40rem;
+    font-size: 12px;
+  }
+
+}
+
+// Move the content down so that it won't be hidden by the toolbar
+mat-sidenav-content {
+  padding-top: 9px;
+  overflow-x: hidden !important;
+}
+
+.expanded {
+  width: 250px;
+}
+
+
+
+.toolbar-color-theme {
+  background-color: #348cd4 !important;
+  color: white !important;
+}

@@ -6,6 +6,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+
+
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+
+
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -25,6 +35,8 @@ import { CustomRouteReuseStrategy } from './customReuseRouteStrategy';
 import { RouteReuseStrategy } from '@angular/router';
 import { LoadAppComponent } from './core/load-app/load-app.component';
 import { ToastComponent } from './core/toast/toast.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MainmenuComponent } from './core/mainmenu/mainmenu.component';
 
 
 
@@ -36,6 +48,14 @@ import { ToastComponent } from './core/toast/toast.component';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+
+    MatIconModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatMenuModule,
+
   ],
   declarations: [
     AppComponent,
@@ -46,7 +66,8 @@ import { ToastComponent } from './core/toast/toast.component';
     ContactComponent,
     LoadingScreenComponent,
     LoadAppComponent,
-    ToastComponent
+    ToastComponent,
+    MainmenuComponent
   ],
   providers: [
     GlobalService,

@@ -6,12 +6,13 @@ body {
   box-sizing: border-box;
   font-size: 12px;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  height: 100%;
   overflow-x: hidden;
 }
 
 .router {
   /* margin-top: 52px; */
-  margin-top: 70px;
+  margin-top: 65px;
 }
 
 .table {
@@ -147,7 +148,7 @@ i {
 .fixedTableHead thead th {
   position: sticky;
   top: 0;
-  background-color: #c7dbd2 ;
+  background-color: #c7dbd2;
 }
 
 .hlink {
@@ -206,7 +207,7 @@ hr {
   margin-top: 1px;
   margin-bottom: 1px;
 } */
- 
+
 .fixwidth th {
   min-width: 60px;
 }
