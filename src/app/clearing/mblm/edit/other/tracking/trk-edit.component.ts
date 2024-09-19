@@ -186,7 +186,7 @@ export class TrkEditComponent {
         this.NewTransitRecord();
     }
 
-    NewTransitRecord(_idx: number = -1) {
+    NewTransitRecord(_idx: number = -1, _desc: string = 'NA', _status: string = 'NA') {
         let Rec: Trackingm = new Trackingm;
         Rec.trk_pkid = this.gs.getGuid();
         Rec.trk_parent_id = this.Record.bl_pkid;
@@ -208,8 +208,8 @@ export class TrkEditComponent {
         Rec.trk_vsl_count = 0;
         Rec.trk_si_cutoff = '';
         Rec.trk_cy_cutoff = '';
-        Rec.trk_status = 'NA';
-        Rec.trk_desc = 'NA';
+        Rec.trk_status = _status;
+        Rec.trk_desc = _desc;
         Rec.row_colour = 'darkslategray';
         if (_idx >= 0 && this.type == "SEA EXPORT")
             this.Record.TransitList.splice(_idx + 1, 0, Rec);
@@ -238,8 +238,14 @@ export class TrkEditComponent {
     LoadData(_Record: Blm) {
         this.Record = _Record;
         this.Record.rec_mode = this.mode;
-        if (this.Record.TransitList.length == 0)
-            this.NewTransitRecord();
+        if (this.Record.TransitList.length == 0) {
+            if (this.type == "SEA EXPORT") {
+                this.NewTransitRecord(0, 'POL', 'DEPA');
+                this.NewTransitRecord(1, 'POD', 'ARRI');
+            } else
+                this.NewTransitRecord();
+        }
+
     }
 
     // Save Data

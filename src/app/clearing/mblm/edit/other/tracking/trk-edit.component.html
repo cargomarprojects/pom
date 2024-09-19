@@ -185,7 +185,7 @@
     </div>
     <hr class="my-1">
     <div *ngFor="let rec of Record.TransitList; let i = index">
-        <app-transit [mRecord]="rec" [type]="type" [statuslist]="StatusList" [rowindex]="i" (click)="SetRowIndex(i)"
+        <app-transit [mRecord]="rec" [type]="type" [statuslist]="StatusList" [rowindex]="i" (click)="SetRowIndex(i)"  
             (ModifiedRecords)="ModifiedRecords($event)">
         </app-transit>
         <hr class="my-1">
