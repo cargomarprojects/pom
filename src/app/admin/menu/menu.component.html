@@ -1,9 +1,9 @@
 ﻿<div class="page-header">
-    <h5>{{title}}</h5>
-    <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-info btn-sm">List</button>
-    <button [disabled]="loading" (click)="ActionHandler('ADD','')" class="btn btn-info btn-sm">New</button>
-    <button class="btn btn-info btn-sm" (click)="Close()">Close</button>
-    <i *ngIf="loading" class="fa fa-spinner"></i>
+  <h5>{{title}}</h5>
+  <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-info btn-sm">List</button>
+  <button [disabled]="loading" (click)="ActionHandler('ADD','')" class="btn btn-info btn-sm">New</button>
+  <button class="btn btn-info btn-sm" (click)="Close()">Close</button>
+  <i *ngIf="loading" class="fa fa-spinner"></i>
 </div>
 
 <div *ngIf="currentTab=='LIST'" class="page-list">
@@ -34,11 +34,12 @@
 
   <div class="page-body">
     <div class="table-responsive  table-bordered  fixedTableHead  my-0 p-0" style="height: calc(100vh - 228px);">
-      <table class="table  table-hover table-sm">
+      <table class="table table-hover table-sm">
         <thead class="page-body-thead">
           <tr>
             <th>EDIT</th>
             <th>MODULE</th>
+            <th>SUBMENU</th>
             <th>MENU ID</th>
             <th>MENU CAPTION</th>
             <th>ROUTE</th>
@@ -47,9 +48,10 @@
           </tr>
         </thead>
         <tbody class="page-body-tbody">
-          <tr *ngFor="let rec of RecordList" >
+          <tr *ngFor="let rec of RecordList">
             <td (click)="ActionHandler('EDIT',rec.menu_pkid)" class="hlink"><i class="fa fa-pencil"></i></td>
             <td>{{rec.menu_module_name}}</td>
+            <td>{{rec.menu_submenu_name}}</td>
             <td>{{rec.menu_code}}</td>
             <td>{{rec.menu_name}}</td>
             <td>{{rec.menu_route1}}</td>
@@ -128,6 +130,17 @@
             </select>
           </div>
         </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label col-form-label-sm">Sub Menu</label>
+          <div class="col-sm-10">
+            <app-autocomplete3 [controlname]="'SUBMENU'" [tabletype]="'SUBMENU'" [displaycolumn]="'CODE'"
+              [displaydata]="Record.menu_submenu_name" (ValueChanged)="LovSelected($event)" #agentlov>
+            </app-autocomplete3>
+          </div>
+        </div>
+
+
 
         <div class="form-group row">
           <label class="col-2 col-form-label  col-form-label-sm">Order</label>
