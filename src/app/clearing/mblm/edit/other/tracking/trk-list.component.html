@@ -12,16 +12,16 @@
     <!-- <hr class="mb-2"> -->
     <div *ngIf="type=='SEA EXPORT'||type=='SEA IMPORT'" class="table-responsive fixedTableHead my-0 p-2"
         style="background-color: white;" [style.height]="'150px'">
-        <table class="table table-hover table-sm table-bordered fixwidth">
+        <table class="table table-hover table-sm table-bordered">
             <thead class="table-success">
                 <tr class="table-header">
                     <th>SL#</th>
                     <th>DESC</th>
                     <th>STATUS</th>
-                    <th>PORT.CODE</th>
-                    <th>PORT.NAME</th>
-                    <th>VESSEL.CODE</th>
-                    <th>VESSEL.NAME</th>
+                    <th class="fixwidth">PORT.CODE</th>
+                    <th class="fixwidth">PORT.NAME</th>
+                    <th class="fixwidth">VESSEL.CODE</th>
+                    <th class="fixwidth">VESSEL.NAME</th>
                     <th>VOYAGE</th>
                     <th>DATE</th>
                     <th>CONFM</th>
