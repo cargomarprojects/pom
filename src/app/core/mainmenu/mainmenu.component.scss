@@ -43,11 +43,11 @@ mat-sidenav-container {
 
 // Move the content down so that it won't be hidden by the toolbar
 mat-sidenav {
-  padding-top: 5rem;
+  padding-top: 6rem;
   transition: width 0.3s ease;
 
   @media screen and (min-width: 600px) {
-    padding-top: 5rem;
+    padding-top: 6rem;
   }
 
   .entry {
