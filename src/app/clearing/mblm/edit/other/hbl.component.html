@@ -1,9 +1,10 @@
-<div class="p-4 mt-4" style="background-color: rgb(235, 235, 235);height: 325px;">
+<div class="p-4 mt-4" style="background-color: rgb(235, 235, 235);height: 307px;">
     <div class="row mx-0 px-0">
         <div class="col-sm-12 p-0">
             <div class="form-group row">
-                <label style="color: black;font-weight: bold; background-color: skyblue;" class="col-sm-12 p-1">House
-                    Details</label>
+                <label style="color: black;font-weight: bold; background-color: skyblue;" class="col-sm-12 p-1">Add/Edit
+                    House
+                </label>
             </div>
         </div>
     </div>
@@ -52,7 +53,7 @@
             <tbody class="page-body-tbody">
                 <tr *ngFor="let rec of RecordList; let i = index" (mousedown)="selectRowId(rec.bl_pkid)"
                     [ngClass]="{'table-info':rec.bl_pkid == getRowId()}">
-                    <td >{{i+1}}</td>
+                    <td>{{i+1}}</td>
                     <td class="hlink" (click)="ActionHandler('EDIT',rec.bl_pkid)"><i class="fa fa-pencil"></i></td>
                     <td>{{rec.bl_no}}</td>
                     <td style="text-transform:uppercase">{{rec.bl_date | date : gs.DATE_DISPLAY_FORMAT}}</td>
@@ -73,7 +74,8 @@
         </button>
     </div> -->
     <div class="modal-body">
-        <app-upload [pkid]="parentid" [groupid]="docGroupId" [type]="'HBL-DOCUMENTS'" (closeModalWindow)="CloseModal2($event)"></app-upload>
+        <app-upload [pkid]="parentid" [groupid]="docGroupId" [type]="'HBL-DOCUMENTS'"
+            (closeModalWindow)="CloseModal2($event)"></app-upload>
     </div>
     <!-- <div class="modal-footer">
         <button type="button" class="btn btn-outline-light" (click)="c('Close click')">Close</button>

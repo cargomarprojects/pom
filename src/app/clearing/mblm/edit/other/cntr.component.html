@@ -1,13 +1,14 @@
-<div class="p-4" style="background-color: rgb(235, 235, 235);height: 325px;">
+<div class="p-4" style="background-color: rgb(235, 235, 235);height: 307px;">
     <div class="row mx-0 px-0">
         <div class="col-sm-12 p-0">
             <div class="form-group row">
-                <label style="color: black;font-weight: bold;background-color: skyblue;" class="col-sm-12 p-1">Container
-                    Details</label>
+                <label style="color: black;font-weight: bold;background-color: skyblue;" class="col-sm-12 p-1">Add/Edit
+                    Container
+                </label>
             </div>
         </div>
     </div>
-    <div class="row page-body line-bottom p-2"  style="background-color: rgb(225, 225, 225);">
+    <div class="row page-body line-bottom p-2" style="background-color: rgb(225, 225, 225);">
         <div class="col-sm-4 mx-0 px-0">
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label col-form-label-sm pr-0">Container#</label>
@@ -59,11 +60,11 @@
             <tbody class="page-body-tbody">
                 <tr *ngFor="let rec of RecordList; let i = index" (mousedown)="selectRowId(rec.cntr_pkid)"
                     [ngClass]="{'table-info':rec.cntr_pkid == getRowId()}">
-                    <td >{{i+1}}</td>
+                    <td>{{i+1}}</td>
                     <td (click)="ActionHandler('EDIT',rec.cntr_pkid)" class="hlink"><i class="fa fa-pencil"></i></td>
-                    <td >{{rec.cntr_no}}</td>
-                    <td >{{rec.cntr_type_code}}</td>
-                    <td >{{rec.cntr_seal_no}}</td>
+                    <td>{{rec.cntr_no}}</td>
+                    <td>{{rec.cntr_type_code}}</td>
+                    <td>{{rec.cntr_seal_no}}</td>
                     <td *ngIf="bDelete" class="p-0 text-left"><i class="fa fa-trash  fa-lg pointer ml-1"
                             aria-hidden="true" (click)="DeleteRow(rec)"></i></td>
                 </tr>
