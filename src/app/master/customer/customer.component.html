@@ -8,7 +8,7 @@
 <div *ngIf="currentTab=='LIST'" class="page-list">
 
   <div class="page-body">
-    <div class="row">
+    <div class="row my-1">
 
       <div class="col-2">
         <input type="checkbox" [(ngModel)]="Is_Shipper" />
@@ -37,7 +37,7 @@
     </div>
   </div>
   <div class="page-body">
-    <div class="row">
+    <div class="row my-1">
       <label class="col-2">Search</label>
       <div class="col">
         <input type="text" class="col form-control form-control-sm" name="Search" [(ngModel)]="searchstring" />
@@ -64,36 +64,33 @@
     </div>
   </div>
 
-  <div class="page-body table-responsive">
-    <table class="table  table-hover table-sm table-bordered fixedTableHead  my-0 p-0" style="height: calc(100vh - 272px);">
+  <div class="page-body table-responsive" style="height: calc(100vh - 260px);">
+    <table class="table  table-hover table-sm table-bordered fixedTableHead  my-0 p-0" >
       <thead class="page-body-thead">
         <tr>
+          <th>EDIT</th>
           <th>CODE</th>
           <th>NAME</th>
           <th>TYPE</th>
           <th>KYC</th>
           <th>SALESMAN</th>
-
           <th>EDI-CODE</th>
           <th>TRADING-PARTNER</th>
-
           <th>DOCS</th>
-
           <th>CREATED.BY</th>
           <th>CREATED.DATE</th>
         </tr>
       </thead>
       <tbody class="page-body-tbody">
         <tr *ngFor="let rec of RecordList">
-          <td (click)="ActionHandler('EDIT',rec.cust_pkid)">{{rec.cust_code}}</td>
-          <td (click)="ActionHandler('EDIT',rec.cust_pkid)">{{rec.cust_name}}</td>
-          <td (click)="ActionHandler('EDIT',rec.cust_pkid)">{{rec.cust_group}}</td>
-          <td (click)="ActionHandler('EDIT',rec.cust_pkid)">{{rec.cust_kyc_status}}</td>
-          <td (click)="ActionHandler('EDIT',rec.cust_pkid)">{{rec.cust_sman_name}}</td>
-
-          <td (click)="ActionHandler('EDIT',rec.cust_pkid)">{{rec.cust_edi_code}}</td>
-          <td (click)="ActionHandler('EDIT',rec.cust_pkid)">{{rec.cust_trading_partner}}</td>
-
+          <td (click)="ActionHandler('EDIT',rec.cust_pkid)" class="hlink"><i class="fa fa-pencil"></i></td>
+          <td >{{rec.cust_code}}</td>
+          <td >{{rec.cust_name}}</td>
+          <td >{{rec.cust_group}}</td>
+          <td >{{rec.cust_kyc_status}}</td>
+          <td >{{rec.cust_sman_name}}</td>
+          <td >{{rec.cust_edi_code}}</td>
+          <td >{{rec.cust_trading_partner}}</td>
           <td>{{rec.cust_docs}}</td>
           <td>{{rec.rec_created_by}}</td>
           <td>{{rec.rec_created_date}}</td>

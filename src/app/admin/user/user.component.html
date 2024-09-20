@@ -37,6 +37,7 @@
       <table class="table table-hover table-sm table-bordered">
         <thead class="page-body-thead">
           <tr>
+            <th>EDIT</th>
             <th>LOGIN ID</th>
             <th>NAME</th>
             <th>EMAIL</th>
@@ -48,7 +49,8 @@
           </tr>
         </thead>
         <tbody class="page-body-tbody">
-          <tr *ngFor="let rec of RecordList" (click)="ActionHandler('EDIT',rec.user_pkid)">
+          <tr *ngFor="let rec of RecordList" >
+            <td (click)="ActionHandler('EDIT',rec.user_pkid)" class="hlink"><i class="fa fa-pencil"></i></td>
             <td>{{rec.user_code}}</td>
             <td>{{rec.user_name}}</td>
             <td>{{rec.user_email}}</td>

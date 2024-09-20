@@ -36,12 +36,14 @@
       <table class="table table-hover table-sm table-bordered">
         <thead class="page-body-thead">
           <tr>
+            <th>EDIT</th>
             <th>NAME</th>
             <th>ORDER</th>
           </tr>
         </thead>
         <tbody class="page-body-tbody">
-          <tr *ngFor="let rec of RecordList" (click)="ActionHandler('EDIT',rec.module_pkid)">
+          <tr *ngFor="let rec of RecordList" >
+            <td (click)="ActionHandler('EDIT',rec.module_pkid)" class="hlink"><i class="fa fa-pencil"></i></td>
             <td>{{rec.module_name}}</td>
             <td>{{rec.module_order}}</td>
           </tr>

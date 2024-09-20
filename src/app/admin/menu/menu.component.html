@@ -37,6 +37,7 @@
       <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
           <tr>
+            <th>EDIT</th>
             <th>MODULE</th>
             <th>MENU ID</th>
             <th>MENU CAPTION</th>
@@ -46,7 +47,8 @@
           </tr>
         </thead>
         <tbody class="page-body-tbody">
-          <tr *ngFor="let rec of RecordList" (click)="ActionHandler('EDIT',rec.menu_pkid)">
+          <tr *ngFor="let rec of RecordList" >
+            <td (click)="ActionHandler('EDIT',rec.menu_pkid)" class="hlink"><i class="fa fa-pencil"></i></td>
             <td>{{rec.menu_module_name}}</td>
             <td>{{rec.menu_code}}</td>
             <td>{{rec.menu_name}}</td>

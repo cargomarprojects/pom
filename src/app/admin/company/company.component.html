@@ -35,6 +35,7 @@
       <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
           <tr>
+            <th>EDIT</th>
             <th>CODE</th>
             <th>NAME</th>
             <th>PTC</th>
@@ -46,7 +47,8 @@
           </tr>
         </thead>
         <tbody class="page-body-tbody" *ngFor="let rec of RecordList">
-          <tr (click)="ActionHandler('EDIT',rec.comp_pkid)">
+          <tr >
+            <td (click)="ActionHandler('EDIT',rec.comp_pkid)" class="hlink"><i class="fa fa-pencil"></i></td>
             <td>{{rec.comp_code}}</td>
             <td>{{rec.comp_name}}</td>
             <td>{{rec.comp_ptc}}</td>
