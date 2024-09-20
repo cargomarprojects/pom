@@ -1,9 +1,9 @@
 ﻿<div class="page-header">
-    <h5>{{title}}</h5>
-    <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-info btn-sm">List</button>
-    <button [disabled]="loading" (click)="ActionHandler('ADD','')" class="btn btn-info btn-sm">New</button>
-    <button class="btn btn-info btn-sm" (click)="Close()">Close</button>
-    <i *ngIf="loading" class="fa fa-spinner"></i>
+  <h5>{{title}}</h5>
+  <button [disabled]="loading" (click)="ActionHandler('LIST','')" class="btn btn-info btn-sm">List</button>
+  <button [disabled]="loading" (click)="ActionHandler('ADD','')" class="btn btn-info btn-sm">New</button>
+  <button class="btn btn-info btn-sm" (click)="Close()">Close</button>
+  <i *ngIf="loading" class="fa fa-spinner"></i>
 </div>
 
 <div *ngIf="currentTab=='LIST'" class="page-list">
@@ -38,13 +38,15 @@
           <tr>
             <th>EDIT</th>
             <th>NAME</th>
+            <th>PARENT</th>
             <th>ORDER</th>
           </tr>
         </thead>
         <tbody class="page-body-tbody">
-          <tr *ngFor="let rec of RecordList" >
+          <tr *ngFor="let rec of RecordList">
             <td (click)="ActionHandler('EDIT',rec.module_pkid)" class="hlink"><i class="fa fa-pencil"></i></td>
             <td>{{rec.module_name}}</td>
+            <td>{{rec.module_parent_name}}</td>
             <td>{{rec.module_order}}</td>
           </tr>
         </tbody>
@@ -69,7 +71,9 @@
 <div *ngIf="currentTab=='DETAILS'" class="page-details">
   <div class="page-body">
     <div class="row">
+
       <div class="col-sm-6">
+
         <div class="form-group row">
           <label class="col-2 col-form-label  col-form-label-sm">Name</label>
           <div class="col-10">
@@ -77,6 +81,7 @@
               maxlength="60" />
           </div>
         </div>
+
         <div class="form-group row">
           <label class="col-2 col-form-label  col-form-label-sm">Order</label>
           <div class="col-10">
@@ -84,6 +89,18 @@
               maxlength="10" />
           </div>
         </div>
+
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label col-form-label-sm">Parent</label>
+          <div class="col-sm-10">
+            <app-autocomplete3 [controlname]="'MODULE'" [tabletype]="'MODULE'" [displaycolumn]="'CODE'"
+              [displaydata]="Record.module_parent_name" (ValueChanged)="LovSelected($event)" #agentlov>
+            </app-autocomplete3>
+          </div>
+        </div>
+
+
 
       </div>
     </div>
