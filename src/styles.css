@@ -51,6 +51,13 @@ label {
   border-bottom: 1px solid lightgray !important;
 }
 
+.center-content {
+  display: flex;
+  justify-content: baseline;
+  align-items: baseline;
+}
+
+
 .page-header {
   display: flex;
   justify-content: baseline;
@@ -63,8 +70,6 @@ label {
   border-color: lightgray;
   border-style: solid;
   border-width: 1px 1px 0px 1px;
-
-
 }
 
 .page-header h5 {
