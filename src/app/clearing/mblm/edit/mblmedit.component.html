@@ -3,7 +3,7 @@
     <button class="btn btn-info btn-sm mr-1" (click)="ActionHandler('ADD')">New</button>
     <button class="btn btn-info btn-sm mr-1" (click)="Close()">Return</button>
 </div>
-<div class="row page-body-ns-mtlr">
+<div class="row page-body-ns-mtrl">
     <div class="col-sm-3">
         <div class="form-group row">
             <label class="col-sm-3 col-form-label col-form-label-sm">Sl#</label>
@@ -83,7 +83,7 @@
         </div>
 
         <div class="col-sm-6 p-0">
-            <div class="page-body-ns-mtlr">
+            <div class="page-body-ns-mtrl">
                 <app-cntr *ngIf="type=='SEA EXPORT'" [parentid]="pkid" [type]="type" [menuid]="menuid"
                     [RecordList]="CntrList"></app-cntr>
             </div>
@@ -98,7 +98,7 @@
         </div>
 
         <div class="col-sm-6 p-0">
-            <div class="page-body-ns-mtlr">
+            <div class="page-body-ns-mtrl">
                 <app-link-cntr-hbl *ngIf="type=='SEA EXPORT'" [parentid]="pkid" [type]="type" [menuid]="menuid"
                     [RecordList]="LinkList"></app-link-cntr-hbl>
             </div>
