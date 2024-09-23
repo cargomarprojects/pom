@@ -58,10 +58,8 @@
         <ng-container *ngIf="rech.module_parent_id">
           <mat-expansion-panel>
             <mat-expansion-panel-header>
-              <span class="entrymenu">
-                <mat-icon color="accent">arrow_right</mat-icon>
-                <span class="entrymenu">{{rech.module_name}}</span>
-              </span>
+              <mat-icon color="accent">arrow_right</mat-icon>
+              <span class="entrymenu">{{rech.module_name}}</span>
             </mat-expansion-panel-header>
             <mat-nav-list>
               <ng-container *ngFor="let rec of gs.MenuList">
