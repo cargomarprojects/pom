@@ -58,6 +58,13 @@ mat-sidenav {
     font-size: 12px;
   }
 
+  .entrymenu {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    font-size: 12px;
+  }
+
 }
 
 // Move the content down so that it won't be hidden by the toolbar
@@ -75,4 +82,9 @@ mat-sidenav-content {
 .toolbar-color-theme {
   background-color: #348cd4 !important;
   color: white !important;
+}
+
+
+.mat-expansion-panel {
+  border: none;
 }

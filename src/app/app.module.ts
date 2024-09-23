@@ -37,6 +37,7 @@ import { LoadAppComponent } from './core/load-app/load-app.component';
 import { ToastComponent } from './core/toast/toast.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainmenuComponent } from './core/mainmenu/mainmenu.component';
+import { MatExpansionModule } from '@angular/material';
 
 
 
@@ -55,6 +56,7 @@ import { MainmenuComponent } from './core/mainmenu/mainmenu.component';
     MatSidenavModule,
     MatListModule,
     MatMenuModule,
+    MatExpansionModule,
 
   ],
   declarations: [

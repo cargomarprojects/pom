@@ -22,7 +22,7 @@ export class LoginComponent {
 
   username: string = '';
   password: string = '';
- 
+
 
   server_software_version_string: string = '';
   showloginbutton: boolean = true;
@@ -43,7 +43,7 @@ export class LoginComponent {
     private loginservice: LoginService,
     private hs: HouseListService,
     private edihs: EdiHblService,
-    private ediord: EdiOrderService 
+    private ediord: EdiOrderService
 
   ) {
 
@@ -55,8 +55,7 @@ export class LoginComponent {
     this.InitAllService();
   }
 
-  InitAllService()
-  {
+  InitAllService() {
     this.hs.init();
     this.edihs.init();
     this.ediord.init();
@@ -120,7 +119,7 @@ export class LoginComponent {
 
     this.loading = true;
 
-    this.gs.globalVariables.appid =  this.gs.getGuid();
+    this.gs.globalVariables.appid = this.gs.getGuid();
 
     this.loginservice.Login(this.username, this.password, this.company_code)
       .subscribe(response => {
@@ -181,7 +180,7 @@ export class LoginComponent {
         this.loading = false;
         this.gs.MenuList = response.list;
         this.gs.Modules = response.modules;
-        this.gs.trkCaptionList= response.trklist;
+        this.gs.trkCaptionList = response.trklist;
 
         let data = response.data;
         this.gs.globalVariables.comp_pkid = data.comp_pkid;

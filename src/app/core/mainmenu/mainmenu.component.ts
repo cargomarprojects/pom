@@ -24,8 +24,6 @@ export class MainmenuComponent implements OnInit {
   isMobile = false;
   isCollapsed = false;
 
-  public isNavbarCollapsed = true;
-
   id: string = "";
 
   constructor(
