@@ -65,47 +65,37 @@
     </div>
 </div>
 
-
-<div *ngIf="mode=='EDIT'">
-    <div class="row">
-          <!-- <div class="col-sm-6 page-body-ns-mtl">
+<div class="row" *ngIf="mode=='EDIT'">
+    <div class="col-sm-6 p-0">
+        <div class="page-body-ns-mtl">
             <app-trk-list [parentid]="pkid" [type]="type" [menuid]="menuid" [RecordList]="TrackList"></app-trk-list>
         </div>
-        <div class="col-sm-6 page-body-ns-mtlr">
+    </div>
+
+    <div class="col-sm-6 p-0">
+        <div class="page-body-ns-mtrl">
             <app-cntr *ngIf="type=='SEA EXPORT'" [parentid]="pkid" [type]="type" [menuid]="menuid"
                 [RecordList]="CntrList"></app-cntr>
-        </div> -->
-
-        <div class="col-sm-6 p-0">
-            <div class="page-body-ns-mtl">
-                <app-trk-list [parentid]="pkid" [type]="type" [menuid]="menuid" [RecordList]="TrackList"></app-trk-list>
-            </div>
         </div>
-
-        <div class="col-sm-6 p-0">
-            <div class="page-body-ns-mtrl">
-                <app-cntr *ngIf="type=='SEA EXPORT'" [parentid]="pkid" [type]="type" [menuid]="menuid"
-                    [RecordList]="CntrList"></app-cntr>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-6 p-0">
-            <div class="page-body-ns-mtl">
-                <app-hbl [parentid]="pkid" [type]="type" [menuid]="menuid" [RecordList]="HblList"></app-hbl>
-            </div>
-        </div>
-
-        <div class="col-sm-6 p-0">
-            <div class="page-body-ns-mtrl">
-                <app-link-cntr-hbl *ngIf="type=='SEA EXPORT'" [parentid]="pkid" [type]="type" [menuid]="menuid"
-                    [RecordList]="LinkList"></app-link-cntr-hbl>
-            </div>
-        </div>
-
     </div>
 </div>
+
+<div class="row" *ngIf="mode=='EDIT'">
+    <div class="col-sm-6 p-0">
+        <div class="page-body-ns-mtl">
+            <app-hbl [parentid]="pkid" [type]="type" [menuid]="menuid" [RecordList]="HblList"></app-hbl>
+        </div>
+    </div>
+
+    <div class="col-sm-6 p-0">
+        <div class="page-body-ns-mtrl">
+            <app-link-cntr-hbl *ngIf="type=='SEA EXPORT'" [parentid]="pkid" [type]="type" [menuid]="menuid"
+                [RecordList]="LinkList"></app-link-cntr-hbl>
+        </div>
+    </div>
+
+</div>
+
 
 <ng-template #doc let-c="close" let-d="dismiss">
     <div class="modal-body">

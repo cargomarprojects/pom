@@ -1,8 +1,9 @@
-<div class="row">
-    <label style="color: black;font-weight: bold;background-color: skyblue;" class="col-sm-12 p-1">{{type=='SEA
+<div class="page-body-header-ns">
+    <h5>{{type=='SEA
         EXPORT'?'Container':''}}
         Tracking
-        <i (click)="ShowTracking(trackingdet)" style="cursor: pointer;" class="fa fa-pencil ml-2"></i></label>
+        <i (click)="ShowTracking(trackingdet)" style="cursor: pointer;" class="fa fa-pencil ml-2"></i>
+    </h5>
 </div>
 <div *ngIf="type=='SEA EXPORT'||type=='SEA IMPORT'" class="table-responsive fixedTableHead "
     style="background-color: white;height: 274px;">
