@@ -222,9 +222,6 @@ hr {
 }
 
 
-
-
-
 /* Scrollbar styles for webkit browsers */
 ::-webkit-scrollbar {
   width: 8px;
@@ -250,4 +247,51 @@ hr {
   background-color: #555;
   cursor: pointer;
   /* Color of the scrollbar thumb when hovered */
+}
+
+
+
+.page-header-ns {
+  display: flex;
+  justify-content: baseline;
+  align-items: baseline;
+  gap: 4px;
+  color: chocolate;
+  margin: 10px !important;
+  padding: 15px !important;
+  background-color: rgb(235, 235, 235);
+}
+
+.page-header-ns h5 {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.page-body-ns {
+  margin: 10px !important;
+  padding: 15px !important;
+  background-color: rgb(235, 235, 235);
+  /* border-color: lightgray; */
+  /* border-style: solid; */
+  /* border-width: 1px 1px 0px 1px; */
+}
+
+.page-body-ns-mtl {
+  margin-top: 10px !important;
+  margin-left: 10px !important;
+  padding: 15px !important;
+  background-color: rgb(235, 235, 235);
+  /* border-color: lightgray; */
+  /* border-style: solid; */
+  /* border-width: 1px 1px 0px 1px; */
+}
+.page-body-ns-mtlr {
+  margin-top: 10px !important;
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+  padding: 15px !important;
+  background-color: rgb(235, 235, 235);
+  /* border-color: lightgray; */
+  /* border-style: solid; */
+  /* border-width: 1px 1px 0px 1px; */
 }

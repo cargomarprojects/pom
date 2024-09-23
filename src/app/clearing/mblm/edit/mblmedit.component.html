@@ -1,114 +1,114 @@
-<!-- <div class="page-header">
+<div class="row page-header-ns">
     <h5>{{title}}</h5>
-    <button class="btn btn-info btn-sm" (click)="ActionHandler('ADD')">New</button>
-    <button class="btn btn-info btn-sm" (click)="Close()">Return</button>
-</div> -->
-<!-- <div style="background-color: #f3f3f3;height: calc(100vh - 115px);"> -->
-<div class="page-body line-bottom" style="background-color: #f3f3f3;height:875px;">
-    <div class="pl-4 pr-4 pt-4">
-        <div class="row p-4" style="background-color: rgb(235, 235, 235);">
-            <h5 class="mr-1 mt-1" style="color: chocolate;">{{title}}</h5>
-            <button class="btn btn-info btn-sm mr-1" (click)="ActionHandler('ADD')">New</button>
-            <button class="btn btn-info btn-sm mr-1" (click)="Close()">Return</button>
+    <button class="btn btn-info btn-sm mr-1" (click)="ActionHandler('ADD')">New</button>
+    <button class="btn btn-info btn-sm mr-1" (click)="Close()">Return</button>
+</div>
+<div class="row page-body-ns-mtlr">
+    <div class="col-sm-3">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label col-form-label-sm">Sl#</label>
+            <div class="col-sm-9">
+                <input type="text" style="color:red; font-weight:bold" class="form-control form-control-sm"
+                    [(ngModel)]="Record.bl_slno" [disabled]="true" required maxlength="15" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label col-form-label-sm">Date</label>
+            <div class="col-sm-9">
+                <app-date [inputdate]="Record.bl_date" (ValueChanged)="Record.bl_date=$event"></app-date>
+            </div>
         </div>
     </div>
-    <div class="p-4">
-        <div class="row p-4" style="background-color: rgb(235, 235, 235);">
-            <div class="col-sm-3 mx-0 px-0">
-                <div class="form-group row">
-                    <label style="padding-right:0" class="col-sm-3 col-form-label col-form-label-sm">Sl#</label>
-                    <div class="col-sm-9 pr-0">
-                        <input type="text" style="color:red; font-weight:bold" class="form-control form-control-sm"
-                            [(ngModel)]="Record.bl_slno" [disabled]="true" required maxlength="15" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label style="padding-right:0" class="col-sm-3 col-form-label col-form-label-sm">Date</label>
-                    <div class="col-sm-9 pr-0">
-                        <app-date [inputdate]="Record.bl_date" (ValueChanged)="Record.bl_date=$event"></app-date>
-                    </div>
-                </div>
+    <div class="col-sm-3">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label col-form-label-sm">Booking#</label>
+            <div class="col-sm-9">
+                <InputBox [(inputModel)]="Record.bl_book_no" [maxlength]="60" [uppercase]=true></InputBox>
             </div>
-            <div class="col-sm-3 mx-0 px-0">
-                <div class="form-group row">
-                    <label style="padding-right:0" class="col-sm-3 col-form-label col-form-label-sm">Booking#</label>
-                    <div class="col-sm-9 pr-0">
-                        <InputBox [(inputModel)]="Record.bl_book_no" [maxlength]="60" [uppercase]=true></InputBox>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label style="padding-right:0" class="col-sm-3 col-form-label col-form-label-sm">Master#</label>
-                    <div class="col-sm-9 pr-0">
-                        <InputBox [(inputModel)]="Record.bl_no" [maxlength]="60" [uppercase]=true></InputBox>
-                    </div>
-                </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label col-form-label-sm">Master#</label>
+            <div class="col-sm-9">
+                <InputBox [(inputModel)]="Record.bl_no" [maxlength]="60" [uppercase]=true></InputBox>
             </div>
-
-            <div class="col-sm-3 mx-0 px-0">
-                <div class="form-group row">
-                    <label style="padding-right:0" class="col-sm-3 col-form-label col-form-label-sm">Carrier</label>
-                    <div class="col-sm-9 pr-0">
-                        <app-autocomplete3 [controlname]="'CARRIER'" [tabletype]="'PARAM'"
-                            [subtype]="type=='SEA EXPORT'?'SEA CARRIER':'AIR CARRIER'" [displaycolumn]="'CODE'"
-                            [displaydata]="Record.bl_carrier_code" (ValueChanged)="LovSelected($event)" [where]="">
-                        </app-autocomplete3>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label style="padding-right:0" class="col-sm-3 col-form-label col-form-label-sm"></label>
-                    <div class="col-sm-9 pr-0">
-                        <InputBox [(inputModel)]="Record.bl_carrier_name" [maxlength]="100" [uppercase]=true
-                            [disabled]=true>
-                        </InputBox>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3 mx-0 px-0">
-                <div class="form-group row">
-                    <label style="padding-right:0" class="col-sm-3 col-form-label col-form-label-sm"></label>
-                    <div class="col-sm-9 pr-0">
-                        <button [hidden]="disableSave" (click)="Save()"
-                            class="btn btn-success btn-md mr-1">{{mode==='ADD'?'Save':'Update'}}</button>
-                        <button [hidden]="disableSave" *ngIf="mode == 'EDIT' && bDocs" (click)="ShowDocuments(doc)"
-                            class="btn btn-success btn-md">Documents</button>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
-    <div *ngIf="mode=='EDIT'">
-        <div class="row">
-            <div class="col-sm-6 pr-2">
+
+    <div class="col-sm-3">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label col-form-label-sm">Carrier</label>
+            <div class="col-sm-9">
+                <app-autocomplete3 [controlname]="'CARRIER'" [tabletype]="'PARAM'"
+                    [subtype]="type=='SEA EXPORT'?'SEA CARRIER':'AIR CARRIER'" [displaycolumn]="'CODE'"
+                    [displaydata]="Record.bl_carrier_code" (ValueChanged)="LovSelected($event)" [where]="">
+                </app-autocomplete3>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label col-form-label-sm"></label>
+            <div class="col-sm-9">
+                <InputBox [(inputModel)]="Record.bl_carrier_name" [maxlength]="100" [uppercase]=true [disabled]=true>
+                </InputBox>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label col-form-label-sm"></label>
+            <div class="col-sm-9">
+                <button [hidden]="disableSave" (click)="Save()"
+                    class="btn btn-success btn-md mr-1">{{mode==='ADD'?'Save':'Update'}}</button>
+                <button [hidden]="disableSave" *ngIf="mode == 'EDIT' && bDocs" (click)="ShowDocuments(doc)"
+                    class="btn btn-success btn-md">Documents</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="mode=='EDIT'">
+    <div class="row">
+          <!-- <div class="col-sm-6 page-body-ns-mtl">
+            <app-trk-list [parentid]="pkid" [type]="type" [menuid]="menuid" [RecordList]="TrackList"></app-trk-list>
+        </div>
+        <div class="col-sm-6 page-body-ns-mtlr">
+            <app-cntr *ngIf="type=='SEA EXPORT'" [parentid]="pkid" [type]="type" [menuid]="menuid"
+                [RecordList]="CntrList"></app-cntr>
+        </div> -->
+
+        <div class="col-sm-6 p-0">
+            <div class="page-body-ns-mtl">
                 <app-trk-list [parentid]="pkid" [type]="type" [menuid]="menuid" [RecordList]="TrackList"></app-trk-list>
             </div>
-            <div class="col-sm-6">
+        </div>
+
+        <div class="col-sm-6 p-0">
+            <div class="page-body-ns-mtlr">
                 <app-cntr *ngIf="type=='SEA EXPORT'" [parentid]="pkid" [type]="type" [menuid]="menuid"
                     [RecordList]="CntrList"></app-cntr>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-6 pr-2 ">
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 p-0">
+            <div class="page-body-ns-mtl">
                 <app-hbl [parentid]="pkid" [type]="type" [menuid]="menuid" [RecordList]="HblList"></app-hbl>
             </div>
-            <div class="col-sm-6">
+        </div>
+
+        <div class="col-sm-6 p-0">
+            <div class="page-body-ns-mtlr">
                 <app-link-cntr-hbl *ngIf="type=='SEA EXPORT'" [parentid]="pkid" [type]="type" [menuid]="menuid"
                     [RecordList]="LinkList"></app-link-cntr-hbl>
             </div>
         </div>
+
     </div>
-    <ng-template #doc let-c="close" let-d="dismiss">
-        <!-- <div class="modal-header">
-        <h4 class="modal-title">Documents</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div> -->
-        <div class="modal-body">
-            <app-upload [pkid]="pkid" [type]="'MBL-DOCUMENTS'" (closeModalWindow)="CloseModal2($event)"></app-upload>
-        </div>
-        <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-outline-light" (click)="c('Close click')">Close</button>
-    </div> -->
-    </ng-template>
 </div>
+
+<ng-template #doc let-c="close" let-d="dismiss">
+    <div class="modal-body">
+        <app-upload [pkid]="pkid" [type]="'MBL-DOCUMENTS'" (closeModalWindow)="CloseModal2($event)"></app-upload>
+    </div>
+</ng-template>
