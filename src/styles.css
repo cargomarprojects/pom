@@ -302,3 +302,14 @@ hr {
   font-size: 12px;
   font-weight: 500;
 }
+
+.fixedTableHead-ns  {
+  padding: 0px 1px 1px 1px;
+  background-color: white;
+}
+
+.fixedTableHead-ns thead th {
+  position: sticky;
+  top: 0;
+  background-color: #c7dbd2;
+}
