@@ -72,9 +72,9 @@
         </div>
     </div>
 
-    <div class="col-sm-6 p-0">
+    <div *ngIf="type=='SEA EXPORT'" class="col-sm-6 p-0">
         <div class="page-body-ns-mtrl">
-            <app-cntr *ngIf="type=='SEA EXPORT'" [parentid]="pkid" [type]="type" [menuid]="menuid"
+            <app-cntr [parentid]="pkid" [type]="type" [menuid]="menuid"
                 [RecordList]="CntrList"></app-cntr>
         </div>
     </div>
@@ -87,9 +87,9 @@
         </div>
     </div>
 
-    <div class="col-sm-6 p-0">
+    <div *ngIf="type=='SEA EXPORT'" class="col-sm-6 p-0">
         <div class="page-body-ns-mtrl">
-            <app-link-cntr-hbl *ngIf="type=='SEA EXPORT'" [parentid]="pkid" [type]="type" [menuid]="menuid"
+            <app-link-cntr-hbl [parentid]="pkid" [type]="type" [menuid]="menuid"
                 [RecordList]="LinkList"></app-link-cntr-hbl>
         </div>
     </div>
