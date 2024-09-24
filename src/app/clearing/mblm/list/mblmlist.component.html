@@ -1,152 +1,109 @@
-<!-- <div class="page-header">
+<div class="row page-header-ns">
     <h5>{{ms.title}}</h5>
-    <button class="btn btn-info btn-sm" (click)="ActionHandler('ADD','')">New</button>
-    <button class="btn btn-info btn-sm" (click)="Close()">Return</button>
-</div> -->
-<div class="page-body line-bottom" style="background-color: #f3f3f3;height:875px;">
-    <div class="pl-4 pr-4 pt-4">
-        <div class="row p-4" style="background-color: rgb(235, 235, 235);">
-            <h5 class="mr-1 mt-1" style="color: chocolate;">{{ms.title}}</h5>
-            <button class="btn btn-info btn-sm mr-1" (click)="ActionHandler('ADD','')">New</button>
-            <button class="btn btn-info btn-sm mr-1" (click)="Close()">Return</button>
-        </div>
-    </div>
-
-    <!-- <div class="page-body">
-        <div class="row">
-            <div class="col-sm-5">
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label col-form-label-sm">Search</label>
-                    <div class="col-sm-10">
-                        <InputBox [(inputModel)]="ms.record.searchQuery.searchstring" [maxlength]="500"
-                            [uppercase]=true>
-                        </InputBox>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-group row">
-                    <div class="col-sm-9 offset-">
-                        <button (click)="ms.List('NEW')" class="btn btn-info btn-sm btn-block">Search</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <div class="pl-4 pr-4 pt-4">
-        <div class="row p-4" style="background-color: rgb(235, 235, 235);">
-            <div class="col-sm-5">
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label col-form-label-sm">Search</label>
-                    <div class="col-sm-10">
-                        <InputBox [(inputModel)]="ms.record.searchQuery.searchstring" [maxlength]="500"
-                            [uppercase]=true>
-                        </InputBox>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-group row">
-                    <div class="col-sm-9 offset-">
-                        <button (click)="ms.List('NEW')" class="btn btn-info btn-sm btn-block">Search</button>
-                    </div>
-                </div>
+    <button class="btn btn-info btn-sm mr-1" (click)="ActionHandler('ADD','')">New</button>
+    <button class="btn btn-info btn-sm mr-1" (click)="Close()">Return</button>
+</div>
+<div class="row page-search-ns">
+    <div class="col-sm-5">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label col-form-label-sm">Search</label>
+            <div class="col-sm-10">
+                <InputBox [(inputModel)]="ms.record.searchQuery.searchstring" [maxlength]="500" [uppercase]=true>
+                </InputBox>
             </div>
         </div>
     </div>
+    <div class="col-sm-2">
+        <div class="form-group row">
+            <div class="col-sm-9 offset-">
+                <button (click)="ms.List('NEW')" class="btn btn-info btn-sm btn-block">Search</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <div class="p-4" >
-        <div class="row pl-2 pr-2 pt-2" style="background-color: rgb(235, 235, 235);" >
-            <div *ngIf="ms.record.searchQuery.page_count">
-                <div class="page-pagination1">
-                    <ul class="pagination pagination-sm my-1">
-                        <li class="page-item"><a class="page-link">Page
-                                {{ms.record.searchQuery.page_current}}/{{ms.record.searchQuery.page_count}}
-                                (Records-{{ms.record.searchQuery.page_rowcount}})</a></li>
-                        <li class="page-item"><a class="page-link" (click)="ms.List('FIRST')"><span
-                                    class="fa fa-backward"></span></a>
-                        </li>
-                        <li class="page-item"><a class="page-link" (click)="ms.List('PREV')"><span
-                                    class="fa fa-arrow-left"></span></a>
-                        </li>
-                        <li class="page-item"><a class="page-link" (click)="ms.List('NEXT')"><span
-                                    class="fa fa-arrow-right"></span></a>
-                        </li>
-                        <li class="page-item"><a class="page-link" (click)="ms.List('LAST')"><span
-                                    class="fa fa-forward"></span></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+<div class="page-body-ns">
+    <div *ngIf="ms.record.searchQuery.page_count">
+        <div class="page-pagination-ns">
+            <ul class="pagination pagination-sm mb-2">
+                <li class="page-item"><a class="page-link">Page
+                        {{ms.record.searchQuery.page_current}}/{{ms.record.searchQuery.page_count}}
+                        (Records-{{ms.record.searchQuery.page_rowcount}})</a></li>
+                <li class="page-item"><a class="page-link" (click)="ms.List('FIRST')"><span
+                            class="fa fa-backward"></span></a>
+                </li>
+                <li class="page-item"><a class="page-link" (click)="ms.List('PREV')"><span
+                            class="fa fa-arrow-left"></span></a>
+                </li>
+                <li class="page-item"><a class="page-link" (click)="ms.List('NEXT')"><span
+                            class="fa fa-arrow-right"></span></a>
+                </li>
+                <li class="page-item"><a class="page-link" (click)="ms.List('LAST')"><span
+                            class="fa fa-forward"></span></a>
+                </li>
+            </ul>
         </div>
-        <div class="row pl-2 pr-2 pt-2" style="background-color: rgb(235, 235, 235);">
-            <div>
-                <div class="table-responsive fixedTableHead  my-0 pl-1 pr-1 pt-0 pb-1"
-                    style="background-color: white;height: calc(100vh - 385px);">
-                    <table class="table table-hover table-sm table-bordered">
-                        <thead>
-                            <tr class="table-header">
-                                <th>SL#</th>
-                                <th>EDIT</th>
-                                <th>DATE</th>
-                                <th>BOOKING#</th>
-                                <th>MASTER#</th>
-                                <th>HOUSE#</th>
-                                <th *ngIf="ms.type=='SEA EXPORT'">CONTAINER#</th>
-                                <th>PLAN#</th>
-                                <th>WEEK#</th>
-                                <th>CONSIGNEE</th>
-                                <th>CARRIER</th>
-                                <th>POL.AGENT</th>
-                                <th>POD.AGENT</th>
-                            </tr>
-                        </thead>
-                        <tbody class="page-body-tbody">
-                            <tr *ngFor="let rec of ms.record.records" (mousedown)="ms.selectRowId(rec.bl_pkid)"
-                                [ngClass]="{'table-info':rec.bl_pkid == ms.getRowId()}">
-                                <td>{{rec.bl_slno}}</td>
-                                <td (click)="ActionHandler('EDIT',rec.bl_pkid)" class="hlink"><i
-                                        class="fa fa-pencil"></i>
-                                </td>
-                                <td>{{rec.bl_date}}</td>
-                                <td>{{rec.bl_book_no}}</td>
-                                <td>{{rec.bl_no}}</td>
-                                <td>{{rec.bl_hbl_nos}}</td>
-                                <td *ngIf="ms.type=='SEA EXPORT'">{{rec.bl_cntr_nos}}</td>
-                                <td>{{rec.vp_plan_no==0?'':rec.vp_plan_no}}</td>
-                                <td>{{rec.vp_week_no==0?'':rec.vp_week_no}}</td>
-                                <td>{{rec.vp_imp_name}}</td>
-                                <td>{{rec.bl_carrier_name}}</td>
-                                <td>{{rec.vp_pol_agent_name}}</td>
-                                <td>{{rec.vp_pod_agent_name}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="row p-2" style="background-color: rgb(235, 235, 235);">
-            <div *ngIf="ms.record.searchQuery.page_count">
-                <div class="page-pagination1 line-bottom1">
-                    <ul class="pagination pagination-sm my-1">
-                        <li class="page-item"><a class="page-link">Page
-                                {{ms.record.searchQuery.page_current}}/{{ms.record.searchQuery.page_count}}
-                                (Records-{{ms.record.searchQuery.page_rowcount}})</a></li>
-                        <li class="page-item"><a class="page-link" (click)="ms.List('FIRST')"><span
-                                    class="fa fa-backward"></span></a>
-                        </li>
-                        <li class="page-item"><a class="page-link" (click)="ms.List('PREV')"><span
-                                    class="fa fa-arrow-left"></span></a>
-                        </li>
-                        <li class="page-item"><a class="page-link" (click)="ms.List('NEXT')"><span
-                                    class="fa fa-arrow-right"></span></a>
-                        </li>
-                        <li class="page-item"><a class="page-link" (click)="ms.List('LAST')"><span
-                                    class="fa fa-forward"></span></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+    </div>
+
+    <div class="table-responsive fixedTableHead-ns" style="height: calc(100vh - 340px);">
+        <table class="table table-hover table-sm table-bordered">
+            <thead>
+                <tr class="table-header">
+                    <th>SL#</th>
+                    <th>EDIT</th>
+                    <th>DATE</th>
+                    <th>BOOKING#</th>
+                    <th>MASTER#</th>
+                    <th>HOUSE#</th>
+                    <th *ngIf="ms.type=='SEA EXPORT'">CONTAINER#</th>
+                    <th>PLAN#</th>
+                    <th>WEEK#</th>
+                    <th>CONSIGNEE</th>
+                    <th>CARRIER</th>
+                    <th>POL.AGENT</th>
+                    <th>POD.AGENT</th>
+                </tr>
+            </thead>
+            <tbody class="page-body-tbody">
+                <tr *ngFor="let rec of ms.record.records" (mousedown)="ms.selectRowId(rec.bl_pkid)"
+                    [ngClass]="{'table-info':rec.bl_pkid == ms.getRowId()}">
+                    <td>{{rec.bl_slno}}</td>
+                    <td (click)="ActionHandler('EDIT',rec.bl_pkid)" class="hlink"><i class="fa fa-pencil"></i>
+                    </td>
+                    <td>{{rec.bl_date}}</td>
+                    <td>{{rec.bl_book_no}}</td>
+                    <td>{{rec.bl_no}}</td>
+                    <td>{{rec.bl_hbl_nos}}</td>
+                    <td *ngIf="ms.type=='SEA EXPORT'">{{rec.bl_cntr_nos}}</td>
+                    <td>{{rec.vp_plan_no==0?'':rec.vp_plan_no}}</td>
+                    <td>{{rec.vp_week_no==0?'':rec.vp_week_no}}</td>
+                    <td>{{rec.vp_imp_name}}</td>
+                    <td>{{rec.bl_carrier_name}}</td>
+                    <td>{{rec.vp_pol_agent_name}}</td>
+                    <td>{{rec.vp_pod_agent_name}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="ms.record.searchQuery.page_count">
+        <div class="page-pagination-ns">
+            <ul class="pagination pagination-sm mt-2">
+                <li class="page-item"><a class="page-link">Page
+                        {{ms.record.searchQuery.page_current}}/{{ms.record.searchQuery.page_count}}
+                        (Records-{{ms.record.searchQuery.page_rowcount}})</a></li>
+                <li class="page-item"><a class="page-link" (click)="ms.List('FIRST')"><span
+                            class="fa fa-backward"></span></a>
+                </li>
+                <li class="page-item"><a class="page-link" (click)="ms.List('PREV')"><span
+                            class="fa fa-arrow-left"></span></a>
+                </li>
+                <li class="page-item"><a class="page-link" (click)="ms.List('NEXT')"><span
+                            class="fa fa-arrow-right"></span></a>
+                </li>
+                <li class="page-item"><a class="page-link" (click)="ms.List('LAST')"><span
+                            class="fa fa-forward"></span></a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

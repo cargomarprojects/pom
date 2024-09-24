@@ -313,3 +313,17 @@ hr {
   top: 0;
   background-color: #c7dbd2;
 }
+
+.page-search-ns {
+  margin: 10px !important;
+  padding: 15px !important;
+  background-color: rgb(235, 235, 235);
+}
+
+.page-pagination-ns {
+  cursor: pointer;
+  margin: 0px 0px 0px 0px;
+  padding: 2px 2px 2px 0px;
+  background-color: rgb(235, 235, 235);
+}
+
