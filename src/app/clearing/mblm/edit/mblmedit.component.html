@@ -66,13 +66,13 @@
 </div>
 
 <div class="row" *ngIf="mode=='EDIT'">
-    <div class="col-sm-6 p-0">
+    <div class="col-md-6 p-0">
         <div class="page-body-ns-mtl">
             <app-trk-list [parentid]="pkid" [type]="type" [menuid]="menuid" [RecordList]="TrackList"></app-trk-list>
         </div>
     </div>
 
-    <div *ngIf="type=='SEA EXPORT'" class="col-sm-6 p-0">
+    <div *ngIf="type=='SEA EXPORT'" class="col-md-6 p-0">
         <div class="page-body-ns-mtrl">
             <app-cntr [parentid]="pkid" [type]="type" [menuid]="menuid"
                 [RecordList]="CntrList"></app-cntr>
@@ -81,13 +81,13 @@
 </div>
 
 <div class="row" *ngIf="mode=='EDIT'">
-    <div class="col-sm-6 p-0">
+    <div class="col-md-6 p-0">
         <div class="page-body-ns-mtl">
             <app-hbl [parentid]="pkid" [type]="type" [menuid]="menuid" [RecordList]="HblList"></app-hbl>
         </div>
     </div>
 
-    <div *ngIf="type=='SEA EXPORT'" class="col-sm-6 p-0">
+    <div *ngIf="type=='SEA EXPORT'" class="col-md-6 p-0">
         <div class="page-body-ns-mtrl">
             <app-link-cntr-hbl [parentid]="pkid" [type]="type" [menuid]="menuid"
                 [RecordList]="LinkList"></app-link-cntr-hbl>
