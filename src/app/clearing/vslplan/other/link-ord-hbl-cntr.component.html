@@ -6,7 +6,7 @@
     <div *ngIf="type=='SEA EXPORT'" class="table-responsive fixedTableHead  my-0 p-0"
         [style.height]="RecordList.length>5?'132px':'auto'" [style.overflow-y]="RecordList.length>5?'scroll':'auto'">
         <table class="table table-hover table-sm table-bordered">
-            <thead class="table-success">
+            <thead>
                 <tr class="table-header">
                     <th width="5%" (click)="SelectDeselect()"><input type="checkbox" [(ngModel)]="cntrd_selected"></th>
                     <th width="20%">MASTER#</th>
@@ -30,7 +30,7 @@
     <div *ngIf="type=='AIR EXPORT'" class="table-responsive fixedTableHead  my-0 p-0"
         [style.height]="RecordList.length>5?'132px':'auto'" [style.overflow-y]="RecordList.length>5?'scroll':'auto'">
         <table class="table table-hover table-sm table-bordered">
-            <thead class="table-success">
+            <thead>
                 <tr class="table-header">
                     <th width="5%" (click)="SelectDeselect()"><input type="checkbox" [(ngModel)]="cntrd_selected"></th>
                     <th width="20%">MASTER#</th>

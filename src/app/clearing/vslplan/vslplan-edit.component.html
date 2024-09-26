@@ -171,7 +171,7 @@
 <div *ngIf="mode=='EDIT'" class="page-body">
   <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 290px);">
     <table class="table table-hover table-sm table-bordered">
-      <thead class="table-success">
+      <thead>
         <tr class="table-header">
           <th><input type="checkbox" (click)="SelectDeselect()" [(ngModel)]="ord_selected"></th>
           <th>UID</th>
@@ -253,8 +253,8 @@
           <td colspan="100%">
             <div class="table-responsive my-0 p-0">
               <table class="table table-hover table-sm table-bordered">
-                <thead class="page-body-thead">
-                  <tr>
+                <thead>
+                  <tr class="table-header">
                     <th width="10%">SL#</th>
                     <th width="20%">MASTER#</th>
                     <th width="20%">HOUSE#</th>
