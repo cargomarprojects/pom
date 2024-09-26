@@ -1,10 +1,10 @@
 import { Component, Input, Output, OnInit, OnDestroy, EventEmitter, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { GlobalService } from '../../../../../core/services/global.service';
-import { Trackingm } from '../../../../models/tracking';
-import { TrkService } from '../../../../services/trk.service';
-import { SearchTable } from '../../../../../shared/models/searchtable';
+import { GlobalService } from '../../../../../../core/services/global.service';
+import { Trackingm } from '../../../../../models/tracking';
+import { TrkService } from '../../../../../services/trk.service';
+import { SearchTable } from '../../../../../../shared/models/searchtable';
 
 @Component({
     selector: 'app-trk-list',
