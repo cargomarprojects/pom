@@ -1,48 +1,48 @@
 <div class="page-body line-bottom  mt-2">
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-sm-12 mx-0 px-0">
             <div class="form-group row mt-1">
                 <label style="color: black;font-weight: bold;background-color: skyblue;" class="col-sm-12 p-1">Tracking
                     Details </label>
             </div>
         </div>
+    </div> -->
+    <div class="page-body-header-ns">
+        <h5>Tracking
+            Details
+        </h5>
     </div>
-    <hr class="mb-1">
 
-    <div *ngIf="type=='SEA EXPORT'" class="row">
-        <div class="col-sm-12 mx-0 px-0">
+    <div *ngIf="type=='SEA EXPORT'" class="row modal-header-ns">
+        <div class="col-sm-12">
             <div class="row">
-                <div class="col-sm-2 mx-0 px-0">
+                <div class="col-sm-3">
                     <div class="form-group row">
-                        <label class="col-sm-5 col-form-label col-form-label-sm pr-0">DESC</label>
-                        <label class="col-sm-7 col-form-label col-form-label-sm pr-0">STATUS</label>
+                        <label class="col-sm-2 col-form-label col-form-label-sm"></label>
+                        <label class="col-sm-5 col-form-label col-form-label-sm">DESC</label>
+                        <label class="col-sm-5 col-form-label col-form-label-sm">STATUS</label>
                     </div>
                 </div>
-
-                <div class="col-sm-5 mx-0 px-0">
+                <div class="col-sm-5">
                     <div class="form-group row">
-                        <label class="col-sm-6 col-form-label col-form-label-sm pr-0">PORT</label>
-                        <label class="col-sm-6 col-form-label col-form-label-sm pr-0">VESSEL</label>
+                        <label class="col-sm-8 col-form-label col-form-label-sm">PORT</label>
+                        <label class="col-sm-3 col-form-label col-form-label-sm">DATE</label>
+                        <label class="col-sm-1 col-form-label col-form-label-sm">CONFM</label>
                     </div>
                 </div>
-                <div class="col-sm-1 mx-0 px-0">
+                <div class="col-sm-4">
                     <div class="form-group row">
-                        <label class="col-sm-12 col-form-label col-form-label-sm pr-0">VOYAGE</label>
-                    </div>
-                </div>
-
-                <div class="col-sm-4 mx-0 px-0">
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label col-form-label-sm pr-0">SI CUT-OFF</label>
-                        <label class="col-sm-3 col-form-label col-form-label-sm pr-0">CY CUT-OFF</label>
-                        <label class="col-sm-3 col-form-label col-form-label-sm pr-0">DATE</label>
-                        <label class="col-sm-3 col-form-label col-form-label-sm pr-0">CONFM</label>
+                        <label class="col-sm-8 col-form-label col-form-label-sm">VESSEL</label>
+                        <label class="col-sm-4 col-form-label col-form-label-sm">VOYAGE</label>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <hr *ngIf="type=='AIR EXPORT'" class="mt-1">
     <div *ngIf="type=='AIR EXPORT'" class="row">
+
         <div class="col-sm-8 mx-0 px-0">
             <div class="row">
                 <div class="col-sm-1 mx-0 px-0">
@@ -143,7 +143,7 @@
                     </div>
                 </div>
                 <div class="col-sm-8 mx-0 px-0">
-                    <div class="row">
+                    <div class="row m-0 p-0">
                         <div class="col-sm-3 mx-0 px-0">
                             <div class="form-group row">
                                 <label class="col-sm-12  col-form-label col-form-label-sm pr-0">CONFM</label>
@@ -182,11 +182,12 @@
                 </div>
             </div>
         </div>
+
     </div>
     <hr class="my-1">
     <div *ngFor="let rec of Record.TransitList; let i = index">
-        <app-transit [mRecord]="rec" [type]="type" [statuslist]="StatusList" [rowindex]="i" [selectedRow]="selectedRowIndex"   
-            (ModifiedRecords)="ModifiedRecords($event)">
+        <app-transit [mRecord]="rec" [type]="type" [statuslist]="StatusList" [rowindex]="i"
+            [selectedRow]="selectedRowIndex" (ModifiedRecords)="ModifiedRecords($event)">
         </app-transit>
         <hr class="my-1">
     </div>
@@ -255,14 +256,15 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="type=='SEA EXPORT'"  class="col-sm-4 mx-0 px-0">
+        <div *ngIf="type=='SEA EXPORT'" class="col-sm-4 mx-0 px-0">
             <div class="form-group row">
                 <div class="col-12">
-                    <button *ngIf="Record.TransitList.length" class="btn btn-info btn-sm mr-1" (click)="changePosition('UP')"><span
-                            class="fa fa-arrow-up"></span></button>
-                    <button *ngIf="Record.TransitList.length" class="btn btn-info btn-sm mr-1" (click)="changePosition('DOWN')"><span
-                            class="fa fa-arrow-down"></span></button>
-                    <label *ngIf="Record.TransitList.length" class="col-form-label col-form-label-sm">Click a row and use arrows to move
+                    <button *ngIf="Record.TransitList.length" class="btn btn-info btn-sm mr-1"
+                        (click)="changePosition('UP')"><span class="fa fa-arrow-up"></span></button>
+                    <button *ngIf="Record.TransitList.length" class="btn btn-info btn-sm mr-1"
+                        (click)="changePosition('DOWN')"><span class="fa fa-arrow-down"></span></button>
+                    <label *ngIf="Record.TransitList.length" class="col-form-label col-form-label-sm">Click a row and
+                        use arrows to move
                         between
                         rows</label>
                 </div>
