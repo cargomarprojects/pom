@@ -324,3 +324,7 @@ hr {
   padding: 2px 2px 2px 0px;
   background-color: rgb(235, 235, 235);
 }
+
+input[type='radio'] {
+  accent-color: chocolate;
+}

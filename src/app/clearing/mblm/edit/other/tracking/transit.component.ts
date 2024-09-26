@@ -19,6 +19,7 @@ export class TransitComponent {
   @Input() mRecord: Trackingm = new Trackingm;
   @Input() statuslist: Param[] = [];
   @Input() public rowindex: number = -1;
+  @Input() public selectedRow: number = -1;
 
   InitCompleted: boolean = false;
   menu_record: any;
@@ -30,6 +31,8 @@ export class TransitComponent {
   // PODRECORD: SearchTable = new SearchTable();
   ErrorMessage = "";
   InfoMessage = "";
+
+
   constructor(
     private route: ActivatedRoute,
     private gs: GlobalService
@@ -108,17 +111,21 @@ export class TransitComponent {
           this.mRecord.trk_voyage = this.mRecord.trk_voyage.toUpperCase().trim();
           break;
         }
-        case 'trk_vsl_name':
+      case 'trk_vsl_name':
         {
           this.mRecord.trk_vsl_name = this.mRecord.trk_vsl_name.toUpperCase().trim();
           break;
         }
-        case 'trk_pol_name':
+      case 'trk_pol_name':
         {
           this.mRecord.trk_pol_name = this.mRecord.trk_pol_name.toUpperCase().trim();
           break;
         }
     }
   }
-  
+
+  setRowIndex() {
+    if (this.ModifiedRecords != null)
+      this.ModifiedRecords.emit({ type: 'ROWINDEX', rindex: this.rowindex });
+  }
 }

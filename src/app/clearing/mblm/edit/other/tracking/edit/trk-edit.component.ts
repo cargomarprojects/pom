@@ -430,6 +430,8 @@ export class TrkEditComponent {
                 if (this.Record.TransitList.length == 0)
                     this.NewTransitRecord();
             }
+        } else if (params.type == "ROWINDEX") {
+            this.SetRowIndex(params.rindex);
         }
     }
 
