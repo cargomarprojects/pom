@@ -10,7 +10,7 @@ import {EdiHblComponent } from './edi/edihbl/edihbl.component';
 import { HouseListComponent } from './houselist/houselist.component';
 import { HouseEditComponent } from './houselist/edit/houseedit.component';
 import { VslPlanComponent } from './vslplan/vslplan.component';
-import { VslPlanEditComponent } from './vslplan/vslplan-edit.component';
+import { VslPlanEditComponent } from './vslplan/edit/vslplan-edit.component';
 import { MblmListComponent } from './mblm/list/mblmlist.component';
 import { MblmEditComponent } from './mblm/edit/mblmedit.component';
 

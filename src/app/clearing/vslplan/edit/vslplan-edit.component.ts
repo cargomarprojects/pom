@@ -1,13 +1,13 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
-import { GlobalService } from '../../core/services/global.service';
-import { Planm } from '../models/planm';
-import { VslPlanService } from '../services/vslplan.service';
-import { SearchTable } from '../../shared/models/searchtable';
-import { DateComponent } from '../../shared/date/date.component';
+import { GlobalService } from '../../../core/services/global.service';
+import { Planm } from '../../models/planm';
+import { VslPlanService } from '../../services/vslplan.service';
+import { SearchTable } from '../../../shared/models/searchtable';
+import { DateComponent } from '../../../shared/date/date.component';
 import { Location } from '@angular/common';
-import { Joborderm } from '../models/joborder';
+import { Joborderm } from '../../models/joborder';
 
 @Component({
   selector: 'app-vslplan-edit',
