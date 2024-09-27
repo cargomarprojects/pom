@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,Output, ViewChild, ElementRef,EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
@@ -20,7 +20,7 @@ export class FileUploadComponent {
   @Input() public canupload: boolean = true;
   @Input() public defaultdoctype: string = '';
   @Output() closeModalWindow = new EventEmitter<any>();
-  
+
   title = 'Documents';
   selectedId = "";
   ErrorMessage: string = '';
@@ -35,6 +35,8 @@ export class FileUploadComponent {
   loading = false;
   myFiles: string[] = [];
   sMsg: string = '';
+  uploadFileName: string = '';
+  bDragged: boolean = false;
 
   constructor(
     public gs: GlobalService,
@@ -102,8 +104,11 @@ export class FileUploadComponent {
 
 
 
-  getFileDetails(e: any) {
+  OldgetFileDetails(e: any) {
     //console.log (e.target.files);
+
+    this.getFileList(e.target.files);
+
     let isValidFile = true;
     let fname: string = '';
     this.filesSelected = false;
@@ -126,6 +131,49 @@ export class FileUploadComponent {
     }
   }
 
+  getFileDetails(e: any) {
+    //console.log (e.target.files);
+    this.getFileList(e.target.files);
+  }
+
+  getFileList(_files: any[] = []) {
+    if (this.gs.isBlank(_files)) {
+      return;
+    }
+    this.uploadFileName = '';
+    this.ErrorMessage = "";
+    let isValidFile = true;
+    let fname: string = '';
+    let fsize: number = 0;
+    this.filesSelected = false;
+    this.myFiles = [];
+    for (var i = 0; i < _files.length; i++) {
+      this.filesSelected = true;
+      fname = _files[i].name;
+      fsize = _files[i].size;
+      if (fname.indexOf('&') >= 0)
+        isValidFile = false;
+      if (fname.indexOf('%') >= 0)
+        isValidFile = false;
+      if (fname.indexOf('#') >= 0)
+        isValidFile = false;
+      if (fname.indexOf(',') >= 0)
+        isValidFile = false;
+      if (fname.indexOf('+') >= 0)
+        isValidFile = false;
+      this.myFiles.push(_files[i]);
+
+      if (this.uploadFileName != '')
+        this.uploadFileName += ', ';
+      this.uploadFileName += fname;
+    }
+
+    if (!isValidFile) {
+      this.filesSelected = false;
+      this.uploadFileName = '';
+      alert('Invalid File Name - &%,+#');
+    }
+  }
 
   uploadFiles() {
 
@@ -355,5 +403,34 @@ export class FileUploadComponent {
     this.closeModalWindow.emit({ saction: 'CLOSE' });
   }
 
+  onDragOver(event: any) {
+    event.preventDefault();
+    event.stopPropagation();
+    const dropArea = event.currentTarget as HTMLElement;
+    dropArea.classList.add('drag-over');
+    this.bDragged = true;
+  }
+
+  onDragLeave(event: any) {
+    event.preventDefault();
+    event.stopPropagation();
+    const dropArea = event.currentTarget as HTMLElement;
+    dropArea.classList.remove('drag-over');
+    this.bDragged = false;
+  }
+
+  onDrop(event: any) {
+    event.preventDefault();
+    event.stopPropagation();
+    const dropArea = event.currentTarget as HTMLElement;
+    dropArea.classList.remove('drag-over');
+    if (event.dataTransfer.files.length > 1) {
+      alert('Multiple files not allowed');
+      this.bDragged = false;
+      return;
+    }
+    this.getFileList(event.dataTransfer.files);
+    this.bDragged = false;
+  }
 
 }
