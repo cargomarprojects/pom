@@ -6,6 +6,7 @@ import { Customerm } from '../models/customer';
 import { CustomerService } from '../services/customer.service';
 import { SearchTable } from '../../shared/models/searchtable';
 import { Addressm } from '../models/addressm';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-customerm',
@@ -80,7 +81,7 @@ export class CustomerComponent {
   // Single Record for add/edit/view details
   Record: Customerm = new Customerm;
 
-  
+
 
   TypeList: any[] = [];
   ClassList: any[] = [];
@@ -97,6 +98,7 @@ export class CustomerComponent {
   constructor(
     private modalService: NgbModal,
     private mainService: CustomerService,
+    private location: Location,
     private route: ActivatedRoute,
     private gs: GlobalService
 
@@ -451,7 +453,7 @@ export class CustomerComponent {
     this.ErrorMessage = '';
     this.InfoMessage = '';
 
-    if ( this.gs.isBlank(this.Record.cust_code)) {
+    if (this.gs.isBlank(this.Record.cust_code)) {
       bret = false;
       sError = " | Code Cannot Be Blank";
     }
@@ -519,6 +521,13 @@ export class CustomerComponent {
   ShowHistory(history: any) {
     this.ErrorMessage = '';
     this.open(history);
+  }
+
+  Return() {
+    if (this.currentTab == 'DETAILS')
+      this.ActionHandler('LIST', '');
+    else
+      this.location.back();
   }
 
 }

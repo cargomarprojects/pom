@@ -2,7 +2,7 @@
   <h5>{{title}}</h5>
   <button (click)="ActionHandler('LIST','')" class="btn btn-info btn-sm">List</button>
   <button (click)="ActionHandler('ADD','')" class="btn btn-info btn-sm">New</button>
-  <button class="btn btn-info btn-sm" (click)="ActionHandler('LIST','')">Return</button>
+  <button class="btn btn-info btn-sm" (click)="Return()">Return</button>
 </div>
 
 <div *ngIf="currentTab=='LIST'" class="page-list">
