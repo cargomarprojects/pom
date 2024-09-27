@@ -305,7 +305,8 @@ hr {
 
 .fixedTableHead-ns  {
   padding: 0px 0px 2px 0px;
-  background-color: white;
+  /* background-color: white; */
+  background-color: rgb(245, 245, 245);
 }
 
 .fixedTableHead-ns thead th {
