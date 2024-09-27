@@ -321,7 +321,7 @@ hr {
 .page-pagination-ns {
   cursor: pointer;
   margin: 0px 0px 0px 0px;
-  padding: 2px 2px 2px 0px;
+  padding: 4px 2px 4px 0px;
   background-color: rgb(235, 235, 235);
 }
 
@@ -361,3 +361,21 @@ input[type='radio'] {
   align-items: center;
   justify-content: center;  
 }
+
+.page-item-ns {
+   margin: 1px;
+}
+
+.page-link-ns {
+  color: chocolate ;
+  font-weight: bold ;
+  font-size: 10px ;
+  padding: 2px ;
+  background-color: white;
+
+}
+
+.page-link-ns:hover {
+  background-color: rgb(235, 235, 235);
+}
+ 
