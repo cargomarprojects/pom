@@ -63,13 +63,13 @@
                         <app-date [inputdate]="mRecord.trk_cy_cutoff"
                             (ValueChanged)="mRecord.trk_cy_cutoff=$event"></app-date>
                     </div> -->
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <app-autocomplete3 [controlname]="'VESSEL'" [tabletype]="'PARAM'" [subtype]="'VESSEL'"
                             [displaycolumn]="'CODE'" [displaydata]="mRecord.trk_vsl_code"
                             (ValueChanged)="LovSelected($event)" [where]="">
                         </app-autocomplete3>
                     </div>
-                    <div class="col-sm-5">
+                    <div class="col-sm-4">
                         <input type="text" class="form-control form-control-sm" [(ngModel)]="mRecord.trk_vsl_name"
                             (blur)="OnBlur('trk_vsl_name')" />
                     </div>
