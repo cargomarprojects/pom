@@ -133,6 +133,8 @@ i {
   color: chocolate !important;
   font-weight: bold !important;
   font-size: 9px !important;
+  /* padding: 10px !important; */
+  padding: 5px 5px 5px 5px !important;
 }
 
 .btn {
