@@ -335,10 +335,6 @@ input[type='radio'] {
   accent-color: chocolate;
 }
 .modal-header-ns {
-  display: flex;
-  justify-content: baseline;
-  align-items: baseline;
-  gap: 4px;
   color: chocolate;
   font-size: 9px;
   font-weight: 500;

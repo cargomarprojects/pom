@@ -19,7 +19,7 @@ export class TransitComponent {
   @Input() mRecord: Trackingm = new Trackingm;
   @Input() statuslist: Param[] = [];
   @Input() public rowindex: number = -1;
-  @Input() public selectedRow: number = -1;
+  @Input() public selectedRow: number = -2;
 
   InitCompleted: boolean = false;
   menu_record: any;

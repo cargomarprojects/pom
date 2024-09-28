@@ -14,32 +14,27 @@
     </div>
 
     <div *ngIf="type=='SEA EXPORT'" class="row modal-header-ns">
-        <div class="col-sm-12">
-            <div class="row">
-                <div class="col-sm-3 mx-0 px-0">
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label col-form-label-sm"></label>
-                        <label class="col-sm-5 col-form-label col-form-label-sm">DESC</label>
-                        <label class="col-sm-5 col-form-label col-form-label-sm">STATUS</label>
-                    </div>
-                </div>
-                <div class="col-sm-5 mx-0 px-0">
-                    <div class="form-group row">
-                        <label class="col-sm-8 col-form-label col-form-label-sm">PORT</label>
-                        <label class="col-sm-3 col-form-label col-form-label-sm">DATE</label>
-                        <label class="col-sm-1 col-form-label col-form-label-sm">CONFM</label>
-                    </div>
-                </div>
-                <div class="col-sm-4 mx-0 px-0">
-                    <div class="form-group row">
-                        <label class="col-sm-8 col-form-label col-form-label-sm">VESSEL</label>
-                        <label class="col-sm-4 col-form-label col-form-label-sm">VOYAGE</label>
-                    </div>
-                </div>
+        <div class="col-sm-3 mx-0 px-0">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label col-form-label-sm"></label>
+                <label class="col-sm-5 col-form-label col-form-label-sm">DESC</label>
+                <label class="col-sm-5 col-form-label col-form-label-sm">STATUS</label>
+            </div>
+        </div>
+        <div class="col-sm-5 mx-0 px-0">
+            <div class="form-group row">
+                <label class="col-sm-8 col-form-label col-form-label-sm">PORT</label>
+                <label class="col-sm-3 col-form-label col-form-label-sm">DATE</label>
+                <label class="col-sm-1 col-form-label col-form-label-sm">CONFM</label>
+            </div>
+        </div>
+        <div class="col-sm-4 mx-0 px-0">
+            <div class="form-group row">
+                <label class="col-sm-8 col-form-label col-form-label-sm">VESSEL</label>
+                <label class="col-sm-4 col-form-label col-form-label-sm">VOYAGE</label>
             </div>
         </div>
     </div>
-
     <hr *ngIf="type=='AIR EXPORT'" class="mt-1">
     <div *ngIf="type=='AIR EXPORT'" class="row">
 
@@ -189,7 +184,7 @@
         <app-transit [mRecord]="rec" [type]="type" [statuslist]="StatusList" [rowindex]="i"
             [selectedRow]="selectedRowIndex" (ModifiedRecords)="ModifiedRecords($event)">
         </app-transit>
-        <hr class="my-1">
+        <hr>
     </div>
     <div *ngIf="type=='AIR EXPORT'" class="row">
         <div class="col-sm-8 mx-0 px-0">
