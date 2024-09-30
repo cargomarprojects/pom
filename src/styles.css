@@ -313,7 +313,7 @@ hr {
   position: sticky;
   top: 0;
   background-color: #c7dbd2;
-  border-color: #dee2e6;
+  border-color: #dee2e6; 
   border-style: solid;
   border-width: 1px 1px 0px 1px;
 }

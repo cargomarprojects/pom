@@ -100,6 +100,8 @@ export class TransitComponent {
   RemoveRow() {
     if (this.ModifiedRecords != null)
       this.ModifiedRecords.emit({ saction: 'REMOVE', type: 'TRANSIT', sid: this.mRecord.trk_pkid, rindex: this.rowindex });
+    if(this.selectedRow==this.rowindex)
+      this.selectedRow=-2;
   }
 
   OnBlur(field: string) {
