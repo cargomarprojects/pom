@@ -285,20 +285,20 @@ export class TrkEditComponent {
                 rec.trk_source = "MANUAL";
                 if (rec.trk_desc == "POL" && rec.trk_status == "DEPA") {
                     bPOL = true;
-                    this.Record.bl_pol_id = rec.trk_pol_id;
-                    this.Record.bl_vessel_id = rec.trk_vsl_id;
-                    this.Record.bl_vessel_no = rec.trk_voyage;
-                    this.Record.bl_si_cutoff = rec.trk_si_cutoff;
-                    this.Record.bl_cy_cutoff = rec.trk_cy_cutoff;
-                    this.Record.bl_pol_etd = rec.trk_pol_etd;
-                    this.Record.bl_pol_etd_confirm = rec.trk_pol_etd_confirm;
+                    // this.Record.bl_pol_id = rec.trk_pol_id;
+                    // this.Record.bl_vessel_id = rec.trk_vsl_id;
+                    // this.Record.bl_vessel_no = rec.trk_voyage;
+                    // this.Record.bl_si_cutoff = rec.trk_si_cutoff;
+                    // this.Record.bl_cy_cutoff = rec.trk_cy_cutoff;
+                    // this.Record.bl_pol_etd = rec.trk_pol_etd;
+                    // this.Record.bl_pol_etd_confirm = rec.trk_pol_etd_confirm;
 
                 }
                 if (rec.trk_desc == "POD" && rec.trk_status == "ARRI") {
                     bPOD = true;
-                    this.Record.bl_pod_id = rec.trk_pol_id;
-                    this.Record.bl_pod_eta = rec.trk_pol_etd;
-                    this.Record.bl_pod_eta_confirm = rec.trk_pol_etd_confirm;
+                    // this.Record.bl_pod_id = rec.trk_pol_id;
+                    // this.Record.bl_pod_eta = rec.trk_pol_etd;
+                    // this.Record.bl_pod_eta_confirm = rec.trk_pol_etd_confirm;
                 }
 
                 if (rec.trk_desc == "NA") {
@@ -327,9 +327,9 @@ export class TrkEditComponent {
                 }
 
             }
-            this.Record.bl_pofd_id = "";
-            this.Record.bl_pofd_eta = "";
-            this.Record.bl_pofd_eta_confirm = false;
+            // this.Record.bl_pofd_id = "";
+            // this.Record.bl_pofd_eta = "";
+            // this.Record.bl_pofd_eta_confirm = false;
 
             if (!bPOL) {
                 bret = false;
