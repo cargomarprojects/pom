@@ -429,6 +429,8 @@ export class TrkEditComponent {
                 this.Record.TransitList.splice(this.Record.TransitList.findIndex(rec => rec.trk_pkid == params.sid), 1);
                 if (this.Record.TransitList.length == 0)
                     this.NewTransitRecord();
+                if (this.selectedRowIndex == params.rindex)
+                    this.selectedRowIndex = -2;
             }
         } else if (params.type == "ROWINDEX") {
             this.SetRowIndex(params.rindex);
