@@ -40,6 +40,7 @@ export class Blm {
   bl_carrier_id: string;
   bl_carrier_code: string;
   bl_carrier_name: string;
+  bl_track_source: string;
   TransitList: Trackingm[] = [];
 
   rec_mode: string;
@@ -55,8 +56,8 @@ export class Containerm {
   cntr_type_id: string;
   cntr_type_code: string;
   cntr_type_name: string;
-  cntr_seal_no:string;
-  
+  cntr_seal_no: string;
+
   cntr_mbl_id: string;
   //   ordh_detList: Joborderm[] = [];
 

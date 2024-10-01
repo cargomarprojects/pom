@@ -255,7 +255,8 @@ export class TrkEditComponent {
             return;
         this.loading = true;
         this.errorMessage = [];
-
+        
+        this.Record.bl_track_source="MANUAL";
         this.Record.rec_category = this.type;
         this.Record._globalvariables = this.gs.globalVariables;
         this.ms.Save(this.Record)
