@@ -211,6 +211,7 @@ export class TrkEditComponent {
         Rec.trk_status = _status;
         Rec.trk_desc = _desc;
         Rec.row_colour = 'darkslategray';
+        Rec.trk_source = "MANUAL";
         if (_idx >= 0 && this.type == "SEA EXPORT")
             this.Record.TransitList.splice(_idx + 1, 0, Rec);
         else
@@ -255,8 +256,7 @@ export class TrkEditComponent {
             return;
         this.loading = true;
         this.errorMessage = [];
-        
-        this.Record.bl_track_source="MANUAL";
+ 
         this.Record.rec_category = this.type;
         this.Record._globalvariables = this.gs.globalVariables;
         this.ms.Save(this.Record)
@@ -286,20 +286,9 @@ export class TrkEditComponent {
                 rec.trk_source = "MANUAL";
                 if (rec.trk_desc == "POL" && rec.trk_status == "DEPA") {
                     bPOL = true;
-                    // this.Record.bl_pol_id = rec.trk_pol_id;
-                    // this.Record.bl_vessel_id = rec.trk_vsl_id;
-                    // this.Record.bl_vessel_no = rec.trk_voyage;
-                    // this.Record.bl_si_cutoff = rec.trk_si_cutoff;
-                    // this.Record.bl_cy_cutoff = rec.trk_cy_cutoff;
-                    // this.Record.bl_pol_etd = rec.trk_pol_etd;
-                    // this.Record.bl_pol_etd_confirm = rec.trk_pol_etd_confirm;
-
                 }
                 if (rec.trk_desc == "POD" && rec.trk_status == "ARRI") {
                     bPOD = true;
-                    // this.Record.bl_pod_id = rec.trk_pol_id;
-                    // this.Record.bl_pod_eta = rec.trk_pol_etd;
-                    // this.Record.bl_pod_eta_confirm = rec.trk_pol_etd_confirm;
                 }
 
                 if (rec.trk_desc == "NA") {
