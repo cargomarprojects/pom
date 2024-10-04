@@ -26,6 +26,7 @@ export class OrderEditComponent {
   InitCompleted: boolean = false;
   menu_record: any;
   bAdmin = false;
+  bDelete = false;
   disableSave = true;
   loading = false;
   modal: any;
@@ -63,11 +64,14 @@ export class OrderEditComponent {
 
   InitComponent() {
     this.bAdmin = false;
+    this.bDelete = false;
     this.menu_record = this.gs.getMenu(this.menuid);
     if (this.menu_record) {
       //this.title = this.menu_record.menu_name;
       if (this.menu_record.rights_admin)
         this.bAdmin = true;
+      if (this.menu_record.rights_delete)
+        this.bDelete = true;
     }
   }
 
