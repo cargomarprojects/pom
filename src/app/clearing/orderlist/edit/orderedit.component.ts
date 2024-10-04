@@ -533,10 +533,10 @@ export class OrderEditComponent {
 
   DeleteRow(_rec: Joborderm) {
     this.errorMessage = [];
-    if (_rec.ord_status == "APPROVED") {
-      this.gs.showToastScreen(['Cannot Delete, Approved']);
-      return;
-    }
+    // if (_rec.ord_status == "APPROVED") {
+    //   this.gs.showToastScreen(['Cannot Delete, Approved']);
+    //   return;
+    // }
 
     if (!confirm("Delete selected row")) {
       return;

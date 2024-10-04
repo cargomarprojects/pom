@@ -343,7 +343,7 @@ export class AddressmComponent {
         this.gs.ClosePage('home');
     }
     open(content: any) {
-        this.modal = this.modalService.open(content);
+        this.modal = this.modalService.open(content, {centered: true, backdrop: 'static', keyboard: true });
     }
     ShowlinkList(addlnklst: any, _rec: Addressm) {
         this.ErrorMessage = '';

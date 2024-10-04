@@ -37,7 +37,10 @@ export class CustomerService {
     GetCreditLimit(SearchData: any) {
       return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/Job/GetCreditLimit', SearchData, this.gs.headerparam2('authorized'));
     }
-  
+
+    DeleteRecord(SearchData: any) {
+      return this.http2.post<any>(this.gs.baseUrl + '/api/Master/Customer/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
+    }
 
 
 }

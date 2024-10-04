@@ -208,7 +208,7 @@ export class OrderListService {
       },
         error => {
           this.loading = false;
-          this.errorMessage= this.gs.getErrorArray(this.gs.getError(error));
+          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
           this.gs.showToastScreen(this.errorMessage);
         });
   }
@@ -401,14 +401,15 @@ export class OrderListService {
     this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
   }
 
-  DeleteRow(_rec: Joborderm) {
+  DeleteRow(_rec: Joborderm, _type: string) {
 
     if (!confirm("DELETE " + _rec.ord_uid)) {
       return;
     }
     this.loading = true;
     let SearchData = {
-      pkid: _rec.ord_pkid,
+      pkid: _type == "SUMMARY" ? _rec.ord_header_id : _rec.ord_pkid,
+      type: _type,
       company_code: this.gs.globalVariables.comp_code,
       branch_code: this.gs.globalVariables.branch_code,
       user_code: this.gs.globalVariables.user_code

@@ -219,6 +219,7 @@
           <th>AGENT.POL</th>
           <th>AGENT.POD</th>
           <th>REMARKS</th>
+          <th *ngIf="ms.canDelete" class='text-center'>DELETE</th>
         </tr>
       </thead>
       <tbody class="page-body-tbody">
@@ -235,6 +236,8 @@
           <td>{{rec.ord_agent_name}}</td>
           <td>{{rec.ord_pod_agent_name}}</td>
           <td>{{rec.ord_remarks}}</td>
+          <td *ngIf="ms.canDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+            (click)="ms.DeleteRow(rec,'SUMMARY')"></i></td>
         </tr>
       </tbody>
     </table>
@@ -289,7 +292,7 @@
           <th *ngIf="gs.getTrackDate('DPOD')||ms.trkdt_alldisplay=='Y'">DPOD</th>
           <th>CREATED.BY</th>
           <th>CREATED.DT</th>
-          <!-- <th *ngIf="ms.canDelete" class='text-center'>DELETE</th> -->
+          <th *ngIf="ms.canDelete" class='text-center'>DELETE</th>
         </tr>
       </thead>
       <tbody class="page-body-tbody" *ngFor="let rec of ms.record.records; let i = index">
@@ -339,8 +342,8 @@
           <td *ngIf="gs.getTrackDate('DPOD')||ms.trkdt_alldisplay=='Y'">{{rec.ord_dlv_pod_date}}</td>
           <td>{{rec.rec_created_by}}</td>
           <td>{{rec.rec_created_date}}</td>
-          <!-- <td *ngIf="ms.canDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
-              (click)="ms.DeleteRow(rec)"></i></td> -->
+          <td *ngIf="ms.canDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+              (click)="ms.DeleteRow(rec,'DETAIL')"></i></td>
         </tr>
         <tr *ngIf="rec.row_displayed" style="border: 2px solid green;">
           <td colspan="100%">

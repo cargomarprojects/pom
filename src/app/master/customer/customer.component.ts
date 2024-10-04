@@ -14,10 +14,7 @@ import { Location } from '@angular/common';
   providers: [CustomerService]
 })
 export class CustomerComponent {
-  /*
-  Ajith 08/06/2019 new tab Beneficiary Details 
-   Ajith 13/08/2019 add  customer Unregistered 
-  */
+
   // Local Variables 
   title = 'Address MASTER';
 
@@ -59,8 +56,9 @@ export class CustomerComponent {
   sub: any;
   urlid: string;
 
-  ErrorMessage = "";
-  InfoMessage = "";
+  public errorMessage: string[] = [];
+  // ErrorMessage = "";
+  // InfoMessage = "";
 
   mode = '';
   pkid = '';
@@ -163,8 +161,7 @@ export class CustomerComponent {
       branch_code: this.gs.globalVariables.branch_code
     };
 
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
     this.mainService.LoadDefault(SearchData)
       .subscribe(response => {
         this.loading = false;
@@ -176,7 +173,8 @@ export class CustomerComponent {
       },
         error => {
           this.loading = false;
-          this.ErrorMessage = this.gs.getError(error);
+          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.errorMessage);
         });
   }
 
@@ -194,8 +192,7 @@ export class CustomerComponent {
 
   //function for handling LIST/NEW/EDIT Buttons
   ActionHandler(action: string, id: string) {
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
     if (action == 'LIST') {
       this.mode = '';
       this.pkid = '';
@@ -219,8 +216,6 @@ export class CustomerComponent {
 
   ResetControls() {
     this.disableSave = true;
-
-
     this.canadd = true;
     this.bAdmin = true;
     this.bDocs = true;
@@ -288,8 +283,7 @@ export class CustomerComponent {
       rec_category: this.rec_category,
     };
 
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
     this.mainService.List(SearchData)
       .subscribe(response => {
         this.loading = false;
@@ -304,7 +298,8 @@ export class CustomerComponent {
       },
         error => {
           this.loading = false;
-          this.ErrorMessage = this.gs.getError(error);
+          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.errorMessage);
         });
   }
 
@@ -391,8 +386,7 @@ export class CustomerComponent {
       pkid: Id,
     };
 
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
     this.mainService.GetRecord(SearchData)
       .subscribe(response => {
         this.loading = false;
@@ -400,7 +394,8 @@ export class CustomerComponent {
       },
         error => {
           this.loading = false;
-          this.ErrorMessage = this.gs.getError(error);
+          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.errorMessage);
         });
   }
 
@@ -418,20 +413,19 @@ export class CustomerComponent {
   // Save Data
   Save() {
     if (!this.allvalid()) {
-      alert(this.ErrorMessage);
       return;
     }
 
     this.loading = true;
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
 
     this.Record._globalvariables = this.gs.globalVariables;
 
     this.mainService.Save(this.Record)
       .subscribe(response => {
         this.loading = false;
-        this.InfoMessage = "Save Complete";
+        this.errorMessage.push("Save Complete"); 
+        this.gs.showToastScreen(this.errorMessage);
         this.mode = 'EDIT';
         this.Record.rec_mode = this.mode;
 
@@ -442,30 +436,30 @@ export class CustomerComponent {
       },
         error => {
           this.loading = false;
-          this.ErrorMessage = this.gs.getError(error);
-          alert(this.ErrorMessage);
+          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.errorMessage);
         });
   }
 
   allvalid() {
     let sError: string = "";
     let bret: boolean = true;
-    this.ErrorMessage = '';
-    this.InfoMessage = '';
+    this.errorMessage = [];
 
     if (this.gs.isBlank(this.Record.cust_code)) {
       bret = false;
-      sError = " | Code Cannot Be Blank";
+      this.errorMessage.push("Code Cannot Be Blank");
     }
+
     if (this.gs.isBlank(this.Record.cust_name)) {
       bret = false;
-      sError += "\n\r | Name Cannot Be Blank";
+      this.errorMessage.push("Name Cannot Be Blank");
     }
 
     if (this.Record.cust_is_consignee) {
       if (this.gs.isBlank(this.Record.cust_edi_code)) {
         bret = false;
-        sError += "\n\r | Edi Code Cannot be Blank";
+        this.errorMessage.push("Edi Code Cannot be Blank");
       }
     }
 
@@ -478,7 +472,8 @@ export class CustomerComponent {
     }
 
     if (bret === false)
-      this.ErrorMessage = sError;
+      this.gs.showToastScreen(this.errorMessage);
+
     return bret;
   }
 
@@ -519,7 +514,7 @@ export class CustomerComponent {
     this.modal = this.modalService.open(content);
   }
   ShowHistory(history: any) {
-    this.ErrorMessage = '';
+    this.errorMessage = [];
     this.open(history);
   }
 
@@ -528,6 +523,37 @@ export class CustomerComponent {
       this.ActionHandler('LIST', '');
     else
       this.location.back();
+  }
+
+  DeleteRow(_rec: Customerm) {
+
+    if (!confirm("DELETE " + _rec.cust_name)) {
+      return;
+    }
+    this.loading = true;
+    let SearchData = {
+      pkid: _rec.cust_pkid,
+      company_code: this.gs.globalVariables.comp_code,
+      branch_code: this.gs.globalVariables.branch_code,
+      user_code: this.gs.globalVariables.user_code
+    };
+    this.errorMessage = [];
+    this.mainService.DeleteRecord(SearchData)
+      .subscribe(response => {
+        this.loading = false;
+        if (response.retvalue == false) {
+          this.errorMessage = this.gs.getErrorArray(response.error);
+          this.gs.showToastScreen(this.errorMessage);
+        }
+        else {
+          this.RecordList.splice(this.RecordList.findIndex(rec => rec.cust_pkid == _rec.cust_pkid), 1);
+        }
+
+      }, error => {
+        this.loading = false;
+        this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+        this.gs.showToastScreen(this.errorMessage);
+      });
   }
 
 }

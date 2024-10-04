@@ -1,11 +1,11 @@
 <!-- <div class="page-list"> -->
 <div class="page-body">
-  <div class="col-sm-12 col-md-12 col-lg-12">
+  <!-- <div class="col-sm-12 col-md-12 col-lg-12"> -->
     <div class="row">
-      <div class="col-sm-12">
-        <div style="height: 300px; overflow-y: scroll;">
-          <div class="page-body table-responsive">
-            <table class="table  table-hover table-sm">
+      <!-- <div class="col-sm-12">
+        <div style="height: 300px; overflow-y: scroll;"> -->
+          <div class="table-responsive" style="height: 300px; overflow-y: scroll;">
+            <table class="table  table-hover table-sm table-bordered fixedTableHead  my-0 p-0">
               <thead class="page-body-thead">
                 <tr>
                   <th>BRANCH</th>
@@ -25,18 +25,18 @@
                 </tr>
               </tbody>
             </table>
-          </div>
-        </div>
+          <!-- </div>
+        </div> -->
       </div>
     </div>
-  </div>
+  <!-- </div> -->
 </div>
 <div class="page-body line-bottom">
   <div class="col-sm-12">
     <div class="form-group row" style="color:black">
       <div class="col-sm-8">
-        <button [disabled]="loading||cannotdelete" (click)="RemoveRecord()" class="btn btn-success btn-sm">Delete</button>
-        <button class="btn btn-success btn-sm" (click)="Close()">Close</button>
+        <button [disabled]="loading||cannotdelete" (click)="RemoveRecord()" class="btn btn-success btn-sm mr-1">Delete</button>
+        <button class="btn btn-success btn-sm mr-1" (click)="Close()">Close</button>
         <i *ngIf="loading" class="fa fa-spinner"></i>
       </div>
     </div>
