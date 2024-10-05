@@ -118,6 +118,7 @@ export class CustomerComponent {
 
   // Init Will be called After executing Constructor
   ngOnInit() {
+    this.LoadCombo();
   }
 
   InitComponent() {
@@ -133,10 +134,6 @@ export class CustomerComponent {
 
     if (this.gs.globalVariables.user_code == "ADMIN")
       this.bAdmin2 = true;
-
-
-
-    this.LoadCombo();
 
   }
 
@@ -533,6 +530,9 @@ export class CustomerComponent {
     this.loading = true;
     let SearchData = {
       pkid: _rec.cust_pkid,
+      group: _rec.cust_group,
+      cust_name: _rec.cust_name,
+      sman_name: _rec.cust_sman_name,
       company_code: this.gs.globalVariables.comp_code,
       branch_code: this.gs.globalVariables.branch_code,
       user_code: this.gs.globalVariables.user_code
