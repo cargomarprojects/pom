@@ -7,8 +7,8 @@
     <table class="table table-hover table-sm table-bordered">
         <thead>
             <tr class="table-header">
-                <th width="5%">SL#</th>
                 <th width="5%">EDIT</th>
+                <th width="5%">SL#</th>
                 <!-- <th width="20%">MBL#</th> -->
                 <th width="20%">HOUSE#</th>
                 <th width="20%">CONTAINER#</th>
@@ -19,8 +19,8 @@
         <tbody class="page-body-tbody">
             <tr *ngFor="let rec of RecordList; let i = index" (mousedown)="selectRowId(rec.cntrd_pkid)"
                 [ngClass]="{'table-info':rec.cntrd_pkid == getRowId()}">
-                <td>{{i+1}}</td>
                 <td class="hlink" (click)="ActionHandler('EDIT',rec.cntrd_pkid)"><i class="fa fa-pencil"></i></td>
+                <td>{{i+1}}</td>
                 <!-- <td>{{rec.cntrd_mbl_no}}</td> -->
                 <td>{{rec.cntrd_hbl_no}}</td>
                 <td>{{rec.cntrd_cntr_no}}</td>

@@ -274,8 +274,8 @@
     <table class="table table-hover table-sm table-bordered">
       <thead>
         <tr class="table-header">
-          <th>SL#</th>
           <th>EDIT</th>
+          <th>SL#</th>
           <th>UID</th>
           <!-- <th>DATE</th> -->
           <th>STATUS</th>
@@ -302,8 +302,8 @@
       <tbody class="page-body-tbody">
         <tr *ngFor="let rec of Record.ordh_detList; let i = index" (mousedown)="selectRowId(rec.ord_pkid)"
           [ngClass]="{'table-info':rec.ord_pkid == getRowId()}" [style.color]="rec.ord_status_color">
-          <td>{{i+1}}</td>
           <td class="hlink" (click)="EditRecord(rec)"><i class="fa fa-pencil"></i></td>
+          <td>{{i+1}}</td>
           <td>{{rec.ord_uid}}</td>
           <!-- <td style="text-transform:uppercase">{{rec.ord_date | date : gs.DATE_DISPLAY_FORMAT}}</td> -->
           <td>{{rec.ord_status}}</td>
