@@ -158,7 +158,11 @@ i {
 .fixedTableHead thead th {
   position: sticky;
   top: 0;
+  /* padding: 2px; */
   background-color: #c7dbd2;
+  border-color: #dee2e6 !important;
+  border-style: solid !important;
+  border-width: 2px 2px 0px 2px !important;
 }
 
 .hlink {
@@ -315,7 +319,7 @@ hr {
   background-color: #c7dbd2;
   border-color: #dee2e6; 
   border-style: solid;
-  border-width: 1px 1px 0px 1px;
+  border-width: 2px 2px 0px 2px;
 }
  
 .page-search-ns {

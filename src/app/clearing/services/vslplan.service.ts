@@ -164,6 +164,7 @@ export class VslPlanService {
         error => {
           this.loading = false;
           this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.errorMessage)
         });
   }
 
