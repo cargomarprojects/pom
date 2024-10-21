@@ -426,9 +426,9 @@ export class CustomerComponent {
         this.mode = 'EDIT';
         this.Record.rec_mode = this.mode;
 
-        if (response.STATUS == "SPECIAL CHARACTER") {
-          alert("Specical Character Found In Address, Pls Re-Check Data");
-        }
+        // if (response.STATUS == "SPECIAL CHARACTER") {
+        //   alert("Specical Character Found In Address, Pls Re-Check Data");
+        // }
         this.RefreshList();
       },
         error => {
