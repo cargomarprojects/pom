@@ -445,9 +445,9 @@ export class GlobalService {
       return true;
     }
     if (_id == undefined || _id == null || _id == '')
-      alert('Page Expired, APPID not found');
+      this.showToastScreen(['Page Expired, APPID not found']);
     else
-      alert('Page Expired');
+      this.showToastScreen(['Page Expired']);
     this.logout();
     return false;
   }

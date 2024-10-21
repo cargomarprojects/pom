@@ -488,6 +488,7 @@ export class ParamComponent {
 
     let parameter = {
       urlid: this.gs.getGuid(),
+      appid: this.gs.globalVariables.appid,
       grp_id: Rec.param_pkid,
       grp_name : Rec.param_name
     };
@@ -500,6 +501,7 @@ export class ParamComponent {
 
     let parameter = {
       urlid: this.gs.getGuid(),
+      appid: this.gs.globalVariables.appid,
       grp_id: Rec.param_pkid,
       grp_name : Rec.param_name
     };
