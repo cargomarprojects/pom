@@ -167,7 +167,7 @@ export class ContainerService {
     }
 
     DeleteRecord(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/Master/Container/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/Container/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
     }
 }
 
