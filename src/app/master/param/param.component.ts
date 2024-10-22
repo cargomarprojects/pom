@@ -11,7 +11,7 @@ import { ParamService } from '../services/param.service';
 })
 export class ParamComponent {
   /*Ajith 19/06/2019 LOcked TAN Enabled*/
-  //Local Variables 
+  //Local Variables
   title = 'Param MASTER';
 
   @Input() menuid: string = '';
@@ -49,7 +49,7 @@ export class ParamComponent {
   lookup_id = '';
 
   data_list = [];
-  
+
   ErrorMessage = "";
 
   mode = '';
@@ -66,7 +66,7 @@ export class ParamComponent {
   constructor(
     private mainService: ParamService,
     private route: ActivatedRoute,
-    private router : Router,
+    private router: Router,
     public gs: GlobalService
   ) {
     this.page_count = 0;
@@ -108,7 +108,7 @@ export class ParamComponent {
 
     this.lookup_id = '';
 
-    this.data_list =[];
+    this.data_list = [];
 
     this.code_length = 15;
 
@@ -145,7 +145,7 @@ export class ParamComponent {
     if (this.type == 'COUNTRY') {
       this.id1 = "Region";
     }
-  
+
     if (this.type == 'PARAM') {
       this.id1 = "Cust.Code";
       this.lookup_id = "Type";
@@ -160,11 +160,16 @@ export class ParamComponent {
     if (this.type == 'SERVICE CONTRACT') {
       this.id3 = "Group";
     }
+
+    if (this.type == 'SEA CARRIER') {
+      this.id2 = "SCAC CODE";
+    }
+
   }
 
   // Destroy Will be called when this component is closed
   ngOnDestroy() {
-    
+
   }
 
   //function for handling LIST/NEW/EDIT Buttons
@@ -272,10 +277,10 @@ export class ParamComponent {
     this.Record.rec_mode = this.mode;
     if (this.type == 'PARAM') {
       this.Record.param_lookup_id = 'AGENT';
-    }  
+    }
     if (this.type == 'CUST-GROUP') {
       this.Record.param_lookup_id = 'GENERAL-USER';
-    }      
+    }
 
   }
 
@@ -388,6 +393,13 @@ export class ParamComponent {
       }
     }
 
+    if (this.type == 'SEA CARRIER') {
+      if (this.Record.param_id2 != "") {
+        bret = false;
+        sError += "\n\rBlank SCAC Code";
+      }
+    }
+
     if (this.type == 'TAN') {
 
       if (this.Record.param_code.length != 10) {
@@ -483,27 +495,27 @@ export class ParamComponent {
   }
 
 
-  openCustGroupPage(Rec : Param){
+  openCustGroupPage(Rec: Param) {
     var urlid = this.pkid;
 
     let parameter = {
       urlid: this.gs.getGuid(),
       appid: this.gs.globalVariables.appid,
       grp_id: Rec.param_pkid,
-      grp_name : Rec.param_name
+      grp_name: Rec.param_name
     };
 
     this.router.navigate(['master/cust-group'], { queryParams: parameter });
   }
 
-  openPoSettingPage(Rec : Param){
+  openPoSettingPage(Rec: Param) {
     var urlid = this.pkid;
 
     let parameter = {
       urlid: this.gs.getGuid(),
       appid: this.gs.globalVariables.appid,
       grp_id: Rec.param_pkid,
-      grp_name : Rec.param_name
+      grp_name: Rec.param_name
     };
 
     this.router.navigate(['master/po-setting'], { queryParams: parameter });
