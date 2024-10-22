@@ -232,6 +232,7 @@ export class FileUploadComponent {
           if (!this.gs.isBlank(this.fileinputCtrl))
             this.fileinputCtrl.nativeElement.value = '';
           this.List('NEW');
+          this.uploadFileName = '';
           alert('Upload Complete');
         },
         error => {
