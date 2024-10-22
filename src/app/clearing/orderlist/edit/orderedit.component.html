@@ -214,8 +214,6 @@
           <InputBoxNumber [(inputModel)]="Recorddet.ord_grwt" [maxlength]="14" [dec]="3"></InputBoxNumber>
         </div>
       </div>
-    </div>
-    <div class="col-sm-2">
       <div class="form-group row">
         <label class="col-sm-4 col-form-label col-form-label-sm ">Ready.Dt</label>
         <div class="col-sm-8 ">
@@ -223,6 +221,9 @@
             (ValueChanged)="Recorddet.ord_cargo_readiness_date=$event"></app-date>
         </div>
       </div>
+
+    </div>
+    <div class="col-sm-2">
 
       <div class="form-group row">
         <label class="col-sm-4 col-form-label col-form-label-sm ">Boarding1</label>
@@ -237,9 +238,6 @@
           <app-date [inputdate]="Recorddet.ord_boarding2" (ValueChanged)="Recorddet.ord_boarding2=$event"></app-date>
         </div>
       </div>
-
-    </div>
-    <div class="col-sm-2">
       <div class="form-group row">
         <label class="col-sm-4 col-form-label col-form-label-sm ">Instock1</label>
         <div class="col-sm-8 ">
@@ -252,15 +250,21 @@
           <app-date [inputdate]="Recorddet.ord_instock2" (ValueChanged)="Recorddet.ord_instock2=$event"></app-date>
         </div>
       </div>
+    </div>
+    <div class="col-sm-2">
+
       <div class="form-group row">
         <label class="col-sm-4 col-form-label  col-form-label-sm "></label>
         <div class="col-sm-8 ">
           <button [disabled]="loading" (click)="AddRecord()"
-            class="btn btn-success btn-sm mr-1 mt-1">{{detailMode==='ADD'?'Add
+            class="btn btn-success btn-sm mr-1">{{detailMode==='ADD'?'Add
             To List':'Update Row'}}</button>
-
-          <button [disabled]="loading" (click)="NewDetRecord()" class="btn btn-success btn-sm mt-1">New Row</button>
-
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label  col-form-label-sm "></label>
+        <div class="col-sm-8 ">
+          <button [disabled]="loading" (click)="NewDetRecord()" class="btn btn-success btn-sm">New Row</button>
         </div>
       </div>
     </div>
