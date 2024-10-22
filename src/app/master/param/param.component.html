@@ -14,8 +14,10 @@
         <input type="text" class="col form-control form-control-sm" name="Search" [(ngModel)]="searchstring" />
       </div>
       <div class="col-2">
-        <input type="checkbox" class="form-check-input" [(ngModel)]="sortby" />
-        <span>Sort By Code</span>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" [(ngModel)]="sortby" />
+          <span>Sort By Code</span>
+        </div>
       </div>
       <div class="col">
         <button (click)="List('NEW')" class="btn btn-info btn-sm mr-1">Search</button>
@@ -169,8 +171,10 @@
         <div *ngIf="type=='SALESMAN' || type =='ESANCHITDOC' || type =='TAN'" class="form-group row">
           <label class="col-4 col-form-label col-form-label-sm">Locked</label>
           <div class="col-8">
-            <input type="checkbox" [(ngModel)]="Record.rec_locked">
-            <span>Lock This Record</span>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="Record.rec_locked">
+              <span>Lock This Record</span>
+            </div>
           </div>
         </div>
 
