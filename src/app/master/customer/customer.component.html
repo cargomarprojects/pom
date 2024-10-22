@@ -8,6 +8,7 @@
 <div *ngIf="currentTab=='LIST'" class="page-list">
 
   <div class="page-body">
+
     <div class="row my-1">
 
       <div class="col-2">
@@ -126,44 +127,46 @@
       <ng-template ngbTabContent>
         <div class="page-body">
 
-
           <div class="row">
 
-            <div class="col-sm-6">
+            <div class="col-md-6">
+
               <div class="form-group row">
-                <label class="col-4 col-form-label col-form-label-sm">Code</label>
-                <div class="col-8">
+                <label class="col-md-4 col-form-label col-form-label-sm">Code</label>
+                <div class="col-md-8">
                   <input [disabled]="!canadd" type="text" class="form-control form-control-sm"
                     [(ngModel)]="Record.cust_code" required maxlength="15" />
                 </div>
               </div>
+
               <div class="form-group row">
-                <label class="col-4 col-form-label  col-form-label-sm">Name</label>
-                <div class="col-8">
+                <label class="col-md-4 col-form-label  col-form-label-sm">Name</label>
+
+                <div class="col-md-8">
                   <input type="text" [disabled]="!canadd" class="form-control form-control-sm"
                     [(ngModel)]="Record.cust_name" required maxlength="60" />
                 </div>
               </div>
 
               <div class="form-group row">
-                <label class="col-4 col-form-label  col-form-label-sm">IE-Code</label>
-                <div class="col-8">
+                <label class="col-md-4 col-form-label col-form-label-sm">IE-Code</label>
+                <div class="col-md-8">
                   <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.cust_iecode" required
                     maxlength="10" />
                 </div>
               </div>
 
               <div class="form-group row">
-                <label class="col-4 col-form-label  col-form-label-sm">EDI Code</label>
-                <div class="col-8">
+                <label class="col-md-4 col-form-label  col-form-label-sm">EDI Code</label>
+                <div class="col-md-8">
                   <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.cust_edi_code" required
                     maxlength="20" />
                 </div>
               </div>
 
               <div class="form-group row">
-                <label class="col-4 col-form-label  col-form-label-sm">Trading Partner</label>
-                <div class="col-8">
+                <label class="col-md-4 col-form-label  col-form-label-sm">Trading Partner</label>
+                <div class="col-md-8">
                   <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.cust_trading_partner"
                     required maxlength="20" />
                 </div>
@@ -171,8 +174,8 @@
 
 
               <div class="form-group row">
-                <label class="col-4 col-form-label col-form-label-sm">Salesman</label>
-                <div class="col-8">
+                <label class="col-md-4 col-form-label col-form-label-sm">Salesman</label>
+                <div class="col-md-8">
 
 
                   <app-autocomplete3 [controlname]="'SALESMAN'" [tabletype]="'PARAM'" [subtype]="'SALESMAN'"
@@ -184,55 +187,93 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-4 col-form-label col-form-label-sm">Refer By</label>
-                <div class="col-8">
+                <label class="col-md-4 col-form-label col-form-label-sm">Refer By</label>
+                <div class="col-md-8">
                   <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.cust_referdby"
                     (blur)="OnBlur('cust_referdby')" maxlength="60" />
                 </div>
               </div>
 
               <div class="form-group row">
-                <label class="col-4 col-form-label col-form-label-sm">Remarks</label>
-                <div class="col-8">
+                <label class="col-md-4 col-form-label col-form-label-sm">Remarks</label>
+                <div class="col-md-8">
                   <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.cust_remarks"
                     (blur)="OnBlur('cust_remarks')" maxlength="100" />
                 </div>
               </div>
 
               <div class="form-group row">
-                <label class="col-4 col-form-label col-form-label-sm">Lock</label>
-                <div class="col-8">
-                  <input [disabled]="!canadd" type="checkbox" [(ngModel)]="Record.rec_locked" />
-                  <span>Lock This Customer</span>
+                <label class="col-md-4 col-form-label col-form-label-sm"></label>
+                <div class="col-md-8">
+                  <div class="form-check">
+                    <input [disabled]="!canadd" type="checkbox" class="form-check-input"
+                      [(ngModel)]="Record.rec_locked" />
+                    <span>Lock This Customer</span>
+                  </div>
                 </div>
               </div>
 
-
             </div>
 
 
-            <div class="col-sm-6">
-              <div class="col-8 offset-4">
-                <input [disabled]="!canadd" type="checkbox" [(ngModel)]="Record.cust_is_shipper" />
-                <span>Shipper</span>
+            <div class="col-md-6">
+
+              <div class="form-group row">
+                <label class="col-md-4 col-form-label col-form-label-sm"></label>
+                <div class="col-md-8">
+                  <div class="form-check">
+                    <input [disabled]="!canadd" type="checkbox" class="form-check-input"
+                      [(ngModel)]="Record.cust_is_shipper" />
+                    <span>Shipper</span>
+                  </div>
+                </div>
               </div>
-              <div class="col-8 offset-4">
-                <input [disabled]="!canadd" type="checkbox" [(ngModel)]="Record.cust_is_consignee" />
-                <span>Consignee</span>
+
+              <div class="form-group row">
+                <label class="col-md-4 col-form-label col-form-label-sm"></label>
+                <div class="col-md-8">
+                  <div class="form-check">
+                    <input [disabled]="!canadd" type="checkbox" class="form-check-input"
+                      [(ngModel)]="Record.cust_is_consignee" />
+                    <span>Consignee</span>
+                  </div>
+                </div>
               </div>
-              <div class="col-8 offset-4">
-                <input [disabled]="!canadd" type="checkbox" [(ngModel)]="Record.cust_is_agent" />
-                <span>Agent</span>
+
+              <div class="form-group row">
+                <label class="col-md-4 col-form-label col-form-label-sm"></label>
+                <div class="col-md-8">
+                  <div class="form-check">
+                    <input [disabled]="!canadd" type="checkbox" class="form-check-input"
+                      [(ngModel)]="Record.cust_is_agent" />
+                    <span>Agent</span>
+                  </div>
+                </div>
               </div>
-              <div class="col-8 offset-4">
-                <input [disabled]="!canadd" type="checkbox" [(ngModel)]="Record.cust_is_buy_agent" />
-                <span>Buying Agent</span>
+
+              <div class="form-group row">
+                <label class="col-md-4 col-form-label col-form-label-sm"></label>
+                <div class="col-md-8">
+                  <div class="form-check">
+                    <input [disabled]="!canadd" type="checkbox" class="form-check-input"
+                      [(ngModel)]="Record.cust_is_buy_agent" />
+                    <span>Buying Agent</span>
+                  </div>
+                </div>
               </div>
-              <div class="col-8 offset-4">
-                <input [disabled]="!canadd" type="checkbox" [(ngModel)]="Record.cust_is_others" />
-                <span>Others</span>
+
+              <div class="form-group row">
+                <label class="col-md-4 col-form-label col-form-label-sm"></label>
+                <div class="col-md-8">
+                  <div class="form-check">
+                    <input [disabled]="!canadd" type="checkbox" class="form-check-input"
+                      [(ngModel)]="Record.cust_is_others" />
+                    <span>Others</span>
+                  </div>
+                </div>
               </div>
             </div>
+
 
           </div>
 

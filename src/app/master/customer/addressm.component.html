@@ -1,5 +1,5 @@
-<div>
-  <label class="ml-3">{{title}}</label>
+<div class="py-2">
+  <label class="mx-3">{{title}}</label>
   <button (click)="ActionHandler('ADD',null)" class="btn btn-link mx-1">Add Record</button>
 </div>
 
@@ -25,7 +25,7 @@
           <th *ngIf="bDelete" width="4%">DELETE</th>
         </tr>
       </thead>
-      <tbody class="page-body-tbody" >
+      <tbody class="page-body-tbody">
         <tr *ngFor="let rec of RecordList">
           <td>{{rec.add_branch_slno}}</td>
           <td (click)="ActionHandler('EDIT',rec)" class="hlink"><i class="fa fa-pencil"></i></td>
