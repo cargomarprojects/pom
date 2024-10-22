@@ -20,6 +20,7 @@ body {
 
 .table {
   font-size: 10px;
+  cursor: pointer;
 }
 
 .table-header {
@@ -284,6 +285,7 @@ hr {
   padding: 15px !important;
   background-color: rgb(235, 235, 235);
 }
+
 .page-body-ns-mtrl {
   margin-top: 10px !important;
   margin-right: 10px !important;
@@ -307,21 +309,21 @@ hr {
   font-weight: 500;
 }
 
-.fixedTableHead-ns  {
+.fixedTableHead-ns {
   padding: 0px 0px 2px 0px;
   /* background-color: white; */
-  background-color: #f3f3f3 ;
+  background-color: #f3f3f3;
 }
 
 .fixedTableHead-ns thead th {
   position: sticky;
   top: 0;
   background-color: #c7dbd2;
-  border-color: #dee2e6; 
+  border-color: #dee2e6;
   border-style: solid;
   border-width: 2px 2px 0px 2px;
 }
- 
+
 .page-search-ns {
   margin: 10px !important;
   padding: 15px !important;
@@ -338,6 +340,7 @@ hr {
 input[type='radio'] {
   accent-color: chocolate;
 }
+
 .modal-header-ns {
   color: chocolate;
   font-size: 9px;
@@ -346,28 +349,25 @@ input[type='radio'] {
   padding: 0 !important;
   margin: 0 !important;
 }
+
 .custom-file-upload {
   border: 1px solid #413f3f;
   display: inline-block;
   padding: 4px 8px;
   cursor: pointer;
-  background-color: #e5e5e5;  
+  background-color: #e5e5e5;
   color: black;
-  border-radius: 2px;  
+  border-radius: 2px;
 }
 
 .custom-file-upload:hover {
-  background-color: #ebebeb;  
+  background-color: #ebebeb;
 }
 
-.drag-drop-area{
+.drag-drop-area {
   border: 1px solid black;
   height: 50px;
   display: flex;
   align-items: center;
-  justify-content: center;  
+  justify-content: center;
 }
-
-
- 
- 

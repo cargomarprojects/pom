@@ -51,11 +51,10 @@ export class MainmenuComponent implements OnInit {
       this.sidenav.toggle();
       this.isCollapsed = false;
     } else {
-      //this.sidenav.open();
       this.sidenav.toggle();
       this.isCollapsed = !this.isCollapsed;
     }
-    return true;
+
   }
 
   isOk(module: any, menu: any) {
@@ -74,9 +73,6 @@ export class MainmenuComponent implements OnInit {
     this.router.navigate([rec.menu_route1], { queryParams: param });
   }
 
-  Logout() {
-    this.loginservice.Logout();
-  }
 
   logout() {
     this.loginservice.Logout();
