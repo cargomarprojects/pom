@@ -44,6 +44,9 @@ export class MainmenuComponent implements OnInit {
   }
 
   toggleMenu() {
+    if (!this.gs.IsAuthenticated)
+      return false;
+
     if (this.isMobile) {
       this.sidenav.toggle();
       this.isCollapsed = false;
@@ -52,6 +55,7 @@ export class MainmenuComponent implements OnInit {
       this.sidenav.toggle();
       this.isCollapsed = !this.isCollapsed;
     }
+    return true;
   }
 
   isOk(module: any, menu: any) {
