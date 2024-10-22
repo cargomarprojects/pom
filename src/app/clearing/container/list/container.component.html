@@ -47,14 +47,17 @@
     </div>
 </div>
 <div class="page-body">
-    <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 375px);">
+    <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 240px);">
         <table class="table  table-hover table-sm table-bordered">
             <thead>
                 <tr class="table-header">
                     <th>EDIT</th>
+                    <th>MASTER#</th>
+                    <th>BOOKING#</th>
                     <th>CNTR#</th>
                     <th>TYPE</th>
                     <th>SEAL#</th>
+                    <th>CARRIER</th>
                 </tr>
             </thead>
             <tbody class="page-body-tbody">
@@ -62,9 +65,12 @@
                     [ngClass]="{'table-info':rec.cntr_pkid == ms.getRowId()}">
                     <td (click)="ActionHandler('EDIT',rec.cntr_pkid)" class="hlink"><i class="fa fa-pencil"></i>
                     </td>
+                    <td>{{rec.cntr_mbl_no}}</td>
+                    <td>{{rec.cntr_booking_no}}</td>
                     <td>{{rec.cntr_no}}</td>
                     <td>{{rec.cntr_type_code}}</td>
                     <td>{{rec.cntr_seal_no}}</td>
+                    <td>{{rec.cntr_carrier_name}}</td>
                 </tr>
             </tbody>
         </table>
