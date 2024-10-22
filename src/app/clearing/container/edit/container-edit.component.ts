@@ -80,16 +80,14 @@ export class ContainerEditComponent {
     }
 
     LovSelected(_Record: SearchTable) {
-        // if (_Record.controlname == "VESSEL") {
-        //   this.Record.vp_vessel_id = _Record.id;
-        //   this.Record.vp_vessel_code = _Record.code;
-        //   this.Record.vp_vessel_name = _Record.name;
-        // }
-        // else if (_Record.controlname == "AGENT-POL") {
-        //   this.Record.vp_pol_agent_id = _Record.id;
-        //   this.Record.vp_pol_agent_code = _Record.code;
-        //   this.Record.vp_pol_agent_name = _Record.name;
-        // }
+        if (_Record.controlname == "CNTR-TYPE") {
+            this.Record.cntr_type_id = _Record.id;
+            this.Record.cntr_type_code = _Record.code;
+        } else if (_Record.controlname == "CARRIER") {
+            this.Record.cntr_carrier_id = _Record.id;
+            this.Record.cntr_carrier_name = _Record.name;
+            this.Record.cntr_carrier_code = _Record.code;
+        }
 
     }
 
@@ -109,11 +107,16 @@ export class ContainerEditComponent {
         this.pkid = this.gs.getGuid();
         this.Record = new Containerm;
         this.Record.cntr_pkid = this.pkid;
-        this.Record.cntr_asealno = '';
+        this.Record.cntr_seal_no = '';
         this.Record.cntr_no = '';
+        this.Record.cntr_type_id = '';
+        this.Record.cntr_type_code = '';
+        this.Record.cntr_carrier_id = '';
+        this.Record.cntr_carrier_code = '';
+        this.Record.cntr_carrier_name = '';
+        this.Record.cntr_booking_no = '';
         this.Record.rec_mode = this.mode;
         this.Record.rec_version = 0;
-
     }
 
     resetControls() {

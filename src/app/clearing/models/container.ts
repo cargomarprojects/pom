@@ -10,6 +10,7 @@ export class Containerm {
   cntr_type_name: string;
   cntr_csealno: string;
   cntr_asealno: string;
+  cntr_seal_no:string;
   cntr_booking_id: string;
   cntr_oldbooking_id: string;
   cntr_booking_no: string;
@@ -47,6 +48,10 @@ export class Containerm {
   cntr_egmno: string;
   cntr_egmdt: string;
   cntr_shipment_type: string;
+
+  cntr_carrier_id: string;
+  cntr_carrier_code: string;
+  cntr_carrier_name: string;
   _globalvariables: GlobalVariables;
 }
 export interface SearchQuery {
