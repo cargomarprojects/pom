@@ -20,6 +20,7 @@ export class ContainerService {
     disableSave = true;
     loading = false;
     public bAdmin = false;
+    public bDelete = false;
 
     searchstring = '';
     public errorMessage: string[] = [];
@@ -83,11 +84,14 @@ export class ContainerService {
     }
     ReadUserRights() {
         this.bAdmin = false;
+        this.bDelete = false;
         this.menu_record = this.gs.getMenu(this.menuid);
         if (this.menu_record) {
             this.title = this.menu_record.menu_name;
             if (this.menu_record.rights_admin)
                 this.bAdmin = true;
+            if (this.menu_record.rights_delete)
+                this.bDelete = true;
         }
     }
 
@@ -162,5 +166,8 @@ export class ContainerService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/Container/Save', Record, this.gs.headerparam2('authorized'));
     }
 
+    DeleteRecord(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Master/Container/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
+    }
 }
 

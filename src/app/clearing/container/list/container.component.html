@@ -58,6 +58,7 @@
                     <th>TYPE</th>
                     <th>SEAL#</th>
                     <th>CARRIER</th>
+                    <th *ngIf="ms.bDelete" class='text-center'>DELETE</th>
                 </tr>
             </thead>
             <tbody class="page-body-tbody">
@@ -71,6 +72,8 @@
                     <td>{{rec.cntr_type_code}}</td>
                     <td>{{rec.cntr_seal_no}}</td>
                     <td>{{rec.cntr_carrier_name}}</td>
+                    <td *ngIf="ms.bDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                        (click)="DeleteRow(rec)"></i></td>
                 </tr>
             </tbody>
         </table>

@@ -45,7 +45,7 @@ export class ContainerComponent {
     //   this.ms.record.searchQuery.list_pod_agent_id = _Record.id;
     //   this.ms.record.searchQuery.list_pod_agent_name = _Record.name;
     // }
-    
+
   }
 
   ActionHandler(action: string, id: string) {
@@ -83,5 +83,39 @@ export class ContainerComponent {
     this.gs.ClosePage('home');
   }
 
+  DeleteRow(_rec: Containerm) {
+
+    if (_rec.cntr_source == "MASTER") {
+      this.gs.showToastScreen(['Cannot Delete, Save from another module']);
+      return;
+    }
+
+    if (!confirm("DELETE " + _rec.cntr_no)) {
+      return;
+    }
+
+    let SearchData = {
+      pkid: _rec.cntr_pkid,
+      company_code: this.gs.globalVariables.comp_code,
+      branch_code: this.gs.globalVariables.branch_code,
+      user_code: this.gs.globalVariables.user_code
+    };
+    this.ms.errorMessage = [];
+    this.ms.DeleteRecord(SearchData)
+      .subscribe(response => {
+        if (response.retvalue == false) {
+          this.ms.errorMessage = this.gs.getErrorArray(response.error);
+          this.gs.showToastScreen(this.ms.errorMessage);
+        }
+        else {
+          this.ms.record.recods.splice(this.ms.record.recods.findIndex(rec => rec.cntr_pkid == _rec.cntr_pkid), 1);
+        }
+
+      }, error => {
+
+        this.ms.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+        this.gs.showToastScreen(this.ms.errorMessage);
+      });
+  }
 
 }
