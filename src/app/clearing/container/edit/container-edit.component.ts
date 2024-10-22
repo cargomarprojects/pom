@@ -19,8 +19,6 @@ export class ContainerEditComponent {
     @Input() mode: string = '';
     @Input() pkid: string = '';
 
-
-
     InitCompleted: boolean = false;
     menu_record: any;
     title: '';
@@ -44,7 +42,6 @@ export class ContainerEditComponent {
         private route: ActivatedRoute,
         public gs: GlobalService
     ) {
-
         const data = this.route.snapshot.queryParams;
         if (data != null) {
             this.InitCompleted = true;
@@ -54,7 +51,6 @@ export class ContainerEditComponent {
             this.pkid = data.pkid;
             this.InitComponent();
         }
-
     }
 
     // Init Will be called After executing Constructor
@@ -116,7 +112,7 @@ export class ContainerEditComponent {
         this.Record.cntr_asealno = '';
         this.Record.cntr_no = '';
         this.Record.rec_mode = this.mode;
-        // this.Record.rec_version = 0;
+        this.Record.rec_version = 0;
 
     }
 
@@ -190,7 +186,7 @@ export class ContainerEditComponent {
                 }
                 this.mode = 'EDIT';
                 this.Record.rec_mode = this.mode;
-                // this.Record.rec_version = response.version;
+                this.Record.rec_version = response.version;
                 this.ms.RefreshList(this.Record);
                 this.gs.showToastScreen(['Save Complete']);
             },
@@ -232,11 +228,11 @@ export class ContainerEditComponent {
                 }
         }
     }
- 
+
 
     Close() {
         this.gs.ClosePage('home');
     }
 
-    
+
 }

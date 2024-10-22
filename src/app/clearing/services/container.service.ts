@@ -140,7 +140,7 @@ export class ContainerService {
     RefreshList(_rec: Containerm) {
         if (this.record.records == null)
             return;
-        var REC = this.record.records.find(rec => rec.vp_pkid == _rec.cntr_pkid);
+        var REC = this.record.records.find(rec => rec.cntr_pkid == _rec.cntr_pkid);
         if (REC == null) {
             this.record.records.push(_rec);
         }

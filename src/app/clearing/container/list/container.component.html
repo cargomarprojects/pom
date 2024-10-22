@@ -52,7 +52,6 @@
             <thead>
                 <tr class="table-header">
                     <th>EDIT</th>
-                    <th>SL#</th>
                     <th>CNTR#</th>
                     <th>TYPE</th>
                     <th>SEAL#</th>
@@ -63,7 +62,6 @@
                     [ngClass]="{'table-info':rec.cntr_pkid == ms.getRowId()}">
                     <td (click)="ActionHandler('EDIT',rec.cntr_pkid)" class="hlink"><i class="fa fa-pencil"></i>
                     </td>
-                    <td></td>
                     <td>{{rec.cntr_no}}</td>
                     <td>{{rec.cntr_type_code}}</td>
                     <td>{{rec.cntr_seal_no}}</td>
