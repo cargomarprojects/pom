@@ -1,8 +1,6 @@
 <mat-toolbar class="toolbar-color-theme">
 
-
   <mat-icon (click)="toggleMenu()" class="hand-cursor">menu</mat-icon>
-
 
   <div class="logo">
     <a routerLink="/home">
@@ -14,7 +12,6 @@
 
   <span class="toolbar-item-spacer"></span>
 
-
   <span *ngIf="gs.IsAuthenticated" id="userName" class="mx-2">{{gs.globalVariables.user_name}}</span>
 
   <ng-container *ngIf="gs.IsAuthenticated">
@@ -25,16 +22,15 @@
     <button class="btn btn-sm btn-success" routerLink="/login">Login</button>
   </ng-container>
 
-
 </mat-toolbar>
+
 
 <mat-sidenav-container autosize="true" class="router" style="height: calc(100vh - 80px)">
 
   <mat-sidenav #sidenav [ngClass]="!isCollapsed ? 'expanded' : ''" [mode]="isMobile ? 'over' : 'side'"
-    [opened]="isMobile ? 'false' : 'true'" *ngIf="gs.IsAuthenticated">
+    [opened]="isMobile || gs.IsAuthenticated==false ? 'false' : 'true'">
 
-
-    <mat-nav-list *ngIf="gs.IsAuthenticated">
+    <mat-nav-list>
 
       <ng-container *ngFor="let rech of gs.Modules">
 
@@ -80,7 +76,6 @@
     </mat-nav-list>
 
   </mat-sidenav>
-
 
 
   <mat-sidenav-content>
