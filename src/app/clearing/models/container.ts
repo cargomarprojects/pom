@@ -49,4 +49,23 @@ export class Containerm {
   cntr_shipment_type: string;
   _globalvariables: GlobalVariables;
 }
+export interface SearchQuery {
+  searchstring: string,
+  company_code: string,
+  branch_code: string,
+  year_code: string,
+  user_code: string,
+  page_count: number,
+  page_current: number,
+  page_rows: number,
+  page_rowcount: number
+}
 
+export interface ContainerModel {
+  urlid: string;
+  selectedId: string;
+  message: string;
+  isError: boolean;
+  searchQuery: SearchQuery;
+  records: Containerm[]
+}
