@@ -236,7 +236,7 @@ export class FileUploadComponent {
         },
         error => {
           this.loading = false;
-          alert('Failed');
+          alert(this.gs.getError(error));
         }
       );
   }
