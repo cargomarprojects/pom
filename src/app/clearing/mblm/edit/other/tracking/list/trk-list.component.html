@@ -1,84 +1,87 @@
 <div class="page-body-header-ns">
-    <h5>{{type=='SEA
-        EXPORT'?'Container':''}}
-        Tracking
-        <i (click)="ShowTracking(trackingdet)" style="cursor: pointer;" class="fa fa-pencil ml-2"></i>
-    </h5>
+  <div>TRACKING</div>
+  <div class="mx-4">
+    <i (click)="ShowTracking(trackingdet)" class="fa fa-pencil"></i>
+  </div>
+  <div>
+    <i (click)="refreshTracking()" class="fa fa-refresh"></i>
+  </div>
 </div>
+
 <div *ngIf="type=='SEA EXPORT'||type=='SEA IMPORT'" class="table-responsive fixedTableHead-ns" style="height: 281px;">
-    <table class="table table-hover table-sm table-bordered">
-        <thead>
-            <tr class="table-header">
-                <th>SL#</th>
-                <th>DESC</th>
-                <th>STATUS</th>
-                <th>PORT.CODE</th>
-                <th>PORT.NAME</th>
-                <th>DATE</th>
-                <th>CONFM</th>
-                <th>VESSEL.CODE</th>
-                <th>VESSEL.NAME</th>
-                <th>VOYAGE</th>
-            </tr>
-        </thead>
-        <tbody class="page-body-tbody">
-            <tr *ngFor="let rec of RecordList; let i = index" (mousedown)="selectRowId(rec.trk_pkid)"
-                [ngClass]="{'table-info':rec.trk_pkid == getRowId()}">
-                <td>{{i+1}}</td>
-                <td>{{rec.trk_desc}}</td>
-                <td>{{rec.trk_status}}</td>
-                <td>{{rec.trk_pol_code}}</td>
-                <td>{{rec.trk_pol_name}}</td>
-                <td>{{rec.trk_pol_etd}}</td>
-                <td>{{rec.trk_pol_etd_confirm ? 'Y' : 'N'}}</td>
-                <td>{{rec.trk_vsl_code}}</td>
-                <td>{{rec.trk_vsl_name}}</td>
-                <td>{{rec.trk_voyage}}</td>
-            </tr>
-        </tbody>
-    </table>
+  <table class="table table-hover table-sm table-bordered">
+    <thead>
+      <tr class="table-header">
+        <th>SL#</th>
+        <th>DESC</th>
+        <th>STATUS</th>
+        <th>PORT.CODE</th>
+        <th>PORT.NAME</th>
+        <th>DATE</th>
+        <th>CONFM</th>
+        <th>VESSEL.CODE</th>
+        <th>VESSEL.NAME</th>
+        <th>VOYAGE</th>
+      </tr>
+    </thead>
+    <tbody class="page-body-tbody">
+      <tr *ngFor="let rec of RecordList; let i = index" (mousedown)="selectRowId(rec.trk_pkid)"
+        [ngClass]="{'table-info':rec.trk_pkid == getRowId()}">
+        <td>{{i+1}}</td>
+        <td>{{rec.trk_desc}}</td>
+        <td>{{rec.trk_status}}</td>
+        <td>{{rec.trk_pol_code}}</td>
+        <td>{{rec.trk_pol_name}}</td>
+        <td>{{rec.trk_pol_etd}}</td>
+        <td>{{rec.trk_pol_etd_confirm ? 'Y' : 'N'}}</td>
+        <td>{{rec.trk_vsl_code}}</td>
+        <td>{{rec.trk_vsl_name}}</td>
+        <td>{{rec.trk_voyage}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <div *ngIf="type=='AIR EXPORT'||type=='AIR IMPORT'" class="table-responsive fixedTableHead-ns" [style.height]="'281px'">
-    <table class="table table-hover table-sm table-bordered">
-        <thead>
-            <tr class="table-header">
-                <th>SL#</th>
-                <th>AIRLINE.CODE</th>
-                <th>AIRLINE.NAME</th>
-                <th>FLIGHT#</th>
-                <th>POL.CODE</th>
-                <th>POL.NAME</th>
-                <th>ETD</th>
-                <th>CONFM</th>
-                <th>POD.CODE</th>
-                <th>POD.NAME</th>
-                <th>ETA</th>
-                <th>CONFM</th>
-            </tr>
-        </thead>
-        <tbody class="page-body-tbody">
-            <tr *ngFor="let rec of RecordList; let i = index" (mousedown)="selectRowId(rec.trk_pkid)"
-                [ngClass]="{'table-info':rec.trk_pkid == getRowId()}">
-                <td>{{i+1}}</td>
-                <td>{{rec.trk_vsl_code}}</td>
-                <td>{{rec.trk_vsl_name}}</td>
-                <td>{{rec.trk_voyage}}</td>
-                <td>{{rec.trk_pol_code}}</td>
-                <td>{{rec.trk_pol_name}}</td>
-                <td>{{rec.trk_pol_etd}}</td>
-                <td>{{rec.trk_pol_etd_confirm ? 'Y' : 'N'}}</td>
-                <td>{{rec.trk_pod_code}}</td>
-                <td>{{rec.trk_pod_name}}</td>
-                <td>{{rec.trk_pod_eta}}</td>
-                <td>{{rec.trk_pod_eta_confirm ? 'Y' : 'N'}}</td>
-            </tr>
-        </tbody>
-    </table>
+  <table class="table table-hover table-sm table-bordered">
+    <thead>
+      <tr class="table-header">
+        <th>SL#</th>
+        <th>AIRLINE.CODE</th>
+        <th>AIRLINE.NAME</th>
+        <th>FLIGHT#</th>
+        <th>POL.CODE</th>
+        <th>POL.NAME</th>
+        <th>ETD</th>
+        <th>CONFM</th>
+        <th>POD.CODE</th>
+        <th>POD.NAME</th>
+        <th>ETA</th>
+        <th>CONFM</th>
+      </tr>
+    </thead>
+    <tbody class="page-body-tbody">
+      <tr *ngFor="let rec of RecordList; let i = index" (mousedown)="selectRowId(rec.trk_pkid)"
+        [ngClass]="{'table-info':rec.trk_pkid == getRowId()}">
+        <td>{{i+1}}</td>
+        <td>{{rec.trk_vsl_code}}</td>
+        <td>{{rec.trk_vsl_name}}</td>
+        <td>{{rec.trk_voyage}}</td>
+        <td>{{rec.trk_pol_code}}</td>
+        <td>{{rec.trk_pol_name}}</td>
+        <td>{{rec.trk_pol_etd}}</td>
+        <td>{{rec.trk_pol_etd_confirm ? 'Y' : 'N'}}</td>
+        <td>{{rec.trk_pod_code}}</td>
+        <td>{{rec.trk_pod_name}}</td>
+        <td>{{rec.trk_pod_eta}}</td>
+        <td>{{rec.trk_pod_eta_confirm ? 'Y' : 'N'}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 <ng-template #trackingdet let-c="close" let-d="dismiss">
-    <div class="modal-body pt-0 pr-1 pb-2 pl-1">
-        <app-trk-edit [pkid]="parentid" [mode]="'EDIT'" [type]="type" [menuid]="menuid"
-            (closeModalWindow)="CloseModal($event)"></app-trk-edit>
-    </div>
+  <div class="modal-body pt-0 pr-1 pb-2 pl-1">
+    <app-trk-edit [pkid]="parentid" [mode]="'EDIT'" [type]="type" [menuid]="menuid"
+      (closeModalWindow)="CloseModal($event)"></app-trk-edit>
+  </div>
 </ng-template>

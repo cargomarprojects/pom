@@ -39,18 +39,24 @@
       <label class="col-sm-3 col-form-label col-form-label-sm">Carrier</label>
       <div class="col-sm-9">
         <app-autocomplete3 [controlname]="'CARRIER'" [tabletype]="'PARAM'"
-          [subtype]="type=='SEA EXPORT'?'SEA CARRIER':'AIR CARRIER'" [displaycolumn]="'CODE'"
-          [displaydata]="Record.bl_carrier_code" (ValueChanged)="LovSelected($event)" [where]="">
+          [subtype]="type=='SEA EXPORT'?'SEA CARRIER':'AIR CARRIER'" [displaycolumn]="'NAME'"
+          [displaydata]="Record.bl_carrier_name" (ValueChanged)="LovSelected($event)" [where]="">
         </app-autocomplete3>
       </div>
     </div>
+
     <div class="form-group row">
-      <label class="col-sm-3 col-form-label col-form-label-sm"></label>
-      <div class="col-sm-9">
-        <InputBox [(inputModel)]="Record.bl_carrier_name" [maxlength]="100" [uppercase]=true [disabled]=true>
-        </InputBox>
+      <label class="col-md-3 form-label form-label-sm">Tracking</label>
+      <div class="col-md-9">
+        <select class="form-control form-control-sm" [(ngModel)]="Record.bl_track_type">
+          <option [value]="'MANUAL'">MANUAL</option>
+          <option [value]="'MBL WISE'">MBL WISE</option>
+          <option [value]="'CNTR WISE'">CNTR WISE</option>
+        </select>
       </div>
     </div>
+
+
   </div>
   <div class="col-md-3">
     <div class="form-group row">

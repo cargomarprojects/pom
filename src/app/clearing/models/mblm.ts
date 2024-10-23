@@ -41,6 +41,10 @@ export class Blm {
   bl_carrier_code: string;
   bl_carrier_name: string;
   bl_track_source: string;
+
+  bl_track_type: string;
+
+
   TransitList: Trackingm[] = [];
 
   rec_mode: string;

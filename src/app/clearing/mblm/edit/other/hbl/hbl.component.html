@@ -1,76 +1,75 @@
 <div class="page-body-header-ns">
-    <h5>Add/Edit
-        House
-    </h5>
+  <div>ADD/EDIT HOUSE
+  </div>
 </div>
 
 <div class="table-responsive fixedTableHead-ns" style="height: 197px;">
-    <table class="table table-hover table-sm table-bordered">
-        <thead>
-            <tr class="table-header">
-                <th width="5%">EDIT</th>
-                <th width="5%">SL#</th>
-                <th width="20%">HOUSE#</th>
-                <th width="getWidth('DT-COL')">DATE</th>
-                <th width="getWidth('DOC-COL')" *ngIf="bDocs">DOCUMENTS</th>
-                <th width="getWidth('DEL-COL')" *ngIf="bDelete" class='text-left'>DELETE</th>
-            </tr>
-        </thead>
-        <tbody class="page-body-tbody">
-            <tr *ngFor="let rec of RecordList; let i = index" (mousedown)="selectRowId(rec.bl_pkid)"
-                [ngClass]="{'table-info':rec.bl_pkid == getRowId()}">
-                <td class="hlink" (click)="ActionHandler('EDIT',rec.bl_pkid)"><i class="fa fa-pencil"></i></td>
-                <td>{{i+1}}</td>
-                <td>{{rec.bl_no}}</td>
-                <td style="text-transform:uppercase">{{rec.bl_date | date : gs.DATE_DISPLAY_FORMAT}}</td>
-                <td *ngIf="bDocs" class="hlink" (click)="ShowDocuments(rec.bl_pkid,doc)"><i
-                        class="fa fa-file fa-lg pointer ml-1"></i></td>
-                <td *ngIf="bDelete" class="p-0 text-left"><i class="fa fa-trash  fa-lg pointer ml-1" aria-hidden="true"
-                        (click)="DeleteRow(rec)"></i></td>
-            </tr>
-        </tbody>
-    </table>
+  <table class="table table-hover table-sm table-bordered">
+    <thead>
+      <tr class="table-header">
+        <th width="5%">EDIT</th>
+        <th width="5%">SL#</th>
+        <th width="20%">HOUSE#</th>
+        <th width="getWidth('DT-COL')">DATE</th>
+        <th width="getWidth('DOC-COL')" *ngIf="bDocs">DOCUMENTS</th>
+        <th width="getWidth('DEL-COL')" *ngIf="bDelete" class='text-left'>DELETE</th>
+      </tr>
+    </thead>
+    <tbody class="page-body-tbody">
+      <tr *ngFor="let rec of RecordList; let i = index" (mousedown)="selectRowId(rec.bl_pkid)"
+        [ngClass]="{'table-info':rec.bl_pkid == getRowId()}">
+        <td class="hlink" (click)="ActionHandler('EDIT',rec.bl_pkid)"><i class="fa fa-pencil"></i></td>
+        <td>{{i+1}}</td>
+        <td>{{rec.bl_no}}</td>
+        <td style="text-transform:uppercase">{{rec.bl_date | date : gs.DATE_DISPLAY_FORMAT}}</td>
+        <td *ngIf="bDocs" class="hlink" (click)="ShowDocuments(rec.bl_pkid,doc)"><i
+            class="fa fa-file fa-lg pointer ml-1"></i></td>
+        <td *ngIf="bDelete" class="p-0 text-left"><i class="fa fa-trash  fa-lg pointer ml-1" aria-hidden="true"
+            (click)="DeleteRow(rec)"></i></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <div class="row page-body line-bottom mt-3 p-2" style="background-color: rgb(225, 225, 225);">
-    <div class="col-md-6">
-        <div class="form-group row">
-            <label class="col-md-4 col-form-label col-form-label-sm">House#</label>
-            <div class="col-md-8">
-                <InputBox #bl_no [(inputModel)]="Record.bl_no" [maxlength]="60" [uppercase]=true></InputBox>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-md-4 col-form-label col-form-label-sm">Date</label>
-            <div class="col-md-8">
-                <app-date [inputdate]="Record.bl_date" (ValueChanged)="Record.bl_date=$event"></app-date>
-            </div>
-        </div>
+  <div class="col-md-6">
+    <div class="form-group row">
+      <label class="col-md-4 col-form-label col-form-label-sm">House#</label>
+      <div class="col-md-8">
+        <InputBox #bl_no [(inputModel)]="Record.bl_no" [maxlength]="60" [uppercase]=true></InputBox>
+      </div>
     </div>
-    <div class="col-md-6">
-        <div class="form-group row">
-            <label class="col-md-4 col-form-label  col-form-label-sm pr-0"></label>
-            <div class="col-md-8 pr-0">
-                <button [disabled]="loading" (click)="Save()"
-                    class="btn btn-success btn-sm mr-1 mt-1">{{mode==='ADD'?'Add':'Update'}}</button>
-                <button [disabled]="loading" (click)="ActionHandler('ADD','')"
-                    class="btn btn-success btn-sm mt-1">Clear</button>
-            </div>
-        </div>
+    <div class="form-group row">
+      <label class="col-md-4 col-form-label col-form-label-sm">Date</label>
+      <div class="col-md-8">
+        <app-date [inputdate]="Record.bl_date" (ValueChanged)="Record.bl_date=$event"></app-date>
+      </div>
     </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group row">
+      <label class="col-md-4 col-form-label  col-form-label-sm pr-0"></label>
+      <div class="col-md-8 pr-0">
+        <button [disabled]="loading" (click)="Save()"
+          class="btn btn-success btn-sm mr-1 mt-1">{{mode==='ADD'?'Add':'Update'}}</button>
+        <button [disabled]="loading" (click)="ActionHandler('ADD','')"
+          class="btn btn-success btn-sm mt-1">Clear</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <ng-template #doc let-c="close" let-d="dismiss">
-    <!-- <div class="modal-header">
+  <!-- <div class="modal-header">
         <h4 class="modal-title">Documents</h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div> -->
-    <div class="modal-body">
-        <app-upload [pkid]="parentid" [groupid]="docGroupId" [type]="'HBL-DOCUMENTS'"
-            (closeModalWindow)="CloseModal2($event)"></app-upload>
-    </div>
-    <!-- <div class="modal-footer">
+  <div class="modal-body">
+    <app-upload [pkid]="parentid" [groupid]="docGroupId" [type]="'HBL-DOCUMENTS'"
+      (closeModalWindow)="CloseModal2($event)"></app-upload>
+  </div>
+  <!-- <div class="modal-footer">
         <button type="button" class="btn btn-outline-light" (click)="c('Close click')">Close</button>
     </div> -->
 </ng-template>

@@ -12,7 +12,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './mblmedit.component.html'
 })
 export class MblmEditComponent {
-  // Local Variables 
+  // Local Variables
   title = 'Mblm List';
   @Input() menuid: string = '';
   @Input() type: string = '';
@@ -46,7 +46,7 @@ export class MblmEditComponent {
     private route: ActivatedRoute,
     public gs: GlobalService
   ) {
-    // URL Query Parameter 
+    // URL Query Parameter
     const data = this.route.snapshot.queryParams;
     if (data != null) {
       this.InitCompleted = true;
@@ -110,6 +110,9 @@ export class MblmEditComponent {
     this.Record.bl_carrier_code = '';
     this.Record.bl_carrier_name = '';
     this.Record.bl_type = '';
+
+    this.Record.bl_track_type = 'MANUAL';
+
     if (this.type == "SEA EXPORT")
       this.Record.bl_type = 'MBL-SE';
     else if (this.type == "AIR EXPORT")
@@ -281,9 +284,9 @@ export class MblmEditComponent {
   }
 
   open(content: any) {
-    this.modal = this.modalService.open(content, {  centered: true,backdrop: 'static', keyboard: true });
+    this.modal = this.modalService.open(content, { centered: true, backdrop: 'static', keyboard: true });
   }
-  
+
   CloseModal2(params: any) {
     this.modal.close();
   }
