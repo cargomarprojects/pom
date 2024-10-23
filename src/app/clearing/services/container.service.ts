@@ -149,8 +149,12 @@ export class ContainerService {
             this.record.records.push(_rec);
         }
         else {
-            REC.cntr_asealno = _rec.cntr_asealno;
             REC.cntr_no = _rec.cntr_no;
+            REC.cntr_seal_no = _rec.cntr_seal_no;
+            REC.cntr_mbl_no = _rec.cntr_mbl_no;
+            REC.cntr_booking_no = _rec.cntr_booking_no;
+            REC.cntr_type_code = _rec.cntr_type_code;
+            REC.cntr_carrier_name = _rec.cntr_carrier_name;
         }
     }
 
