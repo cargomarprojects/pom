@@ -162,7 +162,7 @@ export class ParamComponent {
     }
 
     if (this.type == 'SEA CARRIER') {
-      this.id2 = "SCAC CODE";
+      this.id3 = "SCAC CODE";
     }
 
   }
@@ -393,7 +393,7 @@ export class ParamComponent {
     }
 
     if (this.type == 'SEA CARRIER') {
-      if (this.Record.param_id2 != "") {
+      if (this.Record.param_id3 == "") {
         bret = false;
         sError += "\n\rBlank SCAC Code";
       }
@@ -446,6 +446,7 @@ export class ParamComponent {
 
       this.Record.param_id1 = this.Record.param_id1.toUpperCase().trim();
       this.Record.param_id2 = this.Record.param_id2.toUpperCase().trim();
+      this.Record.param_id3 = this.Record.param_id3.toUpperCase().trim();
       this.Record.param_email = this.Record.param_email.trim();
 
     }
