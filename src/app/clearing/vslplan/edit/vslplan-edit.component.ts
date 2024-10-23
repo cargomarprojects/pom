@@ -80,7 +80,7 @@ export class VslPlanEditComponent {
     this.ActionHandler();
   }
   InitComponent() {
-     this.sWhere = "a.rec_category='" + this.type + "'";
+    this.sWhere = "a.rec_category='" + this.type + "'";
     this.bPrint = false;
     this.menu_record = this.gs.getMenu(this.menuid);
     if (this.menu_record) {
@@ -607,4 +607,10 @@ export class VslPlanEditComponent {
         });
   }
 
+  Unlock() {
+    this.Record.vp_locked = false;
+    this.Record.vp_mbl_id = '';
+    this.Record.vp_mbl_no = '';
+    this.Save();
+  }
 }

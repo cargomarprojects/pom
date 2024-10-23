@@ -286,6 +286,8 @@
     ">
       <button [hidden]="disableSave" [disabled]="loading||Record.vp_locked" (click)="Save()"
         class="btn btn-success btn-sm mr-1">Save</button>
+        <button [hidden]="disableSave" [disabled]="loading" (click)="Unlock()"
+        class="btn btn-success btn-sm mr-1">Unlock Master</button>
       <button [disabled]="loading" (click)="Close()" class="btn btn-success btn-sm">Return</button>
     </div>
   </div>
