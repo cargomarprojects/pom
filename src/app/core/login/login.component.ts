@@ -3,9 +3,6 @@ import { Router } from '@angular/router';
 import { Companym } from '../models/company';
 import { GlobalService } from '../services/global.service';
 import { LoginService } from '../services/login.service';
-import { HouseListService } from 'src/app/clearing/services/houselist.service';
-import { EdiHblService } from 'src/app/clearing/services/edihbl.service';
-import { EdiOrderService } from 'src/app/clearing/services/ediorder.service';
 
 @Component({
   selector: 'app-login',
@@ -39,12 +36,7 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private gs1: GlobalService,
-    // private store: Store<AppState>,
     private loginservice: LoginService,
-    private hs: HouseListService,
-    private edihs: EdiHblService,
-    private ediord: EdiOrderService
-
   ) {
 
     this.username = 'admin';
@@ -56,9 +48,7 @@ export class LoginComponent {
   }
 
   InitAllService() {
-    this.hs.init();
-    this.edihs.init();
-    this.ediord.init();
+  
   }
 
   LoadCombo() {
