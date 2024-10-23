@@ -155,24 +155,20 @@ export class MblmEditComponent {
     this.ms.GetRecord(SearchData)
       .subscribe(response => {
         this.loading = false;
-        this.loadData(response.record);
+        this.Record = response.record;
+        this.Record.rec_mode = this.mode;
         this.CntrList = response.cntrlist;
         this.HblList = response.hbllist;
         this.LinkList = response.linklist;
         this.TrackList = response.tracklist;
-      },
-        error => {
-          this.loading = false;
-          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
-          this.gs.showToastScreen(this.errorMessage);
-          this.ActionHandler('ADD');
-        });
+      }, error => {
+        this.loading = false;
+        this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+        this.gs.showToastScreen(this.errorMessage);
+        this.ActionHandler('ADD');
+      });
   }
 
-  loadData(_Record: Blm) {
-    this.Record = _Record;
-    this.Record.rec_mode = this.mode;
-  }
 
 
   OnBlur(field: string) {
@@ -289,5 +285,8 @@ export class MblmEditComponent {
 
   CloseModal2(params: any) {
     this.modal.close();
+  }
+  refreshTracking() {
+    this.getRecord(this.pkid);
   }
 }

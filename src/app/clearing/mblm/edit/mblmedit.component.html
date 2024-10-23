@@ -83,7 +83,8 @@
 
   <div class="col-md-6 p-0">
     <div class="page-body-ns-mtl">
-      <app-trk-list [parentid]="pkid" [type]="type" [menuid]="menuid" [RecordList]="TrackList"></app-trk-list>
+      <app-trk-list [parentid]="pkid" [type]="type" [menuid]="menuid" [RecordList]="TrackList"
+        (RefreshTracking)="refreshTracking()"></app-trk-list>
     </div>
   </div>
 

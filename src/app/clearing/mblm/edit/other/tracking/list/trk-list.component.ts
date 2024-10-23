@@ -20,6 +20,8 @@ export class TrkListComponent {
   @Input() parentid: string = '';
   @Input() RecordList: Trackingm[] = [];
 
+  @Output('RefreshTracking') LoadTracking = new EventEmitter();
+
   modal: any;
   selectedId: string = '';
   loading = false;
@@ -133,7 +135,7 @@ export class TrkListComponent {
   }
 
   refreshTracking() {
-
+    this.LoadTracking.emit();
   }
 
 }
