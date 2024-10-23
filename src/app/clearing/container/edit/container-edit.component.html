@@ -5,35 +5,35 @@
 
 <div class="page-body">
     <div class="row my-1">
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label col-form-label-sm">SL#</label>
-                <div class="col-sm-10">
+                <label class="col-sm-3 col-form-label col-form-label-sm">SL#</label>
+                <div class="col-sm-9">
                     <input type="text" style="color:red; font-weight:bold" class="form-control form-control-sm"
                         [(ngModel)]="Record.cntr_slno" [disabled]="true" required maxlength="15" />
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label col-form-label-sm">Master#</label>
-                <div class="col-sm-10">
+                <label class="col-sm-3 col-form-label col-form-label-sm">Master#</label>
+                <div class="col-sm-9">
                     <InputBox [(inputModel)]="Record.cntr_mbl_no" [maxlength]="60" [uppercase]=true></InputBox>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label col-form-label-sm">Booking#</label>
-                <div class="col-sm-10">
+                <label class="col-sm-3 col-form-label col-form-label-sm">Booking#</label>
+                <div class="col-sm-9">
                     <InputBox [(inputModel)]="Record.cntr_booking_no" [maxlength]="60" [uppercase]=true></InputBox>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label col-form-label-sm">Container#</label>
-                <div class="col-sm-10">
+                <label class="col-sm-3 col-form-label col-form-label-sm">Container#</label>
+                <div class="col-sm-9">
                     <InputBox #inv_no [(inputModel)]="Record.cntr_no" [maxlength]="15" [uppercase]=true></InputBox>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label col-form-label-sm">Type</label>
-                <div class="col-sm-10">
+                <label class="col-sm-3 col-form-label col-form-label-sm">Type</label>
+                <div class="col-sm-9">
                     <app-autocomplete3 [controlname]="'CNTR-TYPE'" [tabletype]="'PARAM'" [subtype]="'CONTAINER TYPE'"
                         [displaycolumn]="'CODE'" [displaydata]="Record.cntr_type_code"
                         (ValueChanged)="LovSelected($event)" [where]="">
@@ -41,15 +41,15 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label col-form-label-sm">Seal#</label>
-                <div class="col-sm-10">
+                <label class="col-sm-3 col-form-label col-form-label-sm">Seal#</label>
+                <div class="col-sm-9">
                     <InputBox #sel_no [(inputModel)]="Record.cntr_seal_no" [maxlength]="25" [uppercase]=true></InputBox>
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label col-form-label-sm">Carrier</label>
-                <div class="col-sm-10">
+                <label class="col-sm-3 col-form-label col-form-label-sm">Carrier</label>
+                <div class="col-sm-9">
                     <app-autocomplete3 [controlname]="'CARRIER'" [tabletype]="'PARAM'" [subtype]="'SEA CARRIER'"
                         [displaycolumn]="'CODE'" [displaydata]="Record.cntr_carrier_code"
                         (ValueChanged)="LovSelected($event)" [where]="">
@@ -57,8 +57,8 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label col-form-label-sm"></label>
-                <div class="col-sm-10">
+                <label class="col-sm-3 col-form-label col-form-label-sm"></label>
+                <div class="col-sm-9">
                     <InputBox [(inputModel)]="Record.cntr_carrier_name" [maxlength]="100" [uppercase]=true
                         [disabled]=true>
                     </InputBox>
@@ -72,9 +72,9 @@
 
 <div class="page-body line-bottom">
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <div class="form-group row">
-                <div class="offset-2 col-sm -10 my-1">
+                <div class="offset-3 col-sm -9 my-1">
                     <button [hidden]="disableSave" [disabled]="loading" (click)="Save()"
                         class="btn btn-success btn-sm mr-1">Save</button>
                     <button [disabled]="loading" (click)="Close()" class="btn btn-success btn-sm">Return</button>

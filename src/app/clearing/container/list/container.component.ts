@@ -85,7 +85,7 @@ export class ContainerComponent {
 
   DeleteRow(_rec: Containerm) {
 
-    if (_rec.cntr_source == "MASTER") {
+    if (_rec.cntr_source != "ORIGINAL") {
       this.gs.showToastScreen(['Cannot Delete, Save from another module']);
       return;
     }
