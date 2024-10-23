@@ -52,12 +52,15 @@
             <thead>
                 <tr class="table-header">
                     <th>EDIT</th>
+                    <th>SLNO</th>
                     <th>MASTER#</th>
                     <th>BOOKING#</th>
                     <th>CNTR#</th>
                     <th>TYPE</th>
                     <th>SEAL#</th>
                     <th>CARRIER</th>
+                    <th>CREATED.BY</th>
+                    <th>CREATED.DATE</th>
                     <th *ngIf="ms.bDelete" class='text-center'>DELETE</th>
                 </tr>
             </thead>
@@ -66,13 +69,16 @@
                     [ngClass]="{'table-info':rec.cntr_pkid == ms.getRowId()}">
                     <td (click)="ActionHandler('EDIT',rec.cntr_pkid)" class="hlink"><i class="fa fa-pencil"></i>
                     </td>
+                    <td>{{rec.cntr_slno}}</td>
                     <td>{{rec.cntr_mbl_no}}</td>
                     <td>{{rec.cntr_booking_no}}</td>
                     <td>{{rec.cntr_no}}</td>
                     <td>{{rec.cntr_type_code}}</td>
                     <td>{{rec.cntr_seal_no}}</td>
                     <td>{{rec.cntr_carrier_name}}</td>
-                    <td *ngIf="ms.bDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                    <td>{{rec.rec_created_by}}</td>
+                    <td>{{rec.rec_created_date}}</td>
+                    <td *ngIf="ms.bDelete" class="p-0 text-center"><i *ngIf="rec.cntr_source=='ORIGINAL'" class="fa fa-trash  fa-lg pointer" aria-hidden="true"
                         (click)="DeleteRow(rec)"></i></td>
                 </tr>
             </tbody>

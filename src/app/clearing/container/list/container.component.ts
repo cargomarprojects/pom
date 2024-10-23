@@ -98,7 +98,8 @@ export class ContainerComponent {
       pkid: _rec.cntr_pkid,
       company_code: this.gs.globalVariables.comp_code,
       branch_code: this.gs.globalVariables.branch_code,
-      user_code: this.gs.globalVariables.user_code
+      user_code: this.gs.globalVariables.user_code,
+      cntr_no: _rec.cntr_no
     };
     this.ms.errorMessage = [];
     this.ms.DeleteRecord(SearchData)
@@ -108,7 +109,7 @@ export class ContainerComponent {
           this.gs.showToastScreen(this.ms.errorMessage);
         }
         else {
-          this.ms.record.recods.splice(this.ms.record.recods.findIndex(rec => rec.cntr_pkid == _rec.cntr_pkid), 1);
+          this.ms.record.records.splice(this.ms.record.records.findIndex(rec => rec.cntr_pkid == _rec.cntr_pkid), 1);
         }
 
       }, error => {

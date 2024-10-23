@@ -116,7 +116,7 @@ export class ContainerEditComponent {
         this.Record.cntr_carrier_name = '';
         this.Record.cntr_booking_no = '';
         this.Record.cntr_mbl_no = '';
-        this.Record.cntr_source = '';
+        this.Record.cntr_source = 'ORIGINAL';
         this.Record.rec_mode = this.mode;
         this.Record.rec_version = 0;
     }

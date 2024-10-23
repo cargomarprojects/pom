@@ -45,6 +45,9 @@ export class Containerm {
   rec_mode: string;
   rec_category: string;
   rec_version: number;
+  rec_created_by: string;
+  rec_created_date: string;
+
   cntr_egmno: string;
   cntr_egmdt: string;
   cntr_shipment_type: string;
