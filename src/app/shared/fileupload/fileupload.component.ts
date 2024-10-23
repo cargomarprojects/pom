@@ -1,11 +1,7 @@
 import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter } from '@angular/core';
-
 import { HttpClient } from '@angular/common/http';
-
 import { GlobalService } from '../../core/services/global.service';
-import { AlertService } from '../services/alert.service';
 import { LovService } from '../services/lov.service';
-
 import { documentm } from '../models/documentm';
 
 @Component({
@@ -41,7 +37,6 @@ export class FileUploadComponent {
   constructor(
     public gs: GlobalService,
     private lovService: LovService,
-    private alertService: AlertService,
     private http2: HttpClient,
   ) {
 
