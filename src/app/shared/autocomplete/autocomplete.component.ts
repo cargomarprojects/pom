@@ -1,11 +1,9 @@
 
 import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter, OnChanges, SimpleChange } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertService } from '../services/alert.service';
 import { SearchTable } from '../models/searchtable';
 import { LovService } from '../services/lov.service';
 import { GlobalService } from '../../core/services/global.service';
-
 
 @Component({
     selector: 'app-autocomplete',
@@ -35,11 +33,11 @@ export class AutoCompleteComponent {
     @Output() ValueChanged = new EventEmitter<SearchTable>();
     @Input() disabled: boolean = false;
 
-    @ViewChild('inputbox',{static:false}) private inputbox: ElementRef;
+    @ViewChild('inputbox', { static: false }) private inputbox: ElementRef;
 
-    public displaydata: string ='';
+    public displaydata: string = '';
 
-    rows_to_display : number = 0;
+    rows_to_display: number = 0;
     rows_total: number = 0;
     rows_starting_number: number = 0;
     rows_ending_number: number = 0;
@@ -67,7 +65,6 @@ export class AutoCompleteComponent {
         private elementRef: ElementRef,
         private route: ActivatedRoute,
         private router: Router,
-        private alertService: AlertService,
         private gs: GlobalService,
         private lovService: LovService) {
 
@@ -77,7 +74,7 @@ export class AutoCompleteComponent {
         this.controlname = this.inputdata.controlname;
         this.TableType = this.inputdata.type;
         this.displaycolumn = this.inputdata.displaycolumn;
-        if ( this.displaycolumn == 'CODE')
+        if (this.displaycolumn == 'CODE')
             this.displaydata = this.inputdata.code;
         if (this.displaycolumn == 'NAME')
             this.displaydata = this.inputdata.name;
@@ -90,17 +87,17 @@ export class AutoCompleteComponent {
             let changedProp = changes[propName];
             let from = changedProp.previousValue;
             if (this.displaycolumn == 'CODE') {
-              this.displaydata = this.inputdata.code;
+                this.displaydata = this.inputdata.code;
             }
             if (this.displaycolumn == 'NAME') {
-              this.displaydata = this.inputdata.name;
+                this.displaydata = this.inputdata.name;
             }
         }
     }
 
     Focus() {
-      if ( !this.disabled)
-        this.inputbox.nativeElement.focus();
+        if (!this.disabled)
+            this.inputbox.nativeElement.focus();
     }
 
     eventHandler(KeyCode: any) {
@@ -108,20 +105,18 @@ export class AutoCompleteComponent {
     }
 
     More() {
-        if (this.rows_ending_number < this.rows_total)
-        {
-            this.rows_starting_number = this.rows_ending_number +1;
+        if (this.rows_ending_number < this.rows_total) {
+            this.rows_starting_number = this.rows_ending_number + 1;
             this.rows_ending_number = this.rows_ending_number + this.rows_to_display;
-            
+
             this.List('NEXT');
         }
     }
 
-    List(_action : string = 'NEW') {
+    List(_action: string = 'NEW') {
         this.loading = true;
 
-        if (_action == "NEW")
-        {
+        if (_action == "NEW") {
             this.rows_to_display = 10;
             this.rows_starting_number = 1;
             this.rows_ending_number = this.rows_to_display;
@@ -130,17 +125,17 @@ export class AutoCompleteComponent {
 
         let SearchData = {
             action: _action,
-            rows_to_display : this.rows_to_display,
+            rows_to_display: this.rows_to_display,
             rows_starting_number: this.rows_starting_number,
             rows_ending_number: this.rows_ending_number,
             type: this.inputdata.type,
             parentid: this.inputdata.parentid,
             searchstring: this.displaydata,
-            where : this.inputdata.where,
+            where: this.inputdata.where,
             comp_code: this.gs.globalVariables.comp_code,
             branch_code: this.gs.globalVariables.branch_code
         };
-        
+
         this.lovService.List(SearchData)
             .subscribe(response => {
                 //this.RecList = response.list;
@@ -165,11 +160,11 @@ export class AutoCompleteComponent {
                     this.showDiv = true;
                 }
             },
-            error => {
-              this.loading = false;
-              this.alertService.error(error.error);
-                
-            }
+                error => {
+                    this.loading = false;
+                    alert(this.gs.getError(error));
+
+                }
             );
     }
 
@@ -191,7 +186,7 @@ export class AutoCompleteComponent {
             this.inputdata.col7 = '';
             this.displaydata = '';
             this.parentid = '';
-            
+
         }
         else {
             this.inputdata.id = _Record.id;
@@ -200,8 +195,8 @@ export class AutoCompleteComponent {
             this.inputdata.rate = _Record.rate;
             if (this.displaycolumn == "CODE")
                 this.displaydata = _Record.code;
-            if ( this.displaycolumn == "NAME")
-              this.displaydata = _Record.name;
+            if (this.displaycolumn == "NAME")
+                this.displaydata = _Record.name;
             this.parentid = _Record.parentid;
 
             this.inputdata.col1 = _Record.col1;
@@ -265,13 +260,13 @@ export class AutoCompleteComponent {
             'border-radius': '0px',
         };
         return styles;
-      }
+    }
 
-      
+
 
 }
 
-    
+
 
 
 
