@@ -1,12 +1,10 @@
-import { Component, Input, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Component } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
-import { Containerm, SearchQuery } from '../../models/Container';
+import { Containerm } from '../../models/container';
 import { ContainerService } from '../../services/container.service';
 import { SearchTable } from '../../../shared/models/searchtable';
-import { DateComponent } from '../../../shared/date/date.component';
-import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
