@@ -608,9 +608,42 @@ export class VslPlanEditComponent {
   }
 
   Unlock() {
-    this.Record.vp_locked = false;
-    this.Record.vp_mbl_id = '';
-    this.Record.vp_mbl_no = '';
-    this.Save();
+    this.SearchRecord('unlockmaster');
   }
+
+  SearchRecord(controlname: string) {
+    this.errorMessage = [];
+    if (!confirm("UNLOCK " + this.Record.vp_mbl_no)) {
+      return;
+    }
+
+    let SearchData = {
+      rowtype: this.type,
+      table: 'unlockmaster',
+      company_code: this.gs.globalVariables.comp_code,
+      branch_code: this.gs.globalVariables.branch_code,
+      year_code: this.gs.globalVariables.year_code,
+      pkid: this.Record.vp_pkid,
+      mblid: this.Record.vp_mbl_id
+    };
+
+    this.gs.SearchRecord(SearchData)
+      .subscribe(response => {
+        if (response.retvalue == false) {
+          this.errorMessage = this.gs.getErrorArray(response.error);
+          this.gs.showToastScreen(this.errorMessage);
+        } else {
+          this.Record.vp_locked = false;
+          this.Record.vp_mbl_id = '';
+          this.Record.vp_mbl_no = '';
+          this.gs.showToastScreen(['Successfully Updated']);
+        }
+      },
+        error => {
+          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.errorMessage);
+        });
+
+  }
+
 }
