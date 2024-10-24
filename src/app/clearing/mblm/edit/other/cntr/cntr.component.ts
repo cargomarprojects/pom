@@ -283,7 +283,7 @@ export class CntrComponent {
       .subscribe(response => {
         this.loading = false;
         if (response.error) {
-          this.gs.showToastScreen([response.error]);
+          this.gs.showToastScreen(this.gs.getErrorArray(response.error));
         } else {
           this.RecordList.splice(this.RecordList.findIndex(rec => rec.cntr_pkid == _rec.cntr_pkid), 1);
           this.ActionHandler('ADD', null);

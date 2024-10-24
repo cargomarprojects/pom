@@ -286,7 +286,7 @@ export class HblComponent {
             .subscribe(response => {
                 this.loading = false;
                 if (response.error) {
-                    this.gs.showToastScreen([response.error]);
+                    this.gs.showToastScreen(this.gs.getErrorArray(response.error));
                 } else {
                     this.RecordList.splice(this.RecordList.findIndex(rec => rec.bl_pkid == _rec.bl_pkid), 1);
                     this.ActionHandler('ADD', null);
