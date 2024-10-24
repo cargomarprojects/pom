@@ -49,10 +49,13 @@ export class OrderEditComponent {
     const data = this.route.snapshot.queryParams;
     if (data != null) {
       this.InitCompleted = true;
-      this.menuid = data.menuid;
-      this.type = data.type;
-      this.mode = data.mode;
-      this.pkid = data.pkid;
+
+      this.menuid = data['menuid'];
+      this.type = data['type'];
+      this.mode = data['mode'];
+      this.pkid = data['pkid'];
+
+
       this.InitComponent();
     }
   }
