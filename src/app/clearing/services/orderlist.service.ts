@@ -403,7 +403,7 @@ export class OrderListService {
 
   DeleteRow(_rec: Joborderm, _type: string) {
 
-    if (!confirm("DELETE " + _rec.ord_uid)) {
+    if (!confirm("DELETE ROW")) {
       return;
     }
     this.loading = true;
@@ -423,7 +423,10 @@ export class OrderListService {
           this.gs.showToastScreen(this.errorMessage);
         }
         else {
-          this.record.records.splice(this.record.records.findIndex(rec => rec.ord_pkid == _rec.ord_pkid), 1);
+          if (_type == "SUMMARY")
+            this.record.records.splice(this.record.records.findIndex(rec => rec.ord_header_id == _rec.ord_header_id), 1);
+          else
+            this.record.records.splice(this.record.records.findIndex(rec => rec.ord_pkid == _rec.ord_pkid), 1);
         }
 
       }, error => {
