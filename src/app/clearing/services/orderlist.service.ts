@@ -412,7 +412,8 @@ export class OrderListService {
       type: _type,
       company_code: this.gs.globalVariables.comp_code,
       branch_code: this.gs.globalVariables.branch_code,
-      user_code: this.gs.globalVariables.user_code
+      user_code: this.gs.globalVariables.user_code,
+      ord_header_id: _rec.ord_header_id
     };
     this.errorMessage = [];
     this.DeleteRecord(SearchData)
