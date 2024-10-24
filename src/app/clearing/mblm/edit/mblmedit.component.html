@@ -76,13 +76,13 @@
 <div class="row" *ngIf="type =='SEA EXPORT' && mode=='EDIT'">
 
   <div class="col-md-6 p-0">
-    <div class="page-body-ns-mtrl">
+    <div class="page-body-ns-mtl">
       <app-cntr [parentid]="pkid" [type]="type" [menuid]="menuid" [RecordList]="CntrList"></app-cntr>
     </div>
   </div>
 
   <div class="col-md-6 p-0">
-    <div class="page-body-ns-mtl">
+    <div class="page-body-ns-mtrl">
       <app-trk-list [parentid]="pkid" [type]="type" [menuid]="menuid" [RecordList]="TrackList"
         (RefreshTracking)="refreshTracking()"></app-trk-list>
     </div>
