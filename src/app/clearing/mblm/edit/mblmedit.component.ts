@@ -301,7 +301,6 @@ export class MblmEditComponent {
       }, error => {
         this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
         this.gs.showToastScreen(this.errorMessage);
-        this.ActionHandler('ADD');
       });
 
   }

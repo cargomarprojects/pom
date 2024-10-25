@@ -54,6 +54,11 @@
           <th *ngIf="type == 'CONTAINER TYPE'">DESCRIPTION</th>
           <th *ngIf="type == 'SERVICE CONTRACT'">GROUP</th>
           <th *ngIf="type == 'SEA CARRIER'">SCAC</th>
+          <th *ngIf="type == 'VESSEL'">IMO#</th>
+
+          <th *ngIf="type == 'AIR CARRIER'">PREFIX</th>
+          <th *ngIf="type == 'AIR CARRIER'">TYPE</th>
+          <th *ngIf="type == 'SALESMAN'">LOCKED</th>
         </tr>
       </thead>
       <tbody class="page-body-tbody">
@@ -67,6 +72,10 @@
           <td *ngIf="type == 'CONTAINER TYPE'">{{rec.param_id3}}</td>
           <td *ngIf="type == 'SERVICE CONTRACT'">{{rec.param_id3}}</td>
           <td *ngIf="type == 'SEA CARRIER'">{{rec.param_id3}}</td>
+          <td *ngIf="type == 'VESSEL'">{{rec.param_id3}}</td>
+          <th *ngIf="type == 'AIR CARRIER'">{{rec.param_id2}}</th>
+          <th *ngIf="type == 'AIR CARRIER'">{{rec.param_id3}}</th>
+          <th *ngIf="type == 'SALESMAN'">{{rec.rec_locked ? "Y" : "N"}}</th>
         </tr>
       </tbody>
     </table>
@@ -170,7 +179,7 @@
           </div>
         </div>
 
-        <div *ngIf="type=='SALESMAN' || type =='ESANCHITDOC' || type =='TAN'" class="form-group row">
+        <div *ngIf="type=='SALESMAN'" class=" form-group row">
           <label class="col-4 col-form-label col-form-label-sm">Locked</label>
           <div class="col-8">
             <div class="form-check">

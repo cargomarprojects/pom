@@ -13,14 +13,12 @@
     <thead>
       <tr class="table-header">
         <th>SL#</th>
-        <th>DESC</th>
-        <th>STATUS</th>
-        <th>PORT.CODE</th>
-        <th>PORT.NAME</th>
+        <th>PLACE</th>
+        <th>EVENT</th>
+        <th>PORT</th>
         <th>DATE</th>
         <th>CONFM</th>
-        <th>VESSEL.CODE</th>
-        <th>VESSEL.NAME</th>
+        <th>VESSEL</th>
         <th>VOYAGE</th>
       </tr>
     </thead>
@@ -30,11 +28,9 @@
         <td>{{i+1}}</td>
         <td>{{rec.trk_desc}}</td>
         <td>{{rec.trk_status}}</td>
-        <td>{{rec.trk_pol_code}}</td>
         <td>{{rec.trk_pol_name}}</td>
         <td>{{rec.trk_pol_etd}}</td>
         <td>{{rec.trk_pol_etd_confirm ? 'Y' : 'N'}}</td>
-        <td>{{rec.trk_vsl_code}}</td>
         <td>{{rec.trk_vsl_name}}</td>
         <td>{{rec.trk_voyage}}</td>
       </tr>

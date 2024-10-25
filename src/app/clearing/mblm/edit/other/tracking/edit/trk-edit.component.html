@@ -1,201 +1,196 @@
 <div class="page-body line-bottom  mt-2">
-    <div class="page-body-header-ns">
-        <h5>Tracking
-            Details
-        </h5>
-    </div>
+  <div class="page-body-header-ns">
+    <h5>Tracking
+      Details
+    </h5>
+  </div>
 
-    <div *ngIf="type=='SEA EXPORT'">
-        <div class="row modal-header-ns">
-            <div class="col-sm-3 mx-0 px-0">
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label col-form-label-sm"></label>
-                    <label class="col-sm-5 col-form-label col-form-label-sm">DESC</label>
-                    <label class="col-sm-5 col-form-label col-form-label-sm">STATUS</label>
-                </div>
-            </div>
-            <div class="col-sm-5 mx-0 px-0">
-                <div class="form-group row">
-                    <label class="col-sm-8 col-form-label col-form-label-sm">PORT</label>
-                    <label class="col-sm-3 col-form-label col-form-label-sm">DATE</label>
-                    <label class="col-sm-1 col-form-label col-form-label-sm">CONFM</label>
-                </div>
-            </div>
-            <div class="col-sm-4 mx-0 px-0">
-                <div class="form-group row">
-                    <label class="col-sm-8 col-form-label col-form-label-sm">VESSEL</label>
-                    <label class="col-sm-4 col-form-label col-form-label-sm">VOYAGE</label>
-                </div>
-            </div>
+  <div *ngIf="type=='SEA EXPORT'">
+    <div class="row modal-header-ns">
+      <div class="col-sm-3 mx-0 px-0">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label col-form-label-sm"></label>
+          <label class="col-sm-5 col-form-label col-form-label-sm">PLACE</label>
+          <label class="col-sm-5 col-form-label col-form-label-sm">EVENT</label>
         </div>
-        <hr class="mt-1">
-        <div *ngFor="let rec of Record.TransitList; let i = index">
-            <app-transit [mRecord]="rec" [type]="type" [statuslist]="StatusList" [rowindex]="i"
-                [selectedRow]="selectedRowIndex" (ModifiedRecords)="ModifiedRecords($event)">
-            </app-transit>
-            <hr>
+      </div>
+      <div class="col-sm-5 mx-0 px-0">
+        <div class="form-group row">
+          <label class="col-sm-8 col-form-label col-form-label-sm">PORT</label>
+          <label class="col-sm-3 col-form-label col-form-label-sm">DATE</label>
+          <label class="col-sm-1 col-form-label col-form-label-sm">CONF</label>
         </div>
-        <div class="row">
-            <div class="col-sm-8 mx-0 px-0">
-                <div class="form-group row">
-                    <label class="col-sm-1  col-form-label col-form-label-sm pr-0">REMARKS</label>
-                    <div class="col-sm-8  pr-0">
-                        <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.bl_track_comments"
-                            (blur)="OnBlur('bl_track_comments')" required maxlength="150" />
-                    </div>
-                    <div class="col-sm-3">
-                        <button [disabled]="loading" (click)="Save()" class="btn btn-success btn-sm mr-1">Save</button>
-                        <button (click)="Close()" class="btn btn-success btn-sm">Close</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 mx-0 px-0">
-                <div class="form-group row">
-                    <div class="col-12">
-                        <button *ngIf="Record.TransitList.length" class="btn btn-info btn-sm mr-1"
-                            (click)="changePosition('UP')"><span class="fa fa-arrow-up"></span></button>
-                        <button *ngIf="Record.TransitList.length" class="btn btn-info btn-sm mr-1"
-                            (click)="changePosition('DOWN')"><span class="fa fa-arrow-down"></span></button>
-                        <label *ngIf="Record.TransitList.length" class="col-form-label col-form-label-sm">
-                            Select a row and use arrows to move between rows</label>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="col-sm-4 mx-0 px-0">
+        <div class="form-group row">
+          <label class="col-sm-8 col-form-label col-form-label-sm">VESSEL</label>
+          <label class="col-sm-4 col-form-label col-form-label-sm">VOYAGE</label>
         </div>
+      </div>
     </div>
+    <hr class="mt-1">
+    <div *ngFor="let rec of Record.TransitList; let i = index">
+      <app-transit [mRecord]="rec" [type]="type" [statuslist]="StatusList" [rowindex]="i"
+        [selectedRow]="selectedRowIndex" (ModifiedRecords)="ModifiedRecords($event)">
+      </app-transit>
+      <hr>
+    </div>
+    <div class="row">
+      <div class="col-sm-8 mx-0 px-0">
+        <div class="form-group row">
+          <label class="col-sm-1  col-form-label col-form-label-sm pr-0">REMARKS</label>
+          <div class="col-sm-8  pr-0">
+            <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.bl_track_comments"
+              (blur)="OnBlur('bl_track_comments')" required maxlength="150" />
+          </div>
+          <div class="col-sm-3">
+            <button *ngIf="bShowSave" (click)="Save()" class="btn btn-success btn-sm mr-1">Save</button>
+            <button (click)="Close()" class="btn btn-success btn-sm">Close</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 mx-0 px-0" *ngIf="bShowSave">
+        <div class="form-group row">
+          <div class="col-12">
+            <button *ngIf="Record.TransitList.length" class="btn btn-info btn-sm mr-1"
+              (click)="changePosition('UP')"><span class="fa fa-arrow-up"></span></button>
+            <button *ngIf="Record.TransitList.length" class="btn btn-info btn-sm mr-1"
+              (click)="changePosition('DOWN')"><span class="fa fa-arrow-down"></span></button>
+            <label *ngIf="Record.TransitList.length" class="col-form-label col-form-label-sm">
+              Select a row and use arrows to move between rows</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <div *ngIf="type=='AIR EXPORT'">
-        <div class="row modal-header-ns">
-            <div class="col-sm-8 mx-0 px-0">
-                <div class="form-group row">
-                    <label class="col-sm-1 col-form-label col-form-label-sm pr-0">DESC</label>
-                    <label class="col-sm-4  col-form-label col-form-label-sm pr-0">PORT</label>
-                    <label class="col-sm-5  col-form-label col-form-label-sm pr-0">AIRLINE</label>
-                    <label class="col-sm-2  col-form-label col-form-label-sm pr-0">FLIGHT#</label>
-                </div>
-            </div>
-            <div class="col-sm-4 mx-0 px-0">
-                <div class="form-group row">
-                    <label class="col-sm-4  col-form-label col-form-label-sm pr-0">ETD-[POL]</label>
-                    <label class="col-sm-2  col-form-label col-form-label-sm pr-0">CONFM</label>
-                    <label class="col-sm-3  col-form-label col-form-label-sm pr-0">ETA-[POD]</label>
-                    <label class="col-sm-3  col-form-label col-form-label-sm pr-0">CONFM</label>
-                </div>
-            </div>
+  <div *ngIf="type=='AIR EXPORT'">
+    <div class="row modal-header-ns">
+      <div class="col-sm-8 mx-0 px-0">
+        <div class="form-group row">
+          <label class="col-sm-1 col-form-label col-form-label-sm pr-0">DESC</label>
+          <label class="col-sm-4  col-form-label col-form-label-sm pr-0">PORT</label>
+          <label class="col-sm-5  col-form-label col-form-label-sm pr-0">AIRLINE</label>
+          <label class="col-sm-2  col-form-label col-form-label-sm pr-0">FLIGHT#</label>
         </div>
-        <hr class="mt-1">
-        <div class="row">
-            <div class="col-sm-8  mx-0 px-0">
-                <div class="form-group row">
-                    <label class="col-sm-1 col-form-label col-form-label-sm">POL</label>
-                    <div class="col-sm-2">
-                        <app-autocomplete3 [controlname]="'POL'" [tabletype]="'PARAM'" [subtype]="'AIR PORT'"
-                            [displaycolumn]="'CODE'" [displaydata]="Record.bl_pol_code"
-                            (ValueChanged)="LovSelected($event)" [where]="">
-                        </app-autocomplete3>
-                    </div>
-                    <div class="col-sm-2">
-                        <input type="text" disabled class="form-control form-control-sm"
-                            [(ngModel)]="Record.bl_pol_name" />
-                    </div>
-                    <div class="col-sm-2">
-                        <app-autocomplete3 [controlname]="'VESSEL'" [tabletype]="'PARAM'" [subtype]="'AIR CARRIER'"
-                            [displaycolumn]="'CODE'" [displaydata]="Record.bl_vessel_code"
-                            (ValueChanged)="LovSelected($event)" [where]="">
-                        </app-autocomplete3>
-                    </div>
-                    <div class="col-sm-3">
-                        <input type="text" disabled class="form-control form-control-sm"
-                            [(ngModel)]="Record.bl_vessel_name" />
-                    </div>
-                    <div class="col-sm-2">
-                        <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.bl_vessel_no"
-                            (blur)="OnBlur('bl_vessel_no')" required maxlength="15" />
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 mx-0 px-0">
-                <div class="form-group row">
-                    <div class="col-sm-4">
-                        <app-date [inputdate]="Record.bl_pol_etd" (ValueChanged)="Record.bl_pol_etd=$event"></app-date>
-                    </div>
-                    <div class="col-sm-2 my-1">
-                        <input type="checkbox" [(ngModel)]="Record.bl_pol_etd_confirm">
-                    </div>
-                    <div class="col-sm-3">
-                        <app-date [inputdate]="Record.bl_pol_eta" (ValueChanged)="Record.bl_pol_eta=$event"></app-date>
-                    </div>
-                    <div class="col-sm-3 my-1">
-                        <input type="checkbox" [(ngModel)]="Record.bl_pol_eta_confirm">
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="col-sm-4 mx-0 px-0">
+        <div class="form-group row">
+          <label class="col-sm-4  col-form-label col-form-label-sm pr-0">ETD-[POL]</label>
+          <label class="col-sm-2  col-form-label col-form-label-sm pr-0">CONFM</label>
+          <label class="col-sm-3  col-form-label col-form-label-sm pr-0">ETA-[POD]</label>
+          <label class="col-sm-3  col-form-label col-form-label-sm pr-0">CONFM</label>
         </div>
-        <hr class="mt-1">
-        <div *ngFor="let rec of Record.TransitList; let i = index">
-            <app-transit [mRecord]="rec" [type]="type" [statuslist]="StatusList" [rowindex]="i"
-                [selectedRow]="selectedRowIndex" (ModifiedRecords)="ModifiedRecords($event)">
-            </app-transit>
-            <hr>
-        </div>
-        <div class="row">
-            <div class="col-sm-8 mx-0 px-0">
-                <div class="form-group row">
-                    <label class="col-sm-1  col-form-label col-form-label-sm">POD</label>
-                    <div class="col-sm-2">
-                        <app-autocomplete3 [controlname]="'POD'" [tabletype]="'PARAM'" [subtype]="'AIR PORT'"
-                            [displaycolumn]="'CODE'" [displaydata]="Record.bl_pod_code"
-                            (ValueChanged)="LovSelected($event)" [where]="">
-                        </app-autocomplete3>
-                    </div>
-                    <div class="col-sm-2">
-                        <input type="text" disabled class="form-control form-control-sm"
-                            [(ngModel)]="Record.bl_pod_name" />
-                    </div>
-                    <label class="col-sm-1  col-form-label col-form-label-sm">ETA</label>
-                    <div class="col-sm-2">
-                        <app-date [inputdate]="Record.bl_pod_eta" (ValueChanged)="Record.bl_pod_eta=$event"></app-date>
-                    </div>
-                    <label class="col-sm-4  col-form-label col-form-label-sm" for="blpodeta"><input type="checkbox"
-                            [(ngModel)]="Record.bl_pod_eta_confirm" id="blpodeta">CONFM</label>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-1  col-form-label col-form-label-sm">POFD</label>
-                    <div class="col-sm-2">
-                        <app-autocomplete3 [controlname]="'POFD'" [tabletype]="'PARAM'" [subtype]="'AIR PORT'"
-                            [displaycolumn]="'CODE'" [displaydata]="Record.bl_pofd_code"
-                            (ValueChanged)="LovSelected($event)" [where]="">
-                        </app-autocomplete3>
-                    </div>
-                    <div class="col-sm-2">
-                        <input type="text" disabled class="form-control form-control-sm"
-                            [(ngModel)]="Record.bl_pofd_name" />
-                    </div>
-                    <label class="col-sm-1  col-form-label col-form-label-sm">ETA</label>
-                    <div class="col-sm-2">
-                        <app-date [inputdate]="Record.bl_pofd_eta"
-                            (ValueChanged)="Record.bl_pofd_eta=$event"></app-date>
-                    </div>
-                    <label class="col-sm-4  col-form-label col-form-label-sm" for="blpofdeta"><input type="checkbox"
-                            [(ngModel)]="Record.bl_pofd_eta_confirm" id="blpofdeta">CONFM</label>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-sm-8 mx-0 px-0">
-                <div class="form-group row">
-                    <label class="col-sm-1  col-form-label col-form-label-sm pr-0">REMARKS</label>
-                    <div class="col-sm-8  pr-0">
-                        <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.bl_track_comments"
-                            (blur)="OnBlur('bl_track_comments')" required maxlength="150" />
-                    </div>
-                    <div class="col-sm-3">
-                        <button [disabled]="loading" (click)="Save()" class="btn btn-success btn-sm mr-1">Save</button>
-                        <button (click)="Close()" class="btn btn-success btn-sm">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+    <hr class="mt-1">
+    <div class="row">
+      <div class="col-sm-8  mx-0 px-0">
+        <div class="form-group row">
+          <label class="col-sm-1 col-form-label col-form-label-sm">POL</label>
+          <div class="col-sm-2">
+            <app-autocomplete3 [controlname]="'POL'" [tabletype]="'PARAM'" [subtype]="'AIR PORT'"
+              [displaycolumn]="'CODE'" [displaydata]="Record.bl_pol_code" (ValueChanged)="LovSelected($event)"
+              [where]="">
+            </app-autocomplete3>
+          </div>
+          <div class="col-sm-2">
+            <input type="text" disabled class="form-control form-control-sm" [(ngModel)]="Record.bl_pol_name" />
+          </div>
+          <div class="col-sm-2">
+            <app-autocomplete3 [controlname]="'VESSEL'" [tabletype]="'PARAM'" [subtype]="'AIR CARRIER'"
+              [displaycolumn]="'CODE'" [displaydata]="Record.bl_vessel_code" (ValueChanged)="LovSelected($event)"
+              [where]="">
+            </app-autocomplete3>
+          </div>
+          <div class="col-sm-3">
+            <input type="text" disabled class="form-control form-control-sm" [(ngModel)]="Record.bl_vessel_name" />
+          </div>
+          <div class="col-sm-2">
+            <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.bl_vessel_no"
+              (blur)="OnBlur('bl_vessel_no')" required maxlength="15" />
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 mx-0 px-0">
+        <div class="form-group row">
+          <div class="col-sm-4">
+            <app-date [inputdate]="Record.bl_pol_etd" (ValueChanged)="Record.bl_pol_etd=$event"></app-date>
+          </div>
+          <div class="col-sm-2 my-1">
+            <input type="checkbox" [(ngModel)]="Record.bl_pol_etd_confirm">
+          </div>
+          <div class="col-sm-3">
+            <app-date [inputdate]="Record.bl_pol_eta" (ValueChanged)="Record.bl_pol_eta=$event"></app-date>
+          </div>
+          <div class="col-sm-3 my-1">
+            <input type="checkbox" [(ngModel)]="Record.bl_pol_eta_confirm">
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="mt-1">
+    <div *ngFor="let rec of Record.TransitList; let i = index">
+      <app-transit [mRecord]="rec" [type]="type" [statuslist]="StatusList" [rowindex]="i"
+        [selectedRow]="selectedRowIndex" (ModifiedRecords)="ModifiedRecords($event)">
+      </app-transit>
+      <hr>
+    </div>
+    <div class="row">
+      <div class="col-sm-8 mx-0 px-0">
+        <div class="form-group row">
+          <label class="col-sm-1  col-form-label col-form-label-sm">POD</label>
+          <div class="col-sm-2">
+            <app-autocomplete3 [controlname]="'POD'" [tabletype]="'PARAM'" [subtype]="'AIR PORT'"
+              [displaycolumn]="'CODE'" [displaydata]="Record.bl_pod_code" (ValueChanged)="LovSelected($event)"
+              [where]="">
+            </app-autocomplete3>
+          </div>
+          <div class="col-sm-2">
+            <input type="text" disabled class="form-control form-control-sm" [(ngModel)]="Record.bl_pod_name" />
+          </div>
+          <label class="col-sm-1  col-form-label col-form-label-sm">ETA</label>
+          <div class="col-sm-2">
+            <app-date [inputdate]="Record.bl_pod_eta" (ValueChanged)="Record.bl_pod_eta=$event"></app-date>
+          </div>
+          <label class="col-sm-4  col-form-label col-form-label-sm" for="blpodeta"><input type="checkbox"
+              [(ngModel)]="Record.bl_pod_eta_confirm" id="blpodeta">CONFM</label>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-1  col-form-label col-form-label-sm">POFD</label>
+          <div class="col-sm-2">
+            <app-autocomplete3 [controlname]="'POFD'" [tabletype]="'PARAM'" [subtype]="'AIR PORT'"
+              [displaycolumn]="'CODE'" [displaydata]="Record.bl_pofd_code" (ValueChanged)="LovSelected($event)"
+              [where]="">
+            </app-autocomplete3>
+          </div>
+          <div class="col-sm-2">
+            <input type="text" disabled class="form-control form-control-sm" [(ngModel)]="Record.bl_pofd_name" />
+          </div>
+          <label class="col-sm-1  col-form-label col-form-label-sm">ETA</label>
+          <div class="col-sm-2">
+            <app-date [inputdate]="Record.bl_pofd_eta" (ValueChanged)="Record.bl_pofd_eta=$event"></app-date>
+          </div>
+          <label class="col-sm-4  col-form-label col-form-label-sm" for="blpofdeta"><input type="checkbox"
+              [(ngModel)]="Record.bl_pofd_eta_confirm" id="blpofdeta">CONFM</label>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-8 mx-0 px-0">
+        <div class="form-group row">
+          <label class="col-sm-1  col-form-label col-form-label-sm pr-0">REMARKS</label>
+          <div class="col-sm-8  pr-0">
+            <input type="text" class="form-control form-control-sm" [(ngModel)]="Record.bl_track_comments"
+              (blur)="OnBlur('bl_track_comments')" required maxlength="150" />
+          </div>
+          <div class="col-sm-3">
+            <button (click)="Save()" class="btn btn-success btn-sm mr-1">Save</button>
+            <button (click)="Close()" class="btn btn-success btn-sm">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

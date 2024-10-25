@@ -125,7 +125,7 @@ export class ParamComponent {
     }
 
     if (this.type == 'AIR CARRIER') {
-      this.id1 = "3DigitCode";
+      this.id1 = "Prefix";
       this.id2 = "Type";
     }
     if (this.type == 'PAN') {
@@ -163,6 +163,9 @@ export class ParamComponent {
 
     if (this.type == 'SEA CARRIER') {
       this.id3 = "SCAC CODE";
+    }
+    if (this.type == 'VESSEL') {
+      this.id3 = "IMO#";
     }
 
   }
@@ -396,6 +399,13 @@ export class ParamComponent {
       if (this.Record.param_id3 == "") {
         bret = false;
         sError += "\n\rBlank SCAC Code";
+      }
+    }
+
+    if (this.type == 'VESSEL') {
+      if (this.Record.param_id3 == "") {
+        bret = false;
+        sError += "\n\rBlank IMO#";
       }
     }
 
