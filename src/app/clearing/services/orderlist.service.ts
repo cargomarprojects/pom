@@ -408,7 +408,7 @@ export class OrderListService {
     }
     this.loading = true;
     let SearchData = {
-      pkid: _rec.ord_pkid,
+      pkid: _type == "SUMMARY" ? _rec.ord_header_id : _rec.ord_pkid,
       type: _type,
       company_code: this.gs.globalVariables.comp_code,
       branch_code: this.gs.globalVariables.branch_code,
