@@ -8,227 +8,231 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Injectable({ providedIn: 'root' })
 export class MblmListService {
 
-    title = 'MASTER LIST';
-    menuid: string = '';
-    type: string = '';
+  title = 'MASTER LIST';
+  menuid: string = '';
+  type: string = '';
 
-    public initlialized = false;
-    private appid = ''
-    public canDelete: boolean;
-    menu_record: any;
-    total = 0;
-    public errorMessage: string[] = [];
-    loading = false;
-    //   where_buy_agent = "CUST_IS_BUY_AGENT = 'Y'";
-    modalRef: any;
+  public initlialized = false;
+  private appid = ''
+  public canDelete: boolean;
+  menu_record: any;
+  total = 0;
+  public errorMessage: string[] = [];
+  loading = false;
+  //   where_buy_agent = "CUST_IS_BUY_AGENT = 'Y'";
+  modalRef: any;
 
-    private _record: BlmModel;
+  private _record: BlmModel;
 
-    constructor(
-        private modalService: NgbModal,
-        private http2: HttpClient,
-        private gs: GlobalService) {
+  constructor(
+    private modalService: NgbModal,
+    private http2: HttpClient,
+    private gs: GlobalService) {
+  }
+  public get record() {
+    return this._record;
+  }
+  public set record(value: any) {
+    this._record = value;
+  }
+
+
+  public init(params: any) {
+
+    // if (this.appid != this.gs.globalVariables.appid) {
+    //     this.appid = this.gs.globalVariables.appid;
+    //     this.initlialized = false;
+    // }
+
+
+    if (this.appid != this.gs.globalVariables.appid || this.menuid != params.menuid) {
+      this.appid = this.gs.globalVariables.appid;
+      this.initlialized = false;
     }
-    public get record() {
-        return this._record;
+
+    if (this.initlialized)
+      return;
+
+    this.menuid = params.menuid;
+
+    this.type = params.type;
+
+    this.initDefaultValues();
+
+    this.LoadCombo();
+
+    this.ReadUserRights();
+
+    this.List("NEW");
+
+    this.initlialized = true;
+  }
+
+  ReadUserRights() {
+    this.canDelete = false;
+    this.menu_record = this.gs.getMenu(this.menuid);
+    if (this.menu_record) {
+      this.title = this.menu_record.menu_name;
+      if (this.menu_record.rights_delete)
+        this.canDelete = true;
     }
-    public set record(value: any) {
-        this._record = value;
-    }
+  }
+
+  initDefaultValues() {
+    this.total = 0;
+    this.record = <BlmModel>{
+      urlid: '',
+      selectedId: '',
+      message: '',
+      isError: false,
+      records: [],
+      searchQuery: <SearchQuery>{
+        branch_code: this.gs.globalVariables.branch_code,
+        company_code: this.gs.globalVariables.user_company_code,
+        user_code: this.gs.globalVariables.user_code,
+        page_count: 0,
+        page_current: 0,
+        page_rows: 20,
+        page_rowcount: 0,
+        searchstring: '',
+        file_pkid: '',
+        report_folder: '',
+
+      }
+    };
+  }
 
 
-    public init(params: any) {
+  public selectRowId(id: string) {
+    this._record.selectedId = id;
+  }
+  public getRowId() {
+    return this._record.selectedId;
+  }
 
-        // if (this.appid != this.gs.globalVariables.appid) {
-        //     this.appid = this.gs.globalVariables.appid;
-        //     this.initlialized = false;
-        // }
+  LoadCombo() {
 
+  }
 
-        if (this.appid != this.gs.globalVariables.appid || this.menuid != params.menuid) {
-            this.appid = this.gs.globalVariables.appid;
-            this.initlialized = false;
+  List(_type: string) {
+    this.total = 0;
+    this.loading = true;
+    let SearchData = {
+      type: _type,
+      rowtype: this.type,
+      searchstring: this._record.searchQuery.searchstring,
+      company_code: this.gs.globalVariables.comp_code,
+      branch_code: this.gs.globalVariables.branch_code,
+      user_code: this.gs.globalVariables.user_code,
+      page_count: this._record.searchQuery.page_count,
+      page_current: this._record.searchQuery.page_current,
+      page_rows: this._record.searchQuery.page_rows,
+      page_rowcount: this._record.searchQuery.page_rowcount,
+      report_folder: this.gs.globalVariables.report_folder,
+      file_pkid: this.gs.getGuid()
+    };
+    this.errorMessage = [];
+    this.MblList(SearchData)
+      .subscribe(response => {
+        this.loading = false;
+        if (_type == 'EXCEL')
+          this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
+        else {
+          this.record.records = response.list;
+          this.record.searchQuery.page_count = response.page_count;
+          this.record.searchQuery.page_current = response.page_current;
+          this.record.searchQuery.page_rowcount = response.page_rowcount;
         }
+      },
+        error => {
+          this.loading = false;
+          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.errorMessage);
+        });
+  }
+  Downloadfile(filename: string, filetype: string, filedisplayname: string) {
+    this.gs.DownloadFile(this.gs.globalVariables.report_folder, filename, filetype, filedisplayname);
+  }
 
-        if (this.initlialized)
-            return;
+  RefreshList(_record: Blm) {
+    if (this.record.records == null)
+      return;
 
-        this.menuid = params.menuid;
-
-        this.type = params.type;
-
-        this.initDefaultValues();
-
-        this.LoadCombo();
-
-        this.ReadUserRights();
-
-        this.List("NEW");
-
-        this.initlialized = true;
+    var REC = this.record.records.find(rec => rec.bl_pkid == _record.bl_pkid);
+    if (REC == null) {
+      this.record.records.push(_record);
+    }
+    else {
+      REC.bl_date = _record.bl_date;
+      REC.bl_no = _record.bl_no;
+      REC.bl_book_no = _record.bl_book_no;
+      // REC.ord_agent_name = _rec.ord_agent_name;
+      // REC.ord_exp_name = _rec.ord_exp_name;
+      // REC.ord_imp_name = _rec.ord_imp_name;
+      // REC.ord_buy_agent_name = _rec.ord_buy_agent_name;
+      // REC.ord_pod_agent_name = _rec.ord_pod_agent_name;
+      // REC.ord_pol = _rec.ord_pol;
+      // REC.ord_pod = _rec.ord_pod;
     }
 
-    ReadUserRights() {
-        this.canDelete = false;
-        this.menu_record = this.gs.getMenu(this.menuid);
-        if (this.menu_record) {
-            this.title = this.menu_record.menu_name;
-            if (this.menu_record.rights_delete)
-                this.canDelete = true;
-        }
+  }
+
+
+  DeleteRow(_rec: Blm) {
+
+    if (!confirm("DELETE " + _rec.bl_no)) {
+      return;
     }
+    this.loading = true;
+    let SearchData = {
+      pkid: _rec.bl_pkid,
+      company_code: this.gs.globalVariables.comp_code,
+      branch_code: this.gs.globalVariables.branch_code,
+      user_code: this.gs.globalVariables.user_code
+    };
+    this.errorMessage = [];
 
-    initDefaultValues() {
-        this.total = 0;
-        this.record = <BlmModel>{
-            urlid: '',
-            selectedId: '',
-            message: '',
-            isError: false,
-            records: [],
-            searchQuery: <SearchQuery>{
-                branch_code: this.gs.globalVariables.branch_code,
-                company_code: this.gs.globalVariables.user_company_code,
-                user_code: this.gs.globalVariables.user_code,
-                page_count: 0,
-                page_current: 0,
-                page_rows: 20,
-                page_rowcount: 0,
-                searchstring: '',
-                file_pkid: '',
-                report_folder: '',
-
-            }
-        };
-    }
-
-
-    public selectRowId(id: string) {
-        this._record.selectedId = id;
-    }
-    public getRowId() {
-        return this._record.selectedId;
-    }
-
-    LoadCombo() {
-
-    }
-
-    List(_type: string) {
-        this.total = 0;
-        this.loading = true;
-        let SearchData = {
-            type: _type,
-            rowtype: this.type,
-            searchstring: this._record.searchQuery.searchstring,
-            company_code: this.gs.globalVariables.comp_code,
-            branch_code: this.gs.globalVariables.branch_code,
-            user_code: this.gs.globalVariables.user_code,
-            page_count: this._record.searchQuery.page_count,
-            page_current: this._record.searchQuery.page_current,
-            page_rows: this._record.searchQuery.page_rows,
-            page_rowcount: this._record.searchQuery.page_rowcount,
-            report_folder: this.gs.globalVariables.report_folder,
-            file_pkid: this.gs.getGuid()
-        };
-        this.errorMessage = [];
-        this.MblList(SearchData)
-            .subscribe(response => {
-                this.loading = false;
-                if (_type == 'EXCEL')
-                    this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
-                else {
-                    this.record.records = response.list;
-                    this.record.searchQuery.page_count = response.page_count;
-                    this.record.searchQuery.page_current = response.page_current;
-                    this.record.searchQuery.page_rowcount = response.page_rowcount;
-                }
-            },
-                error => {
-                    this.loading = false;
-                    this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
-                    this.gs.showToastScreen(this.errorMessage);
-                });
-    }
-    Downloadfile(filename: string, filetype: string, filedisplayname: string) {
-        this.gs.DownloadFile(this.gs.globalVariables.report_folder, filename, filetype, filedisplayname);
-    }
-
-    RefreshList(_record: Blm) {
-        if (this.record.records == null)
-            return;
-
-        var REC = this.record.records.find(rec => rec.bl_pkid == _record.bl_pkid);
-        if (REC == null) {
-            this.record.records.push(_record);
+    this.DeleteRecord(SearchData)
+      .subscribe(response => {
+        this.loading = false;
+        if (response.retvalue == false) {
+          this.errorMessage = this.gs.getErrorArray(response.error);
+          this.gs.showToastScreen(this.errorMessage);
         }
         else {
-            REC.bl_date = _record.bl_date;
-            REC.bl_no = _record.bl_no;
-            REC.bl_book_no = _record.bl_book_no;
-            // REC.ord_agent_name = _rec.ord_agent_name;
-            // REC.ord_exp_name = _rec.ord_exp_name;
-            // REC.ord_imp_name = _rec.ord_imp_name;
-            // REC.ord_buy_agent_name = _rec.ord_buy_agent_name;
-            // REC.ord_pod_agent_name = _rec.ord_pod_agent_name;
-            // REC.ord_pol = _rec.ord_pol;
-            // REC.ord_pod = _rec.ord_pod;
+          this.record.records.splice(this.record.records.findIndex(rec => rec.bl_pkid == _rec.bl_pkid), 1);
         }
 
-    }
+      }, error => {
+        this.loading = false;
+        this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+        this.gs.showToastScreen(this.errorMessage);
+      });
+  }
 
+  MblList(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/MblmList/List', SearchData, this.gs.headerparam2('authorized'));
+  }
 
-    DeleteRow(_rec: Blm) {
+  GetRecord(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/MblmList/GetRecord', SearchData, this.gs.headerparam2('authorized'));
+  }
 
-        if (!confirm("DELETE " + _rec.bl_no)) {
-            return;
-        }
-        this.loading = true;
-        let SearchData = {
-            pkid: _rec.bl_pkid,
-            company_code: this.gs.globalVariables.comp_code,
-            branch_code: this.gs.globalVariables.branch_code,
-            user_code: this.gs.globalVariables.user_code
-        };
-        this.errorMessage = [];
+  Save(Record: Blm) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/MblmList/Save', Record, this.gs.headerparam2('authorized'));
+  }
 
-        this.DeleteRecord(SearchData)
-            .subscribe(response => {
-                this.loading = false;
-                if (response.retvalue == false) {
-                    this.errorMessage = this.gs.getErrorArray(response.error);
-                    this.gs.showToastScreen(this.errorMessage);
-                }
-                else {
-                    this.record.records.splice(this.record.records.findIndex(rec => rec.bl_pkid == _rec.bl_pkid), 1);
-                }
+  DeleteRecord(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/MblmList/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
+  }
 
-            }, error => {
-                this.loading = false;
-                this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
-                this.gs.showToastScreen(this.errorMessage);
-            });
-    }
+  LoadDefault(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/MblmList/LoadDefault', SearchData, this.gs.headerparam2('authorized'));
+  }
 
-    MblList(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/MblmList/List', SearchData, this.gs.headerparam2('authorized'));
-    }
-
-    GetRecord(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/MblmList/GetRecord', SearchData, this.gs.headerparam2('authorized'));
-    }
-
-    Save(Record: Blm) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/MblmList/Save', Record, this.gs.headerparam2('authorized'));
-    }
-
-    DeleteRecord(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/MblmList/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
-    }
-
-    LoadDefault(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/MblmList/LoadDefault', SearchData, this.gs.headerparam2('authorized'));
-    }
+  ProcessContainerTracking(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Operations/MblmList/ProcessContainerTracking', SearchData, this.gs.headerparam2('authorized'));
+  }
 
 }
 

@@ -287,6 +287,22 @@ export class MblmEditComponent {
     this.modal.close();
   }
   refreshTracking() {
-    this.getRecord(this.pkid);
+    let SearchData = {
+      pkid: this.pkid,
+      company_code: this.gs.globalVariables.comp_code,
+      branch_code: this.gs.globalVariables.branch_code,
+      user_code: this.gs.globalVariables.user_code,
+      type: this.type
+    };
+    this.errorMessage = [];
+    this.ms.ProcessContainerTracking(SearchData)
+      .subscribe(response => {
+        this.getRecord(this.pkid);
+      }, error => {
+        this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+        this.gs.showToastScreen(this.errorMessage);
+        this.ActionHandler('ADD');
+      });
+
   }
 }
