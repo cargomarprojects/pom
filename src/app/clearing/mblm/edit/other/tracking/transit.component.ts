@@ -40,15 +40,15 @@ export class TransitComponent {
   ) {
 
     // URL Query Parameter 
-    this.sub = this.route.queryParams.subscribe(params => {
-      if (params["parameter"] != "") {
-        this.InitCompleted = true;
-        var options = JSON.parse(params["parameter"]);
-        this.menuid = options.menuid;
-        this.type = options.type;
-        this.InitComponent();
-      }
-    });
+    // this.sub = this.route.queryParams.subscribe(params => {
+    //   if (params["parameter"] != "") {
+    //     this.InitCompleted = true;
+    //     var options = JSON.parse(params["parameter"]);
+    //     this.menuid = options.menuid;
+    //     this.type = options.type;
+    //     this.InitComponent();
+    //   }
+    // });
 
   }
 
@@ -62,15 +62,15 @@ export class TransitComponent {
 
   InitComponent() {
 
-    this.menu_record = this.gs.getMenu(this.menuid);
-    if (this.menu_record)
-      this.title = this.menu_record.menu_name;
+    // this.menu_record = this.gs.getMenu(this.menuid);
+    // if (this.menu_record)
+    //   this.title = this.menu_record.menu_name;
 
   }
 
   // Destroy Will be called when this component is closed
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    // this.sub.unsubscribe();
   }
 
   LoadCombo() {
