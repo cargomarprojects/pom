@@ -12,10 +12,10 @@
 </div>
 <div class="page-body">
   <div class="row">
-    <div class="col-sm-4">
+    <div class="col-md-4">
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">Shipper</label>
-        <div class="col-sm-10">
+        <label class="col-md-3 col-form-label col-form-label-sm">Shipper</label>
+        <div class="col-md-9">
           <app-autocomplete3 [controlname]="'SHIPPER'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
             [displaydata]="Record.ordh_exp_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_shipper">
           </app-autocomplete3>
@@ -26,8 +26,8 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">Consignee</label>
-        <div class="col-sm-10">
+        <label class="col-md-3 col-form-label col-form-label-sm">Consignee</label>
+        <div class="col-md-9">
           <app-autocomplete3 [controlname]="'CONSIGNEE'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
             [displaydata]="Record.ordh_imp_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_consignee">
           </app-autocomplete3>
@@ -37,8 +37,8 @@
         </div> -->
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">Buying.Agent</label>
-        <div class="col-sm-10">
+        <label class="col-md-3 col-form-label col-form-label-sm">Buying.Agent</label>
+        <div class="col-md-9">
           <app-autocomplete3 [controlname]="'BUY-AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
             [displaydata]="Record.ordh_buy_agent_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_buy_agent"
             #agentlov>
@@ -51,10 +51,10 @@
       </div>
 
     </div>
-    <div class="col-sm-4">
+    <div class="col-md-4">
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">Pol.Agent</label>
-        <div class="col-sm-10">
+        <label class="col-md-3 col-form-label col-form-label-sm">Pol.Agent</label>
+        <div class="col-md-9">
           <app-autocomplete3 [controlname]="'AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
             [displaydata]="Record.ordh_agent_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_agent"
             #agentlov>
@@ -66,8 +66,8 @@
         </div> -->
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">Pod.Agent</label>
-        <div class="col-sm-10">
+        <label class="col-md-3 col-form-label col-form-label-sm">Pod.Agent</label>
+        <div class="col-md-9">
           <app-autocomplete3 [controlname]="'POD-AGENT'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
             [displaydata]="Record.ordh_pod_agent_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_agent"
             #agentlov>
@@ -79,8 +79,8 @@
         </div> -->
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">Mode</label>
-        <div class="col-sm-10">
+        <label class="col-md-3 col-form-label col-form-label-sm">Mode</label>
+        <div class="col-md-9">
           <select [disabled]="mode=='EDIT'" class="form-control form-control-sm" [(ngModel)]="Record.rec_category">
             <option [value]="'SEA EXPORT'">SEA</option>
             <option [value]="'AIR EXPORT'">AIR</option>
@@ -89,10 +89,10 @@
       </div>
 
     </div>
-    <div class="col-sm-4">
+    <div class="col-md-4">
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">POL</label>
-        <div class="col-sm-10">
+        <label class="col-md-3 col-form-label col-form-label-sm">POL</label>
+        <div class="col-md-9">
           <app-autocomplete3 [controlname]="'POL'" [tabletype]="'PARAM'" [subtype]="'PORT'" [displaycolumn]="'NAME'"
             [displaydata]="Record.ordh_pol" (ValueChanged)="LovSelected($event)">
           </app-autocomplete3>
@@ -102,8 +102,8 @@
         </div> -->
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">POD</label>
-        <div class="col-sm-10">
+        <label class="col-md-3 col-form-label col-form-label-sm">POD</label>
+        <div class="col-md-9">
           <app-autocomplete3 [controlname]="'POD'" [tabletype]="'PARAM'" [subtype]="'PORT'" [displaycolumn]="'NAME'"
             [displaydata]="Record.ordh_pod" (ValueChanged)="LovSelected($event)">
           </app-autocomplete3>
@@ -113,8 +113,8 @@
         </div> -->
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">Remarks</label>
-        <div class="col-sm-10">
+        <label class="col-md-3 col-form-label col-form-label-sm">Remarks</label>
+        <div class="col-md-9">
           <!-- <textarea rows="1" class="form-control form-control-sm" [(ngModel)]="Record.ordh_remarks"
             (blur)="OnBlur('ordh_remarks')" required maxlength="100"></textarea> -->
           <InputBox [(inputModel)]="Record.ordh_remarks" [maxlength]="100" [uppercase]=true></InputBox>
@@ -126,136 +126,135 @@
 
 <div class="page-body">
   <div class="row">
-    <div class="col-sm-3">
+    <div class="col-md-3">
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm">Invoice#</label>
-        <div class="col-sm-10">
+        <label class="col-md-3 col-form-label col-form-label-sm">Invoice#</label>
+        <div class="col-md-9">
           <InputBox #inv_no [(inputModel)]="Recorddet.ord_invno" [maxlength]="30" [uppercase]=true></InputBox>
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label  col-form-label-sm">PO#</label>
-        <div class="col-sm-10 ">
+        <label class="col-md-3 col-form-label  col-form-label-sm">PO#</label>
+        <div class="col-md-9">
           <InputBox [(inputModel)]="Recorddet.ord_po" [maxlength]="60" [uppercase]=true (blur)="OnBlur('ord_po')">
           </InputBox>
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm ">Contract#</label>
-        <div class="col-sm-10 ">
+        <label class="col-md-3 col-form-label col-form-label-sm ">Contract#</label>
+        <div class="col-md-9">
           <InputBox [(inputModel)]="Recorddet.ord_contractno" [maxlength]="100" [uppercase]=true></InputBox>
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm ">Style#</label>
-        <div class="col-sm-10 ">
+        <label class="col-md-3 col-form-label col-form-label-sm ">Style#</label>
+        <div class="col-md-9">
           <InputBox [(inputModel)]="Recorddet.ord_style" [maxlength]="60" [uppercase]=true (blur)="OnBlur('ord_style')">
           </InputBox>
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm ">Color</label>
-        <div class="col-sm-10 ">
+        <label class="col-md-3 col-form-label col-form-label-sm ">Color</label>
+        <div class="col-md-9">
           <InputBox [(inputModel)]="Recorddet.ord_color" [maxlength]="60" [uppercase]=true (blur)="OnBlur('ord_color')">
           </InputBox>
         </div>
       </div>
     </div>
-    <div class="col-sm-3">
-
+    <div class="col-md-3">
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm ">UNECO</label>
-        <div class="col-sm-10 ">
+        <label class="col-md-3 col-form-label col-form-label-sm ">UNECO</label>
+        <div class="col-md-9 ">
           <InputBox [(inputModel)]="Recorddet.ord_uneco" [maxlength]="5" [uppercase]=true></InputBox>
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label  col-form-label-sm ">HS.Code</label>
-        <div class="col-sm-10 ">
+        <label class="col-md-3 col-form-label  col-form-label-sm ">HS.Code</label>
+        <div class="col-md-9 ">
           <InputBox [(inputModel)]="Recorddet.ord_hs_code" [maxlength]="15" [uppercase]=true></InputBox>
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm ">Desc.</label>
-        <div class="col-sm-10">
+        <label class="col-md-3 col-form-label col-form-label-sm ">Desc.</label>
+        <div class="col-md-9">
           <InputBox [(inputModel)]="Recorddet.ord_desc" [maxlength]="100" [uppercase]=true></InputBox>
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm ">Pkgs</label>
-        <div class="col-sm-10">
+        <label class="col-md-3 col-form-label col-form-label-sm ">Pkgs</label>
+        <div class="col-md-9">
           <InputBoxNumber [(inputModel)]="Recorddet.ord_pkg" [maxlength]="10" [dec]="0"></InputBoxNumber>
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label col-form-label-sm ">Pcs</label>
-        <div class="col-sm-10">
+        <label class="col-md-3 col-form-label col-form-label-sm ">Pcs</label>
+        <div class="col-md-9">
           <InputBoxNumber [(inputModel)]="Recorddet.ord_pcs" [maxlength]="14" [dec]="3"></InputBoxNumber>
         </div>
       </div>
     </div>
-    <div class="col-sm-2">
+    <div class="col-md-2">
 
       <div class="form-group row">
-        <label class="col-sm-4 col-form-label col-form-label-sm ">Cbm</label>
-        <div class="col-sm-8 ">
+        <label class="col-md-4 col-form-label col-form-label-sm ">Cbm</label>
+        <div class="col-md-8 ">
           <InputBoxNumber [(inputModel)]="Recorddet.ord_cbm" [maxlength]="14" [dec]="3"></InputBoxNumber>
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-4 col-form-label col-form-label-sm ">Nt.Wt</label>
-        <div class="col-sm-8 ">
+        <label class="col-md-4 col-form-label col-form-label-sm ">Nt.Wt</label>
+        <div class="col-md-8 ">
           <InputBoxNumber [(inputModel)]="Recorddet.ord_ntwt" [maxlength]="14" [dec]="3"></InputBoxNumber>
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-4 col-form-label col-form-label-sm ">Gr.Wt</label>
-        <div class="col-sm-8 ">
+        <label class="col-md-4 col-form-label col-form-label-sm ">Gr.Wt</label>
+        <div class="col-md-8 ">
           <InputBoxNumber [(inputModel)]="Recorddet.ord_grwt" [maxlength]="14" [dec]="3"></InputBoxNumber>
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-4 col-form-label col-form-label-sm ">Ready.Dt</label>
-        <div class="col-sm-8 ">
+        <label class="col-md-4 col-form-label col-form-label-sm ">Ready.Dt</label>
+        <div class="col-md-8 ">
           <app-date [inputdate]="Recorddet.ord_cargo_readiness_date"
             (ValueChanged)="Recorddet.ord_cargo_readiness_date=$event"></app-date>
         </div>
       </div>
 
     </div>
-    <div class="col-sm-2">
+    <div class="col-md-2">
 
       <div class="form-group row">
-        <label class="col-sm-4 col-form-label col-form-label-sm ">Boarding1</label>
-        <div class="col-sm-8 ">
+        <label class="col-md-4 col-form-label col-form-label-sm ">Boarding1</label>
+        <div class="col-md-8 ">
           <app-date [inputdate]="Recorddet.ord_boarding1" (ValueChanged)="Recorddet.ord_boarding1=$event"></app-date>
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-4 col-form-label col-form-label-sm ">Boarding2</label>
-        <div class="col-sm-8 ">
+        <label class="col-md-4 col-form-label col-form-label-sm ">Boarding2</label>
+        <div class="col-md-8 ">
           <app-date [inputdate]="Recorddet.ord_boarding2" (ValueChanged)="Recorddet.ord_boarding2=$event"></app-date>
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-4 col-form-label col-form-label-sm ">Instock1</label>
-        <div class="col-sm-8 ">
+        <label class="col-md-4 col-form-label col-form-label-sm ">Instock1</label>
+        <div class="col-md-8 ">
           <app-date [inputdate]="Recorddet.ord_instock1" (ValueChanged)="Recorddet.ord_instock1=$event"></app-date>
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-4 col-form-label col-form-label-sm ">Instock2</label>
-        <div class="col-sm-8 ">
+        <label class="col-md-4 col-form-label col-form-label-sm ">Instock2</label>
+        <div class="col-md-8 ">
           <app-date [inputdate]="Recorddet.ord_instock2" (ValueChanged)="Recorddet.ord_instock2=$event"></app-date>
         </div>
       </div>
     </div>
-    <div class="col-sm-2">
+    <div class="col-md-2">
 
       <div class="form-group row">
         <!-- <label class="col-sm-1 col-form-label  col-form-label-sm "></label> -->
-        <div class="col-sm-12 ">
+        <div class="col-md-12 ">
           <button [disabled]="loading" (click)="AddRecord()"
             class="btn btn-success btn-sm mb-1 mr-1">{{detailMode==='ADD'?'Add':'Update'}}</button>
             <button [disabled]="loading" (click)="NewDetRecord()" class="btn btn-success btn-sm  mb-1">New</button>
