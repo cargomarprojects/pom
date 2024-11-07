@@ -453,12 +453,12 @@ export class CustomerComponent {
       this.errorMessage.push("Name Cannot Be Blank");
     }
 
-    if (this.Record.cust_is_consignee) {
-      if (this.gs.isBlank(this.Record.cust_edi_code)) {
-        bret = false;
-        this.errorMessage.push("Edi Code Cannot be Blank");
-      }
-    }
+    // if (this.Record.cust_is_consignee) {
+    //   if (this.gs.isBlank(this.Record.cust_edi_code)) {
+    //     bret = false;
+    //     this.errorMessage.push("Edi Code Cannot be Blank");
+    //   }
+    // }
 
 
 

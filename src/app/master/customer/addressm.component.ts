@@ -262,14 +262,14 @@ export class AddressmComponent {
         let bret: boolean = true;
         this.ErrorMessage = '';
 
-        if (!this.bUnregistered) {
-            if (this.gs.globalVariables.user_code != 'ADMIN') {
-                if (this.bForeigner == false && this.bShipper && this.Record.add_gstin.trim().length <= 0) {
-                    bret = false;
-                    sError += "| GSTIN Cannot Be Blank ";
-                }
-            }
-        }
+        // if (!this.bUnregistered) {
+        //     if (this.gs.globalVariables.user_code != 'ADMIN') {
+        //         if (this.bForeigner == false && this.bShipper && this.Record.add_gstin.trim().length <= 0) {
+        //             bret = false;
+        //             sError += "| GSTIN Cannot Be Blank ";
+        //         }
+        //     }
+        // }
 
         if (this.Record.add_contact.trim().length <= 0) {
             bret = false;
@@ -296,12 +296,12 @@ export class AddressmComponent {
             sError += "| Country  Cannot Be Blank";
         }
 
-        if (this.bForeigner == false && !this.bUnregistered && this.Record.add_gst_type.trim() == 'GSN') {
-            if (this.Record.add_gstin.trim().length != 15) {
-                bret = false;
-                sError += "| Invalid GSTIN ";
-            }
-        }
+        // if (this.bForeigner == false && !this.bUnregistered && this.Record.add_gst_type.trim() == 'GSN') {
+        //     if (this.Record.add_gstin.trim().length != 15) {
+        //         bret = false;
+        //         sError += "| Invalid GSTIN ";
+        //     }
+        // }
 
         if (this.IsSpecialCharacter(this.Record.add_line1)) {
             bret = false;
