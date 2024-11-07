@@ -47,6 +47,8 @@ export class CustomerComponent {
   loading = false;
   currentTab = 'LIST';
 
+  selectedRowIndex = "";
+
   searchstring = '';
   page_count = 0;
   page_current = 0;
@@ -421,7 +423,7 @@ export class CustomerComponent {
     this.mainService.Save(this.Record)
       .subscribe(response => {
         this.loading = false;
-        this.errorMessage.push("Save Complete"); 
+        this.errorMessage.push("Save Complete");
         this.gs.showToastScreen(this.errorMessage);
         this.mode = 'EDIT';
         this.Record.rec_mode = this.mode;
@@ -453,12 +455,12 @@ export class CustomerComponent {
       this.errorMessage.push("Name Cannot Be Blank");
     }
 
-    // if (this.Record.cust_is_consignee) {
-    //   if (this.gs.isBlank(this.Record.cust_edi_code)) {
-    //     bret = false;
-    //     this.errorMessage.push("Edi Code Cannot be Blank");
-    //   }
-    // }
+    if (this.Record.cust_is_consignee) {
+      if (this.gs.isBlank(this.Record.cust_edi_code)) {
+        bret = false;
+        this.errorMessage.push("Edi Code Cannot be Blank");
+      }
+    }
 
 
 
@@ -496,6 +498,11 @@ export class CustomerComponent {
     else {
       REC.cust_code = this.Record.cust_code;
       REC.cust_name = this.Record.cust_name;
+      REC.cust_group = this.Record.cust_group;
+      REC.cust_kyc_status = this.Record.cust_kyc_status;
+      REC.cust_sman_name = this.Record.cust_sman_name;
+      REC.cust_edi_code = this.Record.cust_edi_code;
+      REC.cust_trading_partner = this.Record.cust_trading_partner;
     }
   }
 
@@ -556,4 +563,10 @@ export class CustomerComponent {
       });
   }
 
+  public selectRowId(id: string) {
+    this.selectedRowIndex = id;
+  }
+  public getRowId() {
+    return this.selectedRowIndex;
+  }
 }

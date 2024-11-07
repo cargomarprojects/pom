@@ -84,7 +84,8 @@
         </tr>
       </thead>
       <tbody class="page-body-tbody">
-        <tr *ngFor="let rec of RecordList">
+        <tr *ngFor="let rec of RecordList"(mousedown)="selectRowId(rec.cust_pkid)"
+        [ngClass]="{'table-info':rec.cust_pkid == getRowId()}">
           <td (click)="ActionHandler('EDIT',rec.cust_pkid)" class="hlink"><i class="fa fa-pencil"></i></td>
           <td>{{rec.cust_code}}</td>
           <td>{{rec.cust_name}}</td>
