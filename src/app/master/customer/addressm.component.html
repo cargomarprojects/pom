@@ -10,19 +10,19 @@
     <table class="table  table-hover table-sm  table-bordered fixedTableHead">
       <thead class="page-body-thead">
         <tr>
-          <th width="5%">BRANCH</th>
+          <th width="4%">BRANCH</th>
           <th width="2%">EDIT</th>
           <th width="10%">CONTACT</th>
-          <th width="8%">TEL</th>
+          <th width="10%">TEL</th>
           <th width="10%">EMAIL</th>
-          <th width="10%">ADDRESS-LINE1</th>
+          <th width="24%">ADDRESS-LINE1</th>
           <th width="5%">CITY</th>
           <th width="10%">LOCATION</th>
           <th width="10%">STATE</th>
           <th width="5%">PIN</th>
           <th width="6%">COUNTRY</th>
-          <th width="6%">DEFAULT</th>
-          <th *ngIf="bDelete" width="4%">DELETE</th>
+          <th width="4%">DEFAULT</th>
+          <!-- <th *ngIf="bDelete" width="4%">DELETE</th> -->
         </tr>
       </thead>
       <tbody class="page-body-tbody">
@@ -39,8 +39,8 @@
           <td>{{rec.add_pin}}</td>
           <td>{{rec.add_country_name}}</td>
           <td>{{rec.add_default}}</td>
-          <td *ngIf="bDelete"><i class="fa fa-trash fa-lg pointer" aria-hidden="true"
-              (click)="ShowlinkList(addlnklst,rec)"></i></td>
+          <!-- <td *ngIf="bDelete"><i class="fa fa-trash fa-lg pointer" aria-hidden="true"
+              (click)="ShowlinkList(addlnklst,rec)"></i></td> -->
         </tr>
       </tbody>
     </table>
