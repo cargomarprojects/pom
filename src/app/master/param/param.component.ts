@@ -20,7 +20,7 @@ export class ParamComponent {
   menu_record: any;
 
   selectedRowIndex: number = -1;
-
+  selectedRowId: string = "";
   param_rate_caption: string = '';
 
   disableSave = true;
@@ -531,4 +531,10 @@ export class ParamComponent {
     this.router.navigate(['master/po-setting'], { queryParams: parameter });
   }
 
+  public selectRowId(id: string) {
+    this.selectedRowId = id;
+  }
+  public getRowId() {
+    return this.selectedRowId;
+  }
 }
