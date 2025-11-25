@@ -79,6 +79,8 @@ export class LoginComponent {
           this.loading = false;
           this.showlogin = false;
           this.errorMessage = error.error.error_description;
+          console.log(this.gs.baseUrl);
+          console.log(error);
         });
   }
 
