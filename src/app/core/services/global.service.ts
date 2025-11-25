@@ -30,8 +30,10 @@ export class GlobalService {
   public baseLocalServerUrl: string = "http://localhost:8080";
   public baseUrl: string = "http://localhost:5000";
 
+
+  //public baseUrl: string = "https://35.154.228.180:4001";
   //public baseLocalServerUrl: string = "";
-  //public baseUrl: string = "";
+  //public baseUrl: string = "https://35.154.228.180:4001";
   public DATE_DISPLAY_FORMAT = "dd-MMM-yyyy";
 
   public USER_DATA_LIST = [
