@@ -33,7 +33,7 @@ export class GlobalService {
 
 
   //public baseLocalServerUrl: string = "";
-  //public baseUrl: string = "https://35.154.228.180:4001";
+  //public baseUrl: string = "";
   public DATE_DISPLAY_FORMAT = "dd-MMM-yyyy";
 
   public USER_DATA_LIST = [
