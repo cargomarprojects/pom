@@ -164,17 +164,17 @@
         </div>
       </div>
 
-      <div *ngIf="ms.bTrack" class="form-group row">
+      <div *ngIf="ms.bStatus" class="form-group row">
         <div class="col-md-9 offset-md-3">
-          <button (click)="ms.ShowTracking(trackorder)" class="btn btn-info btn-sm btn-block">Tracking
+          <button (click)="ms.ShowStatus(changestatus)" class="btn btn-info btn-sm btn-block">Change PO Status
             <span *ngIf="ms.total>0" class="badge badge-light">{{ms.total}}</span>
           </button>
         </div>
       </div>
 
-      <div *ngIf="ms.bStatus" class="form-group row">
+      <div *ngIf="ms.bTrack" class="form-group row">
         <div class="col-md-9 offset-md-3">
-          <button (click)="ms.ShowStatus(changestatus)" class="btn btn-info btn-sm btn-block">Change PO Status
+          <button (click)="ms.ShowTracking(trackorder)" class="btn btn-info btn-sm btn-block">Tracking
             <span *ngIf="ms.total>0" class="badge badge-light">{{ms.total}}</span>
           </button>
         </div>
