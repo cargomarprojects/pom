@@ -136,6 +136,7 @@ export class OrderEditComponent {
     this.Record.ordh_remarks = '';
     this.Record.rec_category = 'SEA EXPORT';
     this.Record.rec_version = 0;
+    this.Record.ordh_cfno = '';
     this.Record.rec_mode = this.mode;
     // this.Record.ord_imp_grp_id  = '';
     this.NewDetRecord();
@@ -311,6 +312,9 @@ export class OrderEditComponent {
     this.ms.Save(this.Record)
       .subscribe(response => {
         this.loading = false;
+        if (this.mode == 'ADD') {
+          this.Record.ordh_cfno = response.cfno;
+        }
         this.mode = 'EDIT';
         this.Record.rec_mode = this.mode;
         this.Record.ordh_status = response.ordStatus;
@@ -344,14 +348,14 @@ export class OrderEditComponent {
       bret = false;
       this.errorMessage.push("Consignee Cannot Be Blank");
     }
-    // if (this.gs.isBlank(this.Record.ordh_agent_id)) {
-    //   bret = false;
-    //   this.errorMessage.push("Agent(Origin) Cannot Be Blank");
-    // }
-    // if (this.gs.isBlank(this.Record.ordh_pod_agent_id)) {
-    //   bret = false;
-    //   this.errorMessage.push("Agent(Destination) Cannot Be Blank");
-    // }
+    if (this.gs.isBlank(this.Record.ordh_agent_id)) {
+      bret = false;
+      this.errorMessage.push("Agent(POL) Cannot Be Blank");
+    }
+    if (this.gs.isBlank(this.Record.ordh_pod_agent_id)) {
+      bret = false;
+      this.errorMessage.push("Agent(POD) Cannot Be Blank");
+    }
 
     if (this.gs.isBlank(this.Record.ordh_pol)) {
       bret = false;

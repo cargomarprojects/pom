@@ -14,8 +14,22 @@
   <div class="row">
     <div class="col-md-4">
       <div class="form-group row">
-        <label class="col-md-3 col-form-label col-form-label-sm">Shipper</label>
-        <div class="col-md-9">
+        <label class="col-md-2 col-form-label col-form-label-sm">CF#</label>
+        <div class="col-md-4">
+          <input type="text" style="color:red; font-weight:bold" class="form-control form-control-sm pr-0"
+            [(ngModel)]="Record.ordh_cfno" [disabled]="true" required maxlength="15" />
+        </div>
+        <label class="col-md-2 col-form-label col-form-label-sm">Mode</label>
+        <div class="col-md-4">
+          <select [disabled]="mode=='EDIT'" class="form-control form-control-sm" [(ngModel)]="Record.rec_category">
+            <option [value]="'SEA EXPORT'">SEA</option>
+            <option [value]="'AIR EXPORT'">AIR</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label col-form-label-sm">Shipper</label>
+        <div class="col-md-10">
           <app-autocomplete3 [controlname]="'SHIPPER'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
             [displaydata]="Record.ordh_exp_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_shipper">
           </app-autocomplete3>
@@ -26,8 +40,8 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-md-3 col-form-label col-form-label-sm">Consignee</label>
-        <div class="col-md-9">
+        <label class="col-md-2 col-form-label col-form-label-sm">Consignee</label>
+        <div class="col-md-10">
           <app-autocomplete3 [controlname]="'CONSIGNEE'" [tabletype]="'CUSTOMER'" [displaycolumn]="'NAME'"
             [displaydata]="Record.ordh_imp_name" (ValueChanged)="LovSelected($event)" [where]="ms.where_consignee">
           </app-autocomplete3>
@@ -36,6 +50,8 @@
           <InputBox [(inputModel)]="Record.ordh_imp_name" [maxlength]=60 [uppercase]=true [disabled]=true></InputBox>
         </div> -->
       </div>
+    </div>
+    <div class="col-md-4">
       <div class="form-group row">
         <label class="col-md-3 col-form-label col-form-label-sm">Buying.Agent</label>
         <div class="col-md-9">
@@ -49,9 +65,6 @@
           </InputBox>
         </div> -->
       </div>
-
-    </div>
-    <div class="col-md-4">
       <div class="form-group row">
         <label class="col-md-3 col-form-label col-form-label-sm">Pol.Agent</label>
         <div class="col-md-9">
@@ -77,15 +90,6 @@
           <InputBox [(inputModel)]="Record.ordh_pod_agent_name" [maxlength]="60" [uppercase]=true [disabled]=true>
           </InputBox>
         </div> -->
-      </div>
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label col-form-label-sm">Mode</label>
-        <div class="col-md-9">
-          <select [disabled]="mode=='EDIT'" class="form-control form-control-sm" [(ngModel)]="Record.rec_category">
-            <option [value]="'SEA EXPORT'">SEA</option>
-            <option [value]="'AIR EXPORT'">AIR</option>
-          </select>
-        </div>
       </div>
 
     </div>
@@ -177,24 +181,26 @@
       <div class="form-group row">
         <label class="col-md-3 col-form-label col-form-label-sm ">Desc.</label>
         <div class="col-md-9">
-          <InputBox [(inputModel)]="Recorddet.ord_desc" [maxlength]="100" [uppercase]=true></InputBox>
+          <!-- <InputBox [(inputModel)]="Recorddet.ord_desc" [maxlength]="100" [uppercase]=true></InputBox> -->
+          <textarea rows="4" class="form-control form-control-sm" [(ngModel)]="Recorddet.ord_desc"
+            (blur)="OnBlur('ord_desc')" required maxlength="100"></textarea>
         </div>
       </div>
+
+    </div>
+    <div class="col-md-2">
       <div class="form-group row">
-        <label class="col-md-3 col-form-label col-form-label-sm ">Pkgs</label>
-        <div class="col-md-9">
+        <label class="col-md-4 col-form-label col-form-label-sm ">Pkgs</label>
+        <div class="col-md-8">
           <InputBoxNumber [(inputModel)]="Recorddet.ord_pkg" [maxlength]="10" [dec]="0"></InputBoxNumber>
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-md-3 col-form-label col-form-label-sm ">Pcs</label>
-        <div class="col-md-9">
+        <label class="col-md-4 col-form-label col-form-label-sm ">Pcs</label>
+        <div class="col-md-8">
           <InputBoxNumber [(inputModel)]="Recorddet.ord_pcs" [maxlength]="14" [dec]="3"></InputBoxNumber>
         </div>
       </div>
-    </div>
-    <div class="col-md-2">
-
       <div class="form-group row">
         <label class="col-md-4 col-form-label col-form-label-sm ">Cbm</label>
         <div class="col-md-8 ">
@@ -213,6 +219,9 @@
           <InputBoxNumber [(inputModel)]="Recorddet.ord_grwt" [maxlength]="14" [dec]="3"></InputBoxNumber>
         </div>
       </div>
+
+    </div>
+    <div class="col-md-2">
       <div class="form-group row">
         <label class="col-md-4 col-form-label col-form-label-sm ">Ready.Dt</label>
         <div class="col-md-8 ">
@@ -220,10 +229,6 @@
             (ValueChanged)="Recorddet.ord_cargo_readiness_date=$event"></app-date>
         </div>
       </div>
-
-    </div>
-    <div class="col-md-2">
-
       <div class="form-group row">
         <label class="col-md-4 col-form-label col-form-label-sm ">Boarding1</label>
         <div class="col-md-8 ">
@@ -257,7 +262,7 @@
         <div class="col-md-12 ">
           <button [disabled]="loading" (click)="AddRecord()"
             class="btn btn-success btn-sm mb-1 mr-1">{{detailMode==='ADD'?'Add':'Update'}}</button>
-            <button [disabled]="loading" (click)="NewDetRecord()" class="btn btn-success btn-sm  mb-1">New</button>
+          <button [disabled]="loading" (click)="NewDetRecord()" class="btn btn-success btn-sm  mb-1">New</button>
         </div>
       </div>
       <!-- <div class="form-group row">
