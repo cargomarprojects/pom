@@ -164,7 +164,7 @@
         </div>
       </div>
 
-      <div class="form-group row">
+      <div *ngIf="ms.bTrack" class="form-group row">
         <div class="col-md-9 offset-md-3">
           <button (click)="ms.ShowTracking(trackorder)" class="btn btn-info btn-sm btn-block">Tracking
             <span *ngIf="ms.total>0" class="badge badge-light">{{ms.total}}</span>
@@ -172,7 +172,7 @@
         </div>
       </div>
 
-      <div class="form-group row">
+      <div *ngIf="ms.bStatus" class="form-group row">
         <div class="col-md-9 offset-md-3">
           <button (click)="ms.ShowStatus(changestatus)" class="btn btn-info btn-sm btn-block">Change PO Status
             <span *ngIf="ms.total>0" class="badge badge-light">{{ms.total}}</span>
@@ -180,7 +180,7 @@
         </div>
       </div>
 
-      <div class="form-group row">
+      <div *ngIf="ms.bPrint" class="form-group row">
         <div class="col-md-9 offset-md-3">
           <button (click)="ms.List('EXCEL')" class="btn btn-info btn-sm btn-block">Excel</button>
         </div>

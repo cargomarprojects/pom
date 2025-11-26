@@ -16,6 +16,9 @@ export class OrderListService {
   private appid = ''
   public canDelete: boolean;
   public bDocs: boolean = false;
+  public bTrack: boolean = false;
+  public bStatus: boolean = false;
+  public bPrint: boolean = false;
   menu_record: any;
   total = 0;
   // ErrorMessage = "";
@@ -79,6 +82,9 @@ export class OrderListService {
   ReadUserRights() {
     this.canDelete = false;
     this.bDocs = false;
+    this.bTrack = false;
+    this.bStatus = false;
+    this.bPrint = false;
     this.menu_record = this.gs.getMenu(this.menuid);
     if (this.menu_record) {
       this.title = this.menu_record.menu_name;
@@ -86,6 +92,12 @@ export class OrderListService {
         this.canDelete = true;
       if (this.menu_record.rights_docs)
         this.bDocs = true;
+      if (this.menu_record.rights_print)
+        this.bPrint = true;
+      if (this.menu_record.rights_approval.indexOf('{TRACK}') >= 0 || this.gs.globalVariables.user_code == 'ADMIN')
+        this.bTrack = true;
+      if (this.menu_record.rights_approval.indexOf('{STATUS}') >= 0 || this.gs.globalVariables.user_code == 'ADMIN')
+        this.bStatus = true;
     }
   }
 

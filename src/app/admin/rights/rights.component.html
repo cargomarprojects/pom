@@ -41,7 +41,7 @@
           </tr>
         </thead>
         <tbody class="page-body-tbody">
-          <tr *ngFor="let rec of RecordMast" >
+          <tr *ngFor="let rec of RecordMast">
             <td (click)="RightsList('NEW',rec)" class="hlink"><i class="fa fa-pencil"></i></td>
             <td>{{rec.user_code}}</td>
             <td>{{rec.user_name}}</td>
@@ -88,7 +88,7 @@
 
   <div class="page-body">
 
-    <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 250px);">
+    <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 350px);">
       <table class="table table-hover table-sm table-bordered">
         <thead class="page-body-thead">
           <tr>
@@ -136,6 +136,11 @@
         <button [disabled]="loading" (click)="Return2Parent()" class="btn btn-success btn-sm">Return</button>
       </div>
     </div>
+  </div>
+  <div style="height: 105px;" [style.overflow-y]="'scroll'">
+    <p class="p-0 m-0">
+      Order List - Approvals <b> {{'{TRACK}{STATUS}'}} </b>TRACK-Tracking;STATUS- Change PO Status;
+    </p>
   </div>
 </div>
 
