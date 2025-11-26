@@ -20,6 +20,9 @@ export class VslPlanService {
   disableSave = true;
   loading = false;
   public bAdmin = false;
+  public bTrack = false;
+  public bUpdateHouse = false;
+  public bUnlock = false;
 
   where_agent = "CUST_IS_AGENT = 'Y'";
   where_shipper = "CUST_IS_SHIPPER = 'Y'";
@@ -107,11 +110,20 @@ export class VslPlanService {
   }
   ReadUserRights() {
     this.bAdmin = false;
+    this.bTrack = false;
+    this.bUpdateHouse = false;
+    this.bUnlock = false;
     this.menu_record = this.gs.getMenu(this.menuid);
     if (this.menu_record) {
       this.title = this.menu_record.menu_name;
       if (this.menu_record.rights_admin)
         this.bAdmin = true;
+      if (this.menu_record.rights_approval.indexOf('{TRACK}') >= 0 || this.gs.globalVariables.user_code == 'ADMIN')
+        this.bTrack = true;
+      if (this.menu_record.rights_approval.indexOf('{UPDHOUSE}') >= 0 || this.gs.globalVariables.user_code == 'ADMIN')
+        this.bUpdateHouse = true;
+      if (this.menu_record.rights_approval.indexOf('{UNLOCK}') >= 0 || this.gs.globalVariables.user_code == 'ADMIN')
+        this.bUnlock = true;
     }
   }
 
