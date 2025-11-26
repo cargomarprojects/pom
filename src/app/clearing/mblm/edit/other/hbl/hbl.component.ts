@@ -27,7 +27,8 @@ export class HblComponent {
     bDocs: boolean = false;
     bDelete: boolean = false;
     docGroupId: string = '';
-
+    ht: string = "197px";
+    disableSave = true;
 
     private errorMessage: string[] = [];
 
@@ -55,9 +56,14 @@ export class HblComponent {
         // this.List('NEW');
         this.InitComponent();
         this.ActionHandler("ADD", null);
+        if (!this.disableSave)
+            this.ht = "197px";
+        else
+            this.ht = "280px";
     }
 
     InitComponent() {
+        this.ht = "197px";
         this.bDelete = false;
         this.bDocs = false;
         this.menu_record = this.gs.getMenu(this.menuid);
@@ -133,7 +139,18 @@ export class HblComponent {
 
 
     ResetControls() {
+        this.disableSave = true;
+        if (!this.menu_record)
+            return;
 
+        if (this.menu_record.rights_admin)
+            this.disableSave = false;
+        if (this.mode == "ADD" && this.menu_record.rights_add)
+            this.disableSave = false;
+        if (this.mode == "EDIT" && this.menu_record.rights_edit)
+            this.disableSave = false;
+
+        return this.disableSave;
     }
 
     List(_type: string) {
@@ -319,7 +336,7 @@ export class HblComponent {
     }
 
     open(content: any) {
-        this.modal = this.modalService.open(content, {centered: true, backdrop: 'static', keyboard: true });
+        this.modal = this.modalService.open(content, { centered: true, backdrop: 'static', keyboard: true });
     }
 
     getWidth(_type: string) {

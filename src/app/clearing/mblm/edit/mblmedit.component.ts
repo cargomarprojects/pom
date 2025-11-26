@@ -27,6 +27,7 @@ export class MblmEditComponent {
   menu_record: any;
   bAdmin = false;
   bDocs: boolean = false;
+  bTrack: boolean = false;
   disableSave = true;
   loading = false;
   modal: any;
@@ -66,6 +67,7 @@ export class MblmEditComponent {
   InitComponent() {
     this.bAdmin = false;
     this.bDocs = false;
+    this.bTrack = false;
     this.menu_record = this.gs.getMenu(this.menuid);
     if (this.menu_record) {
       this.title = this.menu_record.menu_name;
@@ -73,6 +75,8 @@ export class MblmEditComponent {
         this.bAdmin = true;
       if (this.menu_record.rights_docs)
         this.bDocs = true;
+       if (this.menu_record.rights_approval.indexOf('{TRACK}') >= 0 || this.gs.globalVariables.user_code == 'ADMIN')
+        this.bTrack = true;
     }
   }
 

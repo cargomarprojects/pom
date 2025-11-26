@@ -1,5 +1,5 @@
 <div class="page-body-header-ns">
-  <div>ADD/EDIT CONTAINER
+  <div>{{!disableSave?'ADD/EDIT CONTAINER':'CONTAINER'}}
   </div>
 </div>
 
@@ -7,7 +7,7 @@
   <table class="table table-hover table-sm table-bordered">
     <thead>
       <tr class="table-header">
-        <th width="5%">EDIT</th>
+        <th *ngIf="!disableSave" width="5%">EDIT</th>
         <th width="5%">SL#</th>
         <th width="20%">CNTR#</th>
         <th width="20%">TYPE</th>
@@ -18,7 +18,8 @@
     <tbody class="page-body-tbody">
       <tr *ngFor="let rec of RecordList; let i = index" (mousedown)="selectRowId(rec.cntr_pkid)"
         [ngClass]="{'table-info':rec.cntr_pkid == getRowId()}">
-        <td (click)="ActionHandler('EDIT',rec.cntr_pkid)" class="hlink"><i class="fa fa-pencil"></i></td>
+        <td *ngIf="!disableSave" (click)="ActionHandler('EDIT',rec.cntr_pkid)" class="hlink"><i
+            class="fa fa-pencil"></i></td>
         <td>{{i+1}}</td>
         <td>{{rec.cntr_no}}</td>
         <td>{{rec.cntr_type_code}}</td>
@@ -29,7 +30,7 @@
     </tbody>
   </table>
 </div>
-<div class="row page-body line-bottom mt-3 p-2" style="background-color: rgb(225, 225, 225);">
+<div *ngIf="!disableSave" class="row page-body line-bottom mt-3 p-2" style="background-color: rgb(225, 225, 225);">
   <div class="col-md-6">
     <div class="form-group row">
       <label class="col-md-4 col-form-label col-form-label-sm">Container#</label>
