@@ -221,10 +221,10 @@
       </div>
 
     </div>
-    <div class="col-md-2">
+    <div class="col-md-3">
       <div class="form-group row">
-        <label class="col-md-4 col-form-label col-form-label-sm ">Ready.Dt</label>
-        <div class="col-md-8 ">
+        <label class="col-md-4 col-form-label col-form-label-sm ">Cargo.Ready.Dt</label>
+        <div class="col-md-8">
           <app-date [inputdate]="Recorddet.ord_cargo_readiness_date"
             (ValueChanged)="Recorddet.ord_cargo_readiness_date=$event"></app-date>
         </div>
@@ -255,11 +255,11 @@
         </div>
       </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-1">
 
       <div class="form-group row">
         <!-- <label class="col-sm-1 col-form-label  col-form-label-sm "></label> -->
-        <div class="col-md-12 ">
+        <div class="col-md-12 pr-0">
           <button [disabled]="loading" (click)="AddRecord()"
             class="btn btn-success btn-sm mb-1 mr-1">{{detailMode==='ADD'?'Add':'Update'}}</button>
           <button [disabled]="loading" (click)="NewDetRecord()" class="btn btn-success btn-sm  mb-1">New</button>
