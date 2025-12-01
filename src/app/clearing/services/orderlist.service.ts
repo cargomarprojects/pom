@@ -237,6 +237,7 @@ export class OrderListService {
         var REC = this.record.records.find(rec => rec.ord_header_id == _rec.ord_header_id);
         if (REC == null) {
           _rec.ord_date = this.gs.defaultValues.today;
+          _rec.ord_cfno = _record.ordh_cfno;
           this.record.records.push(_rec);
         }
         else {
@@ -256,6 +257,7 @@ export class OrderListService {
         var REC = this.record.records.find(rec => rec.ord_pkid == _rec.ord_pkid);
         if (REC == null) {
           _rec.ord_date = this.gs.defaultValues.today;
+          _rec.ord_cfno = _record.ordh_cfno;
           this.record.records.push(_rec);
         }
         else {
