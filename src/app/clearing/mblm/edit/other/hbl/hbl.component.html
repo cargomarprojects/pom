@@ -1,13 +1,13 @@
 <div class="page-body-header-ns">
-  <div>ADD/EDIT HOUSE
+  <div>{{!disableSave?'ADD/EDIT HOUSE':'HOUSE'}}
   </div>
 </div>
 
-<div class="table-responsive fixedTableHead-ns" style="height: 197px;">
+<div class="table-responsive fixedTableHead-ns" [ngStyle]="{'height': ht}">
   <table class="table table-hover table-sm table-bordered">
     <thead>
       <tr class="table-header">
-        <th width="5%">EDIT</th>
+        <th *ngIf="!disableSave" width="5%">EDIT</th>
         <th width="5%">SL#</th>
         <th width="20%">HOUSE#</th>
         <th width="getWidth('DT-COL')">DATE</th>
@@ -18,7 +18,7 @@
     <tbody class="page-body-tbody">
       <tr *ngFor="let rec of RecordList; let i = index" (mousedown)="selectRowId(rec.bl_pkid)"
         [ngClass]="{'table-info':rec.bl_pkid == getRowId()}">
-        <td class="hlink" (click)="ActionHandler('EDIT',rec.bl_pkid)"><i class="fa fa-pencil"></i></td>
+        <td *ngIf="!disableSave" class="hlink" (click)="ActionHandler('EDIT',rec.bl_pkid)"><i class="fa fa-pencil"></i></td>
         <td>{{i+1}}</td>
         <td>{{rec.bl_no}}</td>
         <td style="text-transform:uppercase">{{rec.bl_date | date : gs.DATE_DISPLAY_FORMAT}}</td>
@@ -30,7 +30,7 @@
     </tbody>
   </table>
 </div>
-<div class="row page-body line-bottom mt-3 p-2" style="background-color: rgb(225, 225, 225);">
+<div *ngIf="!disableSave" class="row page-body line-bottom mt-3 p-2" style="background-color: rgb(225, 225, 225);">
   <div class="col-md-6">
     <div class="form-group row">
       <label class="col-md-4 col-form-label col-form-label-sm">House#</label>

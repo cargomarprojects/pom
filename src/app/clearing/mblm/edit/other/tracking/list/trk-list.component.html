@@ -3,7 +3,7 @@
   <div class="mx-4">
     <i (click)="ShowTracking(trackingdet)" class="fa fa-pencil fa-lg hand-cursor"> </i>
   </div>
-  <div>
+  <div *ngIf="bTrack">
     <i (click)="refreshTracking()" class="fa fa-refresh fa-lg hand-cursor"></i>
   </div>
 </div>

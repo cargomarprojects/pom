@@ -41,7 +41,7 @@
           </tr>
         </thead>
         <tbody class="page-body-tbody">
-          <tr *ngFor="let rec of RecordMast" >
+          <tr *ngFor="let rec of RecordMast">
             <td (click)="RightsList('NEW',rec)" class="hlink"><i class="fa fa-pencil"></i></td>
             <td>{{rec.user_code}}</td>
             <td>{{rec.user_name}}</td>
@@ -88,7 +88,7 @@
 
   <div class="page-body">
 
-    <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 250px);">
+    <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 350px);">
       <table class="table table-hover table-sm table-bordered">
         <thead class="page-body-thead">
           <tr>
@@ -122,7 +122,7 @@
             <td> <input type="checkbox" [(ngModel)]="rec.rights_docs"></td>
             <td> <input type="checkbox" [(ngModel)]="rec.rights_docs_upload"></td>
             <td> <input type="text" class="form-control form-control-sm" [(ngModel)]="rec.rights_approval" required
-                maxlength="30" /></td>
+                maxlength="250" /></td>
           </tr>
         </tbody>
       </table>
@@ -136,6 +136,17 @@
         <button [disabled]="loading" (click)="Return2Parent()" class="btn btn-success btn-sm">Return</button>
       </div>
     </div>
+  </div>
+  <div style="height: 105px;" [style.overflow-y]="'scroll'">
+    <p class="p-0 m-0">
+      Order List - Approvals <b>{{'{TRACK}'}}</b>Tracking, <b>{{'{STATUS}'}}</b>Change PO Status;
+    </p>
+     <p class="p-0 m-0">
+      Shipment Planning Sea/Air - Approvals <b>{{'{TRACK}'}} </b>Tracking, <b>{{'{UPDHOUSE}'}} </b>Update House/Container, <b>{{'{UNLOCK}'}} </b>Unlock Master, <b>{{'{HIDE}'}} </b>HIDE Button in List
+    </p>
+     <p class="p-0 m-0">
+      MBL Info - Approvals <b>{{'{TRACK}'}} </b>Refresh Tracking
+    </p>
   </div>
 </div>
 

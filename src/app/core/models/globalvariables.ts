@@ -1,10 +1,10 @@
 
 export class GlobalVariables {
-    appid: string ;
-    user_pkid: string ;
-    user_code: string ;
-    user_name: string ;
-    user_email: string ;
+    appid: string;
+    user_pkid: string;
+    user_code: string;
+    user_name: string;
+    user_email: string;
     user_company_id: string;
     user_company_code: string;
     user_branch_id: string;
@@ -12,11 +12,26 @@ export class GlobalVariables {
 
     hide_ho_entries: string;
 
-    ipaddress : string;
-    
+    ipaddress: string;
+
     comp_pkid: string;
     comp_code: string;
     comp_name: string;
+    comp_exp_id: string;
+    comp_exp_code: string;
+    comp_exp_name: string;
+    comp_imp_id: string;
+    comp_imp_code: string;
+    comp_imp_name: string;
+    comp_buy_agent_id: string;
+    comp_buy_agent_code: string;
+    comp_buy_agent_name: string;
+    comp_pol_agent_id: string;
+    comp_pol_agent_code: string;
+    comp_pol_agent_name: string;
+    comp_pod_agent_id: string;
+    comp_pod_agent_code: string;
+    comp_pod_agent_name: string;
 
     branch_pkid: string;
     branch_code: string;
@@ -25,7 +40,7 @@ export class GlobalVariables {
     branch_type: string;
 
     sman_id: string;
-    sman_name: string; 
+    sman_name: string;
 
     year_pkid: string;
     year_code: string;
@@ -38,6 +53,6 @@ export class GlobalVariables {
 
     report_folder: string;
 
-    
-    
+
+
 }

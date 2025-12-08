@@ -3,11 +3,11 @@
   </div>
 </div>
 
-<div class="table-responsive fixedTableHead-ns" style="height: 197px;">
+<div class="table-responsive fixedTableHead-ns"  [ngStyle]="{'height': ht}">
   <table class="table table-hover table-sm table-bordered">
     <thead>
       <tr class="table-header">
-        <th width="5%">EDIT</th>
+        <th *ngIf="!disableSave" width="5%">EDIT</th>
         <th width="5%">SL#</th>
         <!-- <th width="20%">MBL#</th> -->
         <th width="20%">HOUSE#</th>
@@ -19,7 +19,7 @@
     <tbody class="page-body-tbody">
       <tr *ngFor="let rec of RecordList; let i = index" (mousedown)="selectRowId(rec.cntrd_pkid)"
         [ngClass]="{'table-info':rec.cntrd_pkid == getRowId()}">
-        <td class="hlink" (click)="ActionHandler('EDIT',rec.cntrd_pkid)"><i class="fa fa-pencil"></i></td>
+        <td *ngIf="!disableSave" class="hlink" (click)="ActionHandler('EDIT',rec.cntrd_pkid)"><i class="fa fa-pencil"></i></td>
         <td>{{i+1}}</td>
         <!-- <td>{{rec.cntrd_mbl_no}}</td> -->
         <td>{{rec.cntrd_hbl_no}}</td>
@@ -31,7 +31,7 @@
     </tbody>
   </table>
 </div>
-<div class="row page-body line-bottom mt-3 p-2" style="background-color: rgb(225, 225, 225);">
+<div *ngIf="!disableSave"  class="row page-body line-bottom mt-3 p-2" style="background-color: rgb(225, 225, 225);">
   <div class="col-md-6">
     <div class="form-group row">
       <label class="col-md-4 col-form-label col-form-label-sm">House#</label>

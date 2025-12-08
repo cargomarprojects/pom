@@ -61,10 +61,10 @@ export class VslPlanComponent {
       this.gs.showToastScreen(['Insufficient User Rights'])
       return;
     }
-    if (action == "EDIT" && !this.ms.menu_record.rights_edit) {
-      this.gs.showToastScreen(['Insufficient User Rights'])
-      return;
-    }
+    // if (action == "EDIT" && !this.ms.menu_record.rights_edit) {
+    //   this.gs.showToastScreen(['Insufficient User Rights'])
+    //   return;
+    // }
 
     var urlid = this.gs.getParameter('urlid');
 

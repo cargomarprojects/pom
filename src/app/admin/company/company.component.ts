@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../core/services/global.service';
 
 import { Companym } from '../models/company';
-
+import { SearchTable } from '../../shared/models/searchtable';
 import { CompanyService } from '../services/company.service';
 
 @Component({
@@ -39,7 +39,10 @@ export class CompanyComponent {
 
   mode = '';
   pkid = '';
-
+  where_agent = "CUST_IS_AGENT = 'Y'";
+  where_shipper = "CUST_IS_SHIPPER = 'Y'";
+  where_consignee = "CUST_IS_CONSIGNEE = 'Y'";
+  where_buy_agent = "CUST_IS_BUY_AGENT = 'Y'";
 
   CompanyList: Companym[] = [];
 
@@ -59,7 +62,7 @@ export class CompanyComponent {
 
 
     this.menuid = this.gs.getParameter('menuid');
-    this.type =this.gs.getParameter('type');
+    this.type = this.gs.getParameter('type');
     this.InitComponent();
 
     // URL Query Parameter 
@@ -165,7 +168,7 @@ export class CompanyComponent {
 
     this.Record = new Companym();
     this.Record.comp_pkid = this.pkid;
-    
+
     this.Record.comp_code = '';
     this.Record.comp_name = '';
     this.Record.comp_type = this.type;
@@ -192,7 +195,22 @@ export class CompanyComponent {
     this.Record.comp_order = 0;
 
     this.Record.comp_branch_type = 'BOTH';
-    this.Record.comp_uamno= '';
+    this.Record.comp_uamno = '';
+    this.Record.comp_exp_id = '';
+    this.Record.comp_exp_code = '';
+    this.Record.comp_exp_name = '';
+    this.Record.comp_imp_id = '';
+    this.Record.comp_imp_code = '';
+    this.Record.comp_imp_name = '';
+    this.Record.comp_buy_agent_id = '';
+    this.Record.comp_buy_agent_code = '';
+    this.Record.comp_buy_agent_name = '';
+    this.Record.comp_pol_agent_id = '';
+    this.Record.comp_pol_agent_code = '';
+    this.Record.comp_pol_agent_name = '';
+    this.Record.comp_pod_agent_id = '';
+    this.Record.comp_pod_agent_code = '';
+    this.Record.comp_pod_agent_name = '';
 
     this.Record.rec_mode = this.mode;
   }
@@ -228,7 +246,7 @@ export class CompanyComponent {
     if (!this.allvalid())
       return;
 
-    if ( this.mode == 'NEW' && this.type == 'B')
+    if (this.mode == 'NEW' && this.type == 'B')
       this.Record.comp_parent_id = this.gs.globalVariables.comp_pkid;
 
     this.loading = true;
@@ -418,11 +436,39 @@ export class CompanyComponent {
           this.Record.comp_pol_code = this.Record.comp_pol_code.toUpperCase();
           break;
         }
-        case 'comp_uamno':
+      case 'comp_uamno':
         {
           this.Record.comp_uamno = this.Record.comp_uamno.toUpperCase();
           break;
         }
+    }
+  }
+
+  LovSelected(_Record: SearchTable) {
+    if (_Record.controlname == "SHIPPER") {
+      this.Record.comp_exp_id = _Record.id;
+      this.Record.comp_exp_name = _Record.name;
+      this.Record.comp_exp_code = _Record.code;
+    }
+    if (_Record.controlname == "CONSIGNEE") {
+      this.Record.comp_imp_id = _Record.id;
+      this.Record.comp_imp_name = _Record.name;
+      this.Record.comp_imp_code = _Record.code;
+    }
+    if (_Record.controlname == "AGENT") {
+      this.Record.comp_pol_agent_id = _Record.id;
+      this.Record.comp_pol_agent_code = _Record.code;
+      this.Record.comp_pol_agent_name = _Record.name;
+    }
+    if (_Record.controlname == "BUY-AGENT") {
+      this.Record.comp_buy_agent_id = _Record.id;
+      this.Record.comp_buy_agent_code = _Record.code;
+      this.Record.comp_buy_agent_name = _Record.name;
+    }
+    if (_Record.controlname == "POD-AGENT") {
+      this.Record.comp_pod_agent_id = _Record.id;
+      this.Record.comp_pod_agent_code = _Record.code;
+      this.Record.comp_pod_agent_name = _Record.name;
     }
   }
 

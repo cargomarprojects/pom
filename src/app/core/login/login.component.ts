@@ -180,6 +180,21 @@ export class LoginComponent {
         this.gs.globalVariables.comp_name = data.comp_name;
         this.gs.Company_Name = data.comp_name;
         this.gs.globalVariables.report_folder = data.report_folder;
+        this.gs.globalVariables.comp_exp_id = data.comp_exp_id;
+        this.gs.globalVariables.comp_exp_code = data.comp_exp_code;
+        this.gs.globalVariables.comp_exp_name = data.comp_exp_name;
+        this.gs.globalVariables.comp_imp_id = data.comp_imp_id;
+        this.gs.globalVariables.comp_imp_code = data.comp_imp_code;
+        this.gs.globalVariables.comp_imp_name = data.comp_imp_name;
+        this.gs.globalVariables.comp_buy_agent_id = data.comp_buy_agent_id;
+        this.gs.globalVariables.comp_buy_agent_code = data.comp_buy_agent_code;
+        this.gs.globalVariables.comp_buy_agent_name = data.comp_buy_agent_name;
+        this.gs.globalVariables.comp_pol_agent_id = data.comp_pol_agent_id;
+        this.gs.globalVariables.comp_pol_agent_code = data.comp_pol_agent_code;
+        this.gs.globalVariables.comp_pol_agent_name = data.comp_pol_agent_name;
+        this.gs.globalVariables.comp_pod_agent_id = data.comp_pod_agent_id;
+        this.gs.globalVariables.comp_pod_agent_code = data.comp_pod_agent_code;
+        this.gs.globalVariables.comp_pod_agent_name = data.comp_pod_agent_name;
 
         this.gs.InitdefaultValues();
 

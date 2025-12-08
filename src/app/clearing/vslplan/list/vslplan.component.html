@@ -122,7 +122,7 @@
           <th>{{ms.type=='SEA EXPORT'?'VOYAGE':'FLIGHT#'}}</th>
           <th>STATUS</th>
           <th>COMMENTS</th>
-          <th *ngIf="ms.bAdmin">{{ms.show_hide_caption}}</th>
+          <th *ngIf="ms.bHide">{{ms.show_hide_caption}}</th>
         </tr>
       </thead>
       <tbody class="page-body-tbody">
@@ -145,7 +145,7 @@
           <td>{{rec.vp_voyage}}</td>
           <td>{{rec.vp_status}}</td>
           <td>{{rec.vp_comments}}</td>
-          <td *ngIf="ms.bAdmin" class="p-0"><button class="btn btn-info btn-sm pt-0 pb-0"
+          <td *ngIf="ms.bHide" class="p-0"><button class="btn btn-info btn-sm pt-0 pb-0"
               (click)="ms.ChangeShowHide(rec)">{{rec.vp_hide=='Y'?'SHOW':'HIDE'}}</button></td>
         </tr>
       </tbody>

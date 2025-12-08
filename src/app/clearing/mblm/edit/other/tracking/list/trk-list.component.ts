@@ -19,6 +19,7 @@ export class TrkListComponent {
   @Input() type: string = '';
   @Input() parentid: string = '';
   @Input() RecordList: Trackingm[] = [];
+  @Input() bTrack: boolean = false;
 
   @Output('RefreshTracking') LoadTracking = new EventEmitter();
 

@@ -104,21 +104,21 @@ export class OrderEditComponent {
     this.pkid = this.gs.getGuid();
     this.Record = new Joborderh();
     this.Record.ordh_pkid = this.pkid;
-    this.Record.ordh_exp_id = '';
-    this.Record.ordh_exp_name = '';
-    this.Record.ordh_imp_id = '';
-    this.Record.ordh_imp_name = '';
-    this.Record.ordh_exp_code = '';
-    this.Record.ordh_imp_code = '';
-    this.Record.ordh_agent_id = '';
-    this.Record.ordh_agent_code = '';
-    this.Record.ordh_agent_name = '';
-    this.Record.ordh_pod_agent_id = '';
-    this.Record.ordh_pod_agent_code = '';
-    this.Record.ordh_pod_agent_name = '';
-    this.Record.ordh_buy_agent_id = '';
-    this.Record.ordh_buy_agent_code = '';
-    this.Record.ordh_buy_agent_name = '';
+    this.Record.ordh_exp_id = this.gs.globalVariables.comp_exp_id;
+    this.Record.ordh_exp_name = this.gs.globalVariables.comp_exp_name;
+    this.Record.ordh_imp_id = this.gs.globalVariables.comp_imp_id;
+    this.Record.ordh_imp_name = this.gs.globalVariables.comp_imp_name;
+    this.Record.ordh_exp_code = this.gs.globalVariables.comp_exp_code;
+    this.Record.ordh_imp_code = this.gs.globalVariables.comp_imp_code;
+    this.Record.ordh_agent_id = this.gs.globalVariables.comp_pol_agent_id;
+    this.Record.ordh_agent_code = this.gs.globalVariables.comp_pol_agent_code;
+    this.Record.ordh_agent_name = this.gs.globalVariables.comp_pol_agent_name;
+    this.Record.ordh_pod_agent_id = this.gs.globalVariables.comp_pod_agent_id;
+    this.Record.ordh_pod_agent_code = this.gs.globalVariables.comp_pod_agent_code;
+    this.Record.ordh_pod_agent_name = this.gs.globalVariables.comp_pod_agent_name;
+    this.Record.ordh_buy_agent_id = this.gs.globalVariables.comp_buy_agent_id;
+    this.Record.ordh_buy_agent_code = this.gs.globalVariables.comp_buy_agent_code;
+    this.Record.ordh_buy_agent_name = this.gs.globalVariables.comp_buy_agent_name;
     // this.Record.ordh_boarding1 = '';
     // this.Record.ordh_boarding2 = '';
     // this.Record.ordh_instock1 = '';
@@ -136,6 +136,7 @@ export class OrderEditComponent {
     this.Record.ordh_remarks = '';
     this.Record.rec_category = 'SEA EXPORT';
     this.Record.rec_version = 0;
+    this.Record.ordh_cfno = '';
     this.Record.rec_mode = this.mode;
     // this.Record.ord_imp_grp_id  = '';
     this.NewDetRecord();
@@ -311,6 +312,9 @@ export class OrderEditComponent {
     this.ms.Save(this.Record)
       .subscribe(response => {
         this.loading = false;
+        if (this.mode == 'ADD') {
+          this.Record.ordh_cfno = response.cfno;
+        }
         this.mode = 'EDIT';
         this.Record.rec_mode = this.mode;
         this.Record.ordh_status = response.ordStatus;
@@ -344,14 +348,14 @@ export class OrderEditComponent {
       bret = false;
       this.errorMessage.push("Consignee Cannot Be Blank");
     }
-    // if (this.gs.isBlank(this.Record.ordh_agent_id)) {
-    //   bret = false;
-    //   this.errorMessage.push("Agent(Origin) Cannot Be Blank");
-    // }
-    // if (this.gs.isBlank(this.Record.ordh_pod_agent_id)) {
-    //   bret = false;
-    //   this.errorMessage.push("Agent(Destination) Cannot Be Blank");
-    // }
+    if (this.gs.isBlank(this.Record.ordh_agent_id)) {
+      bret = false;
+      this.errorMessage.push("Agent(POL) Cannot Be Blank");
+    }
+    if (this.gs.isBlank(this.Record.ordh_pod_agent_id)) {
+      bret = false;
+      this.errorMessage.push("Agent(POD) Cannot Be Blank");
+    }
 
     if (this.gs.isBlank(this.Record.ordh_pol)) {
       bret = false;

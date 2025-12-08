@@ -44,7 +44,7 @@
               (blur)="OnBlur('bl_track_comments')" required maxlength="150" />
           </div>
           <div class="col-sm-3">
-            <button *ngIf="bShowSave" (click)="Save()" class="btn btn-success btn-sm mr-1">Save</button>
+            <button *ngIf="bShowSave&&!disableSave" (click)="Save()" class="btn btn-success btn-sm mr-1">Save</button>
             <button (click)="Close()" class="btn btn-success btn-sm">Close</button>
           </div>
         </div>

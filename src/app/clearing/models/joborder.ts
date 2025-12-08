@@ -35,6 +35,7 @@ export class Joborderh {
   ordh_date: string;
   ordh_remarks: string;
   ordh_imp_grp_id: string;
+  ordh_cfno: string;
 
   rec_mode: string;
   rec_category: string;
@@ -146,6 +147,7 @@ export class Joborderm {
 
   ord_trk_date_type: string;
   ord_imp_grp_id: string;
+  ord_cfno: string;
 
   ord_date: string;
   ord_remarks: string;

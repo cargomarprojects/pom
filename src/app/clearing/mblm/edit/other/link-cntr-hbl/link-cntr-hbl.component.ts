@@ -32,7 +32,8 @@ export class LinkCntrHblComponent {
     pkid = '';
     ctr: number;
     bDelete: boolean = false;
-
+    ht: string = "197px";
+    disableSave = true;
 
     // Array For Displaying List
 
@@ -52,9 +53,14 @@ export class LinkCntrHblComponent {
         this.InitComponent();
         // this.List('NEW');
         this.ActionHandler("ADD", null);
+        if (!this.disableSave)
+            this.ht = "197px";
+        else
+            this.ht = "280px";
     }
 
     InitComponent() {
+        this.ht = "197px";
         this.bDelete = false;
         this.menu_record = this.gs.getMenu(this.menuid);
         if (this.menu_record) {
@@ -131,7 +137,18 @@ export class LinkCntrHblComponent {
 
 
     ResetControls() {
+        this.disableSave = true;
+        if (!this.menu_record)
+            return;
 
+        if (this.menu_record.rights_admin)
+            this.disableSave = false;
+        if (this.mode == "ADD" && this.menu_record.rights_add)
+            this.disableSave = false;
+        if (this.mode == "EDIT" && this.menu_record.rights_edit)
+            this.disableSave = false;
+
+        return this.disableSave;
     }
 
     List(_type: string) {

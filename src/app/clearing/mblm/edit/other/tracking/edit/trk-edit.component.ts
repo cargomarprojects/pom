@@ -25,9 +25,9 @@ export class TrkEditComponent {
   modal: any;
   selectedId: string = '';
   loading = false;
-
+  disableSave = true;
   bShowSave = true;
-
+  menu_record: any;
   CntrTypes: string = "";
   StatusList: Param[] = [];
   private errorMessage: string[] = [];
@@ -49,10 +49,17 @@ export class TrkEditComponent {
   // Init Will be called After executing Constructor
   ngOnInit() {
     // this.List('NEW');
+    this.InitComponent();
     this.ActionHandler(this.mode, this.pkid);
     this.LoadDefault();
   }
 
+  InitComponent() {
+    this.menu_record = this.gs.getMenu(this.menuid);
+    // if (this.menu_record) {
+    //   // this.title = this.menu_record.menu_name;
+    // }
+  }
   // Destroy Will be called when this component is closed
   ngOnDestroy() {
 
@@ -128,7 +135,18 @@ export class TrkEditComponent {
 
 
   ResetControls() {
+    this.disableSave = true;
+    if (!this.menu_record)
+      return;
 
+    if (this.menu_record.rights_admin)
+      this.disableSave = false;
+    if (this.mode == "ADD" && this.menu_record.rights_add)
+      this.disableSave = false;
+    if (this.mode == "EDIT" && this.menu_record.rights_edit)
+      this.disableSave = false;
+
+    return this.disableSave;
   }
 
   List(_type: string) {

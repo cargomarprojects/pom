@@ -164,15 +164,7 @@
         </div>
       </div>
 
-      <div class="form-group row">
-        <div class="col-md-9 offset-md-3">
-          <button (click)="ms.ShowTracking(trackorder)" class="btn btn-info btn-sm btn-block">Tracking
-            <span *ngIf="ms.total>0" class="badge badge-light">{{ms.total}}</span>
-          </button>
-        </div>
-      </div>
-
-      <div class="form-group row">
+      <div *ngIf="ms.bStatus" class="form-group row">
         <div class="col-md-9 offset-md-3">
           <button (click)="ms.ShowStatus(changestatus)" class="btn btn-info btn-sm btn-block">Change PO Status
             <span *ngIf="ms.total>0" class="badge badge-light">{{ms.total}}</span>
@@ -180,7 +172,15 @@
         </div>
       </div>
 
-      <div class="form-group row">
+      <div *ngIf="ms.bTrack" class="form-group row">
+        <div class="col-md-9 offset-md-3">
+          <button (click)="ms.ShowTracking(trackorder)" class="btn btn-info btn-sm btn-block">Tracking
+            <span *ngIf="ms.total>0" class="badge badge-light">{{ms.total}}</span>
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="ms.bPrint" class="form-group row">
         <div class="col-md-9 offset-md-3">
           <button (click)="ms.List('EXCEL')" class="btn btn-info btn-sm btn-block">Excel</button>
         </div>
@@ -220,6 +220,7 @@
       <thead>
         <tr class="table-header">
           <th><input type="checkbox" [(ngModel)]="ms.selectcheck" (change)="SelectCheckbox(ms.selectcheck)"></th>
+          <th>CF#</th>
           <th>EDIT</th>
           <th>DATE</th>
           <th>SHIPPER</th>
@@ -237,6 +238,7 @@
         <tr *ngFor="let rec of ms.record.records" (mousedown)="ms.selectRowId(rec.ord_header_id)"
           [ngClass]="{'table-info':rec.ord_header_id == ms.getRowId()}">
           <td><input type="checkbox" [(ngModel)]="rec.ord_selected" (change)="handleChange(rec)"></td>
+          <td>{{rec.ord_cfno}}</td>
           <td (click)="ActionHandler('EDIT',rec.ord_header_id)" class="hlink"><i class="fa fa-pencil"></i></td>
           <td>{{rec.ord_date}}</td>
           <td>{{rec.ord_exp_name}}</td>
@@ -262,6 +264,7 @@
         <tr class="table-header">
           <th><input type="checkbox" [(ngModel)]="ms.selectcheck" (change)="SelectCheckbox(ms.selectcheck)"></th>
           <th>UID</th>
+          <th>CF#</th>
           <th>EDIT</th>
           <th>DATE</th>
           <th>STATUS</th>
@@ -311,6 +314,7 @@
           [ngClass]="{'table-info':rec.ord_pkid == ms.getRowId()}">
           <td><input type="checkbox" [(ngModel)]="rec.ord_selected" (change)="handleChange(rec)"></td>
           <td>{{rec.ord_uid}}</td>
+          <td>{{rec.ord_cfno}}</td>
           <td (click)="ActionHandler('EDIT',rec.ord_header_id)" class="hlink"><i class="fa fa-pencil"></i></td>
           <td>{{rec.ord_date}}</td>
           <td>{{rec.ord_status}}</td>
