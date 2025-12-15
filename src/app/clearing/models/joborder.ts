@@ -159,6 +159,11 @@ export class Joborderm {
   ord_mbl_no: string;
   job_docno: string;
   rec_mode: string;
+  ord_status_edited_by: string;
+  ord_status_edited_date: string;
+  ord_cargo_status_edited_by: string;
+  ord_cargo_status_edited_date: string;
+  
   LinkHblCntrList: Containerd[] = [];
   rec_category: string;
   rec_version: number;

@@ -66,8 +66,11 @@
       <div class="form-group row">
         <label class="col-sm-4 col-form-label col-form-label-sm"></label>
         <div class="col-sm-8">
-          <input type="checkbox" [(ngModel)]="ms.record.searchQuery.list_hide" id="_vphide" />
-          <label class="col-form-label col-form-label-sm" for="_vphide">Show Hidden Records</label>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" [(ngModel)]="ms.record.searchQuery.list_hide"
+              id="_vphide" />
+            <label class="form-label form-label-sm" for="_vphide">Show Hidden Records</label>
+          </div>
         </div>
       </div>
     </div>
@@ -110,6 +113,7 @@
           <th>CF#</th>
           <th>WEEK#</th>
           <th>DATE</th>
+          <th>STATUS</th>
           <th>POL.AGENT</th>
           <th>CONSIGNEE</th>
           <th>POD.AGENT</th>
@@ -120,7 +124,6 @@
           <th>ETA</th>
           <th>{{ms.type=='SEA EXPORT'?'VESSEL':'AIRLINE'}}</th>
           <th>{{ms.type=='SEA EXPORT'?'VOYAGE':'FLIGHT#'}}</th>
-          <th>STATUS</th>
           <th>COMMENTS</th>
           <th *ngIf="ms.bHide">{{ms.show_hide_caption}}</th>
         </tr>
@@ -133,6 +136,7 @@
           <td>{{rec.vp_plan_no}}</td>
           <td>{{rec.vp_week_no}}</td>
           <td>{{rec.vp_plan_date}}</td>
+          <td>{{rec.vp_status}}</td>
           <td>{{rec.vp_pol_agent_name}}</td>
           <td>{{rec.vp_imp_name}}</td>
           <td>{{rec.vp_pod_agent_name}}</td>
@@ -143,7 +147,6 @@
           <td>{{rec.vp_pod_eta}}</td>
           <td>{{rec.vp_vessel_name}}</td>
           <td>{{rec.vp_voyage}}</td>
-          <td>{{rec.vp_status}}</td>
           <td>{{rec.vp_comments}}</td>
           <td *ngIf="ms.bHide" class="p-0"><button class="btn btn-info btn-sm pt-0 pb-0"
               (click)="ms.ChangeShowHide(rec)">{{rec.vp_hide=='Y'?'SHOW':'HIDE'}}</button></td>

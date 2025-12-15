@@ -123,6 +123,7 @@
         <label class="col-sm-2 col-form-label col-form-label-sm pr-0">Status</label>
         <div class="col-sm-4 pr-0">
           <select class="form-control form-control-sm" [(ngModel)]="Record.vp_status">
+            <option [value]="'PENDING APPROVAL'">PENDING APPROVAL</option>
             <option [value]="'IN PROGRESS'">IN PROGRESS</option>
             <option [value]="'COMPLETED'">COMPLETED</option>
           </select>
@@ -145,7 +146,8 @@
       </div>
       <div *ngIf="colHblCntrVisible && Record.vp_locked && ms.bUpdateHouse" class="form-group row">
         <div class="offset-sm-3 col-sm-7 pr-0">
-          <button (click)="UpdateHouseContainer(linkhblcntr)" class="btn btn-info btn-sm btn-block">{{type=='SEA EXPORT'?'Update House/Container':'Update House'}}
+          <button (click)="UpdateHouseContainer(linkhblcntr)" class="btn btn-info btn-sm btn-block">{{type=='SEA
+            EXPORT'?'Update House/Container':'Update House'}}
             <span *ngIf="total_hblcntr>0" class="badge badge-light">{{total_hblcntr}}</span>
           </button>
         </div>
@@ -182,7 +184,10 @@
           <th><input type="checkbox" (click)="SelectDeselect()" [(ngModel)]="ord_selected"></th>
           <th>UID</th>
           <th>STATUS</th>
+          <th>STATUS.BY</th>
+          <th>STATUS.DT</th>
           <th>CARGO.STATUS</th>
+          <th>CARGO.STATUS.BY</th>
           <th>CARGO.STATUS.DT</th>
           <th>AGENT.POL</th>
           <th>SHIPPER</th>
@@ -198,8 +203,8 @@
           <th class="text-right">CBM</th>
           <th>POL</th>
           <th>POD</th>
-          <th *ngIf="colHblCntrVisible && Record.vp_locked && ms.bUpdateHouse"><input type="checkbox" (click)="SelectDeselectHblCntr()"
-              [(ngModel)]="ord_hblcntrselected"></th>
+          <th *ngIf="colHblCntrVisible && Record.vp_locked && ms.bUpdateHouse"><input type="checkbox"
+              (click)="SelectDeselectHblCntr()" [(ngModel)]="ord_hblcntrselected"></th>
           <th *ngIf="colHblCntrVisible && Record.vp_locked">VIEW</th>
           <th>MASTER</th>
           <th>HOUSE</th>
@@ -216,11 +221,15 @@
         </tr>
       </thead>
       <tbody class="page-body-tbody" *ngFor="let rec of Record.OrderList; let i = index">
-        <tr [style.color]="rec.ord_status_color" (mousedown)="selectRowId(rec.ord_pkid)" [ngClass]="{'table-info':rec.ord_pkid == getRowId()}">
+        <tr [style.color]="rec.ord_status_color" (mousedown)="selectRowId(rec.ord_pkid)"
+          [ngClass]="{'table-info':rec.ord_pkid == getRowId()}">
           <td><input type="checkbox" (change)="OnChange('ord_selected')" [(ngModel)]="rec.ord_selected"></td>
           <td>{{rec.ord_uid}}</td>
           <td>{{rec.ord_status}}</td>
+          <td>{{rec.ord_status_edited_by}}</td>
+          <td>{{rec.ord_status_edited_date}}</td>
           <td>{{rec.ord_cargo_status}}</td>
+          <td>{{rec.ord_cargo_status_edited_by}}</td>
           <td>{{rec.ord_cargo_status_date}}</td>
           <td>{{rec.ord_agent_name}}</td>
           <td>{{rec.ord_exp_name}}</td>

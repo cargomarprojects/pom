@@ -171,7 +171,7 @@ export class VslPlanEditComponent {
     this.Record.vp_vessel_code = '';
     this.Record.vp_vessel_name = '';
     this.Record.vp_voyage = '';
-    this.Record.vp_status = 'IN PROGRESS';
+    this.Record.vp_status = 'PENDING APPROVAL';
     this.Record.vp_comments = '';
     this.Record.vp_pol_agent_id = '';
     this.Record.vp_pol_agent_code = '';

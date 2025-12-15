@@ -103,7 +103,7 @@
             <option [value]="'REPORTED'">REPORTED</option>
             <option [value]="'APPROVED'">APPROVED</option>
             <option [value]="'REPORTED-APPROVED'">REPORTED + APPROVED</option>
-            <option [value]="'SENT FOR APPROVAL'">SENT FOR APPROVAL</option>
+            <option [value]="'CARGO READY'">CARGO READY</option>
             <option [value]="'CANCELLED'">CANCELLED</option>
             <option [value]="'ON HOLD'">ON HOLD</option>
           </select>
@@ -137,7 +137,8 @@
           <div class="form-check">
             <input type="checkbox" class="form-check-input" [(ngModel)]="ms.record.searchQuery.list_hide"
               id="_ordhide" />
-            <span>Show Hidden Records</span>
+            <label class="form-label form-label-sm my-0" for="_ordhide">Show Hidden Records</label>
+            <!-- <span>Show Hidden Records</span> -->
           </div>
         </div>
       </div>
@@ -148,7 +149,8 @@
           <div class="form-check">
             <input type="checkbox" class="form-check-input" [(ngModel)]="ms.record.searchQuery.list_orderwise"
               id="_orddet" />
-            <span>Order Wise</span>
+            <label class="form-label form-label-sm my-0" for="_orddet">Order Wise</label>
+            <!-- <span>Order Wise</span> -->
           </div>
         </div>
       </div>
@@ -268,7 +270,10 @@
           <th>EDIT</th>
           <th>DATE</th>
           <th>STATUS</th>
+          <th>STATUS.BY</th>
+          <th>STATUS.DT</th>
           <th>CARGO.STATUS</th>
+          <th>CARGO.STATUS.BY</th>
           <th>CARGO.STATUS.DT</th>
           <th>SHIPPER</th>
           <th>CONSIGNEE</th>
@@ -318,7 +323,10 @@
           <td (click)="ActionHandler('EDIT',rec.ord_header_id)" class="hlink"><i class="fa fa-pencil"></i></td>
           <td>{{rec.ord_date}}</td>
           <td>{{rec.ord_status}}</td>
+          <td>{{rec.ord_status_edited_by}}</td>
+          <td>{{rec.ord_status_edited_date}}</td>
           <td>{{rec.ord_cargo_status}}</td>
+          <td>{{rec.ord_cargo_status_edited_by}}</td>
           <td>{{rec.ord_cargo_status_date}}</td>
           <td>{{rec.ord_exp_name}}</td>
           <td>{{rec.ord_imp_name}}</td>
