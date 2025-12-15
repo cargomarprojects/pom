@@ -39,7 +39,8 @@ export class StatusComponent {
   // ErrorMessage = "";
   // InfoMessage = "";
 
-  ord_status = 'SENT FOR APPROVAL';
+  // ord_status = 'SENT FOR APPROVAL';
+  ord_status = 'CARGO READY';
 
   constructor(
     private mainService: TrackOrderService,
