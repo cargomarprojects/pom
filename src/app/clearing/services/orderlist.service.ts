@@ -160,6 +160,7 @@ export class OrderListService {
 
   LoadCombo() {
     this.SortList = [
+      { "colheadername": "CF#", "colname": "ordh_cfno" },
       { "colheadername": "UID", "colname": "a.ord_uid" },
       { "colheadername": "CREATED-DATE", "colname": "a.rec_created_date" }
     ];

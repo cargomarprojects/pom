@@ -125,8 +125,8 @@
       <div class="form-group row">
         <label class="col-md-3 form-label form-label-sm">Sort</label>
         <div class="col-md-9">
-          <select class="form-control form-control-sm" [(ngModel)]="ms.record.searchQuery.sort_colname">
-            <option *ngFor="let rec of ms.SortList" [value]="rec.colheadername">{{rec.colheadername}}</option>
+          <select class="form-control form-control-sm" [(ngModel)]="ms.record.searchQuery.sort_colvalue">
+            <option *ngFor="let rec of ms.SortList" [value]="rec.colname">{{rec.colheadername}}</option>
           </select>
         </div>
       </div>

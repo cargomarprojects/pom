@@ -218,6 +218,7 @@
           <th *ngIf="gs.getTrackDate('WHD')||trkdt_alldisplay=='Y'">WHD</th>
           <th *ngIf="gs.getTrackDate('SOB')||trkdt_alldisplay=='Y'">SOB</th>
           <th *ngIf="gs.getTrackDate('DPOD')||trkdt_alldisplay=='Y'">DPOD</th>
+          <th>HISTORY</th>
         </tr>
       </thead>
       <tbody class="page-body-tbody" *ngFor="let rec of Record.OrderList; let i = index">
@@ -263,6 +264,8 @@
           <td *ngIf="gs.getTrackDate('WHD')||trkdt_alldisplay=='Y'">{{rec.ord_whd_date}}</td>
           <td *ngIf="gs.getTrackDate('SOB')||trkdt_alldisplay=='Y'">{{rec.ord_dlv_pol_date}}</td>
           <td *ngIf="gs.getTrackDate('DPOD')||trkdt_alldisplay=='Y'">{{rec.ord_dlv_pod_date}}</td>
+          <td (click)="ShowHistory(history,'',rec.ord_pkid)" class="hlink"><i class="fa fa-history fa-lg pointer"></i>
+          </td>
         </tr>
         <tr *ngIf="rec.row_displayed" style="border: 2px solid green;">
           <td colspan="100%">
@@ -297,8 +300,7 @@
 </div>
 <div class="page-body line-bottom">
   <div class="form-group row">
-    <div class="col-sm my-1
-    ">
+    <div class="col-sm my-1">
       <button [hidden]="disableSave" [disabled]="loading||Record.vp_locked" (click)="Save()"
         class="btn btn-success btn-sm mr-1">Save</button>
       <button *ngIf="Record.vp_locked&&ms.bUnlock" [disabled]="loading" (click)="Unlock()"
@@ -326,5 +328,16 @@
   <div class="modal-body">
     <app-link-ord-hbl-cntr [mblid]="mblid" [planid]="pkid" [orderid]="orderids" [type]="type" [menuid]="menuid"
       (closeModalWindow)="CloseModal2($event)"></app-link-ord-hbl-cntr>
+  </div>
+</ng-template>
+<ng-template #history let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">History</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-userhistory [pkid]="orderHeaderPkid" [subid]="orderPkid"></app-userhistory>
   </div>
 </ng-template>

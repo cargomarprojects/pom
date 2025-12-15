@@ -49,7 +49,8 @@ export class VslPlanEditComponent {
 
   selectedId = "";
   trkdt_alldisplay = "N";
-
+  orderHeaderPkid: string = "";
+  orderPkid: string = "";
   modalRef: any;
   urlid: string;
   lock_record: boolean = false;
@@ -682,4 +683,9 @@ export class VslPlanEditComponent {
 
   }
 
+  ShowHistory(modalname: any, _ordhPkid: string, _ordPkid: string) {
+    this.orderHeaderPkid = _ordhPkid;
+    this.orderPkid = _ordPkid;
+    this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
+  }
 }
