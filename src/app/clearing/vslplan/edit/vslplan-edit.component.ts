@@ -478,8 +478,35 @@ export class VslPlanEditComponent {
     this.open(modalname);
   }
 
+  ShowStatus(modalname: any) {
+    this.errorMessage = [];
+    this.total = 0;
+    this.ord_trkids = "";
+    this.ord_trkpos = "";
+    for (let rec of this.Record.OrderList) {
+      if (rec.ord_selected) {
+        this.total++;
+        if (this.ord_trkids != "")
+          this.ord_trkids += ",";
+        this.ord_trkids += rec.ord_pkid;
+
+        if (this.ord_trkpos != "")
+          this.ord_trkpos += ",";
+        this.ord_trkpos += rec.ord_po;
+      }
+    }
+
+    if (this.gs.isBlank(this.ord_trkids)) {
+      this.errorMessage.push('No Rows Selected');
+      return;
+
+    }
+    this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
+
+  }
+
   CloseModal1(params: any) {
-    if (params.saction == 'SAVE') {
+    if (params.saction == 'TRACK-SAVE') {
       var arrPkid = params.sid.split(',');
       for (var i = 0; i < arrPkid.length; i++) {
         for (let rec of this.Record.OrderList.filter(rec => rec.ord_pkid == arrPkid[i])) {
@@ -505,6 +532,13 @@ export class VslPlanEditComponent {
             rec.ord_dlv_pol_date = params.trackdate;
           else if (params.sdatetype == "DPOD")
             rec.ord_dlv_pod_date = params.trackdate;
+        }
+      }
+    } else if (params.saction == 'STATUS-SAVE') {
+      for (let rec1 of params.result) {
+        for (let rec of this.Record.OrderList.filter(rec => rec.ord_pkid == rec1.id)) {
+          rec.ord_status = rec1.status;
+          rec.ord_status_color = rec1.color;
         }
       }
     }

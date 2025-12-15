@@ -150,6 +150,13 @@
           </button>
         </div>
       </div>
+      <div *ngIf="ms.bStatus" class="form-group row">
+        <div class="offset-sm-3 col-sm-7 pr-0">
+          <button (click)="ShowStatus(changestatus)" class="btn btn-info btn-sm btn-block">Change PO Status
+            <span *ngIf="total>0" class="badge badge-light">{{total}}</span>
+          </button>
+        </div>
+      </div>
       <div *ngIf="ms.bTrack" class="form-group row">
         <div class="offset-sm-3 col-sm-7 pr-0">
           <button (click)="ShowTracking(trackorder)" class="btn btn-info btn-sm btn-block">Tracking
@@ -209,7 +216,7 @@
         </tr>
       </thead>
       <tbody class="page-body-tbody" *ngFor="let rec of Record.OrderList; let i = index">
-        <tr (mousedown)="selectRowId(rec.ord_pkid)" [ngClass]="{'table-info':rec.ord_pkid == getRowId()}">
+        <tr [style.color]="rec.ord_status_color" (mousedown)="selectRowId(rec.ord_pkid)" [ngClass]="{'table-info':rec.ord_pkid == getRowId()}">
           <td><input type="checkbox" (change)="OnChange('ord_selected')" [(ngModel)]="rec.ord_selected"></td>
           <td>{{rec.ord_uid}}</td>
           <td>{{rec.ord_status}}</td>
@@ -291,6 +298,13 @@
     </div>
   </div>
 </div>
+
+<ng-template #changestatus let-c="close" let-d="dismiss">
+  <div class="modal-body p-2">
+    <app-status [ord_pkids]="ord_trkids" [ord_pos]="ord_trkpos" [ord_header_id]="''"
+      (closeModalWindow)="CloseModal1($event)"></app-status>
+  </div>
+</ng-template>
 
 <ng-template #trackorder let-c="close" let-d="dismiss">
   <div class="modal-body">

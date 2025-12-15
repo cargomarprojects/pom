@@ -24,6 +24,7 @@ export class VslPlanService {
   public bUpdateHouse = false;
   public bUnlock = false;
   public bHide = false;
+  public bStatus = false;
 
   where_agent = "CUST_IS_AGENT = 'Y'";
   where_shipper = "CUST_IS_SHIPPER = 'Y'";
@@ -112,6 +113,7 @@ export class VslPlanService {
   ReadUserRights() {
     this.bAdmin = false;
     this.bTrack = false;
+    this.bStatus = false;
     this.bUpdateHouse = false;
     this.bUnlock = false;
     this.bHide = false;
@@ -122,6 +124,8 @@ export class VslPlanService {
         this.bAdmin = true;
       if (this.menu_record.rights_approval.indexOf('{TRACK}') >= 0 || this.gs.globalVariables.user_code == 'ADMIN')
         this.bTrack = true;
+      if (this.menu_record.rights_approval.indexOf('{STATUS}') >= 0 || this.gs.globalVariables.user_code == 'ADMIN')
+        this.bStatus = true;
       if (this.menu_record.rights_approval.indexOf('{UPDHOUSE}') >= 0 || this.gs.globalVariables.user_code == 'ADMIN')
         this.bUpdateHouse = true;
       if (this.menu_record.rights_approval.indexOf('{UNLOCK}') >= 0 || this.gs.globalVariables.user_code == 'ADMIN')
