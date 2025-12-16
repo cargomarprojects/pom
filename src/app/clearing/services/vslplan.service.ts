@@ -211,6 +211,7 @@ export class VslPlanService {
       REC.vp_pol_etd = this.gs.getDateddMMMyyyy(_rec.vp_pol_etd);
       REC.vp_pod_name = _rec.vp_pod_name;
       REC.vp_pod_eta = this.gs.getDateddMMMyyyy(_rec.vp_pod_eta);
+      REC.vp_po_nos = _rec.vp_po_nos;
     }
   }
 

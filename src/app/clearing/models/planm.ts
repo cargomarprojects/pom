@@ -38,6 +38,7 @@ export class Planm {
     vp_pod_name: string;
     rec_version: number;
     vp_locked: boolean;
+    vp_po_nos: string;
 
     rec_mode: string;
     rec_category: string;

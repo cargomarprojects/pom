@@ -282,6 +282,7 @@ export class VslPlanEditComponent {
         this.mode = 'EDIT';
         this.Record.rec_mode = this.mode;
         this.Record.rec_version = response.version;
+        this.Record.vp_po_nos = response.po_nos;
         this.mblid = this.Record.vp_mbl_id;
         for (let rec of this.Record.OrderList) {
           if (rec.ord_selected)
