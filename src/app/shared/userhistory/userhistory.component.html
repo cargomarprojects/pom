@@ -23,8 +23,8 @@
                 <tr class="table-header">
                     <th>USER</th>
                     <th>DATE</th>
-                    <th>CAPTION</th>
                     <th>ACTION</th>
+                    <th>CAPTION</th>
                     <th>OLD VALUE</th>
                     <th>NEW VALUE</th>
                     <th>VERSION</th>
@@ -35,8 +35,8 @@
                     (mousedown)="selectRowId(rec.uh_pkid)" [ngClass]="{'table-info':rec.uh_pkid == getRowId()}">
                     <td>{{rec.rec_created_by}}</td>
                     <td>{{rec.rec_created_date}}</td>
-                    <td>{{rec.uh_caption}}</td>
                     <td>{{rec.uh_action}}</td>
+                    <td>{{rec.uh_caption}}</td>
                     <td>{{rec.uh_old_value}}</td>
                     <td>{{rec.uh_new_value}}</td>
                     <td>{{rec.rec_version}}</td>

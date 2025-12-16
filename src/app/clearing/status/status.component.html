@@ -27,6 +27,7 @@
         <label class="col-sm-3 col-form-label col-form-label-sm">PO Status</label>
         <div class="col-sm-9">
           <select class="form-control form-control-sm" [(ngModel)]="ord_status">
+            <option [value]="'REPORTED'">REPORTED</option>
             <option [value]="'CARGO READY'">CARGO READY</option>
             <option [value]="'APPROVED'">APPROVED</option>
             <option [value]="'ON HOLD'">ON HOLD</option>
@@ -60,9 +61,9 @@
     <div class="col-sm-12">
       <div>
         <h6>REPORTED CAN BE CHANGED TO CARGO READY / APPROVED / ON HOLD</h6>
-        <h6>CARGO READY CAN BE CHANGED TO APPROVED / ON HOLD</h6>
+        <h6>CARGO READY CAN BE CHANGED TO REPORTED / APPROVED / ON HOLD</h6>
         <h6>APPROVED CAN NOT BE CHANGED</h6>
-        <h6>ON HOLD CAN BE CHANGED TO CARGO READY / APPROVED / CANCELLED</h6>
+        <h6>ON HOLD CAN BE CHANGED TO REPORTED / CARGO READY / APPROVED / CANCELLED</h6>
       </div>
     </div>
   </div>
