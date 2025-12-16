@@ -36,6 +36,7 @@ export class Joborderh {
   ordh_remarks: string;
   ordh_imp_grp_id: string;
   ordh_cfno: string;
+  ordh_po_nos: string;
 
   rec_mode: string;
   rec_category: string;
@@ -163,7 +164,8 @@ export class Joborderm {
   ord_status_edited_date: string;
   ord_cargo_status_edited_by: string;
   ord_cargo_status_edited_date: string;
-  
+  ord_po_nos: string;
+
   LinkHblCntrList: Containerd[] = [];
   rec_category: string;
   rec_version: number;

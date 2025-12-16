@@ -239,6 +239,7 @@ export class OrderListService {
         if (REC == null) {
           _rec.ord_date = this.gs.defaultValues.today;
           _rec.ord_cfno = _record.ordh_cfno;
+          _rec.ord_po_nos = _record.ordh_po_nos;
           this.record.records.push(_rec);
         }
         else {
@@ -250,6 +251,7 @@ export class OrderListService {
           REC.ord_pod_agent_name = _rec.ord_pod_agent_name;
           REC.ord_pol = _rec.ord_pol;
           REC.ord_pod = _rec.ord_pod;
+          REC.ord_po_nos = _record.ordh_po_nos;
         }
         break;
       }
