@@ -1,7 +1,7 @@
-<div *ngIf="page_count">
+<div >
     <div class="page-pagination">
         <div class="form-group row my-0 mx-0">
-            <ul class="col-md-4 pagination pagination-sm my-1 mx-1">
+            <ul *ngIf="page_count" class="col-md-4 pagination pagination-sm my-1 mx-1">
                 <li class="page-item"><a class="page-link">Page
                         {{page_current}}/{{page_count}}
                         (Records-{{page_rowcount}})</a></li>
@@ -21,11 +21,6 @@
 
             <label *ngIf="filterList?.length > 0" class="col-md-1 form-label form-label-sm pt-1">Filter</label>
             <div *ngIf="filterList?.length > 0"  class="col-md-2 pt-1">
-                <!-- <select class="form-control form-control-sm" [(ngModel)]="history_type" (change)="OnChange('history_type')">
-                    <option [value]="'NA'">NA</option>
-                    <option [value]="'EVENT'">EVENT</option>
-                    <option [value]="'PO STATUS'">PO STATUS</option>
-                </select> -->
                 <select class="form-control form-control-sm" [(ngModel)]="history_type" (change)="OnChange('history_type')">
                     <option *ngFor="let rec of filterList" [value]="rec.id">{{rec.name}}</option>
                 </select>
@@ -44,7 +39,7 @@
                     <th>USER</th>
                     <th>DATE</th>
                     <!-- <th>ACTION</th> -->
-                    <th>TYPE</th>
+                    <th *ngIf="filterList?.length > 0">TYPE</th>
                     <th>CAPTION</th>
                     <th>OLD VALUE</th>
                     <th>NEW VALUE</th>
@@ -57,7 +52,7 @@
                     <td>{{rec.rec_created_by}}</td>
                     <td>{{rec.rec_created_date}}</td>
                     <!-- <td>{{rec.uh_action}}</td> -->
-                    <td>{{rec.uh_type}}</td>
+                    <td *ngIf="filterList?.length > 0">{{rec.uh_type}}</td>
                     <td>{{rec.uh_caption}}</td>
                     <td>{{rec.uh_old_value}}</td>
                     <td>{{rec.uh_new_value}}</td>
