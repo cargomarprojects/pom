@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy, ViewChild, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { GlobalService } from '../../../core/services/global.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -16,6 +16,7 @@ export class OrderListComponent {
 
   public mblid: string = '';
   public hblids: string = '';
+  
   modal: any;
   constructor(
     public ms: OrderListService,
@@ -196,5 +197,5 @@ export class OrderListComponent {
   CloseModal2(params: any) {
     this.modal.close();
   }
-
+   
 }

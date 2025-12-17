@@ -4,6 +4,7 @@ import { Joborderh, Joborderm, SearchQuery, JobOrderModel } from '../models/jobo
 import { GlobalService } from '../../core/services/global.service';
 import { JobOrder_VM } from '../models/joborder';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UserHistory } from 'src/app/shared/models/userhistory';
 
 @Injectable({ providedIn: 'root' })
 export class OrderListService {
@@ -42,7 +43,8 @@ export class OrderListService {
   public SortList: any[];
   public HistoryFilterList: any[];
   private _record: JobOrderModel;
-
+  public trkRec: Joborderm = <Joborderm>{};
+  public trkEventList: UserHistory[] = [];
   constructor(
     private modalService: NgbModal,
     private http2: HttpClient,
@@ -134,7 +136,7 @@ export class OrderListService {
         list_pod_agent_id: '',
         list_pod_agent_name: '',
         ord_invoice: '',
-        ord_cfno:'',
+        ord_cfno: '',
         ord_po: '',
         report_folder: '',
         to_date: '',
@@ -222,6 +224,11 @@ export class OrderListService {
           this.record.searchQuery.page_count = response.page_count;
           this.record.searchQuery.page_current = response.page_current;
           this.record.searchQuery.page_rowcount = response.page_rowcount;
+          if (this.ord_list_type == "DETAILS") {
+            if (!this.gs.isBlank(this.record.records))
+              if (this.record.records.length > 0)
+                this.ShowTrackingEvents(this.record.records[0])
+          }
         }
       },
         error => {
@@ -457,6 +464,37 @@ export class OrderListService {
         this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
         this.gs.showToastScreen(this.errorMessage);
       });
+  }
+
+  ShowTrackingEvents(_rec: Joborderm) {
+
+    this.trkRec = _rec;
+
+    this.loading = true;
+    let SearchData = {
+      table: 'userhistory',
+      type: 'NEW',
+      pkid: '',
+      subid: _rec.ord_pkid,
+      rowtype: this.type,
+      company_code: this.gs.globalVariables.comp_code,
+      branch_code: this.gs.globalVariables.branch_code,
+      page_count: 0,
+      page_current: 0,
+      page_rows: 100,
+      page_rowcount: 0,
+      history_type: 'EVENT'
+    };
+    this.gs.SearchRecord(SearchData)
+      .subscribe(response => {
+        this.loading = false;
+        this.trkEventList = response.list;
+      },
+        error => {
+          this.loading = false;
+          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.errorMessage);
+        });
   }
 
   OrdList(SearchData: any) {

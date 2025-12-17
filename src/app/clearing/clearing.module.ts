@@ -18,6 +18,7 @@ import { TrkListComponent } from './mblm/edit/other/tracking/list/trk-list.compo
 import { TransitComponent } from './mblm/edit/other/tracking/transit.component';
 import { ContainerComponent  } from './container/list/container.component';
 import { ContainerEditComponent } from './container/edit/container-edit.component';
+import { TrkEventComponent } from './orderlist/list/trkevent/trkevent.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ContainerEditComponent } from './container/edit/container-edit.componen
     TrkListComponent,
     TransitComponent,
     ContainerComponent,
-    ContainerEditComponent
+    ContainerEditComponent,
+    TrkEventComponent
   ],
   imports: [
     SharedModule,
