@@ -114,6 +114,8 @@ export class OrderListComponent {
         for (let rec of this.ms.record.records.filter(rec => rec.ord_pkid == arrPkid[i])) {
           rec.ord_cargo_status = params.trackstatus;
           rec.ord_cargo_status_date = params.cargostatusdate;
+          rec.ord_cargo_status_edited_date = params.cargostatusdate;
+          rec.ord_cargo_status_edited_by = this.gs.globalVariables.user_code;
           if (params.sdatetype == "BKD")
             rec.ord_booking_date = params.trackdate;
           else if (params.sdatetype == "RND")
@@ -141,6 +143,8 @@ export class OrderListComponent {
         for (let rec of this.ms.record.records.filter(rec => rec.ord_pkid == rec1.id)) {
           rec.ord_status = rec1.status;
           rec.ord_status_color = rec1.color;
+          rec.ord_status_edited_by = rec1.statusby;
+          rec.ord_status_edited_date = rec1.statusdt;
         }
       }
     }
@@ -187,10 +191,10 @@ export class OrderListComponent {
     this.open(doc);
   }
   open(content: any) {
-    this.modal = this.modalService.open(content, { size: "sm",centered: true,  backdrop: 'static', keyboard: false, windowClass: 'modal-custom' });
+    this.modal = this.modalService.open(content, { size: "sm", centered: true, backdrop: 'static', keyboard: false, windowClass: 'modal-custom' });
   }
   CloseModal2(params: any) {
     this.modal.close();
   }
-  
+
 }

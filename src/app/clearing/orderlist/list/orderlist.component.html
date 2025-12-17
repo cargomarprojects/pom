@@ -284,10 +284,10 @@
           <th>DATE</th>
           <th>PO.STATUS</th>
           <th>PO.STATUS.BY</th>
-          <th>PO.STATUS.DT</th>
+          <!-- <th>PO.STATUS.DT</th> -->
           <th>EVENT</th>
           <th>EVENT.BY</th>
-          <th>EVENT.DT</th>
+          <!-- <th>EVENT.DT</th> -->
           <th>SHIPPER</th>
           <th>CONSIGNEE</th>
           <th>BUYING.AGENT</th>
@@ -336,11 +336,9 @@
           <td (click)="ActionHandler('EDIT',rec.ord_header_id)" class="hlink"><i class="fa fa-pencil"></i></td>
           <td>{{rec.ord_date}}</td>
           <td>{{rec.ord_status}}</td>
-          <td>{{rec.ord_status_edited_by}}</td>
-          <td>{{rec.ord_status_edited_date}}</td>
+          <td>{{rec.ord_status_edited_by}}<span *ngIf="rec.ord_status_edited_date">/{{ rec.ord_status_edited_date }}</span></td>
           <td>{{rec.ord_cargo_status}}</td>
-          <td>{{rec.ord_cargo_status_edited_by}}</td>
-          <td>{{rec.ord_cargo_status_edited_date}}</td>
+          <td>{{rec.ord_cargo_status_edited_by}}<span *ngIf="rec.ord_cargo_status_edited_date">/{{ rec.ord_cargo_status_edited_date }}</span></td>
           <td>{{rec.ord_exp_name}}</td>
           <td>{{rec.ord_imp_name}}</td>
           <td>{{rec.ord_buy_agent_name}}</td>

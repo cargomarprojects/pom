@@ -287,7 +287,6 @@
           <!-- <th>DATE</th> -->
           <th>PO.STATUS</th>
           <th>PO.STATUS.BY</th>
-          <th>PO.STATUS.DT</th>
           <th>INV#</th>
           <th>PO#</th>
           <th>STYLE</th>
@@ -316,8 +315,7 @@
           <td>{{rec.ord_uid}}</td>
           <!-- <td style="text-transform:uppercase">{{rec.ord_date | date : gs.DATE_DISPLAY_FORMAT}}</td> -->
           <td>{{rec.ord_status}}</td>
-          <td>{{rec.ord_status_edited_by}}</td>
-          <td>{{rec.ord_status_edited_date}}</td>
+          <td>{{rec.ord_status_edited_by}}<span *ngIf="rec.ord_status_edited_date">/{{ rec.ord_status_edited_date }}</span></td>
           <td>{{rec.ord_invno}}</td>
           <td>{{rec.ord_po}}</td>
           <td>{{rec.ord_style}}</td>
