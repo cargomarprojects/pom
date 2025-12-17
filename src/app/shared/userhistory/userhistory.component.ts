@@ -13,6 +13,8 @@ export class UserHistoryComponent {
     @Input() public pkid: string = '';
     @Input() public type: string = '';
     @Input() public subid: string = '';
+    @Input() public filterList: any[] = [];
+    
     InitCompleted: boolean = false;
     disableSave = true;
     loading = false;
@@ -26,6 +28,7 @@ export class UserHistoryComponent {
     urlid: string;
     ErrorMessage = "";
     InfoMessage = "";
+    history_type = "NA";
     RecordList: UserHistory[] = [];
 
     constructor(
@@ -73,7 +76,8 @@ export class UserHistoryComponent {
             page_count: this.page_count,
             page_current: this.page_current,
             page_rows: this.page_rows,
-            page_rowcount: this.page_rowcount
+            page_rowcount: this.page_rowcount,
+            history_type: this.history_type
         };
         this.gs.SearchRecord(SearchData)
             .subscribe(response => {
@@ -89,5 +93,11 @@ export class UserHistoryComponent {
                     this.ErrorMessage = this.gs.getError(error);
                     alert(this.ErrorMessage);
                 });
+    }
+
+    OnChange(field: string) {
+        if (field == 'history_type') {
+            this.List("NEW");
+        }
     }
 }

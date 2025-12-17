@@ -10,6 +10,7 @@ export class UserHistory {
     uh_caption: string;
     uh_old_value: string;
     uh_new_value: string;
+    uh_type: string;
     rec_company_code: string;
     rec_branch_code: string;
     rec_created_by: string;

@@ -462,7 +462,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <app-userhistory [pkid]="ms.ord_trkheaderid" [subid]="ms.ord_trkids"></app-userhistory>
+    <app-userhistory [pkid]="ms.ord_trkheaderid" [subid]="ms.ord_trkids" [filterList]="ms.HistoryFilterList"></app-userhistory>
   </div>
 </ng-template>
 <ng-template #doc let-c="close" let-d="dismiss">

@@ -1,19 +1,39 @@
 <div *ngIf="page_count">
     <div class="page-pagination">
-        <ul class="pagination pagination-sm my-1 mx-1">
-            <li class="page-item"><a class="page-link">Page
-                    {{page_current}}/{{page_count}}
-                    (Records-{{page_rowcount}})</a></li>
-            <li class="page-item"><a class="page-link" (click)="List('FIRST')"><span class="fa fa-backward"></span></a>
-            </li>
-            <li class="page-item"><a class="page-link" (click)="List('PREV')"><span class="fa fa-arrow-left"></span></a>
-            </li>
-            <li class="page-item"><a class="page-link" (click)="List('NEXT')"><span
-                        class="fa fa-arrow-right"></span></a>
-            </li>
-            <li class="page-item"><a class="page-link" (click)="List('LAST')"><span class="fa fa-forward"></span></a>
-            </li>
-        </ul>
+        <div class="form-group row my-0 mx-0">
+            <ul class="col-md-4 pagination pagination-sm my-1 mx-1">
+                <li class="page-item"><a class="page-link">Page
+                        {{page_current}}/{{page_count}}
+                        (Records-{{page_rowcount}})</a></li>
+                <li class="page-item"><a class="page-link" (click)="List('FIRST')"><span
+                            class="fa fa-backward"></span></a>
+                </li>
+                <li class="page-item"><a class="page-link" (click)="List('PREV')"><span
+                            class="fa fa-arrow-left"></span></a>
+                </li>
+                <li class="page-item"><a class="page-link" (click)="List('NEXT')"><span
+                            class="fa fa-arrow-right"></span></a>
+                </li>
+                <li class="page-item"><a class="page-link" (click)="List('LAST')"><span
+                            class="fa fa-forward"></span></a>
+                </li>
+            </ul>
+
+            <label *ngIf="filterList?.length > 0" class="col-md-1 form-label form-label-sm pt-1">Filter</label>
+            <div *ngIf="filterList?.length > 0"  class="col-md-2 pt-1">
+                <!-- <select class="form-control form-control-sm" [(ngModel)]="history_type" (change)="OnChange('history_type')">
+                    <option [value]="'NA'">NA</option>
+                    <option [value]="'EVENT'">EVENT</option>
+                    <option [value]="'PO STATUS'">PO STATUS</option>
+                </select> -->
+                <select class="form-control form-control-sm" [(ngModel)]="history_type" (change)="OnChange('history_type')">
+                    <option *ngFor="let rec of filterList" [value]="rec.id">{{rec.name}}</option>
+                </select>
+            </div>
+            <!-- <div class="col-md-1 pt-1">
+            <button (click)="List('NEW')" class="btn btn-info btn-sm">Search</button>
+            </div> -->
+        </div>
     </div>
 </div>
 <div class="page-body {{page_count<=0?'line-bottom':''}}">
@@ -23,7 +43,8 @@
                 <tr class="table-header">
                     <th>USER</th>
                     <th>DATE</th>
-                    <th>ACTION</th>
+                    <!-- <th>ACTION</th> -->
+                    <th>TYPE</th>
                     <th>CAPTION</th>
                     <th>OLD VALUE</th>
                     <th>NEW VALUE</th>
@@ -35,7 +56,8 @@
                     (mousedown)="selectRowId(rec.uh_pkid)" [ngClass]="{'table-info':rec.uh_pkid == getRowId()}">
                     <td>{{rec.rec_created_by}}</td>
                     <td>{{rec.rec_created_date}}</td>
-                    <td>{{rec.uh_action}}</td>
+                    <!-- <td>{{rec.uh_action}}</td> -->
+                    <td>{{rec.uh_type}}</td>
                     <td>{{rec.uh_caption}}</td>
                     <td>{{rec.uh_old_value}}</td>
                     <td>{{rec.uh_new_value}}</td>

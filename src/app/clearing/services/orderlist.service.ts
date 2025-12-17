@@ -39,7 +39,8 @@ export class OrderListService {
   ord_trkheaderid = "";
   public ord_list_type: string = "SUMMARY";
 
-  SortList: any[];
+  public SortList: any[];
+  public HistoryFilterList: any[];
   private _record: JobOrderModel;
 
   constructor(
@@ -165,6 +166,8 @@ export class OrderListService {
       { "colheadername": "UID", "colname": "a.ord_uid" },
       { "colheadername": "CREATED-DATE", "colname": "a.rec_created_date" }
     ];
+
+    this.HistoryFilterList = [{ "id": "NA", "name": "NA" }, { "id": "EVENT", "name": "EVENT" }, { "id": "PO STATUS", "name": "PO STATUS" }];
   }
 
   List(_type: string) {
