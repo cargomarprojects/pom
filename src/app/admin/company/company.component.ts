@@ -1,9 +1,6 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-
-import { ActivatedRoute } from '@angular/router';
-
+import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalService } from '../../core/services/global.service';
-
 import { Companym } from '../models/company';
 import { SearchTable } from '../../shared/models/searchtable';
 import { CompanyService } from '../services/company.service';
@@ -54,6 +51,7 @@ export class CompanyComponent {
   constructor(
     private mainService: CompanyService,
     private route: ActivatedRoute,
+    private router: Router,
     private gs: GlobalService
   ) {
     this.page_count = 0;
@@ -470,6 +468,18 @@ export class CompanyComponent {
       this.Record.comp_pod_agent_code = _Record.code;
       this.Record.comp_pod_agent_name = _Record.name;
     }
+  }
+
+  openPoSettingPage(Rec: Companym) {
+    
+    let parameter = {
+      urlid: this.gs.getGuid(),
+      appid: this.gs.globalVariables.appid,
+      grp_id: Rec.comp_pkid,
+      grp_name: Rec.comp_name
+    };
+
+    this.router.navigate(['master/po-setting'], { queryParams: parameter });
   }
 
 }

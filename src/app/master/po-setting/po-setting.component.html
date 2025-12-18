@@ -15,21 +15,21 @@
                     <th>ENABLED</th>
                 </tr>
             </thead>
-            <tbody class="page-body-tbody">
-                <tr *ngFor="let rec of RecordList">
-                    <td style="padding:0px 0px 0px 0px"><input type="number" name="ctr" disabled
+            <tbody class="page-body-tbody" *ngFor="let rec of RecordList; let i = index" >
+                <tr >
+                    <td (click)="SetRowIndex(i)" style="padding:0px 0px 0px 0px"><input type="number"  [style.background]="selectedRowIndex === i ? '#fff9c4bb' : null" name="ctr" readonly
                             class="form-control form-control-sm" [(ngModel)]="rec.ps_ctr" (blur)="OnBlur('ps_ctr',rec)"
                             required maxlength="14" /></td>
-                    <td style="padding:0px 0px 0px 0px"><input type="text" name="ps_code"
+                    <td  (click)="SetRowIndex(i)"  style="padding:0px 0px 0px 0px"><input type="text" [style.background]="selectedRowIndex === i ? '#fff9c4bb' : null" name="ps_code" readonly
                             class="form-control form-control-sm" [(ngModel)]="rec.ps_code"
                             (blur)="OnBlur('ps_code',rec)" required maxlength="15" /></td>
-                    <td style="padding:0px 0px 0px 0px"><input type="text" name="ps_name"
+                    <td  (click)="SetRowIndex(i)"  style="padding:0px 0px 0px 0px"><input type="text" name="ps_name"
                             class="form-control form-control-sm" [(ngModel)]="rec.ps_name"
                             (blur)="OnBlur('ps_name',rec)" required maxlength="100" /></td>
-                    <td style="padding:0px 0px 0px 0px"><input type="text" name="ps_cargo_status"
+                    <td  (click)="SetRowIndex(i)"  style="padding:0px 0px 0px 0px "><input type="text" name="ps_cargo_status"
                             class="form-control form-control-sm" [(ngModel)]="rec.ps_cargo_status"
                             (blur)="OnBlur('ps_cargo_status',rec)" required maxlength="60" /></td>
-                    <td style="padding:0px 0px 0px 0px"><select class="form-control form-control-sm"
+                    <td  (click)="SetRowIndex(i)"  style="padding:0px 0px 0px 0px"><select class="form-control form-control-sm"
                             [(ngModel)]="rec.ps_enabled">
                             <option [value]="'Y'">YES</option>
                             <option [value]="'N'">NO</option>
@@ -43,7 +43,13 @@
     <div class="form-group row">
         <div class="col">
             <button class="btn btn-success btn-sm mr-1" (click)="Save()">Save</button>
-            <button class="btn btn-success btn-sm mr-1" (click)="Close()">Return</button>
+            <button class="btn btn-success btn-sm mr-2" (click)="Close()">Return</button>
+            <button *ngIf="RecordList.length" class="btn btn-info btn-sm mr-1"
+              (click)="changePosition('UP')"><span class="fa fa-arrow-up"></span></button>
+            <button *ngIf="RecordList.length" class="btn btn-info btn-sm mr-1"
+              (click)="changePosition('DOWN')"><span class="fa fa-arrow-down"></span></button>
+            <label *ngIf="RecordList.length" class="col-form-label col-form-label-sm">
+              Select a row and use arrows to move between rows</label>
         </div>
     </div>
 </div>

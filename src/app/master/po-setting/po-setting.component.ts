@@ -29,7 +29,7 @@ export class PoSettingComponent {
     page_current = 0;
     page_rows = 0;
     page_rowcount = 0;
-
+    selectedRowIndex: number = 0;
     sub: any;
     urlid: string;
 
@@ -131,6 +131,7 @@ export class PoSettingComponent {
                 this.loading = false;
                 this.mode = 'EDIT';
                 alert('Save Complete')
+                this.GetRecord(this.grp_id);
             },
                 error => {
                     this.loading = false;
@@ -161,12 +162,35 @@ export class PoSettingComponent {
     LoadDefault() {
         if (!confirm('Load Default')) {
             return;
-          }
+        }
         this.RecordList = this.DefaultList;
     }
     Close() {
         this.location.back();
     }
 
+    SetRowIndex(_indx: number) {
+        this.selectedRowIndex = _indx;
+    }
 
+    changePosition(thistype: string) {
+        if (this.selectedRowIndex == -1)
+            return;
+        let _newindx: number = this.selectedRowIndex;
+
+        if (thistype == 'UP')
+            _newindx--;
+        if (thistype == 'DOWN')
+            _newindx++;
+
+        if (_newindx >= 0 && _newindx < this.RecordList.length) {
+            this.swapItem(this.selectedRowIndex, _newindx);
+            this.selectedRowIndex = _newindx;
+        }
+    }
+    swapItem(slot1: number, slot2: number) {
+        var tempVal = this.RecordList[slot2];
+        this.RecordList[slot2] = this.RecordList[slot1];
+        this.RecordList[slot1] = tempVal;
+    }
 }
