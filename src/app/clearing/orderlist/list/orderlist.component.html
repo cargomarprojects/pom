@@ -314,8 +314,13 @@
                 <th>VIEW</th>
                 <th>MASTER</th>
                 <th>HOUSE</th>
+                
                 <th *ngIf="ms.bDocs">DOCS</th>
-                <th *ngIf="gs.getTrackDate('BKD')||ms.trkdt_alldisplay=='Y'">BKD</th>
+
+                <th *ngFor="let col of ms.trkCaptionList">
+                  {{col.trk_caption_code}}
+                </th>
+                <!-- <th *ngIf="gs.getTrackDate('BKD')||ms.trkdt_alldisplay=='Y'">BKD</th>
                 <th *ngIf="gs.getTrackDate('RND')||ms.trkdt_alldisplay=='Y'">RND</th>
                 <th *ngIf="gs.getTrackDate('POR')||ms.trkdt_alldisplay=='Y'">POR</th>
                 <th *ngIf="gs.getTrackDate('CFS')||ms.trkdt_alldisplay=='Y'">CFS</th>
@@ -324,7 +329,7 @@
                 <th *ngIf="gs.getTrackDate('STUF')||ms.trkdt_alldisplay=='Y'">STUF</th>
                 <th *ngIf="gs.getTrackDate('WHD')||ms.trkdt_alldisplay=='Y'">WHD</th>
                 <th *ngIf="gs.getTrackDate('SOB')||ms.trkdt_alldisplay=='Y'">SOB</th>
-                <th *ngIf="gs.getTrackDate('DPOD')||ms.trkdt_alldisplay=='Y'">DPOD</th>
+                <th *ngIf="gs.getTrackDate('DPOD')||ms.trkdt_alldisplay=='Y'">DPOD</th> -->
                 <th>CREATED.BY</th>
                 <th>CREATED.DT</th>
                 <th *ngIf="ms.canDelete" class='text-center'>DELETE</th>
@@ -369,7 +374,7 @@
                 <td>{{rec.ord_hbl_cntr_nos}}</td>
                 <td *ngIf="ms.bDocs" class="hlink" (click)="ShowDocuments(rec.ord_mbl_id,rec.ord_hbl_id,doc)"><i
                     *ngIf="rec.ord_mbl_id" class="fa fa-file fa-lg pointer ml-1"></i></td>
-                <td *ngIf="gs.getTrackDate('BKD')||ms.trkdt_alldisplay=='Y'">{{rec.ord_booking_date}}</td>
+                <!-- <td *ngIf="gs.getTrackDate('BKD')||ms.trkdt_alldisplay=='Y'">{{rec.ord_booking_date}}</td>
                 <td *ngIf="gs.getTrackDate('RND')||ms.trkdt_alldisplay=='Y'">{{rec.ord_rnd_insp_date}}</td>
                 <td *ngIf="gs.getTrackDate('POR')||ms.trkdt_alldisplay=='Y'">{{rec.ord_po_rel_date}}</td>
                 <td *ngIf="gs.getTrackDate('CFS')||ms.trkdt_alldisplay=='Y'">{{rec.ord_cargo_ready_date}}</td>
@@ -378,7 +383,10 @@
                 <td *ngIf="gs.getTrackDate('STUF')||ms.trkdt_alldisplay=='Y'">{{rec.ord_stuf_date}}</td>
                 <td *ngIf="gs.getTrackDate('WHD')||ms.trkdt_alldisplay=='Y'">{{rec.ord_whd_date}}</td>
                 <td *ngIf="gs.getTrackDate('SOB')||ms.trkdt_alldisplay=='Y'">{{rec.ord_dlv_pol_date}}</td>
-                <td *ngIf="gs.getTrackDate('DPOD')||ms.trkdt_alldisplay=='Y'">{{rec.ord_dlv_pod_date}}</td>
+                <td *ngIf="gs.getTrackDate('DPOD')||ms.trkdt_alldisplay=='Y'">{{rec.ord_dlv_pod_date}}</td> -->
+                <td *ngFor="let col of ms.trkCaptionList">
+                  {{rec[col.trk_field_name]}}
+                </td>
                 <td>{{rec.rec_created_by}}</td>
                 <td>{{rec.rec_created_date}}</td>
                 <td *ngIf="ms.canDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer"
@@ -425,7 +433,11 @@
               </tr>
             </thead>
             <tbody class="page-body-tbody">
-              <tr>
+              <tr *ngFor="let col of ms.trkCaptionList">
+                <td>{{col.trk_caption_name | uppercase }}</td>
+                <td>{{ms.trkRec[col.trk_field_name]}}</td>
+              </tr>
+              <!-- <tr>
                 <td *ngIf="gs.getTrackDate('BKD')||ms.trkdt_alldisplay=='Y'">BOOKING REQUEST DATE
                   (BKD)</td><td>{{ms.trkRec.ord_booking_date}}</td>
               </tr>
@@ -464,7 +476,7 @@
               <tr>
                 <td *ngIf="gs.getTrackDate('DPOD')||ms.trkdt_alldisplay=='Y'">POD DELIVERY DATE
                   (DPOD)</td><td>{{ms.trkRec.ord_dlv_pod_date}}</td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
