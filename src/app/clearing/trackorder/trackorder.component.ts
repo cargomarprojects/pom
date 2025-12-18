@@ -151,6 +151,7 @@ export class TrackOrderComponent {
     let SearchData = {
       pkid: Id,
       ord_imp_grp_id: this.ord_imp_grp_id,
+      company_pkid: this.gs.globalVariables.comp_pkid,
       masterwise: this.masterwise
     };
 
