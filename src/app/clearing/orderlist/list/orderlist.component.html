@@ -81,8 +81,8 @@
 
     <div class="col-md-4">
       <div class="form-group row">
-        <label class="col-md-3 form-label form-label-sm">CF#</label>
-        <div class="col-md-3">
+        <label class="col-md-2 form-label form-label-sm">CF#</label>
+        <div class="col-md-4">
           <InputBox [(inputModel)]="ms.record.searchQuery.ord_cfno" [maxlength]="30" [uppercase]=true></InputBox>
         </div>
         <label class="col-md-2 form-label form-label-sm">Plan#</label>
@@ -91,23 +91,23 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-md-3 form-label form-label-sm">Invoice#</label>
-        <div class="col-md-9">
+        <label class="col-md-2 form-label form-label-sm">Invoice#</label>
+        <div class="col-md-10">
           <InputBox [(inputModel)]="ms.record.searchQuery.ord_invoice" [maxlength]="30" [uppercase]=true></InputBox>
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-md-3 form-label form-label-sm">Po#</label>
-        <div class="col-md-9">
+        <label class="col-md-2 form-label form-label-sm">Po#</label>
+        <div class="col-md-10">
           <InputBox [(inputModel)]="ms.record.searchQuery.ord_po" [maxlength]="1000" [uppercase]=true></InputBox>
         </div>
       </div>
 
 
       <div class="form-group row">
-        <label class="col-md-3 form-label form-label-sm">Status</label>
-        <div class="col-md-9">
+        <label class="col-md-2 form-label form-label-sm">Status</label>
+        <div class="col-md-10">
           <select class="form-control form-control-sm" [(ngModel)]="ms.record.searchQuery.ord_status">
             <option [value]="'ALL'">ALL</option>
             <option [value]="'REPORTED'">REPORTED</option>
@@ -121,8 +121,8 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-md-3 form-label form-label-sm">Pending</label>
-        <div class="col-md-9">
+        <label class="col-md-2 form-label form-label-sm">Pending</label>
+        <div class="col-md-10">
           <select class="form-control form-control-sm" [(ngModel)]="ms.record.searchQuery.ord_showpending">
             <!-- <option [value]="'Y'">SHOW PENDING ONLY</option> -->
             <option [value]="'SOB-CONFIRMED'">SOB CONFIRMED</option>
@@ -133,8 +133,8 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-md-3 form-label form-label-sm">Sort</label>
-        <div class="col-md-9">
+        <label class="col-md-2 form-label form-label-sm">Sort</label>
+        <div class="col-md-10">
           <select class="form-control form-control-sm" [(ngModel)]="ms.record.searchQuery.sort_colvalue">
             <option *ngFor="let rec of ms.SortList" [value]="rec.colname">{{rec.colheadername}}</option>
           </select>
@@ -142,8 +142,8 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-md-3 form-label form-label-sm"></label>
-        <div class="col-md-5">
+        <label class="col-md-2 form-label form-label-sm"></label>
+        <div class="col-md-6">
           <div class="form-check">
             <input type="checkbox" class="form-check-input" [(ngModel)]="ms.record.searchQuery.list_hide"
               id="_ordhide" />
@@ -213,21 +213,39 @@
   </div>
 </div>
 
-<div *ngIf="ms.record.searchQuery.page_count">
+<div>
   <div class="page-pagination">
-    <ul class="pagination pagination-sm my-1 mx-1">
-      <li class="page-item"><a class="page-link">Page
-          {{ms.record.searchQuery.page_current}}/{{ms.record.searchQuery.page_count}}
-          (Records-{{ms.record.searchQuery.page_rowcount}})</a></li>
-      <li class="page-item"><a class="page-link" (click)="ms.List('FIRST')"><span class="fa fa-backward"></span></a>
-      </li>
-      <li class="page-item"><a class="page-link" (click)="ms.List('PREV')"><span class="fa fa-arrow-left"></span></a>
-      </li>
-      <li class="page-item"><a class="page-link" (click)="ms.List('NEXT')"><span class="fa fa-arrow-right"></span></a>
-      </li>
-      <li class="page-item"><a class="page-link" (click)="ms.List('LAST')"><span class="fa fa-forward"></span></a>
-      </li>
-    </ul>
+    <div class="form-group row my-0 mx-0">
+      <ul *ngIf="ms.record.searchQuery.page_count" class="pagination pagination-sm my-1 mx-1">
+        <li class="page-item"><a class="page-link">Page
+            {{ms.record.searchQuery.page_current}}/{{ms.record.searchQuery.page_count}}
+            (Records-{{ms.record.searchQuery.page_rowcount}})</a></li>
+        <li class="page-item"><a class="page-link" (click)="ms.List('FIRST')"><span class="fa fa-backward"></span></a>
+        </li>
+        <li class="page-item"><a class="page-link" (click)="ms.List('PREV')"><span class="fa fa-arrow-left"></span></a>
+        </li>
+        <li class="page-item"><a class="page-link" (click)="ms.List('NEXT')"><span class="fa fa-arrow-right"></span></a>
+        </li>
+        <li class="page-item"><a class="page-link" (click)="ms.List('LAST')"><span class="fa fa-forward"></span></a>
+        </li>
+      </ul>
+
+      <div *ngIf="ms.ord_list_type=='DETAILS'" class="col-md-2 ml-auto pt-2 text-right form-check">
+        <!-- <input type="checkbox" class="form-check-input" [(ngModel)]="ms.record.searchQuery.list_hidetrkevent"
+          id="_hidetrkevent" />
+        <label class="form-label form-label-sm my-0"
+          for="_hidetrkevent">{{ms.record.searchQuery.list_hidetrkevent?'Show Tracking Event':'Hide Tracking Event'}}</label> -->
+        <!-- <button class="btn btn-link btn-sm p-0"
+                        (click)="ms.record.searchQuery.list_hidetrkevent=ms.record.searchQuery.list_hidetrkevent == true ? false : true">{{ms.record.searchQuery.list_hidetrkevent?'Show Tracking Event':'Hide Tracking Event'}}</button> -->
+        <a href="javascript:void(0)" 
+          (click)="ms.record.searchQuery.list_hidetrkevent = !ms.record.searchQuery.list_hidetrkevent">
+          {{ ms.record.searchQuery.list_hidetrkevent
+          ? 'Show Tracking Events'
+          : 'Hide Tracking Events' }}
+        </a>
+      </div>
+
+    </div>
   </div>
 </div>
 
@@ -278,7 +296,7 @@
 
 <div class="page-body" *ngIf="ms.ord_list_type=='DETAILS'">
   <div class="row mx-0">
-    <div class="col-md-8 mx-0 p-0">
+    <div [ngClass]="ms.record.searchQuery.list_hidetrkevent ? 'col-md-12' : 'col-md-8'" class="col-md-8 mx-0 p-0">
       <div class="page-body line-bottom">
         <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 408px);">
           <table class="table table-hover table-sm table-bordered">
@@ -405,7 +423,8 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4 mx-0 p-0" style="height: calc(100vh - 400px);overflow: auto;">
+    <div *ngIf="!ms.record.searchQuery.list_hidetrkevent" class="col-md-4 mx-0 p-0"
+      style="height: calc(100vh - 400px);overflow: auto;">
       <app-trkevent #trkcompnent [RecordList]="ms.trkEventList" [trkRec]="ms.trkRec"
         [trkCaptionList]="ms.trkCaptionList"></app-trkevent>
     </div>

@@ -153,7 +153,8 @@ export class OrderListService {
         ftp_is_checklist: 'N',
         ftp_ordpoids: '',
         list_hide: false,
-        list_orderwise: false
+        list_orderwise: false,
+        list_hidetrkevent: false
       }
     };
   }
@@ -479,6 +480,10 @@ export class OrderListService {
   }
 
   public ShowTrackingEvents(_trkRec: Joborderm) {
+
+    if (this.record.searchQuery.list_hidetrkevent)
+      return;
+    
     this.trkRec = _trkRec;
     this.OrderLinkedList(_trkRec);
 

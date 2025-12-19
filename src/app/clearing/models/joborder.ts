@@ -223,7 +223,8 @@ export interface SearchQuery {
   ftp_is_checklist: string,
   ftp_ordpoids: string,
   list_hide: boolean,
-  list_orderwise: boolean
+  list_orderwise: boolean,
+  list_hidetrkevent: boolean
 }
 
 export interface JobOrderModel {
