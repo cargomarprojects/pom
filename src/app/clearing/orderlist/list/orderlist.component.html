@@ -272,7 +272,7 @@
   </div>
 </div>
 
-<div class="page-body" *ngIf="ms.ord_list_type=='DETAILS'" >
+<div class="page-body" *ngIf="ms.ord_list_type=='DETAILS'">
   <div class="row mx-0">
     <div class="col-md-8 mx-0 p-0">
       <div class="page-body line-bottom">
@@ -314,22 +314,10 @@
                 <th>VIEW</th>
                 <th>MASTER</th>
                 <th>HOUSE</th>
-                
                 <th *ngIf="ms.bDocs">DOCS</th>
-
                 <th *ngFor="let col of ms.trkCaptionList">
                   {{col.trk_caption_code}}
                 </th>
-                <!-- <th *ngIf="gs.getTrackDate('BKD')||ms.trkdt_alldisplay=='Y'">BKD</th>
-                <th *ngIf="gs.getTrackDate('RND')||ms.trkdt_alldisplay=='Y'">RND</th>
-                <th *ngIf="gs.getTrackDate('POR')||ms.trkdt_alldisplay=='Y'">POR</th>
-                <th *ngIf="gs.getTrackDate('CFS')||ms.trkdt_alldisplay=='Y'">CFS</th>
-                <th *ngIf="gs.getTrackDate('FCR')||ms.trkdt_alldisplay=='Y'">FCR</th>
-                <th *ngIf="gs.getTrackDate('INSP')||ms.trkdt_alldisplay=='Y'">INSP</th>
-                <th *ngIf="gs.getTrackDate('STUF')||ms.trkdt_alldisplay=='Y'">STUF</th>
-                <th *ngIf="gs.getTrackDate('WHD')||ms.trkdt_alldisplay=='Y'">WHD</th>
-                <th *ngIf="gs.getTrackDate('SOB')||ms.trkdt_alldisplay=='Y'">SOB</th>
-                <th *ngIf="gs.getTrackDate('DPOD')||ms.trkdt_alldisplay=='Y'">DPOD</th> -->
                 <th>CREATED.BY</th>
                 <th>CREATED.DT</th>
                 <th *ngIf="ms.canDelete" class='text-center'>DELETE</th>
@@ -337,53 +325,45 @@
             </thead>
             <tbody class="page-body-tbody" *ngFor="let rec of ms.record.records; let i = index">
               <tr [style.color]="rec.ord_status_color" (mousedown)="ms.selectRowId(rec.ord_pkid)"
-                [ngClass]="{'table-info':rec.ord_pkid == ms.getRowId()}">
+                [ngClass]="{'table-info':rec.ord_pkid == ms.getRowId()}" (click)="ms.ShowTrackingEvents(rec)">
                 <td><input type="checkbox" [(ngModel)]="rec.ord_selected" (change)="handleChange(rec)"></td>
-                <td (click)="ms.ShowTrackingEvents(rec)" >{{rec.ord_uid}}</td>
-                <td (click)="ms.ShowTrackingEvents(rec)" >{{rec.ord_cfno}}</td>
+                <td >{{rec.ord_uid}}</td>
+                <td >{{rec.ord_cfno}}</td>
                 <td (click)="ActionHandler('EDIT',rec.ord_header_id)" class="hlink"><i class="fa fa-pencil"></i></td>
-                <td (click)="ms.ShowTrackingEvents(rec)" >{{rec.ord_date}}</td>
-                <td (click)="ms.ShowTrackingEvents(rec)" >{{rec.ord_status}}</td>
-                <td (click)="ms.ShowTrackingEvents(rec)" >{{rec.ord_status_edited_by}}<span *ngIf="rec.ord_status_edited_date">/{{ rec.ord_status_edited_date
+                <td >{{rec.ord_date}}</td>
+                <td >{{rec.ord_status}}</td>
+                <td >{{rec.ord_status_edited_by}}<span
+                    *ngIf="rec.ord_status_edited_date">/{{ rec.ord_status_edited_date
                     }}</span></td>
-                <td (click)="ms.ShowTrackingEvents(rec)" >{{rec.ord_cargo_status}}</td>
-                <td (click)="ms.ShowTrackingEvents(rec)" >{{rec.ord_cargo_status_edited_by}}<span *ngIf="rec.ord_cargo_status_edited_date">/{{
+                <td >{{rec.ord_cargo_status}}</td>
+                <td >{{rec.ord_cargo_status_edited_by}}<span
+                    *ngIf="rec.ord_cargo_status_edited_date">/{{
                     rec.ord_cargo_status_edited_date }}</span></td>
-                <td (click)="ms.ShowTrackingEvents(rec)" >{{rec.ord_exp_name}}</td>
-                <td (click)="ms.ShowTrackingEvents(rec)" >{{rec.ord_imp_name}}</td>
-                <td (click)="ms.ShowTrackingEvents(rec)" >{{rec.ord_buy_agent_name}}</td>
-                <td (click)="ms.ShowTrackingEvents(rec)" >{{rec.ord_pol}}</td>
-                <td (click)="ms.ShowTrackingEvents(rec)" >{{rec.ord_pod}}</td>
-                <td (click)="ms.ShowTrackingEvents(rec)" >{{rec.ord_agent_name}}</td>
-                <td (click)="ms.ShowTrackingEvents(rec)" >{{rec.ord_pod_agent_name}}</td>
-                <td (click)="ms.ShowTrackingEvents(rec)" >{{rec.ord_invno}}</td>
-                <td (click)="ms.ShowTrackingEvents(rec)" >{{rec.ord_po}}</td>
-                <td (click)="ms.ShowTrackingEvents(rec)" >{{rec.ord_style}}</td>
-                <td (click)="ms.ShowTrackingEvents(rec)" >{{rec.ord_color}}</td>
-                <td (click)="ms.ShowTrackingEvents(rec)"  align='right'>{{rec.ord_pkg | number : '1.2-2'}}</td>
-                <td (click)="ms.ShowTrackingEvents(rec)"  align='right'>{{rec.ord_pcs | number : '1.2-2'}}</td>
-                <td (click)="ms.ShowTrackingEvents(rec)"  align='right'>{{rec.ord_cbm | number : '1.3-3'}}</td>
+                <td >{{rec.ord_exp_name}}</td>
+                <td >{{rec.ord_imp_name}}</td>
+                <td >{{rec.ord_buy_agent_name}}</td>
+                <td >{{rec.ord_pol}}</td>
+                <td >{{rec.ord_pod}}</td>
+                <td >{{rec.ord_agent_name}}</td>
+                <td >{{rec.ord_pod_agent_name}}</td>
+                <td >{{rec.ord_invno}}</td>
+                <td >{{rec.ord_po}}</td>
+                <td >{{rec.ord_style}}</td>
+                <td >{{rec.ord_color}}</td>
+                <td align='right'>{{rec.ord_pkg | number : '1.2-2'}}</td>
+                <td align='right'>{{rec.ord_pcs | number : '1.2-2'}}</td>
+                <td align='right'>{{rec.ord_cbm | number : '1.3-3'}}</td>
                 <!-- <td>{{rec.ord_boarding1}}</td>
         <td>{{rec.ord_boarding2}}</td>
         <td>{{rec.ord_instock1}}</td>
         <td>{{rec.ord_instock2}}</td>
         <td>{{rec.ord_track_status}}</td>                 -->
-                <td (click)="ms.ShowTrackingEvents(rec)" >{{rec.ord_plan_no>0?rec.ord_plan_no:''}}</td>
+                <td >{{rec.ord_plan_no>0?rec.ord_plan_no:''}}</td>
                 <td class="hlink" (click)="ShowHideRecord(rec)"><i *ngIf="rec.ord_mbl_no" class="fa fa-eye"></i></td>
                 <td>{{rec.ord_mbl_no}}</td>
                 <td>{{rec.ord_hbl_cntr_nos}}</td>
                 <td *ngIf="ms.bDocs" class="hlink" (click)="ShowDocuments(rec.ord_mbl_id,rec.ord_hbl_id,doc)"><i
                     *ngIf="rec.ord_mbl_id" class="fa fa-file fa-lg pointer ml-1"></i></td>
-                <!-- <td *ngIf="gs.getTrackDate('BKD')||ms.trkdt_alldisplay=='Y'">{{rec.ord_booking_date}}</td>
-                <td *ngIf="gs.getTrackDate('RND')||ms.trkdt_alldisplay=='Y'">{{rec.ord_rnd_insp_date}}</td>
-                <td *ngIf="gs.getTrackDate('POR')||ms.trkdt_alldisplay=='Y'">{{rec.ord_po_rel_date}}</td>
-                <td *ngIf="gs.getTrackDate('CFS')||ms.trkdt_alldisplay=='Y'">{{rec.ord_cargo_ready_date}}</td>
-                <td *ngIf="gs.getTrackDate('FCR')||ms.trkdt_alldisplay=='Y'">{{rec.ord_fcr_date}}</td>
-                <td *ngIf="gs.getTrackDate('INSP')||ms.trkdt_alldisplay=='Y'">{{rec.ord_insp_date}}</td>
-                <td *ngIf="gs.getTrackDate('STUF')||ms.trkdt_alldisplay=='Y'">{{rec.ord_stuf_date}}</td>
-                <td *ngIf="gs.getTrackDate('WHD')||ms.trkdt_alldisplay=='Y'">{{rec.ord_whd_date}}</td>
-                <td *ngIf="gs.getTrackDate('SOB')||ms.trkdt_alldisplay=='Y'">{{rec.ord_dlv_pol_date}}</td>
-                <td *ngIf="gs.getTrackDate('DPOD')||ms.trkdt_alldisplay=='Y'">{{rec.ord_dlv_pod_date}}</td> -->
                 <td *ngFor="let col of ms.trkCaptionList">
                   {{rec[col.trk_field_name]}}
                 </td>
@@ -423,78 +403,9 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4 mx-0 p-0" style="height: calc(100vh - 400px);overflow: auto;" >
-      <div class="page-body">
-        <div class="table-responsive fixedTableHead  my-0 p-0" >
-          <table class="table table-hover table-sm table-bordered">
-            <thead class="table-success">
-              <tr class="table-header">
-                <th>TRACKING EVENTS / PO#&nbsp;{{ms.trkRec.ord_po}}</th><th></th>
-              </tr>
-            </thead>
-            <tbody class="page-body-tbody">
-              <tr *ngFor="let col of ms.trkCaptionList">
-                <td>{{col.trk_caption_name | uppercase }}</td>
-                <td>{{ms.trkRec[col.trk_field_name]}}</td>
-              </tr>
-              <!-- <tr>
-                <td *ngIf="gs.getTrackDate('BKD')||ms.trkdt_alldisplay=='Y'">BOOKING REQUEST DATE
-                  (BKD)</td><td>{{ms.trkRec.ord_booking_date}}</td>
-              </tr>
-              <tr>
-                <td *ngIf="gs.getTrackDate('RND')||ms.trkdt_alldisplay=='Y'">RANDOM INSPECTION DATE
-                  (RND)</td><td>{{ms.trkRec.ord_rnd_insp_date}}</td>
-              </tr>
-              <tr>
-                <td *ngIf="gs.getTrackDate('POR')||ms.trkdt_alldisplay=='Y'">PO RELEASE DATE
-                  (POR)</td><td>{{ms.trkRec.ord_po_rel_date}}</td>
-              </tr>
-              <tr>
-                <td *ngIf="gs.getTrackDate('CFS')||ms.trkdt_alldisplay=='Y'">CARGO READY AT CFS DATE
-                  (CFS)</td><td>{{ms.trkRec.ord_cargo_ready_date}}</td>
-              </tr>
-              <tr>
-                <td *ngIf="gs.getTrackDate('FCR')||ms.trkdt_alldisplay=='Y'">FCR DATE
-                  (FCR)</td><td>{{ms.trkRec.ord_fcr_date}}</td>
-              </tr>
-              <tr>
-                <td *ngIf="gs.getTrackDate('INSP')||ms.trkdt_alldisplay=='Y'">INSPECTION DATE
-                  (INSP)</td><td>{{ms.trkRec.ord_insp_date}}</td>
-              </tr>
-              <tr>
-                <td *ngIf="gs.getTrackDate('STUF')||ms.trkdt_alldisplay=='Y'">STUFFING DATE
-                  (STUF)</td><td>{{ms.trkRec.ord_stuf_date}}</td>
-              </tr>
-              <tr>
-                <td *ngIf="gs.getTrackDate('WHD')||ms.trkdt_alldisplay=='Y'">WAREHOUSE DEPATURE DATE
-                  (WHD)</td><td>{{ms.trkRec.ord_whd_date}}</td>
-              </tr>
-              <tr>
-                <td *ngIf="gs.getTrackDate('SOB')||ms.trkdt_alldisplay=='Y'">ON BOARD DATE
-                  (SOB){{ms.trkRec.ord_dlv_pol_date}}</td><td></td>
-              </tr>
-              <tr>
-                <td *ngIf="gs.getTrackDate('DPOD')||ms.trkdt_alldisplay=='Y'">POD DELIVERY DATE
-                  (DPOD)</td><td>{{ms.trkRec.ord_dlv_pod_date}}</td>
-              </tr> -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="page-body line-bottom">
-        <app-trkevent [RecordList]="ms.trkEventList" ></app-trkevent>
-        <!-- <div class="table-responsive fixedTableHead  my-0 p-0">
-          <table class="table table-hover table-sm table-bordered">
-            <tbody class="page-body-tbody">
-              <tr>
-                <td>
-                  <app-trkevent [RecordList]="ms.trkEventList" ></app-trkevent>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div> -->
-      </div>
+    <div class="col-md-4 mx-0 p-0" style="height: calc(100vh - 400px);overflow: auto;">
+      <app-trkevent #trkcompnent [RecordList]="ms.trkEventList" [trkRec]="ms.trkRec"
+        [trkCaptionList]="ms.trkCaptionList"></app-trkevent>
     </div>
   </div>
 </div>

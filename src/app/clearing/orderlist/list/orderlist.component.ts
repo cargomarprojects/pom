@@ -16,7 +16,7 @@ export class OrderListComponent {
 
   public mblid: string = '';
   public hblids: string = '';
-  
+
   modal: any;
   constructor(
     public ms: OrderListService,
@@ -156,33 +156,14 @@ export class OrderListComponent {
     if (!_rec.ord_mbl_no)
       return;
 
+
     if (!_rec.row_displayed) {
-      this.OrderLinkList(_rec);
+      this.ms.OrderLinkedList(_rec);
     }
     _rec.row_displayed = !_rec.row_displayed;
   }
 
-  OrderLinkList(_rec: Joborderm) {
-    this.ms.errorMessage = [];
-    this.ms.loading = true;
-    let SearchData = {
-      rowtype: _rec.rec_category,
-      orderid: _rec.ord_pkid,
-      company_code: this.gs.globalVariables.comp_code,
-      branch_code: this.gs.globalVariables.branch_code
-    };
-    this.ms.OrderLinkList(SearchData)
-      .subscribe(response => {
-        this.ms.loading = false;
-        _rec.LinkHblCntrList = response.list;
-      },
-        error => {
-          this.ms.loading = false;
-          this.ms.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
-          this.gs.showToastScreen(this.ms.errorMessage);
-        });
 
-  }
 
   ShowDocuments(_id: string, _subid: string, doc: any) {
     if (!_id)
@@ -197,5 +178,5 @@ export class OrderListComponent {
   CloseModal2(params: any) {
     this.modal.close();
   }
-   
+
 }

@@ -2,6 +2,9 @@ import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy } from '@a
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../../core/services/global.service';
 import { UserHistory } from '../../../../shared/models/userhistory';
+import { Joborderm } from '../../../models/joborder';
+import { Tracking_Caption } from '../../../models/tracking_caption';
+import { OrderListService } from '../../../services/orderlist.service';
 
 @Component({
     selector: 'app-trkevent',
@@ -14,6 +17,8 @@ export class TrkEventComponent {
     @Input() public subid: string = '';
     @Input() public filterList: any[] = [];
     @Input() public RecordList: UserHistory[] = [];
+    @Input() public trkRec: Joborderm = <Joborderm>{};
+    @Input() public trkCaptionList: Tracking_Caption[] = [];
 
     InitCompleted: boolean = false;
     disableSave = true;
@@ -29,9 +34,11 @@ export class TrkEventComponent {
     ErrorMessage = "";
     InfoMessage = "";
     history_type = "NA";
-    
+
+
 
     constructor(
+        public ms: OrderListService,
         private route: ActivatedRoute,
         private gs: GlobalService
     ) {
@@ -49,6 +56,5 @@ export class TrkEventComponent {
     public getRowId() {
         return this.selectedId;
     }
- 
 
 }

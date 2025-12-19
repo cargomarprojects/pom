@@ -471,16 +471,16 @@ export class OrderListService {
       });
   }
 
-  ShowTrackingEvents(_rec: Joborderm) {
-
-    this.trkRec = _rec;
+  public ShowTrackingEvents(_trkRec: Joborderm) {
+    this.trkRec = _trkRec;
+    this.OrderLinkedList(_trkRec);
 
     this.loading = true;
     let SearchData = {
       table: 'userhistory',
       type: 'NEW',
       pkid: '',
-      subid: _rec.ord_pkid,
+      subid: _trkRec.ord_pkid,
       rowtype: this.type,
       company_code: this.gs.globalVariables.comp_code,
       branch_code: this.gs.globalVariables.branch_code,
@@ -500,6 +500,25 @@ export class OrderListService {
           this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
           this.gs.showToastScreen(this.errorMessage);
         });
+  }
+
+  OrderLinkedList(_rec: Joborderm) {
+    this.errorMessage = [];
+    let SearchData = {
+      rowtype: _rec.rec_category,
+      orderid: _rec.ord_pkid,
+      company_code: this.gs.globalVariables.comp_code,
+      branch_code: this.gs.globalVariables.branch_code
+    };
+    this.OrderLinkList(SearchData)
+      .subscribe(response => {
+        _rec.LinkHblCntrList = response.list;
+      },
+        error => {
+          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.errorMessage);
+        });
+
   }
 
   OrdList(SearchData: any) {
