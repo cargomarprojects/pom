@@ -140,6 +140,7 @@ export class OrderListService {
         list_pod_agent_name: '',
         ord_invoice: '',
         ord_cfno: '',
+        vp_plan_no: '',
         ord_po: '',
         report_folder: '',
         to_date: '',
@@ -177,6 +178,11 @@ export class OrderListService {
 
   List(_type: string) {
     this.total = 0;
+
+    this.trkRec = new Joborderm();
+    this.trkEventList = new Array<UserHistory>();
+    this.record.records = new Array<Joborderm>();
+
     this.loading = true;
     let SearchData = {
       type: _type,
@@ -195,6 +201,7 @@ export class OrderListService {
       ord_po: this._record.searchQuery.ord_po,
       ord_invoice: this._record.searchQuery.ord_invoice,
       ord_cfno: this._record.searchQuery.ord_cfno,
+      vp_plan_no: this._record.searchQuery.vp_plan_no,
       from_date: this._record.searchQuery.from_date,
       to_date: this._record.searchQuery.to_date,
       list_exp_id: this._record.searchQuery.list_exp_id,

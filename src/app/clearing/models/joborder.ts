@@ -199,6 +199,7 @@ export interface SearchQuery {
   ord_po: string,
   ord_invoice: string,
   ord_cfno: string,
+  vp_plan_no:string,
   from_date: string,
   to_date: string,
   list_exp_id: string,

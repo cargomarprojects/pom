@@ -7,6 +7,7 @@ import { OrderListService } from '../../services/orderlist.service';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { SearchTable } from 'src/app/shared/models/searchtable';
+import { UserHistory } from 'src/app/shared/models/userhistory';
 
 @Component({
   selector: 'app-orderlist',
@@ -179,4 +180,12 @@ export class OrderListComponent {
     this.modal.close();
   }
 
+  OnChange(field: string) {
+    // if (field == 'list_orderwise') {
+    //   this.ms.trkRec = new Joborderm();
+    //   this.ms.trkEventList = new Array<UserHistory>();
+    //   this.ms.record.records = new Array<Joborderm>();
+    // }
+
+  }
 }
