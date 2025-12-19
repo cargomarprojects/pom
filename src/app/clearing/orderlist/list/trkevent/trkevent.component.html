@@ -15,7 +15,32 @@
         </table>
     </div>
 </div>
-<div class="page-body">
+
+<div class="page-body ">
+    <div class="table-responsive fixedTableHead my-0 p-0"style="height:134px;">
+        <table class="table table-hover table-sm table-bordered">
+            <thead class="table-success">
+                <tr class="table-header">
+                    <th width="10%">SL#</th>
+                    <th width="20%">MASTER#</th>
+                    <th width="20%">HOUSE#</th>
+                    <th width="20%" *ngIf="trkRec.rec_category=='SEA EXPORT'">CNTR#</th>
+                    <th width="30%" *ngIf="trkRec.rec_category=='SEA EXPORT'">TYPE</th>
+                </tr>
+            </thead>
+            <tbody class="page-body-tbody">
+                <tr *ngFor="let rec1 of trkRec.LinkHblCntrList; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{rec1.cntrd_mbl_no}}</td>
+                    <td>{{rec1.cntrd_hbl_no}}</td>
+                    <td *ngIf="trkRec.rec_category=='SEA EXPORT'">{{rec1.cntrd_cntr_no}}</td>
+                    <td *ngIf="trkRec.rec_category=='SEA EXPORT'">{{rec1.cntrd_cntr_type}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="page-body line-bottom">
     <div class="table-responsive fixedTableHead  my-0 p-0" style="height:265px;">
         <table class="table table-hover table-sm table-bordered">
             <thead class="table-success">
@@ -40,61 +65,3 @@
         </table>
     </div>
 </div>
-
-<div class="page-body line-bottom">
-    <div class="table-responsive fixedTableHead my-0 p-0"style="height:134px;">
-        <table class="table table-hover table-sm table-bordered">
-            <thead class="table-success">
-                <tr class="table-header">
-                    <th width="10%">SL#</th>
-                    <th width="20%">MASTER#</th>
-                    <th width="20%">HOUSE#</th>
-                    <th width="20%" *ngIf="trkRec.rec_category=='SEA EXPORT'">CNTR#</th>
-                    <th width="30%" *ngIf="trkRec.rec_category=='SEA EXPORT'">TYPE</th>
-                </tr>
-            </thead>
-            <tbody class="page-body-tbody">
-                <tr *ngFor="let rec1 of trkRec.LinkHblCntrList; let i = index">
-                    <td>{{i+1}}</td>
-                    <td>{{rec1.cntrd_mbl_no}}</td>
-                    <td>{{rec1.cntrd_hbl_no}}</td>
-                    <td *ngIf="trkRec.rec_category=='SEA EXPORT'">{{rec1.cntrd_cntr_no}}</td>
-                    <td *ngIf="trkRec.rec_category=='SEA EXPORT'">{{rec1.cntrd_cntr_type}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-<!-- <div class="table-responsive fixedTableHead  my-0 p-0" style="height:265px;">
-    <table class="table table-hover table-sm table-bordered">
-        <thead class="table-success">
-            <tr class="table-header">
-                <th>USER</th>
-                <th>DATE</th>
-                <th>CAPTION</th>
-                <th>OLD VALUE</th>
-                <th>NEW VALUE</th>
-            </tr>
-        </thead>
-        <tbody class="page-body-tbody">
-            <tr *ngFor="let rec of RecordList" [style.color]="rec.uh_row_color" (mousedown)="selectRowId(rec.uh_pkid)"
-                [ngClass]="{'table-info':rec.uh_pkid == getRowId()}">
-                <td>{{rec.rec_created_by}}</td>
-                <td>{{rec.rec_created_date}}</td>
-                <td>{{rec.uh_caption}}</td>
-                <td>{{rec.uh_old_value}}</td>
-                <td>{{rec.uh_new_value}}</td>
-            </tr>
-        </tbody>
-    </table>
-</div> -->

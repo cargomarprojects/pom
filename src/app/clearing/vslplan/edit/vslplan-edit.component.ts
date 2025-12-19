@@ -8,6 +8,8 @@ import { SearchTable } from '../../../shared/models/searchtable';
 import { DateComponent } from '../../../shared/date/date.component';
 import { Location } from '@angular/common';
 import { Joborderm } from '../../models/joborder';
+import { OrderListService } from '../../services/orderlist.service';
+import { Tracking_Caption } from '../../models/tracking_caption';
 
 @Component({
   selector: 'app-vslplan-edit',
@@ -35,6 +37,9 @@ export class VslPlanEditComponent {
   ord_hblcntrselected = false;
   chkhblcntrselected = false;
   colHblCntrVisible = false;
+  hidetrkevent = false;
+
+
 
   bPrint: boolean = false;
   searchstring = '';
@@ -56,10 +61,12 @@ export class VslPlanEditComponent {
   lock_record: boolean = false;
   errorMessage: string[] = [];
   Record: Planm = <Planm>{};
+  trkCaptionList: Tracking_Caption[] = [];
 
   constructor(
     private modalService: NgbModal,
     public ms: VslPlanService,
+    public ords: OrderListService,
     private route: ActivatedRoute,
     public gs: GlobalService
   ) {
@@ -222,6 +229,7 @@ export class VslPlanEditComponent {
       type: _type,
       report_folder: this.gs.globalVariables.report_folder,
       company_code: this.gs.globalVariables.comp_code,
+      company_pkid: this.gs.globalVariables.comp_pkid,
       branch_code: this.gs.globalVariables.branch_code,
       user_code: this.gs.globalVariables.user_code
     };
@@ -234,6 +242,7 @@ export class VslPlanEditComponent {
         else {
           this.ctrlDisable = response.ctrldisable;
           this.trkdt_alldisplay = response.trkdt_alldisplay;
+          this.trkCaptionList = response.trkcaptionlist;
           this.LoadData(response.record);
         }
       },

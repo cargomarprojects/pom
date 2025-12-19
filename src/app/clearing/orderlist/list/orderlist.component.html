@@ -230,7 +230,7 @@
         </li>
       </ul>
 
-      <div *ngIf="ms.ord_list_type=='DETAILS'" class="col-md-2 ml-auto pt-2 text-right form-check">
+      <div *ngIf="ms.ord_list_type=='DETAILS'" class="col-md-2 ml-auto pt-2 text-right">
         <!-- <input type="checkbox" class="form-check-input" [(ngModel)]="ms.record.searchQuery.list_hidetrkevent"
           id="_hidetrkevent" />
         <label class="form-label form-label-sm my-0"
@@ -347,7 +347,7 @@
             </thead>
             <tbody class="page-body-tbody" *ngFor="let rec of ms.record.records; let i = index">
               <tr [style.color]="rec.ord_status_color" (mousedown)="ms.selectRowId(rec.ord_pkid)"
-                [ngClass]="{'table-info':rec.ord_pkid == ms.getRowId()}" (click)="ms.ShowTrackingEvents(rec)">
+                [ngClass]="{'table-info':rec.ord_pkid == ms.getRowId()}" (click)="ms.ShowTrackingEvents(rec,ms.record.searchQuery.list_hidetrkevent)">
                 <td><input type="checkbox" [(ngModel)]="rec.ord_selected" (change)="handleChange(rec)"></td>
                 <td>{{rec.ord_uid}}</td>
                 <td>{{rec.ord_cfno}}</td>

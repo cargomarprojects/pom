@@ -240,7 +240,7 @@ export class OrderListService {
           if (this.ord_list_type == "DETAILS") {
             if (!this.gs.isBlank(this.record.records))
               if (this.record.records.length > 0)
-                this.ShowTrackingEvents(this.record.records[0])
+                this.ShowTrackingEvents(this.record.records[0], this.record.searchQuery.list_hidetrkevent);
           }
         }
       },
@@ -479,11 +479,11 @@ export class OrderListService {
       });
   }
 
-  public ShowTrackingEvents(_trkRec: Joborderm) {
+  public ShowTrackingEvents(_trkRec: Joborderm, _hideTrkEvent: boolean) {
 
-    if (this.record.searchQuery.list_hidetrkevent)
+    if (_hideTrkEvent)
       return;
-    
+
     this.trkRec = _trkRec;
     this.OrderLinkedList(_trkRec);
 
