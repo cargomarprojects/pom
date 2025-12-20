@@ -10,6 +10,7 @@ import { Location } from '@angular/common';
 import { Joborderm } from '../../models/joborder';
 import { OrderListService } from '../../services/orderlist.service';
 import { Tracking_Caption } from '../../models/tracking_caption';
+import { UserHistory } from 'src/app/shared/models/userhistory';
 
 @Component({
   selector: 'app-vslplan-edit',
@@ -61,7 +62,8 @@ export class VslPlanEditComponent {
   lock_record: boolean = false;
   errorMessage: string[] = [];
   Record: Planm = <Planm>{};
-  trkCaptionList: Tracking_Caption[] = [];
+  public trkRec: Joborderm = <Joborderm>{};
+  public trkEventList: UserHistory[] = [];
 
   constructor(
     private modalService: NgbModal,
@@ -242,7 +244,6 @@ export class VslPlanEditComponent {
         else {
           this.ctrlDisable = response.ctrldisable;
           this.trkdt_alldisplay = response.trkdt_alldisplay;
-          this.trkCaptionList = response.trkcaptionlist;
           this.LoadData(response.record);
         }
       },
@@ -265,6 +266,9 @@ export class VslPlanEditComponent {
     this.chkselected = this.ord_selected;
     this.setColHblCntrVisible();
     this.FindCount();
+    if (!this.gs.isBlank(this.Record.OrderList))
+      if (this.Record.OrderList.length > 0)
+        this.ShowTrackingEvents(this.Record.OrderList[0], this.hidetrkevent);
   }
 
   Downloadfile(filename: string, filetype: string, filedisplayname: string) {
@@ -697,5 +701,59 @@ export class VslPlanEditComponent {
     this.orderHeaderPkid = _ordhPkid;
     this.orderPkid = _ordPkid;
     this.modalRef = this.modalService.open(modalname, { centered: true, backdrop: 'static', keyboard: true });
+  }
+
+  public ShowTrackingEvents(_trkRec: Joborderm, _hideTrkEvent: boolean) {
+
+    if (_hideTrkEvent)
+      return;
+
+    this.trkRec = _trkRec;
+    this.OrderLinkedList(_trkRec);
+
+    this.loading = true;
+    let SearchData = {
+      table: 'userhistory',
+      type: 'NEW',
+      pkid: '',
+      subid: _trkRec.ord_pkid,
+      rowtype: this.type,
+      company_code: this.gs.globalVariables.comp_code,
+      branch_code: this.gs.globalVariables.branch_code,
+      page_count: 0,
+      page_current: 0,
+      page_rows: 100,
+      page_rowcount: 0,
+      history_type: 'EVENT'
+    };
+    this.gs.SearchRecord(SearchData)
+      .subscribe(response => {
+        this.loading = false;
+        this.trkEventList = response.list;
+      },
+        error => {
+          this.loading = false;
+          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.errorMessage);
+        });
+  }
+
+  OrderLinkedList(_rec: Joborderm) {
+    this.errorMessage = [];
+    let SearchData = {
+      rowtype: _rec.rec_category,
+      orderid: _rec.ord_pkid,
+      company_code: this.gs.globalVariables.comp_code,
+      branch_code: this.gs.globalVariables.branch_code
+    };
+    this.ords.OrderLinkList(SearchData)
+      .subscribe(response => {
+        _rec.LinkHblCntrList = response.list;
+      },
+        error => {
+          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.errorMessage);
+        });
+
   }
 }

@@ -237,7 +237,7 @@
           for="_hidetrkevent">{{ms.record.searchQuery.list_hidetrkevent?'Show Tracking Event':'Hide Tracking Event'}}</label> -->
         <!-- <button class="btn btn-link btn-sm p-0"
                         (click)="ms.record.searchQuery.list_hidetrkevent=ms.record.searchQuery.list_hidetrkevent == true ? false : true">{{ms.record.searchQuery.list_hidetrkevent?'Show Tracking Event':'Hide Tracking Event'}}</button> -->
-        <a href="javascript:void(0)" 
+        <a href="javascript:void(0)"
           (click)="ms.record.searchQuery.list_hidetrkevent = !ms.record.searchQuery.list_hidetrkevent">
           {{ ms.record.searchQuery.list_hidetrkevent
           ? 'Show Tracking Events'
@@ -337,7 +337,7 @@
                 <th>MASTER</th>
                 <th>HOUSE</th>
                 <th *ngIf="ms.bDocs">DOCS</th>
-                <th *ngFor="let col of ms.trkCaptionList">
+                <th *ngFor="let col of gs.trkCaptionList">
                   {{col.trk_caption_code}}
                 </th>
                 <th>CREATED.BY</th>
@@ -347,7 +347,8 @@
             </thead>
             <tbody class="page-body-tbody" *ngFor="let rec of ms.record.records; let i = index">
               <tr [style.color]="rec.ord_status_color" (mousedown)="ms.selectRowId(rec.ord_pkid)"
-                [ngClass]="{'table-info':rec.ord_pkid == ms.getRowId()}" (click)="ms.ShowTrackingEvents(rec,ms.record.searchQuery.list_hidetrkevent)">
+                [ngClass]="{'table-info':rec.ord_pkid == ms.getRowId()}"
+                (click)="ms.ShowTrackingEvents(rec,ms.record.searchQuery.list_hidetrkevent)">
                 <td><input type="checkbox" [(ngModel)]="rec.ord_selected" (change)="handleChange(rec)"></td>
                 <td>{{rec.ord_uid}}</td>
                 <td>{{rec.ord_cfno}}</td>
@@ -384,7 +385,7 @@
                 <td>{{rec.ord_hbl_cntr_nos}}</td>
                 <td *ngIf="ms.bDocs" class="hlink" (click)="ShowDocuments(rec.ord_mbl_id,rec.ord_hbl_id,doc)"><i
                     *ngIf="rec.ord_mbl_id" class="fa fa-file fa-lg pointer ml-1"></i></td>
-                <td *ngFor="let col of ms.trkCaptionList">
+                <td *ngFor="let col of gs.trkCaptionList">
                   {{rec[col.trk_field_name]}}
                 </td>
                 <td>{{rec.rec_created_by}}</td>
@@ -425,8 +426,7 @@
     </div>
     <div *ngIf="!ms.record.searchQuery.list_hidetrkevent" class="col-md-4 mx-0 p-0"
       style="height: calc(100vh - 400px);overflow: auto;">
-      <app-trkevent #trkcompnent [RecordList]="ms.trkEventList" [trkRec]="ms.trkRec"
-        [trkCaptionList]="ms.trkCaptionList"></app-trkevent>
+      <app-trkevent #trkcompnent [RecordList]="ms.trkEventList" [trkRec]="ms.trkRec"></app-trkevent>
     </div>
   </div>
 </div>

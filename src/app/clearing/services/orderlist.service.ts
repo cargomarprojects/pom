@@ -46,8 +46,7 @@ export class OrderListService {
   private _record: JobOrderModel;
   public trkRec: Joborderm = <Joborderm>{};
   public trkEventList: UserHistory[] = [];
-  public trkCaptionList: Tracking_Caption[] = [];
-
+  
   constructor(
     private modalService: NgbModal,
     private http2: HttpClient,
@@ -232,7 +231,6 @@ export class OrderListService {
           this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
         else {
           this.trkdt_alldisplay = response.trkdt_alldisplay;
-          this.trkCaptionList = response.trkcaptionlist;
           this.record.records = response.list;
           this.record.searchQuery.page_count = response.page_count;
           this.record.searchQuery.page_current = response.page_current;

@@ -220,7 +220,7 @@
             <tbody class="page-body-tbody" *ngFor="let rec of Record.OrderList; let i = index">
               <tr [style.color]="rec.ord_status_color" (mousedown)="selectRowId(rec.ord_pkid)"
                 [ngClass]="{'table-info':rec.ord_pkid == getRowId()}"
-                (click)="ords.ShowTrackingEvents(rec,hidetrkevent)">
+                (click)="ShowTrackingEvents(rec,hidetrkevent)">
                 <td><input type="checkbox" (change)="OnChange('ord_selected')" [(ngModel)]="rec.ord_selected"></td>
                 <td>{{rec.ord_uid}}</td>
                 <td>{{rec.ord_status}}</td>
@@ -291,8 +291,7 @@
       </div>
     </div>
     <div *ngIf="!hidetrkevent" class="col-md-4 mx-0 p-0" style="height: calc(100vh - 330px);overflow: auto;">
-      <app-trkevent #trkcompnent [RecordList]="ords.trkEventList" [trkRec]="ords.trkRec"
-        [trkCaptionList]="trkCaptionList"></app-trkevent>
+      <app-trkevent #trkcompnent [RecordList]="trkEventList" [trkRec]="trkRec"></app-trkevent>
     </div>
   </div>
 </div>

@@ -18,8 +18,7 @@ export class TrkEventComponent {
     @Input() public filterList: any[] = [];
     @Input() public RecordList: UserHistory[] = [];
     @Input() public trkRec: Joborderm = <Joborderm>{};
-    @Input() public trkCaptionList: Tracking_Caption[] = [];
-
+    
     InitCompleted: boolean = false;
     disableSave = true;
     loading = false;
@@ -38,9 +37,8 @@ export class TrkEventComponent {
 
 
     constructor(
-        public ms: OrderListService,
         private route: ActivatedRoute,
-        private gs: GlobalService
+        public gs: GlobalService
     ) {
         // this.page_count = 0;
         // this.page_rows = 100;
