@@ -28,7 +28,7 @@
               (ValueChanged)="Record[trk.trk_field_name]=$event"></app-date>
           </div>
           <div class="col-sm-3">
-            <button [disabled]="IsDisableSave(trk.trk_caption_code)" (click)="Update(trk.trk_caption_code)"
+            <button *ngIf="trk.trk_caption_code!='RPT'" [disabled]="IsDisableSave(trk.trk_caption_code)" (click)="Update(trk.trk_caption_code)"
               class="btn btn-info btn-sm">Update</button>
           </div>
         </div>

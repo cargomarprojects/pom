@@ -317,6 +317,7 @@ export class TrackOrderComponent {
       return false;
   }
   EnableLastdate() {
-    this.enableDateCode = this.lastDateCode;
+    if (this.lastDateCode != 'RPT')
+      this.enableDateCode = this.lastDateCode;
   }
 }
