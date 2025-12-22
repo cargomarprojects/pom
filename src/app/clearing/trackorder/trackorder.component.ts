@@ -29,6 +29,7 @@ export class TrackOrderComponent {
   @Input() public ord_pos: string = '';
   @Input() public ord_imp_grp_id: string = '';
   @Input() public ord_header_id: string = '';
+  @Input() public ord_imp_id: string = '';
 
   private menuid: string = '';
   private type: string = '';
@@ -151,6 +152,7 @@ export class TrackOrderComponent {
     let SearchData = {
       pkid: Id,
       ord_imp_grp_id: this.ord_imp_grp_id,
+      ord_imp_id: this.ord_imp_id,
       company_pkid: this.gs.globalVariables.comp_pkid,
       masterwise: this.masterwise
     };

@@ -48,6 +48,7 @@ export class VslPlanEditComponent {
   public ord_trkids = "";
   public ord_trkpos = "";
   public ord_imp_grp_id = "";
+  public trk_ord_imp_id = "";
   public mblid = "";
   public sWhere = "";
   total = 0;
@@ -465,6 +466,7 @@ export class VslPlanEditComponent {
     this.ord_trkids = "";
     this.ord_trkpos = "";
     this.ord_imp_grp_id = "";
+    this.trk_ord_imp_id = "";
     let bMultplrGrpId = false;
     for (let rec of this.Record.OrderList) {
 
@@ -472,7 +474,8 @@ export class VslPlanEditComponent {
 
         if (this.total == 0)
           this.ord_imp_grp_id = rec.ord_imp_grp_id;
-
+        this.trk_ord_imp_id = rec.ord_imp_id;
+        
         this.total++;
         if (this.ord_trkids != "")
           this.ord_trkids += ",";

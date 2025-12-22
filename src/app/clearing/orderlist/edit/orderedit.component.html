@@ -304,6 +304,9 @@
               <th>BOARDING2</th>
               <th>INSTOCK1</th>
               <th>INSTOCK2</th>
+              <th *ngFor="let col of trkCaptionList">
+                {{col.trk_caption_code}}
+              </th>
               <th>HISTORY</th>
               <th *ngIf="bDelete" class='text-center'>DELETE</th>
             </tr>
@@ -335,6 +338,9 @@
               <td style="text-transform:uppercase">{{rec.ord_boarding2 | date : gs.DATE_DISPLAY_FORMAT}}</td>
               <td style="text-transform:uppercase">{{rec.ord_instock1 | date : gs.DATE_DISPLAY_FORMAT}}</td>
               <td style="text-transform:uppercase">{{rec.ord_instock2 | date : gs.DATE_DISPLAY_FORMAT}}</td>
+              <td *ngFor="let col of trkCaptionList">
+                {{rec[col.trk_field_name]}}
+              </td>
               <td (click)="ShowHistory(history,'',rec.ord_pkid)" class="hlink"><i
                   class="fa fa-history fa-lg pointer"></i>
               </td>
@@ -346,7 +352,8 @@
       </div>
     </div>
     <div *ngIf="!hidetrkevent" class="col-md-4 mx-0 p-0" style="height: calc(100vh - 415px);overflow: auto;">
-      <app-trkevent #trkcompnent [RecordList]="trkEventList" [trkRec]="trkRec" [trkCaptionList]="trkCaptionList" [iHistoryHt]="'250px'"></app-trkevent>
+      <app-trkevent #trkcompnent [RecordList]="trkEventList" [trkRec]="trkRec" [trkCaptionList]="trkCaptionList"
+        [iHistoryHt]="'250px'"></app-trkevent>
     </div>
   </div>
 </div>

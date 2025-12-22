@@ -37,6 +37,7 @@ export class OrderListService {
   ord_trkids = "";
   ord_trkpos = "";
   ord_imp_grp_id = "";
+  trk_ord_imp_id = "";
   trkdt_alldisplay = "N";
   ord_trkheaderid = "";
   public ord_list_type: string = "SUMMARY";
@@ -318,6 +319,7 @@ export class OrderListService {
     this.ord_imp_grp_id = "";
     this.ord_trkheaderid = "";
     let bMultplrGrpId = false;
+    this.trk_ord_imp_id = "";
 
     for (let rec of this.record.records) {
 
@@ -325,6 +327,7 @@ export class OrderListService {
 
         if (this.total == 0)
           this.ord_imp_grp_id = rec.ord_imp_grp_id;
+        this.trk_ord_imp_id = rec.ord_imp_id;
 
         this.total++;
 
