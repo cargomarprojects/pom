@@ -7,7 +7,7 @@ import { SearchTable } from '../../../shared/models/searchtable';
 import { InputBoxComponent } from '../../../shared/input/inputbox.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserHistory } from 'src/app/shared/models/userhistory';
-import { Tracking_Caption } from '../models/tracking_caption';
+import { Tracking_Caption } from '../../models/tracking_caption';
 
 @Component({
   selector: 'App-OrderEdit',
