@@ -48,6 +48,7 @@
           <th>EDIT</th>
           <th>CODE</th>
           <th>NAME</th>
+          <th *ngIf="type == 'CUST-GROUP'">GROUP</th>
           <th *ngIf="type == 'CURRENCY'">{{param_rate_caption}}</th>
           <th *ngIf="type == 'SALESMAN'">EMAIL</th>
           <th *ngIf="type == 'COUNTRY'">REGION</th>
@@ -62,11 +63,12 @@
         </tr>
       </thead>
       <tbody class="page-body-tbody">
-        <tr *ngFor="let rec of RecordList;  let i = index" [class.active]="i == selectedRowIndex" (mousedown)="selectRowId(rec.param_pkid)"
-        [ngClass]="{'table-info':rec.param_pkid == getRowId()}">
+        <tr *ngFor="let rec of RecordList;  let i = index" [class.active]="i == selectedRowIndex"
+          (mousedown)="selectRowId(rec.param_pkid)" [ngClass]="{'table-info':rec.param_pkid == getRowId()}">
           <td (click)="ActionHandler('EDIT',rec.param_pkid, i)" class="hlink"><i class="fa fa-pencil"></i></td>
           <td>{{rec.param_code}}</td>
           <td>{{rec.param_name}}</td>
+          <td *ngIf="type == 'CUST-GROUP'">{{rec.param_lookup_id}}</td>
           <td *ngIf="type == 'CURRENCY'">{{rec.param_rate}}</td>
           <td *ngIf="type == 'SALESMAN'">{{rec.param_email}}</td>
           <td *ngIf="type == 'COUNTRY'">{{rec.param_id1}}</td>
@@ -197,11 +199,10 @@
             <span (click)="openCustGroupPage(Record)" class="hlink">Customer Group</span>
           </div>
           <label class="col-12 col-form-label col-form-label-sm"></label>
-          <label *ngIf="gs.globalVariables.user_code=='ADMIN'" class="col-4 col-form-label col-form-label-sm"></label>
-          <!-- moved to company setting -->
-          <!-- <div *ngIf="gs.globalVariables.user_code=='ADMIN'" class="col-8">
+          <label *ngIf="gs.globalVariables.user_code=='ADMIN'&&Record.param_lookup_id=='CONSIGNEE'" class="col-4 col-form-label col-form-label-sm"></label>
+          <div *ngIf="gs.globalVariables.user_code=='ADMIN'&&Record.param_lookup_id=='CONSIGNEE'" class="col-8">
             <span (click)="openPoSettingPage(Record)" class="hlink">PO Settings</span>
-          </div> -->
+          </div>
           <label class="col-12 col-form-label col-form-label-sm"></label>
         </div>
 
