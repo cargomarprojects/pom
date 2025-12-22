@@ -337,9 +337,11 @@
                 <th>MASTER</th>
                 <th>HOUSE</th>
                 <th *ngIf="ms.bDocs">DOCS</th>
-                <th *ngFor="let col of gs.trkCaptionList">
-                  {{col.trk_caption_code}}
-                </th>
+                <ng-container *ngIf="ms.record.searchQuery.list_imp_id">
+                  <th *ngFor="let col of ms.trkCaptionList">
+                    {{col.trk_caption_code}}
+                  </th>
+                </ng-container>
                 <th>CREATED.BY</th>
                 <th>CREATED.DT</th>
                 <th *ngIf="ms.canDelete" class='text-center'>DELETE</th>
@@ -385,9 +387,11 @@
                 <td>{{rec.ord_hbl_cntr_nos}}</td>
                 <td *ngIf="ms.bDocs" class="hlink" (click)="ShowDocuments(rec.ord_mbl_id,rec.ord_hbl_id,doc)"><i
                     *ngIf="rec.ord_mbl_id" class="fa fa-file fa-lg pointer ml-1"></i></td>
-                <td *ngFor="let col of gs.trkCaptionList">
-                  {{rec[col.trk_field_name]}}
-                </td>
+                <ng-container *ngIf="ms.record.searchQuery.list_imp_id">
+                  <td *ngFor="let col of ms.trkCaptionList">
+                    {{rec[col.trk_field_name]}}
+                  </td>
+                </ng-container>
                 <td>{{rec.rec_created_by}}</td>
                 <td>{{rec.rec_created_date}}</td>
                 <td *ngIf="ms.canDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer"
@@ -426,7 +430,8 @@
     </div>
     <div *ngIf="!ms.record.searchQuery.list_hidetrkevent" class="col-md-4 mx-0 p-0"
       style="height: calc(100vh - 400px);overflow: auto;">
-      <app-trkevent #trkcompnent [RecordList]="ms.trkEventList" [trkRec]="ms.trkRec"></app-trkevent>
+      <app-trkevent #trkcompnent [RecordList]="ms.trkEventList" [trkRec]="ms.trkRec"
+        [trkCaptionList]="ms.trkCaptionList"></app-trkevent>
     </div>
   </div>
 </div>

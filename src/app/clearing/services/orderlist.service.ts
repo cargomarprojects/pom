@@ -46,7 +46,8 @@ export class OrderListService {
   private _record: JobOrderModel;
   public trkRec: Joborderm = <Joborderm>{};
   public trkEventList: UserHistory[] = [];
-  
+  public trkCaptionList: Tracking_Caption[] = [];
+
   constructor(
     private modalService: NgbModal,
     private http2: HttpClient,
@@ -178,11 +179,11 @@ export class OrderListService {
 
   List(_type: string) {
     this.total = 0;
-
-    this.trkRec = new Joborderm();
-    this.trkEventList = new Array<UserHistory>();
-    this.record.records = new Array<Joborderm>();
-
+    if (_type != 'EXCEL') {
+      this.trkRec = new Joborderm();
+      this.trkEventList = new Array<UserHistory>();
+      this.record.records = new Array<Joborderm>();
+    }
     this.loading = true;
     let SearchData = {
       type: _type,
@@ -232,6 +233,7 @@ export class OrderListService {
         else {
           this.trkdt_alldisplay = response.trkdt_alldisplay;
           this.record.records = response.list;
+          this.trkCaptionList = response.trkCaptionList;
           this.record.searchQuery.page_count = response.page_count;
           this.record.searchQuery.page_current = response.page_current;
           this.record.searchQuery.page_rowcount = response.page_rowcount;
@@ -491,6 +493,7 @@ export class OrderListService {
       type: 'NEW',
       pkid: '',
       subid: _trkRec.ord_pkid,
+      ord_imp_id: _trkRec.ord_imp_id,
       rowtype: this.type,
       company_code: this.gs.globalVariables.comp_code,
       branch_code: this.gs.globalVariables.branch_code,
@@ -504,6 +507,8 @@ export class OrderListService {
       .subscribe(response => {
         this.loading = false;
         this.trkEventList = response.list;
+        this.trkCaptionList = response.trkCaptionList;
+
       },
         error => {
           this.loading = false;

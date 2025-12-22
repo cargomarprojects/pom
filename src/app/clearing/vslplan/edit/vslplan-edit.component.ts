@@ -64,6 +64,7 @@ export class VslPlanEditComponent {
   Record: Planm = <Planm>{};
   public trkRec: Joborderm = <Joborderm>{};
   public trkEventList: UserHistory[] = [];
+  public trkCaptionList: Tracking_Caption[] = [];
 
   constructor(
     private modalService: NgbModal,
@@ -247,6 +248,7 @@ export class VslPlanEditComponent {
           this.ctrlDisable = response.ctrldisable;
           this.trkdt_alldisplay = response.trkdt_alldisplay;
           this.LoadData(response.record);
+          this.trkCaptionList = response.trkCaptionList;
         }
       },
         error => {
@@ -262,6 +264,7 @@ export class VslPlanEditComponent {
     this.Record = _Record;
     this.Record.rec_mode = this.mode;
     this.mblid = this.Record.vp_mbl_id;
+
     this.ord_selected = false;
     if (this.Record.OrderList.length > 0)
       this.ord_selected = true;
@@ -418,6 +421,9 @@ export class VslPlanEditComponent {
         //     }
         //   }
         this.Record.OrderList = response.list;
+        if (!this.gs.isBlank(this.Record.OrderList))
+          if (this.Record.OrderList.length > 0)
+            this.ShowTrackingEvents(this.Record.OrderList[0], this.hidetrkevent);
       },
         error => {
           this.loading = false;

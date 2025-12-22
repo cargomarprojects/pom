@@ -7,6 +7,7 @@ import { SearchTable } from '../../../shared/models/searchtable';
 import { InputBoxComponent } from '../../../shared/input/inputbox.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserHistory } from 'src/app/shared/models/userhistory';
+import { Tracking_Caption } from '../models/tracking_caption';
 
 @Component({
   selector: 'App-OrderEdit',
@@ -41,6 +42,7 @@ export class OrderEditComponent {
   Recorddet: Joborderm = new Joborderm;
   public trkRec: Joborderm = <Joborderm>{};
   public trkEventList: UserHistory[] = [];
+  public trkCaptionList: Tracking_Caption[] = [];
 
   constructor(
     private modalService: NgbModal,
@@ -175,6 +177,7 @@ export class OrderEditComponent {
       .subscribe(response => {
         this.loading = false;
         this.loadData(response.record);
+        this.trkCaptionList = response.trkCaptionList;
       },
         error => {
           this.loading = false;

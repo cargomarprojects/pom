@@ -19,6 +19,7 @@ export class TrkEventComponent {
     @Input() public filterList: any[] = [];
     @Input() public RecordList: UserHistory[] = [];
     @Input() public trkRec: Joborderm = <Joborderm>{};
+    @Input() public trkCaptionList: Tracking_Caption[] = [];
 
     InitCompleted: boolean = false;
     disableSave = true;
@@ -28,7 +29,7 @@ export class TrkEventComponent {
     // page_current: 0;
     // page_rows: 100;
     // page_rowcount: 0;
-    
+
     selectedId: string = "";
     sub: any;
     urlid: string;
