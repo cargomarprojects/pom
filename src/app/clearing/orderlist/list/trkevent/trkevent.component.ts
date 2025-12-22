@@ -15,10 +15,11 @@ export class TrkEventComponent {
     @Input() public pkid: string = '';
     @Input() public type: string = '';
     @Input() public subid: string = '';
+    @Input() public iHistoryHt: string = "265px";
     @Input() public filterList: any[] = [];
     @Input() public RecordList: UserHistory[] = [];
     @Input() public trkRec: Joborderm = <Joborderm>{};
-    
+
     InitCompleted: boolean = false;
     disableSave = true;
     loading = false;
@@ -27,6 +28,7 @@ export class TrkEventComponent {
     // page_current: 0;
     // page_rows: 100;
     // page_rowcount: 0;
+    
     selectedId: string = "";
     sub: any;
     urlid: string;

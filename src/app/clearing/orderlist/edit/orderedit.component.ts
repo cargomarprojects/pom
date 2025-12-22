@@ -6,6 +6,7 @@ import { OrderListService } from '../../services/orderlist.service';
 import { SearchTable } from '../../../shared/models/searchtable';
 import { InputBoxComponent } from '../../../shared/input/inputbox.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UserHistory } from 'src/app/shared/models/userhistory';
 
 @Component({
   selector: 'App-OrderEdit',
@@ -30,7 +31,7 @@ export class OrderEditComponent {
   disableSave = true;
   loading = false;
   modal: any;
-
+  hidetrkevent = false;
   orderHeaderPkid: string = "";
   orderPkid: string = "";
   selectedId: string = "";
@@ -38,6 +39,8 @@ export class OrderEditComponent {
   detailMode = "ADD";
   Record: Joborderh = <Joborderh>{};
   Recorddet: Joborderm = new Joborderm;
+  public trkRec: Joborderm = <Joborderm>{};
+  public trkEventList: UserHistory[] = [];
 
   constructor(
     private modalService: NgbModal,
@@ -139,6 +142,9 @@ export class OrderEditComponent {
     this.Record.ordh_cfno = '';
     this.Record.rec_mode = this.mode;
     // this.Record.ord_imp_grp_id  = '';
+    this.trkRec = new Joborderm();
+    this.trkEventList = new Array<UserHistory>();
+    this.hidetrkevent = true;
     this.NewDetRecord();
   }
 
@@ -182,6 +188,9 @@ export class OrderEditComponent {
     this.Record = _Record;
     this.Record.rec_mode = this.mode;
     this.NewDetRecord();
+    if (!this.gs.isBlank(this.Record.ordh_detList))
+      if (this.Record.ordh_detList.length > 0)
+        this.ShowTrackingEvents(this.Record.ordh_detList[0], this.hidetrkevent);
   }
 
   OnBlur(field: string) {
@@ -568,5 +577,58 @@ export class OrderEditComponent {
   }
   getRowId() {
     return this.selectedId;
+  }
+
+  public ShowTrackingEvents(_trkRec: Joborderm, _hideTrkEvent: boolean) {
+
+    if (_hideTrkEvent)
+      return;
+
+    this.trkRec = _trkRec;
+    this.OrderLinkedList(_trkRec);
+
+    this.loading = true;
+    let SearchData = {
+      table: 'userhistory',
+      type: 'NEW',
+      pkid: '',
+      subid: _trkRec.ord_pkid,
+      rowtype: this.type,
+      company_code: this.gs.globalVariables.comp_code,
+      branch_code: this.gs.globalVariables.branch_code,
+      page_count: 0,
+      page_current: 0,
+      page_rows: 100,
+      page_rowcount: 0,
+      history_type: 'EVENT'
+    };
+    this.gs.SearchRecord(SearchData)
+      .subscribe(response => {
+        this.loading = false;
+        this.trkEventList = response.list;
+      },
+        error => {
+          this.loading = false;
+          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.errorMessage);
+        });
+  }
+
+  OrderLinkedList(_rec: Joborderm) {
+    this.errorMessage = [];
+    let SearchData = {
+      rowtype: _rec.rec_category,
+      orderid: _rec.ord_pkid,
+      company_code: this.gs.globalVariables.comp_code,
+      branch_code: this.gs.globalVariables.branch_code
+    };
+    this.ms.OrderLinkList(SearchData)
+      .subscribe(response => {
+        _rec.LinkHblCntrList = response.list;
+      },
+        error => {
+          this.errorMessage = this.gs.getErrorArray(this.gs.getError(error));
+          this.gs.showToastScreen(this.errorMessage);
+        });
   }
 }

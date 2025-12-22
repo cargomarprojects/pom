@@ -204,6 +204,8 @@ export class VslPlanEditComponent {
     this.Record.vp_pod_eta = '';
     this.Record.rec_mode = this.mode;
     this.Record.rec_version = 0;
+    this.trkRec = new Joborderm();
+    this.trkEventList = new Array<UserHistory>();
 
   }
 
