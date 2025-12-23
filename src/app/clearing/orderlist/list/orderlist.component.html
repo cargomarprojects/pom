@@ -337,7 +337,7 @@
                 <th>MASTER</th>
                 <th>HOUSE</th>
                 <th *ngIf="ms.bDocs">DOCS</th>
-                <ng-container *ngIf="ms.record.searchQuery.list_imp_id">
+                <ng-container *ngIf="ms.bShowTrkListEvents">
                   <th *ngFor="let col of ms.trkCaptionList">
                     {{col.trk_caption_code}}
                   </th>
@@ -387,7 +387,7 @@
                 <td>{{rec.ord_hbl_cntr_nos}}</td>
                 <td *ngIf="ms.bDocs" class="hlink" (click)="ShowDocuments(rec.ord_mbl_id,rec.ord_hbl_id,doc)"><i
                     *ngIf="rec.ord_mbl_id" class="fa fa-file fa-lg pointer ml-1"></i></td>
-                <ng-container *ngIf="ms.record.searchQuery.list_imp_id">
+                <ng-container *ngIf="ms.bShowTrkListEvents">
                   <td *ngFor="let col of ms.trkCaptionList">
                     {{rec[col.trk_field_name]}}
                   </td>

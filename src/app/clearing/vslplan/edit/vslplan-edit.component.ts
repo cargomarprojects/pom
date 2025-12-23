@@ -422,6 +422,7 @@ export class VslPlanEditComponent {
         //     }
         //   }
         this.Record.OrderList = response.list;
+        this.trkCaptionList = response.trkCaptionList;
         if (!this.gs.isBlank(this.Record.OrderList))
           if (this.Record.OrderList.length > 0)
             this.ShowTrackingEvents(this.Record.OrderList[0], this.hidetrkevent);
@@ -475,7 +476,7 @@ export class VslPlanEditComponent {
         if (this.total == 0)
           this.ord_imp_grp_id = rec.ord_imp_grp_id;
         this.trk_ord_imp_id = rec.ord_imp_id;
-        
+
         this.total++;
         if (this.ord_trkids != "")
           this.ord_trkids += ",";

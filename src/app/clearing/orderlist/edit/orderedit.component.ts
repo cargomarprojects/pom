@@ -146,6 +146,7 @@ export class OrderEditComponent {
     // this.Record.ord_imp_grp_id  = '';
     this.trkRec = new Joborderm();
     this.trkEventList = new Array<UserHistory>();
+    this.trkCaptionList = new Array<Tracking_Caption>();
     this.hidetrkevent = true;
     this.NewDetRecord();
   }
@@ -333,6 +334,7 @@ export class OrderEditComponent {
         this.Record.ordh_detList = response.list;
         this.Record.rec_version = response.version;
         this.Record.ordh_po_nos = response.po_nos;
+        this.trkCaptionList = response.trkCaptionList;
         for (let rec of this.Record.ordh_detList) {
           rec.ord_imp_grp_id = response.grpid;
         }

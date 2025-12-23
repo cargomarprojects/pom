@@ -21,6 +21,7 @@ export class OrderListService {
   public bTrack: boolean = false;
   public bStatus: boolean = false;
   public bPrint: boolean = false;
+  public bShowTrkListEvents: boolean = false;
   menu_record: any;
   total = 0;
   // ErrorMessage = "";
@@ -185,6 +186,7 @@ export class OrderListService {
       this.trkEventList = new Array<UserHistory>();
       this.record.records = new Array<Joborderm>();
     }
+    this.bShowTrkListEvents = false;
     this.loading = true;
     let SearchData = {
       type: _type,
@@ -229,6 +231,7 @@ export class OrderListService {
     this.OrdList(SearchData)
       .subscribe(response => {
         this.loading = false;
+        this.bShowTrkListEvents = !this.gs.isBlank(this._record.searchQuery.list_imp_id);
         if (_type == 'EXCEL')
           this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
         else {
