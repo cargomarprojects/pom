@@ -278,86 +278,89 @@
 <div class="page-body">
   <div class="row mx-0">
     <div [ngClass]="hidetrkevent ? 'col-md-12' : 'col-md-8'" class="col-md-8 mx-0 p-0">
-      <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 415px);">
-        <table class="table table-hover table-sm table-bordered">
-          <thead>
-            <tr class="table-header">
-              <th>EDIT</th>
-              <th>SL#</th>
-              <th>UID</th>
-              <!-- <th>DATE</th> -->
-              <th>PO.STATUS</th>
-              <th>PO.STATUS.BY</th>
-              <th>INV#</th>
-              <th>PO#</th>
-              <th>STYLE</th>
-              <th>COLOR</th>
-              <th class="text-left">HS.CODE</th>
-              <th class="text-left">DESC</th>
-              <th class="text-right">PKGS</th>
-              <th class="text-right">PCS</th>
-              <th class="text-right">NT.WT</th>
-              <th class="text-right">GR.WT</th>
-              <th class="text-right">CBM</th>
-              <th>CARO.READY.DT</th>
-              <th>BOARDING1</th>
-              <th>BOARDING2</th>
-              <th>INSTOCK1</th>
-              <th>INSTOCK2</th>
-              <ng-container *ngIf="mode=='EDIT'">
-                <th *ngFor="let col of trkCaptionList">
-                  {{col.trk_caption_code}}
-                </th>
-              </ng-container>
-              <th>HISTORY</th>
-              <th *ngIf="bDelete" class='text-center'>DELETE</th>
-            </tr>
-          </thead>
-          <tbody class="page-body-tbody">
-            <tr *ngFor="let rec of Record.ordh_detList; let i = index" (mousedown)="selectRowId(rec.ord_pkid)"
-              [ngClass]="{'table-info':rec.ord_pkid == getRowId()}" [style.color]="rec.ord_status_color"
-              (click)="ShowTrackingEvents(rec,hidetrkevent)">
-              <td class="hlink" (click)="EditRecord(rec)"><i class="fa fa-pencil"></i></td>
-              <td>{{i+1}}</td>
-              <td>{{rec.ord_uid}}</td>
-              <!-- <td style="text-transform:uppercase">{{rec.ord_date | date : gs.DATE_DISPLAY_FORMAT}}</td> -->
-              <td>{{rec.ord_status}}</td>
-              <td>{{rec.ord_status_edited_by}}<span *ngIf="rec.ord_status_edited_date">/{{ rec.ord_status_edited_date
-                  }}</span></td>
-              <td>{{rec.ord_invno}}</td>
-              <td>{{rec.ord_po}}</td>
-              <td>{{rec.ord_style}}</td>
-              <td>{{rec.ord_color}}</td>
-              <td>{{rec.ord_hs_code}}</td>
-              <td>{{rec.ord_desc}}</td>
-              <td align='right'>{{rec.ord_pkg | number : '1.2-2'}}</td>
-              <td align='right'>{{rec.ord_pcs | number : '1.2-2'}}</td>
-              <td align='right'>{{rec.ord_ntwt | number : '1.3-3'}}</td>
-              <td align='right'>{{rec.ord_grwt | number : '1.3-3'}}</td>
-              <td align='right'>{{rec.ord_cbm | number : '1.3-3'}}</td>
-              <td style="text-transform:uppercase">{{rec.ord_cargo_readiness_date | date : gs.DATE_DISPLAY_FORMAT}}</td>
-              <td style="text-transform:uppercase">{{rec.ord_boarding1 | date : gs.DATE_DISPLAY_FORMAT}}</td>
-              <td style="text-transform:uppercase">{{rec.ord_boarding2 | date : gs.DATE_DISPLAY_FORMAT}}</td>
-              <td style="text-transform:uppercase">{{rec.ord_instock1 | date : gs.DATE_DISPLAY_FORMAT}}</td>
-              <td style="text-transform:uppercase">{{rec.ord_instock2 | date : gs.DATE_DISPLAY_FORMAT}}</td>
-              <ng-container *ngIf="mode=='EDIT'">
-                <td *ngFor="let col of trkCaptionList">
-                  {{rec[col.trk_field_name]}}
+      <div class="page-body line-bottom">
+        <div class="table-responsive fixedTableHead  my-0 p-0" style="height: calc(100vh - 420px);">
+          <table class="table table-hover table-sm table-bordered">
+            <thead>
+              <tr class="table-header">
+                <th>EDIT</th>
+                <th>SL#</th>
+                <th>UID</th>
+                <!-- <th>DATE</th> -->
+                <th>PO.STATUS</th>
+                <th>PO.STATUS.BY</th>
+                <th>INV#</th>
+                <th>PO#</th>
+                <th>STYLE</th>
+                <th>COLOR</th>
+                <th class="text-left">HS.CODE</th>
+                <th class="text-left">DESC</th>
+                <th class="text-right">PKGS</th>
+                <th class="text-right">PCS</th>
+                <th class="text-right">NT.WT</th>
+                <th class="text-right">GR.WT</th>
+                <th class="text-right">CBM</th>
+                <th>CARO.READY.DT</th>
+                <th>BOARDING1</th>
+                <th>BOARDING2</th>
+                <th>INSTOCK1</th>
+                <th>INSTOCK2</th>
+                <ng-container *ngIf="mode=='EDIT'">
+                  <th *ngFor="let col of trkCaptionList">
+                    {{col.trk_caption_code}}
+                  </th>
+                </ng-container>
+                <th>HISTORY</th>
+                <th *ngIf="bDelete" class='text-center'>DELETE</th>
+              </tr>
+            </thead>
+            <tbody class="page-body-tbody">
+              <tr *ngFor="let rec of Record.ordh_detList; let i = index" (mousedown)="selectRowId(rec.ord_pkid)"
+                [ngClass]="{'table-info':rec.ord_pkid == getRowId()}" [style.color]="rec.ord_status_color"
+                (click)="ShowTrackingEvents(rec,hidetrkevent)">
+                <td class="hlink" (click)="EditRecord(rec)"><i class="fa fa-pencil"></i></td>
+                <td>{{i+1}}</td>
+                <td>{{rec.ord_uid}}</td>
+                <!-- <td style="text-transform:uppercase">{{rec.ord_date | date : gs.DATE_DISPLAY_FORMAT}}</td> -->
+                <td>{{rec.ord_status}}</td>
+                <td>{{rec.ord_status_edited_by}}<span *ngIf="rec.ord_status_edited_date">/{{ rec.ord_status_edited_date
+                    }}</span></td>
+                <td>{{rec.ord_invno}}</td>
+                <td>{{rec.ord_po}}</td>
+                <td>{{rec.ord_style}}</td>
+                <td>{{rec.ord_color}}</td>
+                <td>{{rec.ord_hs_code}}</td>
+                <td>{{rec.ord_desc}}</td>
+                <td align='right'>{{rec.ord_pkg | number : '1.2-2'}}</td>
+                <td align='right'>{{rec.ord_pcs | number : '1.2-2'}}</td>
+                <td align='right'>{{rec.ord_ntwt | number : '1.3-3'}}</td>
+                <td align='right'>{{rec.ord_grwt | number : '1.3-3'}}</td>
+                <td align='right'>{{rec.ord_cbm | number : '1.3-3'}}</td>
+                <td style="text-transform:uppercase">{{rec.ord_cargo_readiness_date | date : gs.DATE_DISPLAY_FORMAT}}
                 </td>
-              </ng-container>
-              <td (click)="ShowHistory(history,'',rec.ord_pkid)" class="hlink"><i
-                  class="fa fa-history fa-lg pointer"></i>
-              </td>
-              <td *ngIf="bDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
-                  (click)="DeleteRow(rec)"></i></td>
-            </tr>
-          </tbody>
-        </table>
+                <td style="text-transform:uppercase">{{rec.ord_boarding1 | date : gs.DATE_DISPLAY_FORMAT}}</td>
+                <td style="text-transform:uppercase">{{rec.ord_boarding2 | date : gs.DATE_DISPLAY_FORMAT}}</td>
+                <td style="text-transform:uppercase">{{rec.ord_instock1 | date : gs.DATE_DISPLAY_FORMAT}}</td>
+                <td style="text-transform:uppercase">{{rec.ord_instock2 | date : gs.DATE_DISPLAY_FORMAT}}</td>
+                <ng-container *ngIf="mode=='EDIT'">
+                  <td *ngFor="let col of trkCaptionList">
+                    {{rec[col.trk_field_name]}}
+                  </td>
+                </ng-container>
+                <td (click)="ShowHistory(history,'',rec.ord_pkid)" class="hlink"><i
+                    class="fa fa-history fa-lg pointer"></i>
+                </td>
+                <td *ngIf="bDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                    (click)="DeleteRow(rec)"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
     <div *ngIf="!hidetrkevent" class="col-md-4 mx-0 p-0" style="height: calc(100vh - 415px);overflow: auto;">
       <app-trkevent #trkcompnent [RecordList]="trkEventList" [trkRec]="trkRec" [trkCaptionList]="trkCaptionList"
-        [iHistoryHt]="'250px'"></app-trkevent>
+        [iHistoryHt]="'252px'"></app-trkevent>
     </div>
   </div>
 </div>
