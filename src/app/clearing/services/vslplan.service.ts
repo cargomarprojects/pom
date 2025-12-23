@@ -35,7 +35,7 @@ export class VslPlanService {
   // InfoMessage = "";
   show_hide_caption = "HIDE";
   public errorMessage: string[] = [];
-
+  public HistoryFilterList: any[];
   private _record: PlanModel;
 
   constructor(
@@ -143,7 +143,7 @@ export class VslPlanService {
   }
 
   LoadCombo() {
-
+    this.HistoryFilterList = [{ "id": "NA", "name": "NA" }, { "id": "EVENT", "name": "EVENT" }, { "id": "PO STATUS", "name": "PO STATUS" }];
   }
 
   // Query List Data

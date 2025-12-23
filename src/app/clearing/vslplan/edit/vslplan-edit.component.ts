@@ -191,9 +191,9 @@ export class VslPlanEditComponent {
     this.Record.vp_pod_agent_id = this.gs.globalVariables.comp_pod_agent_id;
     this.Record.vp_pod_agent_code = this.gs.globalVariables.comp_pod_agent_code;
     this.Record.vp_pod_agent_name = this.gs.globalVariables.comp_pod_agent_name;
-    this.Record.vp_imp_id = '';
-    this.Record.vp_imp_code = '';
-    this.Record.vp_imp_name = '';
+    this.Record.vp_imp_id = this.gs.globalVariables.comp_imp_id;
+    this.Record.vp_imp_code = this.gs.globalVariables.comp_imp_code;
+    this.Record.vp_imp_name = this.gs.globalVariables.comp_imp_name;
     this.Record.vp_mbl_id = '';
     this.Record.vp_mbl_no = '';
     this.Record.vp_pol_id = '';
@@ -303,6 +303,7 @@ export class VslPlanEditComponent {
         this.Record.rec_version = response.version;
         this.Record.vp_po_nos = response.po_nos;
         this.mblid = this.Record.vp_mbl_id;
+        this.trkCaptionList = response.trkCaptionList;
         for (let rec of this.Record.OrderList) {
           if (rec.ord_selected)
             rec.ord_plan_id = this.Record.vp_pkid;
